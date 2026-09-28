@@ -77,7 +77,9 @@ I1~I3은 하나의 시연 흐름으로 연결할 수 있다. I5는 각 실행의
 **판정:** 요청→적용 memory/compute 일치, node·GPU UUID 일치, 독립 UID 연결, 실제 Ready·Mapped 및 GPU 실행 확인.
 compute 값 일치는 **설정 전달 PASS**이고, 이용률 제한 PASS는 I4에서 판정한다.
 
-**시각 자료:** 왼쪽 요청 YAML, 가운데 Channel/Worker 상태와 적용값, 오른쪽 실제 GPU PID/UUID를 보여주는 터미널.
+**시각 자료 — 사용자 검토 후 수정:** [실제 터미널 절차 시연](results/2026-09-28-stage1-terminal/README.md)을 따른다.
+자체 결과 UI를 만들지 않고 bash/kubectl/SSH/nvidia-smi의 실행 명령과 실제 출력을 표준 asciinema로 보존한다.
+요청 등록 → VM·Worker 준비 → 요청/적용 비교 → Worker PID/GPU PID 대응 → 검산·회수를 단계별로 제시한다.
 큰 UID는 화면에 읽기 쉬운 축약값을 표시하되 원본에는 전체 값을 남긴다.
 **산출물:** `request.yaml`, `applied.json`, `placement.csv`, `binding.json`, 실제 터미널 기록·PNG·영상.
 

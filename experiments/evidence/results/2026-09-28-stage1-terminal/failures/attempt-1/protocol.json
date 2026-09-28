@@ -1,0 +1,22 @@
+{
+  "scope": "One new Stage 1 demonstration, separate from historical 3 repeats",
+  "recording": "Real bash PTY using asciinema 2.4.0; agent-entered commands; output is not reconstructed",
+  "player": "Official asciinema-player 3.6.3, default terminal rendering",
+  "name": "evidence-s1-terminal-0928",
+  "memory_mib": 4096,
+  "compute": 50,
+  "sessions": 1,
+  "probe": "integer resident 45 seconds; warmup 10 seconds; seed 2030",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "images": {
+    "control": "localhost/flyt-control-plane@sha256:8dd0a2f445244a839ce390e83da5ad653cd82c6904dced06fc777dc570ccb808",
+    "worker": "localhost/flyt-worker@sha256:a7bae7a184238df59b16cce0233ed6dbc74a135c3b3295b0c97811c2c9e9e47d",
+    "hook": "localhost/flyt-hook@sha256:ff8db37b7ee864c5b63335986b2d4c85c550ca7bd82c80ed241563f715fa0554",
+    "guest": "localhost/flyt-evidence-guest@sha256:47e520785c49e6db93631ef4876dcb40b73b23ffc766327e6b02cdfe3496c052"
+  },
+  "base_commit": "ab7fec2f107e82160f0b67efd0f76f68313e8aaf",
+  "binary_sha256": {
+    "campaign-probe-guest": "d0b7d881445b6edde36bc4180986be16e113ff678867c7f00d2fd38b64421214",
+    "libflyt_guest.so": "a82a3a818b335cbca7ee9d986ae8b1dc7d14915b09f6bdf9351fde1bfd48c401"
+  }
+}

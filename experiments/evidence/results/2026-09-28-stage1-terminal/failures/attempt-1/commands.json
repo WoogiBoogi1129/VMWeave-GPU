@@ -1,0 +1,232 @@
+[
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605143.3900442
+  },
+  {
+    "command": "# 0. BEFORE THE REQUEST: no experiment VM or GPU process",
+    "exit_code": 0,
+    "completed_utc": 1790605143.4428682
+  },
+  {
+    "command": "date -u +%FT%TZ",
+    "exit_code": 0,
+    "completed_utc": 1790605143.498102
+  },
+  {
+    "command": "kubectl get vmi \"$VM\" -n \"$NS\" --ignore-not-found",
+    "exit_code": 0,
+    "completed_utc": 1790605143.6665108
+  },
+  {
+    "command": "nvidia-smi -i 1 --query-gpu=index,name --format=csv",
+    "exit_code": 0,
+    "completed_utc": 1790605143.784635
+  },
+  {
+    "command": "nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv",
+    "exit_code": 0,
+    "completed_utc": 1790605143.9020302
+  },
+  {
+    "command": "# CAPTURE 00-before",
+    "exit_code": 0,
+    "completed_utc": 1790605143.9550495
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605147.012057
+  },
+  {
+    "command": "# 1. REGISTER GPU REQUEST: 4096 MiB / compute 50 / one session",
+    "exit_code": 0,
+    "completed_utc": 1790605147.0650566
+  },
+  {
+    "command": "cat \"$DEMO/prepare.sh\"",
+    "exit_code": 0,
+    "completed_utc": 1790605147.1219459
+  },
+  {
+    "command": "bash \"$DEMO/prepare.sh\" | tee \"$RAW/create.log\"",
+    "exit_code": 0,
+    "completed_utc": 1790605148.204496
+  },
+  {
+    "command": "kubectl get flytgpurequest \"$VM-request\" -n \"$NS\" -o json | jq \".spec | {count,memory,compute}\" | tee \"$RAW/request-values.json\"",
+    "exit_code": 0,
+    "completed_utc": 1790605148.3686705
+  },
+  {
+    "command": "# CAPTURE 01-request",
+    "exit_code": 0,
+    "completed_utc": 1790605148.4223495
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605151.4794338
+  },
+  {
+    "command": "# 2. START THE VM AND WAIT FOR ITS WORKER",
+    "exit_code": 0,
+    "completed_utc": 1790605151.5329628
+  },
+  {
+    "command": "kubectl wait -n \"$NS\" \"flytsharedmemorychannel/$VM-channel\" --for=jsonpath='{.status.phase}'=BackingReady --timeout=180s",
+    "exit_code": 0,
+    "completed_utc": 1790605161.420747
+  },
+  {
+    "command": "kubectl patch vm \"$VM\" -n \"$NS\" --type=merge -p '{\"spec\":{\"runStrategy\":\"Always\"}}'",
+    "exit_code": 0,
+    "completed_utc": 1790605161.6281602
+  },
+  {
+    "command": "kubectl wait -n \"$NS\" \"vmi/$VM\" --for=jsonpath='{.status.phase}'=Running --timeout=300s",
+    "exit_code": 0,
+    "completed_utc": 1790605169.401387
+  },
+  {
+    "command": "python3 experiments/evidence/terminal_stage1.py connect",
+    "exit_code": 0,
+    "completed_utc": 1790605200.718615
+  },
+  {
+    "command": "kubectl get vmi \"$VM\" -n \"$NS\" -o wide | tee \"$RAW/vmi.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605200.8848803
+  },
+  {
+    "command": "kubectl get pod \"$VM-channel-worker\" -n \"$NS\" -o wide | tee \"$RAW/worker.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605201.0552611
+  },
+  {
+    "command": "# CAPTURE 02-vm-worker",
+    "exit_code": 0,
+    "completed_utc": 1790605201.1085851
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605204.1660812
+  },
+  {
+    "command": "# 3. COMPARE REQUESTED VALUES WITH ACTUAL WORKER LIMITS",
+    "exit_code": 0,
+    "completed_utc": 1790605204.2193208
+  },
+  {
+    "command": "kubectl get flytgpurequest \"$VM-request\" -n \"$NS\" -o json | jq \".spec | {count,memory,compute}\"",
+    "exit_code": 0,
+    "completed_utc": 1790605204.3859518
+  },
+  {
+    "command": "kubectl get pod \"$VM-channel-worker\" -n \"$NS\" -o json | jq \".spec.containers[0].resources.limits\" | tee \"$RAW/worker-limits.json\"",
+    "exit_code": 0,
+    "completed_utc": 1790605204.5540326
+  },
+  {
+    "command": "# This checks configuration delivery, not utilization or quota enforcement.",
+    "exit_code": 0,
+    "completed_utc": 1790605204.607637
+  },
+  {
+    "command": "# CAPTURE 03-settings",
+    "exit_code": 0,
+    "completed_utc": 1790605204.6612012
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605207.7183456
+  },
+  {
+    "command": "# 4. EXECUTE THE CUDA PROGRAM INSIDE THE VM",
+    "exit_code": 0,
+    "completed_utc": 1790605207.7716959
+  },
+  {
+    "command": "cat \"$DEMO/run-probe.sh\"",
+    "exit_code": 0,
+    "completed_utc": 1790605207.8283653
+  },
+  {
+    "command": "ssh -F \"$DEMO/ssh-config\" stage1-vm \"bash /tmp/campaign/run-probe.sh\" > \"$RAW/guest-stdout.log\" 2> \"$RAW/guest-stderr.log\" &",
+    "exit_code": 0,
+    "completed_utc": 1790605207.8829534
+  },
+  {
+    "command": "PROBE_JOB=$!",
+    "exit_code": 0,
+    "completed_utc": 1790605207.9361348
+  },
+  {
+    "command": "sleep 3",
+    "exit_code": 0,
+    "completed_utc": 1790605210.9940548
+  },
+  {
+    "command": "head -n 3 \"$RAW/guest-stdout.log\"",
+    "exit_code": 0,
+    "completed_utc": 1790605211.0509045
+  },
+  {
+    "command": "# CAPTURE 04-guest-command",
+    "exit_code": 0,
+    "completed_utc": 1790605211.104335
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605214.161369
+  },
+  {
+    "command": "# 5. MATCH THE WORKER HOST PID TO THE GPU PROCESS PID",
+    "exit_code": 0,
+    "completed_utc": 1790605214.2150264
+  },
+  {
+    "command": "python3 experiments/evidence/terminal_stage1.py observe",
+    "exit_code": 0,
+    "completed_utc": 1790605216.727123
+  },
+  {
+    "command": "jq -r '.[] | select(.role==\"worker\") | \"Worker host PID: \\(.pid)\\nWorker Pod UID: \\(.pod_uid)\"' \"$RAW/host-mapping.json\"",
+    "exit_code": 0,
+    "completed_utc": 1790605216.7863538
+  },
+  {
+    "command": "nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv | tee \"$RAW/gpu-live.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605216.9060748
+  },
+  {
+    "command": "kubectl get flytsharedmemorychannel \"$VM-channel\" -n \"$NS\" -o custom-columns=NAME:.metadata.name,PHASE:.status.phase | tee \"$RAW/channel-ready.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605217.0702856
+  },
+  {
+    "command": "# CAPTURE 05-gpu-pid",
+    "exit_code": 0,
+    "completed_utc": 1790605217.1240323
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605220.1812575
+  },
+  {
+    "command": "# 6. WAIT FOR COMPLETION AND CHECK THE CALCULATION RESULT",
+    "exit_code": 0,
+    "completed_utc": 1790605220.2352164
+  },
+  {
+    "command": "wait \"$PROBE_JOB\"",
+    "exit_code": 149,
+    "completed_utc": 1790605220.2890465
+  }
+]

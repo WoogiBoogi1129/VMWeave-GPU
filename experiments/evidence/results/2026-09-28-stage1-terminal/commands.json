@@ -1,0 +1,287 @@
+[
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605283.4178572
+  },
+  {
+    "command": "# 0. BEFORE THE REQUEST: no experiment VM or GPU process",
+    "exit_code": 0,
+    "completed_utc": 1790605283.4709976
+  },
+  {
+    "command": "date -u +%FT%TZ",
+    "exit_code": 0,
+    "completed_utc": 1790605283.5272727
+  },
+  {
+    "command": "kubectl get vmi \"$VM\" -n \"$NS\" --ignore-not-found",
+    "exit_code": 0,
+    "completed_utc": 1790605283.7002928
+  },
+  {
+    "command": "nvidia-smi -i 1 --query-gpu=index,name --format=csv",
+    "exit_code": 0,
+    "completed_utc": 1790605283.820228
+  },
+  {
+    "command": "nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv",
+    "exit_code": 0,
+    "completed_utc": 1790605283.9306562
+  },
+  {
+    "command": "# CAPTURE 00-before",
+    "exit_code": 0,
+    "completed_utc": 1790605283.9840903
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605287.0402467
+  },
+  {
+    "command": "# 1. REGISTER GPU REQUEST: 4096 MiB / compute 50 / one session",
+    "exit_code": 0,
+    "completed_utc": 1790605287.0936553
+  },
+  {
+    "command": "cat \"$DEMO/prepare.sh\"",
+    "exit_code": 0,
+    "completed_utc": 1790605287.150113
+  },
+  {
+    "command": "bash \"$DEMO/prepare.sh\" | tee \"$RAW/create.log\"",
+    "exit_code": 0,
+    "completed_utc": 1790605288.2433205
+  },
+  {
+    "command": "kubectl get flytgpurequest \"$VM-request\" -n \"$NS\" -o json | jq \".spec | {count,memory,compute}\" | tee \"$RAW/request-values.json\"",
+    "exit_code": 0,
+    "completed_utc": 1790605288.413276
+  },
+  {
+    "command": "# CAPTURE 01-request",
+    "exit_code": 0,
+    "completed_utc": 1790605288.4663904
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605291.5230763
+  },
+  {
+    "command": "# 2. START THE VM AND WAIT FOR ITS WORKER",
+    "exit_code": 0,
+    "completed_utc": 1790605291.5762787
+  },
+  {
+    "command": "kubectl wait -n \"$NS\" \"flytsharedmemorychannel/$VM-channel\" --for=jsonpath='{.status.phase}'=BackingReady --timeout=180s",
+    "exit_code": 0,
+    "completed_utc": 1790605300.5064726
+  },
+  {
+    "command": "kubectl patch vm \"$VM\" -n \"$NS\" --type=merge -p '{\"spec\":{\"runStrategy\":\"Always\"}}'",
+    "exit_code": 0,
+    "completed_utc": 1790605300.717758
+  },
+  {
+    "command": "kubectl wait -n \"$NS\" \"vmi/$VM\" --for=jsonpath='{.status.phase}'=Running --timeout=300s",
+    "exit_code": 0,
+    "completed_utc": 1790605308.2107413
+  },
+  {
+    "command": "python3 experiments/evidence/terminal_stage1.py connect",
+    "exit_code": 0,
+    "completed_utc": 1790605340.710088
+  },
+  {
+    "command": "kubectl get vmi \"$VM\" -n \"$NS\" -o wide | tee \"$RAW/vmi.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605340.8737555
+  },
+  {
+    "command": "kubectl get pod \"$VM-channel-worker\" -n \"$NS\" -o wide | tee \"$RAW/worker.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605341.0446653
+  },
+  {
+    "command": "# CAPTURE 02-vm-worker",
+    "exit_code": 0,
+    "completed_utc": 1790605341.0979962
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605344.154158
+  },
+  {
+    "command": "# 3. COMPARE REQUESTED VALUES WITH ACTUAL WORKER LIMITS",
+    "exit_code": 0,
+    "completed_utc": 1790605344.2076108
+  },
+  {
+    "command": "kubectl get flytgpurequest \"$VM-request\" -n \"$NS\" -o json | jq \".spec | {count,memory,compute}\"",
+    "exit_code": 0,
+    "completed_utc": 1790605344.382073
+  },
+  {
+    "command": "kubectl get pod \"$VM-channel-worker\" -n \"$NS\" -o json | jq \".spec.containers[0].resources.limits\" | tee \"$RAW/worker-limits.json\"",
+    "exit_code": 0,
+    "completed_utc": 1790605344.5488148
+  },
+  {
+    "command": "# This checks configuration delivery, not utilization or quota enforcement.",
+    "exit_code": 0,
+    "completed_utc": 1790605344.601933
+  },
+  {
+    "command": "# CAPTURE 03-settings",
+    "exit_code": 0,
+    "completed_utc": 1790605344.6549487
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605347.7107618
+  },
+  {
+    "command": "# 4. EXECUTE THE CUDA PROGRAM INSIDE THE VM",
+    "exit_code": 0,
+    "completed_utc": 1790605347.7646096
+  },
+  {
+    "command": "cat \"$DEMO/run-probe.sh\"",
+    "exit_code": 0,
+    "completed_utc": 1790605347.8212585
+  },
+  {
+    "command": "ssh -n -F \"$DEMO/ssh-config\" stage1-vm \"bash /tmp/campaign/run-probe.sh\" > \"$RAW/guest-stdout.log\" 2> \"$RAW/guest-stderr.log\" &",
+    "exit_code": 0,
+    "completed_utc": 1790605347.8758907
+  },
+  {
+    "command": "PROBE_JOB=$!",
+    "exit_code": 0,
+    "completed_utc": 1790605347.9291222
+  },
+  {
+    "command": "sleep 3",
+    "exit_code": 0,
+    "completed_utc": 1790605350.9862916
+  },
+  {
+    "command": "head -n 3 \"$RAW/guest-stdout.log\"",
+    "exit_code": 0,
+    "completed_utc": 1790605351.0428095
+  },
+  {
+    "command": "# CAPTURE 04-guest-command",
+    "exit_code": 0,
+    "completed_utc": 1790605351.0963025
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605354.1527302
+  },
+  {
+    "command": "# 5. MATCH THE WORKER HOST PID TO THE GPU PROCESS PID",
+    "exit_code": 0,
+    "completed_utc": 1790605354.2062173
+  },
+  {
+    "command": "python3 experiments/evidence/terminal_stage1.py observe",
+    "exit_code": 0,
+    "completed_utc": 1790605357.386092
+  },
+  {
+    "command": "jq -r '.[] | select(.role==\"worker\") | \"Worker host PID: \\(.pid)\\nWorker Pod UID: \\(.pod_uid)\"' \"$RAW/host-mapping.json\"",
+    "exit_code": 0,
+    "completed_utc": 1790605357.4459891
+  },
+  {
+    "command": "nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv | tee \"$RAW/gpu-live.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605357.5653222
+  },
+  {
+    "command": "kubectl get flytsharedmemorychannel \"$VM-channel\" -n \"$NS\" -o custom-columns=NAME:.metadata.name,PHASE:.status.phase | tee \"$RAW/channel-ready.txt\"",
+    "exit_code": 0,
+    "completed_utc": 1790605357.730845
+  },
+  {
+    "command": "# CAPTURE 05-gpu-pid",
+    "exit_code": 0,
+    "completed_utc": 1790605357.784651
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605360.8417892
+  },
+  {
+    "command": "# 6. WAIT FOR COMPLETION AND CHECK THE CALCULATION RESULT",
+    "exit_code": 0,
+    "completed_utc": 1790605360.8955278
+  },
+  {
+    "command": "wait \"$PROBE_JOB\"",
+    "exit_code": 0,
+    "completed_utc": 1790605403.9218535
+  },
+  {
+    "command": "tail -n 1 \"$RAW/guest-stdout.log\" | tee \"$RAW/result.json\" | jq \"{status,checked_elements,mismatches}\"",
+    "exit_code": 0,
+    "completed_utc": 1790605403.9820838
+  },
+  {
+    "command": "jq -e '.status==\"PASS\" and .checked_elements==524288 and .mismatches==0' \"$RAW/result.json\"",
+    "exit_code": 0,
+    "completed_utc": 1790605404.0423427
+  },
+  {
+    "command": "# CAPTURE 06-result",
+    "exit_code": 0,
+    "completed_utc": 1790605404.0959668
+  },
+  {
+    "command": "clear",
+    "exit_code": 0,
+    "completed_utc": 1790605407.1533422
+  },
+  {
+    "command": "# 7. DRAIN THIS EXPERIMENT AND CHECK RELEASE",
+    "exit_code": 0,
+    "completed_utc": 1790605407.2070866
+  },
+  {
+    "command": "python3 experiments/evidence/terminal_stage1.py cleanup",
+    "exit_code": 0,
+    "completed_utc": 1790605424.7740548
+  },
+  {
+    "command": "kubectl get flytsharedmemorychannel \"$VM-channel\" -n \"$NS\" -o custom-columns=NAME:.metadata.name,PHASE:.status.phase",
+    "exit_code": 0,
+    "completed_utc": 1790605424.9424045
+  },
+  {
+    "command": "kubectl get vmi \"$VM\" -n \"$NS\" --ignore-not-found",
+    "exit_code": 0,
+    "completed_utc": 1790605425.106669
+  },
+  {
+    "command": "kubectl get pod \"$VM-channel-worker\" -n \"$NS\" --ignore-not-found",
+    "exit_code": 0,
+    "completed_utc": 1790605425.2668633
+  },
+  {
+    "command": "nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv",
+    "exit_code": 0,
+    "completed_utc": 1790605425.3864434
+  },
+  {
+    "command": "# CAPTURE 07-released",
+    "exit_code": 0,
+    "completed_utc": 1790605425.4401388
+  }
+]

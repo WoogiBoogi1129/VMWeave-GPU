@@ -1,0 +1,12 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Stage 1 — actual terminal recording — asciinema player</title>
+<link rel="stylesheet" href="asciinema-player/asciinema-player.css">
+<div id="terminal"></div>
+<script src="asciinema-player/asciinema-player.min.js"></script>
+<script>
+// Official player only: no experimental result widgets or invented status panels.
+window.player=AsciinemaPlayer.create('stage1.cast', document.getElementById('terminal'), {
+  preload:true, fit:false, terminalFontSize:'20px', speed:1
+});
+</script>

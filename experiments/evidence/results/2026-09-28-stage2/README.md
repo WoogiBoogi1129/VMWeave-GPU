@@ -1,5 +1,9 @@
 # 2단계 — SHM CUDA 요청·응답 추적과 계산 정확성
 
+> **표현 방식 수정:** 핵심 근거는 [Guest 원본 로그](runs/evidence-s2-0928-01/guest-stderr.txt),
+> [Worker 원본 로그](runs/evidence-s2-0928-01/worker-stderr.txt), [계산 결과](runs/evidence-s2-0928-01/stdout.jsonl)다.
+> 자체 뷰어 화면은 발표 기본 자료에서 제외하고 과거 보조 기록으로 보존한다. 이번 변경은 2단계 재실행이 아니다.
+
 **2026-09-28 실제 실행: 독립 allocation 3/3 PASS.** 각 실행에서 CUDA 요청 10개를 포함한
 18개 요청을 `Guest submit → Worker take → Worker respond → Guest receive`로 연결했다.
 1 MiB 전체 262,144개 정수의 불일치는 매회 0개였으며 할당·H2D·커널·동기화·D2H·해제를 확인했다.
@@ -16,7 +20,7 @@
 `flytRegisterKernelABI`는 Guest 내부 메타데이터 등록이므로 원격 CUDA 요청 수에 포함하지 않는다.
 상세 수치는 [summary.csv](summary.csv), [summary.json](summary.json)에 있다.
 
-## 발표에 바로 쓸 실제 화면
+## 과거 자체 뷰어 기록 — 발표 기본 자료에서 제외
 
 그림은 실행 중 SSH stdout/stderr와 `kubectl logs`를 읽은 **실시간 명령 출력 브라우저 화면**이다.
 사후에 가상 로그를 만든 그림이나 데스크톱 터미널/Grafana 캡처가 아니다. 캡처별 JSON에 화면에
@@ -24,11 +28,11 @@
 
 **1 MiB 요청과 같은 request ID의 응답, 계산·해제 완료:**
 
-![1회차 실제 요청 대응·계산 결과](captures/evidence-s2-0928-01-PROBE_COMPLETE.png)
+[과거 1회차 뷰어: 요청 대응·계산 결과](captures/evidence-s2-0928-01-PROBE_COMPLETE.png)
 
 **3회차 검증·정상 회수 완료:**
 
-![3회차 검증·정상 회수](captures/evidence-s2-0928-03-RELEASED.png)
+[과거 3회차 뷰어: 검증·정상 회수](captures/evidence-s2-0928-03-RELEASED.png)
 
 - [1회차 연속 실행 영상](captures/stage2-first-run-live.webm)
 - [1 MiB 할당 직후 화면](captures/evidence-s2-0928-01-cudaMalloc_1MiB.png) · [그 화면 원본 JSON](captures/evidence-s2-0928-01-cudaMalloc_1MiB.json)
@@ -36,8 +40,8 @@
 - [전체 정수 검산](captures/evidence-s2-0928-01-ACCURACY.png)
 - [2회차 실제 실행 완료](captures/evidence-s2-0928-02-PROBE_COMPLETE.png) · [최종 완료 화면](captures/evidence-s2-0928-03-COMPLETE.png)
 
-발표자료 10쪽의 `cudaMalloc` 개념 설명 다음에 첫 화면을 배치하고, 오른쪽 하단의
-불일치 0개와 free 성공을 함께 표시할 수 있다. 구현 파트의 주장은 다음 범위다.
+발표에는 동일 request ID의 Guest/Worker 원본 로그와 불일치 0개·free 성공 출력을 사용한다.
+구현 파트의 주장은 다음 범위다.
 
 > “Guest의 CUDA 요청을 공유 메모리로 Worker에 전달하고, 같은 식별자의 응답을 회수했다.
 > 1 MiB 정수 데이터의 복사·GPU 커널 실행·결과 회수·해제를 독립 실행 3회에서 확인했다.”

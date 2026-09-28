@@ -1,5 +1,8 @@
 # 본 실험 이전 개발 트랙
 
+> **발표용 시각 자료 수정:** [1단계 실제 터미널 시연](results/2026-09-28-stage1-terminal/README.md).
+> bash에서 실행한 kubectl·SSH·nvidia-smi 명령과 출력을 asciinema로 녹화했다. 기존 자체 뷰어 대신 단계별 터미널 캡처와 원본 로그를 우선 사용한다.
+
 > **2단계 실행 완료:** [SHM 요청·응답 추적과 계산 정확성](results/2026-09-28-stage2/README.md).
 > 새 allocation 3회, 전체 54개 요청의 네 지점 trace 216행 대응, 매회 1 MiB·262,144개 정수 mismatch 0·free·Released를 확인했다. 실제 로그 화면 19개와 연속 영상 1개를 확보했다. 추적 ON 기능 검증이며 성능·연산 제한 판정은 아니다.
 

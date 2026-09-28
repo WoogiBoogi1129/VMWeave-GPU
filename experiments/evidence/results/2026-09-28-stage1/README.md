@@ -1,5 +1,8 @@
 # 1단계 결과 — GPU 요청과 실제 실행 경로 연결
 
+> **발표용 자료 교체:** [실제 터미널 절차 시연](../2026-09-28-stage1-terminal/README.md)을 우선 사용한다.
+> 이 문서의 3회 측정 원본은 유지한다. 기존 자체 브라우저 뷰어는 과거 보조 기록으로만 보존한다.
+
 2026-09-28 실행. **독립 allocation 3/3회에서 요청·배치·공유 영역·실제 GPU 실행·정상 회수를 확인했다.**
 최초 준비 시도 1회는 실행 파일 권한 오류로 실패했으며 [실패 원본](failures/)을 별도로 보존했다.
 이는 전체 시도 4회 중 유효 GPU 실행 3회이며, 서비스 성공률이나 성능 실험 성공률로 표현하지 않는다.
@@ -19,9 +22,9 @@ GPU 경로 확인을 위해 기존 정수 probe를 사용했다. 2단계의 요�
 전체 UID·generation·프로세스·GPU 연결은 [placement.csv](placement.csv),
 개별 검증은 [verification.json](verification.json), 실행 집계는 [summary.json](summary.json)에 있다.
 
-![요청값, 실제 적용값, GPU 프로세스의 실행 중 화면](captures/evidence-s1r-0928-01-MAPPED.png)
+[과거 자체 뷰어: 실행 중 화면](captures/evidence-s1r-0928-01-MAPPED.png)
 
-![실제 프로그램 최종 검산 결과](captures/evidence-s1r-0928-01-PROBE_COMPLETE.png)
+[과거 자체 뷰어: 최종 검산 화면](captures/evidence-s1r-0928-01-PROBE_COMPLETE.png)
 
 - [첫 실행 연속 영상](captures/stage1-first-run-live.webm): 약 131초, 1920×1440. 새 VM 준비부터 실제 매핑·검산·회수까지의 관측 화면을 녹화했다.
 - [첫 실행 회수 화면](captures/evidence-s1r-0928-01-RELEASED.png)

@@ -1,0 +1,129 @@
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 0. BEFORE THE REQUEST: no experiment VM or GPU process
+ubuntu@gpu-4:flyt-k8s-poc-github$ date -u +%FT%TZ
+2026-09-28T14:21:23Z
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get vmi "$VM" -n "$NS" --ignore-not-found
+ubuntu@gpu-4:flyt-k8s-poc-github$ nvidia-smi -i 1 --query-gpu=index,name --format=csv
+index, name
+1, NVIDIA RTX PRO 6000 Blackwell Server Edition
+ubuntu@gpu-4:flyt-k8s-poc-github$ nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv
+pid, process_name
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 00-before
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 1. REGISTER GPU REQUEST: 4096 MiB / compute 50 / one session
+ubuntu@gpu-4:flyt-k8s-poc-github$ cat "$DEMO/prepare.sh"
+#!/bin/bash
+set -euo pipefail
+python3 scripts/prepare-evidence-vm.py --name "$VM" \
+  --reuse-pvc evidence-vm-a-backing --public-key "$DEMO/artifacts/guest-key.pub" \
+  --memory-mib 4096 --compute 50 --sessions 1 \
+  --guest-image "$GUEST_IMAGE" --worker-image "$WORKER_IMAGE" \
+  --control-image "$CONTROL_IMAGE" --hook-image "$HOOK_IMAGE" \
+  --output "$DEMO/private-prepare"
+ubuntu@gpu-4:flyt-k8s-poc-github$ bash "$DEMO/prepare.sh" | tee "$RAW/create.log"
+VirtualMachine evidence-s1-terminal-0928b 4a24e3a9-2cf2-4362-b4e3-bea0ad4fb8db
+FlytGPUProfile evidence-s1-terminal-0928b-profile 6abbe624-af92-496a-9192-17b274501b8a
+FlytGPURequest evidence-s1-terminal-0928b-request a157117f-5dec-469b-80cf-84d734401466
+FlytSharedMemoryChannel evidence-s1-terminal-0928b-channel 21c932c2-0076-4fb0-ae13-3307c85eae20
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get flytgpurequest "$VM-request" -n "$NS" -o json | jq ".spec | {count,memory,compute}" | tee "$RAW/request-values.json"
+{
+  "count": 1,
+  "memory": "4096Mi",
+  "compute": 50
+}
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 01-request
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 2. START THE VM AND WAIT FOR ITS WORKER
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl wait -n "$NS" "flytsharedmemorychannel/$VM-channel" --for=jsonpath='{.status.phase}'=BackingReady --timeout=180s
+flytsharedmemorychannel.flyt.dev/evidence-s1-terminal-0928b-channel condition met
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl patch vm "$VM" -n "$NS" --type=merge -p '{"spec":{"runStrategy":"Always"}}'
+virtualmachine.kubevirt.io/evidence-s1-terminal-0928b patched
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl wait -n "$NS" "vmi/$VM" --for=jsonpath='{.status.phase}'=Running --timeout=300s
+virtualmachineinstance.kubevirt.io/evidence-s1-terminal-0928b condition met
+ubuntu@gpu-4:flyt-k8s-poc-github$ python3 experiments/evidence/terminal_stage1.py connect
+SSH connection and probe files prepared for evidence-s1-terminal-0928b
+Guest CPU: 0-7; Worker CPU: 16-19; Guest BAR: 0000:00:1e.0
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get vmi "$VM" -n "$NS" -o wide | tee "$RAW/vmi.txt"
+NAME                         AGE   PHASE     IP            NODENAME   READY   LIVE-MIGRATABLE   PAUSED
+evidence-s1-terminal-0928b   40s   Running   10.85.0.253   gpu-4      True    True              
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get pod "$VM-channel-worker" -n "$NS" -o wide | tee "$RAW/worker.txt"
+NAME                                        READY   STATUS    RESTARTS   AGE   IP            NODE    NOMINATED NODE   READINESS GATES
+evidence-s1-terminal-0928b-channel-worker   1/1     Running   0          36s   10.85.0.230   gpu-4   <none>           <none>
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 02-vm-worker
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 3. COMPARE REQUESTED VALUES WITH ACTUAL WORKER LIMITS
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get flytgpurequest "$VM-request" -n "$NS" -o json | jq ".spec | {count,memory,compute}"
+{
+  "count": 1,
+  "memory": "4096Mi",
+  "compute": 50
+}
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get pod "$VM-channel-worker" -n "$NS" -o json | jq ".spec.containers[0].resources.limits" | tee "$RAW/worker-limits.json"
+{
+  "nvidia.com/gpu": "1",
+  "nvidia.com/gpucores": "50",
+  "nvidia.com/gpumem": "4096"
+}
+ubuntu@gpu-4:flyt-k8s-poc-github$ # This checks configuration delivery, not utilization or quota enforcement.
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 03-settings
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 4. EXECUTE THE CUDA PROGRAM INSIDE THE VM
+ubuntu@gpu-4:flyt-k8s-poc-github$ cat "$DEMO/run-probe.sh"
+#!/bin/bash
+set -euo pipefail
+hostname
+date -u +%FT%TZ
+cd /tmp/campaign
+sudo env FLYT_LAYOUT=/tmp/campaign/layout.bin \
+  FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign \
+  ./campaign-probe-guest integer resident 45 0 64 2030 0 - -
+ubuntu@gpu-4:flyt-k8s-poc-github$ ssh -n -F "$DEMO/ssh-config" stage1-vm "bash /tmp/campaign/run-probe.sh" > "$RAW/guest-stdout.log" 2> "$RAW/guest-stderr.log" &
+[1] 414527
+ubuntu@gpu-4:flyt-k8s-poc-github$ PROBE_JOB=$!
+ubuntu@gpu-4:flyt-k8s-poc-github$ sleep 3
+ubuntu@gpu-4:flyt-k8s-poc-github$ head -n 3 "$RAW/guest-stdout.log"
+evidence-s1-terminal-0928b
+2026-09-28T14:22:28Z
+{"event":"WARMUP_START","utc_seconds":1790605348.839930534,"monotonic_seconds":33.297366568,"completed":0,"elapsed_seconds":0.000000000}
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 04-guest-command
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 5. MATCH THE WORKER HOST PID TO THE GPU PROCESS PID
+ubuntu@gpu-4:flyt-k8s-poc-github$ python3 experiments/evidence/terminal_stage1.py observe
+Saved raw observations: applied.json, host-mapping.json, runtime-libraries.json, guest-bar.json
+ubuntu@gpu-4:flyt-k8s-poc-github$ jq -r '.[] | select(.role=="worker") | "Worker host PID: \(.pid)\nWorker Pod UID: \(.pod_uid)"' "$RAW/host-mapping.json"
+Worker host PID: 413150
+Worker Pod UID: a40ac20f-e1ec-4b7d-87e4-07003ea2b6ef
+ubuntu@gpu-4:flyt-k8s-poc-github$ nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv | tee "$RAW/gpu-live.txt"
+pid, process_name
+413150, /opt/flyt/bin/flyt-shm-worker
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get flytsharedmemorychannel "$VM-channel" -n "$NS" -o custom-columns=NAME:.metadata.name,PHASE:.status.phase | tee "$RAW/channel-ready.txt"
+NAME                                 PHASE
+evidence-s1-terminal-0928b-channel   Ready
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 05-gpu-pid
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 6. WAIT FOR COMPLETION AND CHECK THE CALCULATION RESULT
+ubuntu@gpu-4:flyt-k8s-poc-github$ wait "$PROBE_JOB"
+[1]+  Done                    ssh -n -F "$DEMO/ssh-config" stage1-vm "bash /tmp/campaign/run-probe.sh" > "$RAW/guest-stdout.log" 2> "$RAW/guest-stderr.log"
+ubuntu@gpu-4:flyt-k8s-poc-github$ tail -n 1 "$RAW/guest-stdout.log" | tee "$RAW/result.json" | jq "{status,checked_elements,mismatches}"
+{
+  "status": "PASS",
+  "checked_elements": 524288,
+  "mismatches": 0
+}
+ubuntu@gpu-4:flyt-k8s-poc-github$ jq -e '.status=="PASS" and .checked_elements==524288 and .mismatches==0' "$RAW/result.json"
+true
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 06-result
+ubuntu@gpu-4:flyt-k8s-poc-github$ clear
+ubuntu@gpu-4:flyt-k8s-poc-github$ # 7. DRAIN THIS EXPERIMENT AND CHECK RELEASE
+ubuntu@gpu-4:flyt-k8s-poc-github$ python3 experiments/evidence/terminal_stage1.py cleanup
+flytsharedmemorychannel.flyt.dev/evidence-s1-terminal-0928b-channel patched
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get flytsharedmemorychannel "$VM-channel" -n "$NS" -o custom-columns=NAME:.metadata.name,PHASE:.status.phase
+NAME                                 PHASE
+evidence-s1-terminal-0928b-channel   Released
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get vmi "$VM" -n "$NS" --ignore-not-found
+ubuntu@gpu-4:flyt-k8s-poc-github$ kubectl get pod "$VM-channel-worker" -n "$NS" --ignore-not-found
+ubuntu@gpu-4:flyt-k8s-poc-github$ nvidia-smi -i 1 --query-compute-apps=pid,process_name --format=csv
+pid, process_name
+ubuntu@gpu-4:flyt-k8s-poc-github$ # CAPTURE 07-released
+ubuntu@gpu-4:flyt-k8s-poc-github$ exit
+exit
