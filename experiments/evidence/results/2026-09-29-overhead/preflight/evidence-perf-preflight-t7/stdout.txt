@@ -1,0 +1,14 @@
++00:00:00.367530 [34mINFO[0m:	connection to host "10.85.0.80"
++00:00:00.367703 [34mINFO[0m:	connecting via TCP...
+{"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+{"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":1,"warmup_min_s":0,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790612614.830885887,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790612614.863940239,"elapsed":0.033032767,"completed":50}
+{"event":"MEASUREMENT_START","utc":1790612614.863971233,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790612615.864121914,"elapsed":1.000143831,"completed":1317}
+{"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":1317,"elapsed_s":1.000143831,"operations_per_s":1316.810601814,"checked_elements":262144,"mismatches":0}
+[rpc] cuModuleLoadData(0x5582cc4d4230) = 0, result 0x645039a4b0b0
+[rpc] cuModuleGetFunction(0x645039a4b0b0, work) = 400, result 94020261724720
++00:00:01.448013 [34mINFO[0m:	api-call-cnt: 1381
++00:00:01.448037 [34mINFO[0m:	memcpy-cnt: 3145728
++00:00:01.450277 [34mINFO[0m: completed deinit request and response	in [4mcpu-client-mgr-handler.c:222[0m

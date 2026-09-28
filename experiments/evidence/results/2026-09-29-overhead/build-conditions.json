@@ -1,0 +1,7 @@
+{
+  "application_variants": "gcc -O2, common overhead_probe.c; API adapters differ only at linkage and SHM kernel ABI registration",
+  "shm_runtime": "CMake Release; exact flags in source/shm-compiler-flags.txt",
+  "tcp_runtime": "Preserved legacy Makefile profile: -g -ggdb -fcommon -DLOG_LEVEL=LOG_INFO; no explicit optimization level; exact server rebuild in source/tcp-compatibility-build.log",
+  "limitation": "Runtime compiler optimization profiles are not matched. These observations compare the frozen implementations, not an isolated TCP-versus-SHM transport effect.",
+  "scope": "Only setup compatibility patches already present in the repository were applied to TCP; no latency optimization between measurement sessions."
+}

@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # Flyt-based TCP: actual connection and physical GPU
+ubuntu@gpu-4:2026-09-29-overhead$ grep '^{' r1-T/stdout.txt | jq 'select(.event=="TRANSPORT")'
+{
+  "event": "TRANSPORT",
+  "socktype": 1,
+  "connection_is_local": 0,
+  "shm_enabled": 1
+}
+ubuntu@gpu-4:2026-09-29-overhead$ jq '{gpu_uuid,sm_count,memory_mib,cell_ip,vm_ip}' r1-T/ident
+ity.json
+{
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "sm_count": 188,
+  "memory_mib": 4096,
+  "cell_ip": "10.85.0.50",
+  "vm_ip": "10.85.0.201"
+}
+ubuntu@gpu-4:2026-09-29-overhead$ cat r1-T/rpcinfo.txt
+   program vers proto   port  service
+    100000    4   tcp    111  portmapper
+    100000    3   tcp    111  portmapper
+    100000    2   tcp    111  portmapper
+    100000    4   udp    111  portmapper
+    100000    3   udp    111  portmapper
+    100000    2   udp    111  portmapper
+        99    1   tcp  50822
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

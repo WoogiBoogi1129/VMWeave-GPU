@@ -1,0 +1,15 @@
++00:00:00.374954 [34mINFO[0m:	connection to host "10.85.0.182"
++00:00:00.375119 [34mINFO[0m:	connecting via TCP...
+{"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+{"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":1,"warmup_min_s":0,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790612436.847893953,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790612436.896824837,"elapsed":0.048907995,"completed":50}
+{"event":"MEASUREMENT_START","utc":1790612436.896856308,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790612437.896863699,"elapsed":1.000000405,"completed":1156}
+{"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":1156,"elapsed_s":1.000000405,"operations_per_s":1155.999531820,"checked_elements":262144,"mismatches":0}
++00:00:01.466503 [1m[31mERROR[0m: elf_getshdrnum failed	in [4mcpu-elf2.c:856[0m
++00:00:01.466534 [1m[31mERROR[0m: check_elf failed	in [4mcpu-elf2.c:914[0m
++00:00:01.466546 [1m[31mERROR[0m: could not get kernel infos from memory	in [4mcpu-client-driver.c:477[0m
++00:00:01.468423 [34mINFO[0m:	api-call-cnt: 1220
++00:00:01.468461 [34mINFO[0m:	memcpy-cnt: 3145728
++00:00:01.470781 [34mINFO[0m: completed deinit request and response	in [4mcpu-client-mgr-handler.c:222[0m

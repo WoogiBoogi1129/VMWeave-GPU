@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # Repetition decision: keep all valid observations
+ubuntu@gpu-4:2026-09-29-overhead$ jq '{first_three_complete,condition_mask,triggered_condition
+s:(.reasons|map({mode,bytes})|unique)}' extension-decision.json
+{
+  "first_three_complete": true,
+  "condition_mask": 119,
+  "triggered_conditions": [
+    {
+      "mode": "copy",
+      "bytes": 4096
+    },
+    {
+      "mode": "kernel",
+      "bytes": 1048576
+    },
+    {
+      "mode": "query",
+      "bytes": 1048576
+    },
+    {
+      "mode": "resident",
+      "bytes": 2097152
+    },
+    {
+      "mode": "transfer",
+      "bytes": 2097152
+    },
+    {
+      "mode": "copy",
+      "bytes": 4194304
+    }
+  ]
+}
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

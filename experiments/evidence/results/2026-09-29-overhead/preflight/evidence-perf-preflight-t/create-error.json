@@ -1,0 +1,92 @@
+{
+  "uid": "69ec6a88-7002-4237-bcdd-69956e1c7a11",
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-28T16:10:06Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-28T16:10:05Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-28T16:10:05Z",
+        "message": "containers with unready status: [cell]",
+        "observedGeneration": 1,
+        "reason": "ContainersNotReady",
+        "status": "False",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-28T16:10:05Z",
+        "message": "containers with unready status: [cell]",
+        "observedGeneration": 1,
+        "reason": "ContainersNotReady",
+        "status": "False",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-09-28T16:10:05Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "image": "localhost/flyt-gpu-cell@sha256:0b93ea71ede3497818901a3639814fa28181483603bc76485621729504889911",
+        "imageID": "",
+        "lastState": {},
+        "name": "cell",
+        "ready": false,
+        "restartCount": 0,
+        "started": false,
+        "state": {
+          "waiting": {
+            "message": "image pull failed for localhost/flyt-gpu-cell@sha256:0b93ea71ede3497818901a3639814fa28181483603bc76485621729504889911 because the registry is unavailable: unable to pull image: initializing source docker://localhost/flyt-gpu-cell@sha256:0b93ea71ede3497818901a3639814fa28181483603bc76485621729504889911: fetching manifest sha256:0b93ea71ede3497818901a3639814fa28181483603bc76485621729504889911 in localhost/flyt-gpu-cell: pinging container registry localhost: Get \"https://localhost/v2/\": dial tcp 127.0.0.1:443: connect: connection refused",
+            "reason": "RegistryUnavailable"
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/etc/flyt",
+            "name": "cfg",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          },
+          {
+            "mountPath": "/dev/shm",
+            "name": "shm"
+          }
+        ]
+      }
+    ],
+    "hostIP": "192.168.24.21",
+    "hostIPs": [
+      {
+        "ip": "192.168.24.21"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Pending",
+    "podIP": "10.85.0.28",
+    "podIPs": [
+      {
+        "ip": "10.85.0.28"
+      }
+    ],
+    "qosClass": "BestEffort",
+    "resources": {},
+    "startTime": "2026-09-28T16:10:05Z"
+  }
+}

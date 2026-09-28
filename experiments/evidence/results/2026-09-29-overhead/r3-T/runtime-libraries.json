@@ -1,0 +1,71 @@
+[
+  {
+    "pid": 771704,
+    "command": "nvidia-cuda-mps-server  ",
+    "maps": [
+      "702820a00000-702820b66000 r--p 00000000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "702820b66000-702821aea000 r-xp 00166000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "702821aea000-702826495000 r--p 010ea000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "702826495000-702826496000 ---p 05a95000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "702826496000-7028265cb000 r--p 05a95000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "7028265cb000-7028265d4000 rw-p 05bca000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02"
+    ],
+    "environment": {
+      "CUDA_DEVICE_MEMORY_LIMIT_0": null,
+      "CUDA_DEVICE_SM_LIMIT": null,
+      "CUDA_DEVICE_SM_LIMIT_0": null,
+      "CUDA_MPS_ACTIVE_THREAD_PERCENTAGE": null,
+      "CUDA_MPS_ENABLE_PER_CTX_DEVICE_MULTIPROCESSOR_PARTITIONING": "1",
+      "CUDA_MPS_PIPE_DIRECTORY": "/run/flyt-mps/pipe",
+      "FLYT_TRACE_CALLS": null,
+      "FLYT_TRACE_REQUESTS": null,
+      "GPU_CORE_UTILIZATION_POLICY": null,
+      "LD_LIBRARY_PATH": "/opt/flyt/bin:/usr/local/cuda/lib64:/usr/local/cuda/lib64",
+      "LD_PRELOAD": null
+    },
+    "library_hashes": {
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4"
+    },
+    "affinity_status": [
+      "Cpus_allowed_list:\t16-19",
+      "Mems_allowed_list:\t0-3"
+    ]
+  },
+  {
+    "pid": 773364,
+    "command": "/opt/flyt/bin/cricket-rpc-server 1 0 188 4294967296 0 ",
+    "maps": [
+      "76bd68e00000-76bd68f66000 r--p 00000000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "76bd68f66000-76bd69eea000 r-xp 00166000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "76bd69eea000-76bd6e895000 r--p 010ea000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "76bd6e895000-76bd6e896000 ---p 05a95000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "76bd6e896000-76bd6e9cb000 r--p 05a95000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "76bd6e9cb000-76bd6e9d4000 rw-p 05bca000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "76bd7d600000-76bd7d6ad000 r-xp 00000000 00:2f5 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+      "76bd7d6ad000-76bd7d8ad000 ---p 000ad000 00:2f5 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+      "76bd7d8ad000-76bd7d8b1000 r--p 000ad000 00:2f5 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+      "76bd7d8b1000-76bd7d8b2000 rw-p 000b1000 00:2f5 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90"
+    ],
+    "environment": {
+      "CUDA_DEVICE_MEMORY_LIMIT_0": null,
+      "CUDA_DEVICE_SM_LIMIT": null,
+      "CUDA_DEVICE_SM_LIMIT_0": null,
+      "CUDA_MPS_ACTIVE_THREAD_PERCENTAGE": null,
+      "CUDA_MPS_ENABLE_PER_CTX_DEVICE_MULTIPROCESSOR_PARTITIONING": "1",
+      "CUDA_MPS_PIPE_DIRECTORY": "/run/flyt-mps/pipe",
+      "FLYT_TRACE_CALLS": null,
+      "FLYT_TRACE_REQUESTS": null,
+      "GPU_CORE_UTILIZATION_POLICY": null,
+      "LD_LIBRARY_PATH": "/opt/flyt/bin:/usr/local/cuda/lib64:/usr/local/cuda/lib64",
+      "LD_PRELOAD": null
+    },
+    "library_hashes": {
+      "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4"
+    },
+    "affinity_status": [
+      "Cpus_allowed_list:\t16-19",
+      "Mems_allowed_list:\t0-3"
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "name": "evidence-perf-7-t",
+  "namespace": "flyt-overhead-tcp",
+  "vmi_uid": "6448abb5-90c3-4223-8776-8036dc36cf77",
+  "cpu": {
+    "cores": 8,
+    "model": "host-model"
+  },
+  "memory": {
+    "guest": "16Gi",
+    "maxGuest": "64Gi"
+  },
+  "resources": {
+    "requests": {
+      "memory": "16Gi"
+    }
+  },
+  "guest_images": [
+    "localhost/flyt-evidence-guest@sha256:47e520785c49e6db93631ef4876dcb40b73b23ffc766327e6b02cdfe3496c052"
+  ],
+  "node": "gpu-4",
+  "interfaces": [
+    {
+      "infoSource": "domain",
+      "ipAddress": "10.85.0.182",
+      "ipAddresses": [
+        "10.85.0.182"
+      ],
+      "linkState": "up",
+      "mac": "ea:bd:3d:b6:93:78",
+      "name": "default",
+      "podInterfaceName": "eth0",
+      "queueCount": 1
+    }
+  ],
+  "observed_utc": 1790616848.6246905,
+  "collection": "read-only Kubernetes API; cloud-init omitted"
+}

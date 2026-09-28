@@ -1,0 +1,40 @@
+{
+  "channel_uid": "4b234484-8838-46ad-b7fe-81f42b8d5251",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "allocation": "9443510ae721d1335c36e7fb1d3b131a",
+  "vmi_uid": "da81741c-d05c-48b3-84c0-5ead179751dd",
+  "worker_uid": "825c1f43-86fb-409c-8cfa-be683f921399",
+  "worker": "evidence-perf-3-s-channel-worker",
+  "launcher": "virt-launcher-evidence-perf-3-s-vfhrm",
+  "launcher_uid": "298045ed-c30d-4fb9-b303-dee7462edd65",
+  "gpu_annotation": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3,NVIDIA,4096,100:;",
+  "images": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "localhost/flyt-hook@sha256:ff8db37b7ee864c5b63335986b2d4c85c550ca7bd82c80ed241563f715fa0554",
+    "image": "localhost/flyt-control-plane@sha256:8dd0a2f445244a839ce390e83da5ad653cd82c6904dced06fc777dc570ccb808",
+    "pvcRef": {
+      "name": "evidence-vm-a-backing",
+      "uid": "3266e644-f00e-4b86-9ba0-de154e13d1f1"
+    },
+    "requestRef": {
+      "name": "evidence-perf-3-s-request",
+      "uid": "f82198f7-2398-47de-a718-1d611c8111d3"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "evidence-perf-3-s",
+      "uid": "148f6efd-7340-4e29-a66b-fb06d30f286d"
+    },
+    "workerImage": "localhost/flyt-worker@sha256:d759e0998fff576f65dcd8bf153fe7b3a1f969705e9f7ec7616c7144d090003a"
+  },
+  "guest_cpu_set": "0-7",
+  "worker_cpu_set": "16-19",
+  "numa_memory_policy": "observed; not strict membind",
+  "path": "S",
+  "session": "r3-S",
+  "cpu_sampling": "nonoverlapping whole Pod cgroups",
+  "trace": "off",
+  "condition_rotation": 4
+}

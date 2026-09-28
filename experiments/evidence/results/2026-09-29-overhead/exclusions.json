@@ -1,0 +1,29 @@
+{
+  "recorded_utc": 1790614625.1549523,
+  "reason": "A browser preview of completed N monitoring was launched without CPU pinning during r1-S query (2026-09-28 16:45:09 UTC capture, S window 16:44:49\u201316:45:19 UTC). This violates the intended separation of measurement and UI capture.",
+  "decision": "Preserve all original raw records. Exclude the first query window for ALL N/T/S as a paired block; replace with fresh N/T/S sessions numbered r7, query only, before deciding variance extensions. Other original windows remain included.",
+  "excluded": [
+    {
+      "session": "r1-N",
+      "mode": "query",
+      "bytes": 1048576
+    },
+    {
+      "session": "r1-T",
+      "mode": "query",
+      "bytes": 1048576
+    },
+    {
+      "session": "r1-S",
+      "mode": "query",
+      "bytes": 1048576
+    }
+  ],
+  "replacement": {
+    "physical_rep": 7,
+    "logical_rep": 1,
+    "condition_mask": 1,
+    "paths": "NTS"
+  },
+  "performance_selection": false
+}

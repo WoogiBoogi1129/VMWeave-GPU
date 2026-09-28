@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # Completed operations / actual elapsed seconds
+ubuntu@gpu-4:2026-09-29-overhead$ python3 analysis-source/overhead_terminal_table.py . through
+put
+Independent session means (all valid repetitions)
+N = host CUDA + HAMi; T = Flyt TCP + MPS; S = proposed SHM + HAMi
+
+metric / payload                 path        mean         SD   n
+resident                         N     113238.323    365.379   3
+resident                         T        931.186    250.006   3
+resident                         S        358.767      6.009   3
+transfer                         N       3572.189    144.330   3
+transfer                         T        152.784     29.649   3
+transfer                         S         64.640      0.571   3
+
+Units: completed operations/s
+Source: aggregate-summary.csv -> per-session CSV -> raw *.csv.xz
+ubuntu@gpu-4:2026-09-29-overhead$ python3 analysis-source/overhead_terminal_table.py . cpu
+CPU cost: nonoverlapping Pod cgroups; approximate window alignment
+mode         path active cores    CPU us/work
+resident     N           1.013          8.942
+resident     T           0.888       1000.724
+resident     S           0.310        864.335
+transfer     N           1.012        283.716
+transfer     T           1.884      12526.503
+transfer     S           0.805      12461.780
+Source: cpu-summary.csv; excludes shared control/monitoring services
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

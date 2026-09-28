@@ -1,0 +1,88 @@
+{
+  "decision": {
+    "first_three_complete": true,
+    "condition_mask": 119,
+    "reasons": [
+      {
+        "mode": "copy",
+        "bytes": 4096,
+        "metric": "d2h_complete",
+        "path": "N",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "copy",
+        "bytes": 4096,
+        "metric": "d2h_complete",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "copy",
+        "bytes": 4096,
+        "metric": "h2d_complete",
+        "path": "N",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "copy",
+        "bytes": 4096,
+        "metric": "h2d_complete",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "copy",
+        "bytes": 4194304,
+        "metric": "d2h_complete",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "copy",
+        "bytes": 4194304,
+        "metric": "h2d_complete",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "kernel",
+        "bytes": 1048576,
+        "metric": "launch_return",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "kernel",
+        "bytes": 1048576,
+        "metric": "launch_sync_complete",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "query",
+        "bytes": 1048576,
+        "metric": "query_return",
+        "path": "N",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "resident",
+        "bytes": 2097152,
+        "metric": "throughput",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      },
+      {
+        "mode": "transfer",
+        "bytes": 2097152,
+        "metric": "throughput",
+        "path": "T",
+        "reason": "first-three run-mean CV > 10%"
+      }
+    ],
+    "rule": "Extend all N/T/S affected conditions to six fresh sessions; no dropping valid original runs."
+  },
+  "archived_utc": 1790617102.226018,
+  "evidence": "The coordinator logged this decision before SESSION_START r4-N in the preserved campaign logs. No further adaptive repetitions after six."
+}

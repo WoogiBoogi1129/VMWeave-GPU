@@ -1,0 +1,54 @@
++00:00:00.373833 [34mINFO[0m:	connection to host "10.85.0.247"
++00:00:00.373996 [34mINFO[0m:	connecting via TCP...
+{"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+{"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790614331.603660107,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790614341.607584715,"elapsed":10.003903603,"completed":2788}
+{"event":"MEASUREMENT_START","utc":1790614341.607671499,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790614372.273333311,"elapsed":30.002560418,"completed":9524}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":9524,"elapsed_s":30.002560418,"operations_per_s":317.439574067,"checked_elements":1024,"mismatches":0}
+{"event":"CONDITION","mode":"copy","bytes":262144,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790614372.300653219,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790614382.304404259,"elapsed":10.003731995,"completed":2477}
+{"event":"MEASUREMENT_START","utc":1790614382.304440975,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790614412.306378841,"elapsed":30.001929928,"completed":7021}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":262144,"completed":7021,"elapsed_s":30.001929928,"operations_per_s":234.018278719,"checked_elements":65536,"mismatches":0}
+{"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":4286578688,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790614412.345725060,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790614422.352615118,"elapsed":10.006869713,"completed":943}
+{"event":"MEASUREMENT_START","utc":1790614422.352653980,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790614452.360608339,"elapsed":30.007946606,"completed":2825}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":2825,"elapsed_s":30.007946606,"operations_per_s":94.141729759,"checked_elements":1048576,"mismatches":0}
+[rpc] cuModuleLoadData(0x55e506fa5230) = 0, result 0x5aa03204ecc0
+[rpc] cuModuleGetFunction(0x5aa03204ecc0, work) = 0, result 99644080454208
+{"event":"CONDITION","mode":"resident","bytes":2097152,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790614452.392457485,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790614462.394510269,"elapsed":10.002034996,"completed":5053}
+{"event":"MEASUREMENT_START","utc":1790614462.394588947,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790614522.394760609,"elapsed":60.000162729,"completed":38941}
+{"event":"RESULT","status":"PASS","mode":"resident","bytes":2097152,"completed":38941,"elapsed_s":60.000162729,"operations_per_s":649.014906441,"checked_elements":524288,"mismatches":0}
+[rpc] cuModuleLoadData(0x55e5071a8ad0) = 0, result 0x5aa03205b6d0
+[rpc] cuModuleGetFunction(0x5aa03205b6d0, work) = 0, result 99644080437856
+{"event":"CONDITION","mode":"transfer","bytes":2097152,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790614522.469903231,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790614532.472112417,"elapsed":10.002188680,"completed":1307}
+{"event":"MEASUREMENT_START","utc":1790614532.472203493,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790614592.473345280,"elapsed":60.001134319,"completed":7908}
+{"event":"RESULT","status":"PASS","mode":"transfer","bytes":2097152,"completed":7908,"elapsed_s":60.001134319,"operations_per_s":131.797508326,"checked_elements":524288,"mismatches":0}
+{"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790614592.505095005,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790614602.505954266,"elapsed":10.000837067,"completed":18763}
+{"event":"MEASUREMENT_START","utc":1790614602.505995989,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790614632.506459951,"elapsed":30.000456190,"completed":36459}
+{"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":36459,"elapsed_s":30.000456190,"operations_per_s":1215.281520024,"checked_elements":262144,"mismatches":0}
+[rpc] cuModuleLoadData(0x55e506da6240) = 0, result 0x5aa032058110
+[rpc] cuModuleGetFunction(0x5aa032058110, work) = 0, result 99644080436624
+{"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":30,"warmup_min_s":10,"iterations":1,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790614632.566959620,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790614642.567473888,"elapsed":10.000495083,"completed":5325}
+{"event":"MEASUREMENT_START","utc":1790614642.567515850,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790614672.567631483,"elapsed":30.000107657,"completed":16189}
+{"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":16189,"elapsed_s":30.000107657,"operations_per_s":539.631396830,"checked_elements":262144,"mismatches":0}
++00:05:41.384626 [34mINFO[0m:	api-call-cnt: 250750
++00:05:41.384700 [34mINFO[0m:	memcpy-cnt: -1948573696
++00:05:41.388253 [34mINFO[0m: completed deinit request and response	in [4mcpu-client-mgr-handler.c:222[0m

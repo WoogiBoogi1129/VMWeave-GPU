@@ -1,0 +1,9 @@
+{
+  "command": "sudo env FLYT_TRACE_REQUESTS=0 FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign /tmp/campaign/probe-S batch 30 60 10 /tmp/campaign/r7-S /tmp/campaign/work.ptx 0 1",
+  "durations": {
+    "micro": 30,
+    "throughput": 60,
+    "warmup_min": 10,
+    "warmup_iterations_min": 50
+  }
+}

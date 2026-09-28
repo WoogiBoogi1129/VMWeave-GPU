@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # Native and proposed: actual process policy / mapped HAMi
+ubuntu@gpu-4:2026-09-29-overhead$ jq '.[]|{command,policy:.environment.GPU_CORE_UTILIZATION_PO
+LICY,memory:.environment.CUDA_DEVICE_MEMORY_LIMIT_0,trace:.environment.FLYT_TRACE_REQUESTS}' r
+1-N/runtime-libraries.json r1-S/runtime-libraries.json
+{
+  "command": "/evidence/probe-N batch 30 60 10 /evidence/r1-N /evidence/work.ptx 0 127 ",
+  "policy": "DISABLE",
+  "memory": "4096m",
+  "trace": "0"
+}
+{
+  "command": "/opt/flyt/bin/flyt-shm-worker /flyt-channel/eb6d34d61d2a426eb9b605c64b22cbf0 0 "
+,
+  "policy": "DISABLE",
+  "memory": "4096m",
+  "trace": "0"
+}
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
++00:00:00.365053 [34mINFO[0m:	connection to host "10.85.0.235"
++00:00:00.365205 [34mINFO[0m:	connecting via TCP...
+{"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+{"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790616850.797979593,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790616860.798135519,"elapsed":10.000135306,"completed":13240}
+{"event":"MEASUREMENT_START","utc":1790616860.798171282,"elapsed":0.000000000,"completed":0}
+{"event":"MEASUREMENT_END","utc":1790616890.799044847,"elapsed":30.000865829,"completed":39185}
+{"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":39185,"elapsed_s":30.000865829,"operations_per_s":1306.128970522,"checked_elements":262144,"mismatches":0}
++00:00:40.445061 [34mINFO[0m:	api-call-cnt: 52434
++00:00:40.445092 [34mINFO[0m:	memcpy-cnt: 2097152
++00:00:40.447465 [34mINFO[0m: completed deinit request and response	in [4mcpu-client-mgr-handler.c:222[0m

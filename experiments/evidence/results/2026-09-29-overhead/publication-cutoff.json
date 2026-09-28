@@ -1,0 +1,53 @@
+{
+  "utc": 1790617386.4384935,
+  "reason": "User requested publishing only results obtained so far. Stop further repetitions and publish a progress snapshot, not a completed six-repetition campaign.",
+  "processes": [
+    {
+      "pid": 723171,
+      "command": [
+        "python3",
+        ".local/overhead-20260929/finish-measurements.py"
+      ],
+      "signal": "SIGTERM"
+    },
+    {
+      "pid": 796509,
+      "command": [
+        "python3",
+        "experiments/evidence/run_overhead.py",
+        "--base",
+        ".local/overhead-20260929",
+        "--output",
+        "experiments/evidence/results/2026-09-29-overhead",
+        "--repetitions",
+        "4,5,6",
+        "--condition-mask",
+        "119"
+      ],
+      "signal": "SIGINT"
+    }
+  ],
+  "primary_comparison": "63 balanced valid windows, three independent sessions per path/condition; preserve three excluded original query windows and all available extension records separately.",
+  "additional_completed_windows": 6,
+  "additional_session": "additional-native/r4-N",
+  "measurement_status": "All six r4-N windows completed and passed before interruption. Export compression was interrupted; regenerate losslessly from preserved private raw samples. No r4-T/S or r5/r6 measurements were started.",
+  "background_writers_stopped": [
+    {
+      "pid": 695834,
+      "command": [
+        "python3",
+        "experiments/evidence/pack_overhead.py",
+        "experiments/evidence/results/2026-09-29-overhead",
+        "--watch"
+      ]
+    },
+    {
+      "pid": 713798,
+      "command": [
+        "python3",
+        "experiments/evidence/overhead_identity.py",
+        "experiments/evidence/results/2026-09-29-overhead"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # r7-S: result of the query window shown on the left
+ubuntu@gpu-4:2026-09-29-overhead$ grep '^{' r7-S/stdout.txt | jq 'select(.event=="RESULT")'
+{
+  "event": "RESULT",
+  "status": "PASS",
+  "mode": "query",
+  "bytes": 1048576,
+  "completed": 20135,
+  "elapsed_s": 30.001034630,
+  "operations_per_s": 671.143520493,
+  "checked_elements": 262144,
+  "mismatches": 0
+}
+ubuntu@gpu-4:2026-09-29-overhead$ # r1-S: throughput windows (mode, completed, seconds, mismat
+ches)
+ubuntu@gpu-4:2026-09-29-overhead$ grep '^{' r1-S/stdout.txt | jq -rs 'map(select(.event=="RESU
+LT" and (.mode=="resident" or .mode=="transfer")))[] | [.mode,.completed,.elapsed_s,.mismatche
+s] | @tsv' | column -t
+resident  21250  60.002804824  0
+transfer  3852   60.009918629  0
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

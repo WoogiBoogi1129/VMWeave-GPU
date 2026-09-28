@@ -1,0 +1,40 @@
+[1/2] STEP 1/5: FROM 79178b3e7bb7 AS build
+[1/2] STEP 2/5: COPY legacy/rpc/patches/flyt-module-resource-handle.patch /tmp/one.patch
+--> 5a060b29d760
+[1/2] STEP 3/5: COPY legacy/rpc/patches/flyt-driver-launch-function-map.patch /tmp/two.patch
+--> 9d0c5283e144
+[1/2] STEP 4/5: COPY legacy/rpc/patches/flyt-driver-launch-stream-map.patch /tmp/three.patch
+--> 5543122f2db1
+[1/2] STEP 5/5: RUN cd /build/flyt && patch -p1 < /tmp/one.patch && patch -p1 < /tmp/two.patch && patch -p1 < /tmp/three.patch && LOG=INFO make -C cpu cricket-rpc-server
+patching file cpu/cpu-server-driver.c
+patching file cpu/cpu-server-driver.c
+Hunk #1 succeeded at 1111 (offset -43 lines).
+patching file cpu/cpu-server-driver.c
+Hunk #1 succeeded at 1133 with fuzz 1 (offset -40 lines).
+make: Entering directory '/build/flyt/cpu'
+gcc -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -g -ggdb  -DLOG_LEVEL=LOG_INFO -c -fpic -o cpu-server-driver.o cpu-server-driver.c  
+cpu-server-driver.c: In function 'rpc_cudevicegetproperties_1_svc':
+cpu-server-driver.c:948:5: warning: 'cuDeviceGetProperties' is deprecated [-Wdeprecated-declarations]
+  948 |     result->err = cuDeviceGetProperties((CUdevprop*)result->mem_result_u.data.mem_data_val, dev);
+      |     ^~~~~~
+In file included from cpu-server-driver.c:6:
+/usr/local/cuda/include/cuda.h:5821:36: note: declared here
+ 5821 | __CUDA_DEPRECATED CUresult CUDAAPI cuDeviceGetProperties(CUdevprop *prop, CUdevice dev);
+      |                                    ^~~~~~~~~~~~~~~~~~~~~
+cpu-server-driver.c: In function 'rpc_cudevicecomputecapability_1_svc':
+cpu-server-driver.c:958:5: warning: 'cuDeviceComputeCapability' is deprecated [-Wdeprecated-declarations]
+  958 |     result->err = cuDeviceComputeCapability(&(result->dint_result_u.data.i1),
+      |     ^~~~~~
+In file included from cpu-server-driver.c:6:
+/usr/local/cuda/include/cuda.h:5855:36: note: declared here
+ 5855 | __CUDA_DEPRECATED CUresult CUDAAPI cuDeviceComputeCapability(int *major, int *minor, CUdevice dev);
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~
+gcc -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -g -ggdb  -DLOG_LEVEL=LOG_INFO -o cricket-rpc-server cpu_rpc_prot_xdr.o cpu_rpc_prot_svc_mod.o cpu-server.o cpu-utils.o cpu-server-runtime.o cpu-server-driver.o cpu-server-driver-hidden.o log.o cpu-libwrap.o msg-handler.o cpu-server-cusolver.o cpu-server-cublas.o list.o api-recorder.o resource-mg.o cr.o gsched_none.o oob.o cpu-server-mt-memcpy.o cpu-elf2.o cpu-server-nvml.o cpu-server-cudnn.o cpu-server-cublaslt.o cpu-server-mgr-listener.o cpu-server-resource-controller.o cpu-server-metrics.o gsched_fixed.o device-management.o resource-map.o cpu-server-client-mgr.o cpu-server-mem_manager.o flyt-cr.o cpu-server-dev-mem.o server-exe.o ../submodules/libtirpc/install/lib/libtirpc.a -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs  -ldl -lcrypto -lelf  -lcudart -lcupti -lcusolver -lcuda -lcublas -lrt -lpthread -lnvidia-ml -lcudnn -lcublasLt -Wl,--unresolved-symbols=ignore-in-object-files -lnvperf_host -lnvperf_target -L /build/flyt/cpu/metrics/ -lprofiler -lstdc++ -lm
+make: Leaving directory '/build/flyt/cpu'
+--> 71d77a740e01
+[2/2] STEP 1/2: FROM localhost/flyt-gpu-cell:dev
+[2/2] STEP 2/2: COPY --from=build /build/flyt/cpu/cricket-rpc-server /opt/flyt/bin/cricket-rpc-server
+[2/2] COMMIT localhost/flyt-gpu-cell:overhead-20260929
+--> dc1831cdbef2
+Successfully tagged localhost/flyt-gpu-cell:overhead-20260929
+dc1831cdbef2124ebd0d5e32f8ff21774b47ef99e285cd021c66e1daf4529c80

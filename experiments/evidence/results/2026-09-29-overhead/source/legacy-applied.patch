@@ -1,0 +1,946 @@
+diff --git a/control-managers/src/client-manager-daemon/vcuda_client_handler.rs b/control-managers/src/client-manager-daemon/vcuda_client_handler.rs
+index f1adea9..f26b1e5 100644
+--- a/control-managers/src/client-manager-daemon/vcuda_client_handler.rs
++++ b/control-managers/src/client-manager-daemon/vcuda_client_handler.rs
+@@ -42,7 +42,10 @@ impl VCudaClientManager {
+             std::fs::File::create(mqueue_path).unwrap();
+         }
+ 
+-        let key = PathProjectIdKey::new(mqueue_path.to_string(), PROJ_ID);
++        // ipc-rs passes String::as_ptr() directly to libc::ftok(), which
++        // requires a NUL-terminated path. Without the explicit terminator the
++        // manager and the C interposer can derive different queue keys.
++        let key = PathProjectIdKey::new(format!("{}\0", mqueue_path), PROJ_ID);
+         let message_queue = MessageQueue::new(MessageQueueKey::PathKey(key)).create().init().unwrap();
+         log::debug!("key used by client: {} {} {}", message_queue.key, mqueue_path.to_string(), PROJ_ID);
+         
+@@ -224,7 +227,7 @@ impl VCudaClientManager {
+     }
+ 
+     pub fn listen_to_clients<F>(&self, virt_server_getter: F) where F: Fn(i32, i32, bool) -> Option<(String, u64)> {
+-        let key = PathProjectIdKey::new(self.mqueue_path.clone(), PROJ_ID);
++        let key = PathProjectIdKey::new(format!("{}\0", self.mqueue_path), PROJ_ID);
+         let message_queue = MessageQueue::new(MessageQueueKey::PathKey(key)).create().init().unwrap();
+         log::info!("Flyt client manager listening to clients...");
+         loop {
+diff --git a/control-managers/src/common/config.rs b/control-managers/src/common/config.rs
+index 92437f8..5e50863 100644
+--- a/control-managers/src/common/config.rs
++++ b/control-managers/src/common/config.rs
+@@ -1,5 +1,8 @@
+ // Copyright (c) 2024-2026 SynerG Lab, IITB
+ 
+-pub const CLMGR_CONFIG_PATH: &str = "../configs/client-mgr.toml";
+-pub const RMGR_CONFIG_PATH: &str = "../configs/cluster-mgr.toml";
+-pub const SNODE_CONFIG_PATH: &str = "../configs/node-mgr.toml";
++// Kubernetes workloads have no reliable working directory. Keep the manager
++// configuration in one well-known, read-only mount shared by containers and
++// VM guest installations.
++pub const CLMGR_CONFIG_PATH: &str = "/etc/flyt/client-mgr.toml";
++pub const RMGR_CONFIG_PATH: &str = "/etc/flyt/cluster-mgr.toml";
++pub const SNODE_CONFIG_PATH: &str = "/etc/flyt/node-mgr.toml";
+diff --git a/control-managers/src/servernode-daemon/gpu_cores_getter.c b/control-managers/src/servernode-daemon/gpu_cores_getter.c
+index 276167b..aa6f580 100644
+--- a/control-managers/src/servernode-daemon/gpu_cores_getter.c
++++ b/control-managers/src/servernode-daemon/gpu_cores_getter.c
+@@ -10,4 +10,22 @@ int get_gpu_cores(unsigned device_id) {
+         return -1;
+     }
+     return dev_prop.multiProcessorCount;
+-}
+\ No newline at end of file
++}
++
++int get_cuda_device_count(void) {
++    int count = 0;
++    cudaError_t res = cudaGetDeviceCount(&count);
++    if (res != cudaSuccess) {
++        return -1;
++    }
++    return count;
++}
++
++unsigned long long get_gpu_total_memory(unsigned device_id) {
++    struct cudaDeviceProp dev_prop;
++    cudaError_t res = cudaGetDeviceProperties(&dev_prop, device_id);
++    if (res != cudaSuccess) {
++        return 0;
++    }
++    return (unsigned long long)dev_prop.totalGlobalMem;
++}
+diff --git a/control-managers/src/servernode-daemon/gpu_manager.rs b/control-managers/src/servernode-daemon/gpu_manager.rs
+index cf09d15..d473e06 100644
+--- a/control-managers/src/servernode-daemon/gpu_manager.rs
++++ b/control-managers/src/servernode-daemon/gpu_manager.rs
+@@ -1,9 +1,9 @@
+ // Copyright (c) 2024-2026 SynerG Lab, IITB
+ 
+-use nvml_wrapper::{enum_wrappers::device::Clock, Nvml};
+-
+ extern "C" {
+     fn get_gpu_cores(device_id: u32) -> i32;
++    fn get_cuda_device_count() -> i32;
++    fn get_gpu_total_memory(device_id: u32) -> u64;
+ }
+ 
+ #[derive(Debug,Clone)]
+@@ -47,24 +47,34 @@ impl GPUManager {
+ }
+ 
+ pub fn get_all_gpus() -> Option<Vec<GPU>> {
+-    
+-    let nvml = Nvml::init().ok()?;
+-    let num_devices = nvml.device_count().ok()?;
++
++    // NVML enumerates physical GPU handles and can report the parent GPU's
++    // memory for a MIG-backed container. CUDA is authoritative for the devices
++    // that the DRA/CDI allocation actually made visible to this GPU Cell.
++    let cuda_device_count = unsafe { get_cuda_device_count() };
++    if cuda_device_count < 1 {
++        log::error!("CUDA did not enumerate an allocated GPU or MIG device");
++        return None;
++    }
++    let num_devices = cuda_device_count as u32;
+ 
+     let mut gpus = Vec::new();
+ 
+     for i in 0..num_devices {
+-        let device = nvml.device_by_index(i).ok()?;
+-        let name = device.name().ok()?;
+-        let memory = device.memory_info().ok()?.free;
+-        let max_clock = device.max_clock_info(Clock::SM).ok()?;
++        let memory = unsafe { get_gpu_total_memory(i) };
+         let sm_cores = unsafe { get_gpu_cores(i) };
+-        let total_cores = device.num_cores().ok()?;
+ 
+-        if sm_cores == -1 {
++        if sm_cores == -1 || memory == 0 {
+             log::error!("Error getting SM cores for GPU {}", i);
+             continue;
+-        } 
++        }
++
++        // The cluster manager currently uses only memory and SM capacity for
++        // placement. Avoid parent-GPU NVML properties in MIG containers; they
++        // are either misleading or unavailable depending on the CDI injection.
++        let name = format!("CUDA-visible-device-{}", i);
++        let max_clock = 0;
++        let total_cores = sm_cores as u32;
+ 
+         let gpu_id = i;
+ 
+diff --git a/cpu/cpu-client-cudnn.c b/cpu/cpu-client-cudnn.c
+index 2cd251d..e9cefa6 100644
+--- a/cpu/cpu-client-cudnn.c
++++ b/cpu/cpu-client-cudnn.c
+@@ -1448,6 +1448,7 @@ DEF_FN(cudnnStatus_t, cudnnSetDropoutDescriptor, cudnnDropoutDescriptor_t, dropo
+ DEF_FN(cudnnStatus_t, cudnnRestoreDropoutDescriptor, cudnnDropoutDescriptor_t, dropoutDesc, cudnnHandle_t, handle, float, dropout, void *, states, size_t, stateSizeInBytes, unsigned long long, seed)
+ DEF_FN(cudnnStatus_t, cudnnGetDropoutDescriptor, cudnnDropoutDescriptor_t, dropoutDesc, cudnnHandle_t, handle, float *, dropout, void **, states, unsigned long long *, seed)
+ DEF_FN(cudnnStatus_t, cudnnDropoutForward, cudnnHandle_t, handle, const cudnnDropoutDescriptor_t, dropoutDesc, const cudnnTensorDescriptor_t, xdesc, const void *, x, const cudnnTensorDescriptor_t, ydesc, void *, y, void *, reserveSpace, size_t, reserveSpaceSizeInBytes)
++#if CUDNN_MAJOR < 9
+ DEF_FN(cudnnStatus_t, cudnnCreateAlgorithmDescriptor, cudnnAlgorithmDescriptor_t *, algoDesc)
+ DEF_FN(cudnnStatus_t, cudnnSetAlgorithmDescriptor, cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t, algorithm)
+ DEF_FN(cudnnStatus_t, cudnnGetAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t *, algorithm)
+@@ -1460,6 +1461,7 @@ DEF_FN(cudnnStatus_t, cudnnDestroyAlgorithmPerformance, cudnnAlgorithmPerformanc
+ DEF_FN(cudnnStatus_t, cudnnGetAlgorithmSpaceSize, cudnnHandle_t, handle, cudnnAlgorithmDescriptor_t, algoDesc, size_t *, algoSpaceSizeInBytes)
+ DEF_FN(cudnnStatus_t, cudnnSaveAlgorithm, cudnnHandle_t, handle, cudnnAlgorithmDescriptor_t, algoDesc, void *, algoSpace, size_t, algoSpaceSizeInBytes)
+ DEF_FN(cudnnStatus_t, cudnnRestoreAlgorithm, cudnnHandle_t, handle, void *, algoSpace, size_t, algoSpaceSizeInBytes, cudnnAlgorithmDescriptor_t, algoDesc)
++#endif
+ DEF_FN(cudnnStatus_t, cudnnSetCallback, unsigned, mask, void *, udata, cudnnCallback_t, fptr)
+ DEF_FN(cudnnStatus_t, cudnnGetCallback, unsigned *, mask, void **, udata, cudnnCallback_t *, fptr)
+ DEF_FN(cudnnStatus_t, cudnnOpsInferVersionCheck)
+diff --git a/cpu/cpu-client-runtime.c b/cpu/cpu-client-runtime.c
+index db9fef3..4426f20 100644
+--- a/cpu/cpu-client-runtime.c
++++ b/cpu/cpu-client-runtime.c
+@@ -41,6 +41,71 @@ void cpu_runtime_print_api_call_cnt(void)
+ }
+ #endif //WITH_API_CNT
+ 
++/*
++ * CUDA 12.5 and newer use these runtime entry points to discover driver API
++ * functions.  Returning a server-side function pointer over RPC would be
++ * invalid, so resolve the driver wrappers exported by this client process.
++ * This also lets recent PyTorch releases load against Flyt's libcudart ABI.
++ */
++#ifdef cudaGetDriverEntryPoint
++#undef cudaGetDriverEntryPoint
++#endif
++#ifdef cudaGetDriverEntryPointByVersion
++#undef cudaGetDriverEntryPointByVersion
++#endif
++
++static cudaError_t flyt_get_driver_entry_point(
++    const char *symbol,
++    void **funcPtr,
++    enum cudaDriverEntryPointQueryResult *driverStatus)
++{
++    void *entry;
++    const char *error;
++
++    if (symbol == NULL || funcPtr == NULL) {
++        return cudaErrorInvalidValue;
++    }
++
++    dlerror();
++    entry = dlsym(RTLD_DEFAULT, symbol);
++    error = dlerror();
++    if (error != NULL || entry == NULL) {
++        *funcPtr = NULL;
++        if (driverStatus != NULL) {
++            *driverStatus = cudaDriverEntryPointSymbolNotFound;
++        }
++        return cudaSuccess;
++    }
++
++    *funcPtr = entry;
++    if (driverStatus != NULL) {
++        *driverStatus = cudaDriverEntryPointSuccess;
++    }
++    return cudaSuccess;
++}
++
++cudaError_t cudaGetDriverEntryPoint(
++    const char *symbol,
++    void **funcPtr,
++    unsigned long long flags,
++    enum cudaDriverEntryPointQueryResult *driverStatus)
++{
++    (void)flags;
++    return flyt_get_driver_entry_point(symbol, funcPtr, driverStatus);
++}
++
++cudaError_t cudaGetDriverEntryPointByVersion(
++    const char *symbol,
++    void **funcPtr,
++    unsigned int cudaVersion,
++    unsigned long long flags,
++    enum cudaDriverEntryPointQueryResult *driverStatus)
++{
++    (void)cudaVersion;
++    (void)flags;
++    return flyt_get_driver_entry_point(symbol, funcPtr, driverStatus);
++}
++
+ 
+ cudaError_t cudaChooseDevice(int* device, const struct cudaDeviceProp* prop)
+ {
+@@ -852,6 +917,24 @@ cudaError_t cudaEventRecord(cudaEvent_t event, cudaStream_t stream)
+     return result;
+ }
+ 
++cudaError_t cudaEventRecordWithFlags(
++    cudaEvent_t event, cudaStream_t stream, unsigned int flags)
++{
++#ifdef WITH_API_CNT
++    api_call_cnt++;
++#endif //WITH_API_CNT
++    int result;
++    enum clnt_stat retval_1;
++    FUNC_BEGIN
++    retval_1 = cuda_event_record_with_flags_1(
++        (ptr)event, (ptr)stream, (int)flags, &result, clnt);
++    FUNC_END
++    if (retval_1 != RPC_SUCCESS) {
++        clnt_perror(clnt, "call failed");
++    }
++    return result;
++}
++
+ cudaError_t cudaEventSynchronize(cudaEvent_t event)
+ {
+ #ifdef WITH_API_CNT
+@@ -1122,6 +1205,24 @@ cudaError_t cudaLaunchKernel(const void* func, dim3 gridDim, dim3 blockDim, void
+     return result;
+ }
+ 
++cudaError_t cudaLaunchKernelExC(
++    const cudaLaunchConfig_t *config, const void *func, void **args)
++{
++    if (config == NULL) {
++        return cudaErrorInvalidValue;
++    }
++    if (config->numAttrs != 0) {
++        return cudaErrorNotSupported;
++    }
++    return cudaLaunchKernel(
++        func,
++        config->gridDim,
++        config->blockDim,
++        args,
++        config->dynamicSmemBytes,
++        config->stream);
++}
++
+ DEF_FN(cudaError_t, cudaSetDoubleForDevice, double*, d)
+ DEF_FN(cudaError_t, cudaSetDoubleForHost, double*, d)
+     
+@@ -1251,6 +1352,38 @@ typedef struct host_alloc_info {
+ } host_alloc_info_t;
+ static host_alloc_info_t hainfo[64] = {0};
+ static size_t hainfo_cnt = 0;
++
++static int hainfo_getfreeindex(void)
++{
++    size_t i;
++
++    for (i = 0; i < hainfo_cnt; ++i) {
++        if (hainfo[i].client_ptr == NULL) {
++            return (int)i;
++        }
++    }
++    if (hainfo_cnt >= sizeof(hainfo) / sizeof(hainfo[0])) {
++        return -1;
++    }
++    return (int)hainfo_cnt;
++}
++
++static int hainfo_add(void *client_ptr, size_t size, int idx)
++{
++    int slot = hainfo_getfreeindex();
++
++    if (slot < 0) {
++        return -1;
++    }
++    hainfo[slot].idx = idx;
++    hainfo[slot].size = size;
++    hainfo[slot].client_ptr = client_ptr;
++    if ((size_t)slot == hainfo_cnt) {
++        hainfo_cnt++;
++    }
++    return slot;
++}
++
+ static int hainfo_getindex(void *client_ptr)
+ {
+     int i;
+@@ -1266,6 +1399,17 @@ static int hainfo_getindex(void *client_ptr)
+     //pthread_mutex_unlock(&hamutex);
+     return -1;
+ }
++
++static int hainfo_gettransferindex(void *client_ptr)
++{
++    int index = hainfo_getindex(client_ptr);
++
++    if (index < 0 || hainfo[index].idx < 0) {
++        return -1;
++    }
++    return index;
++}
++
+ cudaError_t cudaFreeHost(void* ptr)
+ {
+ #ifdef WITH_API_CNT
+@@ -1274,17 +1418,19 @@ cudaError_t cudaFreeHost(void* ptr)
+     int result = cudaErrorInitializationError;
+     enum clnt_stat retval_1;
+     int i = -1;
++    int allocation_idx = -1;
+     //pthread_mutex_lock(&hamutex);
+     if (shm_enabled && connection_is_local == 1) { //Use local shared memory
+         i = hainfo_getindex((void*)ptr);
+         if (i == -1) {
+             goto out;
+         }
++        allocation_idx = hainfo[i].idx;
+         munmap(hainfo[i].client_ptr, hainfo[i].size);
+         memset(&hainfo[i], 0, sizeof(host_alloc_info_t));
+ 
+         FUNC_BEGIN 
+-        retval_1 = cuda_free_host_1(i, &result, clnt);
++        retval_1 = cuda_free_host_1(allocation_idx, &result, clnt);
+         FUNC_END
+         if (retval_1 != RPC_SUCCESS) {
+             clnt_perror (clnt, "call failed");
+@@ -1299,12 +1445,16 @@ cudaError_t cudaFreeHost(void* ptr)
+         if (i == -1) {
+             goto out;
+         }
+-        ib_free_memreg((void*)ptr, i, false);
++        ib_free_memreg((void*)ptr, hainfo[i].idx, false);
+         hainfo[i].client_ptr = 0;
+     	//pthread_mutex_unlock(&hamutex);
+         return cudaSuccess;
+ #else
+-    	//pthread_mutex_unlock(&hamutex);
++	//pthread_mutex_unlock(&hamutex);
++        i = hainfo_getindex(ptr);
++        if (i >= 0) {
++            memset(&hainfo[i], 0, sizeof(host_alloc_info_t));
++        }
+         free(ptr);
+         return cudaSuccess;
+ #endif //WITH_IB
+@@ -1401,10 +1551,13 @@ cudaError_t cudaHostAlloc(void** pHost, size_t size, unsigned int flags)
+         }
+ 
+         //pthread_mutex_lock(&hamutex);
+-        hainfo[hainfo_cnt].idx = ret.sz_result_u.data;
+-        hainfo[hainfo_cnt].size = size;
+-        hainfo[hainfo_cnt].client_ptr = *pHost;
+-        hainfo_cnt++;
++        if (hainfo_add(*pHost, size, ret.sz_result_u.data) < 0) {
++            LOGE(LOG_ERROR, "cudaHostAlloc client allocation table is full.");
++            munmap(*pHost, size);
++            *pHost = NULL;
++            ret.err = cudaErrorMemoryAllocation;
++            goto out;
++        }
+         //pthread_mutex_unlock(&hamutex);
+         
+         FUNC_BEGIN 
+@@ -1418,16 +1571,22 @@ cudaError_t cudaHostAlloc(void** pHost, size_t size, unsigned int flags)
+         shm_unlink(shm_name);
+     } else if (socktype == TCP) { //Use infiniband
+ #ifdef WITH_IB
+-       if (ib_allocate_memreg(pHost, size, hainfo_cnt, false) != 0) {
++       int slot = hainfo_getfreeindex();
++       if (slot < 0) {
++            LOGE(LOG_ERROR, "cudaHostAlloc client allocation table is full.");
++            goto out;
++       }
++       if (ib_allocate_memreg(pHost, size, slot, false) != 0) {
+             LOGE(LOG_ERROR, "failed to register infiniband memory region");
+             goto out;
+         }
+         //pthread_mutex_lock(&hamutex);
+-        hainfo[hainfo_cnt].idx = hainfo_cnt;
+-        hainfo[hainfo_cnt].size = size;
+-        hainfo[hainfo_cnt].client_ptr = *pHost;
+-
+-        hainfo_cnt++;
++        if (hainfo_add(*pHost, size, slot) < 0) {
++            LOGE(LOG_ERROR, "cudaHostAlloc client allocation table is full.");
++            ib_free_memreg(*pHost, slot, false);
++            *pHost = NULL;
++            goto out;
++        }
+         //pthread_mutex_unlock(&hamutex);
+ 
+         FUNC_BEGIN 
+@@ -1436,14 +1595,22 @@ cudaError_t cudaHostAlloc(void** pHost, size_t size, unsigned int flags)
+         ret.err = cudaSuccess;
+ 
+ #else
+-        LOGE(LOG_DEBUG, "cudaHostAlloc is not supported for TCP transports without IB. Using malloc instead...");
++        /*
++         * There is no remote DMA registration on a plain TCP transport, but
++         * PyTorch still relies on its CUDA host allocator for scalar DtoH
++         * staging.  Keep the allocation local and mark it as a non-transfer
++         * entry: cudaMemcpy{,Async} then uses the ordinary synchronous RPC
++         * path instead of the SHM/IB path.
++         */
+         *pHost = malloc(size);
+-        if (*pHost == NULL) {
+-            goto out;
+-        } else {
+-            ret.err = cudaSuccess;
++        if (*pHost == NULL || hainfo_add(*pHost, size, -1) < 0) {
++            free(*pHost);
++            *pHost = NULL;
++            ret.err = cudaErrorMemoryAllocation;
+             goto out;
+         }
++        ret.err = cudaSuccess;
++        goto out;
+ #endif //WITH_IB
+     } else {
+         LOGE(LOG_ERROR, "unknown transport.");
+@@ -1744,7 +1911,7 @@ cudaError_t cudaMemcpy(void* dst, const void* src, size_t count, enum cudaMemcpy
+     //pthread_mutex_lock(&hamutex);
+     if (kind == cudaMemcpyHostToDevice) {
+         // get index of mem reg (src: cpu reg memregion)
+-        int index = hainfo_getindex((void*)src);
++        int index = hainfo_gettransferindex((void*)src);
+         // not a cudaHostAlloc'ed memory 
+         if (index == -1) {
+ #ifdef WITH_MT_MEMCPY
+@@ -1798,7 +1965,7 @@ cudaError_t cudaMemcpy(void* dst, const void* src, size_t count, enum cudaMemcpy
+         }
+     } else if (kind == cudaMemcpyDeviceToHost) {
+         //get the dst, reg cpu mem reg/ buffer
+-        int index = hainfo_getindex(dst);
++        int index = hainfo_gettransferindex(dst);
+         /* not a cudaHostAlloc'ed memory */
+         if (index == -1) {
+ #ifdef WITH_MT_MEMCPY
+@@ -1917,7 +2084,7 @@ cudaError_t cudaMemcpyToSymbol(const void* symbol, const void* src, size_t count
+     enum clnt_stat retval;
+     //pthread_mutex_lock(&hamutex);
+     if (kind == cudaMemcpyHostToDevice) {
+-        int index = hainfo_getindex((void*)src);
++        int index = hainfo_gettransferindex((void*)src);
+         /* not a cudaHostAlloc'ed memory */
+         if (index == -1) {
+             mem_data src_mem;
+@@ -2047,7 +2214,38 @@ DEF_FN(struct cudaExtent, make_cudaExtent, size_t, w, size_t, h, size_t, d)
+ DEF_FN(struct cudaPitchedPtr, make_cudaPitchedPtr, void*, d, size_t, p, size_t, xsz, size_t, ysz)
+ DEF_FN(struct cudaPos, make_cudaPos, size_t, x, size_t, y, size_t, z)
+ 
+-DEF_FN(cudaError_t, cudaPointerGetAttributes, struct cudaPointerAttributes*, attributes, const void*, ptr)
++cudaError_t cudaPointerGetAttributes(
++    struct cudaPointerAttributes *attributes, const void *ptr)
++{
++    int index;
++    cudaError_t (*real_cuda_pointer_get_attributes)(
++        struct cudaPointerAttributes *, const void *);
++    char *error_str;
++
++    if (attributes == NULL || ptr == NULL) {
++        return cudaErrorInvalidValue;
++    }
++
++    index = hainfo_getindex((void *)ptr);
++    if (index >= 0) {
++        memset(attributes, 0, sizeof(*attributes));
++        attributes->type = cudaMemoryTypeHost;
++        attributes->device = 0;
++        attributes->hostPointer = (void *)ptr;
++        return cudaSuccess;
++    }
++
++    dlerror();
++    *(void **)(&real_cuda_pointer_get_attributes) =
++        dlsym(libwrap_get_sohandle(), "cudaPointerGetAttributes");
++    error_str = dlerror();
++    if (error_str != NULL || real_cuda_pointer_get_attributes == NULL) {
++        LOGE(LOG_ERROR, "[libwrap] %s",
++             error_str != NULL ? error_str : "cudaPointerGetAttributes missing");
++        return cudaErrorNotSupported;
++    }
++    return real_cuda_pointer_get_attributes(attributes, ptr);
++}
+ 
+ cudaError_t cudaDeviceCanAccessPeer(int* canAccessPeer, int device, int peerDevice)
+ {
+diff --git a/cpu/cpu-elf2.c b/cpu/cpu-elf2.c
+index 98f148c..9c884ff 100644
+--- a/cpu/cpu-elf2.c
++++ b/cpu/cpu-elf2.c
+@@ -551,6 +551,7 @@ static void print_hexmem(void *mem, size_t len)
+ #define EIATTR_CUDA_API_VERSION         0x37
+ 
+ #define EIFMT_NVAL                      0x1
++#define EIFMT_BVAL                      0x2
+ #define EIFMT_HVAL                      0x3
+ #define EIFMT_SVAL                      0x4
+ 
+@@ -733,8 +734,8 @@ static int get_parm_for_kernel(Elf *elf, kernel_info_t *kernel, void* memory, si
+             // }
+             // printf("\n");
+             secpos += sizeof(struct nv_info_kernel_entry) + entry->values_size-4;
+-        } else if (entry->format == EIFMT_NVAL) {
+-            // printf("nval\n");
++        } else if (entry->format == EIFMT_NVAL || entry->format == EIFMT_BVAL) {
++            // Both no-value and byte-value entries occupy one four-byte record.
+             secpos += sizeof(struct nv_info_kernel_entry)-4;
+         } else {
+             LOGE(LOG_WARNING, "unknown format: %#x", entry->format);
+@@ -1006,4 +1007,4 @@ int elf2_parameter_info(list *kernel_infos, void* memory, size_t memsize)
+ void* elf2_symbol_address(const char *symbol)
+ {
+     return dlsym(RTLD_DEFAULT, symbol);
+-}
+\ No newline at end of file
++}
+diff --git a/cpu/cpu-server-client-mgr.c b/cpu/cpu-server-client-mgr.c
+index 3c0408a..c6787ae 100644
+--- a/cpu/cpu-server-client-mgr.c
++++ b/cpu/cpu-server-client-mgr.c
+@@ -323,7 +323,9 @@ static int freeResources(cricket_client* client) {
+     for (size_t i = 0; i < client->gpu_mem.map_res.length; i++) {
+         if (resource_mg_get_element_at(&client->gpu_mem, FALSE, i, (void **)&map_elem) == 0) {
+             mem_alloc_args_t *mem_args = (mem_alloc_args_t *)map_elem->cuda_address;
+-            free_dev_mem(map_elem->client_address, mem_args->padded_size);
++            if (free_dev_mem(map_elem->client_address, mem_args->padded_size) == cudaSuccess) {
++                dec_mem_usage(mem_args->padded_size);
++            }
+ 	}
+     }
+ 
+diff --git a/cpu/cpu-server-driver.c b/cpu/cpu-server-driver.c
+index 8b89170..63a5d5a 100644
+--- a/cpu/cpu-server-driver.c
++++ b/cpu/cpu-server-driver.c
+@@ -1022,6 +1022,7 @@ bool_t rpc_cumemalloc_1_svc(uint64_t size, ptr_result *result,
+     LOGE(LOG_DEBUG, "cuMemAlloc%d) -> %p; return: %d; padded size: %lu", size, dev_mem_ptr, result->err, padded_size);
+ 
+     if (result->err == cudaSuccess) {
++        inc_mem_usage(padded_size);
+         mem_alloc_args_t *args = malloc(sizeof(mem_alloc_args_t));
+         args->type = MEM_ALLOC_TYPE_DEFAULT;
+         args->size = size;
+diff --git a/cpu/cpu-server-resource-controller.c b/cpu/cpu-server-resource-controller.c
+index 073e735..4f9e6a8 100644
+--- a/cpu/cpu-server-resource-controller.c
++++ b/cpu/cpu-server-resource-controller.c
+@@ -129,16 +129,16 @@ uint64_t get_mem_limit() {
+ }
+ 
+ int allow_mem_alloc(uint64_t size) {
+-    size_t gpu_memusage = get_gpu_memory_usage();
+-    LOGE(LOG_DEBUG, "Current memory usage: %zu, mem_limit: %llu", gpu_memusage, mem_limit);
+-    if (gpu_memusage + size > mem_limit) {
++    LOGE(LOG_DEBUG, "Current tracked memory usage: %llu, mem_limit: %llu",
++         current_mm_usage, mem_limit);
++    if (size > mem_limit || current_mm_usage > mem_limit - size) {
+         return 0;
+     }
+     return 1;
+ } 
+ 
+ uint64_t get_mem_free() {
+-    return mem_limit - get_gpu_memory_usage();
++    return current_mm_usage < mem_limit ? mem_limit - current_mm_usage : 0;
+ }
+ 
+ void inc_mem_usage(uint64_t size) {
+@@ -208,6 +208,7 @@ int set_new_config(uint32_t __newsm, uint64_t __newmem) {
+ }
+ 
+ int init_resource_controller(uint32_t num_sm_cores, uint64_t mem) {
++    current_mm_usage = 0;
+     
+     CUresult res = cuCtxGetCurrent(&primaryCtx);
+     if (res != CUDA_SUCCESS) {
+diff --git a/cpu/cpu-server-runtime.c b/cpu/cpu-server-runtime.c
+index 740f746..3626433 100644
+--- a/cpu/cpu-server-runtime.c
++++ b/cpu/cpu-server-runtime.c
+@@ -493,7 +493,10 @@ bool_t cuda_get_device_properties_1_svc(int device, cuda_device_prop_result *res
+ //        /*ptr_result CUDA_IPC_OPEN_MEM_HANDLE(ptr, int)                 = 125;*/
+ 
+ /**
+- * This call should be ignored
++ * A Flyt client sees one logical CUDA device even when the server process is
++ * scheduled onto one of several physical devices.  Keep the scheduler's
++ * selected device, but preserve CUDA's invalid-device result for every guest
++ * ordinal other than zero.
+  */
+ bool_t cuda_set_device_1_svc(int device, int *result, struct svc_req *rqstp)
+ {
+@@ -501,7 +504,7 @@ bool_t cuda_set_device_1_svc(int device, int *result, struct svc_req *rqstp)
+     RECORD_API(int);
+     RECORD_SINGLE_ARG(device);
+     LOGE(LOG_DEBUG, "cudaSetDevice(%d)", device);
+-    *result = cudaSuccess;
++    *result = device == 0 ? cudaSuccess : cudaErrorInvalidDevice;
+     RECORD_RESULT(integer, *result);
+     GSCHED_RELEASE;
+     return 1;
+@@ -682,7 +685,6 @@ bool_t cuda_stream_create_1_svc(ptr_result *result, struct svc_req *rqstp)
+             cudaStreamDestroy(newStream);
+         }
+ 
+-        server_driver_reload_modules_data(client);
+     }
+ 
+ 
+@@ -720,7 +722,6 @@ bool_t cuda_stream_create_with_flags_1_svc(int flags, ptr_result *result, struct
+             cudaStreamDestroy(newStream);
+         }
+ 
+-        server_driver_reload_modules_data(client);
+     }
+ 
+     RECORD_RESULT(ptr_result_u, *result);
+@@ -758,7 +759,6 @@ bool_t cuda_stream_create_with_priority_1_svc(int flags, int priority, ptr_resul
+             cudaStreamDestroy(newStream);
+         }
+ 
+-        server_driver_reload_modules_data(client);
+     }
+     
+     RECORD_RESULT(ptr_result_u, *result);
+@@ -978,12 +978,7 @@ bool_t cuda_event_destroy_1_svc(ptr event, int *result, struct svc_req *rqstp)
+ 
+     GET_CLIENT(*result)
+     cudaEvent_t event_ptr;
+-    if ((event_ptr = resource_map_get_addr(client->gpu_events, (void*)event)) != 0) {
+-        LOGE(LOG_ERROR, "error getting event");
+-        *result = cudaErrorInvalidValue;
+-        GSCHED_RELEASE;
+-        return 1;
+-    }
++    GET_EVENT(event_ptr, event, *result)
+ 
+     *result = cudaEventDestroy(event_ptr);
+     RECORD_RESULT(integer, *result);
+@@ -1003,20 +998,10 @@ bool_t cuda_event_elapsed_time_1_svc(ptr start, ptr end, float_result *result, s
+     GET_CLIENT(result->err)
+ 
+     cudaEvent_t start_ptr;
+-    if ((start_ptr = resource_map_get_addr(client->gpu_events, (void*)start)) != 0) {
+-        LOGE(LOG_ERROR, "error getting start event");
+-        result->err = cudaErrorInvalidValue;
+-        GSCHED_RELEASE;
+-        return 1;
+-    }
++    GET_EVENT(start_ptr, start, result->err)
+ 
+     cudaEvent_t end_ptr;
+-    if ((end_ptr = resource_map_get_addr(client->gpu_events, (void*)end)) != 0) {
+-        LOGE(LOG_ERROR, "error getting end event");
+-        result->err = cudaErrorInvalidValue;
+-        GSCHED_RELEASE;
+-        return 1;
+-    }
++    GET_EVENT(end_ptr, end, result->err)
+ 
+     result->err = cudaEventElapsedTime(&result->float_result_u.data,
+       start_ptr,
+@@ -1034,12 +1019,7 @@ bool_t cuda_event_query_1_svc(ptr event, int *result, struct svc_req *rqstp)
+     GET_CLIENT(*result)
+ 
+     cudaEvent_t event_ptr;
+-    if ((event_ptr = resource_map_get_addr(client->gpu_events, (void*)event)) != 0) {
+-        LOGE(LOG_ERROR, "error getting event");
+-        *result = cudaErrorInvalidValue;
+-        GSCHED_RELEASE;
+-        return 1;
+-    }
++    GET_EVENT(event_ptr, event, *result)
+ 
+     *result = cudaEventQuery(event_ptr);
+     RECORD_RESULT(integer, *result);
+@@ -1058,12 +1038,7 @@ bool_t cuda_event_record_1_svc(ptr event, ptr stream, int *result, struct svc_re
+     GET_CLIENT(*result)
+ 
+     cudaEvent_t event_ptr;
+-    if ((event_ptr = resource_map_get_addr(client->gpu_events, (void*)event)) != 0) {
+-        LOGE(LOG_ERROR, "error getting event");
+-        *result = cudaErrorInvalidValue;
+-        GSCHED_RELEASE;
+-        return 1;
+-    }
++    GET_EVENT(event_ptr, event, *result)
+ 
+     cudaStream_t stream_ptr;
+     GET_STREAM(stream_ptr, stream, *result)
+@@ -1087,12 +1062,7 @@ bool_t cuda_event_record_with_flags_1_svc(ptr event, ptr stream, int flags, int
+     GET_CLIENT(*result)
+ 
+     cudaEvent_t event_ptr;
+-    if ((event_ptr = resource_map_get_addr(client->gpu_events, (void*)event)) != 0) {
+-        LOGE(LOG_ERROR, "error getting event");
+-        *result = cudaErrorInvalidValue;
+-        GSCHED_RELEASE;
+-        return 1;
+-    }
++    GET_EVENT(event_ptr, event, *result)
+ 
+     cudaStream_t stream_ptr;
+     GET_STREAM(stream_ptr, stream, *result)
+@@ -1120,12 +1090,7 @@ bool_t cuda_event_synchronize_1_svc(ptr event, int *result, struct svc_req *rqst
+     GET_CLIENT(*result)
+ 
+     cudaEvent_t event_ptr;
+-    if ((event_ptr = resource_map_get_addr(client->gpu_events, (void*)event)) != 0) {
+-        LOGE(LOG_ERROR, "error getting event");
+-        *result = cudaErrorInvalidValue;
+-        GSCHED_RELEASE;
+-        return 1;
+-    }
++    GET_EVENT(event_ptr, event, *result)
+ 
+     *result = cudaEventSynchronize(event_ptr);
+     RECORD_RESULT(integer, *result);
+@@ -1266,7 +1231,30 @@ bool_t cuda_func_set_attributes_1_svc(ptr func, int attr, int value, int *result
+     RECORD_ARG(2, attr);
+     RECORD_ARG(3, value);
+     LOGE(LOG_DEBUG, "cudaFuncSetAttributes");
+-    *result = cudaFuncSetAttribute((void*)func, attr, value);
++
++    GET_CLIENT(*result)
++
++    /* The runtime API receives a host-function token in the client process.
++     * That address is not valid in the remote GPU server.  Kernel launches
++     * already resolve the token through the per-client function map; apply
++     * the same translation here and use the equivalent Driver API handle.
++     * cudaFuncAttribute and CUfunction_attribute intentionally share values
++     * for the settable attributes (dynamic shared memory, carveout, cluster
++     * dimensions and cluster policy).
++     */
++    addr_data_pair_t *func_ptr;
++    if (resource_mg_get(&client->functions, (void*)func,
++                        (void**)&func_ptr) != 0) {
++        LOGE(LOG_ERROR, "error getting function");
++        *result = cudaErrorInvalidValue;
++        GSCHED_RELEASE;
++        return 1;
++    }
++
++    *result = (int)cuFuncSetAttribute(
++        (CUfunction)func_ptr->addr,
++        (CUfunction_attribute)attr,
++        value);
+     RECORD_RESULT(integer, *result);
+     GSCHED_RELEASE;
+     return 1;
+@@ -1655,6 +1643,7 @@ bool_t cuda_free_1_svc(ptr devPtr, int *result, struct svc_req *rqstp)
+ #endif
+ 
+     if (*result == cudaSuccess) {
++        dec_mem_usage(alloc_args->padded_size);
+         resource_mg_remove(&client->gpu_mem, (void *)devPtr);
+ 	// migration
+         //resource_map_unset(client->gpu_mem_ext, client_addr);
+@@ -1963,6 +1952,7 @@ bool_t cuda_malloc_1_svc(size_t argp, ptr_result *result, struct svc_req *rqstp)
+     LOGE(LOG_DEBUG, "cudaMalloc(%d) -> %p; return: %d; padded size: %lu", argp, dev_mem_ptr, result->err, padded_size);
+     // resource_mg_create(&rm_memory, (void *)result->ptr_result_u.ptr);
+     if (result->err == cudaSuccess) {
++        inc_mem_usage(padded_size);
+         mem_alloc_args_t *args = malloc(sizeof(mem_alloc_args_t));
+         args->type = MEM_ALLOC_TYPE_DEFAULT;
+         args->size = argp;
+@@ -2020,6 +2010,7 @@ bool_t cuda_malloc_3d_1_svc(size_t depth, size_t height, size_t width, pptr_resu
+     result->pptr_result_u.ptr.ysize = height;
+     
+     if (result->err == cudaSuccess) {
++        inc_mem_usage(padded_out);
+         mem_alloc_args_t *args = malloc(sizeof(mem_alloc_args_t));
+         args->type = MEM_ALLOC_TYPE_3D;
+         args->depth = depth;
+@@ -2141,6 +2132,7 @@ bool_t cuda_malloc_pitch_1_svc(size_t width, size_t height, ptrsz_result *result
+     PRIMARY_CTX_RELEASE;
+     
+     if (result->err == cudaSuccess) {
++        inc_mem_usage(padded_out);
+         mem_alloc_args_t *args = malloc(sizeof(mem_alloc_args_t));
+         args->type = MEM_ALLOC_TYPE_PITCH;
+         args->width = width;
+diff --git a/pytorch_support/BUILD.md b/pytorch_support/BUILD.md
+index 158524b..fe20241 100644
+--- a/pytorch_support/BUILD.md
++++ b/pytorch_support/BUILD.md
+@@ -1,12 +1,13 @@
+-> Tested on pytorch version 2.3.0
++> Kubernetes PoC profile: PyTorch 2.11.0, CUDA 12.8, Blackwell sm_120.
+ 
+ ## Building Steps
+ 
+-1. Clone/download source code for pytorch 2.3.0
++1. Clone/download source code for PyTorch 2.11.0.
+ ```bash
+ git clone --recursive "https://github.com/pytorch/pytorch"
+ cd pytorch
+-git checkout v2.3.0
++git checkout v2.11.0
++git submodule update --init --recursive
+ PYTORCH_CODE=`pwd`
+ ```
+ 2. Create/activate a conda environment for pytorch and dependency installation.
+@@ -15,13 +16,12 @@ PYTORCH_CODE=`pwd`
+ conda install cmake ninja
+ pip install -r "$PYTORCH_CODE"/requirements.txt
+ conda install intel::mkl-static intel::mkl-include
+-conda install -c pytorch magma-cuda121 
++Use the CUDA 12.8 toolkit and cuDNN development libraries from the builder
++image. NCCL and distributed support are disabled for this single-GPU PoC.
+ ```
+ 3. Configure pytorch build and install
+ ```bash
+-./build_pytorch.sh
++./build_pytorch.sh "$PYTORCH_CODE"
+ ```
+ 
+ 4. In case pytorch build is terminated due to out of memory issue restart the build. First load the environment variables `source build_env.sh` in flyt/pytorch_support directory. Then start the build again by running `python3 setup.py install` in the pytorch directory.
+-
+-
+diff --git a/pytorch_support/build_env.sh b/pytorch_support/build_env.sh
+index ae16168..964c7be 100644
+--- a/pytorch_support/build_env.sh
++++ b/pytorch_support/build_env.sh
+@@ -1,14 +1,26 @@
+ # Copyright (c) 2024-2026 SynerG Lab, IITB
+ 
+-export CUDA_NVCC_FLAGS="-cudart=shared "
+-export PYTORCH_CUDA_ALLOC_CONF="backend:native"
+-export TORCH_CUDA_ARCH_LIST="8.6"
+-export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"}
++export CUDA_HOME="${CUDA_HOME:-/usr/local/cuda-12.8}"
++export PATH="${CUDA_HOME}/bin:${PATH}"
++export LIBRARY_PATH="${CUDA_HOME}/lib64${LIBRARY_PATH:+:${LIBRARY_PATH}}"
++export LD_LIBRARY_PATH="${CUDA_HOME}/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
++
++# Flyt interposes the CUDA runtime. PyTorch and its CUDA objects therefore must
++# use the shared CUDA runtime rather than embedding cudart statically.
++export CUDA_NVCC_FLAGS="-cudart=shared"
+ export EXTRA_NVCCFLAGS="-cudart=shared"
+-export NVCC_APPEND_FLAGS='-cudart=shared'
+-export LIBRARY_PATH='/usr/local/cuda-12.3/lib64/'
++export NVCC_APPEND_FLAGS="-cudart=shared"
++export CAFFE2_STATIC_LINK_CUDA="0"
++
++# RTX PRO 6000 Blackwell Server Edition reports compute capability 12.0.
++export TORCH_CUDA_ARCH_LIST="12.0+PTX"
++export CMAKE_CUDA_ARCHITECTURES="120"
++export PYTORCH_CUDA_ALLOC_CONF="backend:native"
++export CMAKE_PREFIX_PATH="${CONDA_PREFIX:-/usr/local}"
++
+ export BUILD_TEST="OFF"
+-export USE_CUDNN="OFF"
++export USE_CUDA="ON"
++export USE_CUDNN="ON"
+ export USE_DISTRIBUTED="OFF"
+ export USE_NCCL="OFF"
+-export USE_CUDA="ON"
+\ No newline at end of file
++export USE_KINETO="OFF"
+diff --git a/pytorch_support/build_pytorch.sh b/pytorch_support/build_pytorch.sh
+index 01d3a81..fb6f59c 100644
+--- a/pytorch_support/build_pytorch.sh
++++ b/pytorch_support/build_pytorch.sh
+@@ -1,33 +1,41 @@
+-#!/bin/bash
++#!/usr/bin/env bash
+ # Copyright (c) 2024-2026 SynerG Lab, IITB
++set -Eeuo pipefail
+ 
+-
+-# This script is used to configure the build environment for PyTorch 
+-# to work with Flyt
++# Configure and build a PyTorch source tree for Flyt. The resulting CUDA
++# objects link to shared cudart and include Blackwell sm_120/PTX code.
+ 
+ if [ -z "$1" ]; then
+     echo "Usage: $0 <path-to-pytorch>"
+     exit 1
+ fi
+ 
+-PYTORCH_DIR=$1
++PYTORCH_DIR=$(realpath "$1")
+ 
+ if [ ! -d "$PYTORCH_DIR" ]; then
+     echo "Error: $PYTORCH_DIR does not exist"
+     exit 1
+ fi
+ 
+-SCRIPT_DIR=`pwd`
++SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+ 
+ # set the environment variables
+-source $CURRENT_DIR/build_env.sh
++source "$SCRIPT_DIR/build_env.sh"
+ 
+ # Go to the PyTorch directory
+-cd $PYTORCH_DIR
++cd "$PYTORCH_DIR"
+ python setup.py build --cmake-only
+ 
+ # configure and generate the build files
+-cmake -DCUDA_NVCC_FLAGS="-cudart=shared" build
++cmake -S . -B build -DCUDA_NVCC_FLAGS="-cudart=shared"
+ 
+ # install pytorch
+-python setup.py install
++python setup.py bdist_wheel
++
++TORCH_CUDA_SO=$(find build -type f -name libtorch_cuda.so -print -quit)
++if [ -z "$TORCH_CUDA_SO" ]; then
++    echo "Error: libtorch_cuda.so was not produced"
++    exit 1
++fi
++readelf -d "$TORCH_CUDA_SO" | \
++    grep 'Shared library: \[libcudart.so.12\]'

@@ -1,0 +1,9 @@
+{
+  "command": "kubectl exec -n flyt-evidence evidence-perf-2-n -- taskset -c 0-7 /evidence/probe-N batch 30 60 10 /evidence/r2-N /evidence/work.ptx 2 127",
+  "durations": {
+    "micro": 30,
+    "throughput": 60,
+    "warmup_min": 10,
+    "warmup_iterations_min": 50
+  }
+}

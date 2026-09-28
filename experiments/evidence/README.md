@@ -1,5 +1,8 @@
 # SHM/HAMi 실증 도구
 
+> **오버헤드 비교의 현재까지 결과 공개 · 2026-09-29:** [호스트 직접+HAMi / Flyt TCP+MPS / 제안 SHM+HAMi](results/2026-09-29-overhead/README.md) · [발표 배치안](results/2026-09-29-overhead/PRESENTATION_GUIDE.md).
+> 유효 63개 구간의 원본 표본·전체 정수 출력·CPU/정책 검증을 통과했다. 준비 실패와 조회 비교 1묶음의 제외·대체 기록도 보존한다. 녹화 없이 실제 터미널·Grafana PNG, 분석 그래프, CSV/XZ, Prometheus TSDB를 제공한다. 사용자 요청으로 확장 반복을 중단했으며 N 추가 6개 구간은 별도 보존한다. 6회 반복 계획 전체의 완료를 뜻하지 않는다. 현재 구현의 전체 경로 비교이며 전송 매체만의 효과 또는 전체 개발 gate 완료를 뜻하지 않는다.
+
 > **3단계 완료 · 2026-09-29:** [두 VM의 동일 GPU 공유·서로 다른 메모리 한도](results/2026-09-29-stage3/README.md) · [발표 배치안](results/2026-09-29-stage3/PRESENTATION_GUIDE.md).
 > 독립 VM 쌍 3/3 PASS. A(1 GiB)의 1536 MiB 요청은 OOM, B(4 GiB)는 성공했다. A의 같은 세션에서 128 MiB 후속 할당·검산, B의 기존 할당·검산 지속 및 양쪽 정상 회수를 확인했다. **녹화 없이 터미널 6장·Grafana 6장**, 원본 로그·CSV·실측 시계열·앞/뒤 출력 표본을 제공한다.
 

@@ -1,0 +1,635 @@
+{
+  "method": "Recorded host receipt of flushed start/end events for monitoring/CPU only; API and throughput durations use same-process CLOCK_MONOTONIC. Receipt duration agreement does not bound a common delivery delay.",
+  "details": [
+    {
+      "session": "r1-N",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 1.9000458983953195e-06,
+      "host_receipt_minus_monotonic_seconds": 0.00015925630810542657,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0012722015380859375,
+      "end_receipt_minus_guest_seconds": 0.0014295578002929688
+    },
+    {
+      "session": "r1-N",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 2.030720214207804e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00016271651794497188,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0016412734985351562,
+      "end_receipt_minus_guest_seconds": 0.0014765262603759766
+    },
+    {
+      "session": "r1-N",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 2.124813111237245e-06,
+      "host_receipt_minus_monotonic_seconds": -2.3385974852629943e-05,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0014977455139160156,
+      "end_receipt_minus_guest_seconds": 0.0014722347259521484
+    },
+    {
+      "session": "r1-N",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 2.028949463550589e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00034749268749934004,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0017168521881103516,
+      "end_receipt_minus_guest_seconds": 0.001367330551147461
+    },
+    {
+      "session": "r1-N",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 2.1964415282127447e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00024075209057627944,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0015950202941894531,
+      "end_receipt_minus_guest_seconds": 0.001352071762084961
+    },
+    {
+      "session": "r1-N",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 2.362117918153217e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00020172418579278428,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0016732215881347656,
+      "end_receipt_minus_guest_seconds": 0.0014691352844238281
+    },
+    {
+      "session": "r1-S",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 8.50423742804196e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0005830122573229346,
+      "original_one_time_offset_seconds": -0.27431535720825195,
+      "start_receipt_minus_guest_seconds": -0.000827789306640625,
+      "end_receipt_minus_guest_seconds": -0.0014193058013916016
+    },
+    {
+      "session": "r1-S",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 1.0127536011594884e-05,
+      "host_receipt_minus_monotonic_seconds": -0.0004919819915762957,
+      "original_one_time_offset_seconds": -0.27431535720825195,
+      "start_receipt_minus_guest_seconds": -0.000972747802734375,
+      "end_receipt_minus_guest_seconds": -0.0014748573303222656
+    },
+    {
+      "session": "r1-S",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 9.112790525733772e-06,
+      "host_receipt_minus_monotonic_seconds": -1.2821718751609978e-05,
+      "original_one_time_offset_seconds": -0.27431535720825195,
+      "start_receipt_minus_guest_seconds": -0.001138925552368164,
+      "end_receipt_minus_guest_seconds": -0.0011608600616455078
+    },
+    {
+      "session": "r1-S",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 8.795394407457024e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0005150102238786758,
+      "original_one_time_offset_seconds": -0.27431535720825195,
+      "start_receipt_minus_guest_seconds": -0.0013213157653808594,
+      "end_receipt_minus_guest_seconds": -0.0018451213836669922
+    },
+    {
+      "session": "r1-S",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 8.038396238418954e-06,
+      "host_receipt_minus_monotonic_seconds": 0.001045636052488419,
+      "original_one_time_offset_seconds": -0.27431535720825195,
+      "start_receipt_minus_guest_seconds": -0.0018780231475830078,
+      "end_receipt_minus_guest_seconds": -0.0008404254913330078
+    },
+    {
+      "session": "r1-S",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.690122316716952e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0028973233010276545,
+      "original_one_time_offset_seconds": -0.27431535720825195,
+      "start_receipt_minus_guest_seconds": -0.00045680999755859375,
+      "end_receipt_minus_guest_seconds": 0.0024328231811523438
+    },
+    {
+      "session": "r1-T",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 7.538764648984397e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0010932969738775,
+      "original_one_time_offset_seconds": -0.43653059005737305,
+      "start_receipt_minus_guest_seconds": -0.001367330551147461,
+      "end_receipt_minus_guest_seconds": -0.0002815723419189453
+    },
+    {
+      "session": "r1-T",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 8.051137207587544e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0004786894123540719,
+      "original_one_time_offset_seconds": -0.43653059005737305,
+      "start_receipt_minus_guest_seconds": -0.0005116462707519531,
+      "end_receipt_minus_guest_seconds": -4.100799560546875e-05
+    },
+    {
+      "session": "r1-T",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 7.792916381532677e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0011016573572995014,
+      "original_one_time_offset_seconds": -0.43653059005737305,
+      "start_receipt_minus_guest_seconds": 0.0007407665252685547,
+      "end_receipt_minus_guest_seconds": 0.0018346309661865234
+    },
+    {
+      "session": "r1-T",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 5.981053099901601e-06,
+      "host_receipt_minus_monotonic_seconds": 7.583769677665941e-05,
+      "original_one_time_offset_seconds": -0.43653059005737305,
+      "start_receipt_minus_guest_seconds": 0.0016753673553466797,
+      "end_receipt_minus_guest_seconds": 0.0017452239990234375
+    },
+    {
+      "session": "r1-T",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.5722712367110034e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00010806073962754681,
+      "original_one_time_offset_seconds": -0.43653059005737305,
+      "start_receipt_minus_guest_seconds": 0.0018112659454345703,
+      "end_receipt_minus_guest_seconds": 0.0016956329345703125
+    },
+    {
+      "session": "r1-T",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.0201866435581906e-06,
+      "host_receipt_minus_monotonic_seconds": 0.00043021316454883163,
+      "original_one_time_offset_seconds": -0.43653059005737305,
+      "start_receipt_minus_guest_seconds": 0.0016756057739257812,
+      "end_receipt_minus_guest_seconds": 0.0020987987518310547
+    },
+    {
+      "session": "r2-N",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 3.788045898289738e-06,
+      "host_receipt_minus_monotonic_seconds": -0.004442241617187648,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0059893131256103516,
+      "end_receipt_minus_guest_seconds": 0.001543283462524414
+    },
+    {
+      "session": "r2-N",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 1.9874830314847713e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0011295470933845309,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0025196075439453125,
+      "end_receipt_minus_guest_seconds": 0.0013880729675292969
+    },
+    {
+      "session": "r2-N",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 1.993118896592705e-06,
+      "host_receipt_minus_monotonic_seconds": -6.142622314442292e-05,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0014989376068115234,
+      "end_receipt_minus_guest_seconds": 0.0014355182647705078
+    },
+    {
+      "session": "r2-N",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 2.3254174834619334e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00015312349609075682,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.001575469970703125,
+      "end_receipt_minus_guest_seconds": 0.0014200210571289062
+    },
+    {
+      "session": "r2-N",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 2.1950753179567073e-06,
+      "host_receipt_minus_monotonic_seconds": -3.595189733829329e-05,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0013422966003417969,
+      "end_receipt_minus_guest_seconds": 0.0013041496276855469
+    },
+    {
+      "session": "r2-N",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 3.367534425535723e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0005817116586896987,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0019593238830566406,
+      "end_receipt_minus_guest_seconds": 0.0013742446899414062
+    },
+    {
+      "session": "r2-N",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 2.262231689087457e-06,
+      "host_receipt_minus_monotonic_seconds": 2.920353112756402e-05,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0015954971313476562,
+      "end_receipt_minus_guest_seconds": 0.0016224384307861328
+    },
+    {
+      "session": "r2-S",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 0.5291789457128893,
+      "host_receipt_minus_monotonic_seconds": 0.0005610868261705093,
+      "original_one_time_offset_seconds": -0.33148694038391113,
+      "start_receipt_minus_guest_seconds": 0.5328762531280518,
+      "end_receipt_minus_guest_seconds": 0.004258394241333008
+    },
+    {
+      "session": "r2-S",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 7.629076293369508e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0018889907204595602,
+      "original_one_time_offset_seconds": -0.33148694038391113,
+      "start_receipt_minus_guest_seconds": 0.0025196075439453125,
+      "end_receipt_minus_guest_seconds": 0.0006229877471923828
+    },
+    {
+      "session": "r2-S",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 9.28269592392894e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0001919425848377898,
+      "original_one_time_offset_seconds": -0.33148694038391113,
+      "start_receipt_minus_guest_seconds": 0.0005235671997070312,
+      "end_receipt_minus_guest_seconds": 0.0003223419189453125
+    },
+    {
+      "session": "r2-S",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.576847167456435e-06,
+      "host_receipt_minus_monotonic_seconds": 0.001242108249755347,
+      "original_one_time_offset_seconds": -0.33148694038391113,
+      "start_receipt_minus_guest_seconds": 0.0008862018585205078,
+      "end_receipt_minus_guest_seconds": 0.0021207332611083984
+    },
+    {
+      "session": "r2-S",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.81524328630212e-06,
+      "host_receipt_minus_monotonic_seconds": -0.000450425265746901,
+      "original_one_time_offset_seconds": -0.33148694038391113,
+      "start_receipt_minus_guest_seconds": 0.0021109580993652344,
+      "end_receipt_minus_guest_seconds": 0.0016527175903320312
+    },
+    {
+      "session": "r2-S",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 7.790260010409611e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0005289732739264252,
+      "original_one_time_offset_seconds": -0.33148694038391113,
+      "start_receipt_minus_guest_seconds": 0.0019903182983398438,
+      "end_receipt_minus_guest_seconds": 0.0025115013122558594
+    },
+    {
+      "session": "r2-S",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 8.321767822394577e-06,
+      "host_receipt_minus_monotonic_seconds": 1.7620092407355514e-05,
+      "original_one_time_offset_seconds": -0.33148694038391113,
+      "start_receipt_minus_guest_seconds": 0.0022666454315185547,
+      "end_receipt_minus_guest_seconds": 0.0022759437561035156
+    },
+    {
+      "session": "r2-T",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 0.6631013938286117,
+      "host_receipt_minus_monotonic_seconds": -0.004620116104860017,
+      "original_one_time_offset_seconds": -0.45862865447998047,
+      "start_receipt_minus_guest_seconds": 0.6652381420135498,
+      "end_receipt_minus_guest_seconds": -0.002483367919921875
+    },
+    {
+      "session": "r2-T",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 7.938210938363e-06,
+      "host_receipt_minus_monotonic_seconds": 0.02988417035815516,
+      "original_one_time_offset_seconds": -0.45862865447998047,
+      "start_receipt_minus_guest_seconds": 0.0007297992706298828,
+      "end_receipt_minus_guest_seconds": 0.03060603141784668
+    },
+    {
+      "session": "r2-T",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 7.753054564574313e-06,
+      "host_receipt_minus_monotonic_seconds": -0.007767076809937379,
+      "original_one_time_offset_seconds": -0.45862865447998047,
+      "start_receipt_minus_guest_seconds": 0.03332662582397461,
+      "end_receipt_minus_guest_seconds": 0.025551795959472656
+    },
+    {
+      "session": "r2-T",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 8.932376950099297e-06,
+      "host_receipt_minus_monotonic_seconds": -0.027062305187136815,
+      "original_one_time_offset_seconds": -0.45862865447998047,
+      "start_receipt_minus_guest_seconds": 0.016298532485961914,
+      "end_receipt_minus_guest_seconds": -0.010772705078125
+    },
+    {
+      "session": "r2-T",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.467575315445174e-06,
+      "host_receipt_minus_monotonic_seconds": -0.006053609542604477,
+      "original_one_time_offset_seconds": -0.45862865447998047,
+      "start_receipt_minus_guest_seconds": -0.013856172561645508,
+      "end_receipt_minus_guest_seconds": -0.01991724967956543
+    },
+    {
+      "session": "r2-T",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 7.772554930340903e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0007592679162584659,
+      "original_one_time_offset_seconds": -0.45862865447998047,
+      "start_receipt_minus_guest_seconds": -0.018891334533691406,
+      "end_receipt_minus_guest_seconds": -0.01813983917236328
+    },
+    {
+      "session": "r2-T",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 7.976010863330885e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0014246812309579582,
+      "original_one_time_offset_seconds": -0.45862865447998047,
+      "start_receipt_minus_guest_seconds": -0.018014192581176758,
+      "end_receipt_minus_guest_seconds": -0.019446849822998047
+    },
+    {
+      "session": "r3-N",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 3.843175782947128e-06,
+      "host_receipt_minus_monotonic_seconds": 9.229646862962682e-05,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0014111995697021484,
+      "end_receipt_minus_guest_seconds": 0.0014996528625488281
+    },
+    {
+      "session": "r3-N",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 1.9923245844211124e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0002948388063970242,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0016279220581054688,
+      "end_receipt_minus_guest_seconds": 0.0013310909271240234
+    },
+    {
+      "session": "r3-N",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 1.9056075473145029e-06,
+      "host_receipt_minus_monotonic_seconds": -9.989912572905268e-05,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.001550912857055664,
+      "end_receipt_minus_guest_seconds": 0.0014491081237792969
+    },
+    {
+      "session": "r3-N",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 3.3627901601107624e-06,
+      "host_receipt_minus_monotonic_seconds": -0.000529741152710983,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0019834041595458984,
+      "end_receipt_minus_guest_seconds": 0.0014503002166748047
+    },
+    {
+      "session": "r3-N",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 2.1436502670724167e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00016856405236964633,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0016300678253173828,
+      "end_receipt_minus_guest_seconds": 0.001459360122680664
+    },
+    {
+      "session": "r3-N",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 1.8150448006792885e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0003345935703116254,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0017826557159423828,
+      "end_receipt_minus_guest_seconds": 0.0014462471008300781
+    },
+    {
+      "session": "r3-N",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 1.9929759531578384e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0001529791004628578,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0015931129455566406,
+      "end_receipt_minus_guest_seconds": 0.001438140869140625
+    },
+    {
+      "session": "r3-S",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 7.2848474133024865e-06,
+      "host_receipt_minus_monotonic_seconds": -0.34092460754760623,
+      "original_one_time_offset_seconds": -0.1599292755126953,
+      "start_receipt_minus_guest_seconds": 0.361863374710083,
+      "end_receipt_minus_guest_seconds": 0.020931482315063477
+    },
+    {
+      "session": "r3-S",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 8.900522949772949e-06,
+      "host_receipt_minus_monotonic_seconds": -0.016337792515990657,
+      "original_one_time_offset_seconds": -0.1599292755126953,
+      "start_receipt_minus_guest_seconds": 0.011289834976196289,
+      "end_receipt_minus_guest_seconds": -0.005056858062744141
+    },
+    {
+      "session": "r3-S",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.612430295012018e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0015108755000028395,
+      "original_one_time_offset_seconds": -0.1599292755126953,
+      "start_receipt_minus_guest_seconds": -0.004525661468505859,
+      "end_receipt_minus_guest_seconds": -0.006044149398803711
+    },
+    {
+      "session": "r3-S",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 7.445007447870466e-06,
+      "host_receipt_minus_monotonic_seconds": -0.002513831466551153,
+      "original_one_time_offset_seconds": -0.1599292755126953,
+      "start_receipt_minus_guest_seconds": -0.007537126541137695,
+      "end_receipt_minus_guest_seconds": -0.010058403015136719
+    },
+    {
+      "session": "r3-S",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 8.359829589466017e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0020816477934566535,
+      "original_one_time_offset_seconds": -0.1599292755126953,
+      "start_receipt_minus_guest_seconds": -0.011108160018920898,
+      "end_receipt_minus_guest_seconds": -0.009034872055053711
+    },
+    {
+      "session": "r3-S",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 9.21555578514699e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0005802280527333892,
+      "original_one_time_offset_seconds": -0.1599292755126953,
+      "start_receipt_minus_guest_seconds": -0.008328914642333984,
+      "end_receipt_minus_guest_seconds": -0.007757902145385742
+    },
+    {
+      "session": "r3-S",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 7.529591918853384e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0007935568338623966,
+      "original_one_time_offset_seconds": -0.1599292755126953,
+      "start_receipt_minus_guest_seconds": -0.007472515106201172,
+      "end_receipt_minus_guest_seconds": -0.008273601531982422
+    },
+    {
+      "session": "r3-T",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 0.901431688110474,
+      "host_receipt_minus_monotonic_seconds": -0.0007752096251216756,
+      "original_one_time_offset_seconds": -0.7093751430511475,
+      "start_receipt_minus_guest_seconds": 0.9050929546356201,
+      "end_receipt_minus_guest_seconds": 0.002886056900024414
+    },
+    {
+      "session": "r3-T",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.83287450900616e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0042517534597195095,
+      "original_one_time_offset_seconds": -0.7093751430511475,
+      "start_receipt_minus_guest_seconds": 0.0026807785034179688,
+      "end_receipt_minus_guest_seconds": -0.0015788078308105469
+    },
+    {
+      "session": "r3-T",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 7.363350583489137e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0035803041769995048,
+      "original_one_time_offset_seconds": -0.7093751430511475,
+      "start_receipt_minus_guest_seconds": -0.0009822845458984375,
+      "end_receipt_minus_guest_seconds": 0.002590656280517578
+    },
+    {
+      "session": "r3-T",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 8.86178784043068e-06,
+      "host_receipt_minus_monotonic_seconds": -9.36582011732412e-05,
+      "original_one_time_offset_seconds": -0.7093751430511475,
+      "start_receipt_minus_guest_seconds": 0.003015279769897461,
+      "end_receipt_minus_guest_seconds": 0.002912759780883789
+    },
+    {
+      "session": "r3-T",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 8.088261964189769e-06,
+      "host_receipt_minus_monotonic_seconds": 0.00031898608911262727,
+      "original_one_time_offset_seconds": -0.7093751430511475,
+      "start_receipt_minus_guest_seconds": 0.002654552459716797,
+      "end_receipt_minus_guest_seconds": 0.0029654502868652344
+    },
+    {
+      "session": "r3-T",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 9.532034546566592e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0004622983334954256,
+      "original_one_time_offset_seconds": -0.7093751430511475,
+      "start_receipt_minus_guest_seconds": 0.003085613250732422,
+      "end_receipt_minus_guest_seconds": 0.0026137828826904297
+    },
+    {
+      "session": "r3-T",
+      "mode": "copy",
+      "bytes": 262144,
+      "guest_wall_minus_monotonic_seconds": 7.765349000266042e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0005699563585217504,
+      "original_one_time_offset_seconds": -0.7093751430511475,
+      "start_receipt_minus_guest_seconds": 0.0029010772705078125,
+      "end_receipt_minus_guest_seconds": 0.003463268280029297
+    },
+    {
+      "session": "r7-N",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 4.789068846378086e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0005533488248303797,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.002045869827270508,
+      "end_receipt_minus_guest_seconds": 0.00148773193359375
+    },
+    {
+      "session": "r7-S",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 0.5765987508898931,
+      "host_receipt_minus_monotonic_seconds": 0.010183440983887238,
+      "original_one_time_offset_seconds": -0.37314891815185547,
+      "start_receipt_minus_guest_seconds": 0.5772783756256104,
+      "end_receipt_minus_guest_seconds": 0.010863065719604492
+    },
+    {
+      "session": "r7-T",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 7.736673829583651e-06,
+      "host_receipt_minus_monotonic_seconds": -0.21122945548010108,
+      "original_one_time_offset_seconds": -0.024881839752197266,
+      "start_receipt_minus_guest_seconds": 0.22313404083251953,
+      "end_receipt_minus_guest_seconds": 0.011896848678588867
+    }
+  ]
+}

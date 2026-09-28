@@ -1,5 +1,7 @@
 # Flyt on Kubernetes/KubeVirt reproducible PoC
 
+> **2026-09-29 실제 검증:** [합성 CUDA 오버헤드 비교](../../experiments/evidence/results/2026-09-29-overhead/README.md)에서 기존 MPS 기반 TCP 경로의 선택 API·계산 결과·성능을 검증했다. 기준 커밋, 실제 builder diff와 호환성 패치 3개를 명시한다. 아래 RPC+HAMi 및 PyTorch 전체 검증의 NOT_RUN 상태와는 별도 범위다.
+
 개발 중인 [1단계 HAMi 단독 PoC](experiments/hami-standalone/README.md)는
 기존 MPS 구현과 분리되어 있으며 현재 **구현 완료·검증 미실행** 상태다.
 이 브랜치의 [2단계 VM별 HAMi Worker](experiments/per-vm-worker/README.md)도

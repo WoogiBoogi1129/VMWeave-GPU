@@ -1,0 +1,32 @@
+SESSION_START r7-N 1790616705.4733133
+{"run_id": "evidence-perf-7-n", "event": "PREPARE", "utc_seconds": 1790616705.5455709, "backend": "native-hami-disabled", "compute": 100}
+{"run_id": "evidence-perf-7-n", "event": "PREPARED", "utc_seconds": 1790616708.185777}
+r7-N {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+r7-N {"event":"WARMUP_START","utc":1790616708.953598738,"elapsed":0.000000000,"completed":0}
+r7-N {"event":"WARMUP_END","utc":1790616718.953620911,"elapsed":10.000002233,"completed":1235066}
+r7-N {"event":"MEASUREMENT_START","utc":1790616718.953677654,"elapsed":0.000000000,"completed":0}
+r7-N {"event":"MEASUREMENT_END","utc":1790616748.953686237,"elapsed":30.000003794,"completed":5532627}
+r7-N {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":5532627,"elapsed_s":30.000003794,"operations_per_s":184420.876677058,"checked_elements":262144,"mismatches":0}
+{"run_id": "evidence-perf-7-n", "event": "RELEASED", "utc_seconds": 1790616758.7394385}
+SESSION_COMPLETE r7-N 1790616758.7405531
+SESSION_START r7-T 1790616758.74096
+r7-T {"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+r7-T {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+r7-T {"event":"WARMUP_START","utc":1790616850.797979593,"elapsed":0.000000000,"completed":0}
+r7-T {"event":"WARMUP_END","utc":1790616860.798135519,"elapsed":10.000135306,"completed":13240}
+r7-T {"event":"MEASUREMENT_START","utc":1790616860.798171282,"elapsed":0.000000000,"completed":0}
+r7-T {"event":"MEASUREMENT_END","utc":1790616890.799044847,"elapsed":30.000865829,"completed":39185}
+r7-T {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":39185,"elapsed_s":30.000865829,"operations_per_s":1306.128970522,"checked_elements":262144,"mismatches":0}
+SESSION_COMPLETE r7-T 1790616902.7978024
+SESSION_START r7-S 1790616902.8017325
+{"run_id": "evidence-perf-7-s", "event": "PREPARE", "utc_seconds": 1790616902.8687193, "backend": "shm", "compute": 100}
+{"run_id": "evidence-perf-7-s", "event": "PREPARED", "utc_seconds": 1790616959.3253253}
+r7-S {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":30,"warmup_min_s":10,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+r7-S {"event":"WARMUP_START","utc":1790616961.918428659,"elapsed":0.000000000,"completed":0}
+r7-S {"event":"WARMUP_END","utc":1790616971.919462442,"elapsed":10.001009740,"completed":6667}
+r7-S {"event":"MEASUREMENT_START","utc":1790616971.919501305,"elapsed":0.000000000,"completed":0}
+r7-S {"event":"MEASUREMENT_END","utc":1790617002.497134686,"elapsed":30.001034630,"completed":20135}
+r7-S {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":20135,"elapsed_s":30.001034630,"operations_per_s":671.143520493,"checked_elements":262144,"mismatches":0}
+{"run_id": "evidence-perf-7-s", "event": "RELEASED", "utc_seconds": 1790617020.178622}
+SESSION_COMPLETE r7-S 1790617020.1798246
+CAMPAIGN_COMPLETE 1790617020.1798692

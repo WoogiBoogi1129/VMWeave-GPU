@@ -1,0 +1,9 @@
+{
+  "command": "sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T batch 30 60 10 /tmp/perf/r3-T /tmp/perf/work.cubin 4 127",
+  "durations": {
+    "micro": 30,
+    "throughput": 60,
+    "warmup_min": 10,
+    "warmup_iterations_min": 50
+  }
+}

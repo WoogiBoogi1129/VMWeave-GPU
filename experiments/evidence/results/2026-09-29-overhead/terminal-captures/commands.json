@@ -1,0 +1,302 @@
+[
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.328Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.394Z"
+  },
+  {
+    "pane": 0,
+    "command": "# Native and proposed: actual process policy / mapped HAMi",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.408Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq '.[]|{command,policy:.environment.GPU_CORE_UTILIZATION_POLICY,memory:.environment.CUDA_DEVICE_MEMORY_LIMIT_0,trace:.environment.FLYT_TRACE_REQUESTS}' r1-N/runtime-libraries.json r1-S/runtime-libraries.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.472Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Flyt-based TCP: actual connection and physical GPU",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.487Z"
+  },
+  {
+    "pane": 1,
+    "command": "grep '^{' r1-T/stdout.txt | jq 'select(.event==\"TRANSPORT\")'",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.549Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq '{gpu_uuid,sm_count,memory_mib,cell_ip,vm_ip}' r1-T/identity.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.614Z"
+  },
+  {
+    "pane": 1,
+    "command": "cat r1-T/rpcinfo.txt",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:20.679Z"
+  },
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.224Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.289Z"
+  },
+  {
+    "pane": 0,
+    "command": "# r7-N: replacement query / actual measurement times",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.304Z"
+  },
+  {
+    "pane": 0,
+    "command": "grep '^{' r7-N/stdout.txt | jq -s 'map(select(.event==\"CONDITION\"))[0]'",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.368Z"
+  },
+  {
+    "pane": 0,
+    "command": "grep '^{' r7-N/stdout.txt | jq -rs 'map(select(.event==\"WARMUP_START\" or .event==\"WARMUP_END\" or .event==\"MEASUREMENT_START\" or .event==\"MEASUREMENT_END\"))[:4][] | [.event,(.utc|floor|strftime(\"%H:%M:%S UTC\")),.completed,.elapsed] | @tsv' | column -t",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.435Z"
+  },
+  {
+    "pane": 1,
+    "command": "# r7-N: result of the query window shown on the left",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.449Z"
+  },
+  {
+    "pane": 1,
+    "command": "grep '^{' r7-N/stdout.txt | jq 'select(.event==\"RESULT\")'",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.513Z"
+  },
+  {
+    "pane": 1,
+    "command": "# r1-N: throughput windows (mode, completed, seconds, mismatches)",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.527Z"
+  },
+  {
+    "pane": 1,
+    "command": "grep '^{' r1-N/stdout.txt | jq -rs 'map(select(.event==\"RESULT\" and (.mode==\"resident\" or .mode==\"transfer\")))[] | [.mode,.completed,.elapsed_s,.mismatches] | @tsv' | column -t",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:21.592Z"
+  },
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.378Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.443Z"
+  },
+  {
+    "pane": 0,
+    "command": "# r7-T: replacement query / actual measurement times",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.458Z"
+  },
+  {
+    "pane": 0,
+    "command": "grep '^{' r7-T/stdout.txt | jq -s 'map(select(.event==\"CONDITION\"))[0]'",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.522Z"
+  },
+  {
+    "pane": 0,
+    "command": "grep '^{' r7-T/stdout.txt | jq -rs 'map(select(.event==\"WARMUP_START\" or .event==\"WARMUP_END\" or .event==\"MEASUREMENT_START\" or .event==\"MEASUREMENT_END\"))[:4][] | [.event,(.utc|floor|strftime(\"%H:%M:%S UTC\")),.completed,.elapsed] | @tsv' | column -t",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.590Z"
+  },
+  {
+    "pane": 1,
+    "command": "# r7-T: result of the query window shown on the left",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.605Z"
+  },
+  {
+    "pane": 1,
+    "command": "grep '^{' r7-T/stdout.txt | jq 'select(.event==\"RESULT\")'",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.669Z"
+  },
+  {
+    "pane": 1,
+    "command": "# r1-T: throughput windows (mode, completed, seconds, mismatches)",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.684Z"
+  },
+  {
+    "pane": 1,
+    "command": "grep '^{' r1-T/stdout.txt | jq -rs 'map(select(.event==\"RESULT\" and (.mode==\"resident\" or .mode==\"transfer\")))[] | [.mode,.completed,.elapsed_s,.mismatches] | @tsv' | column -t",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:22.749Z"
+  },
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.495Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.560Z"
+  },
+  {
+    "pane": 0,
+    "command": "# r7-S: replacement query / actual measurement times",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.576Z"
+  },
+  {
+    "pane": 0,
+    "command": "grep '^{' r7-S/stdout.txt | jq -s 'map(select(.event==\"CONDITION\"))[0]'",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.639Z"
+  },
+  {
+    "pane": 0,
+    "command": "grep '^{' r7-S/stdout.txt | jq -rs 'map(select(.event==\"WARMUP_START\" or .event==\"WARMUP_END\" or .event==\"MEASUREMENT_START\" or .event==\"MEASUREMENT_END\"))[:4][] | [.event,(.utc|floor|strftime(\"%H:%M:%S UTC\")),.completed,.elapsed] | @tsv' | column -t",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.702Z"
+  },
+  {
+    "pane": 1,
+    "command": "# r7-S: result of the query window shown on the left",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.713Z"
+  },
+  {
+    "pane": 1,
+    "command": "grep '^{' r7-S/stdout.txt | jq 'select(.event==\"RESULT\")'",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.773Z"
+  },
+  {
+    "pane": 1,
+    "command": "# r1-S: throughput windows (mode, completed, seconds, mismatches)",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.785Z"
+  },
+  {
+    "pane": 1,
+    "command": "grep '^{' r1-S/stdout.txt | jq -rs 'map(select(.event==\"RESULT\" and (.mode==\"resident\" or .mode==\"transfer\")))[] | [.mode,.completed,.elapsed_s,.mismatches] | @tsv' | column -t",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:23.847Z"
+  },
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:24.613Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:24.677Z"
+  },
+  {
+    "pane": 0,
+    "command": "# Session means recomputed from original CSV files",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:24.692Z"
+  },
+  {
+    "pane": 0,
+    "command": "python3 analysis-source/overhead_terminal_table.py . latency",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:24.755Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Completed operations / actual elapsed seconds",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:24.769Z"
+  },
+  {
+    "pane": 1,
+    "command": "python3 analysis-source/overhead_terminal_table.py . throughput",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:24.833Z"
+  },
+  {
+    "pane": 1,
+    "command": "python3 analysis-source/overhead_terminal_table.py . cpu",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:24.897Z"
+  },
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.582Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.648Z"
+  },
+  {
+    "pane": 0,
+    "command": "# Collected snapshot: six-repetition campaign NOT complete",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.663Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq '{status,scope,campaign_complete,windows,additional_native_windows}' bundle-validation.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.726Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq '{status,windows,mismatches:([.details[].mismatches]|add)}' validation.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.790Z"
+  },
+  {
+    "pane": 0,
+    "command": "cat final-audit.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.855Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Repetition decision: keep all valid observations",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.867Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq '{first_three_complete,condition_mask,triggered_conditions:(.reasons|map({mode,bytes})|unique)}' extension-decision.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T17:50:25.930Z"
+  }
+]

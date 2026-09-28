@@ -1,0 +1,263 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": false,
+    "canEdit": false,
+    "canAdmin": false,
+    "canStar": false,
+    "canDelete": false,
+    "slug": "n-flyt-tcp-proposed-shm-e28094-actual-monitoring",
+    "url": "/d/overhead/n-flyt-tcp-proposed-shm-e28094-actual-monitoring",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2026-09-29T01:13:47+09:00",
+    "updated": "2026-09-29T01:13:47+09:00",
+    "updatedBy": "Anonymous",
+    "createdBy": "Anonymous",
+    "version": 1,
+    "hasAcl": false,
+    "isFolder": false,
+    "apiVersion": "v0alpha1",
+    "folderId": 0,
+    "folderUid": "",
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": true,
+    "provisionedExternalId": "overhead.json",
+    "annotationsPermissions": {
+      "dashboard": {
+        "canAdd": false,
+        "canEdit": false,
+        "canDelete": false
+      },
+      "organization": {
+        "canAdd": false,
+        "canEdit": false,
+        "canDelete": false
+      }
+    }
+  },
+  "dashboard": {
+    "annotations": {
+      "list": [
+        {
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "iconColor": "orange",
+          "name": "Measured windows",
+          "target": {
+            "limit": 1000,
+            "tags": [
+              "overhead"
+            ],
+            "type": "tags"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "id": 1,
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "perf-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "spanNulls": false
+            },
+            "min": 0,
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "targets": [
+          {
+            "expr": "perf_gpu_util_percent",
+            "legendFormat": "{{session}} {{role}}",
+            "refId": "A"
+          }
+        ],
+        "title": "GPU utilization (whole GPU)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "perf-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "spanNulls": false
+            },
+            "min": 0,
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 2,
+        "targets": [
+          {
+            "expr": "rate(perf_pod_cpu_seconds_total[10s])",
+            "legendFormat": "{{session}} {{role}}",
+            "refId": "A"
+          }
+        ],
+        "title": "CPU cores used (exclusive Pod cgroups)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "perf-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "spanNulls": false
+            },
+            "min": 0,
+            "unit": "mbytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 3,
+        "targets": [
+          {
+            "expr": "perf_gpu_memory_mib",
+            "legendFormat": "{{session}} {{role}}",
+            "refId": "A"
+          }
+        ],
+        "title": "GPU memory (includes contexts)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "perf-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "spanNulls": false
+            },
+            "min": 0,
+            "unit": "suffix:MHz"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 4,
+        "targets": [
+          {
+            "expr": "perf_gpu_sm_clock_mhz",
+            "legendFormat": "{{session}} {{role}}",
+            "refId": "A"
+          }
+        ],
+        "title": "GPU SM clock",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "perf-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "spanNulls": false
+            },
+            "min": 0,
+            "unit": "celsius"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 5,
+        "targets": [
+          {
+            "expr": "perf_gpu_temperature_c",
+            "legendFormat": "{{session}} {{role}}",
+            "refId": "A"
+          }
+        ],
+        "title": "GPU temperature",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "perf-prom"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "spanNulls": false
+            },
+            "min": 0,
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "id": 6,
+        "targets": [
+          {
+            "expr": "perf_collector_errors",
+            "legendFormat": "{{session}} {{role}}",
+            "refId": "A"
+          }
+        ],
+        "title": "Collector errors",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 40,
+    "timezone": "utc",
+    "title": "N / Flyt TCP / Proposed SHM \u2014 actual monitoring",
+    "uid": "overhead",
+    "version": 1
+  }
+}

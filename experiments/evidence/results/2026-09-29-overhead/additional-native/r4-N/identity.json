@@ -1,0 +1,96 @@
+{
+  "uid": "0f933083-4549-4175-b7e9-6b54fa5c3fb1",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "annotations": {
+    "hami.io/bind-phase": "success",
+    "hami.io/bind-time": "1790617062",
+    "hami.io/vgpu-devices-allocated": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3,NVIDIA,4096,100:;",
+    "hami.io/vgpu-devices-to-allocate": ";;",
+    "hami.io/vgpu-node": "gpu-4",
+    "hami.io/vgpu-time": "1790617062",
+    "nvidia.com/use-gpuuuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3"
+  },
+  "image": "localhost/flyt-worker@sha256:d759e0998fff576f65dcd8bf153fe7b3a1f969705e9f7ec7616c7144d090003a",
+  "cpu_set": "0-7",
+  "path": "N",
+  "session": "r4-N",
+  "cpu_sampling": "nonoverlapping whole Pod cgroups",
+  "trace": "off",
+  "condition_rotation": 0,
+  "pod": {
+    "name": "evidence-perf-4-n",
+    "uid": "0f933083-4549-4175-b7e9-6b54fa5c3fb1",
+    "image_status": [
+      {
+        "allocatedResources": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "100",
+          "nvidia.com/gpumem": "4096"
+        },
+        "allocatedResourcesStatus": [
+          {
+            "name": "nvidia.com/gpu",
+            "resources": [
+              {
+                "health": "Healthy",
+                "resourceID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3-6"
+              }
+            ]
+          }
+        ],
+        "containerID": "cri-o://9c7f7910b75cb848163072e9c277a95e6646585bbf1b95b3525fcaf6cbd86f34",
+        "image": "localhost/flyt-worker:overhead-20260929",
+        "imageID": "localhost/flyt-worker@sha256:d759e0998fff576f65dcd8bf153fe7b3a1f969705e9f7ec7616c7144d090003a",
+        "lastState": {},
+        "name": "native",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "100",
+            "nvidia.com/gpumem": "4096"
+          },
+          "requests": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "100",
+            "nvidia.com/gpumem": "4096"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-09-28T17:37:44Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0,
+              44,
+              993
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/evidence",
+            "name": "artifacts"
+          }
+        ]
+      }
+    ],
+    "annotations": {
+      "hami.io/bind-phase": "success",
+      "hami.io/bind-time": "1790617062",
+      "hami.io/vgpu-devices-allocated": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3,NVIDIA,4096,100:;",
+      "hami.io/vgpu-devices-to-allocate": ";;",
+      "hami.io/vgpu-node": "gpu-4",
+      "hami.io/vgpu-time": "1790617062",
+      "nvidia.com/use-gpuuuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3"
+    },
+    "node": "gpu-4"
+  }
+}

@@ -1,0 +1,7 @@
+FROM 79178b3e7bb7 AS build
+COPY legacy/rpc/patches/flyt-module-resource-handle.patch /tmp/one.patch
+COPY legacy/rpc/patches/flyt-driver-launch-function-map.patch /tmp/two.patch
+COPY legacy/rpc/patches/flyt-driver-launch-stream-map.patch /tmp/three.patch
+RUN cd /build/flyt && patch -p1 < /tmp/one.patch && patch -p1 < /tmp/two.patch && patch -p1 < /tmp/three.patch && LOG=INFO make -C cpu cricket-rpc-server
+FROM localhost/flyt-gpu-cell:dev
+COPY --from=build /build/flyt/cpu/cricket-rpc-server /opt/flyt/bin/cricket-rpc-server

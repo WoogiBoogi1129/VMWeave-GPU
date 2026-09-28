@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # Collected snapshot: six-repetition campaign NOT complete
+ubuntu@gpu-4:2026-09-29-overhead$ jq '{status,scope,campaign_complete,windows,additional_nativ
+e_windows}' bundle-validation.json
+{
+  "status": "PASS",
+  "scope": "collected-data snapshot",
+  "campaign_complete": false,
+  "windows": 63,
+  "additional_native_windows": 6
+}
+ubuntu@gpu-4:2026-09-29-overhead$ jq '{status,windows,mismatches:([.details[].mismatches]|add)
+}' validation.json
+{
+  "status": "PASS",
+  "windows": 66,
+  "mismatches": 0
+}
+ubuntu@gpu-4:2026-09-29-overhead$ cat final-audit.json
+{
+  "status": "PASS",
+  "utc": 1790617775.872229,
+  "active_experiment_VMs": 0,
+  "active_experiment_Pods": 0,
+  "owned_channels_all_Released": true,
+  "target_GPU_compute_processes": 0,
+  "baseline_VM": "basic-vm",
+  "baseline_VM_UID_preserved": true,
+  "baseline_VM_phase": "Running",
+  "details": "resource-cleanup.json"
+}
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+{
+  "method": "Recorded host receipt of flushed start/end events for monitoring/CPU only; API and throughput durations use same-process CLOCK_MONOTONIC. Receipt duration agreement does not bound a common delivery delay.",
+  "details": [
+    {
+      "session": "r4-N",
+      "mode": "query",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 3.6008830583966756e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0007750741962873064,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0020868778228759766,
+      "end_receipt_minus_guest_seconds": 0.0013082027435302734
+    },
+    {
+      "session": "r4-N",
+      "mode": "kernel",
+      "bytes": 1048576,
+      "guest_wall_minus_monotonic_seconds": 1.8978830560456572e-06,
+      "host_receipt_minus_monotonic_seconds": -0.0001108741048589934,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0015456676483154297,
+      "end_receipt_minus_guest_seconds": 0.0014328956604003906
+    },
+    {
+      "session": "r4-N",
+      "mode": "copy",
+      "bytes": 4096,
+      "guest_wall_minus_monotonic_seconds": 2.176301634904121e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0025856800247794354,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0016210079193115234,
+      "end_receipt_minus_guest_seconds": 0.004204511642456055
+    },
+    {
+      "session": "r4-N",
+      "mode": "copy",
+      "bytes": 4194304,
+      "guest_wall_minus_monotonic_seconds": 2.5201484383785555e-06,
+      "host_receipt_minus_monotonic_seconds": 0.0011638570472420895,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0016903877258300781,
+      "end_receipt_minus_guest_seconds": 0.002851724624633789
+    },
+    {
+      "session": "r4-N",
+      "mode": "resident",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 2.284906003069409e-06,
+      "host_receipt_minus_monotonic_seconds": -0.00012693796386997747,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0016224384307861328,
+      "end_receipt_minus_guest_seconds": 0.001493215560913086
+    },
+    {
+      "session": "r4-N",
+      "mode": "transfer",
+      "bytes": 2097152,
+      "guest_wall_minus_monotonic_seconds": 2.3726075468744057e-06,
+      "host_receipt_minus_monotonic_seconds": -3.887380663769591e-05,
+      "original_one_time_offset_seconds": 0,
+      "start_receipt_minus_guest_seconds": 0.0015392303466796875,
+      "end_receipt_minus_guest_seconds": 0.0014979839324951172
+    }
+  ]
+}

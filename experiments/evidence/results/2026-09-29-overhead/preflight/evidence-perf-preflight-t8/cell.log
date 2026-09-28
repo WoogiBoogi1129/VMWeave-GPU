@@ -1,0 +1,29 @@
+GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-7d708c42-8d4a-16d5-0746-474567157aa3)
+[2026-09-28T16:26:44Z INFO  flyt_node_manager::virt_server_manager] message path: /tmp/flyt-servernode-queue, key: 1123354227 id: 0 proj_id: 66
+[2026-09-28T16:26:44Z INFO  flyt_node_manager] Connected to resource manager
+[2026-09-28T16:26:44Z INFO  flyt_node_manager::resource_manager_handler] Got send gpu info command
+[2026-09-28T16:27:24Z INFO  flyt_node_manager::resource_manager_handler] Got allocate virt server command
+[2026-09-28T16:27:24Z INFO  flyt_node_manager::resource_manager_handler] Allocating virt server: gpu_id: 0, num_cores: 188, memory: 4294967296
+[2026-09-28T16:27:24Z INFO  flyt_node_manager::virt_server_manager] Starting virt server with rpc_id: 1
+[2026-09-28T16:27:24Z INFO  flyt_node_manager::virt_server_manager] Executing command: CUDA_MPS_ENABLE_PER_CTX_DEVICE_MULTIPROCESSOR_PARTITIONING="1" CUDA_VISIBLE_DEVICES="0" "/opt/flyt/bin/cricket-rpc-server" "1" "0" "188" "4294967296" "0"
+prg 99 cricker 1 gpu 0 sm 188 mem 4294967296 mode 0
+welcome to cricket!
+Initialize Metrics called
++00:00:00.000040 [34mINFO[0m:	using TCP...
++00:00:00.001153 [34mINFO[0m:	listening on port 49408
++00:00:00.001297 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:382[0m
++00:00:00.134575 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:388[0m
++00:00:00.134588 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:394[0m
++00:00:00.134591 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:400[0m
++00:00:00.134596 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:422[0m
++00:00:00.134598 [1m[31mERROR[0m:	send_type = 4294967296
+
++00:00:00.134847 [34mINFO[0m: GPU affinitySupport: 1	in [4mcpu-server-resource-controller.c:82[0m
++00:00:00.221450 [34mINFO[0m: get_next_client resource mgt_get_element returned NULL 	in [4mcpu-server-client-mgr.c:394[0m
++00:00:00.221466 [34mINFO[0m: get_next_client resource mgt_get_element returned NULL 	in [4mcpu-server-client-mgr.c:394[0m
++00:00:00.221482 [34mINFO[0m: Changed SM cores to 188	in [4mcpu-server-resource-controller.c:105[0m
++00:00:00.253175 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:429[0m
++00:00:00.253207 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:437[0m
++00:00:00.253214 [34mINFO[0m:	waiting for RPC requests...
+[2026-09-28T16:27:25Z INFO  flyt_node_manager::virt_server_manager] Virt server initialized with rpc_id: 1
+[2026-09-28T16:27:25Z INFO  flyt_node_manager::resource_manager_handler] Virt server created: 1

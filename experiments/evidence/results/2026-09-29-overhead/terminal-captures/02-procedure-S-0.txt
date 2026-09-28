@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # r7-S: replacement query / actual measurement times
+ubuntu@gpu-4:2026-09-29-overhead$ grep '^{' r7-S/stdout.txt | jq -s 'map(select(.event=="CONDI
+TION"))[0]'
+{
+  "event": "CONDITION",
+  "mode": "query",
+  "bytes": 1048576,
+  "duration_s": 30,
+  "warmup_min_s": 10,
+  "iterations": 64,
+  "free_bytes": 3716153344,
+  "total_bytes": 4294967296
+}
+ubuntu@gpu-4:2026-09-29-overhead$ grep '^{' r7-S/stdout.txt | jq -rs 'map(select(.event=="WARM
+UP_START" or .event=="WARMUP_END" or .event=="MEASUREMENT_START" or .event=="MEASUREMENT_END")
+)[:4][] | [.event,(.utc|floor|strftime("%H:%M:%S UTC")),.completed,.elapsed] | @tsv' | column
+-t
+WARMUP_START       17:36:01  UTC  0      0E-9
+WARMUP_END         17:36:11  UTC  6667   10.001009740
+MEASUREMENT_START  17:36:11  UTC  0      0E-9
+MEASUREMENT_END    17:36:42  UTC  20135  30.001034630
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

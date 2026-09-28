@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-29-overhead$ # Session means recomputed from original CSV files
+ubuntu@gpu-4:2026-09-29-overhead$ python3 analysis-source/overhead_terminal_table.py . latency
+Independent session means (all valid repetitions)
+N = host CUDA + HAMi; T = Flyt TCP + MPS; S = proposed SHM + HAMi
+
+metric / payload                 path        mean         SD   n
+d2h_complete 4K                  N          8.523      0.964   3
+d2h_complete 4K                  T       1751.033    181.871   3
+d2h_complete 4K                  S       2851.694     37.174   3
+h2d_complete 4K                  N          7.151      0.716   3
+h2d_complete 4K                  T       1729.692    182.582   3
+h2d_complete 4K                  S       2843.482     36.677   3
+d2h_complete 256K                N         27.251      0.140   3
+d2h_complete 256K                T       2164.670    149.647   3
+d2h_complete 256K                S       3456.831     27.321   3
+h2d_complete 256K                N         22.905      0.056   3
+h2d_complete 256K                T       2375.020    143.160   3
+h2d_complete 256K                S       3478.232     55.271   3
+d2h_complete 4096K               N        260.870     14.050   3
+d2h_complete 4096K               T       3888.745   1385.490   3
+d2h_complete 4096K               S      11160.913    516.983   3
+h2d_complete 4096K               N        256.658     13.973   3
+h2d_complete 4096K               T       3773.735   1177.396   3
+h2d_complete 4096K               S      12580.965    641.020   3
+launch_return                    N          1.483      0.019   3
+launch_return                    T        848.714     88.009   3
+launch_return                    S       1429.337      7.296   3
+launch_sync_complete             N          7.901      0.029   3
+launch_sync_complete             T       1674.622    174.424   3
+launch_sync_complete             S       2834.760     18.992   3
+query_return                     N          5.979      0.926   3
+query_return                     T        800.728     31.215   3
+query_return                     S       1489.474      7.685   3
+
+Units: microseconds
+Source: aggregate-summary.csv -> per-session CSV -> raw *.csv.xz
+ubuntu@gpu-4:2026-09-29-overhead$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
