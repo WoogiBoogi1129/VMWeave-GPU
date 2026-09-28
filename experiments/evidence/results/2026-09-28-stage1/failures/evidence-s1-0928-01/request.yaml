@@ -1,0 +1,21 @@
+apiVersion: flyt.dev/v1alpha1
+kind: FlytGPURequest
+metadata:
+  creationTimestamp: "2026-09-28T13:23:58Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/part-of: flyt-evidence
+  name: evidence-s1-0928-01-request
+  namespace: flyt-evidence
+  resourceVersion: "2711988"
+  uid: af9d6fad-6e8f-4da7-9ae2-c32aa34c23ea
+spec:
+  compute: 50
+  count: 1
+  memory: 4096Mi
+  profileRef:
+    name: evidence-s1-0928-01-profile
+    uid: f4908718-f5af-4e92-8976-433f702a1054
+  vmRef:
+    name: evidence-s1-0928-01
+    uid: 418bdeb1-b3d1-4851-a107-f49c4ca3c43f

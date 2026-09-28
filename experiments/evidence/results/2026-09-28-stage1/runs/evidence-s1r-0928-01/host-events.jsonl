@@ -1,0 +1,5 @@
+{"run_id": "evidence-s1r-0928-01", "event": "PREPARE", "utc_seconds": 1790601967.670599, "backend": "shm", "compute": 50}
+{"run_id": "evidence-s1r-0928-01", "event": "PREPARED", "utc_seconds": 1790602021.0918543}
+{"run_id": "evidence-s1r-0928-01", "event": "COMMAND", "utc_seconds": 1790602021.4254274, "command": "sudo env FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign /tmp/campaign/campaign-probe-guest integer resident 45 0 64 2027 0 - -"}
+{"run_id": "evidence-s1r-0928-01", "event": "EXIT", "utc_seconds": 1790602077.0195508, "exit_code": 0, "result": {"event": "RESULT", "status": "PASS", "kind": "integer", "mode": "resident", "seed": 2027, "iterations": 64, "completed": 16231, "elapsed_seconds": 45.001377198, "throughput": 360.67785056, "checked_elements": 524288, "mismatches": 0, "nonfinite": 0, "max_absolute_error": 0, "max_relative_error": 0, "reference_generation": false, "utc_seconds": 1790602076.9619958}}
+{"run_id": "evidence-s1r-0928-01", "event": "RELEASED", "utc_seconds": 1790602097.6218588}

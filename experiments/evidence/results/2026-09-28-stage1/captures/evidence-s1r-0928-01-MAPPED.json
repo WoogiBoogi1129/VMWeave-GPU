@@ -1,0 +1,94 @@
+{
+  "captured_at": "2026-09-28T13:27:08.192Z",
+  "browser": "153.0.8010.12",
+  "url": "http://127.0.0.1:9898/",
+  "kind": "Actual live command-output browser viewer",
+  "state": {
+    "run_id": "evidence-s1r-0928-01",
+    "stage": "RUNNING",
+    "utc": "2026-09-28T13:27:07Z",
+    "request": {
+      "request": "evidence-s1r-0928-01-request",
+      "uid": "ea4fff48-41f9-425e-93d4-0bccb6f87dbd",
+      "compute": 50,
+      "count": 1,
+      "memory": "4096Mi",
+      "profileRef": {
+        "name": "evidence-s1r-0928-01-profile",
+        "uid": "876f73e1-ea0d-4d80-9079-c4d194f3cc76"
+      },
+      "vmRef": {
+        "name": "evidence-s1r-0928-01",
+        "uid": "cd83a549-b39c-431a-88d3-b7f2513c12b8"
+      }
+    },
+    "binding": {
+      "channel": "Ready",
+      "allocation": "28c4dafa49f4bf017e90d5189582b951",
+      "VM": "evidence-s1r-0928-01",
+      "VMI_UID": "4cd6108e-6960-4808-9be0-906921d25875",
+      "VM_node": "gpu-4",
+      "Worker": "evidence-s1r-0928-01-channel-worker",
+      "Worker_node": "gpu-4",
+      "applied": {
+        "limits": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "50",
+          "nvidia.com/gpumem": "4096"
+        },
+        "requests": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "50",
+          "nvidia.com/gpumem": "4096"
+        }
+      },
+      "attachments": [
+        "Mapped",
+        "Mapped"
+      ]
+    },
+    "gpu": [
+      {
+        "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "pid": 311182,
+        "process": "/opt/flyt/bin/flyt-shm-worker",
+        "memory_mib": "554"
+      }
+    ],
+    "checks": {
+      "approved_profile": true,
+      "request_values": true,
+      "request_profile_uid": true,
+      "request_channel_uid": true,
+      "vm_reference": true,
+      "vmi_worker_uid": true,
+      "ready_mapped": true,
+      "node_matches": true,
+      "gpu_matches": true,
+      "worker_requests_limits": true,
+      "channel_quota": true,
+      "hami_loaded": true,
+      "actual_worker_gpu_process": true,
+      "same_shared_backing_inode": true,
+      "guest_bar2_mapping": true
+    },
+    "result": {},
+    "cleanup": {},
+    "stdout": "{\"event\":\"WARMUP_START\",\"utc_seconds\":1790602021.919981003,\"monotonic_seconds\":26.424491825,\"completed\":0,\"elapsed_seconds\":0.000000000}",
+    "command": {
+      "backend": "shm",
+      "program": "/tmp/campaign/campaign-probe",
+      "args": [
+        "integer",
+        "resident",
+        "45",
+        "0",
+        "64",
+        "2027",
+        "0",
+        "-",
+        "-"
+      ]
+    }
+  }
+}

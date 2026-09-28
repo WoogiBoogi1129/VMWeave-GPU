@@ -1,0 +1,32 @@
+[
+  {
+    "pid": 334767,
+    "role": "worker",
+    "cgroup": "0::/../../../../kubepods-besteffort.slice/kubepods-besteffort-pod706f6bc4_a2c2_4704_bba4_8940c1910a6f.slice/crio-90911577eca7dcd737085beeaef197d83f266fb83677e2e25e912766f51895ad.scope/container\n",
+    "pod_uid": "706f6bc4-a2c2-4704-bba4-8940c1910a6f",
+    "backing_mappings": [
+      {
+        "address": "76c5c2800000-76c5c6800000",
+        "permissions": "rw-s",
+        "device": "fc:00",
+        "inode": "60577818",
+        "path": "/flyt-channel/289e0bdf0e65f32250b25d426142054d/channel"
+      }
+    ]
+  },
+  {
+    "pid": 334951,
+    "role": "qemu",
+    "cgroup": "0::/../../../kubepods-burstable-pod3a7c3473_8c65_44b8_8907_1ee124df1075.slice/crio-016a8b56f3e431309a5e5bbdb918a764f01588c021d409c89972a033b85027d1.scope/container\n",
+    "pod_uid": "3a7c3473-8c65-44b8-8907-1ee124df1075",
+    "backing_mappings": [
+      {
+        "address": "7a6103dff000-7a6107dff000",
+        "permissions": "rw-s",
+        "device": "fc:00",
+        "inode": "60577818",
+        "path": "/run/flyt-channel/289e0bdf0e65f32250b25d426142054d/channel"
+      }
+    ]
+  }
+]

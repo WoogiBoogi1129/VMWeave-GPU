@@ -1,0 +1,22 @@
+{
+  "kind": "FlytGPUProfile",
+  "metadata": {
+    "name": "evidence-s1r-0928-01-profile",
+    "namespace": "flyt-evidence",
+    "uid": "876f73e1-ea0d-4d80-9079-c4d194f3cc76",
+    "generation": 1
+  },
+  "status": {},
+  "spec": {
+    "approved": true,
+    "cores": 50,
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "hamiNamespace": "kube-system",
+    "maxClients": 1,
+    "memoryMiB": 4096,
+    "nodeName": "gpu-4",
+    "runtimeClass": "nvidia",
+    "schedulerName": "hami-scheduler",
+    "workerImage": "localhost/flyt-worker@sha256:a7bae7a184238df59b16cce0233ed6dbc74a135c3b3295b0c97811c2c9e9e47d"
+  }
+}

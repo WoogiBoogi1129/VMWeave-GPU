@@ -1,0 +1,23 @@
+{
+  "kind": "FlytGPURequest",
+  "metadata": {
+    "name": "evidence-s1r-0928-03-request",
+    "namespace": "flyt-evidence",
+    "uid": "beb128b0-21da-4057-98a0-e62d86f22298",
+    "generation": 1
+  },
+  "status": {},
+  "spec": {
+    "compute": 50,
+    "count": 1,
+    "memory": "4096Mi",
+    "profileRef": {
+      "name": "evidence-s1r-0928-03-profile",
+      "uid": "9d1d390d-457f-46a1-9d4a-2145591c94bc"
+    },
+    "vmRef": {
+      "name": "evidence-s1r-0928-03",
+      "uid": "9c71b47f-3895-468b-aeac-610df1a70e0e"
+    }
+  }
+}

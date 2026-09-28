@@ -1,0 +1,20 @@
+[
+  {
+    "name": "evidence-flyt-controller",
+    "containers": [
+      {
+        "name": "controller",
+        "image": "localhost/flyt-control-plane@sha256:f8c839eee3c5ab77cc23716d4600e80e5227b8b452563a63d8e90d7a12080cb2"
+      }
+    ]
+  },
+  {
+    "name": "evidence-flyt-webhook",
+    "containers": [
+      {
+        "name": "webhook",
+        "image": "localhost/flyt-control-plane@sha256:a60f76638461c0fb15c11d89779c482e44621ab52119e682b279de0dd2a4859d"
+      }
+    ]
+  }
+]
