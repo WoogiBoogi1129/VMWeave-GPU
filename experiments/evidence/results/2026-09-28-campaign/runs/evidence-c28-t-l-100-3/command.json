@@ -1,0 +1,15 @@
+{
+  "backend": "shm",
+  "program": "/tmp/campaign/campaign-probe",
+  "args": [
+    "fma",
+    "resident",
+    "60",
+    "0",
+    "1048576",
+    "2026",
+    "0",
+    "/tmp/campaign/reference-long.bin",
+    "-"
+  ]
+}

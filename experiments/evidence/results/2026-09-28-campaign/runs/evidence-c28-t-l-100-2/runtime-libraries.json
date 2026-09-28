@@ -1,0 +1,39 @@
+[
+  {
+    "pid": 162602,
+    "command": "/opt/flyt/bin/flyt-shm-worker /flyt-channel/06d090feb3dbd50eed439f09e485bf63 0 ",
+    "maps": [
+      "78c32d800000-78c32d966000 r--p 00000000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "78c32d966000-78c32e8ea000 r-xp 00166000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "78c32e8ea000-78c333295000 r--p 010ea000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "78c333295000-78c333296000 ---p 05a95000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "78c333296000-78c3333cb000 r--p 05a95000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "78c3333cb000-78c3333d4000 rw-p 05bca000 fc:00 37619255                   /usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+      "78c333600000-78c3336ad000 r-xp 00000000 00:2e1 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+      "78c3336ad000-78c3338ad000 ---p 000ad000 00:2e1 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+      "78c3338ad000-78c3338b1000 r--p 000ad000 00:2e1 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+      "78c3338b1000-78c3338b2000 rw-p 000b1000 00:2e1 69363720                  /usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+      "78c333a00000-78c333a56000 r-xp 00000000 fc:00 37770815                   /usr/local/vgpu/libvgpu.so",
+      "78c333a56000-78c333c56000 ---p 00056000 fc:00 37770815                   /usr/local/vgpu/libvgpu.so",
+      "78c333c56000-78c333c58000 r--p 00056000 fc:00 37770815                   /usr/local/vgpu/libvgpu.so",
+      "78c333c58000-78c333c5b000 rw-p 00058000 fc:00 37770815                   /usr/local/vgpu/libvgpu.so"
+    ],
+    "environment": {
+      "CUDA_DEVICE_MEMORY_LIMIT_0": "4096m",
+      "CUDA_DEVICE_SM_LIMIT": "100",
+      "CUDA_DEVICE_SM_LIMIT_0": null,
+      "GPU_CORE_UTILIZATION_POLICY": null,
+      "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+      "LD_PRELOAD": null
+    },
+    "library_hashes": {
+      "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+      "/usr/local/vgpu/libvgpu.so": "e98badc7ab64065af728fcca833ed372f16702d1e1c18eec01b1d8f6cbf7a9fb",
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4"
+    },
+    "affinity_status": [
+      "Cpus_allowed_list:\t16-19",
+      "Mems_allowed_list:\t0-3"
+    ]
+  }
+]

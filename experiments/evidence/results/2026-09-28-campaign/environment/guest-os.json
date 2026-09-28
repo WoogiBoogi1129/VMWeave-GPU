@@ -1,0 +1,19 @@
+{
+  "captured_at": 1790596341.1677735,
+  "command": [
+    "ssh",
+    "-i",
+    ".local/campaign-20260928/artifacts/guest-key",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "UserKnownHostsFile=.local/campaign-20260928/runs/evidence-c28-t-l-25-2/known-hosts",
+    "ubuntu@10.85.0.148",
+    "cat /etc/os-release; uname -r; nproc; free -b"
+  ],
+  "exit_code": 0,
+  "stdout": "PRETTY_NAME=\"Ubuntu 22.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.5 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy\n5.15.0-191-generic\n8\n               total        used        free      shared  buff/cache   available\nMem:     16763932672   228225024 15979003904     1130496   556703744 16243843072\nSwap:              0           0           0\n",
+  "stderr": ""
+}

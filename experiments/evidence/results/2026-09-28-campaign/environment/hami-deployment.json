@@ -1,0 +1,52 @@
+{
+  "captured_at": 1790596375.2705836,
+  "source_command": "kubectl get deploy,ds -A -o json; select HAMi names and image metadata",
+  "resources": [
+    {
+      "kind": "Deployment",
+      "namespace": "kube-system",
+      "name": "hami-scheduler",
+      "labels": {
+        "app.kubernetes.io/component": "hami-scheduler",
+        "app.kubernetes.io/instance": "hami",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "hami",
+        "app.kubernetes.io/version": "2.10.0",
+        "helm.sh/chart": "hami-2.10.0"
+      },
+      "containers": [
+        {
+          "name": "kube-scheduler",
+          "image": "registry.k8s.io/kube-scheduler:v1.37.0"
+        },
+        {
+          "name": "vgpu-scheduler-extender",
+          "image": "docker.io/projecthami/hami:v2.10.0"
+        }
+      ]
+    },
+    {
+      "kind": "DaemonSet",
+      "namespace": "kube-system",
+      "name": "hami-device-plugin",
+      "labels": {
+        "app.kubernetes.io/component": "hami-device-plugin",
+        "app.kubernetes.io/instance": "hami",
+        "app.kubernetes.io/managed-by": "Helm",
+        "app.kubernetes.io/name": "hami",
+        "app.kubernetes.io/version": "2.10.0",
+        "helm.sh/chart": "hami-2.10.0"
+      },
+      "containers": [
+        {
+          "name": "device-plugin",
+          "image": "docker.io/projecthami/hami:v2.10.0"
+        },
+        {
+          "name": "vgpu-monitor",
+          "image": "docker.io/projecthami/hami:v2.10.0"
+        }
+      ]
+    }
+  ]
+}

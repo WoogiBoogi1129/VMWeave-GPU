@@ -1,0 +1,10 @@
+{
+  "scope": "Reanalysis only; not newly executed C3/C4",
+  "memory_source": "results/2026-09-24-showcase",
+  "correctness_source": "results/2026-09-22-pytorch/comparisons",
+  "limitations": [
+    "OOM timestamp absent: textual annotation only",
+    "Aggregate after-free other-session retry not tested",
+    "Process sum is not per-VM in shared runs"
+  ]
+}

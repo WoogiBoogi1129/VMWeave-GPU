@@ -1,0 +1,15 @@
+{
+  "captured_at": 1790595236.702158,
+  "command": [
+    "kubectl",
+    "get",
+    "kubevirt",
+    "-n",
+    "kubevirt",
+    "-o",
+    "jsonpath={range .items[*]}{.status.observedKubeVirtVersion}{\"\\n\"}{end}"
+  ],
+  "exit_code": 0,
+  "stdout": "v1.9.0\n",
+  "stderr": ""
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "pid": "55867",
+    "command": [
+      ".local/campaign-20260928/tools/prometheus-3.5.0.linux-amd64/prometheus",
+      "--config.file=.local/campaign-20260928/monitoring/prometheus.yml",
+      "--storage.tsdb.path=.local/campaign-20260928/monitoring/prometheus-data",
+      "--web.listen-address=127.0.0.1:9099",
+      ""
+    ],
+    "cpus": [
+      48,
+      49,
+      50,
+      51
+    ]
+  },
+  {
+    "pid": "56099",
+    "command": [
+      ".local/campaign-20260928/tools/grafana-v12.0.2/bin/grafana",
+      "server",
+      "--homepath",
+      ".local/campaign-20260928/tools/grafana-v12.0.2",
+      "--config",
+      ".local/campaign-20260928/monitoring/grafana.ini",
+      ""
+    ],
+    "cpus": [
+      48,
+      49,
+      50,
+      51
+    ]
+  }
+]

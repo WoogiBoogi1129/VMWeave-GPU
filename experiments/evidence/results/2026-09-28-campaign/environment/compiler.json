@@ -1,0 +1,6 @@
+{
+  "command": "podman run --rm --entrypoint gcc 07247b313457 --version",
+  "stdout": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": "gcc -O2 -Wall -I/usr/local/cuda/include; guest -DFLYT_GUEST -lflyt_guest; native -lcudart -lcuda; both -lm",
+  "cuda_image": "nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04 (local content digest in image inspect)"
+}

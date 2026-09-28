@@ -1,0 +1,38 @@
+{
+  "scope": "Completed C5-time runs with actual capture examples and aggregate visualizations; reused historical visuals",
+  "included_run_ids": [
+    "evidence-c28-t-l-100-1",
+    "evidence-c28-t-l-100-2",
+    "evidence-c28-t-l-100-3",
+    "evidence-c28-t-l-25-1",
+    "evidence-c28-t-l-25-2",
+    "evidence-c28-t-l-25-3",
+    "evidence-c28-t-l-50-1",
+    "evidence-c28-t-l-50-2",
+    "evidence-c28-t-l-50-3",
+    "evidence-c28-t-s-100-1",
+    "evidence-c28-t-s-100-2",
+    "evidence-c28-t-s-100-3",
+    "evidence-c28-t-s-25-1",
+    "evidence-c28-t-s-25-2",
+    "evidence-c28-t-s-25-3",
+    "evidence-c28-t-s-50-1",
+    "evidence-c28-t-s-50-2",
+    "evidence-c28-t-s-50-3"
+  ],
+  "excluded": [
+    "C5-fixed (user stopped; omitted from publication)",
+    "C6 overhead and interference (not run)",
+    "pilot/reference-generation run directories",
+    "unrelated runtime implementation changes"
+  ],
+  "device_samples": "Original JSON objects, restricted to published measurement windows plus 5 seconds each side",
+  "cpu_samples": "Same time windows, only processes belonging to published pod UIDs; QEMU command strings omitted from pinning records",
+  "analysis_snapshot_changes": [
+    "Expected published run count 18",
+    "Scope label narrowed",
+    "Skip plotting phases without measurements"
+  ],
+  "original_analysis_sha256": "3e86ccc9bf9430e21eea29f35902c8d6fbd9538d253171ee4d04f316f7c37e9d",
+  "base_commit": "75b5696fe66e478413efa7ea621a551487e986f0"
+}

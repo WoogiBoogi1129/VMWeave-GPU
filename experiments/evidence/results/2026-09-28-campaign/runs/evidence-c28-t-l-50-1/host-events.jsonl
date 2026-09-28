@@ -1,0 +1,5 @@
+{"run_id": "evidence-c28-t-l-50-1", "event": "PREPARE", "utc_seconds": 1790595573.6730988, "backend": "shm", "compute": 50}
+{"run_id": "evidence-c28-t-l-50-1", "event": "PREPARED", "utc_seconds": 1790595626.644037}
+{"run_id": "evidence-c28-t-l-50-1", "event": "COMMAND", "utc_seconds": 1790595626.6458817, "command": "sudo env FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign /tmp/campaign/campaign-probe-guest fma resident 60 0 1048576 2026 0 /tmp/campaign/reference-long.bin -"}
+{"run_id": "evidence-c28-t-l-50-1", "event": "EXIT", "utc_seconds": 1790595697.026355, "exit_code": 0, "result": {"event": "RESULT", "status": "PASS", "kind": "fma", "mode": "resident", "seed": 2026, "iterations": 1048576, "completed": 3134, "elapsed_seconds": 60.00930964, "throughput": 52.225230032, "checked_elements": 524288, "mismatches": 0, "nonfinite": 0, "max_absolute_error": 0, "max_relative_error": 0, "reference_generation": false, "utc_seconds": 1790595697.0120194}}
+{"run_id": "evidence-c28-t-l-50-1", "event": "RELEASED", "utc_seconds": 1790595715.7399726}

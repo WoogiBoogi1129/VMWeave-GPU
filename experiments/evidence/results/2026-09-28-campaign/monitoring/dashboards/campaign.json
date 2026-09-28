@@ -1,0 +1,464 @@
+{
+  "uid": "flyt-campaign",
+  "title": "FLYT campaign \u2014 actual SHM / HAMi experiments",
+  "schemaVersion": 40,
+  "version": 1,
+  "timezone": "utc",
+  "refresh": "5s",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "tags": [
+    "actual-measurements",
+    "2026-09-28"
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "run",
+        "label": "Run ID",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "campaign-prom"
+        },
+        "query": "label_values(flyt_run_active, run_id)",
+        "refresh": 1,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "Physical GPU utilization \u2014 entire device",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "flyt_gpu_utilization_percent",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "GPU physical memory",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "flyt_gpu_memory_mib",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "mebibytes",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Run active \u2014 warmup + measurement",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "flyt_run_active{run_id=~\"$run\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "HAMi container memory",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "hami_container_device_memory_bytes{pod=~\"evidence-c28-.*\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Completed synchronized kernels / second (live estimate)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "rate(flyt_completed_work_total{run_id=~\"$run\"}[5s])",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Final elapsed seconds (completed runs)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 16,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "flyt_run_elapsed_seconds{run_id=~\"$run\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "Final output mismatches (check count below)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "flyt_run_mismatches{run_id=~\"$run\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "Final throughput (completed work / actual elapsed)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 24,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "flyt_run_throughput{run_id=~\"$run\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "Final checked elements (0 = reference generation)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 32,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "flyt_run_checked_elements{run_id=~\"$run\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Scrape health (1 = reachable)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "campaign-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 32,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "up{job=\"flyt-campaign\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}}{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "name": "Run state",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "campaign-prom"
+        },
+        "enable": false,
+        "expr": "changes(flyt_run_active{run_id=~\"$run\"}[5s]) > 0",
+        "titleFormat": "Observed state change",
+        "textFormat": "{{run_id}}"
+      },
+      {
+        "name": "Recorded experiment events",
+        "type": "dashboard",
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255, 180, 60, 1)",
+        "target": {
+          "type": "tags",
+          "tags": [
+            "flyt-campaign"
+          ],
+          "matchAny": false,
+          "limit": 1000
+        }
+      }
+    ]
+  }
+}
