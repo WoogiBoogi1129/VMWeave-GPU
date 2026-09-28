@@ -1,0 +1,26 @@
+{
+  "base_commit": "02b24da4226abae05f553112f539e63d403d2b25",
+  "runtime_changes": [
+    "runtime/shm/src/guest.c",
+    "runtime/shm/src/worker.c",
+    "runtime/shm/include/flyt_trace.h"
+  ],
+  "trace_default": "off; opt-in FLYT_TRACE_REQUESTS=1",
+  "experiment_worker_image": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+  "build_control_plane_source": "HEAD version in build context; pre-existing local control_plane.py edit excluded",
+  "source_sha256": {
+    "audit-cleanup.py": "67dc77e9386a366ffde0f7c3e0ef6ad771adb5e9d9b2dc258bbaaf5ef85e9ff6",
+    "experiments/evidence/campaign_affinity.py": "8a5dda0307426ad453dc5814b809e0c6262b526dfbb73ac49a07c8248ac63845",
+    "experiments/evidence/campaign_runtime.py": "5d79ec0d1fae2fa02018352c9d2c11c76ff7f01f0adae8ac2a3748fad59ea8ba",
+    "experiments/evidence/campaign_runtime_info.py": "47d8d0deb75b8817efa869da3eaaf3b3bc934354637067175bad63caef48875e",
+    "experiments/evidence/run_stage2.py": "6b729e847f1a0fd141437351484571681b57d8b9c0443a1d800600d4e928a6d3",
+    "experiments/evidence/stage2_probe.c": "311b8cbbb32a5ece079f77620623f91b4e145c2599f70e619af370925d64bcab",
+    "experiments/evidence/summarize_stage2.py": "4e241c2298e152f4c6f5183d32b55a7d97c2b0360c3f8f4533ada6f66d827fd0",
+    "experiments/evidence/verify_stage2.py": "72123d61863d8f46e2d2eb1a763dd0ed57c7f2dae6f5ef6b783561060b7925d1",
+    "runtime/shm/include/flyt_trace.h": "4832ac6ad078fe7896b007998e2ee186331fb2fee3814bd14b2a0fda61e041df",
+    "runtime/shm/src/guest.c": "0f4ad6ccd31098cce482d47e417bef2929c27a89fd2cd4ef7cebc01ee9fc7c88",
+    "runtime/shm/src/worker.c": "1f02b3214b5a3f46ef679cdee1119b9d22bc6fff51c64499a54d4d64c1665420",
+    "scripts/capture-stage2.cjs": "bb3d06d8d1f28b4242e81bda0dce9d384612f26fcea6269323d605dc0f1da29c",
+    "tests/control/test_stage2_evidence.py": "e2ff592a256e9d8d27e4f47280b3aafd4f0d7e9160a3671a46aa0ffc659481b5"
+  }
+}

@@ -1,5 +1,10 @@
 # SHM/HAMi 실증 도구
 
+> **발표자료 v3 후속 실험:** [1단계 요청–배치 연결](results/2026-09-28-stage1/README.md) ·
+> [2단계 SHM 요청 왕복·정수 검산](results/2026-09-28-stage2/README.md).
+> 2단계는 독립 실행 3회 모두 통과했으며 네 지점 trace·요청 CSV·실제 출력 데이터·화면 19개·영상 1개를 제공한다.
+> [현재 단계별 계획](THESIS_V3_EXPERIMENT_PLAN.md)과 [2단계 재현·오프라인 검증](results/2026-09-28-stage2/REPRODUCE.md)을 따른다.
+
 > 실제 후속 실행과 화면 증거: [2026-09-24 결과 보고서](IMPLEMENTATION_EXPERIMENT_RESULTS_2026-09-24.md).
 
 > **2026-09-24 자료 제작 범위 변경:** [현재 구현·실험 계획](IMPLEMENTATION_EXPERIMENT_PLAN.md)을 따른다.

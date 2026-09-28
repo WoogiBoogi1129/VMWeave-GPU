@@ -1,0 +1,34 @@
+[1/3] STEP 1/7: FROM docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85 AS build
+[1/3] STEP 2/7: RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake && rm -rf /var/lib/apt/lists/*
+--> Using cache 4544d711fc958fdc650d849a78521ba6b7b066e4d8faa4c8cb833e9ae6298f22
+--> 4544d711fc95
+[1/3] STEP 3/7: COPY runtime/shm /src/runtime/shm
+--> Using cache f2aadae1eff3e91e65458041890a6c80612247ed6fd0533bd72d44167a81e05f
+--> f2aadae1eff3
+[1/3] STEP 4/7: COPY experiments/shm-contract /src/experiments/shm-contract
+--> Using cache 6e2073a89e42eab2672d8dba124349bfe28894e00d3d576a479b78ae58ac9b55
+--> 6e2073a89e42
+[1/3] STEP 5/7: COPY experiments/shm-queue /src/experiments/shm-queue
+--> Using cache e3696893c66447572dc2710a36d16ef853a44e1e53b9bc2468574601b0660b19
+--> e3696893c664
+[1/3] STEP 6/7: COPY experiments/cuda-dispatch /src/experiments/cuda-dispatch
+--> Using cache 0de8236ef4f2cebd9bae29927a72f1e36370c836ccaa80b6d864022294ca11e4
+--> 0de8236ef4f2
+[1/3] STEP 7/7: RUN cmake -S /src/runtime/shm -B /build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/flyt     && cmake --build /build --parallel 2 && cmake --install /build
+--> Using cache d94699a19c42f78777eb8126bda5f823767801f1c9698d065319bede58dbc7e2
+--> d94699a19c42
+[3/3] STEP 1/6: FROM docker.io/nvidia/cuda:12.8.1-cudnn-runtime-ubuntu22.04@sha256:17e2934e1fa96152b14f78078bfbafd0f00f391df995dc6c641a720fce1202bb AS worker
+[3/3] STEP 2/6: RUN apt-get update && apt-get install -y --no-install-recommends python3 ca-certificates tini && rm -rf /var/lib/apt/lists/*
+--> Using cache fb9da5db17ff81a1da0505ec86a6f655a58f5a6e23cbd194fa254227190c8914
+--> fb9da5db17ff
+[3/3] STEP 3/6: COPY --from=build /opt/flyt/bin /opt/flyt/bin
+--> 90f22aa4e669
+[3/3] STEP 4/6: COPY runtime/shm/control /opt/flyt/control
+--> 654a824c8410
+[3/3] STEP 5/6: ENV FLYT_RESOURCE_BACKEND=hami FLYT_TRACE_REQUESTS=1
+--> a6b88ecd8b87
+[3/3] STEP 6/6: ENTRYPOINT ["/usr/bin/tini","--","python3","/opt/flyt/control/supervisor.py"]
+[3/3] COMMIT localhost/flyt-worker:stage2-20260928
+--> 1feb2fa05582
+Successfully tagged localhost/flyt-worker:stage2-20260928
+1feb2fa055824cdf246d1f63084b64490a7f24266a16e65b49ae8d65caa99b0b

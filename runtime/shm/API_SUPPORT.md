@@ -70,3 +70,18 @@ NVIDIA Driver 라이브러리에서 대신 찾아 반환하지 않는다.
 
 실제 학습 판정과 알려진 제약은
 [PyTorch 구현·검증 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md)를 따른다.
+
+## 요청별 선택형 추적
+
+Guest와 Worker 프로세스에 각각 `FLYT_TRACE_REQUESTS=1`을 설정하면 stderr에
+`FLYT_TRACE {JSON}` 레코드를 남긴다. 기본값은 꺼짐이며 `1` 이외의 값도 꺼짐이다.
+`allocation + generation + session_id + request_id`로 Guest submit/receive와
+Worker take/respond를 연결한다. submit/respond는 해당 큐 연산이 성공한 뒤에만 기록한다.
+응답 전 상태는 `null`이고, 응답의 transport 상태와 Runtime/Driver 반환값은 별도 필드다.
+malloc 크기·opaque handle·복사 방향/크기는 기록하되 데이터 내용이나 가상 주소는 기록하지 않는다.
+
+`monotonic_ns`는 각 endpoint의 로컬 시계다. Guest/Worker 시각을 빼서 전송 지연을
+계산하면 안 되며, 커널 launch 응답은 GPU 작업 완료를 뜻하지 않는다. 완료 확인에는
+별도 동기화가 필요하다. 추적 실행은 기능 시연용으로 사용한다.
+[2단계 실제 요청 추적·검산](../../experiments/evidence/results/2026-09-28-stage2/README.md)에
+독립 실행 원본과 검증 절차를 보존한다.

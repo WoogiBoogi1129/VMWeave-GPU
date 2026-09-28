@@ -1,0 +1,9 @@
+{
+  "command": "cd /tmp/campaign && sudo env FLYT_TRACE_REQUESTS=1 FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign ./stage2-probe 2029",
+  "worker_logs_command": "kubectl logs -n flyt-evidence evidence-s2-0928-03-channel-worker",
+  "probe_sha256": "46011cbcfbbbe1bfcfeb678bf8bad059bb6bb99afc381c7b5804906f0735e080",
+  "guest_library_sha256": "1aa980966e97b4c396d5a44aeb0302c8f014c95ae0829edf047972d84c2ad7d1",
+  "worker_image": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+  "trace_on": true,
+  "timing_experiment": false
+}
