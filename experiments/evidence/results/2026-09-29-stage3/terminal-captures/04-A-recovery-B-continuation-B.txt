@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 4. VM B: actual records bracketing A events
+ubuntu@gpu-4:pair-1$ cat B/continuation-excerpt.jsonl | jq '{A_event,host_received_utc,complet
+ed:.record.completed,live_bytes:.record.live_allocated_bytes,mismatches:.record.mismatches}'
+{
+  "A_event": "OOM",
+  "host_received_utc": 1790608962.267898,
+  "completed": 13,
+  "live_bytes": 1610612736,
+  "mismatches": 0
+}
+{
+  "A_event": "128 MiB success",
+  "host_received_utc": 1790608973.4672115,
+  "completed": 24,
+  "live_bytes": 1610612736,
+  "mismatches": 0
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

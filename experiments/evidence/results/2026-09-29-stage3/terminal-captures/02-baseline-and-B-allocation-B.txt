@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 2. VM B: allocate 1536 MiB and retain it
+ubuntu@gpu-4:pair-1$ jq 'select(.event=="ALLOC" and .phase=="large")' B/stdout.jsonl
+{
+  "event": "ALLOC",
+  "vm": "B",
+  "pid": 2085,
+  "utc_seconds": 1790608951.027816772,
+  "monotonic_seconds": 148.748851109,
+  "live_allocated_bytes": 1610612736,
+  "phase": "large",
+  "requested_bytes": 1610612736,
+  "api_result": 0,
+  "guest_pointer": 140681989324800
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

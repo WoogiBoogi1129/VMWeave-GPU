@@ -1,0 +1,251 @@
+[
+  {
+    "status": "PASS",
+    "pair": "pair-1",
+    "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "roles": {
+      "A": {
+        "status": "PASS",
+        "memory_limit_mib": 1024,
+        "large_api_result": 2,
+        "expected_oom_count": 1,
+        "same_guest_pid": 2120,
+        "matched_requests": 111,
+        "trace_records": 444,
+        "completed_checks": 13,
+        "checked_elements_total": 6815744,
+        "mismatches": 0,
+        "output_sha256": {
+          "head": "b3c31c82fb255d6a60c2ac9c0056efa948abe61b44985b97393cb4cc6a343dca",
+          "tail": "e7e37bf3fa13d064c011bbeeed04684e5b8fb221c7b1b37428cf3e102cb42e8a"
+        },
+        "malloc_requests": [
+          {
+            "request_id": 6,
+            "requested_bytes": 2097152,
+            "api_result": 0,
+            "allocation_handle": 1
+          },
+          {
+            "request_id": 26,
+            "requested_bytes": 1610612736,
+            "api_result": 2,
+            "allocation_handle": 0
+          },
+          {
+            "request_id": 33,
+            "requested_bytes": 134217728,
+            "api_result": 0,
+            "allocation_handle": 2
+          }
+        ]
+      },
+      "B": {
+        "status": "PASS",
+        "memory_limit_mib": 4096,
+        "large_api_result": 0,
+        "expected_oom_count": 0,
+        "same_guest_pid": 2085,
+        "matched_requests": 259,
+        "trace_records": 1036,
+        "completed_checks": 46,
+        "checked_elements_total": 24117248,
+        "mismatches": 0,
+        "output_sha256": {
+          "head": "1e54d9e6fa4cdfe0370be26aa5dce0807394874b4ea213bb2b44c0007f295931",
+          "tail": "5b6b92328192bbb681c1704d1f5b1d6f0f3fd52606b268c5d3b0f723504e7cf7"
+        },
+        "malloc_requests": [
+          {
+            "request_id": 6,
+            "requested_bytes": 2097152,
+            "api_result": 0,
+            "allocation_handle": 1
+          },
+          {
+            "request_id": 21,
+            "requested_bytes": 1610612736,
+            "api_result": 0,
+            "allocation_handle": 2
+          }
+        ]
+      }
+    },
+    "B_checks_by_host_receipt_interval": {
+      "before_A_OOM": 11,
+      "after_OOM_before_small": 11,
+      "during_A_small": 11,
+      "after_A_free": 12
+    },
+    "B_same_live_allocation": true,
+    "clock_basis": "Host log receipt intervals; not cross-VM one-way latency",
+    "full_large_allocation_checked": false,
+    "checked_sample": "First and last 1 MiB per completed check"
+  },
+  {
+    "status": "PASS",
+    "pair": "pair-2",
+    "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "roles": {
+      "A": {
+        "status": "PASS",
+        "memory_limit_mib": 1024,
+        "large_api_result": 2,
+        "expected_oom_count": 1,
+        "same_guest_pid": 2056,
+        "matched_requests": 111,
+        "trace_records": 444,
+        "completed_checks": 13,
+        "checked_elements_total": 6815744,
+        "mismatches": 0,
+        "output_sha256": {
+          "head": "21f80c0454a423ce24b916260700f202ee8bb3ddd3e3acbbb45d79f7ce7efdc6",
+          "tail": "8ba4d3253aca5cb5d857a00121efef39be1a9347d440b3b00d7dbd4efc622d9f"
+        },
+        "malloc_requests": [
+          {
+            "request_id": 6,
+            "requested_bytes": 2097152,
+            "api_result": 0,
+            "allocation_handle": 1
+          },
+          {
+            "request_id": 26,
+            "requested_bytes": 1610612736,
+            "api_result": 2,
+            "allocation_handle": 0
+          },
+          {
+            "request_id": 33,
+            "requested_bytes": 134217728,
+            "api_result": 0,
+            "allocation_handle": 2
+          }
+        ]
+      },
+      "B": {
+        "status": "PASS",
+        "memory_limit_mib": 4096,
+        "large_api_result": 0,
+        "expected_oom_count": 0,
+        "same_guest_pid": 2060,
+        "matched_requests": 258,
+        "trace_records": 1032,
+        "completed_checks": 46,
+        "checked_elements_total": 24117248,
+        "mismatches": 0,
+        "output_sha256": {
+          "head": "8142c4ef5b0f9f35db4d1fa7814610d00d021b66ab9b56ae84232f003d203086",
+          "tail": "de073742bd9fc0c4ef1443ea1a8a08ba3b8765a5f035cb9e84d523489e977607"
+        },
+        "malloc_requests": [
+          {
+            "request_id": 6,
+            "requested_bytes": 2097152,
+            "api_result": 0,
+            "allocation_handle": 1
+          },
+          {
+            "request_id": 20,
+            "requested_bytes": 1610612736,
+            "api_result": 0,
+            "allocation_handle": 2
+          }
+        ]
+      }
+    },
+    "B_checks_by_host_receipt_interval": {
+      "before_A_OOM": 11,
+      "after_OOM_before_small": 11,
+      "during_A_small": 11,
+      "after_A_free": 12
+    },
+    "B_same_live_allocation": true,
+    "clock_basis": "Host log receipt intervals; not cross-VM one-way latency",
+    "full_large_allocation_checked": false,
+    "checked_sample": "First and last 1 MiB per completed check"
+  },
+  {
+    "status": "PASS",
+    "pair": "pair-3",
+    "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "roles": {
+      "A": {
+        "status": "PASS",
+        "memory_limit_mib": 1024,
+        "large_api_result": 2,
+        "expected_oom_count": 1,
+        "same_guest_pid": 2058,
+        "matched_requests": 111,
+        "trace_records": 444,
+        "completed_checks": 13,
+        "checked_elements_total": 6815744,
+        "mismatches": 0,
+        "output_sha256": {
+          "head": "889c24d4b2865b510cb723f73f00e348b47c0d4d800536d53d01def8ee981fcc",
+          "tail": "e2d2957e3a1eea08602bf69ed5d7d51ff700b60c06057f674e08bffcb5f94cd3"
+        },
+        "malloc_requests": [
+          {
+            "request_id": 6,
+            "requested_bytes": 2097152,
+            "api_result": 0,
+            "allocation_handle": 1
+          },
+          {
+            "request_id": 26,
+            "requested_bytes": 1610612736,
+            "api_result": 2,
+            "allocation_handle": 0
+          },
+          {
+            "request_id": 33,
+            "requested_bytes": 134217728,
+            "api_result": 0,
+            "allocation_handle": 2
+          }
+        ]
+      },
+      "B": {
+        "status": "PASS",
+        "memory_limit_mib": 4096,
+        "large_api_result": 0,
+        "expected_oom_count": 0,
+        "same_guest_pid": 2059,
+        "matched_requests": 259,
+        "trace_records": 1036,
+        "completed_checks": 46,
+        "checked_elements_total": 24117248,
+        "mismatches": 0,
+        "output_sha256": {
+          "head": "1f3c2e1ef78cf82f92e05cde139e5c9a22120b5bbff7195311f26018bc621ec2",
+          "tail": "91ff168742027964313e165804bcf1de36c3b204d25f5215a8143664cfd6c39a"
+        },
+        "malloc_requests": [
+          {
+            "request_id": 6,
+            "requested_bytes": 2097152,
+            "api_result": 0,
+            "allocation_handle": 1
+          },
+          {
+            "request_id": 21,
+            "requested_bytes": 1610612736,
+            "api_result": 0,
+            "allocation_handle": 2
+          }
+        ]
+      }
+    },
+    "B_checks_by_host_receipt_interval": {
+      "before_A_OOM": 11,
+      "after_OOM_before_small": 11,
+      "during_A_small": 11,
+      "after_A_free": 12
+    },
+    "B_same_live_allocation": true,
+    "clock_basis": "Host log receipt intervals; not cross-VM one-way latency",
+    "full_large_allocation_checked": false,
+    "checked_sample": "First and last 1 MiB per completed check"
+  }
+]

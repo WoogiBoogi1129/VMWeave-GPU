@@ -1,0 +1,316 @@
+{
+  "uid": "stage3-memory",
+  "title": "Stage 3 \u2014 memory \u2014 actual measurements",
+  "schemaVersion": 40,
+  "version": 2,
+  "timezone": "utc",
+  "refresh": "",
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "templating": {
+    "list": [
+      {
+        "name": "pair",
+        "label": "Run pair",
+        "type": "custom",
+        "query": "pair-1,pair-2,pair-3",
+        "current": {
+          "text": "pair-1",
+          "value": "pair-1"
+        },
+        "options": [
+          {
+            "text": "pair-1",
+            "value": "pair-1",
+            "selected": true
+          },
+          {
+            "text": "pair-2",
+            "value": "pair-2",
+            "selected": false
+          },
+          {
+            "text": "pair-3",
+            "value": "pair-3",
+            "selected": false
+          }
+        ]
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "VM A \u2014 1 GiB limit",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "stage3-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 14
+      },
+      "targets": [
+        {
+          "expr": "s3_live_bytes{pair=\"$pair\",vm=\"A\"}",
+          "refId": "A",
+          "legendFormat": "App live allocations"
+        },
+        {
+          "expr": "s3_limit_bytes{pair=\"$pair\",vm=\"A\"}",
+          "refId": "B",
+          "legendFormat": "Configured limit"
+        },
+        {
+          "expr": "s3_hami_memory_bytes{pair=\"$pair\",vm=\"A\"}",
+          "refId": "C",
+          "legendFormat": "HAMi accounting"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": {
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Configured limit"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    8,
+                    8
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "VM B \u2014 4 GiB limit",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "stage3-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 14
+      },
+      "targets": [
+        {
+          "expr": "s3_live_bytes{pair=\"$pair\",vm=\"B\"}",
+          "refId": "A",
+          "legendFormat": "App live allocations"
+        },
+        {
+          "expr": "s3_limit_bytes{pair=\"$pair\",vm=\"B\"}",
+          "refId": "B",
+          "legendFormat": "Configured limit"
+        },
+        {
+          "expr": "s3_hami_memory_bytes{pair=\"$pair\",vm=\"B\"}",
+          "refId": "C",
+          "legendFormat": "HAMi accounting"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": {
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Configured limit"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    8,
+                    8
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Physical GPU memory \u2014 includes contexts and both Workers",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "stage3-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 14,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "s3_gpu_total_memory_bytes",
+          "refId": "A",
+          "legendFormat": "{{vm}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Collector errors \u2014 must stay zero",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "stage3-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 14,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "s3_collector_errors",
+          "refId": "A",
+          "legendFormat": "{{vm}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 5,
+      "type": "annolist",
+      "title": "Experiment steps \u2014 actual host observation times (UTC)",
+      "gridPos": {
+        "x": 0,
+        "y": 22,
+        "w": 24,
+        "h": 9
+      },
+      "options": {
+        "limit": 10,
+        "onlyFromThisDashboard": false,
+        "onlyInTimeRange": true,
+        "showTags": false,
+        "showTime": true,
+        "showUser": false,
+        "tags": [
+          "stage3"
+        ],
+        "navigateToPanel": false,
+        "navigateBefore": "10s",
+        "navigateAfter": "10s"
+      }
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "name": "Observed phase events",
+        "type": "dashboard",
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255,180,60,1)",
+        "target": {
+          "type": "tags",
+          "tags": [
+            "stage3",
+            "$pair"
+          ],
+          "matchAny": false,
+          "limit": 100
+        }
+      }
+    ]
+  }
+}

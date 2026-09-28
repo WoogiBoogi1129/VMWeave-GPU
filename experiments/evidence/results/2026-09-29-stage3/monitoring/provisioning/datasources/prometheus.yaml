@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: Stage3 Prometheus
+    uid: stage3-prom
+    type: prometheus
+    access: proxy
+    url: http://127.0.0.1:9098
+    isDefault: true
+    jsonData:
+      timeInterval: 1s

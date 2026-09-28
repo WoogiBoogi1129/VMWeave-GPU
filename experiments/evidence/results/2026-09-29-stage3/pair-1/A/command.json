@@ -1,0 +1,10 @@
+{
+  "guest_command": "cd /tmp/campaign && sudo env FLYT_TRACE_REQUESTS=1 FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign ./stage3-probe A 3110",
+  "worker_log_command": [
+    "kubectl",
+    "logs",
+    "-n",
+    "flyt-evidence",
+    "evidence-s3-0929-1-a-channel-worker"
+  ]
+}

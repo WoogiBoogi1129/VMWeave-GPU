@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "independent_pairs": 3,
+  "unique_vmis_workers_allocations": 6,
+  "expected_oom_count": 3,
+  "all_pair_checks_pass": true,
+  "negative_checks_rejected": [
+    "unexpected_success",
+    "wrong_output_byte"
+  ],
+  "monitoring_quality": {
+    "pair-1": {
+      "raw_samples": 79,
+      "sample_interval_mean_seconds": 1.000133908711947,
+      "sample_interval_max_seconds": 1.0002799034118652,
+      "collector_error_samples": 0
+    },
+    "pair-2": {
+      "raw_samples": 78,
+      "sample_interval_mean_seconds": 1.000130761753429,
+      "sample_interval_max_seconds": 1.0002388954162598,
+      "collector_error_samples": 0
+    },
+    "pair-3": {
+      "raw_samples": 79,
+      "sample_interval_mean_seconds": 1.0001259094629533,
+      "sample_interval_max_seconds": 1.0002391338348389,
+      "collector_error_samples": 0
+    }
+  },
+  "terminal_png_count": 6,
+  "grafana_png_count": 6,
+  "recording_video_count": 0,
+  "terminal_commands": 44,
+  "all_terminal_commands_exit_zero": true,
+  "source_snapshots_match": true,
+  "local_document_links_valid": true,
+  "credential_scan": "PASS"
+}

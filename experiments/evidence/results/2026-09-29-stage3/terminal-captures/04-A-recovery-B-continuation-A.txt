@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 4. VM A: same process succeeds with 128 MiB
+ubuntu@gpu-4:pair-1$ jq 'select(.event=="ALLOC" and .phase=="small")' A/stdout.jsonl
+{
+  "event": "ALLOC",
+  "vm": "A",
+  "pid": 2120,
+  "utc_seconds": 1790608973.090492010,
+  "monotonic_seconds": 171.577612215,
+  "live_allocated_bytes": 134217728,
+  "phase": "small",
+  "requested_bytes": 134217728,
+  "api_result": 0,
+  "guest_pointer": 139856684515328
+}
+ubuntu@gpu-4:pair-1$ jq -s '[.[]|select(.event=="PROGRESS" and .live_allocated_bytes==13421772
+8)][0]' A/stdout.jsonl
+{
+  "event": "PROGRESS",
+  "vm": "A",
+  "pid": 2120,
+  "utc_seconds": 1790608973.122664452,
+  "monotonic_seconds": 171.609784607,
+  "live_allocated_bytes": 134217728,
+  "completed": 2,
+  "checked_elements": 524288,
+  "mismatches": 0,
+  "guest_pointer": 139856684515328
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

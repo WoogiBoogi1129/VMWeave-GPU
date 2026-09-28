@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "pair": "pair-3",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "roles": {
+    "A": {
+      "status": "PASS",
+      "memory_limit_mib": 1024,
+      "large_api_result": 2,
+      "expected_oom_count": 1,
+      "same_guest_pid": 2058,
+      "matched_requests": 111,
+      "trace_records": 444,
+      "completed_checks": 13,
+      "checked_elements_total": 6815744,
+      "mismatches": 0,
+      "output_sha256": {
+        "head": "889c24d4b2865b510cb723f73f00e348b47c0d4d800536d53d01def8ee981fcc",
+        "tail": "e2d2957e3a1eea08602bf69ed5d7d51ff700b60c06057f674e08bffcb5f94cd3"
+      },
+      "malloc_requests": [
+        {
+          "request_id": 6,
+          "requested_bytes": 2097152,
+          "api_result": 0,
+          "allocation_handle": 1
+        },
+        {
+          "request_id": 26,
+          "requested_bytes": 1610612736,
+          "api_result": 2,
+          "allocation_handle": 0
+        },
+        {
+          "request_id": 33,
+          "requested_bytes": 134217728,
+          "api_result": 0,
+          "allocation_handle": 2
+        }
+      ]
+    },
+    "B": {
+      "status": "PASS",
+      "memory_limit_mib": 4096,
+      "large_api_result": 0,
+      "expected_oom_count": 0,
+      "same_guest_pid": 2059,
+      "matched_requests": 259,
+      "trace_records": 1036,
+      "completed_checks": 46,
+      "checked_elements_total": 24117248,
+      "mismatches": 0,
+      "output_sha256": {
+        "head": "1f3c2e1ef78cf82f92e05cde139e5c9a22120b5bbff7195311f26018bc621ec2",
+        "tail": "91ff168742027964313e165804bcf1de36c3b204d25f5215a8143664cfd6c39a"
+      },
+      "malloc_requests": [
+        {
+          "request_id": 6,
+          "requested_bytes": 2097152,
+          "api_result": 0,
+          "allocation_handle": 1
+        },
+        {
+          "request_id": 21,
+          "requested_bytes": 1610612736,
+          "api_result": 0,
+          "allocation_handle": 2
+        }
+      ]
+    }
+  },
+  "B_checks_by_host_receipt_interval": {
+    "before_A_OOM": 11,
+    "after_OOM_before_small": 11,
+    "during_A_small": 11,
+    "after_A_free": 12
+  },
+  "B_same_live_allocation": true,
+  "clock_basis": "Host log receipt intervals; not cross-VM one-way latency",
+  "full_large_allocation_checked": false,
+  "checked_sample": "First and last 1 MiB per completed check"
+}

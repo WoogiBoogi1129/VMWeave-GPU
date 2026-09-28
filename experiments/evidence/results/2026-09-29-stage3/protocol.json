@@ -1,0 +1,24 @@
+{
+  "base_commit": "bfb493a00d295a7719681fc28ea50982ca98ba3e",
+  "worker_image": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "pairs": 3,
+  "quota_mib": {
+    "A": 1024,
+    "B": 4096
+  },
+  "compute": 50,
+  "sessions_per_vm": 1,
+  "shm_mib": 64,
+  "large_mib": 1536,
+  "small_mib": 128,
+  "hold_seconds": 10,
+  "sample_mib_per_end": 1,
+  "kernel_blocks": 1024,
+  "kernel_threads": 256,
+  "recording": false,
+  "binary_sha256": {
+    "stage3-probe": "7c5555ee8504430b93a7df92cda273905d154dfeb3e5db1626eadbe6401e0db2",
+    "libflyt_guest.so": "1aa980966e97b4c396d5a44aeb0302c8f014c95ae0829edf047972d84c2ad7d1"
+  }
+}

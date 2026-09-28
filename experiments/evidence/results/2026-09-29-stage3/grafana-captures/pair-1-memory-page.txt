@@ -1,0 +1,47 @@
+Run pair
+pair-1
+Observed phase events
+2026-09-28 15:22:16 to 2026-09-28 15:23:34
+UTC
+Refresh
+VM A — 1 GiB limit
+Name	Max	Last *
+
+App live allocations
+	128 MiB	0 B
+
+Configured limit
+	1 GiB	1 GiB
+
+HAMi accounting
+	678 MiB	0 B
+VM B — 4 GiB limit
+Name	Max	Last *
+
+App live allocations
+	1.50 GiB	0 B
+
+Configured limit
+	4 GiB	4 GiB
+
+HAMi accounting
+	2.04 GiB	0 B
+Physical GPU memory — includes contexts and both Workers
+s3_gpu_total_memory_bytes {__name__="s3_gpu_total_memory_bytes", instance="127.0.0.1:9898", job="stage3"}
+Collector errors — must stay zero
+s3_collector_errors {__name__="s3_collector_errors", instance="127.0.0.1:9898", job="stage3"}
+Experiment steps — actual host observation times (UTC)
+Both VMs: normal program exit
+2026-09-28 15:23:29
+B: verification passed; 1536 MiB freed
+2026-09-28 15:23:16
+A: verification passed; 128 MiB freed
+2026-09-28 15:23:05
+A: 128 MiB allocated in the same session
+2026-09-28 15:22:54
+A: 1536 MiB rejected (CUDA OOM)
+2026-09-28 15:22:43
+B: 1536 MiB allocated
+2026-09-28 15:22:32
+Both VMs: precheck passed
+2026-09-28 15:22:21

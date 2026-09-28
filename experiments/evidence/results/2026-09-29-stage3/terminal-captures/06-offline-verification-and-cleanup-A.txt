@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 6. Independent check of logs and saved output bytes
+ubuntu@gpu-4:pair-1$ python3 ../../../verify_stage3.py . | jq '{status,pair,B_checks_by_host_r
+eceipt_interval,B_same_live_allocation}'
+{
+  "status": "PASS",
+  "pair": "pair-1",
+  "B_checks_by_host_receipt_interval": {
+    "before_A_OOM": 11,
+    "after_OOM_before_small": 11,
+    "during_A_small": 11,
+    "after_A_free": 12
+  },
+  "B_same_live_allocation": true
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

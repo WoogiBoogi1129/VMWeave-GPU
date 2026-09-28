@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 2. VM A: precheck complete; waiting for command
+ubuntu@gpu-4:pair-1$ jq 'select(.event=="MEMINFO" and .phase=="ready")' A/stdout.jsonl
+{
+  "event": "MEMINFO",
+  "vm": "A",
+  "pid": 2120,
+  "utc_seconds": 1790608938.418245554,
+  "monotonic_seconds": 136.905366025,
+  "live_allocated_bytes": 0,
+  "phase": "ready",
+  "free_bytes": 497025024,
+  "total_bytes": 1073741824
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

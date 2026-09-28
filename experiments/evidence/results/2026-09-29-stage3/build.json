@@ -1,0 +1,7 @@
+{
+  "compiler_image_id": "d94699a19c42f78777eb8126bda5f823767801f1c9698d065319bede58dbc7e2",
+  "compiler_image_digest": "sha256:2aeb7c95dc9b79cc227a8a7cd75dff9b37092b5548f90dc981cc2bb731afd9a1",
+  "command": "gcc -O2 -Wall -Wextra -Wno-misleading-indentation -I/usr/local/cuda/include /stage3_probe.c -L/opt/flyt/lib -lflyt_guest -Wl,-rpath,/tmp/campaign -o /artifacts/stage3-probe",
+  "probe_sha256": "7c5555ee8504430b93a7df92cda273905d154dfeb3e5db1626eadbe6401e0db2",
+  "runtime_change": "No Guest library or Worker rebuild; new experiment probe; runner quota argument added"
+}

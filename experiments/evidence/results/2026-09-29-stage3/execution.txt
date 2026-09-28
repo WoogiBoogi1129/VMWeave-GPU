@@ -1,0 +1,49 @@
+{"run_id": "evidence-s3-0929-1-a", "event": "PREPARE", "utc_seconds": 1790608770.538795, "backend": "shm", "compute": 50}
+{"run_id": "evidence-s3-0929-1-b", "event": "PREPARE", "utc_seconds": 1790608770.5393827, "backend": "shm", "compute": 50}
+{"run_id": "evidence-s3-0929-1-a", "event": "PREPARED", "utc_seconds": 1790608928.5070853}
+{"run_id": "evidence-s3-0929-1-b", "event": "PREPARED", "utc_seconds": 1790608937.07416}
+{"pair": "pair-1", "phase": "PREPARED", "host_utc": 1790608937.0777209}
+{"pair": "pair-1", "phase": "BOTH_READY", "host_utc": 1790608941.022814}
+{"pair": "pair-1", "phase": "B_LARGE_ALLOCATED", "host_utc": 1790608952.0241761}
+{"pair": "pair-1", "phase": "A_EXPECTED_OOM", "host_utc": 1790608963.0885456}
+{"pair": "pair-1", "phase": "A_SMALL_ALLOCATED", "host_utc": 1790608974.0907755}
+{"pair": "pair-1", "phase": "A_FREED", "host_utc": 1790608985.092718}
+{"pair": "pair-1", "phase": "B_FREED", "host_utc": 1790608996.0950203}
+{"pair": "pair-1", "phase": "BOTH_COMPLETE", "host_utc": 1790609009.6149344}
+{"run_id": "evidence-s3-0929-1-a", "event": "RELEASED", "utc_seconds": 1790609028.3160307}
+{"run_id": "evidence-s3-0929-1-b", "event": "RELEASED", "utc_seconds": 1790609029.0178971}
+{"pair": "pair-1", "phase": "RELEASED", "host_utc": 1790609029.3719444}
+pair-1 PASS
+{"run_id": "evidence-s3-0929-2-a", "event": "PREPARE", "utc_seconds": 1790609029.862911, "backend": "shm", "compute": 50}
+{"run_id": "evidence-s3-0929-2-b", "event": "PREPARE", "utc_seconds": 1790609029.8635318, "backend": "shm", "compute": 50}
+{"run_id": "evidence-s3-0929-2-a", "event": "PREPARED", "utc_seconds": 1790609087.3201427}
+{"run_id": "evidence-s3-0929-2-b", "event": "PREPARED", "utc_seconds": 1790609087.3371797}
+{"pair": "pair-2", "phase": "PREPARED", "host_utc": 1790609087.3407671}
+{"pair": "pair-2", "phase": "BOTH_READY", "host_utc": 1790609091.2858632}
+{"pair": "pair-2", "phase": "B_LARGE_ALLOCATED", "host_utc": 1790609102.2874558}
+{"pair": "pair-2", "phase": "A_EXPECTED_OOM", "host_utc": 1790609113.351742}
+{"pair": "pair-2", "phase": "A_SMALL_ALLOCATED", "host_utc": 1790609124.3537214}
+{"pair": "pair-2", "phase": "A_FREED", "host_utc": 1790609135.3557346}
+{"pair": "pair-2", "phase": "B_FREED", "host_utc": 1790609146.3580194}
+{"pair": "pair-2", "phase": "BOTH_COMPLETE", "host_utc": 1790609159.9319513}
+{"run_id": "evidence-s3-0929-2-a", "event": "RELEASED", "utc_seconds": 1790609177.5963812}
+{"run_id": "evidence-s3-0929-2-b", "event": "RELEASED", "utc_seconds": 1790609179.446319}
+{"pair": "pair-2", "phase": "RELEASED", "host_utc": 1790609179.8021917}
+pair-2 PASS
+{"run_id": "evidence-s3-0929-3-a", "event": "PREPARE", "utc_seconds": 1790609180.2809267, "backend": "shm", "compute": 50}
+{"run_id": "evidence-s3-0929-3-b", "event": "PREPARE", "utc_seconds": 1790609180.2813265, "backend": "shm", "compute": 50}
+{"run_id": "evidence-s3-0929-3-b", "event": "PREPARED", "utc_seconds": 1790609236.4786232}
+{"run_id": "evidence-s3-0929-3-a", "event": "PREPARED", "utc_seconds": 1790609237.7004282}
+{"pair": "pair-3", "phase": "PREPARED", "host_utc": 1790609237.7040162}
+{"pair": "pair-3", "phase": "BOTH_READY", "host_utc": 1790609241.6267447}
+{"pair": "pair-3", "phase": "B_LARGE_ALLOCATED", "host_utc": 1790609252.6283658}
+{"pair": "pair-3", "phase": "A_EXPECTED_OOM", "host_utc": 1790609263.6943252}
+{"pair": "pair-3", "phase": "A_SMALL_ALLOCATED", "host_utc": 1790609274.6962166}
+{"pair": "pair-3", "phase": "A_FREED", "host_utc": 1790609285.6981535}
+{"pair": "pair-3", "phase": "B_FREED", "host_utc": 1790609296.7000773}
+{"pair": "pair-3", "phase": "BOTH_COMPLETE", "host_utc": 1790609310.3066723}
+{"run_id": "evidence-s3-0929-3-a", "event": "RELEASED", "utc_seconds": 1790609326.7924688}
+{"run_id": "evidence-s3-0929-3-b", "event": "RELEASED", "utc_seconds": 1790609329.7785504}
+{"pair": "pair-3", "phase": "RELEASED", "host_utc": 1790609330.119499}
+pair-3 PASS
+ALL THREE PAIRS PASS

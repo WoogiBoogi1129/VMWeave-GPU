@@ -1,0 +1,273 @@
+{
+  "request": {
+    "kind": "FlytGPURequest",
+    "metadata": {
+      "name": "evidence-s3-0929-3-a-request",
+      "namespace": "flyt-evidence",
+      "uid": "5f8d47c5-d2a0-4bd8-8e48-7e621f137901",
+      "generation": 1
+    },
+    "status": {},
+    "spec": {
+      "compute": 50,
+      "count": 1,
+      "memory": "1024Mi",
+      "profileRef": {
+        "name": "evidence-s3-0929-3-a-profile",
+        "uid": "0dedc654-8108-43f3-b6e1-23e579f50598"
+      },
+      "vmRef": {
+        "name": "evidence-s3-0929-3-a",
+        "uid": "b454b539-1303-4337-8552-6b32b35d7cbf"
+      }
+    }
+  },
+  "profile": {
+    "kind": "FlytGPUProfile",
+    "metadata": {
+      "name": "evidence-s3-0929-3-a-profile",
+      "namespace": "flyt-evidence",
+      "uid": "0dedc654-8108-43f3-b6e1-23e579f50598",
+      "generation": 1
+    },
+    "status": {},
+    "spec": {
+      "approved": true,
+      "cores": 50,
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "hamiNamespace": "kube-system",
+      "maxClients": 1,
+      "memoryMiB": 1024,
+      "nodeName": "gpu-4",
+      "runtimeClass": "nvidia",
+      "schedulerName": "hami-scheduler",
+      "workerImage": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae"
+    }
+  },
+  "channel": {
+    "kind": "FlytSharedMemoryChannel",
+    "metadata": {
+      "name": "evidence-s3-0929-3-a-channel",
+      "namespace": "flyt-evidence",
+      "uid": "b53cbd8e-3aa3-4e58-84a8-1aeaa332e071",
+      "generation": 1
+    },
+    "status": {
+      "allocation": "76db841f9d20dfd4301c94e37d8c04d1",
+      "compute": 50,
+      "everBound": true,
+      "generation": "fc77735896503a5b9652e59ae456fc2d",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 1024,
+      "nodeName": "gpu-4",
+      "phase": "Bound",
+      "profileGeneration": 1,
+      "reason": "AwaitingMappingACK",
+      "requestGeneration": 1,
+      "sessions": [
+        "aa1b9c1bb5504064d4b70ce41d5d8725"
+      ],
+      "vmiUID": "c90a90b8-f360-4996-98c1-666af4f4b4e1",
+      "workerPodUID": "a93990d0-f048-46c6-857d-23e5ff858d60"
+    },
+    "spec": {
+      "drain": false,
+      "gid": 107,
+      "hookImage": "localhost/flyt-hook@sha256:ff8db37b7ee864c5b63335986b2d4c85c550ca7bd82c80ed241563f715fa0554",
+      "image": "localhost/flyt-control-plane@sha256:8dd0a2f445244a839ce390e83da5ad653cd82c6904dced06fc777dc570ccb808",
+      "pvcRef": {
+        "name": "evidence-vm-a-backing",
+        "uid": "3266e644-f00e-4b86-9ba0-de154e13d1f1"
+      },
+      "requestRef": {
+        "name": "evidence-s3-0929-3-a-request",
+        "uid": "5f8d47c5-d2a0-4bd8-8e48-7e621f137901"
+      },
+      "sessions": 1,
+      "uid": 107,
+      "vmRef": {
+        "name": "evidence-s3-0929-3-a",
+        "uid": "b454b539-1303-4337-8552-6b32b35d7cbf"
+      },
+      "workerImage": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae"
+    }
+  },
+  "worker": {
+    "kind": "Pod",
+    "metadata": {
+      "name": "evidence-s3-0929-3-a-channel-worker",
+      "namespace": "flyt-evidence",
+      "uid": "a93990d0-f048-46c6-857d-23e5ff858d60",
+      "generation": 1,
+      "ownerReferences": [
+        {
+          "apiVersion": "flyt.dev/v1alpha1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "FlytSharedMemoryChannel",
+          "name": "evidence-s3-0929-3-a-channel",
+          "uid": "b53cbd8e-3aa3-4e58-84a8-1aeaa332e071"
+        }
+      ],
+      "annotations": {
+        "hami.io/vgpu-devices-allocated": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3,NVIDIA,1024,50:;",
+        "hami.io/vgpu-devices-to-allocate": ";;",
+        "hami.io/vgpu-node": "gpu-4",
+        "hami.io/vgpu-time": "1790609200",
+        "nvidia.com/use-gpuuuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3"
+      }
+    },
+    "status": {
+      "allocatedResources": {
+        "nvidia.com/gpu": "1",
+        "nvidia.com/gpucores": "50",
+        "nvidia.com/gpumem": "1024"
+      },
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-28T15:26:41Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodReadyToStartContainers"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-28T15:26:40Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Initialized"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-28T15:26:44Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-28T15:26:44Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "ContainersReady"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-28T15:26:40Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodScheduled"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "allocatedResources": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "50",
+            "nvidia.com/gpumem": "1024"
+          },
+          "allocatedResourcesStatus": [
+            {
+              "name": "nvidia.com/gpu",
+              "resources": [
+                {
+                  "health": "Healthy",
+                  "resourceID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3-4"
+                }
+              ]
+            }
+          ],
+          "containerID": "cri-o://17f8d6952a4b6ee1b47c93091106eb372c297b8f9985e68bcb5e2442d56b821e",
+          "image": "localhost/flyt-worker:stage2-20260928",
+          "imageID": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+          "lastState": {},
+          "name": "main",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "50",
+              "nvidia.com/gpumem": "1024"
+            },
+            "requests": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "50",
+              "nvidia.com/gpumem": "1024"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-28T15:26:42Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107,
+                44,
+                993
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-87hc7",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "hostIP": "192.168.24.21",
+      "hostIPs": [
+        {
+          "ip": "192.168.24.21"
+        }
+      ],
+      "observedGeneration": 1,
+      "phase": "Running",
+      "podIP": "10.85.0.166",
+      "podIPs": [
+        {
+          "ip": "10.85.0.166"
+        }
+      ],
+      "qosClass": "BestEffort",
+      "resources": {},
+      "startTime": "2026-09-28T15:26:40Z"
+    },
+    "spec": {
+      "nodeName": "gpu-4",
+      "schedulerName": "hami-scheduler",
+      "runtimeClassName": "nvidia",
+      "containers": [
+        {
+          "name": "main",
+          "image": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+          "resources": {
+            "limits": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "50",
+              "nvidia.com/gpumem": "1024"
+            },
+            "requests": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "50",
+              "nvidia.com/gpumem": "1024"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

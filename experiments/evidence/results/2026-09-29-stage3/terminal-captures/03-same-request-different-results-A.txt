@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 3. SAME 1536 MiB request; compare api_result
+ubuntu@gpu-4:pair-1$ jq 'select(.event=="ALLOC" and .phase=="large")' A/stdout.jsonl
+{
+  "event": "ALLOC",
+  "vm": "A",
+  "pid": 2120,
+  "utc_seconds": 1790608962.079684734,
+  "monotonic_seconds": 160.566805086,
+  "live_allocated_bytes": 0,
+  "phase": "large",
+  "requested_bytes": 1610612736,
+  "api_result": 2,
+  "guest_pointer": 0
+}
+ubuntu@gpu-4:pair-1$ # Worker response for that allocation request
+ubuntu@gpu-4:pair-1$ sed -n 's/^FLYT_TRACE //p' A/worker-stderr.txt | jq 'select(.event=="resp
+ond" and .api_id==4112 and .requested_bytes==1610612736) | {request_id,requested_bytes,api_res
+ult,transport_status}'
+{
+  "request_id": 26,
+  "requested_bytes": 1610612736,
+  "api_result": 2,
+  "transport_status": 0
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 6. Both channels released
+ubuntu@gpu-4:pair-1$ jq '{name:.metadata.name,phase:.status.phase}' A/released-channel.json B/
+released-channel.json
+{
+  "name": "evidence-s3-0929-1-a-channel",
+  "phase": "Released"
+}
+{
+  "name": "evidence-s3-0929-1-b-channel",
+  "phase": "Released"
+}
+ubuntu@gpu-4:pair-1$ cat ../final-audit.json
+{
+  "baseline_preserved": true,
+  "baseline_vmis": [
+    {
+      "namespace": "flyt-infra-validation",
+      "name": "basic-vm",
+      "uid": "7d79ad6c-9a38-4242-b7a1-31c5a59f128b"
+    }
+  ],
+  "gpu_processes_after": ""
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

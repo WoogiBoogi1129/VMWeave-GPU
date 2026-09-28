@@ -1,0 +1,42 @@
+Run pair
+pair-1
+Observed phase events
+2026-09-28 15:22:16 to 2026-09-28 15:23:34
+UTC
+Refresh
+VM A — synchronized and verified work / OOM
+Name	Max	Last *
+
+Completed checks
+	13	13
+
+Expected OOM count
+	1	1
+VM B — synchronized and verified work / OOM
+Name	Max	Last *
+
+Completed checks
+	46	46
+
+Expected OOM count
+	0	0
+Verified mismatches — must stay zero
+A
+B
+Scrape health — must stay 1
+up {__name__="up", instance="127.0.0.1:9898", job="stage3"}
+Experiment steps — actual host observation times (UTC)
+Both VMs: normal program exit
+2026-09-28 15:23:29
+B: verification passed; 1536 MiB freed
+2026-09-28 15:23:16
+A: verification passed; 128 MiB freed
+2026-09-28 15:23:05
+A: 128 MiB allocated in the same session
+2026-09-28 15:22:54
+A: 1536 MiB rejected (CUDA OOM)
+2026-09-28 15:22:43
+B: 1536 MiB allocated
+2026-09-28 15:22:32
+Both VMs: precheck passed
+2026-09-28 15:22:21

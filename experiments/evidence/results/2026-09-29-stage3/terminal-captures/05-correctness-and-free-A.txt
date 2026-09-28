@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 5. Final sample verification and release
+ubuntu@gpu-4:pair-1$ jq 'select(.event=="FREE" and .phase=="final" or .event=="RESULT")' A/std
+out.jsonl
+{
+  "event": "FREE",
+  "vm": "A",
+  "pid": 2120,
+  "utc_seconds": 1790608984.124492884,
+  "monotonic_seconds": 182.611613289,
+  "live_allocated_bytes": 0,
+  "phase": "final",
+  "freed_bytes": 134217728,
+  "guest_pointer": 139856684515328,
+  "api_result": 0
+}
+{
+  "event": "RESULT",
+  "vm": "A",
+  "pid": 2120,
+  "utc_seconds": 1790609006.110162020,
+  "monotonic_seconds": 204.597282298,
+  "live_allocated_bytes": 0,
+  "status": "PASS",
+  "completed": 13,
+  "checked_elements_total": 6815744,
+  "mismatches": 0
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,266 @@
+[
+  {
+    "pane": "VM A log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:07.997Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:08.066Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "# 1. Actual VM / Worker / same physical GPU",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:08.082Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "jq '{worker,gpu_uuid,vmi_uid,worker_uid}' A/identity.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:08.149Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "jq '{requested:.request.spec.memory,applied:.channel.status.memoryMiB}' A/applied.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:08.217Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "# 1. Actual VM / Worker / same physical GPU",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:08.235Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "jq '{worker,gpu_uuid,vmi_uid,worker_uid}' B/identity.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:08.302Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "jq '{requested:.request.spec.memory,applied:.channel.status.memoryMiB}' B/applied.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:08.368Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.002Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.069Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "# 2. VM A: precheck complete; waiting for command",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.088Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "jq 'select(.event==\"MEMINFO\" and .phase==\"ready\")' A/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.157Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "# 2. VM B: allocate 1536 MiB and retain it",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.174Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "jq 'select(.event==\"ALLOC\" and .phase==\"large\")' B/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.242Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.884Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.950Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "# 3. SAME 1536 MiB request; compare api_result",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:09.968Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "jq 'select(.event==\"ALLOC\" and .phase==\"large\")' A/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.033Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "# Worker response for that allocation request",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.052Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "sed -n 's/^FLYT_TRACE //p' A/worker-stderr.txt | jq 'select(.event==\"respond\" and .api_id==4112 and .requested_bytes==1610612736) | {request_id,requested_bytes,api_result,transport_status}'",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.120Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "# 3. SAME 1536 MiB request; compare api_result",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.137Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "jq 'select(.event==\"ALLOC\" and .phase==\"large\")' B/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.203Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "# Worker response for that allocation request",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.222Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "sed -n 's/^FLYT_TRACE //p' B/worker-stderr.txt | jq 'select(.event==\"respond\" and .api_id==4112 and .requested_bytes==1610612736) | {request_id,requested_bytes,api_result,transport_status}'",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.291Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.926Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:10.995Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "# 4. VM A: same process succeeds with 128 MiB",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.013Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "jq 'select(.event==\"ALLOC\" and .phase==\"small\")' A/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.081Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "jq -s '[.[]|select(.event==\"PROGRESS\" and .live_allocated_bytes==134217728)][0]' A/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.150Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "# 4. VM B: actual records bracketing A events",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.170Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "cat B/continuation-excerpt.jsonl | jq '{A_event,host_received_utc,completed:.record.completed,live_bytes:.record.live_allocated_bytes,mismatches:.record.mismatches}'",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.239Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.877Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.946Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "# 5. Final sample verification and release",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:11.964Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "jq 'select(.event==\"FREE\" and .phase==\"final\" or .event==\"RESULT\")' A/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:12.033Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "# 5. Final sample verification and release",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:12.051Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "jq 'select(.event==\"FREE\" and .phase==\"final\" or .event==\"RESULT\")' B/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:12.123Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:12.775Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:12.841Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "# 6. Independent check of logs and saved output bytes",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:12.858Z"
+  },
+  {
+    "pane": "VM A log inspection",
+    "command": "python3 ../../../verify_stage3.py . | jq '{status,pair,B_checks_by_host_receipt_interval,B_same_live_allocation}'",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:13.174Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "# 6. Both channels released",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:13.192Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "jq '{name:.metadata.name,phase:.status.phase}' A/released-channel.json B/released-channel.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:13.260Z"
+  },
+  {
+    "pane": "VM B log inspection",
+    "command": "cat ../final-audit.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:32:13.329Z"
+  }
+]

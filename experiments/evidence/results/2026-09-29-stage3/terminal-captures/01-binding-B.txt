@@ -1,0 +1,48 @@
+ubuntu@gpu-4:pair-1$ # 1. Actual VM / Worker / same physical GPU
+ubuntu@gpu-4:pair-1$ jq '{worker,gpu_uuid,vmi_uid,worker_uid}' B/identity.json
+{
+  "worker": "evidence-s3-0929-1-b-channel-worker",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "vmi_uid": "76583ac0-366c-4031-80d9-fbeda0c54bdb",
+  "worker_uid": "54be1dd0-9ebc-4564-9f4e-8a358fba7856"
+}
+ubuntu@gpu-4:pair-1$ jq '{requested:.request.spec.memory,applied:.channel.status.memoryMiB}' B
+/applied.json
+{
+  "requested": "4096Mi",
+  "applied": 4096
+}
+ubuntu@gpu-4:pair-1$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
