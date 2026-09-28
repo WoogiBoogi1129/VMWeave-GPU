@@ -2,7 +2,7 @@
 
 > **표현 방식 수정:** 핵심 근거는 [Guest 원본 로그](runs/evidence-s2-0928-01/guest-stderr.txt),
 > [Worker 원본 로그](runs/evidence-s2-0928-01/worker-stderr.txt), [계산 결과](runs/evidence-s2-0928-01/stdout.jsonl)다.
-> 자체 뷰어 화면은 발표 기본 자료에서 제외하고 과거 보조 기록으로 보존한다. 이번 변경은 2단계 재실행이 아니다.
+> 자체 뷰어 화면은 발표 기본 자료에서 제외하고 과거 보조 기록으로 보존한다. 후속 [새 VM 대표 재실험·정적 터미널 캡처](../2026-09-28-stage2-static/README.md)를 발표 기본 자료로 사용한다. 아래 세 번의 과거 실행과 후속 한 번의 실행을 구분한다.
 
 **2026-09-28 실제 실행: 독립 allocation 3/3 PASS.** 각 실행에서 CUDA 요청 10개를 포함한
 18개 요청을 `Guest submit → Worker take → Worker respond → Guest receive`로 연결했다.

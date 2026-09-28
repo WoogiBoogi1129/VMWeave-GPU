@@ -1,10 +1,13 @@
 # 본 실험 이전 개발 트랙
 
+> **2단계 재실험 · 최신 발표용 자료:** [실제 로그와 정적 터미널 캡처](results/2026-09-28-stage2-static/README.md) · [발표 배치안](results/2026-09-28-stage2-static/PRESENTATION_GUIDE.md).
+> 2026-09-28–29 KST에 새 VM 대표 실행 1회 PASS: 18개 요청·72개 추적 레코드 대응, 정수 262,144개 불일치 0, 정상 회수. **녹화 없이 PNG 7장·원본 로그·CSV·실제 출력 데이터**를 제공한다. 화면은 실험 후 bash/tmux/ttyd에서 실제 수집 로그를 조회한 캡처다. 이전 3회 결과와 구분하며 자체 뷰어 대신 이 자료를 사용한다.
+
 > **발표용 시각 자료 수정:** [1단계 실제 터미널 시연](results/2026-09-28-stage1-terminal/README.md).
 > bash에서 실행한 kubectl·SSH·nvidia-smi 명령과 출력을 asciinema로 녹화했다. 기존 자체 뷰어 대신 단계별 터미널 캡처와 원본 로그를 우선 사용한다.
 
 > **2단계 실행 완료:** [SHM 요청·응답 추적과 계산 정확성](results/2026-09-28-stage2/README.md).
-> 새 allocation 3회, 전체 54개 요청의 네 지점 trace 216행 대응, 매회 1 MiB·262,144개 정수 mismatch 0·free·Released를 확인했다. 실제 로그 화면 19개와 연속 영상 1개를 확보했다. 추적 ON 기능 검증이며 성능·연산 제한 판정은 아니다.
+> 새 allocation 3회, 전체 54개 요청의 네 지점 trace 216행 대응, 매회 1 MiB·262,144개 정수 mismatch 0·free·Released를 확인했다. 기존 자체 뷰어 화면 19개와 영상 1개는 과거 보조 기록으로 보존한다. 추적 ON 기능 검증이며 성능·연산 제한 판정은 아니다.
 
 > **1단계 실행 완료:** [GPU 요청–실제 배치·실행 연결 결과](results/2026-09-28-stage1/README.md).
 > 새 allocation 3회에서 4 GiB·compute 50 전달, 실제 Worker GPU PID·HAMi 로드·동일 backing·BAR2 매핑과 정상 회수를 확인했다. 초기 준비 실패 1회는 별도 보존했다. 1단계 자체는 이용률 제한을 검증하지 않았으며 요청별 추적은 위 2단계에서 별도 수행했다.

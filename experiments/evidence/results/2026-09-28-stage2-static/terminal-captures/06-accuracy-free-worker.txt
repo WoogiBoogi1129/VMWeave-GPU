@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 6. cudaFree: the same allocation handle
+ubuntu@gpu-4:raw$ jq 'select(.api_id==4113) | {event,request_id,allocation_handle,transport_st
+atus,api_result}' worker-trace.jsonl
+{
+  "event": "take",
+  "request_id": 17,
+  "allocation_handle": 1,
+  "transport_status": null,
+  "api_result": null
+}
+{
+  "event": "respond",
+  "request_id": 17,
+  "allocation_handle": 1,
+  "transport_status": 0,
+  "api_result": 0
+}
+ubuntu@gpu-4:raw$ # SHA-256: expected output and actual output
+ubuntu@gpu-4:raw$ jq '{reference,output}' array-hashes.json
+{
+  "reference": "62ce9b535e739177e8f015dd43418c08d61394b94b4ccac468024544d0870906",
+  "output": "62ce9b535e739177e8f015dd43418c08d61394b94b4ccac468024544d0870906"
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+{
+  "issue": "Worker image absent from node cache; ImagePullBackOff before CUDA execution",
+  "resolution": "Reimported preserved OCI archive; no image rebuild or experiment input change",
+  "worker_uid": "f683e1cd-c697-473c-8db5-ed12a02a097c",
+  "image": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+  "observed_container_state": [
+    {
+      "allocatedResources": {
+        "nvidia.com/gpu": "1",
+        "nvidia.com/gpucores": "50",
+        "nvidia.com/gpumem": "4096"
+      },
+      "allocatedResourcesStatus": [
+        {
+          "name": "nvidia.com/gpu",
+          "resources": [
+            {
+              "health": "Healthy",
+              "resourceID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3-5"
+            }
+          ]
+        }
+      ],
+      "containerID": "cri-o://a923fbae1df49701f126de011450c1313c19f5f0ef36c3b454547c1d5857276f",
+      "image": "localhost/flyt-worker:stage2-20260928",
+      "imageID": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+      "lastState": {},
+      "name": "main",
+      "ready": true,
+      "resources": {
+        "limits": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "50",
+          "nvidia.com/gpumem": "4096"
+        },
+        "requests": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "50",
+          "nvidia.com/gpumem": "4096"
+        }
+      },
+      "restartCount": 0,
+      "started": true,
+      "state": {
+        "running": {
+          "startedAt": "2026-09-28T14:59:49Z"
+        }
+      },
+      "user": {
+        "linux": {
+          "gid": 107,
+          "supplementalGroups": [
+            107,
+            44,
+            993
+          ],
+          "uid": 107
+        }
+      },
+      "volumeMounts": [
+        {
+          "mountPath": "/flyt-channel",
+          "name": "channel"
+        },
+        {
+          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+          "name": "kube-api-access-zcn59",
+          "readOnly": true,
+          "recursiveReadOnly": "Disabled"
+        }
+      ]
+    }
+  ],
+  "import_manifest": {
+    "manifest_digest": "sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+    "reference": "localhost/flyt-worker:stage2-20260928"
+  }
+}

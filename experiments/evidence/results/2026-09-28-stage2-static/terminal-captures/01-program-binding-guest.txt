@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 1. Executed Guest command and workload
+ubuntu@gpu-4:raw$ jq -r .guest_command command.json
+cd /tmp/campaign && sudo env FLYT_TRACE_REQUESTS=1 FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_I
+VSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign ./stage2-probe 2031
+ubuntu@gpu-4:raw$ jq 'select(.event=="CONDITIONS")' stdout.jsonl
+{
+  "event": "CONDITIONS",
+  "seed": 2031,
+  "bytes": 1048576,
+  "elements": 262144,
+  "blocks": 1024,
+  "threads": 256,
+  "kernel_addend": 19,
+  "trace": true,
+  "timing_experiment": false
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

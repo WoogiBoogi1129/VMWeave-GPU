@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 5. D2H: response data length
+ubuntu@gpu-4:raw$ jq 'select(.api_id==4114 and .copy_direction==2) | {event,request_id,copy_by
+tes,src_handle,output_bytes,api_result}' worker-trace.jsonl
+{
+  "event": "take",
+  "request_id": 13,
+  "copy_bytes": 1048576,
+  "src_handle": 1,
+  "output_bytes": null,
+  "api_result": null
+}
+{
+  "event": "respond",
+  "request_id": 13,
+  "copy_bytes": 1048576,
+  "src_handle": 1,
+  "output_bytes": 1048576,
+  "api_result": 0
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

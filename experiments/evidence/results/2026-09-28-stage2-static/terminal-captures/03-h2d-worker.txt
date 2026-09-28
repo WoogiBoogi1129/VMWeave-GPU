@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 3. H2D: Worker result
+ubuntu@gpu-4:raw$ jq 'select(.api_id==4114 and .copy_direction==1) | {event,request_id,copy_by
+tes,dst_handle,transport_status,api_result}' worker-trace.jsonl
+{
+  "event": "take",
+  "request_id": 6,
+  "copy_bytes": 1048576,
+  "dst_handle": 1,
+  "transport_status": null,
+  "api_result": null
+}
+{
+  "event": "respond",
+  "request_id": 6,
+  "copy_bytes": 1048576,
+  "dst_handle": 1,
+  "transport_status": 0,
+  "api_result": 0
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

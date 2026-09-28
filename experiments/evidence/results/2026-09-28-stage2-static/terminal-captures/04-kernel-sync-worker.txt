@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # Launch response alone is NOT GPU completion
+ubuntu@gpu-4:raw$ jq 'select(.api_id==8243 or .api_id==4128) | {event,request_id,api_id,transp
+ort_status,api_result}' worker-trace.jsonl
+{
+  "event": "take",
+  "request_id": 10,
+  "api_id": 8243,
+  "transport_status": null,
+  "api_result": null
+}
+{
+  "event": "respond",
+  "request_id": 10,
+  "api_id": 8243,
+  "transport_status": 0,
+  "api_result": 0
+}
+{
+  "event": "take",
+  "request_id": 11,
+  "api_id": 4128,
+  "transport_status": null,
+  "api_result": null
+}
+{
+  "event": "respond",
+  "request_id": 11,
+  "api_id": 4128,
+  "transport_status": 0,
+  "api_result": 0
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

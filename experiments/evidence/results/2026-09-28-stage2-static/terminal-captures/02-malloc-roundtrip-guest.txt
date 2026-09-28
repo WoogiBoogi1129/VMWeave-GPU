@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 2. cudaMalloc(1 MiB): Guest submit / receive
+ubuntu@gpu-4:raw$ jq 'select(.api_id==4112) | {event,request_id,requested_bytes,allocation_han
+dle,transport_status,result_domain,api_result}' guest-trace.jsonl
+{
+  "event": "submit",
+  "request_id": 3,
+  "requested_bytes": 1048576,
+  "allocation_handle": 0,
+  "transport_status": null,
+  "result_domain": null,
+  "api_result": null
+}
+{
+  "event": "receive",
+  "request_id": 3,
+  "requested_bytes": 1048576,
+  "allocation_handle": 1,
+  "transport_status": 0,
+  "result_domain": 1,
+  "api_result": 0
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

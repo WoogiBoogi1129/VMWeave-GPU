@@ -1,0 +1,24 @@
+{
+  "name": "evidence-s2-static-0928",
+  "scope": "One independent Stage 2 log demonstration; separate from historical three runs",
+  "recording": false,
+  "video": false,
+  "worker_image": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "compute": 50,
+  "memory_mib": 4096,
+  "sessions": 1,
+  "seed": 2031,
+  "input_bytes": 1048576,
+  "elements": 262144,
+  "blocks": 1024,
+  "threads": 256,
+  "kernel_addend": 19,
+  "trace_on": true,
+  "timing_experiment": false,
+  "base_commit": "188ca58ccbf77e3570c8793d3bac165767a00c63",
+  "binary_sha256": {
+    "stage2-probe": "46011cbcfbbbe1bfcfeb678bf8bad059bb6bb99afc381c7b5804906f0735e080",
+    "libflyt_guest.so": "1aa980966e97b4c396d5a44aeb0302c8f014c95ae0829edf047972d84c2ad7d1"
+  }
+}

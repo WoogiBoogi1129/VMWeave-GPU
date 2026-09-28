@@ -1,0 +1,90 @@
+[
+  {
+    "reason": "FilteringSucceed",
+    "message": "find fit node(gpu-4), 0 nodes not fit, 1 nodes fit(gpu-4:0.00)",
+    "firstTimestamp": "2026-09-28T14:55:00Z",
+    "lastTimestamp": "2026-09-28T14:55:00Z",
+    "count": 1,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "BindingSucceed",
+    "message": "Successfully binding node [gpu-4] to flyt-evidence/evidence-s2-static-0928-channel-worker",
+    "firstTimestamp": "2026-09-28T14:55:01Z",
+    "lastTimestamp": "2026-09-28T14:55:01Z",
+    "count": 1,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Scheduled",
+    "message": "Successfully assigned flyt-evidence/evidence-s2-static-0928-channel-worker to gpu-4",
+    "firstTimestamp": null,
+    "lastTimestamp": null,
+    "count": null,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Pulling",
+    "message": "Pulling image \"localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae\"",
+    "firstTimestamp": "2026-09-28T14:55:02Z",
+    "lastTimestamp": "2026-09-28T14:57:49Z",
+    "count": 5,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Failed",
+    "message": "Failed to pull image \"localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae\": RegistryUnavailable: unable to pull image: initializing source docker://localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae: fetching manifest sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae in localhost/flyt-worker: pinging container registry localhost: Get \"https://localhost/v2/\": dial tcp 127.0.0.1:443: connect: connection refused",
+    "firstTimestamp": "2026-09-28T14:55:02Z",
+    "lastTimestamp": "2026-09-28T14:57:49Z",
+    "count": 5,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Failed",
+    "message": "Error: RegistryUnavailable",
+    "firstTimestamp": "2026-09-28T14:55:02Z",
+    "lastTimestamp": "2026-09-28T14:57:49Z",
+    "count": 5,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "BackOff",
+    "message": "Back-off pulling image \"localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae\"",
+    "firstTimestamp": "2026-09-28T14:55:02Z",
+    "lastTimestamp": "2026-09-28T14:59:34Z",
+    "count": 18,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Failed",
+    "message": "Error: ImagePullBackOff",
+    "firstTimestamp": "2026-09-28T14:55:02Z",
+    "lastTimestamp": "2026-09-28T14:58:54Z",
+    "count": 15,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Pulled",
+    "message": "Container image \"localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae\" already present on machine and can be accessed by the pod",
+    "firstTimestamp": "2026-09-28T14:59:49Z",
+    "lastTimestamp": "2026-09-28T14:59:49Z",
+    "count": 1,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Created",
+    "message": "Container created",
+    "firstTimestamp": "2026-09-28T14:59:49Z",
+    "lastTimestamp": "2026-09-28T14:59:49Z",
+    "count": 1,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  },
+  {
+    "reason": "Unhealthy",
+    "message": "Readiness probe errored and resulted in unknown state: rpc error: code = NotFound desc = container is not created or running: checking if PID of a923fbae1df49701f126de011450c1313c19f5f0ef36c3b454547c1d5857276f is running failed: container process not found",
+    "firstTimestamp": "2026-09-28T15:00:14Z",
+    "lastTimestamp": "2026-09-28T15:00:14Z",
+    "count": 1,
+    "uid": "f683e1cd-c697-473c-8db5-ed12a02a097c"
+  }
+]

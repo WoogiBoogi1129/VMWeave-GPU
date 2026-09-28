@@ -1,0 +1,26 @@
+{
+  "guest_ssh_command": [
+    "ssh",
+    "-i",
+    "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/stage2-static-20260928/artifacts/guest-key",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "StrictHostKeyChecking=accept-new",
+    "-o",
+    "UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/stage2-static-20260928/runs/evidence-s2-static-0928/known-hosts",
+    "ubuntu@10.85.0.238",
+    "cd /tmp/campaign && sudo env FLYT_TRACE_REQUESTS=1 FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign ./stage2-probe 2031"
+  ],
+  "worker_log_command": [
+    "kubectl",
+    "logs",
+    "-n",
+    "flyt-evidence",
+    "evidence-s2-static-0928-channel-worker"
+  ],
+  "worker_image": "localhost/flyt-worker@sha256:bdac2a998228f13380efb7c80b38c7218ed639b12c00f9cc8d150d83f0c78dae",
+  "guest_command": "cd /tmp/campaign && sudo env FLYT_TRACE_REQUESTS=1 FLYT_LAYOUT=/tmp/campaign/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/campaign ./stage2-probe 2031"
+}

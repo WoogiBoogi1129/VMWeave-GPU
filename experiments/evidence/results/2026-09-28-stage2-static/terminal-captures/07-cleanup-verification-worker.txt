@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 7. Saved post-run cleanup observations
+ubuntu@gpu-4:raw$ jq '{phase:.status.phase}' released-channel.json
+{
+  "phase": "Released"
+}
+ubuntu@gpu-4:raw$ cat cleanup.json
+{
+  "released": true,
+  "utc_seconds": 1790607633.052511,
+  "uid": "c39574ee-9b39-49cc-a1e5-b4b5f91521df"
+}
+ubuntu@gpu-4:raw$ cat final-audit.json
+{
+  "baseline_vmis": [
+    {
+      "namespace": "flyt-infra-validation",
+      "name": "basic-vm",
+      "uid": "7d79ad6c-9a38-4242-b7a1-31c5a59f128b"
+    }
+  ],
+  "baseline_preserved": true,
+  "vmi_worker_absent": true,
+  "gpu_processes_after": ""
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

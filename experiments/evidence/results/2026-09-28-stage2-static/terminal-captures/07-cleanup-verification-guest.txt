@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 7. Recheck original trace records and output bytes
+ubuntu@gpu-4:raw$ python3 ../../../verify_stage2.py . | jq 'del(.joined)'
+{
+  "status": "PASS",
+  "matched_requests": 18,
+  "cuda_requests": 10,
+  "trace_records": 72,
+  "checked_elements": 262144,
+  "mismatches": 0,
+  "exact_output_reference_hash_match": true,
+  "cleanup_released": true
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

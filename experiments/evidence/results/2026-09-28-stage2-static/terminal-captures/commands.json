@@ -1,0 +1,296 @@
+[
+  {
+    "pane": "Guest log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.471Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.539Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "# 1. Executed Guest command and workload",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.556Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq -r .guest_command command.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.621Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq 'select(.event==\"CONDITIONS\")' stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.687Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# Same allocation, generation and session",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.703Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq '{allocation,generation,session_id,gpu_uuid}' trace-binding.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.771Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq -r '.worker_log_command | join(\" \")' command.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:53.840Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:54.496Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:54.565Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "# 2. cudaMalloc(1 MiB): Guest submit / receive",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:54.582Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq 'select(.api_id==4112) | {event,request_id,requested_bytes,allocation_handle,transport_status,result_domain,api_result}' guest-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:54.645Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# 2. SAME REQUEST: Worker take / respond",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:54.662Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq 'select(.api_id==4112) | {event,request_id,requested_bytes,allocation_handle,transport_status,result_domain,api_result}' worker-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:54.729Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:55.351Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:55.419Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "# 3. H2D: input copy to the allocation",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:55.433Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq 'select(.api_id==4114 and .copy_direction==1) | {event,request_id,copy_bytes,dst_handle,transport_status,api_result}' guest-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:55.500Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# 3. H2D: Worker result",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:55.517Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq 'select(.api_id==4114 and .copy_direction==1) | {event,request_id,copy_bytes,dst_handle,transport_status,api_result}' worker-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:55.584Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:56.224Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:56.290Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "# 4. Kernel launch (8243), then synchronize (4128)",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:56.305Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq 'select(.api_id==8243 or .api_id==4128) | {event,request_id,api_id,transport_status,api_result}' guest-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:56.371Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# Launch response alone is NOT GPU completion",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:56.391Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq 'select(.api_id==8243 or .api_id==4128) | {event,request_id,api_id,transport_status,api_result}' worker-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:56.460Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:57.152Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:57.221Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "# 5. D2H: read back 1 MiB",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:57.239Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq 'select(.api_id==4114 and .copy_direction==2) | {event,request_id,copy_bytes,src_handle,output_bytes,api_result}' guest-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:57.308Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# 5. D2H: response data length",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:57.324Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq 'select(.api_id==4114 and .copy_direction==2) | {event,request_id,copy_bytes,src_handle,output_bytes,api_result}' worker-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:57.394Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.025Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.092Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "# 6. Actual output verification in the Guest",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.111Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq 'select(.event==\"ACCURACY\" or .event==\"RESULT\")' stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.180Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "jq 'select(.api_id==4113 and .event==\"receive\") | {event,request_id,allocation_handle,api_result}' guest-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.248Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# 6. cudaFree: the same allocation handle",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.266Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq 'select(.api_id==4113) | {event,request_id,allocation_handle,transport_status,api_result}' worker-trace.jsonl",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.335Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# SHA-256: expected output and actual output",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.358Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq '{reference,output}' array-hashes.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:58.429Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.085Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.154Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "# 7. Recheck original trace records and output bytes",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.175Z"
+  },
+  {
+    "pane": "Guest log inspection",
+    "command": "python3 ../../../verify_stage2.py . | jq 'del(.joined)'",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.346Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "# 7. Saved post-run cleanup observations",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.364Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "jq '{phase:.status.phase}' released-channel.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.433Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "cat cleanup.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.503Z"
+  },
+  {
+    "pane": "Worker log inspection",
+    "command": "cat final-audit.json",
+    "exit_code": 0,
+    "utc": "2026-09-28T15:00:59.571Z"
+  }
+]

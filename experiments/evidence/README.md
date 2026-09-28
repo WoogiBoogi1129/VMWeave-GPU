@@ -1,11 +1,14 @@
 # SHM/HAMi 실증 도구
 
+> **2단계 재실험 · 최신 발표용 자료:** [실제 로그와 정적 터미널 캡처](results/2026-09-28-stage2-static/README.md) · [발표 배치안](results/2026-09-28-stage2-static/PRESENTATION_GUIDE.md).
+> 2026-09-28–29 KST에 새 VM 대표 실행 1회 PASS: 18개 요청·72개 추적 레코드 대응, 정수 262,144개 불일치 0, 정상 회수. **녹화 없이 PNG 7장·원본 로그·CSV·실제 출력 데이터**를 제공한다. 화면은 실험 후 bash/tmux/ttyd에서 실제 수집 로그를 조회한 캡처다. 이전 3회 결과와 구분하며 자체 뷰어 대신 이 자료를 사용한다.
+
 > **발표용 첫 자료:** [1단계 실제 터미널 시연·로그·캡처](results/2026-09-28-stage1-terminal/README.md).
 > 요청 등록 → 준비 → 설정 확인 → GPU 실행 → 검산 → 회수를 표준 asciinema 기록으로 제공한다. 자체 결과 UI는 발표 기본 자료에서 제외한다.
 
 > **발표자료 v3 후속 실험:** [1단계 요청–배치 연결](results/2026-09-28-stage1/README.md) ·
 > [2단계 SHM 요청 왕복·정수 검산](results/2026-09-28-stage2/README.md).
-> 2단계는 독립 실행 3회 모두 통과했으며 네 지점 trace·요청 CSV·실제 출력 데이터·화면 19개·영상 1개를 제공한다.
+> 이전 2단계는 독립 실행 3회 모두 통과했다. 네 지점 trace·요청 CSV·실제 출력 데이터를 보존하며, 기존 자체 뷰어 화면·영상은 과거 보조 기록이다.
 > [현재 단계별 계획](THESIS_V3_EXPERIMENT_PLAN.md)과 [2단계 재현·오프라인 검증](results/2026-09-28-stage2/REPRODUCE.md)을 따른다.
 
 > 실제 후속 실행과 화면 증거: [2026-09-24 결과 보고서](IMPLEMENTATION_EXPERIMENT_RESULTS_2026-09-24.md).

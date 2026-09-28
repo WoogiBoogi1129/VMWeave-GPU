@@ -1,0 +1,48 @@
+ubuntu@gpu-4:raw$ # 6. Actual output verification in the Guest
+ubuntu@gpu-4:raw$ jq 'select(.event=="ACCURACY" or .event=="RESULT")' stdout.jsonl
+{
+  "event": "ACCURACY",
+  "checked_elements": 262144,
+  "checked_bytes": 1048576,
+  "mismatches": 0,
+  "criterion": "exact uint32 equality"
+}
+{
+  "event": "RESULT",
+  "status": "PASS",
+  "checked_elements": 262144,
+  "checked_bytes": 1048576,
+  "mismatches": 0,
+  "utc_seconds": 1790607613.662366629
+}
+ubuntu@gpu-4:raw$ jq 'select(.api_id==4113 and .event=="receive") | {event,request_id,allocati
+on_handle,api_result}' guest-trace.jsonl
+{
+  "event": "receive",
+  "request_id": 17,
+  "allocation_handle": 1,
+  "api_result": 0
+}
+ubuntu@gpu-4:raw$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
