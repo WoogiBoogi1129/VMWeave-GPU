@@ -103,6 +103,11 @@ def review(api, channel):
 def process(api, channel, execution_mode):
     if execution_mode == 'review':
         return review(api, channel)
+    # A released allocation is immutable. Repeatedly re-observing/reclaiming
+    # every historical channel produces API traffic and status conflicts that
+    # delay new allocations. Deletion still reconciles to remove its finalizer.
+    if channel.get('status', {}).get('phase') == 'Released' and not channel['metadata'].get('deletionTimestamp'):
+        return
     # Preserve the experimental active path, with transport errors retried by the
     # outer loop. Never convert an API error or conflict into a failed session.
     from channel_controller import reconcile, update
