@@ -64,7 +64,7 @@ flyt_trace("guest","submit",allocation,&q,NULL);flyt_trace("guest","receive",all
 '''
         with tempfile.TemporaryDirectory() as directory:
             d=Path(directory);(d/'trace.c').write_text(source)
-            includes=['runtime/shm/include','experiments/cuda-dispatch/include','experiments/shm-queue/include','experiments/shm-contract/include']
+            includes=['runtime/shm/include','runtime/shm/cuda-dispatch/include','runtime/shm/shm-queue/include','runtime/shm/shm-contract/include']
             subprocess.run(['cc','-std=c11','-Wall','-Wextra','-Werror',*[f'-I{ROOT/p}' for p in includes],str(d/'trace.c'),'-o',str(d/'trace')],check=True)
             env=os.environ.copy();env.pop('FLYT_TRACE_REQUESTS',None)
             for flag in [None,'0','true','1']:

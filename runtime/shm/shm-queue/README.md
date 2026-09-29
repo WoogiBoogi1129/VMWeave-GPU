@@ -1,3 +1,5 @@
+> 이 문서는 해당 개발 단계의 계약 기록입니다. 후속 구현·검증 현황은 [현재 상태](../../../docs/overview/status.md)를 따릅니다.
+
 # 10-03: SHM Ring Queue와 payload 전달
 
 **소스 작성 완료 · 검증 NOT_RUN · VM/Guest/Worker runtime 미연결.**

@@ -1,10 +1,11 @@
-# Historical RPC source archive
+# 이전 구현과 역사 문서
 
-RPC-era entrypoints, deployment templates, external-source patches and stage 1–7 experiments
-are preserved under `rpc/`. They are not build inputs for the active SHM images or workflows.
-Relative links/scripts may refer to their original repository locations. For exact reproduction,
-checkout the corresponding preserved stage branch instead of running archived deployment scripts.
+- `rpc/`: Flyt/Cricket RPC 기반 이전 구현과 배포·실험 자료.
+- `docs/`: 2026-09-29 저장소 정리 직전 문서. 명령과 상태는 작성 당시 기준입니다.
 
-No cluster resource, GPU, VM or external repository was deleted by this source reorganization.
-The active runtime provides a smaller, explicitly documented CUDA compatibility set than the
-historical implementation. Archive preservation does not imply SHM compatibility parity.
+현재 실행 경로는 [runtime/shm](../runtime/shm/), 현재 안내는 [문서 사이트](https://WoogiBoogi1129.github.io/VMWeave-GPU/)를 따릅니다.
+과거 문서의 상대 링크는 정리 전 커밋에 연결하여 당시 자료를 확인할 수 있게 했습니다.
+
+RPC archive의 스크립트는 원래 저장소 위치를 전제로 할 수 있습니다. 정확한 재현은
+해당 보존 stage 브랜치를 checkout해서 수행합니다. archive 보존은 현재 SHM 경로가
+이전 구현의 전체 호환성을 제공한다는 의미가 아닙니다.

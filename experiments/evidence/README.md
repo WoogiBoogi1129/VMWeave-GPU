@@ -166,7 +166,7 @@ fork하고, 두 자식의 초기화 이후 동시에 각각 quota의 60%를 요�
 
 ## HAMi-only 예비 실행
 
-`docs/installation/hami-smoke.cu`를 현 CUDA 도구 체인으로 빌드한 바이너리를 전달한다.
+`scripts/installation/hami-smoke.cu`를 현 CUDA 도구 체인으로 빌드한 바이너리를 전달한다.
 소스·바이너리 해시와 실제 image digest를 결과에 저장한다.
 
 ```sh

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18)
 project(flyt_cuda_dispatch LANGUAGES C)
 
 # Explicit opt-in only. No generated RPC files, rpcgen, XDR, or libtirpc.
-# This file has not been configured or built (NOT_RUN).
+# The execution core can be built without the optional CUDA backend.
 find_package(Threads REQUIRED)
 add_library(flyt_cuda_exec STATIC src/exec.c)
 target_compile_features(flyt_cuda_exec PUBLIC c_std_11)

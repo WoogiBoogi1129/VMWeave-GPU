@@ -1,50 +1,65 @@
-# FLYT SHM-only Kubernetes / KubeVirt development
+# VMWeave-GPU
 
-CPU 기반 Kubernetes 배포는 [Stage 1 설치·운영 안내](docs/CONTROL_PLANE_STAGE1.md)를 참고하세요. `review` 모드의 실클러스터 검증과 GPU 런타임 검증 범위는 별개입니다.
+**Kubernetes가 관리하는 가상머신을 위한 공유 메모리 기반 GPU 실행·공유 시스템.**
 
-현재 브랜치는 `feat/k8s-native-control-plane`이다. **CPU review control plane은 실클러스터 검증 완료**,
-실제 VM의 SHM GPU 실행 및 고정 FP32 eager MLP·SGD를 검증했으며,
-전체 CUDA/PyTorch 호환성은 미완료다. 이전 RPC 구현은 `legacy/rpc`와 1~7단계 브랜치에 보존했다.
-기본 Makefile, 이미지, 배포 진입점은 RPC 서버·Manager·rpcbind·libtirpc를 사용하지 않는다.
+VM의 CUDA 호출을 공유 메모리(SHM) 채널로 Worker에 전달하고, Kubernetes 리소스로
+할당과 수명 주기를 관리합니다. GPU 자원 제한에는 HAMi를 사용합니다.
+Flyt/Cricket 기반 실험에서 출발했으며, 현재 기본 실행 경로는 SHM 전용입니다.
 
-## 현재 구조
+[문서 사이트](https://WoogiBoogi1129.github.io/VMWeave-GPU/) ·
+[설치](docs/getting-started/index.md) · [아키텍처](docs/architecture/index.md) ·
+[실험 결과](docs/evaluation/index.md) · [개발 안내](CONTRIBUTING.md)
 
-VM의 CUDA interception → per-session Request/Response Ring + payload → Worker dispatcher →
-HAMi/CUDA 순서다. `runtime/shm`에 mapping, CUDA adapter, Guest library, Worker 및 관리 코드를 둔다.
-`FlytSharedMemoryChannel`은 allocation과 VM/Worker 배치를, `FlytChannelAttachment`는
-매핑·해제 근거를 관리한다. Kubernetes API와 KubeVirt hook 관리 통신은 계속 사용한다.
+```text
+KubeVirt VM                       GPU 노드의 Worker
+CUDA interception → SHM rings → CUDA dispatcher → HAMi / CUDA → GPU
+                         ↑
+          Kubernetes CRD · Channel Controller
+```
 
-## 지원 범위
+## 현재 상태
 
-기본 메모리/device, stream/event, 제한된 async 복사, 명시적 ABI의 PTX Driver launch,
-빈 노드 Graph lifecycle, cuBLAS float SGEMM, cuDNN handle/version 소스를 작성했다.
-Runtime fatbinary 등록·packed kernel 인자 전달을 추가했고, 고정 PyTorch 빌드의 대표 학습을
-passthrough VM과 비교했다. 전체 Graph·cuDNN 연산·기타 라이브러리와 임의 PyTorch 호환성은 미지원이다.
-현재 지원 계약은 [SHM API 범위](runtime/shm/API_SUPPORT.md), 실제 학습 증거는
-[PyTorch 구현·검증 보고서](experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md)를 따른다.
-[지원 표](experiments/shm-compatibility/README.md)와 [남은 작업](experiments/rpc-removal/README.md)을 확인한다.
-과거 MPS의 PyTorch 결과를 SHM 검증 결과로 사용할 수 없다.
+연구·개발 단계입니다. 실제 VM의 SHM GPU 실행, 제한된 FP32 eager MLP·SGD,
+두 VM의 서로 다른 메모리 한도와 정상 회수를 검증했습니다.
+전체 CUDA/PyTorch 호환성, 전체 장애 시험 및 HA 운영은 완료되지 않았습니다.
 
-## GPU PoC 후속 빌드·배포 준비
+2026-09-29 N/T/S 비교는 각 경로 3회 반복의 유효 63개 구간입니다.
+**현재 구현의 SHM 경로는 측정한 9개 호출·전송 지표 모두에서 TCP 경로보다 평균 지연이 컸습니다.**
+전송 방식 외에 자원 정책과 런타임 구현도 다르므로 SHM 자체의 성능으로 일반화할 수 없습니다.
+[지원·검증 현황](docs/overview/status.md)과 [비교 범위](docs/evaluation/overhead.md)를 확인하세요.
 
-아래는 GPU 런타임 준비 순서다. 실제 개발 검증 재현은
-[VM 준비](experiments/evidence/REPRODUCE_VM_DEVELOPMENT.md)와
-[PyTorch 실행](experiments/evidence/REPRODUCE_PYTORCH.md)을 참고한다. CPU 배포 결과는 [Stage 1 검증 기록](docs/CONTROL_PLANE_VALIDATION.md)을 참고한다.
+## 시작하기
 
-1. 개발물 검증을 재개할 때 CMake/이미지 빌드와 CPU Queue 시험부터 수행한다.
-2. control plane은 `images/flyt/ControlPlane.Containerfile`, `worker`와 `guest-artifacts`는 기존 `images/flyt/Containerfile`로 빌드한다.
-   hook은 별도 `Hook.Containerfile`과 실제 설치 버전의 digest-pinned Sidecar-shim image가 필요하다.
-3. 별도 SHM 실험 클러스터/namespace에 Profile/Request 및 Channel/Attachment CRD를 설치한다.
-   `deploy/shm`의 CRD는 SHM 전용이며 기존 RPC 클러스터 CRD를 무조건 덮어쓰면 안 된다.
-4. admission TLS Secret과 CA를 준비하고 Helm chart를 별도 PoC namespace에 설치한다.
-   GPU 실행에는 experimental active 모드 설정과 확대된 권한 검토가 필요하다.
-5. 승인 GPU Profile, 정지 VM, 같은 노드 local filesystem PVC, Request와 Channel을 준비한다.
-   BackingReady 이후 VM을 수동 시작한다. Guest에 layout.bin을 전달하고 명시적 ivshmem BDF/slot을 지정한다.
-6. 양쪽 mapping ACK와 Ready를 확인한 뒤 지원 API를 실행·검증한다. 종료는 Channel drain 절차를 따른다.
+모든 명령은 저장소 루트에서 실행합니다. 문서만 확인할 때 GPU는 필요하지 않습니다.
 
-일반 GPU 없는 노드에서는 control plane/Queue 검증까지 가능하지만 실제 CUDA Worker 실행은 별개다.
-KubeVirt hook/PVC 공유·Guest BAR mapping과 HAMi 실행은 gpu-4에서 확인했다.
-RPC·MPS를 포함한 정식 성능 비교와 전체 장애 시험은 아직 완료되지 않았다.
-검증을 생략한 소스 개발만으로 배포 가능/운영 준비 완료라고 판단하지 않는다.
+```sh
+python3 -m venv .local/docs-venv
+.local/docs-venv/bin/pip install -r requirements-docs.txt
+.local/docs-venv/bin/mkdocs serve
+```
 
-[단계별 기록](docs/DEVELOPMENT_STAGES.md) · [최종 개발 상태](experiments/rpc-removal/README.md)
+- CPU 환경: [제어기 설치와 검증](docs/getting-started/cpu-control-plane.md)
+- GPU 환경: [요구 조건과 준비 순서](docs/getting-started/gpu.md)
+- 소스 검증: [빌드·테스트](docs/development/index.md)
+- 기존 자료: [개발 이력과 출처](docs/history/index.md)
+
+## 저장소 구성
+
+| 경로 | 역할 |
+|---|---|
+| `runtime/shm/` | Guest, Worker, 제어기, SHM 계약·큐·CUDA 디스패처 |
+| `charts/`, `deploy/`, `images/` | Helm, CRD·예제, 이미지 빌드 |
+| `scripts/`, `tests/` | 빌드·설치·검증 도구 |
+| `experiments/` | 실험 실행·수집·분석 및 원본 증거 |
+| `docs/` | 현재 문서 사이트의 원본 |
+| `legacy/` | 이전 RPC 구현과 역사 문서 |
+| `artifacts/`, `results/`, `.local/` | 로컬 산출물; Git 포함 범위는 각 안내 참조 |
+
+[전체 파일 관리 정책](docs/development/repository.md) · [증거 보존 정책](docs/evaluation/artifacts.md)
+
+## 출처와 인용
+
+원본 저작권과 MIT 라이선스는 [LICENSE](LICENSE), 프로젝트 계보와 의존성은
+[NOTICE](NOTICE) 및 [출처 문서](docs/history/provenance.md)를 따릅니다.
+이름 변경은 기존 코드의 출처 변경을 뜻하지 않습니다.
+논문 제목·저자·DOI가 확정되기 전에는 저장소 URL과 사용 커밋 SHA를 인용하세요.

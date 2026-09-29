@@ -3,9 +3,6 @@ ARG CUDA_RUNTIME_IMAGE=docker.io/nvidia/cuda:12.8.1-cudnn-runtime-ubuntu22.04@sh
 FROM ${CUDA_DEVEL_IMAGE} AS build
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake && rm -rf /var/lib/apt/lists/*
 COPY runtime/shm /src/runtime/shm
-COPY experiments/shm-contract /src/experiments/shm-contract
-COPY experiments/shm-queue /src/experiments/shm-queue
-COPY experiments/cuda-dispatch /src/experiments/cuda-dispatch
 RUN cmake -S /src/runtime/shm -B /build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/flyt \
     && cmake --build /build --parallel 2 && cmake --install /build
 

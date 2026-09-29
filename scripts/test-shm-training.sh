@@ -5,8 +5,8 @@ repo=$(cd "$(dirname "$0")/.." && pwd)
 build=${1:?Usage: test-shm-training.sh /absolute/path/to/shm-cmake-build}
 cuda_root=${CUDA_PATH:-/usr/local/cuda}
 cd "$repo"
-includes=(-Iruntime/shm/include -Iexperiments/cuda-dispatch/include
-  -Iexperiments/shm-queue/include -Iexperiments/shm-contract/include
+includes=(-Iruntime/shm/include -Iruntime/shm/cuda-dispatch/include
+  -Iruntime/shm/shm-queue/include -Iruntime/shm/shm-contract/include
   -I"$cuda_root/include")
 cc -O2 "${includes[@]}" tests/integration/guest_pointer_refs.c \
   "$build/libflyt_mapping.a" "$build/queue/libflyt_shm_queue.a" \

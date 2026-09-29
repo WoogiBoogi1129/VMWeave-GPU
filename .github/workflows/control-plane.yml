@@ -17,5 +17,12 @@ jobs:
         with:
           version: v3.17.3
       - run: python3 -m unittest discover -s tests/control -v
+      - run: python3 -m unittest discover -s experiments/evidence/tests -v
+      - name: Build CPU queue and dispatch libraries
+        run: |
+          cmake -S runtime/shm/shm-queue -B .local/queue-build
+          cmake --build .local/queue-build
+          cmake -S runtime/shm/cuda-dispatch -B .local/dispatch-build
+          cmake --build .local/dispatch-build
       - run: helm lint charts/flyt-control-plane --set image.digest=sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --set tls.caBundle=dGVzdA==
       - run: docker build -f images/flyt/ControlPlane.Containerfile -t flyt-control-plane:test .

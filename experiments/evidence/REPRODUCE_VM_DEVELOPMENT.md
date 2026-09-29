@@ -130,7 +130,7 @@ python3 experiments/evidence/plot_development.py --lifecycle LIFECYCLE_RUN_DIREC
 
 tensor 비교 검사를 포함하려면 CPU PyTorch가 있는 Python 환경에서 단위 검사를 실행한다.
 CUDA를 직접 쓰지 않는 `tests/integration/allocation_oom_recovery.c`는
-`experiments/cuda-dispatch/src/exec.c`와 연결해 실행한다.
+`runtime/shm/cuda-dispatch/src/exec.c`와 연결해 실행한다.
 `memory_info_dispatch.c`는 CUDA 개발 이미지에서 `runtime/shm/src/dispatch.c`와 연결하며
 실제 CUDA 조회 대신 오류·경계 동작을 제어하는 mock을 사용한다.
 

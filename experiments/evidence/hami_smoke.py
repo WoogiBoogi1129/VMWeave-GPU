@@ -102,7 +102,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--config", type=Path, default=HERE / "config.json")
     p.add_argument("--out", type=Path, required=True); p.add_argument("--binary", type=Path, required=True)
-    p.add_argument("--source", type=Path, default=ROOT / "docs/installation/hami-smoke.cu")
+    p.add_argument("--source", type=Path, default=ROOT / "scripts/installation/hami-smoke.cu")
     a = p.parse_args()
     result = run(a.out, a.binary, a.source, json.loads(a.config.read_text()))
     print(json.dumps(result, ensure_ascii=False))

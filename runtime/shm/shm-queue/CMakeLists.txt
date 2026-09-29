@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 project(flyt_shm_queue LANGUAGES C)
-# Authored only: configure/build/link/tests NOT_RUN. No CUDA or RPC dependency.
+# CPU-only queue library; no CUDA or RPC dependency.
 find_package(Threads REQUIRED)
 add_library(flyt_shm_queue STATIC src/queue.c)
 target_compile_features(flyt_shm_queue PUBLIC c_std_11)

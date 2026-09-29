@@ -1,0 +1,89 @@
+site_name: VMWeave-GPU
+site_description: Kubernetes 가상머신을 위한 공유 메모리 기반 GPU 실행·공유
+site_url: https://WoogiBoogi1129.github.io/VMWeave-GPU/
+repo_url: https://github.com/WoogiBoogi1129/VMWeave-GPU
+repo_name: WoogiBoogi1129/VMWeave-GPU
+edit_uri: edit/main/docs/
+strict: true
+theme:
+  name: material
+  language: ko
+  font: false
+  palette:
+    - scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: 어두운 화면으로 전환
+    - scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: 밝은 화면으로 전환
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+plugins:
+  - search:
+      lang: [ko, en]
+      # Explicit settings avoid a blank pipeline entry in the Korean translation.
+      pipeline: []
+      separator: '[\s\-]+'
+hooks:
+  - scripts/docs_hooks.py
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+extra_css:
+  - assets/styles.css
+validation:
+  nav:
+    omitted_files: info
+  links:
+    not_found: warn
+    unrecognized_links: warn
+    anchors: warn
+nav:
+  - 홈: index.md
+  - 소개:
+      - 설계 범위: overview/index.md
+      - 지원·검증 현황: overview/status.md
+  - 아키텍처:
+      - 전체 구조: architecture/index.md
+      - 채널 수명 주기: architecture/lifecycle.md
+  - 설치·운영:
+      - 시작하기: getting-started/index.md
+      - CPU 제어기: getting-started/cpu-control-plane.md
+      - GPU 준비: getting-started/gpu.md
+      - 운영·문제 해결: guides/operations.md
+  - 기술 참조:
+      - CUDA·SHM 계약: reference/api.md
+      - Kubernetes 설정: reference/configuration.md
+  - 실험·평가:
+      - 평가 개요: evaluation/index.md
+      - 두 VM 메모리 한도: evaluation/memory.md
+      - N/T/S 오버헤드: evaluation/overhead.md
+      - 재현·검증: evaluation/reproduction.md
+      - 전체 증거 색인: evaluation/catalog.md
+      - 증거 보존: evaluation/artifacts.md
+  - 개발:
+      - 빌드·테스트: development/index.md
+      - 저장소 구조: development/repository.md
+      - 문서·Pages: development/documentation.md
+      - 남은 작업: development/roadmap.md
+  - 이력·출처:
+      - 개발 이력: history/index.md
+      - 출처·인용: history/provenance.md

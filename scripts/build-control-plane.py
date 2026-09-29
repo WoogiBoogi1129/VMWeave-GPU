@@ -34,6 +34,6 @@ subprocess.run([a.crane, 'mutate', '--platform', 'linux/amd64', base,
     '--user', '65532:65532', '--workdir', '/opt/flyt/control',
     '--env', 'PYTHONDONTWRITEBYTECODE=1', '--env', 'PYTHONUNBUFFERED=1', '--env', 'FLYT_MODE=review',
     '--exposed-ports', '8080/tcp,8443/tcp',
-    '--label', 'org.opencontainers.image.source=https://github.com/WoogiBoogi1129/flyt-k8s-poc',
+    '--label', 'org.opencontainers.image.source=https://github.com/WoogiBoogi1129/VMWeave-GPU',
     '--label', 'org.opencontainers.image.revision=' + revision], check=True)
 print('Built', a.output, 'revision', revision)

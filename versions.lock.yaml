@@ -5,7 +5,8 @@ runtime:
   sourceDirectory: runtime/shm
   rpcFallback: false
   legacyDirectory: legacy/rpc
-  validation: NOT_RUN
+  validation: PARTIAL
+  validationReference: docs/overview/status.md
 toolchain:
   cuda: 12.8.1
   cudnnMajor: 9
@@ -14,6 +15,6 @@ toolchain:
 compatibility:
   fullPyTorch: NOT_IMPLEMENTED
   graph: empty-node-lifecycle-only
-  kernel: explicit-PTX-ABI-only
+  kernel: explicit-PTX-ABI-and-opt-in-fatbinary-packed-launch
   cuBLAS: float-SGEMM-subset
   cuDNN: handle-and-version-only
