@@ -4,6 +4,11 @@ from runtime import *
 from tcp_runtime import TCP
 p=argparse.ArgumentParser();p.add_argument('stage',choices=['overhead','single','shared']);p.add_argument('--repetitions',default='1,2,3,4,5');a=p.parse_args()
 protocol=json.loads((OUT/'protocol.json').read_text());reps=protocol['load']['iterations'];count=protocol['load']['fixed_count']
+for name,expected in protocol['artifact_sha256'].items():
+ actual=hashlib.sha256((BASE/'artifacts'/name).read_bytes()).hexdigest()
+ if actual!=expected:raise RuntimeError('Measurement artifact changed after protocol freeze: '+name)
+save(OUT/(a.stage+'-source.json'),{'commit':call(['git','-C',ROOT,'rev-parse','HEAD']).strip(),
+ 'source_sha256':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in Path(__file__).parent.iterdir() if f.suffix in ['.py','.c','.sh']},'started_utc':time.time(),'protocol_sha256':hashlib.sha256((OUT/'protocol.json').read_bytes()).hexdigest()})
 def idle():
  inventory=call(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,process_name','--format=csv,noheader'])
  if GPU in inventory:raise RuntimeError('GPU already has a compute process; do not overlap independent runs: '+inventory)
@@ -14,8 +19,9 @@ def one(s,kind):
   if s.path=='T':
    prefix='/tmp/perf/'+s.name
    cmd=s.ssh+['sudo env SM_CORE='+str(s.sm)+' LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T batch 10 30 10 '+prefix+' /tmp/perf/work.cubin 0 127']
-   execute_stream(s,cmd,prefix)
-  else:s.execute(kind=kind,reps=reps,count=count if kind=='load' else 0)
+   results=execute_stream(s,cmd,prefix)
+  else:results=s.execute(kind=kind,reps=reps,count=count if kind=='load' else 0)
+  if len(results)!=(7 if kind=='overhead' else 2):raise RuntimeError('Missing measurement windows '+s.name)
  except Exception as e:save(s.out/'failure.json',{'error':str(e),'utc':time.time()});raise
  finally:s.close()
  print('SESSION_COMPLETE',s.name,time.time(),flush=True)

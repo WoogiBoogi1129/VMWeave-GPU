@@ -40,6 +40,8 @@ class Session:
    try:return subprocess.run(self.ssh+['true'],capture_output=True,timeout=8).returncode==0
    except subprocess.TimeoutExpired:return False
   wait(sshready)
+  call(self.ssh+['sudo timedatectl set-ntp false'])
+  (self.out/'guest-clock-policy.txt').write_text(call(self.ssh+['timedatectl status']))
   channel=get(CHAN,self.name);save(self.out/'channel-bound.json',channel)
   self.bdf=call(self.ssh+["python3 -c \"from pathlib import Path; print(next(p.name for p in Path('/sys/bus/pci/devices').iterdir() if (p/'vendor').read_text().strip()=='0x1af4' and (p/'device').read_text().strip()=='0x1110'))\""]).strip()
   call([sys.executable,ROOT/'scripts/export-shm-guest.py','--channel-json',self.out/'channel-bound.json','--bdf',self.bdf,'--slot','0','--output',self.out/'guest-config'])
@@ -102,9 +104,15 @@ def execute_stream(s,cmd,prefix):
     record_state(s,row)
     if row.get('event')!='TICK':print(s.name,line.strip(),flush=True)
     if row.get('event')=='RESULT':results.append(row)
-    if row.get('event')=='TICK' and not snapshot:
+    if row.get('event')=='WARMUP_START' and not snapshot:
      pod=get('pod',s.worker);source=(ROOT/'experiments/evidence/overhead_runtime_info.py').read_text().replace("'/evidence/probe-N'","'/evidence/probe-N','/evidence/load-N'")
      (s.out/'runtime-libraries.json').write_text(k('exec','-i','-n',NS,HELPER,'--','python3','-',pod['metadata']['uid'],input=source))
+     runtime=json.loads((s.out/'runtime-libraries.json').read_text())
+     if s.path in ['N','S']:
+      if not runtime or not all(r['environment'].get('GPU_CORE_UTILIZATION_POLICY')=='FORCE' and r['environment'].get('CUDA_DEVICE_SM_LIMIT')==str(s.cap) and any('libvgpu' in f for f in r['library_hashes']) for r in runtime):raise RuntimeError('Runtime policy/library does not match requested cap')
+     if s.path=='T':
+      (s.out/'tcp-connections.txt').write_text(call(s.ssh+['ss -tnp; ip -brief address']))
+      if any('libvgpu' in f for r in runtime for f in r['library_hashes']):raise RuntimeError('Unexpected HAMi injection in TCP baseline')
      if s.path=='S':save(s.out/'channel-running.json',get(CHAN,s.name))
      snapshot=True
    code=p.wait()

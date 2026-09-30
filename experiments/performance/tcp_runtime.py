@@ -49,8 +49,10 @@ class TCP:
   v=wait(readyvm);self.vmi_uid=v['metadata']['uid'];self.ip=v['status']['interfaces'][0]['ipAddress']
   self.ssh=['ssh','-i',str(self.art/'guest-key'),'-o','BatchMode=yes','-o','ConnectTimeout=5','-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile='+str(self.out/'known-hosts'),'ubuntu@'+self.ip]
   wait(lambda:subprocess.run(self.ssh+['true'],capture_output=True,timeout=8).returncode==0)
+  call(self.ssh+['sudo timedatectl set-ntp false'])
+  (self.out/'guest-clock-policy.txt').write_text(call(self.ssh+['timedatectl status']))
   pods=json.loads(k(['get','pods','-n',TCP_NS,'-o','json']))['items'];p=next(p for p in pods if p['metadata']['name'].startswith('virt-launcher-'+self.name+'-'));self.launcher=p['metadata']['name']
-  affinity=(Path(__file__).parent/'campaign_affinity.py').read_text();(self.out/'cpu-pinning.txt').write_text(k(['exec','-i','-n',NS,HELPER,'--','python3','-',p['metadata']['uid'],'0-7'],input=affinity))
+  affinity=(Path(__file__).parent.parent/'evidence/campaign_affinity.py').read_text();(self.out/'cpu-pinning.txt').write_text(k(['exec','-i','-n',NS,HELPER,'--','python3','-',p['metadata']['uid'],'0-7'],input=affinity))
   call(self.ssh+['mkdir -p /tmp/perf; sudo mkdir -p /etc/flyt'])
   scp=['scp','-i',str(self.art/'guest-key'),'-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile='+str(self.out/'known-hosts')]
   self.scp=scp
@@ -68,7 +70,11 @@ class TCP:
   cmd=['/bin/sh','-c','exec mongosh --quiet --username "$MONGO_INITDB_ROOT_USERNAME" --password "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --eval "$1"','sh',seed]
   (self.out/'resource-seed.txt').write_text(k(['exec','-n',NS,'perf-tcp-manager','-c','mongo','--',*cmd]))
   call(self.ssh+['ln -sf libtirpc.so.3.0.0 /tmp/perf/libtirpc.so.3; ln -sf cricket-client.so /tmp/perf/libcudart.so.12; sudo cp /tmp/perf/client-mgr.toml /etc/flyt/client-mgr.toml; sudo sh -c "nohup env LD_LIBRARY_PATH=/tmp/perf RUST_LOG=info /tmp/perf/flyt-client-manager >/tmp/perf/manager.log 2>&1 </dev/null &"'])
-  save(self.out/'identity.json',{'path':'T','cell_uid':self.uid,'cell_ip':self.server_ip,'vm_ip':self.ip,'vmi_uid':self.vmi_uid,'launcher_uid':p['metadata']['uid'],'gpu_uuid':GPU,'sm_count':sm,'memory_mib':4096,'cell_image':legacy['cell_image'],'guest_cpu_set':'0-7','server_cpu_set':'16-19','transport':'TCP between distinct VM and server pod IPs; no shared host filesystem','policy':'MPS full physical SM count'})
+  clocks=[]
+  for _ in range(5):
+   t0=time.time();g=float(call(self.ssh+['date +%s.%N']));t1=time.time();clocks.append({'before':t0,'guest':g,'after':t1,'offset':g-(t0+t1)/2,'uncertainty':(t1-t0)/2})
+  self.offset=min(clocks,key=lambda x:x['uncertainty'])['offset'];save(self.out/'clock-map.json',clocks)
+  save(self.out/'identity.json',{'path':'T','cell_uid':self.uid,'cell_ip':self.server_ip,'vm_ip':self.ip,'vmi_uid':self.vmi_uid,'launcher_uid':p['metadata']['uid'],'gpu_uuid':GPU,'sm_count':sm,'memory_mib':4096,'cell_image':legacy['cell_image'],'guest_cpu_set':'0-7','server_cpu_set':'16-19','transport':'TCP between distinct VM and server pod IPs; no shared host filesystem','policy':'MPS full physical SM count','clock_offset':self.offset})
  def close(self):
   if self.vmi_uid:
    vm=vget('vm',self.name)
