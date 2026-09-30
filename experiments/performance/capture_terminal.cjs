@@ -19,7 +19,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  `jq '.[] | select(.command|contains("flyt-shm-worker")) | {pid,policy:.environment.GPU_CORE_UTILIZATION_POLICY,cap:.environment.CUDA_DEVICE_SM_LIMIT,memory:.environment.CUDA_DEVICE_MEMORY_LIMIT_0}' runs/perf-c-r1-25/runtime-libraries.json`,
  `jq '{cap,gpu_uuid,worker,worker_uid}' runs/perf-c-r1-25/identity.json`],[
  '# Original measured events; automated run, post-run inspection',
- `jq -Rr 'fromjson? | select(.event=="MEASUREMENT_START" or .event=="MEASUREMENT_END" or .event=="RESULT") | [.event,.mode,.completed,.elapsed_s,.status] | @tsv' runs/perf-c-r1-25/stdout.jsonl | column -t`,
+ `jq -Rr 'fromjson? | select(.event=="MEASUREMENT_START" or .event=="MEASUREMENT_END" or .event=="RESULT") | [.event,.phase,.completed,.elapsed_s,.status] | @tsv' runs/perf-c-r1-25/stdout.jsonl | column -t`,
  `jq '{released,uid,utc}' runs/perf-c-r1-25/cleanup.json`]],
  ['02-nts-path-comparison',[
  '# Recomputed from all five independent sessions per path',

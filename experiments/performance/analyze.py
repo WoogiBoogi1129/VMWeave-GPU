@@ -78,6 +78,7 @@ def main(root):
   entering=interval(data,bstart,bstart+10);leaving=interval(data,bend,min(bend+10,240))
   row={'pair':pair['name'],'cap_a':pair['cap_a'],'cap_b':pair['cap_b'],'slot':pair['always_active_slot'],'solo_q':baseline,'shared_q':stages['shared']['throughput'],'recovered_q':stages['recovered']['throughput'],'retention':stages['shared']['throughput']/baseline,'solo_p95_ms':stages['solo']['p95_ms'],'shared_p95_ms':stages['shared']['p95_ms'],'entry_10s_q':entering['throughput'],'entry_10s_p95_ms':entering['p95_ms'],'exit_10s_p95_ms':leaving['p95_ms'],'b_actual_start_s':bstart,'b_actual_end_s':bend,'recovery_s':recovery,'recovery_band_entry_s':entry}
   row.update(recovered_p95_ms=stages['recovered']['p95_ms'],b_shared_q=bshared['throughput'],b_shared_p95_ms=bshared['p95_ms'],shared_total_q=stages['shared']['throughput']+bshared['throughput'])
+  row['alignment_uncertainty_bound_s']=sum(min(x['uncertainty'] for x in json.loads((folder/'clock-map.json').read_text())) for folder in [run,other])
   origin=ar['utc_start']-ai.get('clock_offset',0)
   for role,folder,cap in [('a',run,pair['cap_a']),('b',other,pair['cap_b'])]:
    runtime=json.loads((folder/'runtime-libraries.json').read_text());pid=next(x['pid'] for x in runtime if 'flyt-shm-worker' in x['command'])
@@ -108,6 +109,18 @@ def main(root):
   if rs:
    keys=['retention','solo_q','shared_q','recovered_q','recovered_p95_ms','solo_p95_ms','shared_p95_ms','b_shared_q','b_shared_p95_ms','shared_total_q']
    summary['shared'][f'{ca}/{cb}/{slot}']={'n':len(rs),**{k:statistics.mean(r[k] for r in rs) for k in keys},'sd':{k:statistics.stdev(r[k] for r in rs) if len(rs)>1 else 0 for k in keys}}
+   group=summary['shared'][f'{ca}/{cb}/{slot}']
+   group['max_alignment_uncertainty_bound_s']=max(r['alignment_uncertainty_bound_s'] for r in rs)
+   recovered=[r['recovery_s'] for r in rs if r['recovery_s'] is not None]
+   group['recovery']={'confirmed':len(recovered),'unconfirmed':len(rs)-len(recovered),
+     'mean_s':statistics.mean(recovered) if recovered else None,
+     'sd_s':statistics.stdev(recovered) if len(recovered)>1 else None,
+     'max_s':max(recovered) if recovered else None}
+   for role in ['a','b']:
+    values=[r['shared_util_'+role] for r in rs if r['shared_util_'+role] is not None]
+    group['utilization_'+role]={'n':len(values),'mean':statistics.mean(values) if values else None,
+      'sd':statistics.stdev(values) if len(values)>1 else None}
+    group['enforcement_'+role]={k:sum(r['shared_cap_'+role]==k for r in rs) for k in ['PASS','FAIL','NOT_EVALUATED']}
  (dest/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary,indent=2))
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('root');a=p.parse_args();main(a.root)
