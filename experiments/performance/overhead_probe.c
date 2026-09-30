@@ -1,5 +1,6 @@
 /* Common sequential CUDA workload. Build N, T (FLYT_TCP), S (FLYT_GUEST).
- * Timing: CLOCK_MONOTONIC; no printing/allocation/I/O within measured window.
+ * Timing: CLOCK_MONOTONIC; sample arrays preallocated, CSV written afterwards.
+ * A real progress counter is printed once per second inside the timed loop.
  * argv: mode bytes seconds warmup_seconds sample_prefix module_file
  * module: identical source PTX; T uses offline ptxas cubin for legacy ELF parser.
  */

@@ -30,6 +30,7 @@ for cap,r in s['single'].items():
 lines += ['', '상한 판정은 중앙 구간 평균 이용률 ≤ 설정값 + 10 percentage points, 유효 계측 ≥95%, 정상 작업 완료를 기준으로 합니다. 이 허용오차는 연구용 사전 기준이며 HAMi의 공식 보장값이 아닙니다. 100은 연산 제한 없는 기준(BASELINE)이고, 상한은 처리량 비율이나 코어 독점 할당을 뜻하지 않습니다.', '',
  '![단일 VM 결과](figures/single-caps.png)','',
  '## N / Flyt TCP·RPC / VMWeave SHM 비교','',
+ '클라이언트 측 완료 시간을 측정합니다. query는 cudaMemGetInfo, kernel은 launch+sync, H2D/D2H는 각 copy+sync입니다. 표의 크기는 작업 버퍼 크기이며 query 요청의 네트워크 전송량을 뜻하지 않습니다. resident는 GPU 상주 데이터로 kernel+sync를 반복하고, transfer는 매 작업에 H2D와 D2H를 포함합니다. 두 처리량 시험의 커널 내부 반복은 64회이고, 상한·공유 시험은 1,048,576회이므로 두 절의 작업/초를 직접 비교하지 않습니다.','',
  '| 지표 | 크기 (bytes) | N (µs, 평균 ± SD) | T (µs, 평균 ± SD) | S (µs, 평균 ± SD) | S/T 평균 지연 비 |','|---|---:|---:|---:|---:|---:|']
 for key,paths in s['overhead'].items():
  mode,size=key.rsplit('-',1)
@@ -50,7 +51,7 @@ lines += ['', 'A는 계속 부하를 실행하는 VM입니다. 역할 교환 실
  '경쟁만으로 이용률이 낮아질 수 있으므로, 공유 상태에서 상한 이하라는 사실만으로 제한 정책 성공을 주장하지 않습니다. 장치 전체 DCGM 값과 VM별 프로세스 이용률을 구분합니다.', '',
  '![50/50 부하 변화](figures/shared-50-50.png)','', '![25/75 부하 변화](figures/shared-25-75.png)','',
  '## 모니터링·실행 증거','',
- 'Prometheus 3.5.0, Grafana 12.0.2, DCGM Exporter, HAMi 모니터링, node-exporter를 사용했습니다. GPU·애플리케이션 지표는 1초 수집을 목표로 구성했고, Pod CPU는 중복되지 않는 상위 cgroup 카운터로 수집했습니다. 공유 구간의 VM별 이용률은 Worker Pod와 GPU UUID에 대응시킨 HAMi 지표를 사용하고, 실제 nvidia-smi pmon 원문을 PID와 측정 시간으로 대응시켜 교차 확인합니다. pmon은 요청한 1초보다 실제 간격이 길 수 있으므로 HAMi의 1초 표본 기준과 혼용하지 않습니다. 센서의 내부 갱신 주기와 표본의 독립성은 별개입니다.', '',
+ 'Prometheus 3.5.0, Grafana 12.0.2, DCGM Exporter, HAMi 모니터링, node-exporter를 사용했습니다. GPU·애플리케이션 지표는 1초 수집을 목표로 구성했고, Pod CPU는 중복되지 않는 상위 cgroup 카운터로 수집했습니다. 공유 구간의 VM별 이용률은 Worker Pod와 GPU UUID에 대응시킨 HAMi 지표를 사용하고, 실제 nvidia-smi pmon 원문을 PID와 측정 시간으로 대응시켜 교차 확인합니다. pmon은 요청한 1초보다 실제 간격이 길 수 있으므로 HAMi의 1초 표본 기준과 혼용하지 않습니다. 센서의 내부 갱신 주기와 표본의 독립성은 별개입니다. 원시 표본은 메모리에 모아 측정 후 저장하며, 실제 진행 카운터는 측정 중 1초마다 출력합니다. 따라서 처리량에는 이 계측 비용이 포함됩니다. 짧은 전송 시험의 p99는 표본 수와 함께 참고해야 하며, 전체 지연 표본을 독립 실험 반복으로 세지 않습니다.', '',
  '- [실행별 원본·설정·회수 증거](runs/)와 [실행별 통계](analysis/).',
  '- [실제 Grafana 캡처](captures/): 사전 지정한 첫 반복을 절대 UTC 범위로 조회한 측정 후 화면입니다.',
  '- [검증 결과](validation.json): 원시 표본 건수·출력 검산·시각 연속성·Released 확인.',

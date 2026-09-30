@@ -1,8 +1,18 @@
 """Independent bundle checks; completion is distinct from enforcement success."""
 import json,sys
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from analyze import samples
 root=Path(sys.argv[1]);details=[];errors=[]
+presence={}
+for line in (root/'monitoring/pmon.txt').read_text().splitlines():
+ cols=line.split()
+ if len(cols)<5 or not cols[3].isdigit():continue
+ try:
+  utc=datetime.strptime(cols[0]+' '+cols[1],'%Y%m%d %H:%M:%S').replace(tzinfo=ZoneInfo('Asia/Seoul')).timestamp()
+  presence.setdefault(int(cols[3]),[]).append(utc)
+ except ValueError:continue
 for run in sorted((root/'runs').iterdir()):
  if not run.name.startswith('perf-') or not (run/'cleanup.json').exists():continue
  try:
@@ -17,6 +27,15 @@ for run in sorted((root/'runs').iterdir()):
   assert len(begins)==len(ends)==len(execution['results'])
   max_clock_error=max(abs((b['utc']-a['utc'])-b['elapsed']) for a,b in zip(begins,ends))
   assert max_clock_error<.05,('wall-clock discontinuity',max_clock_error)
+  runtime=json.loads((run/'runtime-libraries.json').read_text());allowed={r['pid'] for r in runtime}
+  if run.name.startswith('perf-d-'):
+   other=run.parent/(run.name[:-1]+('b' if run.name.endswith('-a') else 'a'))
+   allowed.update(r['pid'] for r in json.loads((other/'runtime-libraries.json').read_text()))
+  offset=identity.get('clock_offset',0)
+  # pmon timestamps have one-second precision; exclude only the boundary seconds.
+  observed={pid for pid,times in presence.items() if any(a['utc']-offset+1<t<b['utc']-offset-1 for a,b in zip(begins,ends) for t in times)}
+  assert observed, 'No process-presence evidence in measurement windows'
+  assert not observed-allowed,('unrelated GPU processes observed',sorted(observed-allowed))
   checked=0
   for r in execution['results']:
    assert r['status']=='PASS' and r['mismatches']==0 and r['checked_elements']>0
@@ -31,7 +50,7 @@ for run in sorted((root/'runs').iterdir()):
   if identity['path'] in ['N','S']:
    runtime=json.loads((run/'runtime-libraries.json').read_text())
    assert runtime and all(r['environment']['GPU_CORE_UTILIZATION_POLICY']=='FORCE' and r['environment']['CUDA_DEVICE_SM_LIMIT']==str(identity['cap']) for r in runtime)
-  details.append({'run':run.name,'windows':len(begins),'verified_output_elements':checked,'max_clock_error_seconds':max_clock_error,'status':'PASS'})
+  details.append({'run':run.name,'windows':len(begins),'verified_output_elements':checked,'max_clock_error_seconds':max_clock_error,'observed_gpu_pids':sorted(observed),'status':'PASS'})
  except Exception as e:errors.append({'run':run.name,'error':str(e)})
 pair_checks=[]
 for file in sorted((root/'pairs').glob('*.json')) if (root/'pairs').exists() else []:
