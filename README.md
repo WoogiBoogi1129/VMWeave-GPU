@@ -14,7 +14,7 @@ Flyt/Cricket 기반 실험에서 출발했으며, 현재 기본 실행 경로는
 KubeVirt VM                       GPU 노드의 Worker
 CUDA interception → SHM rings → CUDA dispatcher → HAMi / CUDA → GPU
                          ↑
-          Kubernetes CRD · Channel Controller
+          vmweave-system: Go Operator · Webhook
 ```
 
 ## 현재 상태
@@ -38,6 +38,8 @@ python3 -m venv .local/docs-venv
 .local/docs-venv/bin/mkdocs serve
 ```
 
+- 중앙 설치: [관리자 설치](docs/getting-started/install.md) → [namespace 등록](docs/getting-started/namespaces.md) → [첫 VM](docs/getting-started/first-vm.md)
+- 기존 배포: [새 API 이전](docs/guides/migrate-to-vmweave-api.md)
 - CPU 환경: [제어기 설치와 검증](docs/getting-started/cpu-control-plane.md)
 - GPU 환경: [요구 조건과 준비 순서](docs/getting-started/gpu.md)
 - 소스 검증: [빌드·테스트](docs/development/index.md)
@@ -47,7 +49,8 @@ python3 -m venv .local/docs-venv
 
 | 경로 | 역할 |
 |---|---|
-| `runtime/shm/` | Guest, Worker, 제어기, SHM 계약·큐·CUDA 디스패처 |
+| `operator/` | 중앙 Go Controller·Webhook, `vmweave.io` API |
+| `runtime/shm/` | Guest, Worker, Python 호환 helper, SHM 계약·큐·CUDA 디스패처 |
 | `charts/`, `deploy/`, `images/` | Helm, CRD·예제, 이미지 빌드 |
 | `scripts/`, `tests/` | 빌드·설치·검증 도구 |
 | `experiments/` | 실험 실행·수집·분석 및 원본 증거 |

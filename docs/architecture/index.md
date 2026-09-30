@@ -1,35 +1,32 @@
-# 아키텍처
+# 전체 구조
 
-![데이터와 제어 흐름](../assets/architecture.svg)
+중앙 제어 영역은 `vmweave-system`의 Go Controller와 TLS Webhook입니다.
+Operator SDK/controller-runtime 기반으로 namespaced cache, watch, 객체별 queue,
+Lease leader election, health/ready endpoint와 metrics를 사용합니다.
 
-## 데이터 경로
+```text
+vmweave-system
+  vmweave-controller ─── RoleBinding + namespace allowlist ──┐
+  vmweave-webhook    ─── Service + ValidatingWebhook ────────┤
+                                                           │
+team-a / team-b                                             │
+  GPUProfile → GPURequest → SharedMemoryChannel ←───────────┘
+  KubeVirt VM → virt-launcher ↔ local PVC ↔ GPU Worker
+  ChannelAttachment (guest / worker), prepare / reclaim Pod
+```
 
-1. Guest 중계 라이브러리가 지원하는 CUDA Runtime/Driver 호출을 가로챕니다.
-2. 요청은 세션의 request ring과 payload 영역에 기록됩니다.
-3. Worker는 요청을 수신하고 CUDA dispatcher를 통해 HAMi/CUDA 경로에서 실행합니다.
-4. 결과는 response ring으로 돌아옵니다. 커널 launch 응답과 GPU 완료는 구분합니다.
+4종 CRD는 `vmweave.io/v1alpha1`, Namespaced scope입니다. 참조는 같은 namespace의
+이름과 UID로 검증합니다. Controller/Webhook의 ServiceAccount는 system namespace에 있고,
+Worker는 자기 namespace의 전용 ServiceAccount로 자기 Channel/Attachment만 접근합니다.
+Node/PV/Namespace의 단건 조회만 별도 ClusterRoleBinding으로 허용합니다.
 
-SHM backing은 GPU 노드의 로컬 파일시스템 PVC와 연결되고 VM에는 ivshmem 장치로 매핑됩니다.
-Guest와 Worker는 같은 layout·ABI 및 일치하는 실행 세대를 사용해야 합니다.
-이는 GPU 메모리의 일반적인 zero-copy나 PCI 장치 직접 패스스루를 뜻하지 않습니다.
+관리 대상은 명시적인 allowlist입니다. Webhook namespaceSelector는 Kubernetes가 관리하는
+`kubernetes.io/metadata.name`을 사용합니다. 같은 namespace의 일반 VM은 Channel 검사를
+통과하도록 설계하며, SHM VM의 live migration은 거부합니다.
 
-## 제어 경로
+Go 제어기는 CUDA 호출을 실행하지 않습니다. C/CUDA Guest·Worker 경로와 Python helper의
+signal·파일·domain XML 계약을 유지합니다. 공개 API 이름을 바꾸어도 기존 공유 메모리 ABI와
+파일 경로까지 동시에 바꾸지 않습니다.
 
-Kubernetes API와 admission이 요청 참조·정책을 검사합니다. Channel Controller는
-채널 상태를 조정하고 Worker 및 backing의 수명 주기를 관리합니다.
-KubeVirt hook의 관리 통신은 유지됩니다. 제거된 것은 기존 CUDA RPC 데이터 경로입니다.
-
-| 구성 요소 | 책임 | 코드 |
-|---|---|---|
-| Guest library | CUDA interception·요청 직렬화·응답 처리 | [guest.c](../../runtime/shm/src/guest.c) |
-| Queue와 계약 | ring·payload·ABI | [큐](../../runtime/shm/shm-queue/), [계약](../../runtime/shm/shm-contract/) |
-| Worker·dispatcher | 요청 수신·CUDA 실행·응답 | [Worker](../../runtime/shm/src/worker.c), [dispatcher](../../runtime/shm/cuda-dispatch/) |
-| 제어기·admission | 참조 검사·상태·할당·회수 조정 | [control](../../runtime/shm/control/) |
-| HAMi | Worker에 적용되는 GPU 자원 정책 | [배포 예제](../../deploy/examples/values-gpu-poc.yaml) |
-
-## Review와 active
-
-`review` 모드는 참조와 상태를 검사하며 SHM 할당·VM 시작·GPU Worker 실행을 하지 않습니다.
-`active`는 별도의 실험용 설정과 확대된 권한을 사용합니다. CPU review 성공은 GPU 실행 성공의
-대체 근거가 아닙니다. [CPU 설치](../getting-started/cpu-control-plane.md)와
-[GPU 준비](../getting-started/gpu.md)를 구분합니다.
+[수명 주기](lifecycle.md) · [권한·설정](../reference/configuration.md) ·
+[전환 검증과 한계](../development/operator-validation.md).

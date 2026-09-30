@@ -1,7 +1,7 @@
 name: CPU control plane
 on:
   push:
-    branches: [main, 'feat/k8s-native-control-plane']
+    branches: [main, 'feat/vmweave-go-operator']
   pull_request:
 permissions:
   contents: read
@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: operator/go.mod
+          cache-dependency-path: operator/go.sum
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -26,3 +30,6 @@ jobs:
           cmake --build .local/dispatch-build
       - run: helm lint charts/flyt-control-plane --set image.digest=sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --set tls.caBundle=dGVzdA==
       - run: docker build -f images/flyt/ControlPlane.Containerfile -t flyt-control-plane:test .
+      - run: make -C operator check
+      - run: helm lint charts/vmweave-operator --set image.digest=sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --set tls.caBundle=dGVzdA== --set 'management.namespaces={team-a,team-b}'
+      - run: docker build -f images/vmweave/Operator.Containerfile -t vmweave-operator:test .

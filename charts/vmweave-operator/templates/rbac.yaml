@@ -1,0 +1,89 @@
+{{- range $component := list "controller" "webhook" }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $.Release.Name }}-{{ $component }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ $.Release.Namespace }}-{{ $.Release.Name }}-{{ $component }}
+rules:
+- apiGroups: [vmweave.io]
+  resources: [sharedmemorychannels, channelattachments, gpuprofiles, gpurequests]
+  verbs: [get, list, watch]
+- apiGroups: [kubevirt.io]
+  resources: [virtualmachines, virtualmachineinstances]
+  verbs: [get, list, watch]
+- apiGroups: ['']
+  resources: [pods, persistentvolumeclaims]
+  verbs: [get, list, watch]
+{{- if eq $component "controller" }}
+- apiGroups: [vmweave.io]
+  resources: [sharedmemorychannels/status]
+  verbs: [get, patch, update]
+- apiGroups: ['']
+  resources: [events]
+  verbs: [create, patch]
+{{- if eq $.Values.mode "active" }}
+- apiGroups: [vmweave.io]
+  resources: [sharedmemorychannels, sharedmemorychannels/finalizers, channelattachments, channelattachments/status]
+  verbs: [get, list, watch, create, update, patch, delete]
+- apiGroups: [kubevirt.io]
+  resources: [virtualmachines]
+  verbs: [update, patch]
+- apiGroups: ['']
+  resources: [pods, serviceaccounts]
+  verbs: [get, list, watch, create, update, patch, delete]
+- apiGroups: [rbac.authorization.k8s.io]
+  resources: [roles, rolebindings]
+  verbs: [get, create]
+{{- end }}
+{{- end }}
+{{- range $ns := $.Values.management.namespaces }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $.Release.Namespace }}-{{ $.Release.Name }}-{{ $component }}
+  namespace: {{ $ns }}
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: {{ $.Release.Namespace }}-{{ $.Release.Name }}-{{ $component }}}
+subjects: [{kind: ServiceAccount, name: {{ $.Release.Name }}-{{ $component }}, namespace: {{ $.Release.Namespace }}}]
+{{- end }}
+{{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Release.Namespace }}-{{ .Release.Name }}-infra-reader
+rules:
+- apiGroups: ['']
+  resources: [nodes, persistentvolumes, namespaces]
+  verbs: [get]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Release.Namespace }}-{{ .Release.Name }}-infra-reader
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: {{ .Release.Namespace }}-{{ .Release.Name }}-infra-reader}
+subjects: [{kind: ServiceAccount, name: {{ .Release.Name }}-controller, namespace: {{ .Release.Namespace }}}]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ .Release.Name }}-leader
+rules:
+- apiGroups: ['']
+  resources: [events]
+  verbs: [create, patch]
+- apiGroups: [coordination.k8s.io]
+  resources: [leases]
+  verbs: [get, list, watch, create, update, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ .Release.Name }}-leader
+roleRef: {apiGroup: rbac.authorization.k8s.io, kind: Role, name: {{ .Release.Name }}-leader}
+subjects: [{kind: ServiceAccount, name: {{ .Release.Name }}-controller, namespace: {{ .Release.Namespace }}}]

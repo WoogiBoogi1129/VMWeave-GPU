@@ -9,7 +9,7 @@
 - [실험 증거 정책](docs/evaluation/artifacts.md)
 
 변경 설명에는 문제, 변경 후 동작, 실행한 검증과 미실행 범위를 포함하세요.
-문서 변경은 `make docs-check`, 제어기 변경은 `make test-control`을 실행합니다.
+문서 변경은 `make docs-check`, 제어기 변경은 `make operator-check`와 `make test-control`을 실행합니다.
 CUDA 관련 변경은 개발 문서의 빌드·회귀 검사를 추가합니다.
 
 과거 결과를 새로운 코드로 생성한 결과처럼 수정하지 않습니다. 재실험은 새 식별자와

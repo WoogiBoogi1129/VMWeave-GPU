@@ -5,7 +5,8 @@
 
 | 항목 | 확인된 범위 | 근거 |
 |---|---|---|
-| CPU review 제어기 | 실제 CPU 클러스터 검증 기록 | [검증 보고서](../../legacy/docs/CONTROL_PLANE_VALIDATION.md) |
+| 중앙 Go Operator | 새 API·두 namespace 검증 | [현재 검증 범위](../development/operator-validation.md) |
+| 구 Python review 제어기 | 과거 CPU 클러스터 검증 기록 | [과거 검증 보고서](../../legacy/docs/CONTROL_PLANE_VALIDATION.md) |
 | VM SHM GPU 실행 | 실제 VM에서 복사·PTX 실행·정상 회수 | [구현 검증](../../experiments/evidence/IMPLEMENTATION_AND_VALIDATION_2026-09-22.md) |
 | PyTorch 학습 | 고정 빌드의 FP32 eager MLP·SGD | [학습 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md) |
 | 요청·실행 연결 | 요청·배치·실행·회수 증거 | [실험 1](../evaluation/index.md) |

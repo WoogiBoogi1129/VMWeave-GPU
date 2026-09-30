@@ -1,0 +1,400 @@
+{
+  "date": "2026-09-30",
+  "node": "gpu-4",
+  "operatorImage": "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+  "systemNamespace": "vmweave-system",
+  "mode": "active",
+  "apiGroup": "vmweave.io",
+  "goContractTests": 13,
+  "pythonHelperTests": 52,
+  "runs": {
+    "final-a": {
+      "namespace": "vmweave-test-a",
+      "channel": "same-channel-3",
+      "uid": "019edb7b-38b3-4e13-9f10-bd867e39e845",
+      "resourcePrefix": "same-channel-3-019edb7b38b3",
+      "metrics": {
+        "status": "PASS",
+        "formal_training_result": false,
+        "scope": "VM SHM gpu smoke and lifecycle",
+        "probe": "gpu",
+        "scenario": null,
+        "bytes": null,
+        "probe_results": [
+          {
+            "status": "PASS",
+            "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+            "seed": 23,
+            "kernel_repeats": 2379,
+            "copy_bytes": 4096,
+            "active_seconds": 10.00383
+          }
+        ],
+        "probe_pass": true,
+        "released": true,
+        "elapsed_seconds": 60.55894222401548
+      },
+      "readyObserved": true,
+      "finalStatus": {
+        "allocation": "11caeae0fe5f5c89afdc01f579fb205f",
+        "compute": 25,
+        "everBound": true,
+        "generation": "e58a27028a9f281576ee158d6a9894f5",
+        "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "memoryMiB": 1024,
+        "nodeName": "gpu-4",
+        "phase": "Released",
+        "profileGeneration": 1,
+        "reason": "DetachAndReclamationConfirmed",
+        "requestGeneration": 1,
+        "resourcePrefix": "same-channel-3-019edb7b38b3",
+        "sessions": [
+          "e544d5a35e71ecf7d3840cdaa8cfac78"
+        ],
+        "vmiUID": "97dd325e-7eab-4929-b304-bb66159ea34f",
+        "workerPodUID": "8657a6da-147a-41a8-83e7-de79249044b2"
+      },
+      "attachmentEvidence": [
+        {
+          "name": "same-channel-3-guest",
+          "spec": {
+            "channelRef": {
+              "name": "same-channel-3",
+              "uid": "019edb7b-38b3-4e13-9f10-bd867e39e845"
+            },
+            "generation": "e58a27028a9f281576ee158d6a9894f5",
+            "holderUID": "97dd325e-7eab-4929-b304-bb66159ea34f",
+            "nodeName": "gpu-4",
+            "role": "guest"
+          },
+          "status": {
+            "evidence": "KubeletTerminalLauncher",
+            "launcherPodUID": "87f337f1-9278-44af-b702-671474894dcb",
+            "observedGeneration": 1,
+            "phase": "Detached",
+            "reporterPodUID": "8657a6da-147a-41a8-83e7-de79249044b2"
+          }
+        },
+        {
+          "name": "same-channel-3-worker",
+          "spec": {
+            "channelRef": {
+              "name": "same-channel-3",
+              "uid": "019edb7b-38b3-4e13-9f10-bd867e39e845"
+            },
+            "generation": "e58a27028a9f281576ee158d6a9894f5",
+            "holderUID": "8657a6da-147a-41a8-83e7-de79249044b2",
+            "nodeName": "gpu-4",
+            "role": "worker"
+          },
+          "status": {
+            "evidence": "ChildProcessesReaped",
+            "observedGeneration": 1,
+            "phase": "Detached",
+            "reporterPodUID": "8657a6da-147a-41a8-83e7-de79249044b2"
+          }
+        }
+      ],
+      "privateEvidenceHashes": {
+        "metrics.json": "da70fabe533fe8aaae7b41a36b7964c04e8dc65b66dbea1a0f83c21b97360288",
+        "channel-ready.json": "d1be73509fd1d5b745f7ff323a93dd3eba6c22c4022a8c0b688dce341db599e6",
+        "channel-released.json": "e0aac483bb35e5f41aca904d48e8d2e40add728bb051974c16a86212fa2f54c2",
+        "attachments-final.json": "72b1f773106d18c887516293a9e057b8c7b7d216012ae4ea6ef1162de835997d",
+        "timeline.json": "9bcb44c04b6a045f4c2e592092f1c1759b5524f9677d664ed46b681e372a7a7c"
+      }
+    },
+    "final-b": {
+      "namespace": "vmweave-test-b",
+      "channel": "same-channel-3",
+      "uid": "74663412-307b-44c3-bda7-f5505f3cfd68",
+      "resourcePrefix": "same-channel-3-74663412307b",
+      "metrics": {
+        "status": "PASS",
+        "formal_training_result": false,
+        "scope": "VM SHM gpu smoke and lifecycle",
+        "probe": "gpu",
+        "scenario": null,
+        "bytes": null,
+        "probe_results": [
+          {
+            "status": "PASS",
+            "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+            "seed": 23,
+            "kernel_repeats": 2455,
+            "copy_bytes": 4096,
+            "active_seconds": 10.001441
+          }
+        ],
+        "probe_pass": true,
+        "released": true,
+        "elapsed_seconds": 62.867746222997084
+      },
+      "readyObserved": true,
+      "finalStatus": {
+        "allocation": "6992c9d1f4da64a92cba86f7b7e5b20f",
+        "compute": 25,
+        "everBound": true,
+        "generation": "ef4bf0b18555def043257fe454f87067",
+        "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "memoryMiB": 1024,
+        "nodeName": "gpu-4",
+        "phase": "Released",
+        "profileGeneration": 1,
+        "reason": "DetachAndReclamationConfirmed",
+        "requestGeneration": 1,
+        "resourcePrefix": "same-channel-3-74663412307b",
+        "sessions": [
+          "c2a8aded7d16f486f7b0628b7d469aac"
+        ],
+        "vmiUID": "b43c7dcf-e61f-498f-bb34-5218ffbeacd7",
+        "workerPodUID": "c1fc34a2-ad0b-441f-a276-1dcf16cd9443"
+      },
+      "attachmentEvidence": [
+        {
+          "name": "same-channel-3-guest",
+          "spec": {
+            "channelRef": {
+              "name": "same-channel-3",
+              "uid": "74663412-307b-44c3-bda7-f5505f3cfd68"
+            },
+            "generation": "ef4bf0b18555def043257fe454f87067",
+            "holderUID": "b43c7dcf-e61f-498f-bb34-5218ffbeacd7",
+            "nodeName": "gpu-4",
+            "role": "guest"
+          },
+          "status": {
+            "evidence": "KubeletTerminalLauncher",
+            "launcherPodUID": "b4b116ae-ad50-4d73-9882-0f3fdd3336ed",
+            "observedGeneration": 1,
+            "phase": "Detached",
+            "reporterPodUID": "c1fc34a2-ad0b-441f-a276-1dcf16cd9443"
+          }
+        },
+        {
+          "name": "same-channel-3-worker",
+          "spec": {
+            "channelRef": {
+              "name": "same-channel-3",
+              "uid": "74663412-307b-44c3-bda7-f5505f3cfd68"
+            },
+            "generation": "ef4bf0b18555def043257fe454f87067",
+            "holderUID": "c1fc34a2-ad0b-441f-a276-1dcf16cd9443",
+            "nodeName": "gpu-4",
+            "role": "worker"
+          },
+          "status": {
+            "evidence": "ChildProcessesReaped",
+            "observedGeneration": 1,
+            "phase": "Detached",
+            "reporterPodUID": "c1fc34a2-ad0b-441f-a276-1dcf16cd9443"
+          }
+        }
+      ],
+      "privateEvidenceHashes": {
+        "metrics.json": "8c49b887b7c8d29c3a2d71121f25a5ebb2ea66f3c22e7032722bdc05033cf14a",
+        "channel-ready.json": "ec5913681a46d29c2761cab986e26258de3f14747d420490f1e62856ed1a56ba",
+        "channel-released.json": "b707773ce324f3d3edc1151391fa611bde838ad1d153b46bbfbb6da65a24e9ee",
+        "attachments-final.json": "ce4509195ea51d45f54b08b7cb55ed746180beb815f089831b3881b7fe76248d",
+        "timeline.json": "e71e3fd1f9d11b9565a9e0ef9d85076fc406ffde99462e6936abe183c6793fd4"
+      }
+    },
+    "migrated-smoke": {
+      "namespace": "flyt-evidence",
+      "channel": "evidence-perf-3-s-channel",
+      "uid": "588977d0-2d24-4793-a01b-80a32b131881",
+      "resourcePrefix": "evidence-perf-3-s-channel-588977d02d24",
+      "metrics": {
+        "status": "PASS",
+        "formal_training_result": false,
+        "scope": "VM SHM gpu smoke and lifecycle",
+        "probe": "gpu",
+        "scenario": null,
+        "bytes": null,
+        "probe_results": [
+          {
+            "status": "PASS",
+            "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+            "seed": 23,
+            "kernel_repeats": 2363,
+            "copy_bytes": 4096,
+            "active_seconds": 10.001213
+          }
+        ],
+        "probe_pass": true,
+        "released": true,
+        "elapsed_seconds": 64.91729070001747
+      },
+      "readyObserved": true,
+      "finalStatus": {
+        "allocation": "fc9c31d366d15ea9992f0fabc8c13ab0",
+        "compute": 100,
+        "everBound": true,
+        "generation": "316158644aab941b507b36205f27d81f",
+        "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "memoryMiB": 4096,
+        "nodeName": "gpu-4",
+        "phase": "Released",
+        "profileGeneration": 1,
+        "reason": "DetachAndReclamationConfirmed",
+        "requestGeneration": 1,
+        "resourcePrefix": "evidence-perf-3-s-channel-588977d02d24",
+        "sessions": [
+          "a4270c1703c1b68d957df3b540cbf5d6"
+        ],
+        "vmiUID": "15ed2cc9-6064-4bb8-937d-7e21f3e9fae6",
+        "workerPodUID": "c7edb37a-3d20-4d3d-b64b-568848a80e3c"
+      },
+      "attachmentEvidence": [
+        {
+          "name": "evidence-perf-3-s-channel-guest",
+          "spec": {
+            "channelRef": {
+              "name": "evidence-perf-3-s-channel",
+              "uid": "588977d0-2d24-4793-a01b-80a32b131881"
+            },
+            "generation": "316158644aab941b507b36205f27d81f",
+            "holderUID": "15ed2cc9-6064-4bb8-937d-7e21f3e9fae6",
+            "nodeName": "gpu-4",
+            "role": "guest"
+          },
+          "status": {
+            "evidence": "KubeletTerminalLauncher",
+            "launcherPodUID": "1d6b67e7-9aca-4ad8-9626-c10099233a11",
+            "observedGeneration": 1,
+            "phase": "Detached",
+            "reporterPodUID": "c7edb37a-3d20-4d3d-b64b-568848a80e3c"
+          }
+        },
+        {
+          "name": "evidence-perf-3-s-channel-worker",
+          "spec": {
+            "channelRef": {
+              "name": "evidence-perf-3-s-channel",
+              "uid": "588977d0-2d24-4793-a01b-80a32b131881"
+            },
+            "generation": "316158644aab941b507b36205f27d81f",
+            "holderUID": "c7edb37a-3d20-4d3d-b64b-568848a80e3c",
+            "nodeName": "gpu-4",
+            "role": "worker"
+          },
+          "status": {
+            "evidence": "ChildProcessesReaped",
+            "observedGeneration": 1,
+            "phase": "Detached",
+            "reporterPodUID": "c7edb37a-3d20-4d3d-b64b-568848a80e3c"
+          }
+        }
+      ],
+      "privateEvidenceHashes": {
+        "metrics.json": "9c4c45fb56d6e6b64f23248393bdc4f98a423b7079ba117ea2ba3cdb0cdecd66",
+        "channel-ready.json": "9518f46dacdb0218c35450d627368d2e49ff48728ac0f686d97c31d5712fa779",
+        "channel-released.json": "23bbb0f4c20616cac07883d067c545f3b5d51711be86152df1a59b21a4f19417",
+        "attachments-final.json": "06138d218a2cbfbbff99a0b3eacedf2bafdf7a3b21baf96a5dcff3debcb22367",
+        "timeline.json": "90f37944b753a52ef926f055b9e37908e06074b62cecc6892258b473220600c8"
+      }
+    }
+  },
+  "backup": {
+    "branch": "backup/pre-vmweave-operator-20260930",
+    "commit": "e045d31",
+    "resticSnapshots": [
+      "309c7ee1",
+      "0078f8c3"
+    ],
+    "fullPackCheck": "PASS (866 packs)"
+  },
+  "legacyException": {
+    "namespace": "flyt-gpu-validation",
+    "channel": "shm-channel-a",
+    "phase": "Draining",
+    "reason": "AwaitingDetachEvidence",
+    "legacyControllerRetained": true
+  },
+  "failedInitialRuns": {
+    "active-a-resume": "VM startup image pull delay; GPU test not executed; terminal observation/reclaim Released",
+    "active-b-resume": "VM startup image pull delay; GPU test not executed; terminal observation/reclaim Released"
+  },
+  "admission-rbac.json": [
+    {
+      "check": "controller pod create vmweave-test-a",
+      "result": "yes"
+    },
+    {
+      "check": "controller pod create vmweave-test-b",
+      "result": "yes"
+    },
+    {
+      "check": "controller pod create flyt-gpu-validation",
+      "result": "no"
+    },
+    {
+      "check": "ordinary VMI admitted in managed namespace",
+      "result": "PASS"
+    },
+    {
+      "check": "invalid managed VMI rejected",
+      "result": "PASS"
+    }
+  ],
+  "worker-admission.json": {
+    "validWorkerMapping": "PASS",
+    "foreignReporterUIDRejected": "PASS"
+  },
+  "review-smoke-local.json": {
+    "namespaces": [
+      "vmweave-test-a",
+      "vmweave-test-b"
+    ],
+    "name": "review-8a087f88",
+    "checks": [
+      {
+        "namespace": "vmweave-test-a",
+        "uid": "0e4ec92b-e2b2-49d8-928e-1a7811f7fc11",
+        "reviewOnly": true,
+        "noFinalizer": true,
+        "noAllocation": true,
+        "stableStatus": true
+      },
+      {
+        "namespace": "vmweave-test-b",
+        "uid": "1c877ae7-0e21-4253-b1ac-bcc000baf553",
+        "reviewOnly": true,
+        "noFinalizer": true,
+        "noAllocation": true,
+        "stableStatus": true
+      }
+    ],
+    "status": "PASS"
+  },
+  "migration": {
+    "profiles": 101,
+    "requests": 101,
+    "selectedNewChannels": 1,
+    "oldHistoricalChannelsRetained": 100,
+    "rerunCompleted": true,
+    "mappingHash": "db751a8237fb495f672d595c5256b5e3726003cfae7ccfcde92da046ac420e31"
+  },
+  "sourceFileSHA256": {
+    "operator/api/v1alpha1/groupversion_info.go": "49bf4c0a9e2e3348ac3334b22fa824b3632d879f72fbfd84d7562f042c6f6a57",
+    "operator/api/v1alpha1/types.go": "7444a73ea13c2c26011fd6bd8d669a3530e2285743b4934fe9e1c3d13088ade8",
+    "operator/api/v1alpha1/zz_generated.deepcopy.go": "b7b9b1f6d241d8a3290ef040579ac5f13b49a0dbc9ec1ca45fb7c94304b3fe62",
+    "operator/cmd/main.go": "d288c29dc02ab41423825eafc95375958f91e2ed8daff619c963eaea9b1ef7b7",
+    "operator/config/crd/bases/channelattachments.vmweave.io.json": "6122bb44d8e98c73b6290f6a7464306f2c38127953750abb822cfd60fb788b6c",
+    "operator/config/crd/bases/gpuprofiles.vmweave.io.json": "13f0831701427b7d65e89bcc468ccdbad5021f14a92319ecdd92e4484e46c9da",
+    "operator/config/crd/bases/gpurequests.vmweave.io.json": "e6804d75f359e42dea9b305621bab1a940dd4a11c42809ad0ad21d96ca492835",
+    "operator/config/crd/bases/sharedmemorychannels.vmweave.io.json": "59f3852354e0d75f62422cfd54aed6f08dae0633661360401c0ce4f513055787",
+    "operator/go.mod": "5d2512c39cc5407212a1ad7ae5d19d07ffeb21c8c10b5c1ff176d6f5ac9239c2",
+    "operator/go.sum": "6b88ea3de6a589720814bde2347287a77460498cf220f76c3b5ec3ee9a62ddf6",
+    "operator/internal/engine/admission.go": "6b9f5a293f17a43e0db2f0182683f7aa452da4e4873aa16dc8420004ab7abd21",
+    "operator/internal/engine/api.go": "ba26c3c4b8613b23bb3891460d3e6d15dd05ba34c0e04e82144aa0fd47643dad",
+    "operator/internal/engine/controller.go": "750e4b58307d4747731d3bc185aa0cdee2cc320758116726abed8bda4755764d",
+    "operator/internal/engine/engine_test.go": "d4555172b25b74a1eb1801cb88408749c7cbe6badd6cd081d9d2848716e58e21",
+    "operator/internal/engine/lifecycle.go": "191b040dab05473b6aea584c4b9c4c0cf87c118898aace8848ba4d991857a34b",
+    "operator/internal/engine/observe.go": "4dbda77d09fa5249f3b6a3d9e4009cdcee062cf4c6a2e519737e1cad29a2f633",
+    "operator/internal/engine/review.go": "d409d6265acd5edb551b079aa587526158a8c062494f53476c3185577ec8de89",
+    "operator/internal/engine/worker.go": "63a9100e94abb2f4488959a15bb923cf0787098eed85cf0dc77cf06b350e8128",
+    "runtime/shm/control/domain_hook.py": "b9761f84070c50b831d9f6f5b693ef6439d22193f329cacd0fd5712c0b7a8028",
+    "runtime/shm/control/kube.py": "3a07f09478d49efdf320075e08690c5f65572f24d78034c59639cdfb16e588e7"
+  },
+  "imageBuildContext": "development working tree; source file hashes recorded; later committed without controller/runtime changes"
+}

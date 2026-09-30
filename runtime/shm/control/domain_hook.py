@@ -36,14 +36,18 @@ def pci_location(root):
     raise ValueError('no free PCI root slot for SHM')
 def mutate(vmi, domain):
     annotations=vmi['metadata'].get('annotations',{})
-    aid=annotations.get('flyt.dev/shm-allocation','')
+    old=annotations.get('flyt.dev/shm-allocation','')
+    new=annotations.get('vmweave.io/shm-allocation','')
+    if old and new: raise ValueError('mixed API binding is forbidden')
+    group='vmweave.io' if new else 'flyt.dev'
+    aid=annotations.get(group+'/shm-allocation','')
     if not re.fullmatch('[0-9a-f]{32}',aid): raise ValueError('allocation missing')
     root=ET.fromstring(domain)
     if vmi.get('status',{}).get('migrationState') or vmi['spec'].get('evictionStrategy')=='LiveMigrate':
         raise ValueError('active SHM migration unsupported')
     # Hook volumePath and sharedComputePath must refer to the SAME PVC.
     with open('/flyt-channel/'+aid+'/ready.json') as f: ready=json.load(f)
-    if ready['allocationId']!=aid or ready['generation']!=annotations.get('flyt.dev/shm-generation'):
+    if ready['allocationId']!=aid or ready['generation']!=annotations.get(group+'/shm-generation'):
         raise ValueError('backing generation mismatch')
     size=ready['regionBytes']
     if type(size)!=int or not 2**20<=size<=2**32 or size&(size-1): raise ValueError('invalid BAR size')

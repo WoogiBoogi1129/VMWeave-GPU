@@ -13,7 +13,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--channel-json',type=Path,required=True)
     p.add_argument('--bdf',required=True);p.add_argument('--slot',type=int,required=True);p.add_argument('--output',type=Path,required=True)
     a=p.parse_args();c=json.loads(a.channel_json.read_text());s=c.get('status',{})
-    if c.get('kind')!='FlytSharedMemoryChannel' or s.get('phase') not in ('Bound','Ready') or c['metadata'].get('deletionTimestamp') or c['spec'].get('drain'):
+    if (c.get('apiVersion'),c.get('kind')) not in [('flyt.dev/v1alpha1','FlytSharedMemoryChannel'),('vmweave.io/v1alpha1','SharedMemoryChannel')] or s.get('phase') not in ('Bound','Ready') or c['metadata'].get('deletionTimestamp') or c['spec'].get('drain'):
         raise ValueError('bound live channel required')
     if not s.get('vmiUID') or not s.get('workerPodUID') or not 0<=a.slot<len(s['sessions']):raise ValueError('incomplete binding/slot')
     if not re.fullmatch('[0-9a-fA-F]{4}:[0-9a-fA-F]{2}:[0-9a-fA-F]{2}\\.[0-7]',a.bdf):raise ValueError('explicit Guest BDF required')

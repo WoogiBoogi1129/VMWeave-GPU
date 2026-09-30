@@ -2,7 +2,7 @@
 
 ## 구현
 
-- [Go Operator·중앙 관리·새 API 전환 계획](operator-migration-plan.md)에 따른 제어 영역 및 설치 문서 개편(미구현).
+- [Go Operator 전환 검증](operator-validation.md)의 미완료 항목: HA 장애 행렬, Node fencing, Go helper 후속 이전.
 - CUDA Graph·라이브러리 연산·비동기 의미의 지원 범위 확대.
 - Guest 환경 배포와 장치 매핑 자동화 개선.
 - RPC/SHM CRD 공존 migration 및 운영 수명 주기 정리.

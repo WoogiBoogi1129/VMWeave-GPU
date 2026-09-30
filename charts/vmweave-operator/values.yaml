@@ -1,0 +1,24 @@
+mode: review
+activeModeAcknowledged: false
+management:
+  namespaces: []
+image:
+  repository: ghcr.io/woogiboogi1129/vmweave-operator
+  digest: ''
+  pullPolicy: IfNotPresent
+imagePullSecrets: []
+tls:
+  existingSecret: vmweave-webhook-tls
+  caBundle: ''
+webhook:
+  registrationEnabled: true
+controller:
+  replicas: 1
+  leaderElection: true
+resources:
+  requests: {cpu: 100m, memory: 96Mi}
+  limits: {memory: 512Mi}
+nodeSelector: {}
+tolerations: []
+workloads:
+  tolerations: []

@@ -18,3 +18,14 @@ compatibility:
   kernel: explicit-PTX-ABI-and-opt-in-fatbinary-packed-launch
   cuBLAS: float-SGEMM-subset
   cuDNN: handle-and-version-only
+
+operator:
+  sdk: v1.42.3
+  go: '1.25.6'
+  controllerRuntime: v0.23.3
+  kubernetesClient: v0.35.0
+  apiGroup: vmweave.io
+  apiVersion: v1alpha1
+  testedKubernetes: v1.37.0
+  testedKubeVirt: v1.9.0
+  installationChart: charts/vmweave-operator

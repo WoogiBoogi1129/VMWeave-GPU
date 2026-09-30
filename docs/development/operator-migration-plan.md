@@ -1,7 +1,7 @@
 # VMWeave Go Operator·중앙 관리·API 명칭 전환 최종 계획
 
-작성: 2026-09-30. 분석 기준: `c3c07c9`. **상태: 구현 전 계획**.
-이 문서가 이전 중앙 제어기 계획을 대체한다. 코드/차트/클러스터는 아직 변경하지 않았다.
+작성: 2026-09-30. 분석 기준: `c3c07c9`. **상태: 초기 중앙 Go Operator 구현·검증 진행**.
+이 문서가 이전 중앙 제어기 계획을 대체한다. 최종 적용 범위와 검증 결과는 [검증 기록](operator-validation.md)을 따른다.
 
 ## 1. 최종 결정
 
@@ -33,11 +33,9 @@ KubeVirt/HAMi의 설치 위치는 유지한다. 사용자 namespace와 VM/PVC를
 ## 2. 새 API와 명명 규칙
 
 새 Kind는 제품 접두사를 반복하지 않고 아래 명칭으로 정한다. 네 리소스 모두 Namespaced,
-초기 version은 `v1alpha1`이다. **API group 제안은 `vmweave.io`이며 도메인 관리 권한은 미확인이다.**
-최초 배포 전에 프로젝트가 관리하는 DNS 이름을 확인해 group을 확정한다. 아래 이름은
-`vmweave.io`가 확정될 경우의 설계안이며, 확인 없이 도메인 소유를 전제로 릴리스하지 않는다.
+초기 version은 `v1alpha1`이다. **API group은 사용자가 관리 권한을 확인한 `vmweave.io`로 확정했다.**
 
-| 기존 Kind / CRD | 새 Kind | 새 CRD 이름(제안 group 기준) |
+| 기존 Kind / CRD | 새 Kind | 새 CRD 이름 |
 |---|---|---|
 | `FlytGPUProfile` / `flytgpuprofiles.flyt.dev` | `GPUProfile` | `gpuprofiles.vmweave.io` |
 | `FlytGPURequest` / `flytgpurequests.flyt.dev` | `GPURequest` | `gpurequests.vmweave.io` |
@@ -91,7 +89,8 @@ deploy/examples/vmweave/
 
 Go/SDK/controller-runtime/client-go/KubeVirt API 버전을 고정하고 실험 노드 Kubernetes v1.37과
 호환성을 시험한다. SDK 생성 기본값을 그대로 검증 완료로 간주하지 않는다.
-Go 타입·markers를 신CRD의 원본으로 두고 chart 사본은 생성 및 차이 검사로 관리한다.
+초기 구현은 기존 CEL 제약을 손실 없이 보존하기 위해 신CRD JSON schema를 원본으로 유지하고,
+Go 타입·DeepCopy를 생성한다. chart 사본의 일치 여부를 검사한다. Go markers 원본 전환은 후속 작업이다.
 구CRD 사본은 호환용으로 동결하고 신CRD와 동일해야 한다는 기존 검사를 분리한다.
 OLM은 초기 필수 의존성이 아니다. Helm으로 배포하며 사용자에게 Go/SDK 설치를 요구하지 않는다.
 

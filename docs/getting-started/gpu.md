@@ -18,9 +18,9 @@ CUDA 실행 성공과 성능 검증을 각각 확인해야 합니다.
 
 1. [CPU review](cpu-control-plane.md)에서 제어기와 admission을 확인합니다.
 2. [런타임 빌드](../development/index.md) 후 Worker·Guest·hook 산출물의 digest/해시를 기록합니다.
-3. 별도 실험 namespace에 [active 예제](../../deploy/examples/values-gpu-poc.yaml)를 적용할 입력을 준비합니다.
+3. [중앙 설치](install.md)의 active 설정에 사용자 namespace를 등록합니다.
 4. 승인 Profile, 정지 VM, Request, Channel과 로컬 PVC를 준비합니다.
-5. [VM 준비·실행 절차](../../experiments/evidence/REPRODUCE_VM_DEVELOPMENT.md)에 따라 매핑과 GPU smoke를 확인합니다.
+5. [첫 VM 실행](first-vm.md)에 따라 새 API의 매핑과 GPU smoke를 확인합니다. 과거 실험 재현 문서는 구API 기록입니다.
 6. [학습 재현 절차](../../experiments/evidence/REPRODUCE_PYTORCH.md)는 고정 PyTorch 빌드·모델의 별도 검증으로 수행합니다.
 
 설치 당시 보조 파일은 [scripts/installation](../../scripts/installation/)에 보존했습니다.

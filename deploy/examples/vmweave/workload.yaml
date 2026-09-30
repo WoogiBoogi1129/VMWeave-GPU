@@ -1,0 +1,66 @@
+# Edit node/GPU/image references before applying. Administrator provisions this local directory.
+# The PVC and VM are user resources; the approved GPUProfile is administrator controlled.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vmweave-team-a
+spec:
+  capacity: {storage: 1Gi}
+  volumeMode: Filesystem
+  accessModes: [ReadWriteOnce]
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ''
+  claimRef: {namespace: team-a, name: gpu-backing}
+  local: {path: /var/lib/vmweave/team-a}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - {key: kubernetes.io/hostname, operator: In, values: [gpu-node]}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: {namespace: team-a, name: gpu-backing}
+spec:
+  accessModes: [ReadWriteOnce]
+  volumeMode: Filesystem
+  storageClassName: ''
+  volumeName: vmweave-team-a
+  resources: {requests: {storage: 1Gi}}
+---
+apiVersion: vmweave.io/v1alpha1
+kind: GPUProfile
+metadata: {namespace: team-a, name: approved-gpu}
+spec:
+  approved: false # Set true after checking the GPU and digest references.
+  nodeName: gpu-node
+  gpuUUID: GPU-00000000-0000-0000-0000-000000000000
+  cores: 25
+  memoryMiB: 1024
+  maxClients: 1
+  hamiNamespace: kube-system
+  schedulerName: hami-scheduler
+  runtimeClass: nvidia
+  workerImage: registry.example.com/vmweave-worker@sha256:0000000000000000000000000000000000000000000000000000000000000000
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata: {namespace: team-a, name: gpu-vm}
+spec:
+  runStrategy: Halted
+  template:
+    spec:
+      domain:
+        cpu: {cores: 2}
+        resources: {requests: {memory: 4Gi}}
+        devices:
+          disks:
+          - {name: root, disk: {bus: virtio}}
+          interfaces:
+          - {name: default, masquerade: {}}
+      networks:
+      - {name: default, pod: {}}
+      volumes:
+      - name: root
+        containerDisk:
+          image: registry.example.com/vmweave-guest@sha256:0000000000000000000000000000000000000000000000000000000000000000

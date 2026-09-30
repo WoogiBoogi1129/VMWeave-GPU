@@ -3,12 +3,13 @@
 ## CPU 검증
 
 ```sh
+make operator-check
 make test-control
 make check-layout
 python3 -m unittest discover -s experiments/evidence/tests -v
-helm lint charts/flyt-control-plane \
+helm lint charts/vmweave-operator \
   --set image.digest=sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
-  --set tls.caBundle=dGVzdA==
+  --set tls.caBundle=dGVzdA== --set 'management.namespaces={team-a,team-b}'
 ```
 
 Queue와 transport-independent CUDA 실행 코어는 GPU 없이 빌드할 수 있습니다.
@@ -31,10 +32,10 @@ bash scripts/test-shm-training.sh "$PWD/.local/shm-build"
 ```
 
 회귀 스크립트는 CUDA 헤더/라이브러리를 사용하지만 실제 GPU 실행을 대체하지 않습니다.
-Containerfile은 기존 `flyt-*` 대상과 설치 경로를 유지합니다.
+Go Operator는 별도 이미지로 빌드합니다. 런타임 내부 설치 경로는 ABI 호환을 위해 유지합니다.
 
 ```sh
-docker build -f images/flyt/ControlPlane.Containerfile -t vmweave-control-plane:test .
+docker build -f images/vmweave/Operator.Containerfile -t vmweave-operator:test .
 ```
 
 실제 클러스터 재현은 [별도 GPU 절차](../getting-started/gpu.md)를 따릅니다.

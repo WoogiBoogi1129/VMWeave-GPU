@@ -16,6 +16,9 @@ class DependencyNotReady(Exception):
 class API:
     def __init__(self):
         self.namespace=namespace()
+        self.group=os.getenv('VMWEAVE_API_GROUP','flyt.dev')
+        if self.group not in ('flyt.dev','vmweave.io'):
+            raise ValueError('unsupported VMWeave API group')
         self.base=os.getenv('FLYT_API_URL','https://kubernetes.default.svc').rstrip('/')
         self.timeout=positive_float('FLYT_API_TIMEOUT_SECONDS',10)
         self.tls=ssl.create_default_context(cafile='/var/run/secrets/kubernetes.io/serviceaccount/ca.crt')
@@ -27,6 +30,9 @@ class API:
                 'vms':('kubevirt.io/v1','virtualmachines'),
                 'vmis':('kubevirt.io/v1','virtualmachineinstances')}
         if kind in ('roles','rolebindings'):groups[kind]=('rbac.authorization.k8s.io/v1',kind)
+        if self.group=='vmweave.io' and kind in ('channels','attachments','requests','profiles'):
+            old_group,plural=groups[kind]
+            groups[kind]=('vmweave.io/v1alpha1',plural.removeprefix('flyt'))
         if kind in groups:
             group,plural=groups[kind];root='/apis/'+group
         else: root='/api/v1';plural=kind

@@ -1,0 +1,64 @@
+{{- if not .Values.management.namespaces }}{{ fail "management.namespaces must not be empty" }}{{ end }}
+{{- if has .Release.Namespace .Values.management.namespaces }}{{ fail "system namespace cannot be a workload namespace" }}{{ end }}
+{{- if and (eq .Values.mode "active") (not .Values.activeModeAcknowledged) }}{{ fail "activeModeAcknowledged is required" }}{{ end }}
+{{- if and (gt (int .Values.controller.replicas) 1) (not .Values.controller.leaderElection) }}{{ fail "multiple controllers require leader election" }}{{ end }}
+{{- range $component := list "controller" "webhook" }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $.Release.Name }}-{{ $component }}
+  labels: {app.kubernetes.io/part-of: vmweave, app.kubernetes.io/component: {{ $component }}}
+spec:
+  replicas: {{ if eq $component "controller" }}{{ $.Values.controller.replicas }}{{ else }}1{{ end }}
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: {{ $.Release.Name }}-{{ $component }}}
+  template:
+    metadata:
+      labels: {app: {{ $.Release.Name }}-{{ $component }}, app.kubernetes.io/part-of: vmweave}
+    spec:
+      serviceAccountName: {{ $.Release.Name }}-{{ $component }}
+      securityContext: {runAsNonRoot: true, runAsUser: 65532, runAsGroup: 65532, seccompProfile: {type: RuntimeDefault}}
+      imagePullSecrets: {{ $.Values.imagePullSecrets | toJson }}
+      nodeSelector: {{ $.Values.nodeSelector | toJson }}
+      tolerations: {{ $.Values.tolerations | toJson }}
+      containers:
+      - name: {{ $component }}
+        image: {{ printf "%s@%s" $.Values.image.repository (required "image.digest required" $.Values.image.digest) | quote }}
+        imagePullPolicy: {{ $.Values.image.pullPolicy }}
+        command: [/manager]
+        args:
+        - --component={{ $component }}
+        - --mode={{ $.Values.mode }}
+        - --namespaces={{ join "," $.Values.management.namespaces }}
+        - --system-namespace={{ $.Release.Namespace }}
+        - --controller-service-account={{ $.Release.Name }}-controller
+        - --leader-elect={{ $.Values.controller.leaderElection }}
+        env:
+        - name: VMWEAVE_WORKLOAD_TOLERATIONS
+          value: {{ $.Values.workloads.tolerations | toJson | quote }}
+        securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}
+        resources: {{ $.Values.resources | toJson }}
+        ports:
+        - {name: metrics, containerPort: 8080}
+        - {name: health, containerPort: 8081}
+        - {name: webhook, containerPort: 9443}
+        readinessProbe: {httpGet: {path: /readyz, port: health}, periodSeconds: 5}
+        livenessProbe: {httpGet: {path: /healthz, port: health}, periodSeconds: 10}
+        startupProbe: {httpGet: {path: /healthz, port: health}, periodSeconds: 2, failureThreshold: 60}
+        {{- if eq $component "webhook" }}
+        volumeMounts: [{name: tls, mountPath: /tls, readOnly: true}]
+      volumes:
+      - name: tls
+        secret: {secretName: {{ $.Values.tls.existingSecret }}}
+        {{- end }}
+{{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-webhook
+spec:
+  selector: {app: {{ .Release.Name }}-webhook}
+  ports: [{port: 443, targetPort: webhook}]

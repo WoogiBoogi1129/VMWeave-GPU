@@ -4,7 +4,7 @@ DOCS_PYTHON ?= .local/docs-venv/bin/python
 help:
 	@echo 'VMWeave-GPU: see docs/overview/status.md for the supported and validated scope.'
 	@echo 'make build-shm    Configure/build the SHM runtime locally (explicit action)'
-	@echo 'make render ARGS="..."    Emit SHM control-plane manifests; never apply'
+	@echo 'make render ARGS="..."    Legacy SHM renderer; new installs use docs/getting-started/install.md'
 	@echo 'make docs-check / docs-serve    Build or preview the documentation'
 	@echo 'make test-control / check-layout    CPU tests and repository checks'
 build-shm:
@@ -21,3 +21,9 @@ test-control:
 	python3 -m unittest discover -s tests/control -v
 check-layout:
 	python3 scripts/check-repository.py
+
+.PHONY: operator-check operator-build
+operator-check:
+	$(MAKE) -C operator check
+operator-build:
+	$(MAKE) -C operator build

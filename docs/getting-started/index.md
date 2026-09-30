@@ -1,24 +1,18 @@
-# 설치와 시작
+# 시작하기
 
-목적에 맞는 경로를 선택하세요. 현재 배포는 연구 환경을 전제로 합니다.
+VMWeave는 `vmweave-system`에 중앙 Go Controller와 Webhook을 설치합니다.
+사용자는 각자의 namespace에 VM, PVC와 `vmweave.io/v1alpha1` 리소스를 생성합니다.
+KubeVirt의 virt-launcher와 VMWeave Worker·prepare·reclaim Pod도 VM의 namespace에 생성됩니다.
 
-| 목적 | 필요한 환경 | 안내 |
-|---|---|---|
-| 문서 읽기·수정 | Python 3.11 이상 | [문서 개발](../development/documentation.md) |
-| 제어기 단위 테스트 | Python 3 | [개발 검증](../development/index.md) |
-| CPU review 실클러스터 | Kubernetes·Helm·admission 권한·KubeVirt CRD | [CPU 제어기 설치](cpu-control-plane.md) |
-| VM GPU 실행 | NVIDIA GPU·CUDA·HAMi·KubeVirt·로컬 PVC·Guest 환경 | [GPU 준비](gpu.md) |
+1. 관리자: [사전 조건](prerequisites.md)과 [중앙 설치](install.md).
+2. 관리자: [사용자 namespace 등록](namespaces.md).
+3. 사용자: [첫 VM 실행과 회수](first-vm.md).
+4. 운영자: [업그레이드·제거](../guides/upgrade-uninstall.md).
+5. 기존 사용자: [flyt.dev 데이터 이전](../guides/migrate-to-vmweave-api.md).
 
-## 소스 받기
+GPU 없이 제어 영역을 확인할 때는 같은 설치 경로의 [review 모드](cpu-control-plane.md)를 사용합니다.
+GPU 의존성은 [GPU 준비](gpu.md), 이번 전환의 검증 범위는
+[Operator 검증 기록](../development/operator-validation.md)에 정리합니다.
 
-```sh
-git clone https://github.com/WoogiBoogi1129/VMWeave-GPU.git
-cd VMWeave-GPU
-python3 -m unittest discover -s tests/control -v
-```
-
-모든 명령은 특별한 안내가 없으면 저장소 루트에서 실행합니다.
-기존 `flyt-k8s-poc` 클론도 origin을 새 주소로 지정해 계속 사용할 수 있습니다.
-
-컨테이너·CRD·환경변수에 남은 `flyt`는 현재 호환 식별자입니다.
-문서의 프로젝트 이름과 달라도 임의로 변경하지 마세요.
+`charts/flyt-control-plane`, `scripts/install-control-plane.py`, 이전 실험 문서의 설치 명령은
+구API 회수·재현용으로 보존합니다. 새 설치에는 위 중앙 설치 경로를 사용합니다.

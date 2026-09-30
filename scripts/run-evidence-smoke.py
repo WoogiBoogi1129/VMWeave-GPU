@@ -13,7 +13,7 @@ import time
 
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(description=__doc__)
-p.add_argument('--name',required=True);p.add_argument('--key',type=Path,required=True)
+p.add_argument('--namespace',default='flyt-evidence');p.add_argument('--api-group',choices=['flyt.dev','vmweave.io'],default='flyt.dev');p.add_argument('--channel');p.add_argument('--resume',action='store_true',help='Resume a live Bound/Ready channel after an interrupted test runner');p.add_argument('--name',required=True);p.add_argument('--key',type=Path,required=True)
 p.add_argument('--artifacts',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
 p.add_argument('--seed',type=int,default=23);p.add_argument('--timeout',type=int,default=300)
 p.add_argument('--probe',choices=['gpu','memory'],default='gpu')
@@ -24,10 +24,10 @@ p.add_argument('--bytes',type=int);p.add_argument('--barrier',type=Path)
 a=p.parse_args()
 if not 1<=a.gpu_seconds<=90:p.error('gpu-seconds must be 1..90')
 if a.probe=='memory' and (not a.scenario or not a.bytes or a.bytes<=0):p.error('memory requires scenario and positive bytes')
-if not re.fullmatch(r'evidence-[a-z0-9-]+',a.name):p.error('evidence VM name required')
+if not re.fullmatch(r'[a-z0-9]([-a-z0-9]*[a-z0-9])?',a.name):p.error('valid VM name required')
 a.output.mkdir(parents=True,exist_ok=False)
 binary=('compute-probe-guest' if a.gpu_program=='compute' else 'guest-gpu-smoke') if a.probe=='gpu' else 'memory-probe-guest'
-ns='flyt-evidence';channel=a.name+'-channel';timeline=[];started=time.monotonic();ssh_process=None
+ns=a.namespace;channel=a.channel or a.name+'-channel';channel_kind=('flytsharedmemorychannels.flyt.dev' if a.api_group=='flyt.dev' else 'sharedmemorychannels.vmweave.io');attachment_kind=('flytchannelattachments.flyt.dev' if a.api_group=='flyt.dev' else 'channelattachments.vmweave.io');timeline=[];started=time.monotonic();ssh_process=None
 def k(args):return subprocess.check_output(['kubectl',*args],text=True,timeout=20)
 def get(kind,name):
  text=k(['get',kind,name,'-n',ns,'--ignore-not-found','-o','json'])
@@ -44,8 +44,8 @@ def wait_for(function,label,timeout=None):
   if result:return result
   time.sleep(2)
  raise TimeoutError(label)
-initial=get('flytsharedmemorychannel',channel)
-if not initial or initial.get('status',{}).get('phase')!='BackingReady':raise ValueError('new BackingReady channel required')
+initial=get(channel_kind,channel)
+if not initial or initial.get('status',{}).get('phase') not in (('BackingReady','Bound','Ready') if a.resume else ('BackingReady',)) or initial.get('spec',{}).get('drain') or initial['metadata'].get('deletionTimestamp'):raise ValueError('live channel in permitted initial phase required')
 save('channel-before.json',initial)
 files=[ROOT/'scripts/run-evidence-smoke.py',ROOT/'experiments/evidence/guest_gpu_smoke.c',ROOT/'experiments/evidence/memory_probe.cu',a.artifacts/'libflyt_guest.so',a.artifacts/binary]
 if a.gpu_program=='compute':files.append(ROOT/'experiments/evidence/compute_probe.c')
@@ -60,6 +60,8 @@ try:
  k(['patch','vm',a.name,'-n',ns,'--type=merge','-p',json.dumps({'spec':{'runStrategy':'Always'}})])
  event('VMStartRequested')
  def running():
+  current=get(channel_kind,channel)
+  if current and current.get('status',{}).get('phase') in ('Failed','Draining','Released'):raise RuntimeError('channel ended before VM reached Running')
   v=get('vmi',a.name)
   return v if v and v.get('status',{}).get('phase')=='Running' and v['status'].get('interfaces') else None
  vmi=wait_for(running,'VM did not reach Running');save('vmi-running.json',vmi)
@@ -74,7 +76,7 @@ try:
  discovery="from pathlib import Path; print(chr(10).join(p.name for p in Path('/sys/bus/pci/devices').iterdir() if (p/'vendor').read_text().strip()=='0x1af4' and (p/'device').read_text().strip()=='0x1110'))"
  bdf=subprocess.check_output(ssh+['python3 -c '+shlex.quote(discovery)],text=True,timeout=10).strip()
  if not re.fullmatch(r'[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-7]',bdf):raise ValueError('exactly one ivshmem device required')
- bound=get('flytsharedmemorychannel',channel);save('channel-bound.json',bound)
+ bound=get(channel_kind,channel);save('channel-bound.json',bound)
  subprocess.run([sys.executable,str(ROOT/'scripts/export-shm-guest.py'),'--channel-json',str(a.output/'channel-bound.json'),
                  '--bdf',bdf,'--slot','0','--output',str(a.output/'guest-config')],check=True)
  subprocess.run(ssh+['mkdir -p /tmp/flyt-evidence-run'],check=True,timeout=10)
@@ -89,7 +91,7 @@ try:
  with (a.output/'guest-stdout.txt').open('w') as stdout,(a.output/'guest-stderr.txt').open('w') as stderr:
   ssh_process=subprocess.Popen(ssh+[command],stdout=stdout,stderr=stderr)
   def mapped():
-   c=get('flytsharedmemorychannel',channel)
+   c=get(channel_kind,channel)
    if c and c.get('status',{}).get('phase')=='Ready':return c
    if ssh_process.poll() is not None:raise RuntimeError('Guest ended before Channel Ready')
    return None
@@ -112,11 +114,11 @@ finally:
   except subprocess.TimeoutExpired:ssh_process.kill();ssh_process.wait()
  # Preserve runtime evidence while API objects still exist.
  try:
-  save('channel-after-probe.json',get('flytsharedmemorychannel',channel))
+  save('channel-after-probe.json',get(channel_kind,channel))
   pods=json.loads(k(['get','pods','-n',ns,'-o','json']))['items']
   for pod in pods:
    name=pod['metadata']['name']
-   if name==channel+'-worker' or name.startswith('virt-launcher-'+a.name+'-'):
+   if any(r.get('uid')==initial['metadata']['uid'] for r in pod['metadata'].get('ownerReferences',[])) or name.startswith('virt-launcher-'+a.name+'-'):
     save(name+'.json',pod)
     for container in pod['spec']['containers']:
      if container['name'] not in ('compute','worker','main','hook-sidecar-0'):continue
@@ -125,13 +127,13 @@ finally:
  except Exception as error:metrics['evidence_collection_error']=str(error)
  # Drain stops the VM and Worker, including a disconnected SSH workload.
  try:
-  k(['patch','flytsharedmemorychannel',channel,'-n',ns,'--type=merge','-p','{"spec":{"drain":true}}'])
+  k(['patch',channel_kind,channel,'-n',ns,'--type=merge','-p','{"spec":{"drain":true}}'])
   event('DrainRequested')
   def released():
-   c=get('flytsharedmemorychannel',channel)
+   c=get(channel_kind,channel)
    return c if c and c.get('status',{}).get('phase')=='Released' else None
   final=wait_for(released,'Channel did not release');save('channel-released.json',final);event('Released')
-  attachments=json.loads(k(['get','flytchannelattachments','-n',ns,'-o','json']))
+  attachments=json.loads(k(['get',attachment_kind,'-n',ns,'-o','json']))
   save('attachments-final.json',{'items':[x for x in attachments['items'] if x['spec']['channelRef']['uid']==initial['metadata']['uid']]})
   metrics['released']=True
  except Exception as error:
