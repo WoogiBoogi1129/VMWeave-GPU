@@ -71,11 +71,13 @@ def main(root):
   ar=json.loads((run/'execution.json').read_text())['results'][0];br=json.loads((other/'execution.json').read_text())['results'][0]
   ai=json.loads((run/'identity.json').read_text());bi=json.loads((other/'identity.json').read_text())
   bstart=br['utc_start']-bi.get('clock_offset',0)-(ar['utc_start']-ai.get('clock_offset',0));bend=bstart+br['elapsed_s']
+  bdata=samples(other/(other.name+'-timed.csv.gz'));bshared=interval(bdata,90-bstart,150-bstart)
   bins=np.histogram(data[:,1],bins=np.arange(0,242))[0];baseline=stages['solo']['throughput'];recovery=None;entry=None
   for t in range(math.ceil(bend),236):
    if all(abs(float(x)-baseline)<=baseline*.1 for x in bins[t:t+5]):entry=t-bend;recovery=t+5-bend;break
   entering=interval(data,bstart,bstart+10);leaving=interval(data,bend,min(bend+10,240))
   row={'pair':pair['name'],'cap_a':pair['cap_a'],'cap_b':pair['cap_b'],'slot':pair['always_active_slot'],'solo_q':baseline,'shared_q':stages['shared']['throughput'],'recovered_q':stages['recovered']['throughput'],'retention':stages['shared']['throughput']/baseline,'solo_p95_ms':stages['solo']['p95_ms'],'shared_p95_ms':stages['shared']['p95_ms'],'entry_10s_q':entering['throughput'],'entry_10s_p95_ms':entering['p95_ms'],'exit_10s_p95_ms':leaving['p95_ms'],'b_actual_start_s':bstart,'b_actual_end_s':bend,'recovery_s':recovery,'recovery_band_entry_s':entry}
+  row.update(b_shared_q=bshared['throughput'],b_shared_p95_ms=bshared['p95_ms'],shared_total_q=stages['shared']['throughput']+bshared['throughput'])
   origin=ar['utc_start']-ai.get('clock_offset',0)
   for role,folder,cap in [('a',run,pair['cap_a']),('b',other,pair['cap_b'])]:
    runtime=json.loads((folder/'runtime-libraries.json').read_text());pid=next(x['pid'] for x in runtime if 'flyt-shm-worker' in x['command'])
@@ -104,7 +106,7 @@ def main(root):
  for ca,cb,slot in [(50,50,'a'),(50,50,'b'),(25,75,'a'),(75,25,'b')]:
   rs=[r for r in dynamic if (r['cap_a'],r['cap_b'],r['slot'])==(ca,cb,slot)]
   if rs:
-   keys=['retention','solo_q','shared_q','solo_p95_ms','shared_p95_ms']
+   keys=['retention','solo_q','shared_q','solo_p95_ms','shared_p95_ms','b_shared_q','b_shared_p95_ms','shared_total_q']
    summary['shared'][f'{ca}/{cb}/{slot}']={'n':len(rs),**{k:statistics.mean(r[k] for r in rs) for k in keys},'sd':{k:statistics.stdev(r[k] for r in rs) if len(rs)>1 else 0 for k in keys}}
  (dest/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary,indent=2))
 if __name__=='__main__':
