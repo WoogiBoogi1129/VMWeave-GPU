@@ -8,6 +8,8 @@ for name,expected in protocol['artifact_sha256'].items():
  actual=hashlib.sha256((BASE/'artifacts'/name).read_bytes()).hexdigest()
  if actual!=expected:raise RuntimeError('Measurement artifact changed after protocol freeze: '+name)
 save(OUT/(a.stage+'-source.json'),{'commit':call(['git','-C',ROOT,'rev-parse','HEAD']).strip(),
+ 'worktree_status':call(['git','-C',ROOT,'status','--short']),
+ 'performance_source_diff':call(['git','-C',ROOT,'diff','--','experiments/performance']),
  'source_sha256':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in Path(__file__).parent.iterdir() if f.suffix in ['.py','.c','.sh']},'started_utc':time.time(),'protocol_sha256':hashlib.sha256((OUT/'protocol.json').read_bytes()).hexdigest()})
 def idle():
  inventory=call(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,process_name','--format=csv,noheader'])

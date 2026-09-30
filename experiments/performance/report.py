@@ -45,9 +45,13 @@ lines += ['', 'N도 HAMi를 포함합니다. T의 MPS와 N/S의 HAMi, 큐·동�
  '![호출·전송 지연](figures/path-latency.png)','', '![처리량](figures/path-throughput.png)','',
  '## 다른 VM 부하의 시작·종료','',
  '| A/B 상한, A CPU 슬롯 | n | A 단독 처리량 | 동시 실행 시 A 처리량 | 유지율 | A 단독 p95 (ms) | 동시 실행 시 A p95 (ms) |', '|---|---:|---:|---:|---:|---:|---:|']
-for name,r in s['shared'].items():lines.append(f"| {name} | {r['n']} | {r['solo_q']:.2f} | {r['shared_q']:.2f} | {r['retention']*100:.1f}% | {r['solo_p95_ms']:.2f} | {r['shared_p95_ms']:.2f} |")
-lines += ['', 'A는 계속 부하를 실행하는 VM입니다. 역할 교환 실행에서 A의 실제 VM/CPU 슬롯과 상한을 교환합니다. 같은 상한의 단독 구간과 비교하므로 상한 자체의 효과와 공유에 따른 추가 간섭을 구분할 수 있습니다. 25/75를 처리량 1:3 보장으로 해석하지 않습니다.', '',
- '시작 직후 10초의 처리량·p95, 종료 직후 10초의 p95, 회복 시간, Worker Pod에 대응시킨 HAMi 이용률·상한 판정과 PID별 pmon 교차 계측은 [실행별 표](analysis/shared.csv)에 보존합니다. 회복은 기존 단독 처리량의 ±10% 범위에 1초 구간 5개가 연속 들어오는 시점으로 확인합니다. 빈 회복 값은 관측 종료 전 기준을 충족하지 못했다는 뜻입니다.', '',
+for name,r in s['shared'].items():
+ def shared_stat(k,percent=False):
+  scale=100 if percent else 1
+  return f"{r[k]*scale:.2f} ± {r['sd'][k]*scale:.2f}"+('%' if percent else '')
+ lines.append(f"| {name} | {r['n']} | {shared_stat('solo_q')} | {shared_stat('shared_q')} | {shared_stat('retention',True)} | {shared_stat('solo_p95_ms')} | {shared_stat('shared_p95_ms')} |")
+lines += ['', '각 값은 독립 실행 5회의 평균 ± SD입니다. A는 계속 부하를 실행하는 VM입니다. 역할 교환 실행에서 A의 실제 VM/CPU 슬롯과 상한을 교환합니다. 같은 상한의 단독 구간과 비교하므로 상한 자체의 효과와 공유에 따른 추가 간섭을 구분할 수 있습니다. 25/75를 처리량 1:3 보장으로 해석하지 않습니다.', '',
+ '시작 직후 10초의 처리량·p95, 종료 직후 10초의 p95, 회복 시간, Worker Pod에 대응시킨 HAMi 이용률·상한 판정과 PID별 pmon 교차 계측은 [실행별 표](analysis/shared.csv)에 보존합니다. 회복은 기존 단독 처리량의 ±10% 범위에 1초 구간 5개가 연속 들어오는 조건으로 확인합니다. 회복 시간은 다섯 번째 구간의 종료 시점에서 B의 실제 부하 종료 시점을 뺀 값이며, 연속 구간 최초 진입 시간도 별도로 기록합니다. 빈 회복 값은 관측 종료 전 기준을 충족하지 못했다는 뜻입니다.', '',
  '경쟁만으로 이용률이 낮아질 수 있으므로, 공유 상태에서 상한 이하라는 사실만으로 제한 정책 성공을 주장하지 않습니다. 장치 전체 DCGM 값과 VM별 프로세스 이용률을 구분합니다.', '',
  '![50/50 부하 변화](figures/shared-50-50.png)','', '![25/75 부하 변화](figures/shared-25-75.png)','',
  '## 모니터링·실행 증거','',

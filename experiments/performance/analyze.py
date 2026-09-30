@@ -98,7 +98,9 @@ def main(root):
    if rs:summary['overhead'][key][path]={'n':len(rs),**{k:{'mean':statistics.mean(r[k] for r in rs),'sd':statistics.stdev(r[k] for r in rs) if len(rs)>1 else 0} for k in ['mean_us','operations_per_s']}}
  for ca,cb,slot in [(50,50,'a'),(50,50,'b'),(25,75,'a'),(75,25,'b')]:
   rs=[r for r in dynamic if (r['cap_a'],r['cap_b'],r['slot'])==(ca,cb,slot)]
-  if rs:summary['shared'][f'{ca}/{cb}/{slot}']={'n':len(rs),**{k:statistics.mean(r[k] for r in rs) for k in ['retention','solo_q','shared_q','solo_p95_ms','shared_p95_ms']}}
+  if rs:
+   keys=['retention','solo_q','shared_q','solo_p95_ms','shared_p95_ms']
+   summary['shared'][f'{ca}/{cb}/{slot}']={'n':len(rs),**{k:statistics.mean(r[k] for r in rs) for k in keys},'sd':{k:statistics.stdev(r[k] for r in rs) if len(rs)>1 else 0 for k in keys}}
  (dest/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary,indent=2))
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('root');a=p.parse_args();main(a.root)

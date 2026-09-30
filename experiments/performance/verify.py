@@ -5,6 +5,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from analyze import samples
 root=Path(sys.argv[1]);details=[];errors=[]
+protocol=json.loads((root/'protocol.json').read_text())
 presence={}
 for line in (root/'monitoring/pmon.txt').read_text().splitlines():
  cols=line.split()
@@ -25,6 +26,7 @@ for run in sorted((root/'runs').iterdir()):
    except ValueError:pass
   begins=[r for r in events if r.get('event')=='MEASUREMENT_START'];ends=[r for r in events if r.get('event')=='MEASUREMENT_END']
   assert len(begins)==len(ends)==len(execution['results'])
+  assert len(begins)==(7 if run.name.startswith('perf-o-') else 2 if run.name.startswith('perf-c-') else 1)
   max_clock_error=max(abs((b['utc']-a['utc'])-b['elapsed']) for a,b in zip(begins,ends))
   assert max_clock_error<.05,('wall-clock discontinuity',max_clock_error)
   runtime=json.loads((run/'runtime-libraries.json').read_text());allowed={r['pid'] for r in runtime}
@@ -39,6 +41,11 @@ for run in sorted((root/'runs').iterdir()):
   checked=0
   for r in execution['results']:
    assert r['status']=='PASS' and r['mismatches']==0 and r['checked_elements']>0
+   assert r['checked_elements']==r['bytes']//4
+   if 'phase' in r:
+    assert r['reps']==protocol['load']['iterations'] and r['bytes']==protocol['load']['bytes']
+    if r['phase']=='fixed':assert r['completed']==protocol['load']['fixed_count']
+    elif run.name.startswith('perf-c-'):assert abs(r['elapsed_s']-protocol['load']['timed_s'])<.25
    suffix=r['phase'] if 'phase' in r else r['mode']+'-'+str(r['bytes'])
    data=samples(run/(run.name+'-'+suffix+'.csv.gz'));assert len(data)==r['completed']
    assert (data[:,0]==range(len(data))).all()
