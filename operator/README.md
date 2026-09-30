@@ -8,7 +8,7 @@ Run `make check` for schema consistency, vet and race tests. Run `make build` fo
 manager binary. `images/vmweave/Operator.Containerfile` builds its container.
 
 The initial migration preserves the audited OpenAPI/CEL schemas in `config/crd/bases`.
-`hack/generate-types.py` generates typed Go clients from these schemas; `make generate`
+`hack/generate-types.py` generates typed Go API objects and scheme registration from these schemas; `make generate`
 regenerates the types and DeepCopy methods. The chart ships identical schema copies.
 This deliberately differs from inferring weaker schemas from Go types during migration.
 OLM bundles and the SDK's example scaffolding are not part of the supported install path.

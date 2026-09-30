@@ -5,7 +5,8 @@
 - [Go Operator 전환 검증](operator-validation.md)의 미완료 항목: HA 장애 행렬, Node fencing, Go helper 후속 이전.
 - CUDA Graph·라이브러리 연산·비동기 의미의 지원 범위 확대.
 - Guest 환경 배포와 장치 매핑 자동화 개선.
-- RPC/SHM CRD 공존 migration 및 운영 수명 주기 정리.
+- 중앙화·새 API 배포와 기존 실험 namespace 정리는 완료. 구 CRD 정의 제거와
+  PyTorch/성능 campaign의 새 API 전환·재검증은 후속 작업이다.
 - Worker 대기·큐·복사·동기화 비용의 원인 분석과 최적화.
 
 ## 검증

@@ -10,6 +10,11 @@ on:
       - 'scripts/docs_hooks.py'
       - 'scripts/check-site.py'
       - 'scripts/check-repository.py'
+      - 'scripts/check-doc-contracts.py'
+      - 'scripts/operator/**'
+      - 'scripts/run-evidence-smoke.py'
+      - 'deploy/examples/vmweave/**'
+      - 'charts/vmweave-operator/**'
       - '.github/workflows/docs.yml'
   pull_request:
   workflow_dispatch:
@@ -30,6 +35,7 @@ jobs:
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
       - run: python scripts/check-repository.py
+      - run: python scripts/check-doc-contracts.py
       - run: mkdocs build --strict
       - run: python scripts/check-site.py
       - uses: actions/upload-pages-artifact@v3

@@ -10,7 +10,7 @@ metadata:
   name: {{ $.Release.Name }}-{{ $component }}
   labels: {app.kubernetes.io/part-of: vmweave, app.kubernetes.io/component: {{ $component }}}
 spec:
-  replicas: {{ if eq $component "controller" }}{{ $.Values.controller.replicas }}{{ else }}1{{ end }}
+  replicas: {{ if eq $component "controller" }}{{ if $.Values.maintenance.enabled }}0{{ else }}{{ $.Values.controller.replicas }}{{ end }}{{ else }}1{{ end }}
   strategy: {type: Recreate}
   selector:
     matchLabels: {app: {{ $.Release.Name }}-{{ $component }}}

@@ -43,6 +43,8 @@ CPU 환경은 Operator/helper/hook 빌드가 가능하며 Worker 빌드에는 CU
 `build-image.py`는 이미 검증한 로컬 OCI base를 사용하는 실험 노드용 대안입니다.
 노드 import는 단일 노드 캐시 배포이며 다중 노드 registry 배포를 대신하지 않습니다.
 
+Guest OS 이미지와 smoke 프로그램은 [Guest 준비](guest-images.md)를 따릅니다.
+
 ## 설정과 설치
 
 `deploy/examples/vmweave/active.json`을 복사하고 실제 이미지 repository/digest 및 관리 목록을

@@ -13,9 +13,14 @@ python3 experiments/evidence/verify_stage2.py \
 이는 보존된 증거의 검증이며 현재 하드웨어에서 새로 GPU 실험을 실행하는 작업은 아닙니다.
 다른 평가의 검사 방법은 각 보고서의 재현·검증 절차를 따릅니다.
 
-## 새 GPU 실행
+## 현재 VMWeave에서 새 GPU 실행
 
-[GPU 환경 준비](../getting-started/gpu.md) 후 다음 문서를 사용합니다.
+[신규 실험 가이드](new-experiments.md)를 따릅니다. 새 API 호환이 확인된 실행기부터 사용합니다.
+
+## 과거 구현의 실험 재현
+
+아래는 당시 커밋·이미지·구 API를 전제로 한 역사 재현 문서입니다.
+현재 클러스터의 설치 지침으로 사용하지 않습니다. 과거 재현은 별도 환경에서 수행합니다.
 
 - [VM SHM 실행](../../experiments/evidence/REPRODUCE_VM_DEVELOPMENT.md)
 - [고정 PyTorch 학습](../../experiments/evidence/REPRODUCE_PYTORCH.md)

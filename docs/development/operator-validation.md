@@ -1,5 +1,8 @@
 # Go Operator 전환 검증: 2026-09-30
 
+> 이 문서는 **전환 직후의 검증 snapshot**이다. 이후 모든 `flyt-*` namespace와 구 Controller를
+> 정리했다. 현재 배포와 백업 보존 상태는 [후속 정리 기록](../history/cleanup-2026-09-30.md)을 따른다.
+
 초기 중앙 Go Operator를 gpu-4에 배포했다. Controller와 Webhook은 `vmweave-system`의
 `vmweave` release에 각각 1 replica로 실행한다. API는 `vmweave.io/v1alpha1`의
 GPUProfile, GPURequest, SharedMemoryChannel, ChannelAttachment다.
@@ -78,7 +81,7 @@ UID 기반 이름을 추가한 뒤 새 binding/VMI/소유 child/backing 모두 �
 ## 남은 범위
 
 - C/CUDA runtime은 유지한다. supervisor/provision/reclaim/domain hook은 신API 호환 Python helper다.
-- 구API 제거는 기존 Draining 해소와 이력 보존 확인 이후 별도 운영 작업이다.
+- 전환 직후 남았던 Draining과 namespace는 후속 정리에서 처리했다. 구 CRD 정의 제거는 별도 작업이다.
 - 전체 HA·API 단절·node fencing 장애 행렬 및 Terminating namespace 자동 회수는 미완료다.
 - scope/mode 변경은 현재 자동 rolling 전환 대신 유지보수 절차를 사용한다.
 - 초기 CRD 원본은 기존 CEL을 보존한 JSON schema이며 Go 타입/DeepCopy를 생성한다.

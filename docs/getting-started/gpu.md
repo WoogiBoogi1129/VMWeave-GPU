@@ -16,12 +16,13 @@ CUDA 실행 성공과 성능 검증을 각각 확인해야 합니다.
 
 ## 준비 순서
 
-1. [CPU review](cpu-control-plane.md)에서 제어기와 admission을 확인합니다.
+1. 새 설치에서 active 또는 선택 진단용 [CPU review](cpu-control-plane.md)를 고릅니다.
+   review를 먼저 설치할 필요는 없습니다. 기존 review에서 active로 바꾸려면 [유지보수 절차](../guides/upgrade-uninstall.md)를 따릅니다.
 2. [런타임 빌드](../development/index.md) 후 Worker·Guest·hook 산출물의 digest/해시를 기록합니다.
 3. [중앙 설치](install.md)의 active 설정에 사용자 namespace를 등록합니다.
 4. 승인 Profile, 정지 VM, Request, Channel과 로컬 PVC를 준비합니다.
 5. [첫 VM 실행](first-vm.md)에 따라 새 API의 매핑과 GPU smoke를 확인합니다. 과거 실험 재현 문서는 구API 기록입니다.
-6. [학습 재현 절차](../../experiments/evidence/REPRODUCE_PYTORCH.md)는 고정 PyTorch 빌드·모델의 별도 검증으로 수행합니다.
+6. [신규 실험 가이드](../evaluation/new-experiments.md)의 호환 표를 확인합니다. 과거 PyTorch 절차는 새 API에서 그대로 실행하는 절차가 아닙니다.
 
 설치 당시 보조 파일은 [scripts/installation](../../scripts/installation/)에 보존했습니다.
 호스트 서비스 복구 스크립트에는 당시 환경 경로가 있으므로 일반 설치기로 취급하지 않습니다.

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: {namespace: team-a, name: gpu-backing}
+spec:
+  accessModes: [ReadWriteOnce]
+  volumeMode: Filesystem
+  storageClassName: ''
+  volumeName: vmweave-team-a
+  resources: {requests: {storage: 1Gi}}
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata: {namespace: team-a, name: gpu-vm}
+spec:
+  runStrategy: Halted
+  template:
+    spec:
+      domain:
+        cpu: {cores: 2}
+        resources: {requests: {memory: 4Gi}}
+        devices:
+          disks:
+          - {name: root, disk: {bus: virtio}}
+          interfaces:
+          - {name: default, masquerade: {}}
+      networks:
+      - {name: default, pod: {}}
+      volumes:
+      - name: root
+        containerDisk:
+          image: registry.example.com/vmweave-guest@sha256:0000000000000000000000000000000000000000000000000000000000000000

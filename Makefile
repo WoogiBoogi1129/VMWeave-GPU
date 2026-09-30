@@ -15,6 +15,7 @@ render:
 docs-serve:
 	$(DOCS_PYTHON) -m mkdocs serve
 docs-check:
+	$(DOCS_PYTHON) scripts/check-doc-contracts.py
 	$(DOCS_PYTHON) -m mkdocs build --strict
 	$(DOCS_PYTHON) scripts/check-site.py
 test-control:

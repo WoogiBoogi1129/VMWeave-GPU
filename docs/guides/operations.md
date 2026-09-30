@@ -1,5 +1,8 @@
 # 운영 점검과 문제 해결
 
+VM 부팅 지연과 디스크 보존은 [Guest 이미지·디스크](../getting-started/guest-images.md)를,
+namespace 해제와 백업·복구는 [업그레이드·제거](upgrade-uninstall.md)를 따릅니다.
+
 ## 점검 순서
 
 1. 제어기·webhook Pod의 readiness와 로그를 확인합니다.

@@ -6,6 +6,7 @@
 | 입력 | 의미 |
 |---|---|
 | `management.namespaces` | 관리할 기존 namespace의 명시적 목록; 빈 목록 금지 |
+| `maintenance.enabled` | 기본 false; 유지보수 중 Controller만 0 replica, Webhook은 유지 |
 | `mode` | `review`는 검증/status만 기록, `active`는 workload 생성·회수 |
 | `activeModeAcknowledged` | active 설정의 명시적 선택 |
 | `image.repository`, `image.digest` | Go Operator 이미지와 고정 digest |

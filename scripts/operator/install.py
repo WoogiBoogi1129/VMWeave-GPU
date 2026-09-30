@@ -6,6 +6,7 @@ p=argparse.ArgumentParser();p.add_argument('--namespace',default='vmweave-system
 def run(*xs,**kw):return subprocess.check_output(list(xs),text=True,**kw)
 # Helm performs schema validation. Values are JSON to keep installation dependencies explicit.
 v=json.loads(a.values.read_text());names=v.get('management',{}).get('namespaces',[])
+if v.get('maintenance',{}).get('enabled'):raise SystemExit('maintenance requires staged Helm procedure; see docs/guides/upgrade-uninstall.md')
 if not names:raise SystemExit('nonempty management.namespaces required')
 for n in names:
  run('kubectl','get','namespace',n)
@@ -17,6 +18,7 @@ for n in names:
    if env.get('FLYT_MODE')=='active' and x['spec'].get('replicas',1)>0:raise SystemExit('legacy active deployment must be stopped first: '+n+'/'+x['metadata']['name'])
 try:old=json.loads(run('helm','get','values',a.release,'-n',a.namespace,'-o','json')) or {}
 except subprocess.CalledProcessError:old={}
+if old.get('maintenance',{}).get('enabled'):raise SystemExit('finish staged maintenance before normal installation')
 removed=set(old.get('management',{}).get('namespaces',[]))-set(names)
 for n in removed:
  cs=json.loads(run('kubectl','get','sharedmemorychannels.vmweave.io','-n',n,'-o','json'))['items']
