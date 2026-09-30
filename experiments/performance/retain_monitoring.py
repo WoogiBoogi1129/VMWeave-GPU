@@ -6,7 +6,8 @@ assert json.loads((OUT/'validation.json').read_text())['campaign_complete']
 mon=json.loads((BASE/'monitor.json').read_text());ns='vmweave-performance'
 assert get('namespace',ns,'default')['metadata']['uid']==json.loads((BASE/'owned-namespaces.json').read_text())[ns]['uid']
 m=BASE/'monitoring';before=(m/'prometheus.yml').read_text()
-(OUT/'monitoring/prometheus-during-experiments.yml').write_text(before)
+original_config=OUT/'monitoring/prometheus-during-experiments.yml'
+if not original_config.exists():original_config.write_text(before)
 # Local TSDB snapshot retains observations beyond the live retention window.
 response=json.load(urllib.request.urlopen(urllib.request.Request(mon['prometheus']+'/api/v1/admin/tsdb/snapshot',data=b'',method='POST'),timeout=60))
 assert response['status']=='success';save(OUT/'monitoring/tsdb-snapshot.json',response)
@@ -42,6 +43,12 @@ def healthy():
   return targets if len(targets)==3 and all(t['health']=='up' for t in targets) else None
  except Exception:return None
 targets=wait(healthy,120)
+def grafana_ready():
+ try:
+  health=json.load(urllib.request.urlopen(mon['grafana']+'/api/health',timeout=5))
+  return health if health.get('database')=='ok' else None
+ except Exception:return None
+grafana_health=wait(grafana_ready,120)
 save(OUT/'monitoring/kubernetes-resources.json',{'pods':[get('pod',name,ns) for name in services],'services':[get('service',name,ns) for name in services]})
 save(OUT/'monitoring/prometheus-build.json',json.load(urllib.request.urlopen(mon['prometheus']+'/api/v1/status/buildinfo')))
 stopped=[]
@@ -49,8 +56,9 @@ for process in json.loads((BASE/'processes.json').read_text()):
  proc=Path('/proc')/str(process['pid'])/'cmdline'
  if not proc.exists():continue
  args=proc.read_bytes().replace(b'\0',b' ').decode()
+ if not args.strip():continue
  expected='experiments/performance/exporter.py' if process['name']=='app-exporter' else 'nvidia-smi pmon -i 1'
  assert expected in args,('PID has different owner',process['name'],process['pid'])
  os.kill(process['pid'],signal.SIGTERM);stopped.append({'name':process['name'],'pid':process['pid'],'utc':time.time()})
-save(OUT/'monitoring/retained.json',{'utc':time.time(),'services':services,'targets':[{k:t[k] for k in ['labels','health','scrapeUrl','lastError']} for t in targets],'stopped_measurement_collectors':stopped,'grafana_health':json.load(urllib.request.urlopen(mon['grafana']+'/api/health')),'history':'Full measurement query responses are in runs/*/telemetry.json; live TSDB retained 30 days, local snapshot retained under monitoring/prom-data/snapshots.','credentials':'Grafana now uses a Kubernetes Secret reference; anonymous Viewer remains enabled.','port_forward':'kubectl -n vmweave-performance port-forward svc/perf-monitor 3000:3000 9090:9090'})
+save(OUT/'monitoring/retained.json',{'utc':time.time(),'services':services,'targets':[{k:t[k] for k in ['labels','health','scrapeUrl','lastError']} for t in targets],'stopped_measurement_collectors':stopped,'grafana_health':grafana_health,'history':'Full measurement query responses are in runs/*/telemetry.json; live TSDB retained 30 days, local snapshot retained under monitoring/prom-data/snapshots.','credentials':'Grafana now uses a Kubernetes Secret reference; anonymous Viewer remains enabled.','port_forward':'kubectl -n vmweave-performance port-forward svc/perf-monitor 3000:3000 9090:9090'})
 print('Monitoring retained with healthy stable Services; measurement-only collectors stopped.')

@@ -12,6 +12,7 @@ for source in sorted(BASE.glob('build*.txt')):
 for name in ['Worker.Containerfile','images.json']:
  source=BASE/name;target=OUT/'build'/name;target.write_text(redact(source.read_text()))
 shutil.copy2(BASE/'artifacts/cubin-normalization.json',OUT/'build/cubin-normalization.json')
+shutil.copy2(BASE/'processes.json',OUT/'monitoring/collectors.json')
 for source in [BASE/'monitoring/prometheus.yml',BASE/'monitoring/grafana.ini',BASE/'monitoring/dashboards/performance.json',BASE/'monitoring/provisioning/datasources/prometheus.yaml']:
  target=OUT/'monitoring'/source.name;target.write_text(redact(source.read_text()))
 # Original records may include application diagnostics as well as audited commands.
