@@ -42,6 +42,8 @@ def healthy():
   return targets if len(targets)==3 and all(t['health']=='up' for t in targets) else None
  except Exception:return None
 targets=wait(healthy,120)
+save(OUT/'monitoring/kubernetes-resources.json',{'pods':[get('pod',name,ns) for name in services],'services':[get('service',name,ns) for name in services]})
+save(OUT/'monitoring/prometheus-build.json',json.load(urllib.request.urlopen(mon['prometheus']+'/api/v1/status/buildinfo')))
 stopped=[]
 for process in json.loads((BASE/'processes.json').read_text()):
  proc=Path('/proc')/str(process['pid'])/'cmdline'

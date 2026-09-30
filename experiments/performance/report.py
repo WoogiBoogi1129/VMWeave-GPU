@@ -4,7 +4,7 @@ from pathlib import Path
 root=Path(sys.argv[1]);s=json.loads((root/'analysis/summary.json').read_text());v=json.loads((root/'validation.json').read_text())
 def stat(r,k,d=2):return f"{r[k]['mean']:,.{d}f} ± {r[k]['sd']:,.{d}f}"
 lines=['# VMWeave 성능 분석 — 2026-09-30 시작 campaign','',
- f"실행·검산·시각 연속성·정상 회수 검증: **{v['status']}**. 전체 계획 완료: **{v['campaign_complete']}**.",
+ f"원시 표본·검산 성공 기록·시각 연속성·정상 회수 검증: **{v['status']}**. 전체 계획 완료: **{v['campaign_complete']}**.",
  '**검산 성공과 HAMi 이용률 상한 준수는 별도 판정입니다.** 아래 상한 결과를 함께 확인해야 합니다.','',
  '## 실험 구성','',
  '| 항목 | 조건 |','|---|---|',
@@ -19,7 +19,7 @@ lines=['# VMWeave 성능 분석 — 2026-09-30 시작 campaign','',
  '| 다중 VM | A 240초 실행, B는 +60~+180초 부하. B 프로세스/Worker/VM은 회복 관측 후까지 유지 |',
  '| 비교 부하 | 동일 입력·정수 PTX 커널. T는 동일 PTX에서 생성한 cubin 사용 |','',
  f"실제 집계: N/T/S {s['overhead_sessions']} 세션·{s['overhead_measurement_windows']} 측정 구간, 단일 VM {s['single_runs']} 세션, 다중 VM {s['shared_pairs']} 쌍.",
- '[고정 프로토콜](protocol.json) · [N/T/S 시작 시 프로토콜](protocol-overhead.json) · [계획 변경 이력](deviations.json) · [실행 코드](../../../performance/README.md)','',
+ '[관측과 원인 분석의 경계](DIAGNOSTICS.md) · [고정 프로토콜](protocol.json) · [N/T/S 시작 시 프로토콜](protocol-overhead.json) · [계획 변경 이력](deviations.json) · [실행 코드](../../../performance/README.md)','',
  '## 단일 VM 이용률 상한','',
  '| 상한 | n | GPU 이용률 평균 (%) | 처리량 (작업/초, 평균 ± SD) | p95 지연 (ms, 실행별 값의 평균 ± SD) | 2,500회 완료 시간 (s, 평균 ± SD) | 상한 판정 |',
  '|---:|---:|---:|---:|---:|---:|---|']
