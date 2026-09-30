@@ -33,8 +33,26 @@ for run in sorted((root/'runs').iterdir()):
    assert runtime and all(r['environment']['GPU_CORE_UTILIZATION_POLICY']=='FORCE' and r['environment']['CUDA_DEVICE_SM_LIMIT']==str(identity['cap']) for r in runtime)
   details.append({'run':run.name,'windows':len(begins),'verified_output_elements':checked,'max_clock_error_seconds':max_clock_error,'status':'PASS'})
  except Exception as e:errors.append({'run':run.name,'error':str(e)})
+pair_checks=[]
+for file in sorted((root/'pairs').glob('*.json')) if (root/'pairs').exists() else []:
+ if file.name.endswith('-failure.json'):errors.append({'pair':file.stem,'error':'failure marker present'});continue
+ pair=json.loads(file.read_text());a=root/'runs'/pair['a'];b=root/'runs'/pair['b']
+ if not all((d/'cleanup.json').exists() for d in [a,b]):continue
+ try:
+  ai=json.loads((a/'identity.json').read_text());bi=json.loads((b/'identity.json').read_text())
+  ar=json.loads((a/'execution.json').read_text())['results'][0];br=json.loads((b/'execution.json').read_text())['results'][0]
+  astart=ar['utc_start']-ai['clock_offset'];bstart=br['utc_start']-bi['clock_offset']
+  assert abs(astart-pair['scheduled_start_host_utc'])<.25
+  assert abs(bstart-astart-60)<.25
+  assert abs(ar['elapsed_s']-240)<.25 and abs(br['elapsed_s']-120)<.25
+  events=[json.loads(l) for l in (b/'stdout.jsonl').read_text().splitlines() if l.startswith('{')]
+  hold_end=next(e['utc'] for e in events if e.get('event')=='IDLE_HOLD_END')-bi['clock_offset']
+  assert hold_end>=astart+239.75
+  assert ai['worker_uid']!=bi['worker_uid'] and ai['launcher_uid']!=bi['launcher_uid']
+  pair_checks.append({'pair':pair['name'],'start_delay_s':bstart-astart,'b_context_held_until_a_s':hold_end-astart,'status':'PASS'})
+ except Exception as e:errors.append({'pair':pair['name'],'error':str(e)})
 counts={p:sum(x['run'].startswith('perf-'+p+'-') for x in details) for p in ['o','c','d']}
-complete=counts=={'o':15,'c':20,'d':40} and not errors
-report={'status':'PASS' if not errors else 'FAIL','campaign_complete':complete,'valid_runs':counts,'expected_runs':{'o':15,'c':20,'d':40},'details':details,'errors':errors,'meaning':'Checks execution, sample counts, output verification, clock continuity and normal release. This is not a verdict that HAMi limits were enforced.'}
+complete=counts=={'o':15,'c':20,'d':40} and len(pair_checks)==20 and not errors
+report={'status':'PASS' if not errors else 'FAIL','campaign_complete':complete,'valid_runs':counts,'expected_runs':{'o':15,'c':20,'d':40},'validated_pairs':len(pair_checks),'details':details,'pair_checks':pair_checks,'errors':errors,'meaning':'Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance), B context hold through A end, and normal release. This is not a verdict that HAMi limits were enforced.'}
 (root/'validation.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='details'},indent=2))
 if errors:raise SystemExit(1)

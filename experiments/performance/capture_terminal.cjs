@@ -19,14 +19,14 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  `jq '.[] | select(.command|contains("flyt-shm-worker")) | {pid,policy:.environment.GPU_CORE_UTILIZATION_POLICY,cap:.environment.CUDA_DEVICE_SM_LIMIT,memory:.environment.CUDA_DEVICE_MEMORY_LIMIT_0}' runs/perf-c-r1-25/runtime-libraries.json`,
  `jq '{cap,gpu_uuid,worker,worker_uid}' runs/perf-c-r1-25/identity.json`],[
  '# Original measured events; automated run, post-run inspection',
- `jq -r 'select(.event=="MEASUREMENT_START" or .event=="MEASUREMENT_END" or .event=="RESULT") | [.event,.mode,.completed,.elapsed_s,.status] | @tsv' runs/perf-c-r1-25/stdout.jsonl | column -t`,
- `jq '{status,phase,reason}' runs/perf-c-r1-25/cleanup.json`]],
+ `jq -Rr 'fromjson? | select(.event=="MEASUREMENT_START" or .event=="MEASUREMENT_END" or .event=="RESULT") | [.event,.mode,.completed,.elapsed_s,.status] | @tsv' runs/perf-c-r1-25/stdout.jsonl | column -t`,
+ `jq '{released,uid,utc}' runs/perf-c-r1-25/cleanup.json`]],
  ['02-nts-path-comparison',[
  '# Recomputed from all five independent sessions per path',
  'python3 ../../../performance/terminal_table.py . paths'],[
  '# Protocol and raw first-run output',
  `jq '.overhead' protocol-overhead.json`,
- `jq -r 'select(.event=="RESULT") | [.mode,.bytes,.completed,.operations_per_s,.mismatches] | @tsv' runs/perf-o-r1-t/stdout.jsonl | column -t`]],
+ `jq -Rr 'fromjson? | select(.event=="RESULT") | [.mode,.bytes,.completed,.operations_per_s,.mismatches] | @tsv' runs/perf-o-r1-t/stdout.jsonl | column -t`]],
  ['03-single-and-shared-results',[
  '# Output correctness and utilization enforcement are separate',
  'python3 ../../../performance/terminal_table.py . single'],[
@@ -35,7 +35,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  `jq '.shared | {conditions,solo_window_s,shared_window_s,recovery_window_s}' protocol.json`]],
  ['04-verification-and-resource-audit',[
  '# Independently checked sample counts, clocks, output and release',
- `jq 'del(.runs,.details)' validation.json`,
+ `jq 'del(.runs,.details,.pair_checks)' validation.json`,
  'cat campaign-execution-complete.json'],[
  '# Actual resource cleanup and monitoring audit',
  'cat final-audit.json']]

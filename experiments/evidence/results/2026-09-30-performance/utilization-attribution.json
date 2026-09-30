@@ -4,5 +4,11 @@
   "primary": "HAMi utilization by exact Worker Pod and GPU UUID, exporter up required",
   "crosscheck": "nvidia-smi pmon by Worker PID, raw values and actual sample count preserved",
   "reason": "Pilot S25 90-second interval contained 84 pmon observations at actual ~1.07-second cadence. Treating the requested 1-second cadence as a strict coverage denominator would falsely mark valid samples missing. HAMi Prometheus scrape is 1 second. Pilot HAMi mean 83.4111%, pmon 84.04%, DCGM 84.03%.",
-  "unchanged": "95% valid Prometheus samples and cap+10 percentage-point research tolerance; correctness and independent repetitions unchanged."
+  "unchanged": "95% valid Prometheus samples and cap+10 percentage-point research tolerance; correctness and independent repetitions unchanged.",
+  "shared_timing_validation": {
+    "recorded_before_shared_runs_utc": 1790778283.5403945,
+    "scheduled_start_and_duration_tolerance_s": 0.25,
+    "clock_continuity_tolerance_s": 0.05,
+    "transient_context_requirement": "B idle-hold ends after A completes; distinct Worker and launcher UIDs"
+  }
 }
