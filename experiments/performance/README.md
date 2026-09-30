@@ -138,3 +138,10 @@ so its lifetime is separate from an interactive tool session. `status.py` checks
 actual driver processes and labels persisted, inactive logs as unfinished.
 The measured stages and the final cleanup/publication remain separate completion
 states; process startup alone is not completion.
+
+`finish_campaign.py` can run in a separate named user systemd service. It waits
+for successful full measurement validation, then retains monitoring, removes
+only owned resources, audits the resulting state, captures real terminal
+inspection, and generates the report. It stops on failure and never publishes
+automatically. Review the outputs, finish documentation and checks, and hash the
+bundle before committing and publishing it.
