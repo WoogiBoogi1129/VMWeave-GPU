@@ -35,7 +35,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  `jq '.shared | {conditions,solo_window_s,shared_window_s,recovery_window_s}' protocol.json`]],
  ['04-verification-and-resource-audit',[
  '# Independently checked sample counts, clocks, output and release',
- `jq 'del(.runs,.details,.pair_checks)' validation.json`,
+ `jq '{status,campaign_complete,valid_runs,validated_pairs,errors}' validation.json`,
  'cat campaign-execution-complete.json'],[
  '# Actual resource cleanup and monitoring audit',
  'cat final-audit.json']]

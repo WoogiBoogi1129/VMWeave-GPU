@@ -43,13 +43,17 @@ for pairfile in sorted((root/'pairs').glob('*r1-*-a.json')) if (root/'pairs').ex
  for run,label,color in [(ra,'A (continuous)','#7c3aed'),(rb,'B (starts/stops)','#0f766e')]:
   r=json.loads((run/'execution.json').read_text())['results'][0];ident=json.loads((run/'identity.json').read_text());offset=r['utc_start']-ident.get('clock_offset',0)-origin
   data=samples(run/(run.name+'-timed.csv.gz'));times=data[:,1]+offset;bins=np.arange(0,242);count=np.histogram(times,bins=bins)[0]
-  active=(bins[:-1]>=offset)&(bins[:-1]<offset+r['elapsed_s'])
-  ax[0].plot(bins[:-1][active],count[active],color=color,alpha=.25)
-  smooth=np.convolve(count,np.ones(5)/5,mode='same');ax[0].plot(bins[:-1][active],smooth[active],color=color,label=label+' (5 s mean)')
+  # Only complete one-second bins. A final fractional bin is not a full-second rate.
+  active=(bins[:-1]>=offset)&(bins[1:]<=min(240,offset+r['elapsed_s']))
+  x=bins[:-1][active]+.5;values=count[active]
+  ax[0].plot(x,values,color=color,alpha=.25)
+  # Trailing average without zero padding or mixing pre-start/post-stop bins.
+  smooth=np.convolve(values,np.ones(5),mode='full')[:len(values)]/np.minimum(np.arange(len(values))+1,5)
+  ax[0].plot(x,smooth,color=color,label=label+' (trailing ≤5 s mean)')
   points=[]
-  for t in range(240):
+  for t in bins[:-1][active]:
    lat=data[(times>=t)&(times<t+1),2]
-   if len(lat)>=20:points.append((t,np.percentile(lat,95)*1000))
+   if len(lat)>=20:points.append((t+.5,np.percentile(lat,95)*1000))
   if points:ax[1].plot(*np.array(points).T,color=color,label=label)
  telemetry=ra/'telemetry.json'
  if telemetry.exists():

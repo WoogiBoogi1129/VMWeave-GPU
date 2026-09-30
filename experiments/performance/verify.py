@@ -1,5 +1,6 @@
 """Independent bundle checks; completion is distinct from enforcement success."""
 import json,sys
+from collections import Counter
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from pathlib import Path
@@ -57,7 +58,7 @@ for run in sorted((root/'runs').iterdir()):
   if identity['path'] in ['N','S']:
    runtime=json.loads((run/'runtime-libraries.json').read_text())
    assert runtime and all(r['environment']['GPU_CORE_UTILIZATION_POLICY']=='FORCE' and r['environment']['CUDA_DEVICE_SM_LIMIT']==str(identity['cap']) for r in runtime)
-  details.append({'run':run.name,'windows':len(begins),'verified_output_elements':checked,'max_clock_error_seconds':max_clock_error,'observed_gpu_pids':sorted(observed),'status':'PASS'})
+  details.append({'run':run.name,'path':identity['path'],'cap':identity['cap'],'windows':len(begins),'verified_output_elements':checked,'max_clock_error_seconds':max_clock_error,'observed_gpu_pids':sorted(observed),'status':'PASS'})
  except Exception as e:errors.append({'run':run.name,'error':str(e)})
 pair_checks=[]
 for file in sorted((root/'pairs').glob('*.json')) if (root/'pairs').exists() else []:
@@ -66,6 +67,7 @@ for file in sorted((root/'pairs').glob('*.json')) if (root/'pairs').exists() els
  if not all((d/'cleanup.json').exists() for d in [a,b]):continue
  try:
   ai=json.loads((a/'identity.json').read_text());bi=json.loads((b/'identity.json').read_text())
+  assert (ai['cap'],bi['cap'])==(pair['cap_a'],pair['cap_b']), 'Pair labels differ from actual VM policies'
   ar=json.loads((a/'execution.json').read_text())['results'][0];br=json.loads((b/'execution.json').read_text())['results'][0]
   astart=ar['utc_start']-ai['clock_offset'];bstart=br['utc_start']-bi['clock_offset']
   assert abs(astart-pair['scheduled_start_host_utc'])<.25
@@ -75,10 +77,19 @@ for file in sorted((root/'pairs').glob('*.json')) if (root/'pairs').exists() els
   hold_end=next(e['utc'] for e in events if e.get('event')=='IDLE_HOLD_END')-bi['clock_offset']
   assert hold_end>=astart+239.75
   assert ai['worker_uid']!=bi['worker_uid'] and ai['launcher_uid']!=bi['launcher_uid']
-  pair_checks.append({'pair':pair['name'],'start_delay_s':bstart-astart,'b_context_held_until_a_s':hold_end-astart,'status':'PASS'})
+  pair_checks.append({'pair':pair['name'],'condition':[pair['cap_a'],pair['cap_b'],pair['always_active_slot']],'start_delay_s':bstart-astart,'b_context_held_until_a_s':hold_end-astart,'status':'PASS'})
  except Exception as e:errors.append({'pair':pair['name'],'error':str(e)})
 counts={p:sum(x['run'].startswith('perf-'+p+'-') for x in details) for p in ['o','c','d']}
+coverage={
+ 'overhead':dict(Counter(x['path'] for x in details if x['run'].startswith('perf-o-'))),
+ 'single':dict(Counter(str(x['cap']) for x in details if x['run'].startswith('perf-c-'))),
+ 'shared':dict(Counter('/'.join(map(str,x['condition'])) for x in pair_checks))}
+expected_coverage={'overhead':{p:5 for p in 'NTS'},'single':{str(c):5 for c in protocol['caps']},'shared':{'/'.join(map(str,c)):5 for c in protocol['shared']['conditions']}}
+for stage,actual in coverage.items():
+ expected=expected_coverage[stage]
+ if any(k not in expected or n>expected[k] for k,n in actual.items()) or (sum(actual.values())==sum(expected.values()) and actual!=expected):
+  errors.append({'stage':stage,'error':'Independent-repeat coverage differs from protocol','actual':actual,'expected':expected})
 complete=counts=={'o':15,'c':20,'d':40} and len(pair_checks)==20 and not errors
-report={'status':'PASS' if not errors else 'FAIL','campaign_complete':complete,'valid_runs':counts,'expected_runs':{'o':15,'c':20,'d':40},'validated_pairs':len(pair_checks),'details':details,'pair_checks':pair_checks,'errors':errors,'meaning':'Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance), B context hold through A end, and normal release. This is not a verdict that HAMi limits were enforced.'}
+report={'status':'PASS' if not errors else 'FAIL','campaign_complete':complete,'valid_runs':counts,'expected_runs':{'o':15,'c':20,'d':40},'validated_pairs':len(pair_checks),'repeat_coverage':coverage,'details':details,'pair_checks':pair_checks,'errors':errors,'meaning':'Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance on corrected timestamps), B context hold through A end, repeat coverage, and normal release. This is not a verdict that HAMi limits were enforced.'}
 (root/'validation.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='details'},indent=2))
 if errors:raise SystemExit(1)

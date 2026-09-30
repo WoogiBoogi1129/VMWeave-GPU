@@ -9,6 +9,13 @@ for source in sorted(BASE.glob('*.terminal')):
 for source in sorted(BASE.glob('build*.txt')):
  target=OUT/'build'/source.name;target.parent.mkdir(exist_ok=True)
  target.write_text(redact(source.read_text()))
+history=[]
+for pattern in ['collect-*.txt','first-shared-review-*.txt']:
+ for source in sorted(BASE.glob(pattern)):
+  target=OUT/'analysis-history'/source.name;target.parent.mkdir(exist_ok=True)
+  target.write_text(redact(source.read_text()))
+  history.append({'file':target.name,'source_modified_utc':source.stat().st_mtime})
+save(OUT/'analysis-history/index.json',{'scope':'Actual collection/analysis command outputs at successive checkpoints; early counts are partial, final outcomes are in validation.json and analysis/summary.json.','files':history})
 for name in ['Worker.Containerfile','images.json']:
  source=BASE/name;target=OUT/'build'/name;target.write_text(redact(source.read_text()))
 shutil.copy2(BASE/'artifacts/cubin-normalization.json',OUT/'build/cubin-normalization.json')
