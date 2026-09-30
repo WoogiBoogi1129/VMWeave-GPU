@@ -31,7 +31,7 @@ def process_samples(path):
  return rows
 def main(root):
  root=Path(root);dest=root/'analysis';dest.mkdir(exist_ok=True)
- singles=[];overhead=[];dynamic=[];failures=[]
+ singles=[];overhead=[];dynamic=[];failures=[];trends=[]
  proc=process_samples(root/'monitoring/pmon.txt')
  for run in sorted((root/'runs').iterdir()):
   if run.name.startswith('pilot-'):continue
@@ -50,6 +50,10 @@ def main(root):
     row['enforcement']='NOT_EVALUATED' if len(vals)<86 else ('BASELINE' if row['cap']==100 else ('PASS' if row['gpu_util_mean']<=row['cap']+10 else 'FAIL'))
    else:row.update(gpu_util_mean=None,gpu_samples=0,enforcement='NOT_EVALUATED')
    singles.append(row)
+   for lo in range(0,120,30):
+    trend={'run':run.name,'cap':identity['cap'],'window_start_s':lo,'window_end_s':lo+30,**interval(data,lo,lo+30)}
+    values=[float(v) for s in ts if s['metric'].get('UUID')==identity['gpu_uuid'] for t,v in s['values'] if row['utc_start']+lo<float(t)<=row['utc_start']+lo+30 and math.isfinite(float(v)) and 0<=float(v)<=100] if telemetry.exists() else []
+    trend.update(gpu_util_mean=statistics.mean(values) if values else None,gpu_samples=len(values));trends.append(trend)
   elif run.name.startswith('perf-o-'):
    for result in execution['results']:
     mode=result['mode'];size=result['bytes'];data=samples(run/(run.name+'-'+mode+'-'+str(size)+'.csv.gz'))
@@ -87,6 +91,7 @@ def main(root):
    row['shared_cap_'+role]='NOT_EVALUATED' if len(hvals)<57 else ('PASS' if mean<=cap+10 else 'FAIL')
   dynamic.append(row)
  for name,rows in [('single',singles),('overhead',overhead),('shared',dynamic)]:rows_csv(dest/(name+'.csv'),rows)
+ rows_csv(dest/'single-timecourse.csv',trends)
  summary={'single_runs':len(singles),'overhead_sessions':len({r['run'] for r in overhead}),'overhead_measurement_windows':len({(r['run'],('copy' if r['metric'] in ['H2D','D2H'] else r['metric']),r['bytes']) for r in overhead}),'overhead_metric_rows':len(overhead),'shared_pairs':len(dynamic),'failures':failures,'single':{},'overhead':{},'shared':{}}
  for cap in [25,50,75,100]:
   rs=[r for r in singles if r['cap']==cap]

@@ -29,6 +29,7 @@ for cap,r in s['single'].items():
  lines.append(f"| {cap} | {r['n']} | {util} | {stat(r,'throughput')} | {stat(r,'p95_ms')} | {stat(r,'fixed_seconds')} | {verdict} |")
 lines += ['', '상한 판정은 중앙 구간 평균 이용률 ≤ 설정값 + 10 percentage points, 유효 계측 ≥95%, 정상 작업 완료를 기준으로 합니다. 이 허용오차는 연구용 사전 기준이며 HAMi의 공식 보장값이 아닙니다. 100은 연산 제한 없는 기준(BASELINE)이고, 상한은 처리량 비율이나 코어 독점 할당을 뜻하지 않습니다.', '',
  '![단일 VM 결과](figures/single-caps.png)','',
+ '[30초 구간별 처리량·지연·이용률](analysis/single-timecourse.csv)도 보존합니다. 평균 상한 위반을 제어 경로의 영구 비활성으로 단정하지 않으며, 판정 범위는 명시한 워밍업과 관측 구간입니다.','',
  '## N / Flyt TCP·RPC / VMWeave SHM 비교','',
  '클라이언트 측 완료 시간을 측정합니다. query는 cudaMemGetInfo, kernel은 launch+sync, H2D/D2H는 각 copy+sync입니다. 표의 크기는 작업 버퍼 크기이며 query 요청의 네트워크 전송량을 뜻하지 않습니다. resident는 GPU 상주 데이터로 kernel+sync를 반복하고, transfer는 매 작업에 H2D와 D2H를 포함합니다. 두 처리량 시험의 커널 내부 반복은 64회이고, 상한·공유 시험은 1,048,576회이므로 두 절의 작업/초를 직접 비교하지 않습니다.','',
  '| 지표 | 크기 (bytes) | N (µs, 평균 ± SD) | T (µs, 평균 ± SD) | S (µs, 평균 ± SD) | S/T 평균 지연 비 |','|---|---:|---:|---:|---:|---:|']
