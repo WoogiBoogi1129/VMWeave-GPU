@@ -98,3 +98,25 @@ tables/figures/report. `capture_grafana.cjs` and `capture_terminal.cjs` capture
 real retained-data dashboards and real ttyd/tmux log inspection.
 `cleanup.py` is gated on full verification and deletes only recorded resource
 UIDs; it leaves the monitoring installation and data intact.
+
+## Reusing the recorded testbed
+
+The command block above records this campaign's entry points. It is not a
+one-command installer for another cluster. For a new measurement, change
+`BASE`/`OUT` to fresh paths, preserve the published evidence, provision the
+recorded image digests and guest key, and create/copy the measurement protocol
+with hashes of the binaries actually used. Existing output directories are
+intentionally rejected. VM templates use 8 vCPU/16 GiB; affinity is recorded
+per launcher/Worker and is not exclusive CPU reservation.
+
+Start `exporter.py` on the recorded host address/port and capture
+`nvidia-smi pmon -i 1 -s um -d 1 -o DT` before measurements (index 1 is the
+verified target UUID on this testbed). Record their actual PIDs/commands in
+`BASE/processes.json`; the published `monitoring/collectors.json` preserves
+this campaign's record. Do not start a duplicate exporter on an occupied port.
+All four Prometheus targets must be healthy before timing.
+
+For offline review, use `verify.py`, `analyze.py`, `plot.py`, and `report.py`
+against the result directory. Verify the original `SHA256SUMS` before
+regenerating derived files; regenerated SVG metadata can change file hashes.
+The analysis environment used Python 3.12, NumPy 2.5.3, and Matplotlib 3.9.4.
