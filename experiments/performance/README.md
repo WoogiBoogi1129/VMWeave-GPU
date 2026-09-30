@@ -49,8 +49,10 @@ Report both mean and time-series limit behavior. The research acceptance rule
 is mean utilization <= cap + 10 percentage points over the central window, with
 >=95% valid telemetry and verified nonzero work. This tolerance is an experiment
 criterion, not a HAMi guarantee. GPU whole-device DCGM values support single-VM
-evaluation only; process pmon/HAMi attribution is needed for individual shared
-VMs. Missing/unsupported telemetry is not zero. HAMi's cap-100 utilization series
+evaluation only. Shared VM utilization uses the exact Worker Pod/GPU UUID HAMi
+series (healthy exporter), cross-checked against Worker-PID pmon samples. Actual
+pmon cadence is recorded and is not assumed to equal its requested interval.
+The pre-shared-run clarification is in `utilization-attribution.json` in the results. Missing/unsupported telemetry is not zero. HAMi's cap-100 utilization series
 may stay zero even during real GPU execution and must not be used as proof of idle.
 
 ## Execution and evidence
@@ -88,3 +90,11 @@ Preparation failures remain in the pilot evidence. Formal failures stop the
 driver for diagnosis; no silent rerun or deletion. Resume only missing runs with
 new names and an explicit deviation record. Drain owned channels by UID; do not
 force finalizers or modify unrelated user resources.
+
+After collection, `verify.py` independently checks exact sample counts, output,
+clock continuity, shared start offsets (250 ms tolerance), B context lifetime,
+and release identities. `analyze.py`, `plot.py`, and `report.py` regenerate the
+tables/figures/report. `capture_grafana.cjs` and `capture_terminal.cjs` capture
+real retained-data dashboards and real ttyd/tmux log inspection.
+`cleanup.py` is gated on full verification and deletes only recorded resource
+UIDs; it leaves the monitoring installation and data intact.

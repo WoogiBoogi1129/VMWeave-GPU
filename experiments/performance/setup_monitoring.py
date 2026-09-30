@@ -1,5 +1,6 @@
 """Dedicated Kubernetes Prometheus/Grafana; existing DCGM is preserved."""
 import json, secrets
+from pathlib import Path
 from common import *
 
 ensure_admin()
@@ -25,10 +26,7 @@ nip=get('pod','perf-node-exporter',MON)['status']['podIP']
 (M/'provisioning/datasources/prometheus.yaml').write_text('apiVersion: 1\ndatasources:\n  - name: Performance Prometheus\n    uid: perf-prom\n    type: prometheus\n    access: proxy\n    url: http://127.0.0.1:9090\n    isDefault: true\n    jsonData:\n      timeInterval: 1s\n')
 (M/'provisioning/dashboards/perf.yaml').write_text('apiVersion: 1\nproviders:\n  - name: Performance\n    type: file\n    options:\n      path: /monitor/dashboards\n')
 (M/'grafana.ini').write_text('[server]\nhttp_port = 3000\n[paths]\ndata = /monitor/grafana-data\nlogs = /monitor/grafana-data\nprovisioning = /monitor/provisioning\n[auth.anonymous]\nenabled = true\norg_role = Viewer\n[analytics]\nreporting_enabled = false\ncheck_for_updates = false\n')
-specs=[('GPU utilization — whole device','DCGM_FI_DEV_GPU_UTIL','percent'),('Completed operations per second','rate(vmweave_completed_total[5s])','ops'),('Application phase','vmweave_phase','short'),('GPU framebuffer used','DCGM_FI_DEV_FB_USED','mbytes'),('GPU power','DCGM_FI_DEV_POWER_USAGE','watt'),('GPU SM clock','DCGM_FI_DEV_SM_CLOCK','suffix:MHz'),('GPU temperature','DCGM_FI_DEV_GPU_TEMP','celsius'),('Requested HAMi cap','vmweave_compute_cap_percent','percent')]
-panels=[]
-for i,(title,expr,unit) in enumerate(specs):panels.append({'id':i+1,'type':'timeseries','title':title,'datasource':{'type':'prometheus','uid':'perf-prom'},'gridPos':{'x':12*(i%2),'y':7*(i//2),'w':12,'h':7},'targets':[{'expr':expr,'refId':'A','legendFormat':'{{run_id}} {{vm}} {{UUID}}'}],'fieldConfig':{'defaults':{'unit':unit,'min':0,'custom':{'spanNulls':False}},'overrides':[]}})
-dashboard={'uid':'vmweave-performance','title':'VMWeave performance — actual observations','schemaVersion':40,'version':1,'timezone':'utc','refresh':'','panels':panels}
+dashboard=json.loads((Path(__file__).parent/'grafana-dashboard.json').read_text())
 save(M/'dashboards/performance.json',dashboard)
 password=json.loads((BASE/'grafana-auth.json').read_text())['password'] if (BASE/'grafana-auth.json').exists() else secrets.token_urlsafe(24)
 save(BASE/'grafana-auth.json',{'user':'admin','password':password});(BASE/'grafana-auth.json').chmod(0o600)

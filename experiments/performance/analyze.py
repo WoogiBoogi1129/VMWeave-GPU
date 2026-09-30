@@ -44,7 +44,7 @@ def main(root):
    telemetry=run/'telemetry.json'
    if telemetry.exists():
     ts=json.loads(telemetry.read_text()).get('gpu_util',{}).get('data',{}).get('result',[])
-    vals=[float(v) for s in ts for t,v in s['values'] if row['utc_start']+15<=float(t)<=row['utc_start']+105 and math.isfinite(float(v)) and 0<=float(v)<=100]
+    vals=[float(v) for s in ts if s['metric'].get('UUID')==identity['gpu_uuid'] for t,v in s['values'] if row['utc_start']+15<=float(t)<=row['utc_start']+105 and math.isfinite(float(v)) and 0<=float(v)<=100]
     row['gpu_util_mean']=statistics.mean(vals) if vals else None
     row['gpu_samples']=len(vals)
     row['enforcement']='NOT_EVALUATED' if len(vals)<86 else ('PASS' if row['gpu_util_mean']<=row['cap']+10 else 'FAIL')
