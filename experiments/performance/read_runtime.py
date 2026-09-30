@@ -25,8 +25,9 @@ for row in rows:
   rel=subprocess.check_output(['chroot','/host','/usr/bin/readelf','-Wr','/proc/'+str(pid)+'/exe'],text=True)
   symbols={}
   for line in rel.splitlines():
-   if 'JUMP_SLOT' not in line or not any(s in line for s in ['cuLaunchKernel ','cudaMemcpy ','cudaDeviceSynchronize ']):continue
-   cols=line.split();address=base+int(cols[0],16)
+   cols=line.split()
+   if 'JUMP_SLOT' not in line or len(cols)<5 or cols[4].split('@')[0] not in ['cuLaunchKernel','cudaMemcpy','cudaDeviceSynchronize']:continue
+   address=base+int(cols[0],16)
    with (p/'mem').open('rb',buffering=0) as memory:
     memory.seek(address);target=struct.unpack('<Q',memory.read(8))[0]
    owner=next((x.split()[-1] for x in maps if int(x.split()[0].split('-')[0],16)<=target<int(x.split()[0].split('-')[1],16)),'unmapped')
