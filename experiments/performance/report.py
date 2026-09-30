@@ -24,10 +24,10 @@ lines=['# VMWeave 성능 분석 — 2026-09-30 시작 campaign','',
  '| 상한 | n | GPU 이용률 평균 (%) | 처리량 (작업/초, 평균 ± SD) | p95 지연 (ms, 실행별 값의 평균 ± SD) | 2,500회 완료 시간 (s, 평균 ± SD) | 상한 판정 |',
  '|---:|---:|---:|---:|---:|---:|---|']
 for cap,r in s['single'].items():
- verdict=', '.join(f'{k} {r["enforcement"].count(k)}' for k in ['PASS','FAIL','NOT_EVALUATED'] if k in r['enforcement'])
+ verdict=', '.join(f'{k} {r["enforcement"].count(k)}' for k in ['PASS','FAIL','NOT_EVALUATED','BASELINE'] if k in r['enforcement'])
  util=f"{r['gpu_util_mean']:.2f}" if r['gpu_util_mean'] is not None else '미계측'
  lines.append(f"| {cap} | {r['n']} | {util} | {stat(r,'throughput')} | {stat(r,'p95_ms')} | {stat(r,'fixed_seconds')} | {verdict} |")
-lines += ['', '상한 판정은 중앙 구간 평균 이용률 ≤ 설정값 + 10 percentage points, 유효 계측 ≥95%, 정상 작업 완료를 기준으로 합니다. 이 허용오차는 연구용 사전 기준이며 HAMi의 공식 보장값이 아닙니다. 100은 연산 제한 없는 기준이고, 상한은 처리량 비율이나 코어 독점 할당을 뜻하지 않습니다.', '',
+lines += ['', '상한 판정은 중앙 구간 평균 이용률 ≤ 설정값 + 10 percentage points, 유효 계측 ≥95%, 정상 작업 완료를 기준으로 합니다. 이 허용오차는 연구용 사전 기준이며 HAMi의 공식 보장값이 아닙니다. 100은 연산 제한 없는 기준(BASELINE)이고, 상한은 처리량 비율이나 코어 독점 할당을 뜻하지 않습니다.', '',
  '![단일 VM 결과](figures/single-caps.png)','',
  '## N / Flyt TCP·RPC / VMWeave SHM 비교','',
  '| 지표 | 크기 (bytes) | N (µs, 평균 ± SD) | T (µs, 평균 ± SD) | S (µs, 평균 ± SD) | S/T 평균 지연 비 |','|---|---:|---:|---:|---:|---:|']

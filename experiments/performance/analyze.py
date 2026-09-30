@@ -47,7 +47,7 @@ def main(root):
     vals=[float(v) for s in ts if s['metric'].get('UUID')==identity['gpu_uuid'] for t,v in s['values'] if row['utc_start']+15<=float(t)<=row['utc_start']+105 and math.isfinite(float(v)) and 0<=float(v)<=100]
     row['gpu_util_mean']=statistics.mean(vals) if vals else None
     row['gpu_samples']=len(vals)
-    row['enforcement']='NOT_EVALUATED' if len(vals)<86 else ('PASS' if row['gpu_util_mean']<=row['cap']+10 else 'FAIL')
+    row['enforcement']='NOT_EVALUATED' if len(vals)<86 else ('BASELINE' if row['cap']==100 else ('PASS' if row['gpu_util_mean']<=row['cap']+10 else 'FAIL'))
    else:row.update(gpu_util_mean=None,gpu_samples=0,enforcement='NOT_EVALUATED')
    singles.append(row)
   elif run.name.startswith('perf-o-'):
