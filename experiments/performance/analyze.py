@@ -58,7 +58,7 @@ def main(root):
    if all(abs(float(x)-baseline)<=baseline*.1 for x in bins[t:t+5]):entry=t-bend;recovery=t+5-bend;break
   dynamic.append({'pair':pair['name'],'cap_a':pair['cap_a'],'cap_b':pair['cap_b'],'slot':pair['always_active_slot'],'solo_q':baseline,'shared_q':stages['shared']['throughput'],'recovered_q':stages['recovered']['throughput'],'retention':stages['shared']['throughput']/baseline,'solo_p95_ms':stages['solo']['p95_ms'],'shared_p95_ms':stages['shared']['p95_ms'],'b_actual_start_s':bstart,'b_actual_end_s':bend,'recovery_s':recovery,'recovery_band_entry_s':entry})
  for name,rows in [('single',singles),('overhead',overhead),('shared',dynamic)]:rows_csv(dest/(name+'.csv'),rows)
- summary={'single_runs':len(singles),'overhead_windows':len(overhead),'shared_pairs':len(dynamic),'failures':failures,'single':{},'overhead':{},'shared':{}}
+ summary={'single_runs':len(singles),'overhead_sessions':len({r['run'] for r in overhead}),'overhead_measurement_windows':len({(r['run'],('copy' if r['metric'] in ['H2D','D2H'] else r['metric']),r['bytes']) for r in overhead}),'overhead_metric_rows':len(overhead),'shared_pairs':len(dynamic),'failures':failures,'single':{},'overhead':{},'shared':{}}
  for cap in [25,50,75,100]:
   rs=[r for r in singles if r['cap']==cap]
   if rs:summary['single'][str(cap)]={'n':len(rs),**{k:{'mean':statistics.mean(r[k] for r in rs),'sd':statistics.stdev(r[k] for r in rs) if len(rs)>1 else 0} for k in ['throughput','p95_ms','fixed_seconds']},'gpu_util_mean':statistics.mean(r['gpu_util_mean'] for r in rs if r['gpu_util_mean'] is not None) if any(r['gpu_util_mean'] is not None for r in rs) else None,'enforcement':[r['enforcement'] for r in rs]}
