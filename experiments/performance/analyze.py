@@ -76,9 +76,15 @@ def main(root):
   for role,folder,cap in [('a',run,pair['cap_a']),('b',other,pair['cap_b'])]:
    runtime=json.loads((folder/'runtime-libraries.json').read_text());pid=next(x['pid'] for x in runtime if 'flyt-shm-worker' in x['command'])
    vals=[v for t,v in proc.get(pid,[]) if origin+90<t<=origin+150 and 0<=v<=100]
-   mean=statistics.mean(vals) if vals else None
-   row['shared_util_'+role]=mean;row['shared_util_samples_'+role]=len(vals)
-   row['shared_cap_'+role]='NOT_EVALUATED' if len(vals)<57 else ('PASS' if mean<=cap+10 else 'FAIL')
+   row['pmon_util_'+role]=statistics.mean(vals) if vals else None;row['pmon_samples_'+role]=len(vals)
+   ident=json.loads((folder/'identity.json').read_text())
+   telemetry=json.loads((folder/'telemetry.json').read_text()) if (folder/'telemetry.json').exists() else {}
+   series=[s for s in telemetry.get('hami_util',{}).get('data',{}).get('result',[]) if s['metric'].get('pod')==ident['worker'] and s['metric'].get('device_uuid')==ident['gpu_uuid']]
+   if len(series)>1:raise ValueError('ambiguous worker utilization series '+folder.name)
+   hvals=[float(v) for s in series for t,v in s['values'] if origin+90<float(t)<=origin+150 and math.isfinite(float(v)) and 0<=float(v)<=100]
+   mean=statistics.mean(hvals) if hvals else None
+   row['shared_util_'+role]=mean;row['shared_util_samples_'+role]=len(hvals)
+   row['shared_cap_'+role]='NOT_EVALUATED' if len(hvals)<57 else ('PASS' if mean<=cap+10 else 'FAIL')
   dynamic.append(row)
  for name,rows in [('single',singles),('overhead',overhead),('shared',dynamic)]:rows_csv(dest/(name+'.csv'),rows)
  summary={'single_runs':len(singles),'overhead_sessions':len({r['run'] for r in overhead}),'overhead_measurement_windows':len({(r['run'],('copy' if r['metric'] in ['H2D','D2H'] else r['metric']),r['bytes']) for r in overhead}),'overhead_metric_rows':len(overhead),'shared_pairs':len(dynamic),'failures':failures,'single':{},'overhead':{},'shared':{}}
