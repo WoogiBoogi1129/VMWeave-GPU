@@ -17,7 +17,11 @@ dcgm={'apiVersion':'v1','kind':'Pod','metadata':{'name':'perf-dcgm','namespace':
 if not get('pod','perf-dcgm',MON):create(dcgm)
 wait(lambda:get('pod','perf-dcgm',MON).get('status',{}).get('phase')=='Running')
 dip=get('pod','perf-dcgm',MON)['status']['podIP']
-(M/'prometheus.yml').write_text('global:\n  scrape_interval: 1s\n  scrape_timeout: 900ms\nscrape_configs:\n  - job_name: dcgm\n    static_configs:\n      - targets: ["'+dip+':9400"]\n  - job_name: experiment\n    static_configs:\n      - targets: ["192.168.24.21:9899"]\n')
+node={'apiVersion':'v1','kind':'Pod','metadata':{'name':'perf-node-exporter','namespace':MON},'spec':{'nodeName':'gpu-4','hostPID':True,'restartPolicy':'Always','automountServiceAccountToken':False,'containers':[{'name':'node-exporter','image':'quay.io/prometheus/node-exporter:v1.9.1','args':['--path.rootfs=/host','--path.procfs=/host/proc','--path.sysfs=/host/sys','--collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/containers|var/lib/kubelet)($|/)'],'volumeMounts':[{'name':'host','mountPath':'/host','readOnly':True}]}],'volumes':[{'name':'host','hostPath':{'path':'/','type':'Directory'}}]}}
+if not get('pod','perf-node-exporter',MON):create(node)
+wait(lambda:get('pod','perf-node-exporter',MON).get('status',{}).get('phase')=='Running')
+nip=get('pod','perf-node-exporter',MON)['status']['podIP']
+(M/'prometheus.yml').write_text('global:\n  scrape_interval: 1s\n  scrape_timeout: 900ms\nscrape_configs:\n  - job_name: dcgm\n    static_configs:\n      - targets: ["'+dip+':9400"]\n  - job_name: experiment\n    static_configs:\n      - targets: ["192.168.24.21:9899"]\n  - job_name: hami\n    static_configs:\n      - targets: ["hami-device-plugin-monitor.kube-system.svc:31992"]\n  - job_name: node\n    static_configs:\n      - targets: ["'+nip+':9100"]\n')
 (M/'provisioning/datasources/prometheus.yaml').write_text('apiVersion: 1\ndatasources:\n  - name: Performance Prometheus\n    uid: perf-prom\n    type: prometheus\n    access: proxy\n    url: http://127.0.0.1:9090\n    isDefault: true\n    jsonData:\n      timeInterval: 1s\n')
 (M/'provisioning/dashboards/perf.yaml').write_text('apiVersion: 1\nproviders:\n  - name: Performance\n    type: file\n    options:\n      path: /monitor/dashboards\n')
 (M/'grafana.ini').write_text('[server]\nhttp_port = 3000\n[paths]\ndata = /monitor/grafana-data\nlogs = /monitor/grafana-data\nprovisioning = /monitor/provisioning\n[auth.anonymous]\nenabled = true\norg_role = Viewer\n[analytics]\nreporting_enabled = false\ncheck_for_updates = false\n')
@@ -26,7 +30,8 @@ panels=[]
 for i,(title,expr,unit) in enumerate(specs):panels.append({'id':i+1,'type':'timeseries','title':title,'datasource':{'type':'prometheus','uid':'perf-prom'},'gridPos':{'x':12*(i%2),'y':7*(i//2),'w':12,'h':7},'targets':[{'expr':expr,'refId':'A','legendFormat':'{{run_id}} {{vm}} {{UUID}}'}],'fieldConfig':{'defaults':{'unit':unit,'min':0,'custom':{'spanNulls':False}},'overrides':[]}})
 dashboard={'uid':'vmweave-performance','title':'VMWeave performance — actual observations','schemaVersion':40,'version':1,'timezone':'utc','refresh':'','panels':panels}
 save(M/'dashboards/performance.json',dashboard)
-password=secrets.token_urlsafe(24);save(BASE/'grafana-auth.json',{'user':'admin','password':password});(BASE/'grafana-auth.json').chmod(0o600)
+password=json.loads((BASE/'grafana-auth.json').read_text())['password'] if (BASE/'grafana-auth.json').exists() else secrets.token_urlsafe(24)
+save(BASE/'grafana-auth.json',{'user':'admin','password':password});(BASE/'grafana-auth.json').chmod(0o600)
 if not get('secret','perf-grafana-auth',MON):
     create({'apiVersion':'v1','kind':'Secret','metadata':{'name':'perf-grafana-auth','namespace':MON},'stringData':{'password':password}},private=True)
 pod={'apiVersion':'v1','kind':'Pod','metadata':{'name':'perf-monitor','namespace':MON},'spec':{'nodeName':'gpu-4','restartPolicy':'Always','automountServiceAccountToken':False,'securityContext':{'runAsUser':0},
