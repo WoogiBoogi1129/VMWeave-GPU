@@ -45,12 +45,12 @@ for key,paths in s['overhead'].items():
 lines += ['', 'N도 HAMi를 포함합니다. T의 MPS와 N/S의 HAMi, 큐·동기화·실행기 차이가 포함되므로 결과는 전체 구현 경로의 비교입니다. PTX와 cubin의 계산·입력은 같지만 동일 기계어를 보장하지 않습니다. 전송 매체만의 효과나 모든 CUDA/AI 작업에 일반화하지 않습니다.', '',
  '![호출·전송 지연](figures/path-latency.png)','', '![처리량](figures/path-throughput.png)','',
  '## 다른 VM 부하의 시작·종료','',
- '| A/B 상한, A CPU 슬롯 | n | A 단독 처리량 | 동시 실행 시 A 처리량 | 유지율 | A 단독 p95 (ms) | 동시 실행 시 A p95 (ms) |', '|---|---:|---:|---:|---:|---:|---:|']
+ '| A/B 상한, A CPU 슬롯 | n | A 단독 처리량 | 동시 실행 시 A 처리량 | 종료 후 A 처리량 | 유지율 | A 단독 p95 (ms) | 동시 실행 시 A p95 (ms) |', '|---|---:|---:|---:|---:|---:|---:|---:|']
 for name,r in s['shared'].items():
  def shared_stat(k,percent=False):
   scale=100 if percent else 1
   return f"{r[k]*scale:.2f} ± {r['sd'][k]*scale:.2f}"+('%' if percent else '')
- lines.append(f"| {name} | {r['n']} | {shared_stat('solo_q')} | {shared_stat('shared_q')} | {shared_stat('retention',True)} | {shared_stat('solo_p95_ms')} | {shared_stat('shared_p95_ms')} |")
+ lines.append(f"| {name} | {r['n']} | {shared_stat('solo_q')} | {shared_stat('shared_q')} | {shared_stat('recovered_q')} | {shared_stat('retention',True)} | {shared_stat('solo_p95_ms')} | {shared_stat('shared_p95_ms')} |")
 lines += ['', '| A/B 상한, A CPU 슬롯 | B 동시 처리량 (작업/초, 평균 ± SD) | B 동시 p95 (ms, 평균 ± SD) | A+B 동시 처리량 (작업/초, 평균 ± SD) |', '|---|---:|---:|---:|']
 for name,r in s['shared'].items():
  lines.append('| '+name+' | '+' | '.join(f"{r[k]:.2f} ± {r['sd'][k]:.2f}" for k in ['b_shared_q','b_shared_p95_ms','shared_total_q'])+' |')
