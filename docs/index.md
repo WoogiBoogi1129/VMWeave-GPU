@@ -14,7 +14,13 @@ Kubernetes가 관리하는 VM의 CUDA 호출, GPU 자원 요청, 실행과 회�
 
 ## 실행 구조
 
-![VMWeave-GPU 데이터 경로와 제어 관계](assets/architecture.svg)
+<figure class="architecture-figure" markdown>
+
+![VMWeave 중앙 제어와 사용자 namespace 구조](assets/architecture.svg)
+
+</figure>
+
+[그림 크게 보기](assets/architecture.svg){ target="_blank" rel="noopener" }
 
 Guest의 CUDA interception은 요청을 SHM 큐에 기록합니다. Worker가 요청을 받아
 HAMi/CUDA 경로에서 실행하고 응답합니다. Kubernetes 제어기는 VM·요청·Worker의

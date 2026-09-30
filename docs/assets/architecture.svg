@@ -1,14 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 350" role="img" aria-labelledby="title desc">
-<title id="title">VMWeave-GPU architecture</title><desc id="desc">A KubeVirt VM sends CUDA requests through shared-memory rings to a Worker, which executes them through HAMi and CUDA. Kubernetes manages the channel lifecycle.</desc>
-<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#0d9488"/></marker></defs>
-<rect width="960" height="350" rx="16" fill="#f1f5f9"/>
-<g font-family="system-ui,sans-serif" text-anchor="middle" fill="#0f172a">
-<text x="480" y="36" font-size="15" font-weight="700">VMWeave-GPU · shared-memory execution on the same node</text>
-<rect x="30" y="75" width="195" height="102" rx="10" fill="#fff" stroke="#94a3b8"/><text x="127" y="108" font-size="18" font-weight="700">KubeVirt VM</text><text x="127" y="138" font-size="14">CUDA interception</text><text x="127" y="159" font-size="12">Guest library</text>
-<rect x="272" y="75" width="186" height="102" rx="10" fill="#ccfbf1" stroke="#0d9488"/><text x="365" y="108" font-size="18" font-weight="700">Shared memory</text><text x="365" y="138" font-size="14">Request / response rings</text><text x="365" y="159" font-size="12">Payload · ivshmem</text>
-<rect x="505" y="75" width="188" height="102" rx="10" fill="#fff" stroke="#94a3b8"/><text x="599" y="108" font-size="18" font-weight="700">Worker</text><text x="599" y="138" font-size="14">CUDA dispatcher</text><text x="599" y="159" font-size="12">Session execution</text>
-<rect x="740" y="75" width="190" height="102" rx="10" fill="#fff" stroke="#94a3b8"/><text x="835" y="108" font-size="18" font-weight="700">GPU</text><text x="835" y="138" font-size="14">HAMi / CUDA</text><text x="835" y="159" font-size="12">Resource policy</text>
-<g stroke="#0d9488" stroke-width="2" marker-end="url(#arrow)" marker-start="url(#arrow)"><path d="M232 126H265"/><path d="M465 126H498"/><path d="M700 126H733"/></g>
-<rect x="205" y="245" width="550" height="68" rx="10" fill="#e0e7ff" stroke="#818cf8"/><text x="480" y="274" font-size="17" font-weight="700">Kubernetes API · Channel Controller</text><text x="480" y="297" font-size="13">References · allocation · mapping evidence · drain / release</text>
-<g stroke="#64748b" stroke-width="2" stroke-dasharray="5 5" fill="none"><path d="M290 245V211H127V184"/><path d="M480 245V211H365V184"/><path d="M665 245V211H599V184"/></g>
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 800" role="img" aria-labelledby="title desc">
+<title id="title">VMWeave 중앙 제어와 namespace별 리소스</title><desc id="desc">vmweave-system의 Go Controller와 Webhook이 Kubernetes API를 통해 등록된 team-a와 team-b를 관리합니다. KubeVirt는 별도 kubevirt namespace에서 VM 수명 주기를 관리합니다. 사용자 namespace에는 GPUProfile, GPURequest, SharedMemoryChannel, ChannelAttachment, VM, virt-launcher, Worker, helper Pod와 PVC가 있습니다.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#64748b"/></marker><marker id="teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#0f766e"/></marker></defs>
+<style>text{font-family:"Noto Sans KR",system-ui,sans-serif} .mono{font-family:ui-monospace,"DejaVu Sans Mono",monospace}</style>
+<rect x="0" y="0" width="1080" height="800" rx="20" fill="#f8fafc" stroke="none" stroke-width="1.5"/>
+<text x="32" y="42" font-size="26" fill="#0f172a" font-weight="750" text-anchor="start">VMWeave</text>
+<text x="175" y="42" font-size="21" fill="#475569" font-weight="500" text-anchor="start">중앙 제어 · namespace별 워크로드</text>
+<text x="32" y="72" font-size="17" fill="#334155" font-weight="400" text-anchor="start">제어기는 한 곳에, VM과 GPU 실행 리소스는 각 사용자의 namespace에 배치합니다.</text>
+<rect x="32" y="100" width="648" height="208" rx="12" fill="#ecfdf5" stroke="#99d8c9" stroke-width="1.5"/>
+<text x="52" y="133" font-size="13" fill="#0f766e" font-weight="700" text-anchor="start">SYSTEM NAMESPACE</text>
+<text x="52" y="161" font-size="20" fill="#0f172a" font-weight="700" text-anchor="start" class="mono">vmweave-system</text>
+<rect x="52" y="178" width="291" height="108" rx="12" fill="#fff" stroke="#b6dbd0" stroke-width="1.5"/>
+<text x="70" y="209" font-size="20" fill="#0f172a" font-weight="700" text-anchor="start">Go Controller</text>
+<text x="70" y="238" font-size="16" fill="#334155" font-weight="400" text-anchor="start">watch · reconcile · 할당 / 회수</text>
+<text x="70" y="262" font-size="14" fill="#64748b" font-weight="400" text-anchor="start">Operator SDK / controller-runtime</text>
+<rect x="361" y="178" width="299" height="108" rx="12" fill="#fff" stroke="#b6dbd0" stroke-width="1.5"/>
+<text x="379" y="209" font-size="20" fill="#0f172a" font-weight="700" text-anchor="start">Admission Webhook</text>
+<text x="379" y="238" font-size="16" fill="#334155" font-weight="400" text-anchor="start">API 요청 · 참조 / 권한 검증</text>
+<text x="379" y="262" font-size="14" fill="#64748b" font-weight="400" text-anchor="start">TLS Service · namespace selector</text>
+<rect x="704" y="100" width="344" height="208" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+<text x="724" y="133" font-size="13" fill="#1d4ed8" font-weight="700" text-anchor="start">KUBEVIRT NAMESPACE</text>
+<text x="724" y="161" font-size="20" fill="#0f172a" font-weight="700" text-anchor="start" class="mono">kubevirt</text>
+<rect x="724" y="178" width="304" height="108" rx="12" fill="#fff" stroke="#c7daf5" stroke-width="1.5"/>
+<text x="742" y="209" font-size="20" fill="#0f172a" font-weight="700" text-anchor="start">KubeVirt 제어 영역</text>
+<text x="742" y="238" font-size="16" fill="#334155" font-weight="400" text-anchor="start">VM / VMI 수명 주기 관리</text>
+<text x="742" y="262" font-size="16" fill="#334155" font-weight="400" text-anchor="start">virt-launcher 생성 · 상태 관측</text>
+<path d="M198 308V350" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M510 308V350" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M876 308V350" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<rect x="32" y="352" width="1016" height="65" rx="12" fill="#0f172a" stroke="none" stroke-width="1.5"/>
+<text x="58" y="392" font-size="23" fill="#fff" font-weight="700" text-anchor="start">Kubernetes API</text>
+<text x="334" y="390" font-size="16" fill="#cbd5e1" font-weight="400" text-anchor="start">vmweave.io/v1alpha1  ·  kubevirt.io/v1  ·  Pods / PVC / RBAC</text>
+<path d="M278 417V484" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<path d="M802 417V484" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<rect x="333" y="429" width="414" height="36" rx="12" fill="#f8fafc" stroke="none" stroke-width="1.5"/>
+<text x="540" y="454" font-size="16" fill="#475569" font-weight="500" text-anchor="middle">등록된 namespace만 관측 · 검증 · 조정</text>
+<rect x="32" y="486" width="492" height="270" rx="12" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="52" y="517" font-size="12" fill="#64748b" font-weight="700" text-anchor="start">USER NAMESPACE</text>
+<text x="52" y="546" font-size="22" fill="#0f172a" font-weight="700" text-anchor="start" class="mono">team-a</text>
+<rect x="52" y="565" width="452" height="70" rx="12" fill="#f1f5f9" stroke="none" stroke-width="1.5"/>
+<text x="68" y="592" font-size="17" fill="#334155" font-weight="600" text-anchor="start">GPUProfile · GPURequest</text>
+<text x="68" y="618" font-size="16" fill="#334155" font-weight="400" text-anchor="start">SharedMemoryChannel · ChannelAttachment</text>
+<rect x="52" y="650" width="216" height="84" rx="12" fill="#f0fdfa" stroke="#cce9e3" stroke-width="1.5"/>
+<text x="67" y="680" font-size="17" fill="#0f766e" font-weight="600" text-anchor="start">VM · virt-launcher</text>
+<text x="67" y="710" font-size="15" fill="#334155" font-weight="400" text-anchor="start">Guest CUDA 프로그램</text>
+<rect x="282" y="650" width="222" height="84" rx="12" fill="#f0fdfa" stroke="#cce9e3" stroke-width="1.5"/>
+<text x="297" y="680" font-size="17" fill="#0f766e" font-weight="600" text-anchor="start">GPU Worker · PVC</text>
+<text x="297" y="710" font-size="15" fill="#334155" font-weight="400" text-anchor="start">prepare / reclaim Pod</text>
+<rect x="556" y="486" width="492" height="270" rx="12" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="576" y="517" font-size="12" fill="#64748b" font-weight="700" text-anchor="start">USER NAMESPACE</text>
+<text x="576" y="546" font-size="22" fill="#0f172a" font-weight="700" text-anchor="start" class="mono">team-b</text>
+<rect x="576" y="565" width="452" height="70" rx="12" fill="#f1f5f9" stroke="none" stroke-width="1.5"/>
+<text x="592" y="592" font-size="17" fill="#334155" font-weight="600" text-anchor="start">GPUProfile · GPURequest</text>
+<text x="592" y="618" font-size="16" fill="#334155" font-weight="400" text-anchor="start">SharedMemoryChannel · ChannelAttachment</text>
+<rect x="576" y="650" width="216" height="84" rx="12" fill="#f0fdfa" stroke="#cce9e3" stroke-width="1.5"/>
+<text x="591" y="680" font-size="17" fill="#0f766e" font-weight="600" text-anchor="start">VM · virt-launcher</text>
+<text x="591" y="710" font-size="15" fill="#334155" font-weight="400" text-anchor="start">Guest CUDA 프로그램</text>
+<rect x="806" y="650" width="222" height="84" rx="12" fill="#f0fdfa" stroke="#cce9e3" stroke-width="1.5"/>
+<text x="821" y="680" font-size="17" fill="#0f766e" font-weight="600" text-anchor="start">GPU Worker · PVC</text>
+<text x="821" y="710" font-size="15" fill="#334155" font-weight="400" text-anchor="start">prepare / reclaim Pod</text>
+<text x="32" y="783" font-size="15" fill="#64748b" font-weight="400" text-anchor="start">권한 경계: 중앙 ServiceAccount + namespace별 RoleBinding / Worker 전용 ServiceAccount</text>
+</svg>

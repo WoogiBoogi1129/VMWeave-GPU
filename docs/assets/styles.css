@@ -6,3 +6,8 @@
 .md-typeset table:not([class]) th { min-width: 5rem; }
 .md-typeset img { border-radius: .35rem; }
 .md-header__topic { font-weight: 700; }
+
+/* Keep diagram labels readable on small screens; full SVG opens independently. */
+.md-typeset .architecture-figure { margin: 1.5rem 0 .5rem; max-width: 100%; overflow-x: auto; }
+.md-typeset .architecture-figure img { display: block; width: 100%; min-width: 680px; max-width: none; }
+.md-typeset .architecture-figure figcaption { min-width: 680px; font-size: .75rem; color: var(--md-default-fg-color--light); margin: .6rem 0; }

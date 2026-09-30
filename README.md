@@ -10,12 +10,7 @@ Flyt/Cricket 기반 실험에서 출발했으며, 현재 기본 실행 경로는
 [설치](docs/getting-started/index.md) · [아키텍처](docs/architecture/index.md) ·
 [실험 결과](docs/evaluation/index.md) · [개발 안내](CONTRIBUTING.md)
 
-```text
-KubeVirt VM                       GPU 노드의 Worker
-CUDA interception → SHM rings → CUDA dispatcher → HAMi / CUDA → GPU
-                         ↑
-          vmweave-system: Go Operator · Webhook
-```
+![VMWeave 중앙 제어와 namespace별 워크로드](docs/assets/architecture.svg)
 
 ## 현재 상태
 
