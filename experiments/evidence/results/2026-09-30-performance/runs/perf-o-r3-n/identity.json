@@ -1,0 +1,237 @@
+{
+  "path": "N",
+  "cap": 100,
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "pod_uid": "4fe52c98-0f67-473f-997b-916d4a28cea4",
+  "pod": {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "annotations": {
+        "hami.io/bind-phase": "success",
+        "hami.io/bind-time": "1790777760",
+        "hami.io/vgpu-devices-allocated": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3,NVIDIA,4096,100:;",
+        "hami.io/vgpu-devices-to-allocate": ";;",
+        "hami.io/vgpu-node": "gpu-4",
+        "hami.io/vgpu-time": "1790777760",
+        "nvidia.com/use-gpuuuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3"
+      },
+      "creationTimestamp": "2026-09-30T14:16:00Z",
+      "generation": 1,
+      "labels": {
+        "hami.io/vgpu-node": "gpu-4",
+        "vmweave.io/campaign": "performance-20260930"
+      },
+      "name": "perf-o-r3-n",
+      "namespace": "vmweave-test-a",
+      "resourceVersion": "3515101",
+      "uid": "4fe52c98-0f67-473f-997b-916d4a28cea4"
+    },
+    "spec": {
+      "automountServiceAccountToken": false,
+      "containers": [
+        {
+          "command": [
+            "sleep",
+            "14400"
+          ],
+          "image": "localhost/vmweave-worker@sha256:002c13d3ef8d5ce26d812d630c57b64df24a53d3e2d019b0f3fa0be83d04be57",
+          "imagePullPolicy": "IfNotPresent",
+          "name": "native",
+          "resources": {
+            "limits": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "100",
+              "nvidia.com/gpumem": "4096"
+            },
+            "requests": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "100",
+              "nvidia.com/gpumem": "4096"
+            }
+          },
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "volumeMounts": [
+            {
+              "mountPath": "/evidence",
+              "name": "art"
+            }
+          ]
+        }
+      ],
+      "dnsPolicy": "ClusterFirst",
+      "enableServiceLinks": true,
+      "nodeName": "gpu-4",
+      "nodeSelector": {
+        "kubernetes.io/hostname": "gpu-4"
+      },
+      "preemptionPolicy": "PreemptLowerPriority",
+      "priority": 0,
+      "restartPolicy": "Never",
+      "runtimeClassName": "nvidia",
+      "schedulerName": "hami-scheduler",
+      "securityContext": {},
+      "serviceAccount": "default",
+      "serviceAccountName": "default",
+      "terminationGracePeriodSeconds": 1,
+      "tolerations": [
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/not-ready",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        },
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/unreachable",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": {
+            "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts",
+            "type": "Directory"
+          },
+          "name": "art"
+        }
+      ]
+    },
+    "status": {
+      "allocatedResources": {
+        "nvidia.com/gpu": "1",
+        "nvidia.com/gpucores": "100",
+        "nvidia.com/gpumem": "4096"
+      },
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-30T14:16:01Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodReadyToStartContainers"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-30T14:16:00Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Initialized"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-30T14:16:01Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-30T14:16:01Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "ContainersReady"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-30T14:16:00Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodScheduled"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "allocatedResources": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "100",
+            "nvidia.com/gpumem": "4096"
+          },
+          "allocatedResourcesStatus": [
+            {
+              "name": "nvidia.com/gpu",
+              "resources": [
+                {
+                  "health": "Healthy",
+                  "resourceID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3-3"
+                }
+              ]
+            }
+          ],
+          "containerID": "cri-o://50279a7f70182340189b293ac69885e1732eee375f2225c3695fd38034662a42",
+          "image": "localhost/vmweave-worker:performance-20260930",
+          "imageID": "localhost/vmweave-worker@sha256:002c13d3ef8d5ce26d812d630c57b64df24a53d3e2d019b0f3fa0be83d04be57",
+          "lastState": {},
+          "name": "native",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "100",
+              "nvidia.com/gpumem": "4096"
+            },
+            "requests": {
+              "nvidia.com/gpu": "1",
+              "nvidia.com/gpucores": "100",
+              "nvidia.com/gpumem": "4096"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-30T14:16:01Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0,
+                44,
+                993
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/evidence",
+              "name": "art"
+            }
+          ]
+        }
+      ],
+      "hostIP": "192.168.24.21",
+      "hostIPs": [
+        {
+          "ip": "192.168.24.21"
+        }
+      ],
+      "observedGeneration": 1,
+      "phase": "Running",
+      "podIP": "10.85.0.67",
+      "podIPs": [
+        {
+          "ip": "10.85.0.67"
+        }
+      ],
+      "qosClass": "BestEffort",
+      "resources": {
+        "limits": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "100",
+          "nvidia.com/gpumem": "4096"
+        },
+        "requests": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "100",
+          "nvidia.com/gpumem": "4096"
+        }
+      },
+      "startTime": "2026-09-30T14:16:00Z"
+    }
+  }
+}

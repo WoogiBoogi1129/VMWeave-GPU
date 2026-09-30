@@ -1,0 +1,177 @@
+{
+  "status": "PASS",
+  "campaign_complete": false,
+  "valid_runs": {
+    "o": 15,
+    "c": 0,
+    "d": 0
+  },
+  "expected_runs": {
+    "o": 15,
+    "c": 20,
+    "d": 40
+  },
+  "validated_pairs": 0,
+  "details": [
+    {
+      "run": "perf-o-r1-n",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 3.6985344245010765e-06,
+      "observed_gpu_pids": [
+        3059897
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r1-s",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 1.0517350341743281e-05,
+      "observed_gpu_pids": [
+        3071077
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r1-t",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 1.0004020996490226e-05,
+      "observed_gpu_pids": [
+        3065123,
+        3066736
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r2-n",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 3.943324584199104e-06,
+      "observed_gpu_pids": [
+        3091302
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r2-s",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 8.315776977241285e-06,
+      "observed_gpu_pids": [
+        3084786
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r2-t",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 7.903861815705682e-06,
+      "observed_gpu_pids": [
+        3078894,
+        3080401
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r3-n",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 3.6012087409886817e-06,
+      "observed_gpu_pids": [
+        3102116
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r3-s",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 7.827375853253216e-06,
+      "observed_gpu_pids": [
+        3095709
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r3-t",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 9.277204345181644e-06,
+      "observed_gpu_pids": [
+        3107226,
+        3108887
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r4-n",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 3.3077202150622043e-06,
+      "observed_gpu_pids": [
+        3112746
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r4-s",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 9.19884728922682e-06,
+      "observed_gpu_pids": [
+        3117624
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r4-t",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 8.854506347688584e-06,
+      "observed_gpu_pids": [
+        3125831,
+        3127208
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r5-n",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 3.117953003339835e-06,
+      "observed_gpu_pids": [
+        3144996
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r5-s",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 1.0099646607031332e-05,
+      "observed_gpu_pids": [
+        3131742
+      ],
+      "status": "PASS"
+    },
+    {
+      "run": "perf-o-r5-t",
+      "windows": 7,
+      "verified_output_elements": 6030336,
+      "max_clock_error_seconds": 8.538662230606064e-06,
+      "observed_gpu_pids": [
+        3139773,
+        3141131
+      ],
+      "status": "PASS"
+    }
+  ],
+  "pair_checks": [],
+  "errors": [],
+  "meaning": "Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance), B context hold through A end, and normal release. This is not a verdict that HAMi limits were enforced.",
+  "snapshot_scope": "Completed N/T/S stage only; subsequent stages still running",
+  "validation_file_written_utc": 1790779829.7669837
+}

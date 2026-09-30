@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "kubectl",
+    "exec",
+    "-n",
+    "vmweave-test-a",
+    "perf-o-r3-n",
+    "--",
+    "taskset",
+    "-c",
+    "0-7",
+    "/evidence/probe-N",
+    "batch",
+    "10",
+    "30",
+    "10",
+    "/evidence/perf-o-r3-n",
+    "/evidence/work.ptx",
+    "0",
+    "127"
+  ],
+  "utc": 1790777762.406274
+}

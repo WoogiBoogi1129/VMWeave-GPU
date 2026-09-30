@@ -1,0 +1,71 @@
+GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-7d708c42-8d4a-16d5-0746-474567157aa3)
+[2026-09-30T14:33:26Z INFO  flyt_node_manager::virt_server_manager] message path: /tmp/flyt-servernode-queue, key: 1115495966 id: 0 proj_id: 66
+[2026-09-30T14:33:26Z INFO  flyt_node_manager] Connected to resource manager
+[2026-09-30T14:33:26Z INFO  flyt_node_manager::resource_manager_handler] Got send gpu info command
+[2026-09-30T14:34:13Z INFO  flyt_node_manager::resource_manager_handler] Got allocate virt server command
+[2026-09-30T14:34:13Z INFO  flyt_node_manager::resource_manager_handler] Allocating virt server: gpu_id: 0, num_cores: 188, memory: 4294967296
+[2026-09-30T14:34:13Z INFO  flyt_node_manager::virt_server_manager] Starting virt server with rpc_id: 1
+[2026-09-30T14:34:13Z INFO  flyt_node_manager::virt_server_manager] Executing command: CUDA_MPS_ENABLE_PER_CTX_DEVICE_MULTIPROCESSOR_PARTITIONING="1" CUDA_VISIBLE_DEVICES="0" "/opt/flyt/bin/cricket-rpc-server" "1" "0" "188" "4294967296" "0"
+prg 99 cricker 1 gpu 0 sm 188 mem 4294967296 mode 0
+welcome to cricket!
+Initialize Metrics called
++00:00:00.000046 [34mINFO[0m:	using TCP...
++00:00:00.001173 [34mINFO[0m:	listening on port 54922
++00:00:00.001391 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:382[0m
++00:00:00.132847 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:388[0m
++00:00:00.132860 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:394[0m
++00:00:00.132863 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:400[0m
++00:00:00.132870 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:422[0m
++00:00:00.132872 [1m[31mERROR[0m:	send_type = 4294967296
+
++00:00:00.133103 [34mINFO[0m: GPU affinitySupport: 1	in [4mcpu-server-resource-controller.c:82[0m
++00:00:00.220446 [34mINFO[0m: get_next_client resource mgt_get_element returned NULL 	in [4mcpu-server-client-mgr.c:394[0m
++00:00:00.220461 [34mINFO[0m: get_next_client resource mgt_get_element returned NULL 	in [4mcpu-server-client-mgr.c:394[0m
++00:00:00.220465 [34mINFO[0m: Changed SM cores to 188	in [4mcpu-server-resource-controller.c:105[0m
++00:00:00.251446 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:429[0m
++00:00:00.251478 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:437[0m
++00:00:00.251487 [34mINFO[0m:	waiting for RPC requests...
+[2026-09-30T14:34:13Z INFO  flyt_node_manager::virt_server_manager] Virt server initialized with rpc_id: 1
+[2026-09-30T14:34:13Z INFO  flyt_node_manager::resource_manager_handler] Virt server created: 1
+cricket-rpc-server: unexpected event in svc_run
+: No such file or directory
++00:00:00.251503 [34mINFO[0m: mqueue_id = 0 type 4294967296 data 3355443200
+	in [4mcpu-server-mgr-listener.c:172[0m
+set mode = 50
+eventfd created 65
+get mode = 50
++00:00:00.265721 [34mINFO[0m:	RPC init requested 66
++00:00:00.265807 [34mINFO[0m: added client for pid 2211
+	in [4mcpu-server-client-mgr.c:141[0m
++00:00:00.269392 [34mINFO[0m: cudaMalloc 0x74c893a00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:00:00.270586 [34mINFO[0m: cudaMalloc 0x74c893c00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:00:20.317396 [34mINFO[0m: cudaMalloc 0x74c893a00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:00:20.318885 [34mINFO[0m: cudaMalloc 0x74c893c00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:00:40.350898 [34mINFO[0m: cudaMalloc 0x74c893a00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:00:40.352526 [34mINFO[0m: cudaMalloc 0x74c893c00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:01:00.367556 [34mINFO[0m: cudaMalloc 0x74c893a00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:01:00.369162 [34mINFO[0m: cudaMalloc 0x74c893c00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:01:20.414993 [34mINFO[0m: cudaMalloc 0x74c898c00000: size: 0x1000000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:01:20.416672 [34mINFO[0m: cudaMalloc 0x74c89a600000: size: 0x1000000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:01:40.490449 [34mINFO[0m: cudaMalloc 0x74c893a00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:01:40.491638 [34mINFO[0m: cudaMalloc 0x74c893c00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:02:20.542235 [34mINFO[0m: cudaMalloc 0x74c893a00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:02:20.543857 [34mINFO[0m: cudaMalloc 0x74c893c00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:03:00.580650 [34mINFO[0m:	RPC deinit requested.
++00:03:00.580726 [34mINFO[0m: Client with xp_fd 66 being removed	in [4mcpu-server-client-mgr.c:306[0m
++00:03:00.580735 [34mINFO[0m: removing client ptr from 2211 
+	in [4mcpu-server-client-mgr.c:233[0m
