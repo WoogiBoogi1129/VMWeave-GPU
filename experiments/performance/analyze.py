@@ -121,6 +121,7 @@ def main(root):
     group['utilization_'+role]={'n':len(values),'mean':statistics.mean(values) if values else None,
       'sd':statistics.stdev(values) if len(values)>1 else None}
     group['enforcement_'+role]={k:sum(r['shared_cap_'+role]==k for r in rs) for k in ['PASS','FAIL','NOT_EVALUATED']}
+ summary['interrupted_attempts']=json.loads((root/'interruptions.json').read_text()) if (root/'interruptions.json').exists() else []
  (dest/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary,indent=2))
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('root');a=p.parse_args();main(a.root)

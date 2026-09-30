@@ -7,7 +7,7 @@ queries={'gpu_util':'DCGM_FI_DEV_GPU_UTIL and on(instance) (up{job="dcgm"} == 1)
  'hami_util':'hami_container_device_utilization_ratio{namespace="vmweave-test-a"} and on(instance) (up{job="hami"} == 1)','collector_health':'up','application_completed':'vmweave_completed_total',
  'application_latency':'vmweave_last_operation_latency_seconds','pod_cpu':'vmweave_pod_cpu_seconds_total','host_cpu':'node_cpu_seconds_total{mode="idle"}'}
 for run in sorted((OUT/'runs').iterdir()):
- if not (run/'execution.json').exists() or (run/'telemetry.json').exists():continue
+ if not ((run/'execution.json').exists() or (run/'interruption.json').exists()) or (run/'telemetry.json').exists():continue
  events=[json.loads(l) for l in (run/'stdout.jsonl').read_text().splitlines() if l.startswith('{')]
  events=[x for x in events if 'utc' in x]
  if not events:continue

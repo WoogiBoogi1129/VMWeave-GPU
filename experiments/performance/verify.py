@@ -89,7 +89,10 @@ for stage,actual in coverage.items():
  expected=expected_coverage[stage]
  if any(k not in expected or n>expected[k] for k,n in actual.items()) or (sum(actual.values())==sum(expected.values()) and actual!=expected):
   errors.append({'stage':stage,'error':'Independent-repeat coverage differs from protocol','actual':actual,'expected':expected})
-complete=counts=={'o':15,'c':20,'d':40} and len(pair_checks)==20 and not errors
+interruptions=json.loads((root/'interruptions.json').read_text()) if (root/'interruptions.json').exists() else []
+unresolved=[r.name for r in (root/'runs').iterdir() if r.name.startswith('perf-') and not (r/'interruption.json').exists() and not ((r/'execution.json').exists() and (r/'cleanup.json').exists())]
+complete=counts=={'o':15,'c':20,'d':40} and len(pair_checks)==20 and not errors and not unresolved
 report={'status':'PASS' if not errors else 'FAIL','campaign_complete':complete,'valid_runs':counts,'expected_runs':{'o':15,'c':20,'d':40},'validated_pairs':len(pair_checks),'repeat_coverage':coverage,'details':details,'pair_checks':pair_checks,'errors':errors,'meaning':'Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance on corrected timestamps), B context hold through A end, repeat coverage, and normal release. This is not a verdict that HAMi limits were enforced.'}
+report.update(interrupted_attempts=interruptions,unresolved_runs=unresolved)
 (root/'validation.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='details'},indent=2))
 if errors:raise SystemExit(1)

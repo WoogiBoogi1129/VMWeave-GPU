@@ -120,3 +120,21 @@ For offline review, use `verify.py`, `analyze.py`, `plot.py`, and `report.py`
 against the result directory. Verify the original `SHA256SUMS` before
 regenerating derived files; regenerated SVG metadata can change file hashes.
 The analysis environment used Python 3.12, NumPy 2.5.3, and Matplotlib 3.9.4.
+
+## Interrupted shared-stage recovery
+
+The original shared driver stopped after seven completed pairs. The eighth pair's
+last saved events were warmup completion and waiting; no measurement-start or
+completed result was recorded. At recovery, both VMs were Halted and channels
+Released. The precise termination cause was not established. The original
+attempt and its resource observations remain under the original names, with
+`interruptions.json`; they are not counted as completed repetitions.
+
+`resume_campaign.py` preserves the seven completed pairs, uses a new `resume1`
+name for the interrupted condition, and executes only the remaining conditions
+with unchanged benchmark hashes and timing. It refuses undocumented partial
+attempts. Run it through a named user systemd service and a real `script` session,
+so its lifetime is separate from an interactive tool session. `status.py` checks
+actual driver processes and labels persisted, inactive logs as unfinished.
+The measured stages and the final cleanup/publication remain separate completion
+states; process startup alone is not completion.
