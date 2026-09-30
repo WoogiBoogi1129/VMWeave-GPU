@@ -1,5 +1,7 @@
 """Recompute measured outcomes from raw samples, keeping pilots separate."""
 import argparse,csv,gzip,json,math,statistics
+from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 import numpy as np
 
@@ -16,9 +18,21 @@ def rows_csv(path,rows):
  if not rows:return
  with path.open('w') as f:
   w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+def process_samples(path):
+ rows={}
+ if not path.exists():return rows
+ for line in path.read_text().splitlines():
+  v=line.split()
+  if len(v)<7 or line.lstrip().startswith('#') or v[3]=='-' or v[5]=='-':continue
+  try:
+   t=datetime.strptime(v[0]+' '+v[1],'%Y%m%d %H:%M:%S').replace(tzinfo=ZoneInfo('Asia/Seoul')).timestamp()
+   rows.setdefault(int(v[3]),[]).append((t,float(v[5])))
+  except ValueError:continue
+ return rows
 def main(root):
  root=Path(root);dest=root/'analysis';dest.mkdir(exist_ok=True)
  singles=[];overhead=[];dynamic=[];failures=[]
+ proc=process_samples(root/'monitoring/pmon.txt')
  for run in sorted((root/'runs').iterdir()):
   if run.name.startswith('pilot-'):continue
   if (run/'failure.json').exists():failures.append({'run':run.name,**json.loads((run/'failure.json').read_text())});continue
@@ -56,7 +70,16 @@ def main(root):
   bins=np.histogram(data[:,1],bins=np.arange(0,242))[0];baseline=stages['solo']['throughput'];recovery=None;entry=None
   for t in range(math.ceil(bend),236):
    if all(abs(float(x)-baseline)<=baseline*.1 for x in bins[t:t+5]):entry=t-bend;recovery=t+5-bend;break
-  dynamic.append({'pair':pair['name'],'cap_a':pair['cap_a'],'cap_b':pair['cap_b'],'slot':pair['always_active_slot'],'solo_q':baseline,'shared_q':stages['shared']['throughput'],'recovered_q':stages['recovered']['throughput'],'retention':stages['shared']['throughput']/baseline,'solo_p95_ms':stages['solo']['p95_ms'],'shared_p95_ms':stages['shared']['p95_ms'],'b_actual_start_s':bstart,'b_actual_end_s':bend,'recovery_s':recovery,'recovery_band_entry_s':entry})
+  entering=interval(data,bstart,bstart+10);leaving=interval(data,bend,min(bend+10,240))
+  row={'pair':pair['name'],'cap_a':pair['cap_a'],'cap_b':pair['cap_b'],'slot':pair['always_active_slot'],'solo_q':baseline,'shared_q':stages['shared']['throughput'],'recovered_q':stages['recovered']['throughput'],'retention':stages['shared']['throughput']/baseline,'solo_p95_ms':stages['solo']['p95_ms'],'shared_p95_ms':stages['shared']['p95_ms'],'entry_10s_q':entering['throughput'],'entry_10s_p95_ms':entering['p95_ms'],'exit_10s_p95_ms':leaving['p95_ms'],'b_actual_start_s':bstart,'b_actual_end_s':bend,'recovery_s':recovery,'recovery_band_entry_s':entry}
+  origin=ar['utc_start']-ai.get('clock_offset',0)
+  for role,folder,cap in [('a',run,pair['cap_a']),('b',other,pair['cap_b'])]:
+   runtime=json.loads((folder/'runtime-libraries.json').read_text());pid=next(x['pid'] for x in runtime if 'flyt-shm-worker' in x['command'])
+   vals=[v for t,v in proc.get(pid,[]) if origin+90<t<=origin+150 and 0<=v<=100]
+   mean=statistics.mean(vals) if vals else None
+   row['shared_util_'+role]=mean;row['shared_util_samples_'+role]=len(vals)
+   row['shared_cap_'+role]='NOT_EVALUATED' if len(vals)<57 else ('PASS' if mean<=cap+10 else 'FAIL')
+  dynamic.append(row)
  for name,rows in [('single',singles),('overhead',overhead),('shared',dynamic)]:rows_csv(dest/(name+'.csv'),rows)
  summary={'single_runs':len(singles),'overhead_sessions':len({r['run'] for r in overhead}),'overhead_measurement_windows':len({(r['run'],('copy' if r['metric'] in ['H2D','D2H'] else r['metric']),r['bytes']) for r in overhead}),'overhead_metric_rows':len(overhead),'shared_pairs':len(dynamic),'failures':failures,'single':{},'overhead':{},'shared':{}}
  for cap in [25,50,75,100]:

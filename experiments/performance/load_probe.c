@@ -52,5 +52,7 @@ int main(int argc,char**argv){
   printf("{\"event\":\"RESULT\",\"status\":\"%s\",\"phase\":\"%s\",\"utc_start\":%.9f,\"reps\":%u,\"bytes\":%zu,\"completed\":%lu,\"elapsed_s\":%.9f,\"operations_per_s\":%.9f,\"checked_elements\":%zu,\"mismatches\":%lu}\n",bad?"FAIL":"PASS",phase,utc,reps,bytes,n,elapsed,n/elapsed,bytes/4,bad);fflush(stdout);
   if(bad)return 8;
  }
+ const char *hold_env=getenv("PERF_HOLD_UNTIL_UTC");double hold=hold_env?atof(hold_env):0;
+ if(hold>clk(CLOCK_REALTIME)){emit("IDLE_HOLD_START","idle",0,0);while(clk(CLOCK_REALTIME)<hold)usleep(50000);emit("IDLE_HOLD_END","idle",0,0);}
  CHECK(cuModuleUnload(module));CHECK(cudaFree(di));CHECK(cudaFree(do_));return 0;
 }

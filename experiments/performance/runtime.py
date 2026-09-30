@@ -62,8 +62,9 @@ class Session:
   save(self.out/'identity.json',{'path':self.path,'cap':self.cap,'gpu_uuid':GPU,'channel_uid':self.uid,'worker':self.worker,'worker_uid':owned[0]['metadata']['uid'],'launcher_uid':launcher['metadata']['uid'],'vm_ip':self.ip,'clock_offset':self.offset,'images':IMAGES})
  def command(self,program,args):
   if self.path=='N':return ['kubectl','exec','-n',NS,self.name,'--','taskset','-c','0-7','/evidence/'+program,*map(str,args)]
-  return self.ssh+['sudo env FLYT_TRACE_REQUESTS=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF='+self.bdf+' FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/'+program+' '+shlex.join(list(map(str,args)))]
- def execute(self,kind='load',seconds=120,warmup=30,reps=524288,count=0,start=0):
+  return self.ssh+['sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC='+str(getattr(self,'hold_until',0))+' FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF='+self.bdf+' FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/'+program+' '+shlex.join(list(map(str,args)))]
+ def execute(self,kind='load',seconds=120,warmup=30,reps=524288,count=0,start=0,hold_until=0):
+  self.hold_until=hold_until+self.offset if hold_until else 0
   prefix=('/evidence/' if self.path=='N' else '/tmp/perf/')+self.name
   directory='/evidence/' if self.path=='N' else '/tmp/perf/'
   args=[seconds,warmup,reps,count,start+self.offset if start else 0,prefix,directory+'work.ptx'] if kind=='load' else ['batch',10,30,10,prefix,directory+'work.ptx',0,127]
@@ -105,7 +106,7 @@ def execute_stream(s,cmd,prefix):
     if row.get('event')!='TICK':print(s.name,line.strip(),flush=True)
     if row.get('event')=='RESULT':results.append(row)
     if row.get('event')=='WARMUP_START' and not snapshot:
-     pod=get('pod',s.worker);source=(ROOT/'experiments/evidence/overhead_runtime_info.py').read_text().replace("'/evidence/probe-N'","'/evidence/probe-N','/evidence/load-N'")
+     pod=get('pod',s.worker);source=(ROOT/'experiments/performance/read_runtime.py').read_text()
      (s.out/'runtime-libraries.json').write_text(k('exec','-i','-n',NS,HELPER,'--','python3','-',pod['metadata']['uid'],input=source))
      runtime=json.loads((s.out/'runtime-libraries.json').read_text())
      if s.path in ['N','S']:

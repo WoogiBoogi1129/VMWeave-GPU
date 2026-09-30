@@ -44,7 +44,7 @@ for rep in map(int,a.repetitions.split(',')):
     idle();sa.prepare();sb.prepare();start=time.time()+60
     save(OUT/'pairs'/(name+'.json'),{'name':name,'a':sa.name,'b':sb.name,'cap_a':ca,'cap_b':cb,'always_active_slot':slot,'scheduled_start_host_utc':start,'b_start_offset_s':60,'b_stop_offset_s':180,'end_offset_s':240})
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-     fs=[pool.submit(sa.execute,seconds=240,warmup=30,reps=reps,start=start),pool.submit(sb.execute,seconds=120,warmup=30,reps=reps,start=start+60)]
+     fs=[pool.submit(sa.execute,seconds=240,warmup=30,reps=reps,start=start),pool.submit(sb.execute,seconds=120,warmup=30,reps=reps,start=start+60,hold_until=start+250)]
      for f in fs:f.result()
    except Exception as e:save(OUT/'pairs'/(name+'-failure.json'),{'error':str(e),'utc':time.time()});raise
    finally:
