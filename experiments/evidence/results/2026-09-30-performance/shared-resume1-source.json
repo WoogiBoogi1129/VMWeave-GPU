@@ -1,0 +1,49 @@
+{
+  "utc": 1790810465.086532,
+  "pid": 3671339,
+  "commit": "e3181358d371c655d8708c1919d5fd3ab5a0c0aa",
+  "source_diff": "",
+  "source_sha256": {
+    "analyze.py": "e6978695b2dee9cde685eca8287563b98d3116d795f4fc7c7d7e0ad69d27f6e0",
+    "runtime.py": "e96ce092d619313da2703877e48319a725cc4dfd4d97b9d6b95df797254f6602",
+    "annotate_grafana.py": "2ac32e2cf71d215d13c23d918e59f34117a89f5beafe13795b7dcc0820dc57e6",
+    "read_runtime.py": "37339397254b3df33c2a70522cc0b2e445cc9fd61a3f4306476c5cee0f853e72",
+    "retain_monitoring.py": "a88fc871b333be4eb20ca360f7bb91d92f6bd3197b5909e578bd8adf5663c873",
+    "overhead_probe.c": "47cb04e42d7206b894c2c5d573d1524af130de94e91671a9858b38cb852e9d06",
+    "verify.py": "19292a4950373e54ba276aae08f8f44a432c91c6e2a0d5919ec01ebe9f6d0889",
+    "plot.py": "0ed4341b7d93636d4a818b4eb7ef334c9be2da9d1dc295e17e422ecbd91253af",
+    "resume_campaign.py": "752ff71bb7a9b663393272976432a188555184319027eff20cc0b7338367770c",
+    "cleanup.py": "00f0b20f220994410a6e3daaae6ccb6a301746f74fc3cff5130376c8f1a94af5",
+    "build.sh": "65a507bb89661714a597f893956f3709c14132bf8a8340db916dc9eaf94887fa",
+    "load_probe.c": "1448ba1570162893f988b9356262117c69a6854595907e40c262ccbf5244ffa2",
+    "final_audit.py": "d2efa1f0d2b431d1bcea9c758e857b03104f8badf758a8a738fab1fbd79bdb2b",
+    "common.py": "5adc614a92168afac8409b9b9fd7babaa9baa6bc66a8038ec2a75388a6c0acdb",
+    "export_telemetry.py": "5ed223d2f7e982e94bb6892f5edc9a547593884e9b445e1aca06f4df26a9dba1",
+    "finalize_evidence.py": "617033d89b3719603746b76b38c29042bc3764591797e13d3b8a62a7f9913a1f",
+    "exporter.py": "954ffe36d3484eb7e74b5a4c327dbec06f2065c9a28e70168da0a7140c370dd6",
+    "report.py": "e134606494a112b53ebcd8a1e46c9590b90a8bb1e3e4a0a7d98b0c3cb98fa17b",
+    "tcp_runtime.py": "8674e3d7d349ee5aba7ad35f05123591ddfc199de72539bcf8ecdad32ce966b3",
+    "pilot.py": "271a40f8421633fccd3633e79853fb8845c90dfebfcae36f6b6be2fb78a4cee1",
+    "continue_campaign.py": "a239c9380cdc700aeabc576429b84b2c2ae30a6f0038d241889b971b71e43304",
+    "run.py": "3728f470d00de4a119f380643e5088cfe596e4d7bef1a5d0b2e3f1510ae0a63a",
+    "status.py": "15d50f3e135f7267eed56009fd7d299fee07e939d8f37af9492b0306c7370ad9",
+    "setup_tcp.py": "1e2f511170bb540e399c9e06d60e4e720a4871a15c073f4a8175118a7c295222",
+    "setup_monitoring.py": "e5373242db7bd899eb4cbf29bb6fe7a0c60537e16424ca4af0f126ddd814a500",
+    "test_analysis.py": "9a4278b8ce36c98254e1b4fe865e6a98796d52afb57d1d9a617a8d50a9cabb09",
+    "terminal_table.py": "8a1ecc4ba8676fa73edab4b6f6b89204910f5e9113ed1ababea63815a120321d"
+  },
+  "protocol_sha256": "b1cac8d0d12e114f415a3cf4a4410fad7e1aaa106b762aace3ef3fafefce9b47",
+  "interruptions": [
+    {
+      "detected_utc": 1790810289.8863413,
+      "pair": "perf-d-r2-25-75-a",
+      "runs": [
+        "perf-d-r2-25-75-a-a",
+        "perf-d-r2-25-75-a-b"
+      ],
+      "classification": "Orchestration stopped before any recorded MEASUREMENT_START; exact termination cause unconfirmed. Last persisted events are warmup completion/waiting.",
+      "outcome": "Interrupted attempt, not counted as a completed performance repeat. Original files retained.",
+      "replacement_pair": "perf-d-r2-25-75-a-resume1"
+    }
+  ]
+}

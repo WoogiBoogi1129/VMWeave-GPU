@@ -1,0 +1,10 @@
+[
+  {
+    "utc": 1790810617.5756354,
+    "component": "verify.py independent-repeat coverage metadata",
+    "issue": "New coverage output assumed cap exists for every path. T uses MPS SM count, not HAMi cap, and correctly has no cap key.",
+    "correction": "Record null cap for T; preserve actual T path and require five T sessions. Existing output, sample, clock, and release checks unchanged.",
+    "original_error_log": "analysis-history/recovery-checkpoint-1.txt",
+    "note": "Verifier schema error, not a failed benchmark. No measurements repeated or removed."
+  }
+]

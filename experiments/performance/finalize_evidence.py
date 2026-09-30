@@ -10,7 +10,7 @@ for source in sorted(BASE.glob('build*.txt')):
  target=OUT/'build'/source.name;target.parent.mkdir(exist_ok=True)
  target.write_text(redact(source.read_text()))
 history=[]
-for pattern in ['collect-*.txt','first-shared-review-*.txt']:
+for pattern in ['collect-*.txt','first-shared-review-*.txt','recovery-checkpoint-*.txt']:
  for source in sorted(BASE.glob(pattern)):
   target=OUT/'analysis-history'/source.name;target.parent.mkdir(exist_ok=True)
   target.write_text(redact(source.read_text()))

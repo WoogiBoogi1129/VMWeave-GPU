@@ -44,6 +44,7 @@ save(OUT/'final-audit.json',{
     'formal_sessions':sum(validation['valid_runs'].values()),
     'measurement_windows':sum(r['windows'] for r in validation['details']),
     'shared_pairs':validation['validated_pairs'],
+    'interrupted_attempts_retained':len(validation.get('interrupted_attempts',[])),
     'owned_resources_removed':len(cleanup['removed']),
     'owned_workloads_remaining':0,
     'pre_existing_resources_preserved_across_cleanup':len(preserved),

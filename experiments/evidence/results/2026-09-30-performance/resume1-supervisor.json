@@ -1,0 +1,22 @@
+{
+  "utc": 1790810464.9914064,
+  "command": [
+    "systemd-run",
+    "--user",
+    "--unit=vmweave-performance-resume1",
+    "--property=WorkingDirectory=/home/ubuntu/taeuk/flyt-k8s-poc-github",
+    "--property=StandardOutput=append:/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/resume1-driver.txt",
+    "--property=StandardError=append:/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/resume1-driver.txt",
+    "--property=RuntimeMaxSec=10800",
+    "--setenv=PATH=/home/ubuntu/.codex/tmp/arg0/codex-arg0aAEluz:/home/ubuntu/.vscode-server/cli/servers/Stable-04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/server/bin/remote-cli:/home/ubuntu/.nvm/versions/node/v24.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin:/home/ubuntu/.vscode-server/extensions/openai.chatgpt-26.917.62051-linux-x64/bin/linux-x86_64:/usr/local/go/bin",
+    "/usr/bin/script",
+    "-q",
+    "-f",
+    "-e",
+    "-c",
+    "python3 experiments/performance/resume_campaign.py",
+    "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/shared-resume1.terminal"
+  ],
+  "unit": "vmweave-performance-resume1.service",
+  "mechanism": "user systemd service, independent of tool-session process group; no automatic restart"
+}

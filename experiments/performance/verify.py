@@ -58,7 +58,7 @@ for run in sorted((root/'runs').iterdir()):
   if identity['path'] in ['N','S']:
    runtime=json.loads((run/'runtime-libraries.json').read_text())
    assert runtime and all(r['environment']['GPU_CORE_UTILIZATION_POLICY']=='FORCE' and r['environment']['CUDA_DEVICE_SM_LIMIT']==str(identity['cap']) for r in runtime)
-  details.append({'run':run.name,'path':identity['path'],'cap':identity['cap'],'windows':len(begins),'verified_output_elements':checked,'max_clock_error_seconds':max_clock_error,'observed_gpu_pids':sorted(observed),'status':'PASS'})
+  details.append({'run':run.name,'path':identity['path'],'cap':identity.get('cap'),'windows':len(begins),'verified_output_elements':checked,'max_clock_error_seconds':max_clock_error,'observed_gpu_pids':sorted(observed),'status':'PASS'})
  except Exception as e:errors.append({'run':run.name,'error':str(e)})
 pair_checks=[]
 for file in sorted((root/'pairs').glob('*.json')) if (root/'pairs').exists() else []:
