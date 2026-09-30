@@ -13,6 +13,16 @@ python3 experiments/evidence/verify_stage2.py \
 이는 보존된 증거의 검증이며 현재 하드웨어에서 새로 GPU 실험을 실행하는 작업은 아닙니다.
 다른 평가의 검사 방법은 각 보고서의 재현·검증 절차를 따릅니다.
 
+## 새 성능 실험의 증거 검증
+
+[성능 실행 코드](../../experiments/performance/README.md)와 결과 묶음의 프로토콜을 함께 확인합니다.
+오프라인 검증은 원본 체크섬을 먼저 확인하고 `verify.py`로 표본 수·검산 성공 기록·시각·정상 회수를 대조합니다.
+`analyze.py`, `plot.py`, `report.py`는 파생 결과를 다시 생성합니다. 실행 검증 PASS와 이용률 상한 준수는 별도 판정입니다.
+분석은 Python 3.12, NumPy 2.5.3, Matplotlib 3.9.4를 사용했습니다.
+
+새 GPU 측정에는 기록된 이미지·키·프로토콜과 새로운 출력 경로를 준비해야 합니다.
+실행 도구는 기록된 testbed용이며 다른 클러스터의 자동 설치 도구가 아닙니다.
+
 ## 현재 VMWeave에서 새 GPU 실행
 
 [신규 실험 가이드](new-experiments.md)를 따릅니다. 새 API 호환이 확인된 실행기부터 사용합니다.

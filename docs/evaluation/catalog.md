@@ -4,6 +4,7 @@
 
 | 결과 묶음 | 내용 |
 |---|---|
+| [2026-09-30 performance](../../experiments/evidence/results/2026-09-30-performance/) | 새 Go Operator의 N/T/S·연산 상한·공유 성능, 원시 표본·Grafana·명령 이력 |
 | [2026-09-30 Operator](../../experiments/operator/2026-09-30/) | 중앙 Go Operator·두 namespace GPU smoke; 성능 재측정 아님 |
 | [2026-09-22](../../experiments/evidence/results/2026-09-22/) | 초기 VM 실행·개발 증거 |
 | [2026-09-22-pytorch](../../experiments/evidence/results/2026-09-22-pytorch/) | 고정 PyTorch 학습 |

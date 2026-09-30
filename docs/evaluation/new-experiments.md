@@ -9,7 +9,8 @@
 | GPU 복사·PTX·회수 smoke | `scripts/run-evidence-smoke.py --api-group vmweave.io` | 9월 30일 두 namespace 실제 GPU 검증 완료 |
 | 메모리 probe | 같은 실행기의 `--probe memory` | CLI에 새 API 경로 존재; 새 Operator에서 전체 quota 실험 재검증 필요 |
 | PyTorch 학습 | 과거 학습 도구·고정 wheel을 별도로 이식 | 새 Operator campaign 검증 미완료 |
-| N/T/S 성능 비교 | 과거 측정 프로토콜을 보존하고 실행 도구·배포를 전환 | 새 Operator에서 재측정 미완료 |
+| N/T/S 성능 비교 | `experiments/performance/`의 새 API 실행기 | 경로별 5회·105구간 완료; [결과](resource-performance.md) |
+| 단일 VM 상한 | 같은 실행기의 `single` 단계 | 20회 완료; 25·50·75에서 사전 이용률 기준 위반 |
 
 API 명칭 변경만으로 모든 상위 실험 도구가 호환되는 것은 아닙니다.
 과거 성능·학습 결과는 [역사 재현](reproduction.md)의 기록이며 새 제어기의 측정 결과로 표시하지 않습니다.

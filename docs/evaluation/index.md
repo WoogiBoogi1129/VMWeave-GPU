@@ -8,8 +8,8 @@
 | 1. 요청과 실행 연결 | 요청 등록→배치→GPU 실행→검산→회수 기록 | [실제 터미널 기록](../../experiments/evidence/results/2026-09-28-stage1-terminal/README.md) |
 | 2. SHM 요청 왕복 | 새 대표 실행 1회, 18요청·72추적 레코드, 정수 262,144개 불일치 0 | [정적 화면과 원본](../../experiments/evidence/results/2026-09-28-stage2-static/README.md) |
 | 3. 두 VM 메모리 제한 | VM 쌍 3/3 PASS, 1 GiB/4 GiB 정책과 OOM 후 재할당 | [평가 요약](memory.md) |
-| N/T/S 오버헤드 | 경로별 3회, 유효 63구간; 현재 S 지연이 T보다 큼 | [평가 요약](overhead.md) |
-| 연산 상한·공유 성능 | 9/30 새 campaign 실행 중; 예비 상한 25 위반 관측 | [새 평가](resource-performance.md) |
+| N/T/S 오버헤드 | 새 경로별 5회·105구간, 8개 지연 지표 모두 S > T | [새 평가](resource-performance.md) |
+| 연산 상한·공유 성능 | 단일 VM 20회 완료, 25·50·75 기준 위반; 공유 측정 진행 중 | [새 평가](resource-performance.md) |
 | 제한된 PyTorch 학습 | 고정 FP32 eager MLP·SGD, passthrough와 정확성 비교 | [구현·검증 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md) |
 
 ## 재현과 판정
