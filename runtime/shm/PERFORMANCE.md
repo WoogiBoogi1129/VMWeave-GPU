@@ -13,6 +13,16 @@ memory, or transparent asynchronous return is introduced.
 | `FLYT_COPY_MODE` | `legacy`, `optimized` | Independent switch for private buffer reuse and payload-copy changes |
 | `FLYT_METRICS` | `0`, `1` | Per-thread accumulated stage timing, emitted to stderr on close |
 
+Defaults are `bounded`, `FLYT_SPIN_US=0`, `FLYT_SLEEP_US=50`, and `optimized`.
+Telemetry is off by default. These defaults were selected after a four-way,
+five-repetition actual-VM campaign. Saturated CPU consumption increases as more
+requests complete; CPU time per operation decreases in the measured workloads.
+See the [results and limitations](../../experiments/evidence/results/2026-10-01-shm-first/README.md).
+To restore the prior wait/copy behavior, set `FLYT_WAIT_MODE=legacy` and
+`FLYT_COPY_MODE=legacy` in both Guest and Worker before starting fresh processes.
+Unset string settings select the defaults; unknown or empty mode strings select
+legacy behavior. Numeric defaults and limits are listed above.
+
 After 10ms without work the bounded wait requests 1ms sleeps. Idle workloads do
 not reserve a spinning CPU. This also means the first request following idle may
 still encounter the long sleep. Policy is initialized once per process; start

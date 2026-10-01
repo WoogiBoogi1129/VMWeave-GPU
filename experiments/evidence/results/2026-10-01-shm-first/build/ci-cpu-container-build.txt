@@ -1,0 +1,56 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /out/ci-queue
+[ 33%] Building C object CMakeFiles/flyt_shm_queue.dir/src/queue.c.o
+[ 66%] Building C object CMakeFiles/flyt_shm_queue.dir/src/perf.c.o
+[100%] Linking C static library libflyt_shm_queue.a
+[100%] Built target flyt_shm_queue
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /out/ci-dispatch
+[ 50%] Building C object CMakeFiles/flyt_cuda_exec.dir/src/exec.c.o
+[100%] Linking C static library libflyt_cuda_exec.a
+[100%] Built target flyt_cuda_exec
+PASS: private input/output borrowing, capacity preflight, ownership and bounds
+PASS: borrowed output failure poisons context without freeing caller buffer

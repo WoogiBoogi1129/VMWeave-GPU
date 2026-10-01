@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-10-01-shm-first$ # Mean latency in microseconds: query, kernel, H2D16MiB, D2
+H16MiB
+ubuntu@gpu-4:2026-10-01-shm-first$ jq -r '.summary|to_entries[]|[.key,.value.query.mean_us,.va
+lue.kernel.mean_us,.value["h2d-16777216"].mean_us,.value["d2h-16777216"].mean_us]|@tsv' summar
+y.json | column -t
+base  1465.0035298057396  2828.6466705256325  44572.407938084485  48751.233109357265
+wait  180.98076167747095  284.88766683300884  39814.55197765285   40711.042968937305
+copy  1472.516017964204   2828.995391219962   16391.149436923333  13368.120980621443
+both  181.1808874055064   276.9570730029581   9438.169478298603   6410.500152932865
+ubuntu@gpu-4:2026-10-01-shm-first$ jq '{complete,latency_targets_pass,p95_regression_guard_pas
+s,candidate_eligible,improvements}' validation.json
+{
+  "complete": true,
+  "latency_targets_pass": true,
+  "p95_regression_guard_pass": true,
+  "candidate_eligible": true,
+  "improvements": {
+    "d2h-1048576": 0.7662290803262422,
+    "d2h-16777216": 0.8685058870500152,
+    "d2h-4096": 0.8965513533402341,
+    "h2d-1048576": 0.7514142960334762,
+    "h2d-16777216": 0.7882508503599546,
+    "h2d-4096": 0.898991478839738,
+    "kernel": 0.9020884877956522,
+    "query": 0.8763273372934937
+  }
+}
+ubuntu@gpu-4:2026-10-01-shm-first$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

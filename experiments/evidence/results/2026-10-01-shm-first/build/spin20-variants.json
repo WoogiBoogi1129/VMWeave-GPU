@@ -1,0 +1,22 @@
+{
+  "base": {
+    "worker": "localhost/vmweave-worker@sha256:a1dc20387c9ecca9a22e7d814f001f3b4696184b60af0648d702aa33c9300ad7",
+    "wait": "legacy",
+    "copy": "legacy"
+  },
+  "wait": {
+    "worker": "localhost/vmweave-worker@sha256:9904b3caa8083aea77a344bf3650cc2d682f6bbdb656c46cb964e63f17786d93",
+    "wait": "bounded",
+    "copy": "legacy"
+  },
+  "copy": {
+    "worker": "localhost/vmweave-worker@sha256:257ee6612bc68c601dab3c5556f66a82e73712eb5287c2d98453120711e5d96f",
+    "wait": "legacy",
+    "copy": "optimized"
+  },
+  "both": {
+    "worker": "localhost/vmweave-worker@sha256:eac610c8185326cb985726dff6099611dc0f1f1fd2ed5bf1fbde1bf7426708eb",
+    "wait": "bounded",
+    "copy": "optimized"
+  }
+}

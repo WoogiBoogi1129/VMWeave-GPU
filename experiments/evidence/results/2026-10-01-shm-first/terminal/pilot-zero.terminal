@@ -1,0 +1,35 @@
+Script started on 2026-10-01 12:01:53+09:00 [COMMAND="python3 -u experiments/shm-first-bundle/build_sleep.py && python3 -u experiments/shm-first-bundle/run.py pilot-zero" <not executed on terminal>]
+COMMAND sf-pilot-zero-both ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-shm-first/runs/sf-pilot-zero-both/known-hosts ubuntu@10.85.0.230 'sudo env FLYT_WAIT_MODE=bounded FLYT_COPY_MODE=optimized FLYT_SPIN_US=0 FLYT_METRICS=1 FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S batch 5 5 2 /tmp/perf/sf-pilot-zero-both /tmp/perf/work.ptx 3 31'
+sf-pilot-zero-both {"event":"CONDITION","mode":"copy","bytes":1048576,"duration_s":5,"warmup_min_s":2,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-pilot-zero-both {"event":"WARMUP_START","utc":1790823864.256911516,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"WARMUP_END","utc":1790823866.257144213,"elapsed":2.000206724,"completed":778}
+sf-pilot-zero-both {"event":"MEASUREMENT_START","utc":1790823866.257186174,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"MEASUREMENT_END","utc":1790823871.258527517,"elapsed":5.001333786,"completed":1872}
+sf-pilot-zero-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":1048576,"completed":1872,"elapsed_s":5.001333786,"operations_per_s":374.300152739,"checked_elements":262144,"mismatches":0}
+sf-pilot-zero-both {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":5,"warmup_min_s":2,"iterations":64,"free_bytes":3684696064,"total_bytes":4294967296}
+sf-pilot-zero-both {"event":"WARMUP_START","utc":1790823871.383960009,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"WARMUP_END","utc":1790823873.388890743,"elapsed":2.004906424,"completed":109}
+sf-pilot-zero-both {"event":"MEASUREMENT_START","utc":1790823873.388923407,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"MEASUREMENT_END","utc":1790823878.390017748,"elapsed":5.001086801,"completed":346}
+sf-pilot-zero-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":346,"elapsed_s":5.001086801,"operations_per_s":69.184961943,"checked_elements":4194304,"mismatches":0}
+sf-pilot-zero-both {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":5,"warmup_min_s":2,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-pilot-zero-both {"event":"WARMUP_START","utc":1790823878.441496372,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"WARMUP_END","utc":1790823880.441546202,"elapsed":2.000032672,"completed":11172}
+sf-pilot-zero-both {"event":"MEASUREMENT_START","utc":1790823880.441580772,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"MEASUREMENT_END","utc":1790823885.441606283,"elapsed":5.000017686,"completed":27568}
+sf-pilot-zero-both {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":27568,"elapsed_s":5.000017686,"operations_per_s":5513.580497363,"checked_elements":262144,"mismatches":0}
+sf-pilot-zero-both {"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":5,"warmup_min_s":2,"iterations":1,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-pilot-zero-both {"event":"WARMUP_START","utc":1790823885.508164883,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"WARMUP_END","utc":1790823887.508355618,"elapsed":2.000170554,"completed":7457}
+sf-pilot-zero-both {"event":"MEASUREMENT_START","utc":1790823887.508379459,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"MEASUREMENT_END","utc":1790823892.508612871,"elapsed":5.000230685,"completed":17780}
+sf-pilot-zero-both {"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":17780,"elapsed_s":5.000230685,"operations_per_s":3555.835944397,"checked_elements":262144,"mismatches":0}
+sf-pilot-zero-both {"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":5,"warmup_min_s":2,"iterations":64,"free_bytes":3718242304,"total_bytes":4294967296}
+sf-pilot-zero-both {"event":"WARMUP_START","utc":1790823892.526187420,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"WARMUP_END","utc":1790823894.526768684,"elapsed":2.000568678,"completed":3296}
+sf-pilot-zero-both {"event":"MEASUREMENT_START","utc":1790823894.526789904,"elapsed":0.000000000,"completed":0}
+sf-pilot-zero-both {"event":"MEASUREMENT_END","utc":1790823899.527513266,"elapsed":5.000719472,"completed":8373}
+sf-pilot-zero-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":8373,"elapsed_s":5.000719472,"operations_per_s":1674.359069106,"checked_elements":1024,"mismatches":0}
+SESSION_COMPLETE sf-pilot-zero-both
+
+Script done on 2026-10-01 12:05:14+09:00 [COMMAND_EXIT_CODE="0"]

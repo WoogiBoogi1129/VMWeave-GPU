@@ -1,0 +1,42 @@
+{
+  "repeats": 5,
+  "conditions": [
+    "query",
+    "kernel",
+    "copy-4096",
+    "copy-1048576",
+    "copy-16777216"
+  ],
+  "duration_s": 10,
+  "warmup_min_s": 3,
+  "warmup_min_operations": 50,
+  "variants": {
+    "base": {
+      "worker": "localhost/vmweave-worker@sha256:a1dc20387c9ecca9a22e7d814f001f3b4696184b60af0648d702aa33c9300ad7",
+      "wait": "legacy",
+      "copy": "legacy"
+    },
+    "wait": {
+      "worker": "localhost/vmweave-worker@sha256:ea572a79b1d6791f2ade9971ce3984bff9e3fde34667e83275c681e4151448f9",
+      "wait": "bounded",
+      "copy": "legacy",
+      "spin_us": 0
+    },
+    "copy": {
+      "worker": "localhost/vmweave-worker@sha256:257ee6612bc68c601dab3c5556f66a82e73712eb5287c2d98453120711e5d96f",
+      "wait": "legacy",
+      "copy": "optimized"
+    },
+    "both": {
+      "worker": "localhost/vmweave-worker@sha256:540284516a62d459dae29cecf1a38f88c91a0cc5b60be03173826df9a8b2abc7",
+      "wait": "bounded",
+      "copy": "optimized",
+      "spin_us": 0
+    }
+  },
+  "metrics": true,
+  "cap": 100,
+  "seed": 20261001,
+  "scope": "SHM first-bundle ablation, no TCP-only causal claim",
+  "acceptance": "No correctness failures. Target query/kernel mean -50%, 16MiB copies -25%; report p95 and total Worker/launcher CPU; do not enable permanent two-core spinning."
+}

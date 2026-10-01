@@ -31,6 +31,12 @@ python3 experiments/shm-first-bundle/run.py formal
 python3 experiments/shm-first-bundle/analyze.py
 python3 experiments/shm-first-bundle/analyze_cpu.py
 python3 experiments/shm-first-bundle/export_telemetry.py
+python3 experiments/shm-first-bundle/verify.py
+# Only after reviewing eligible results and selecting the defaults:
+python3 experiments/shm-first-bundle/build_final.py
+python3 experiments/shm-first-bundle/regression.py default
+python3 experiments/shm-first-bundle/regression.py shared
+python3 experiments/shm-first-bundle/verify_regression.py
 ```
 
 Run the driver inside `script -q -e` to record the real terminal. Commands, output,
@@ -50,3 +56,18 @@ The same serial workload and synchronization boundaries are maintained. This
 does not measure API batching, Graphs, quota enforcement or transport-only
 TCP/SHM effects. Native CUDA and the original Flyt TCP implementation are not
 relabelled as matched controls. No failed run is silently counted as a success.
+
+The selected runtime defaults use zero active spin and optimized private copies;
+explicit legacy mode remains available. `build_final.py` preserves a separate
+set of final binaries and hashes, leaving all formal comparison artifacts intact.
+The default-policy VM run and one two-VM start/stop pair are supplemental
+regression checks, not additional formal repetitions or quota-validation tests.
+
+After measurements, use `plot.py` (Python with matplotlib/numpy), `report.py`,
+`capture_grafana.cjs` and `capture_terminal.cjs` (Node with Playwright and a
+Chromium browser) to produce figures and actual post-run screen captures.
+`archive_logs.py` copies only explicitly selected non-secret logs. `cleanup.py`
+removes UID-matched campaign resources and stopped image-reference containers,
+retaining the monitoring deployment and its historical data. Stop the campaign
+exporter after exporting all observations. Generate the checksum manifest only
+after final cleanup and recording. See the [completed result bundle](../evidence/results/2026-10-01-shm-first/README.md).

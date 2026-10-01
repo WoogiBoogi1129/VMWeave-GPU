@@ -1,0 +1,23 @@
+Script started on 2026-10-01 11:50:32+09:00 [COMMAND="python3 -u experiments/shm-first-bundle/build_images.py" <not executed on terminal>]
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/build_images.py", line 17, in <module>
+    call(['python3',ROOT/'scripts/import-evidence-image.py',archive,'--output',target],timeout=900)
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/common.py", line 35, in call
+    raise RuntimeError(shlex.join(args)+': '+result.stderr[-2000:])
+RuntimeError: python3 /home/ubuntu/taeuk/flyt-k8s-poc-github/scripts/import-evidence-image.py /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/worker-base.oci --output /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/import-base: Error from server (NotFound): error when creating "STDIN": namespaces "flyt-evidence" not found
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/scripts/import-evidence-image.py", line 42, in <module>
+    created=json.loads(run(['create','-f','-','-o','json'],input=json.dumps(pod)))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/scripts/import-evidence-image.py", line 40, in run
+    def run(args,**kw):return subprocess.check_output(['kubectl',*args],text=True,**kw)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['kubectl', 'create', '-f', '-', '-o', 'json']' returned non-zero exit status 1.
+
+
+Script done on 2026-10-01 11:51:18+09:00 [COMMAND_EXIT_CODE="1"]

@@ -1,0 +1,82 @@
+{
+  "status": "success",
+  "data": {
+    "activeTargets": [
+      {
+        "discoveredLabels": {
+          "__address__": "10.105.14.111:9400",
+          "__metrics_path__": "/metrics",
+          "__scheme__": "http",
+          "__scrape_interval__": "1s",
+          "__scrape_timeout__": "900ms",
+          "job": "dcgm"
+        },
+        "labels": {
+          "instance": "10.105.14.111:9400",
+          "job": "dcgm"
+        },
+        "scrapePool": "dcgm",
+        "scrapeUrl": "http://10.105.14.111:9400/metrics",
+        "globalUrl": "http://10.105.14.111:9400/metrics",
+        "lastError": "",
+        "lastScrape": "2026-10-01T02:52:00.768323456Z",
+        "lastScrapeDuration": 0.003229207,
+        "health": "up",
+        "scrapeInterval": "1s",
+        "scrapeTimeout": "900ms"
+      },
+      {
+        "discoveredLabels": {
+          "__address__": "10.97.206.19:31992",
+          "__metrics_path__": "/metrics",
+          "__scheme__": "http",
+          "__scrape_interval__": "1s",
+          "__scrape_timeout__": "900ms",
+          "job": "hami"
+        },
+        "labels": {
+          "instance": "10.97.206.19:31992",
+          "job": "hami"
+        },
+        "scrapePool": "hami",
+        "scrapeUrl": "http://10.97.206.19:31992/metrics",
+        "globalUrl": "http://10.97.206.19:31992/metrics",
+        "lastError": "",
+        "lastScrape": "2026-10-01T02:52:00.643543617Z",
+        "lastScrapeDuration": 0.002188035,
+        "health": "up",
+        "scrapeInterval": "1s",
+        "scrapeTimeout": "900ms"
+      },
+      {
+        "discoveredLabels": {
+          "__address__": "10.110.216.21:9100",
+          "__metrics_path__": "/metrics",
+          "__scheme__": "http",
+          "__scrape_interval__": "1s",
+          "__scrape_timeout__": "900ms",
+          "job": "node"
+        },
+        "labels": {
+          "instance": "10.110.216.21:9100",
+          "job": "node"
+        },
+        "scrapePool": "node",
+        "scrapeUrl": "http://10.110.216.21:9100/metrics",
+        "globalUrl": "http://10.110.216.21:9100/metrics",
+        "lastError": "",
+        "lastScrape": "2026-10-01T02:52:00.857006063Z",
+        "lastScrapeDuration": 0.261200179,
+        "health": "up",
+        "scrapeInterval": "1s",
+        "scrapeTimeout": "900ms"
+      }
+    ],
+    "droppedTargets": [],
+    "droppedTargetCounts": {
+      "dcgm": 0,
+      "hami": 0,
+      "node": 0
+    }
+  }
+}

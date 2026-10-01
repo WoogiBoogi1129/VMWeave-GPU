@@ -1,0 +1,2665 @@
+{
+  "scope": "Pod cgroup CPU inside measured windows. Launcher includes QEMU/Guest; copy window includes both directions. Host/Guest alignment uncertainty in clock-map.json.",
+  "rows": [
+    {
+      "run": "sf-pilot-base",
+      "variant": "base",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.12372682275493663,
+          "observed_s": 1.000243902206421,
+          "coverage": 0.5000383789769023,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 0.22023828339674117,
+          "observed_s": 1.000243902206421,
+          "coverage": 0.5000383789769023,
+          "samples": 2
+        }
+      },
+      "total_cores": 0.3439651061516778,
+      "iterations_s": 682.8883224924047,
+      "cpu_us_iteration": 503.69159176170206
+    },
+    {
+      "run": "sf-pilot-base",
+      "variant": "base",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10593140271448337,
+          "observed_s": 1.0000905990600586,
+          "coverage": 0.49977713860263223,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 0.20569236446511824,
+          "observed_s": 1.0000905990600586,
+          "coverage": 0.49977713860263223,
+          "samples": 2
+        }
+      },
+      "total_cores": 0.3116237671796016,
+      "iterations_s": 355.3105784233286,
+      "cpu_us_iteration": 877.04612838271
+    },
+    {
+      "run": "sf-pilot-base",
+      "variant": "base",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.10869952816621464,
+          "observed_s": 1.0004091262817383,
+          "coverage": 0.49890090134650283,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 0.27325120575021095,
+          "observed_s": 1.0004091262817383,
+          "coverage": 0.49890090134650283,
+          "samples": 2
+        }
+      },
+      "total_cores": 0.3819507339164256,
+      "iterations_s": 175.5419491760626,
+      "cpu_us_iteration": 2175.8373751070862
+    },
+    {
+      "run": "sf-pilot-base",
+      "variant": "base",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.31304151705221994,
+          "observed_s": 1.0001580715179443,
+          "coverage": 0.4981572194177155,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 0.3704664398075122,
+          "observed_s": 1.0001580715179443,
+          "coverage": 0.4981572194177155,
+          "samples": 2
+        }
+      },
+      "total_cores": 0.6835079568597322,
+      "iterations_s": 92.14485144348276,
+      "cpu_us_iteration": 7417.755264155623
+    },
+    {
+      "run": "sf-pilot-base",
+      "variant": "base",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6279361677055315,
+          "observed_s": 1.0003867149353027,
+          "coverage": 0.49081053361614313,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 0.42790652215696845,
+          "observed_s": 1.0003867149353027,
+          "coverage": 0.49081053361614313,
+          "samples": 2
+        }
+      },
+      "total_cores": 1.0558426898625,
+      "iterations_s": 10.79370128262926,
+      "cpu_us_iteration": 97820.26222661084
+    },
+    {
+      "run": "sf-pilot-both",
+      "variant": "both",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.5239355926688334,
+          "observed_s": 0.9988441467285156,
+          "coverage": 0.49839386888802334,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 0.9974038525059101,
+          "observed_s": 0.9988441467285156,
+          "coverage": 0.49839386888802334,
+          "samples": 2
+        }
+      },
+      "total_cores": 1.5213394451747435,
+      "iterations_s": 65.86436262002462,
+      "cpu_us_iteration": 23098.066764138297
+    },
+    {
+      "run": "sf-pilot-both",
+      "variant": "both",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.4120624463022312,
+          "observed_s": 1.0004405975341797,
+          "coverage": 0.5001206753672911,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 1.7464285278969875,
+          "observed_s": 1.0004405975341797,
+          "coverage": 0.5001206753672911,
+          "samples": 2
+        }
+      },
+      "total_cores": 2.1584909741992186,
+      "iterations_s": 6262.263287541265,
+      "cpu_us_iteration": 344.68224587323306
+    },
+    {
+      "run": "sf-pilot-both",
+      "variant": "both",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.6482383973849927,
+          "observed_s": 0.9991123676300049,
+          "coverage": 0.49954201090352596,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 2.0514589413620685,
+          "observed_s": 0.9991123676300049,
+          "coverage": 0.49954201090352596,
+          "samples": 2
+        }
+      },
+      "total_cores": 2.699697338747061,
+      "iterations_s": 12246.676938785695,
+      "cpu_us_iteration": 220.44325593312715
+    },
+    {
+      "run": "sf-pilot-both",
+      "variant": "both",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.5849094065367195,
+          "observed_s": 1.0014593601226807,
+          "coverage": 0.5007217412004972,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 2.006573686378878,
+          "observed_s": 1.0014593601226807,
+          "coverage": 0.5007217412004972,
+          "samples": 2
+        }
+      },
+      "total_cores": 2.5914830929155976,
+      "iterations_s": 4907.932385869487,
+      "cpu_us_iteration": 528.019314279223
+    },
+    {
+      "run": "sf-pilot-both",
+      "variant": "both",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.4869533724385956,
+          "observed_s": 1.0006461143493652,
+          "coverage": 0.49982654397595505,
+          "samples": 2
+        },
+        "launcher": {
+          "cores": 0.90152351272214,
+          "observed_s": 1.0006461143493652,
+          "coverage": 0.49982654397595505,
+          "samples": 2
+        }
+      },
+      "total_cores": 1.3884768851607356,
+      "iterations_s": 401.6025107022124,
+      "cpu_us_iteration": 3457.341147426962
+    },
+    {
+      "run": "sf-pilot-zero-both",
+      "variant": "both",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.47149534042973673,
+          "observed_s": 3.999242067337036,
+          "coverage": 0.7996338968132272,
+          "samples": 5
+        },
+        "launcher": {
+          "cores": 0.9008599477947974,
+          "observed_s": 3.999242067337036,
+          "coverage": 0.7996338968132272,
+          "samples": 5
+        }
+      },
+      "total_cores": 1.3723552882245342,
+      "iterations_s": 374.3001527392957,
+      "cpu_us_iteration": 3666.4566610006045
+    },
+    {
+      "run": "sf-pilot-zero-both",
+      "variant": "both",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.49482474357060413,
+          "observed_s": 3.999634265899658,
+          "coverage": 0.7997518128957181,
+          "samples": 5
+        },
+        "launcher": {
+          "cores": 1.0007082482827225,
+          "observed_s": 3.999634265899658,
+          "coverage": 0.7997518128957181,
+          "samples": 5
+        }
+      },
+      "total_cores": 1.4955329918533267,
+      "iterations_s": 69.18496194283512,
+      "cpu_us_iteration": 21616.445971149456
+    },
+    {
+      "run": "sf-pilot-zero-both",
+      "variant": "both",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.26264149765884365,
+          "observed_s": 3.998260021209717,
+          "coverage": 0.7996479243122148,
+          "samples": 5
+        },
+        "launcher": {
+          "cores": 1.4625029310201756,
+          "observed_s": 3.998260021209717,
+          "coverage": 0.7996479243122148,
+          "samples": 5
+        }
+      },
+      "total_cores": 1.7251444286790192,
+      "iterations_s": 5513.580497363065,
+      "cpu_us_iteration": 312.8900411455115
+    },
+    {
+      "run": "sf-pilot-zero-both",
+      "variant": "both",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.18371234167415051,
+          "observed_s": 4.000275611877441,
+          "coverage": 0.8000177756594481,
+          "samples": 5
+        },
+        "launcher": {
+          "cores": 1.7338507825326557,
+          "observed_s": 4.000275611877441,
+          "coverage": 0.8000177756594481,
+          "samples": 5
+        }
+      },
+      "total_cores": 1.917563124206806,
+      "iterations_s": 3555.8359443970335,
+      "cpu_us_iteration": 539.2721020294341
+    },
+    {
+      "run": "sf-pilot-zero-both",
+      "variant": "both",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.20990316193683037,
+          "observed_s": 4.000277996063232,
+          "coverage": 0.7999398699967589,
+          "samples": 5
+        },
+        "launcher": {
+          "cores": 1.638046657369465,
+          "observed_s": 4.000277996063232,
+          "coverage": 0.7999398699967589,
+          "samples": 5
+        }
+      },
+      "total_cores": 1.8479498193062953,
+      "iterations_s": 1674.3590691063664,
+      "cpu_us_iteration": 1103.675939888197
+    },
+    {
+      "run": "sf-r1-base",
+      "variant": "base",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.32048957053409,
+          "observed_s": 8.999740600585938,
+          "coverage": 0.8990931027116266,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.34927551131810913,
+          "observed_s": 8.999740600585938,
+          "coverage": 0.8990931027116266,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.6697650818521992,
+      "iterations_s": 95.60639262231975,
+      "cpu_us_iteration": 7005.442455066958
+    },
+    {
+      "run": "sf-r1-base",
+      "variant": "base",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6337737860452267,
+          "observed_s": 8.999411344528198,
+          "coverage": 0.8986288329447103,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.4159935418749621,
+          "observed_s": 8.999411344528198,
+          "coverage": 0.8986288329447103,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.049767327920189,
+      "iterations_s": 10.684404980520883,
+      "cpu_us_iteration": 98252.29667295997
+    },
+    {
+      "run": "sf-r1-base",
+      "variant": "base",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.12463809890680784,
+          "observed_s": 9.000016927719116,
+          "coverage": 0.8999869086508736,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.21342615413133453,
+          "observed_s": 9.000016927719116,
+          "coverage": 0.8999869086508736,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33806425303814236,
+      "iterations_s": 677.7894015426859,
+      "cpu_us_iteration": 498.7747702585634
+    },
+    {
+      "run": "sf-r1-base",
+      "variant": "base",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10551052267889821,
+          "observed_s": 8.999955415725708,
+          "coverage": 0.8999879242011763,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22383333104962524,
+          "observed_s": 8.999955415725708,
+          "coverage": 0.8999879242011763,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3293438537285235,
+      "iterations_s": 354.597263182863,
+      "cpu_us_iteration": 928.7828416168104
+    },
+    {
+      "run": "sf-r1-base",
+      "variant": "base",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.10661121940384412,
+          "observed_s": 8.999643802642822,
+          "coverage": 0.8998272491508348,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22480556390530465,
+          "observed_s": 8.999643802642822,
+          "coverage": 0.8998272491508348,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33141678330914875,
+      "iterations_s": 173.87363785281175,
+      "cpu_us_iteration": 1906.0783877409933
+    },
+    {
+      "run": "sf-r1-both",
+      "variant": "both",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.262694174171864,
+          "observed_s": 9.000104427337646,
+          "coverage": 0.9000028681513678,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4790071723576255,
+          "observed_s": 9.000104427337646,
+          "coverage": 0.9000028681513678,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7417013465294895,
+      "iterations_s": 5442.258311212884,
+      "cpu_us_iteration": 320.0328332341371
+    },
+    {
+      "run": "sf-r1-both",
+      "variant": "both",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.20000075263924688,
+          "observed_s": 8.999256134033203,
+          "coverage": 0.8999066896986886,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.743676340165173,
+          "observed_s": 8.999256134033203,
+          "coverage": 0.8999066896986886,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.9436770928044198,
+      "iterations_s": 3580.3258589701445,
+      "cpu_us_iteration": 542.8771484401994
+    },
+    {
+      "run": "sf-r1-both",
+      "variant": "both",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.22979732981742915,
+          "observed_s": 8.998851299285889,
+          "coverage": 0.8998797447725311,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.5545229646266188,
+          "observed_s": 8.998851299285889,
+          "coverage": 0.8998797447725311,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.784320294444048,
+      "iterations_s": 1579.4914533717456,
+      "cpu_us_iteration": 1129.6802465344485
+    },
+    {
+      "run": "sf-r1-both",
+      "variant": "both",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.44487087079339793,
+          "observed_s": 8.999813795089722,
+          "coverage": 0.8997731209407307,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9099194923863824,
+          "observed_s": 8.999813795089722,
+          "coverage": 0.8997731209407307,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.3547903631797804,
+      "iterations_s": 398.3080865056196,
+      "cpu_us_iteration": 3401.3629375829055
+    },
+    {
+      "run": "sf-r1-both",
+      "variant": "both",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.5138007253604738,
+          "observed_s": 9.000491380691528,
+          "coverage": 0.8993642212878138,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9973774342207398,
+          "observed_s": 9.000491380691528,
+          "coverage": 0.8993642212878138,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.5111781595812137,
+      "iterations_s": 64.7507359048039,
+      "cpu_us_iteration": 23338.393586799346
+    },
+    {
+      "run": "sf-r1-copy",
+      "variant": "copy",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.11910804079448564,
+          "observed_s": 8.999367237091064,
+          "coverage": 0.8998838373742312,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.24353023298873774,
+          "observed_s": 8.999367237091064,
+          "coverage": 0.8998838373742312,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3626382737832234,
+      "iterations_s": 674.8608052316955,
+      "cpu_us_iteration": 537.3526969887089
+    },
+    {
+      "run": "sf-r1-copy",
+      "variant": "copy",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.1021100052663661,
+          "observed_s": 8.999607801437378,
+          "coverage": 0.8999458679585879,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.24865128007495993,
+          "observed_s": 8.999607801437378,
+          "coverage": 0.8999458679585879,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.350761285341326,
+      "iterations_s": 353.59440040835625,
+      "cpu_us_iteration": 991.987669873283
+    },
+    {
+      "run": "sf-r1-copy",
+      "variant": "copy",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.10904355292019677,
+          "observed_s": 9.000752210617065,
+          "coverage": 0.899984306490264,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.23156520157742563,
+          "observed_s": 9.000752210617065,
+          "coverage": 0.899984306490264,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3406087544976224,
+      "iterations_s": 174.18253600606545,
+      "cpu_us_iteration": 1955.4701769054598
+    },
+    {
+      "run": "sf-r1-copy",
+      "variant": "copy",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.21396062914437297,
+          "observed_s": 9.00026798248291,
+          "coverage": 0.899872217671196,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.3062017714765565,
+          "observed_s": 9.00026798248291,
+          "coverage": 0.899872217671196,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.5201624006209294,
+      "iterations_s": 134.37703606642793,
+      "cpu_us_iteration": 3870.917352007916
+    },
+    {
+      "run": "sf-r1-copy",
+      "variant": "copy",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.47879142737511576,
+          "observed_s": 9.000595569610596,
+          "coverage": 0.899716406742128,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.457911586863836,
+          "observed_s": 9.000595569610596,
+          "coverage": 0.899716406742128,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.9367030142389517,
+      "iterations_s": 33.787143735026525,
+      "cpu_us_iteration": 27723.65197795304
+    },
+    {
+      "run": "sf-r1-wait",
+      "variant": "wait",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.26565790422742847,
+          "observed_s": 8.999747276306152,
+          "coverage": 0.8999656513817182,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.48466180102383,
+          "observed_s": 8.999747276306152,
+          "coverage": 0.8999656513817182,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7503197052512585,
+      "iterations_s": 5430.649544921209,
+      "cpu_us_iteration": 322.30393266458753
+    },
+    {
+      "run": "sf-r1-wait",
+      "variant": "wait",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2209693785280161,
+          "observed_s": 9.000066041946411,
+          "coverage": 0.9000019049545006,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.6691118631781976,
+          "observed_s": 9.000066041946411,
+          "coverage": 0.9000019049545006,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.8900812417062136,
+      "iterations_s": 3472.4829949035257,
+      "cpu_us_iteration": 544.3025191139128
+    },
+    {
+      "run": "sf-r1-wait",
+      "variant": "wait",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.21381493013304567,
+          "observed_s": 8.997982501983643,
+          "coverage": 0.8997607950604397,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.6553939726729063,
+          "observed_s": 8.997982501983643,
+          "coverage": 0.8997607950604397,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.869208902805952,
+      "iterations_s": 1814.525344257951,
+      "cpu_us_iteration": 1030.1365636589462
+    },
+    {
+      "run": "sf-r1-wait",
+      "variant": "wait",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.49722069667033336,
+          "observed_s": 9.000536441802979,
+          "coverage": 0.8998193734274429,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9460841645450002,
+          "observed_s": 9.000536441802979,
+          "coverage": 0.8998193734274429,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.4433048612153336,
+      "iterations_s": 289.4248445296563,
+      "cpu_us_iteration": 4986.803615843158
+    },
+    {
+      "run": "sf-r1-wait",
+      "variant": "wait",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6710215235466964,
+          "observed_s": 9.99933648109436,
+          "coverage": 0.992739389091712,
+          "samples": 11
+        },
+        "launcher": {
+          "cores": 0.6291247436161395,
+          "observed_s": 9.99933648109436,
+          "coverage": 0.992739389091712,
+          "samples": 11
+        }
+      },
+      "total_cores": 1.3001462671628359,
+      "iterations_s": 12.410076715665104,
+      "cpu_us_iteration": 104765.36905865179
+    },
+    {
+      "run": "sf-r2-base",
+      "variant": "base",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.11884585016678824,
+          "observed_s": 8.999792575836182,
+          "coverage": 0.899865935042646,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.23233135457077228,
+          "observed_s": 8.999792575836182,
+          "coverage": 0.899865935042646,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.35117720473756053,
+      "iterations_s": 682.2147623820512,
+      "cpu_us_iteration": 514.7604890744004
+    },
+    {
+      "run": "sf-r2-base",
+      "variant": "base",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10624834646376917,
+          "observed_s": 8.999933004379272,
+          "coverage": 0.8999858118284148,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.24419003996258917,
+          "observed_s": 8.999933004379272,
+          "coverage": 0.8999858118284148,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.35043838642635833,
+      "iterations_s": 350.7973432714005,
+      "cpu_us_iteration": 998.9767401266649
+    },
+    {
+      "run": "sf-r2-base",
+      "variant": "base",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.11074155592999385,
+          "observed_s": 8.999918699264526,
+          "coverage": 0.8995796246536858,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22619871001349856,
+          "observed_s": 8.999918699264526,
+          "coverage": 0.8995796246536858,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3369402659434924,
+      "iterations_s": 172.72097764827174,
+      "cpu_us_iteration": 1950.7778993101585
+    },
+    {
+      "run": "sf-r2-base",
+      "variant": "base",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.3161916224751479,
+          "observed_s": 9.000415563583374,
+          "coverage": 0.8991500817263463,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.35678252601944466,
+          "observed_s": 9.000415563583374,
+          "coverage": 0.8991500817263463,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.6729741484945926,
+      "iterations_s": 95.70517704284964,
+      "cpu_us_iteration": 7031.742370564603
+    },
+    {
+      "run": "sf-r2-base",
+      "variant": "base",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6117014432603778,
+          "observed_s": 9.00033187866211,
+          "coverage": 0.8965866030607724,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.4396318995059302,
+          "observed_s": 9.00033187866211,
+          "coverage": 0.8965866030607724,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.0513333427663079,
+      "iterations_s": 10.957884441733507,
+      "cpu_us_iteration": 95943.09452308751
+    },
+    {
+      "run": "sf-r2-both",
+      "variant": "both",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.4653887431504862,
+          "observed_s": 9.000722646713257,
+          "coverage": 0.9000028274262059,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.8981987688457603,
+          "observed_s": 9.000722646713257,
+          "coverage": 0.9000028274262059,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.3635875119962466,
+      "iterations_s": 384.37063358391237,
+      "cpu_us_iteration": 3547.585046448561
+    },
+    {
+      "run": "sf-r2-both",
+      "variant": "both",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.5224207748905442,
+          "observed_s": 8.999249696731567,
+          "coverage": 0.8995669705421379,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.0065157991215343,
+          "observed_s": 8.999249696731567,
+          "coverage": 0.8995669705421379,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.5289365740120786,
+      "iterations_s": 62.67510299222745,
+      "cpu_us_iteration": 24394.63999288022
+    },
+    {
+      "run": "sf-r2-both",
+      "variant": "both",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2643260751749786,
+          "observed_s": 9.000005006790161,
+          "coverage": 0.8999932694975896,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4624997419522978,
+          "observed_s": 9.000005006790161,
+          "coverage": 0.8999932694975896,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7268258171272763,
+      "iterations_s": 5507.160036742477,
+      "cpu_us_iteration": 313.5601300137095
+    },
+    {
+      "run": "sf-r2-both",
+      "variant": "both",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.21368872767015085,
+          "observed_s": 8.999094247817993,
+          "coverage": 0.899889021051907,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.7020855186302735,
+          "observed_s": 8.999094247817993,
+          "coverage": 0.899889021051907,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.9157742463004244,
+      "iterations_s": 3612.0195126467956,
+      "cpu_us_iteration": 530.3886758066249
+    },
+    {
+      "run": "sf-r2-both",
+      "variant": "both",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.21348089976788548,
+          "observed_s": 8.99945616722107,
+          "coverage": 0.8999239892153471,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.6514202329393846,
+          "observed_s": 8.99945616722107,
+          "coverage": 0.8999239892153471,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.86490113270727,
+      "iterations_s": 1908.154673121448,
+      "cpu_us_iteration": 977.3322671251688
+    },
+    {
+      "run": "sf-r2-copy",
+      "variant": "copy",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.21867202030976482,
+          "observed_s": 8.998544931411743,
+          "coverage": 0.8995881108203795,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.3106024386502129,
+          "observed_s": 8.998544931411743,
+          "coverage": 0.8995881108203795,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.5292744589599777,
+      "iterations_s": 132.76089315474698,
+      "cpu_us_iteration": 3986.6744368995155
+    },
+    {
+      "run": "sf-r2-copy",
+      "variant": "copy",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.48185135891130076,
+          "observed_s": 9.000547409057617,
+          "coverage": 0.8997502337797045,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.4624547608972386,
+          "observed_s": 9.000547409057617,
+          "coverage": 0.8997502337797045,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.9443061198085394,
+      "iterations_s": 34.38838470407527,
+      "cpu_us_iteration": 27460.031284826015
+    },
+    {
+      "run": "sf-r2-copy",
+      "variant": "copy",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.11909060002970152,
+          "observed_s": 9.000038623809814,
+          "coverage": 0.8999373267733973,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22331970828245104,
+          "observed_s": 9.000038623809814,
+          "coverage": 0.8999373267733973,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3424103083121526,
+      "iterations_s": 671.7508540357678,
+      "cpu_us_iteration": 509.72813246906674
+    },
+    {
+      "run": "sf-r2-copy",
+      "variant": "copy",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10510100370357733,
+          "observed_s": 9.00068473815918,
+          "coverage": 0.8998754458573728,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22243540999853567,
+          "observed_s": 9.00068473815918,
+          "coverage": 0.8998754458573728,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.327536413702113,
+      "iterations_s": 349.0254546896543,
+      "cpu_us_iteration": 938.4313072333109
+    },
+    {
+      "run": "sf-r2-copy",
+      "variant": "copy",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.10801816713379639,
+          "observed_s": 8.99980092048645,
+          "coverage": 0.899495634880258,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22056787894956065,
+          "observed_s": 8.99980092048645,
+          "coverage": 0.899495634880258,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.32858604608335706,
+      "iterations_s": 175.70550222492835,
+      "cpu_us_iteration": 1870.095369368226
+    },
+    {
+      "run": "sf-r2-wait",
+      "variant": "wait",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6712054988366527,
+          "observed_s": 9.000945329666138,
+          "coverage": 0.8942706179119467,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.6441572287846636,
+          "observed_s": 9.000945329666138,
+          "coverage": 0.8942706179119467,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.3153627276213165,
+      "iterations_s": 12.22042532447976,
+      "cpu_us_iteration": 107636.41139285086
+    },
+    {
+      "run": "sf-r2-wait",
+      "variant": "wait",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2628474119951162,
+          "observed_s": 8.999704360961914,
+          "coverage": 0.8999662090934947,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4750536759388757,
+          "observed_s": 8.999704360961914,
+          "coverage": 0.8999662090934947,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.737901087933992,
+      "iterations_s": 5417.078885851626,
+      "cpu_us_iteration": 320.81886281424795
+    },
+    {
+      "run": "sf-r2-wait",
+      "variant": "wait",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.21826224475902722,
+          "observed_s": 9.00046181678772,
+          "coverage": 0.9000404951398083,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.7174356510427244,
+          "observed_s": 9.00046181678772,
+          "coverage": 0.9000404951398083,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.9356978958017517,
+      "iterations_s": 3521.8788430172262,
+      "cpu_us_iteration": 549.6208081205375
+    },
+    {
+      "run": "sf-r2-wait",
+      "variant": "wait",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.2269235975341302,
+          "observed_s": 9.000399351119995,
+          "coverage": 0.9000266738776098,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.5727292143140905,
+          "observed_s": 9.000399351119995,
+          "coverage": 0.9000266738776098,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7996528118482207,
+      "iterations_s": 1580.877405783941,
+      "cpu_us_iteration": 1138.3885969043824
+    },
+    {
+      "run": "sf-r2-wait",
+      "variant": "wait",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.5473688418203785,
+          "observed_s": 8.999352216720581,
+          "coverage": 0.8999159544819086,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9327530246459104,
+          "observed_s": 8.999352216720581,
+          "coverage": 0.8999159544819086,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.480121866466289,
+      "iterations_s": 236.99512031787165,
+      "cpu_us_iteration": 6245.368531137111
+    },
+    {
+      "run": "sf-r3-base",
+      "variant": "base",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6216373393224455,
+          "observed_s": 9.000792980194092,
+          "coverage": 0.8952307178784338,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.437945968613423,
+          "observed_s": 9.000792980194092,
+          "coverage": 0.8952307178784338,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.0595833079358685,
+      "iterations_s": 10.542909216706938,
+      "cpu_us_iteration": 100501.98537769708
+    },
+    {
+      "run": "sf-r3-base",
+      "variant": "base",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.12561199200570303,
+          "observed_s": 9.001234531402588,
+          "coverage": 0.900004512667329,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22507368216349702,
+          "observed_s": 9.001234531402588,
+          "coverage": 0.900004512667329,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.35068567416920005,
+      "iterations_s": 680.110740430127,
+      "cpu_us_iteration": 515.630254489752
+    },
+    {
+      "run": "sf-r3-base",
+      "variant": "base",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10865006538829405,
+          "observed_s": 9.000767707824707,
+          "coverage": 0.8999152526373421,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.21930251552698357,
+          "observed_s": 9.000767707824707,
+          "coverage": 0.8999152526373421,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3279525809152776,
+      "iterations_s": 353.33684888234035,
+      "cpu_us_iteration": 928.1584469682199
+    },
+    {
+      "run": "sf-r3-base",
+      "variant": "base",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.11258886153743118,
+          "observed_s": 8.999540328979492,
+          "coverage": 0.8997483757095831,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22594687346998985,
+          "observed_s": 8.999540328979492,
+          "coverage": 0.8997483757095831,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.338535735007421,
+      "iterations_s": 172.96059691243013,
+      "cpu_us_iteration": 1957.299761048012
+    },
+    {
+      "run": "sf-r3-base",
+      "variant": "base",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.3269464076733639,
+          "observed_s": 9.000826835632324,
+          "coverage": 0.8998877005714704,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.3533089857268201,
+          "observed_s": 9.000826835632324,
+          "coverage": 0.8998877005714704,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.680255393400184,
+      "iterations_s": 94.3796184760031,
+      "cpu_us_iteration": 7207.65144407895
+    },
+    {
+      "run": "sf-r3-both",
+      "variant": "both",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.49939777731463936,
+          "observed_s": 8.999427318572998,
+          "coverage": 0.8991652268303232,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.0009922499633475,
+          "observed_s": 8.999427318572998,
+          "coverage": 0.8991652268303232,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.5003900272779869,
+      "iterations_s": 65.34354290448765,
+      "cpu_us_iteration": 22961.565299131395
+    },
+    {
+      "run": "sf-r3-both",
+      "variant": "both",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.26485700782547994,
+          "observed_s": 8.998568773269653,
+          "coverage": 0.8998510847141058,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4755349805673055,
+          "observed_s": 8.998568773269653,
+          "coverage": 0.8998510847141058,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7403919883927854,
+      "iterations_s": 5539.868569001687,
+      "cpu_us_iteration": 314.15763148807207
+    },
+    {
+      "run": "sf-r3-both",
+      "variant": "both",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.19455553963677244,
+          "observed_s": 9.001049280166626,
+          "coverage": 0.900104348592343,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.7723730315700124,
+          "observed_s": 9.001049280166626,
+          "coverage": 0.900104348592343,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.9669285712067848,
+      "iterations_s": 3626.9988582207598,
+      "cpu_us_iteration": 542.3019548927209
+    },
+    {
+      "run": "sf-r3-both",
+      "variant": "both",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.224313597922114,
+          "observed_s": 8.999360799789429,
+          "coverage": 0.8999265964614002,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.60874636789079,
+          "observed_s": 8.999360799789429,
+          "coverage": 0.8999265964614002,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.833059965812904,
+      "iterations_s": 1667.9830604644328,
+      "cpu_us_iteration": 1098.9679747122295
+    },
+    {
+      "run": "sf-r3-both",
+      "variant": "both",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.4690648337315124,
+          "observed_s": 9.001043558120728,
+          "coverage": 0.8999048849173766,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9127229467285518,
+          "observed_s": 9.001043558120728,
+          "coverage": 0.8999048849173766,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.3817877804600642,
+      "iterations_s": 386.21466440228454,
+      "cpu_us_iteration": 3577.7713997435944
+    },
+    {
+      "run": "sf-r3-copy",
+      "variant": "copy",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.11032263143360367,
+          "observed_s": 8.999975681304932,
+          "coverage": 0.8996675852267473,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22886728508374635,
+          "observed_s": 8.999975681304932,
+          "coverage": 0.8996675852267473,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33918991651735003,
+      "iterations_s": 177.23515862355868,
+      "cpu_us_iteration": 1913.7845964173375
+    },
+    {
+      "run": "sf-r3-copy",
+      "variant": "copy",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.21869360327914245,
+          "observed_s": 8.999339580535889,
+          "coverage": 0.8995223180920253,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.3102508773020142,
+          "observed_s": 8.999339580535889,
+          "coverage": 0.8995223180920253,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.5289444805811567,
+      "iterations_s": 133.53903000494722,
+      "cpu_us_iteration": 3960.972912275616
+    },
+    {
+      "run": "sf-r3-copy",
+      "variant": "copy",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.48752341273360117,
+          "observed_s": 9.000090837478638,
+          "coverage": 0.8987211601073605,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.4529728725651517,
+          "observed_s": 9.000090837478638,
+          "coverage": 0.8987211601073605,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.9404962852987528,
+      "iterations_s": 33.75165584949563,
+      "cpu_us_iteration": 27865.189473742732
+    },
+    {
+      "run": "sf-r3-copy",
+      "variant": "copy",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.12486901478989379,
+          "observed_s": 8.999326229095459,
+          "coverage": 0.8999035294250035,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22283479328891528,
+          "observed_s": 8.999326229095459,
+          "coverage": 0.8999035294250035,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3477038080788091,
+      "iterations_s": 677.7785963619276,
+      "cpu_us_iteration": 513.0049988966284
+    },
+    {
+      "run": "sf-r3-copy",
+      "variant": "copy",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10843038910966529,
+          "observed_s": 9.000447273254395,
+          "coverage": 0.900016252480339,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22272148695952265,
+          "observed_s": 9.000447273254395,
+          "coverage": 0.900016252480339,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33115187606918794,
+      "iterations_s": 357.0890011588397,
+      "cpu_us_iteration": 927.3650966412307
+    },
+    {
+      "run": "sf-r3-wait",
+      "variant": "wait",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.23800579615409614,
+          "observed_s": 8.999243021011353,
+          "coverage": 0.89990136636351,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.567190703381518,
+          "observed_s": 8.999243021011353,
+          "coverage": 0.89990136636351,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.8051964995356142,
+      "iterations_s": 1557.9610522200633,
+      "cpu_us_iteration": 1158.6916739434823
+    },
+    {
+      "run": "sf-r3-wait",
+      "variant": "wait",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.5325201301135231,
+          "observed_s": 9.00031328201294,
+          "coverage": 0.8998217711672601,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.938058902557639,
+          "observed_s": 9.00031328201294,
+          "coverage": 0.8998217711672601,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.470579032671162,
+      "iterations_s": 247.14265084444273,
+      "cpu_us_iteration": 5950.324752309864
+    },
+    {
+      "run": "sf-r3-wait",
+      "variant": "wait",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.672127256446572,
+          "observed_s": 9.000704765319824,
+          "coverage": 0.895431967025482,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.6387037626376058,
+          "observed_s": 9.000704765319824,
+          "coverage": 0.895431967025482,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.3108310190841777,
+      "iterations_s": 12.535075063814379,
+      "cpu_us_iteration": 104573.04901733046
+    },
+    {
+      "run": "sf-r3-wait",
+      "variant": "wait",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.25876132374716065,
+          "observed_s": 9.000085353851318,
+          "coverage": 0.9000032353210659,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.5019636446242657,
+          "observed_s": 9.000085353851318,
+          "coverage": 0.9000032353210659,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7607249683714263,
+      "iterations_s": 5680.268561417593,
+      "cpu_us_iteration": 309.9721341224774
+    },
+    {
+      "run": "sf-r3-wait",
+      "variant": "wait",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.20663802223166386,
+          "observed_s": 9.000308752059937,
+          "coverage": 0.9000269912508627,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.6753466370305232,
+          "observed_s": 9.000308752059937,
+          "coverage": 0.9000269912508627,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.8819846592621872,
+      "iterations_s": 3491.9859758351226,
+      "cpu_us_iteration": 538.9439339922042
+    },
+    {
+      "run": "sf-r4-base",
+      "variant": "base",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.3153915391286542,
+          "observed_s": 8.999172925949097,
+          "coverage": 0.8993064346236603,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.36482474856474056,
+          "observed_s": 8.999172925949097,
+          "coverage": 0.8993064346236603,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.6802162876933948,
+      "iterations_s": 95.93490680345818,
+      "cpu_us_iteration": 7090.394001079855
+    },
+    {
+      "run": "sf-r4-base",
+      "variant": "base",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6313163290198421,
+          "observed_s": 9.00043249130249,
+          "coverage": 0.8977356321942951,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.42501335393566453,
+          "observed_s": 9.00043249130249,
+          "coverage": 0.8977356321942951,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.0563296829555067,
+      "iterations_s": 10.87206169124749,
+      "cpu_us_iteration": 97160.01554754796
+    },
+    {
+      "run": "sf-r4-base",
+      "variant": "base",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.12283584693511404,
+          "observed_s": 8.999897241592407,
+          "coverage": 0.8999098667019876,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.21168097244440512,
+          "observed_s": 8.999897241592407,
+          "coverage": 0.8999098667019876,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33451681937951916,
+      "iterations_s": 685.4397245554858,
+      "cpu_us_iteration": 488.03243727441753
+    },
+    {
+      "run": "sf-r4-base",
+      "variant": "base",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10166410109908763,
+          "observed_s": 9.000050067901611,
+          "coverage": 0.899861906077539,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.2242418636311594,
+          "observed_s": 9.000050067901611,
+          "coverage": 0.899861906077539,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.325905964730247,
+      "iterations_s": 349.5446736146522,
+      "cpu_us_iteration": 932.3728534039539
+    },
+    {
+      "run": "sf-r4-base",
+      "variant": "base",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.11132725991484907,
+          "observed_s": 9.000113725662231,
+          "coverage": 0.8995447327066843,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.21698059152650415,
+          "observed_s": 9.000113725662231,
+          "coverage": 0.8995447327066843,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3283078514413532,
+      "iterations_s": 175.70898443287,
+      "cpu_us_iteration": 1868.4750384337
+    },
+    {
+      "run": "sf-r4-both",
+      "variant": "both",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.2310622252253109,
+          "observed_s": 9.000553846359253,
+          "coverage": 0.900003328130864,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.6019906381463895,
+          "observed_s": 9.000553846359253,
+          "coverage": 0.900003328130864,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.8330528633717005,
+      "iterations_s": 1605.0078616346887,
+      "cpu_us_iteration": 1142.0834172766915
+    },
+    {
+      "run": "sf-r4-both",
+      "variant": "both",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.44376045551459636,
+          "observed_s": 9.00011920928955,
+          "coverage": 0.8999665825512664,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9264015071482771,
+          "observed_s": 9.00011920928955,
+          "coverage": 0.8999665825512664,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.3701619626628734,
+      "iterations_s": 400.6801245428981,
+      "cpu_us_iteration": 3419.590538028245
+    },
+    {
+      "run": "sf-r4-both",
+      "variant": "both",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.5297514760724604,
+          "observed_s": 8.999627590179443,
+          "coverage": 0.8991185191955214,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.0051205907532046,
+          "observed_s": 8.999627590179443,
+          "coverage": 0.8991185191955214,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.534872066825665,
+      "iterations_s": 60.14356898526977,
+      "cpu_us_iteration": 25520.13611299959
+    },
+    {
+      "run": "sf-r4-both",
+      "variant": "both",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.26794141469016786,
+          "observed_s": 8.999959945678711,
+          "coverage": 0.899992496996474,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4732703345381473,
+          "observed_s": 8.999959945678711,
+          "coverage": 0.899992496996474,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7412117492283152,
+      "iterations_s": 5482.68289896377,
+      "cpu_us_iteration": 317.58388754480137
+    },
+    {
+      "run": "sf-r4-both",
+      "variant": "both",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.19824531690622732,
+          "observed_s": 8.99874472618103,
+          "coverage": 0.8998665559110849,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.7190837689830911,
+          "observed_s": 8.99874472618103,
+          "coverage": 0.8998665559110849,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.9173290858893184,
+      "iterations_s": 3678.168859886798,
+      "cpu_us_iteration": 521.2727199121379
+    },
+    {
+      "run": "sf-r4-copy",
+      "variant": "copy",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.11177542414902293,
+          "observed_s": 9.000788927078247,
+          "coverage": 0.899866514715453,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.23062833900648294,
+          "observed_s": 9.000788927078247,
+          "coverage": 0.899866514715453,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.34240376315550586,
+      "iterations_s": 174.85885990687655,
+      "cpu_us_iteration": 1958.17222723434
+    },
+    {
+      "run": "sf-r4-copy",
+      "variant": "copy",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2236938194871103,
+          "observed_s": 9.000856637954712,
+          "coverage": 0.8996293827090652,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.3053569355177001,
+          "observed_s": 9.000856637954712,
+          "coverage": 0.8996293827090652,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.5290507550048105,
+      "iterations_s": 133.2325336563141,
+      "cpu_us_iteration": 3970.8826401931738
+    },
+    {
+      "run": "sf-r4-copy",
+      "variant": "copy",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.48539647101238226,
+          "observed_s": 9.000555753707886,
+          "coverage": 0.897868031590457,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.446799187743859,
+          "observed_s": 9.000555753707886,
+          "coverage": 0.897868031590457,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.9321956587562412,
+      "iterations_s": 33.91738810292894,
+      "cpu_us_iteration": 27484.299673291804
+    },
+    {
+      "run": "sf-r4-copy",
+      "variant": "copy",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.11918993306738869,
+          "observed_s": 9.000172853469849,
+          "coverage": 0.8999570994457258,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.21702360963511505,
+          "observed_s": 9.000172853469849,
+          "coverage": 0.8999570994457258,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33621354270250375,
+      "iterations_s": 684.5547187590182,
+      "cpu_us_iteration": 491.1419547468783
+    },
+    {
+      "run": "sf-r4-copy",
+      "variant": "copy",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10085974720995308,
+          "observed_s": 8.99989366531372,
+          "coverage": 0.8999499938907912,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22073060792443844,
+          "observed_s": 8.99989366531372,
+          "coverage": 0.8999499938907912,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3215903551343915,
+      "iterations_s": 352.98480527487817,
+      "cpu_us_iteration": 911.0600522420815
+    },
+    {
+      "run": "sf-r4-wait",
+      "variant": "wait",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2648063043319665,
+          "observed_s": 9.00023889541626,
+          "coverage": 0.9000130747177683,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4969529316451415,
+          "observed_s": 9.00023889541626,
+          "coverage": 0.9000130747177683,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7617592359771082,
+      "iterations_s": 5608.536911811693,
+      "cpu_us_iteration": 314.12100226474524
+    },
+    {
+      "run": "sf-r4-wait",
+      "variant": "wait",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.21814336195456405,
+          "observed_s": 8.99915075302124,
+          "coverage": 0.8998970100097078,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.7061143236038598,
+          "observed_s": 8.99915075302124,
+          "coverage": 0.8998970100097078,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.924257685558424,
+      "iterations_s": 3504.830892795905,
+      "cpu_us_iteration": 549.030108560641
+    },
+    {
+      "run": "sf-r4-wait",
+      "variant": "wait",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.22275517905972825,
+          "observed_s": 8.999799728393555,
+          "coverage": 0.8999771190415183,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.5925372155540536,
+          "observed_s": 8.999799728393555,
+          "coverage": 0.8999771190415183,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.8152923946137818,
+      "iterations_s": 1614.1957569250333,
+      "cpu_us_iteration": 1124.580080715754
+    },
+    {
+      "run": "sf-r4-wait",
+      "variant": "wait",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.5293590296511238,
+          "observed_s": 8.999232530593872,
+          "coverage": 0.8996154455838306,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9297675075685411,
+          "observed_s": 8.999232530593872,
+          "coverage": 0.8996154455838306,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.459126537219665,
+      "iterations_s": 246.61579362914324,
+      "cpu_us_iteration": 5916.598104879996
+    },
+    {
+      "run": "sf-r4-wait",
+      "variant": "wait",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6751650043874172,
+          "observed_s": 9.000029563903809,
+          "coverage": 0.893631594824526,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.6341021392739278,
+          "observed_s": 9.000029563903809,
+          "coverage": 0.893631594824526,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.309267143661345,
+      "iterations_s": 12.907978781758036,
+      "cpu_us_iteration": 101430.84101684786
+    },
+    {
+      "run": "sf-r5-base",
+      "variant": "base",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6167231156192355,
+          "observed_s": 9.000470161437988,
+          "coverage": 0.8941250713273418,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.4382634383812881,
+          "observed_s": 9.000470161437988,
+          "coverage": 0.8941250713273418,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.0549865540005237,
+      "iterations_s": 10.53026356332374,
+      "cpu_us_iteration": 100186.14896544252
+    },
+    {
+      "run": "sf-r5-base",
+      "variant": "base",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.12387731263669619,
+          "observed_s": 8.999048948287964,
+          "coverage": 0.899819875093341,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22049274444467729,
+          "observed_s": 8.999048948287964,
+          "coverage": 0.899819875093341,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.34437005708137347,
+      "iterations_s": 684.6359957769808,
+      "cpu_us_iteration": 502.9972995950267
+    },
+    {
+      "run": "sf-r5-base",
+      "variant": "base",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10897290947080478,
+          "observed_s": 9.000319480895996,
+          "coverage": 0.9000027441088025,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.21816403341768106,
+          "observed_s": 9.000319480895996,
+          "coverage": 0.9000027441088025,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3271369428884858,
+      "iterations_s": 358.48864204020305,
+      "cpu_us_iteration": 912.5447908940969
+    },
+    {
+      "run": "sf-r5-base",
+      "variant": "base",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.11035948637100783,
+          "observed_s": 8.998972654342651,
+          "coverage": 0.8997162412319242,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22456085573555004,
+          "observed_s": 8.998972654342651,
+          "coverage": 0.8997162412319242,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33492034210655786,
+      "iterations_s": 173.865177013132,
+      "cpu_us_iteration": 1926.3221529476336
+    },
+    {
+      "run": "sf-r5-base",
+      "variant": "base",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.32320097771364853,
+          "observed_s": 8.999672651290894,
+          "coverage": 0.8993836944760045,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.34910069751807565,
+          "observed_s": 8.999672651290894,
+          "coverage": 0.8993836944760045,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.6723016752317241,
+      "iterations_s": 94.53872757878939,
+      "cpu_us_iteration": 7111.3890830762675
+    },
+    {
+      "run": "sf-r5-both",
+      "variant": "both",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.5199495303941288,
+          "observed_s": 9.000898599624634,
+          "coverage": 0.8987185885069685,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.006175427904241,
+          "observed_s": 9.000898599624634,
+          "coverage": 0.8987185885069685,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.5261249582983698,
+      "iterations_s": 62.80421543831067,
+      "cpu_us_iteration": 24299.721724848285
+    },
+    {
+      "run": "sf-r5-both",
+      "variant": "both",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2688466331251745,
+          "observed_s": 9.000306129455566,
+          "coverage": 0.9000179955820703,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4857075756831917,
+          "observed_s": 9.000306129455566,
+          "coverage": 0.9000179955820703,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.754554208808366,
+      "iterations_s": 5546.626996404799,
+      "cpu_us_iteration": 316.3281413993819
+    },
+    {
+      "run": "sf-r5-both",
+      "variant": "both",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2213018309659431,
+          "observed_s": 8.998456954956055,
+          "coverage": 0.8998277388616222,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.7253054693393062,
+          "observed_s": 8.998456954956055,
+          "coverage": 0.8998277388616222,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.9466073003052493,
+      "iterations_s": 3546.0303229863744,
+      "cpu_us_iteration": 548.9539352460662
+    },
+    {
+      "run": "sf-r5-both",
+      "variant": "both",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.2326833956549375,
+          "observed_s": 8.999516248703003,
+          "coverage": 0.8999130477032716,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.6045649122619359,
+          "observed_s": 8.999516248703003,
+          "coverage": 0.8999130477032716,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.8372483079168733,
+      "iterations_s": 1778.5243241457124,
+      "cpu_us_iteration": 1033.018375387904
+    },
+    {
+      "run": "sf-r5-both",
+      "variant": "both",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.4600182299284129,
+          "observed_s": 9.002191066741943,
+          "coverage": 0.9001704099974565,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9379754259155019,
+          "observed_s": 9.002191066741943,
+          "coverage": 0.9001704099974565,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.3979936558439148,
+      "iterations_s": 404.1784285930876,
+      "cpu_us_iteration": 3458.8527168810506
+    },
+    {
+      "run": "sf-r5-copy",
+      "variant": "copy",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.4760613415813011,
+          "observed_s": 8.999970436096191,
+          "coverage": 0.8980342508821221,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.4726824415931372,
+          "observed_s": 8.999970436096191,
+          "coverage": 0.8980342508821221,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.9487437831744383,
+      "iterations_s": 32.22958306008692,
+      "cpu_us_iteration": 29437.0479880443
+    },
+    {
+      "run": "sf-r5-copy",
+      "variant": "copy",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.12534913082437613,
+          "observed_s": 8.999807119369507,
+          "coverage": 0.899961422316583,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22967325550248097,
+          "observed_s": 8.999807119369507,
+          "coverage": 0.899961422316583,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3550223863268571,
+      "iterations_s": 683.6858523519202,
+      "cpu_us_iteration": 519.2770701712766
+    },
+    {
+      "run": "sf-r5-copy",
+      "variant": "copy",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.10738887067881975,
+          "observed_s": 8.999284505844116,
+          "coverage": 0.8999041201764993,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22311484859669578,
+          "observed_s": 8.999284505844116,
+          "coverage": 0.8999041201764993,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.33050371927551553,
+      "iterations_s": 353.8907017695345,
+      "cpu_us_iteration": 933.9146737196578
+    },
+    {
+      "run": "sf-r5-copy",
+      "variant": "copy",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.10541000480742865,
+          "observed_s": 8.999288082122803,
+          "coverage": 0.8996946342868206,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.22829061379657314,
+          "observed_s": 8.999288082122803,
+          "coverage": 0.8996946342868206,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.3337006186040018,
+      "iterations_s": 173.75489910110895,
+      "cpu_us_iteration": 1920.5249482480465
+    },
+    {
+      "run": "sf-r5-copy",
+      "variant": "copy",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2178094176982653,
+          "observed_s": 8.999739408493042,
+          "coverage": 0.8992890598669212,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.29186722868010595,
+          "observed_s": 8.999739408493042,
+          "coverage": 0.8992890598669212,
+          "samples": 10
+        }
+      },
+      "total_cores": 0.5096766463783713,
+      "iterations_s": 132.89887895739685,
+      "cpu_us_iteration": 3835.0710734118184
+    },
+    {
+      "run": "sf-r5-wait",
+      "variant": "wait",
+      "condition": "copy-16777216",
+      "parts": {
+        "worker": {
+          "cores": 0.6385681593654376,
+          "observed_s": 8.999216318130493,
+          "coverage": 0.8959260995679763,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.6611515702776247,
+          "observed_s": 8.999216318130493,
+          "coverage": 0.8959260995679763,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.2997197296430625,
+      "iterations_s": 12.046286576676042,
+      "cpu_us_iteration": 107893.80788595659
+    },
+    {
+      "run": "sf-r5-wait",
+      "variant": "wait",
+      "condition": "query-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.26499427095025996,
+          "observed_s": 9.004209756851196,
+          "coverage": 0.9004161669439936,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.4608833373735215,
+          "observed_s": 9.004209756851196,
+          "coverage": 0.9004161669439936,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.7258776083237815,
+      "iterations_s": 5404.076206392871,
+      "cpu_us_iteration": 319.3658901926876
+    },
+    {
+      "run": "sf-r5-wait",
+      "variant": "wait",
+      "condition": "kernel-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.2273356358830372,
+          "observed_s": 8.999002695083618,
+          "coverage": 0.8998802736183402,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.725195727353401,
+          "observed_s": 8.999002695083618,
+          "coverage": 0.8998802736183402,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.9525313632364383,
+      "iterations_s": 3547.4224086486247,
+      "cpu_us_iteration": 550.4084764408551
+    },
+    {
+      "run": "sf-r5-wait",
+      "variant": "wait",
+      "condition": "copy-4096",
+      "parts": {
+        "worker": {
+          "cores": 0.23894326189892504,
+          "observed_s": 8.999902248382568,
+          "coverage": 0.8999413903569113,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 1.548993046286185,
+          "observed_s": 8.999902248382568,
+          "coverage": 0.8999413903569113,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.78793630818511,
+      "iterations_s": 1571.9155695853094,
+      "cpu_us_iteration": 1137.4251536021045
+    },
+    {
+      "run": "sf-r5-wait",
+      "variant": "wait",
+      "condition": "copy-1048576",
+      "parts": {
+        "worker": {
+          "cores": 0.5309989180466779,
+          "observed_s": 8.999364852905273,
+          "coverage": 0.8996674411603338,
+          "samples": 10
+        },
+        "launcher": {
+          "cores": 0.9233318279475544,
+          "observed_s": 8.999364852905273,
+          "coverage": 0.8996674411603338,
+          "samples": 10
+        }
+      },
+      "total_cores": 1.4543307459942323,
+      "iterations_s": 247.1262719032131,
+      "cpu_us_iteration": 5884.970200836519
+    }
+  ],
+  "summary": {
+    "base": {
+      "copy-1048576": {
+        "repeats": 5,
+        "cores": 0.675102517334419,
+        "cpu_us_iteration": 7089.323870773327,
+        "min_coverage": 0.8990931027116266
+      },
+      "copy-16777216": {
+        "repeats": 5,
+        "cores": 1.054400043115679,
+        "cpu_us_iteration": 98408.70821734701,
+        "min_coverage": 0.8941250713273418
+      },
+      "copy-4096": {
+        "repeats": 5,
+        "cores": 0.33402419556159463,
+        "cpu_us_iteration": 1921.7906478960995,
+        "min_coverage": 0.8995447327066843
+      },
+      "kernel-1048576": {
+        "repeats": 5,
+        "cores": 0.33215554573777845,
+        "cpu_us_iteration": 940.1671346019492,
+        "min_coverage": 0.899861906077539
+      },
+      "query-1048576": {
+        "repeats": 5,
+        "cores": 0.34376280168115914,
+        "cpu_us_iteration": 504.039050138432,
+        "min_coverage": 0.899819875093341
+      }
+    },
+    "wait": {
+      "copy-1048576": {
+        "repeats": 5,
+        "cores": 1.4614926087133364,
+        "cpu_us_iteration": 5796.81304100133,
+        "min_coverage": 0.8996154455838306
+      },
+      "copy-16777216": {
+        "repeats": 5,
+        "cores": 1.3070653774345475,
+        "cpu_us_iteration": 105259.8956743275,
+        "min_coverage": 0.893631594824526
+      },
+      "copy-4096": {
+        "repeats": 5,
+        "cores": 1.8154573833977357,
+        "cpu_us_iteration": 1117.844413764934,
+        "min_coverage": 0.8997607950604397
+      },
+      "kernel-1048576": {
+        "repeats": 5,
+        "cores": 1.9169105691130028,
+        "cpu_us_iteration": 546.4611692456301,
+        "min_coverage": 0.8998802736183402
+      },
+      "query-1048576": {
+        "repeats": 5,
+        "cores": 1.7473165211715134,
+        "cpu_us_iteration": 317.31636441174913,
+        "min_coverage": 0.8999656513817182
+      }
+    },
+    "copy": {
+      "copy-1048576": {
+        "repeats": 5,
+        "cores": 0.5234217483090491,
+        "cpu_us_iteration": 3924.903682957608,
+        "min_coverage": 0.8992890598669212
+      },
+      "copy-16777216": {
+        "repeats": 5,
+        "cores": 0.9404889722553847,
+        "cpu_us_iteration": 27994.044079571577,
+        "min_coverage": 0.897868031590457
+      },
+      "copy-4096": {
+        "repeats": 5,
+        "cores": 0.3368978197715674,
+        "cpu_us_iteration": 1923.609463634682,
+        "min_coverage": 0.899495634880258
+      },
+      "kernel-1048576": {
+        "repeats": 5,
+        "cores": 0.33230872990450677,
+        "cpu_us_iteration": 940.5517599419128,
+        "min_coverage": 0.8998754458573728
+      },
+      "query-1048576": {
+        "repeats": 5,
+        "cores": 0.3487976638407092,
+        "cpu_us_iteration": 514.1009706545118,
+        "min_coverage": 0.8998838373742312
+      }
+    },
+    "both": {
+      "copy-1048576": {
+        "repeats": 5,
+        "cores": 1.3736642548285758,
+        "cpu_us_iteration": 3481.0325277368715,
+        "min_coverage": 0.8997731209407307
+      },
+      "copy-16777216": {
+        "repeats": 5,
+        "cores": 1.5203003571990628,
+        "cpu_us_iteration": 24102.89134333177,
+        "min_coverage": 0.8987185885069685
+      },
+      "copy-4096": {
+        "repeats": 5,
+        "cores": 1.8305165128505592,
+        "cpu_us_iteration": 1076.2164562072885,
+        "min_coverage": 0.8998797447725311
+      },
+      "kernel-1048576": {
+        "repeats": 5,
+        "cores": 1.9380632593012392,
+        "cpu_us_iteration": 537.1588868595499,
+        "min_coverage": 0.8998277388616222
+      },
+      "query-1048576": {
+        "repeats": 5,
+        "cores": 1.7409370220172464,
+        "cpu_us_iteration": 316.3325247360204,
+        "min_coverage": 0.8998510847141058
+      }
+    }
+  }
+}

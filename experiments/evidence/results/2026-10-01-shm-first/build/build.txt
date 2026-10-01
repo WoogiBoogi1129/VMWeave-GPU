@@ -1,0 +1,72 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found CUDAToolkit: /usr/local/cuda/include (found suitable version "12.8.93", minimum required is "12.8") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /out/build
+[  4%] Building C object queue/CMakeFiles/flyt_shm_queue.dir/src/queue.c.o
+[  8%] Building C object queue/CMakeFiles/flyt_shm_queue.dir/src/perf.c.o
+[ 13%] Building C object exec/CMakeFiles/flyt_cuda_exec.dir/src/exec.c.o
+[ 17%] Linking C static library libflyt_cuda_exec.a
+[ 17%] Built target flyt_cuda_exec
+[ 21%] Building C object exec/CMakeFiles/flyt_cuda_runtime.dir/src/runtime.c.o
+[ 26%] Linking C static library libflyt_shm_queue.a
+[ 30%] Linking C static library libflyt_cuda_runtime.a
+[ 30%] Built target flyt_shm_queue
+[ 34%] Building C object CMakeFiles/flyt_mapping.dir/src/mapping.c.o
+[ 34%] Built target flyt_cuda_runtime
+[ 39%] Linking C static library libflyt_mapping.a
+[ 39%] Built target flyt_mapping
+[ 43%] Building C object CMakeFiles/flyt_dispatch.dir/src/dispatch.c.o
+[ 47%] Building C object CMakeFiles/flyt_guest.dir/src/guest.c.o
+[ 56%] Building C object CMakeFiles/flyt_guest.dir/src/guest_async.c.o
+[ 56%] Building C object CMakeFiles/flyt_guest.dir/src/guest_compat.c.o
+[ 60%] Building C object CMakeFiles/flyt_guest.dir/src/guest_torch.c.o
+[ 65%] Linking C static library libflyt_dispatch.a
+[ 65%] Built target flyt_dispatch
+[ 69%] Building C object CMakeFiles/flyt_async.dir/src/async.c.o
+[ 73%] Building C object CMakeFiles/flyt_async.dir/src/torch.c.o
+[ 78%] Linking C shared library libflyt_guest.so
+[ 82%] Linking C static library libflyt_async.a
+[ 82%] Built target flyt_guest
+[ 82%] Built target flyt_async
+[ 86%] Building C object CMakeFiles/flyt_compat.dir/src/compat.c.o
+[ 91%] Linking C static library libflyt_compat.a
+[ 91%] Built target flyt_compat
+[ 95%] Building C object CMakeFiles/flyt-shm-worker.dir/src/worker.c.o
+[100%] Linking C executable flyt-shm-worker
+[100%] Built target flyt-shm-worker
+-- Install configuration: "Release"
+-- Installing: /out/artifacts/bin/flyt-shm-worker
+-- Set runtime path of "/out/artifacts/bin/flyt-shm-worker" to ""
+-- Installing: /out/artifacts/lib/libflyt_guest.so
+PASS: adjacent refs, bounds, VA collision preservation and exact reservation
+/out/build/kernel-wire-test: error while loading shared libraries: libcuda.so.1: cannot open shared object file: No such file or directory

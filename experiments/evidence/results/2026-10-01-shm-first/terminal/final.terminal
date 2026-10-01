@@ -1,0 +1,48 @@
+Script started on 2026-10-01 12:54:07+09:00 [COMMAND="python3 -u experiments/shm-first-bundle/build_final.py && python3 -u experiments/shm-first-bundle/regression.py default && python3 -u experiments/shm-first-bundle/regression.py shared" <not executed on terminal>]
+COMMAND sf-default-both ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/final-artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-shm-first/runs/sf-default-both/known-hosts ubuntu@10.85.0.200 'sudo env FLYT_METRICS=1 FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S batch 10 10 3 /tmp/perf/sf-default-both /tmp/perf/work.ptx 0 31'
+sf-default-both {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-default-both {"event":"WARMUP_START","utc":1790826952.428875208,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"WARMUP_END","utc":1790826955.429085016,"elapsed":3.000187043,"completed":16884}
+sf-default-both {"event":"MEASUREMENT_START","utc":1790826955.429132223,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"MEASUREMENT_END","utc":1790826965.429226637,"elapsed":10.000085538,"completed":54825}
+sf-default-both {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":54825,"elapsed_s":10.000085538,"operations_per_s":5482.453104193,"checked_elements":262144,"mismatches":0}
+sf-default-both {"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":10,"warmup_min_s":3,"iterations":1,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-default-both {"event":"WARMUP_START","utc":1790826965.536380291,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"WARMUP_END","utc":1790826968.536583185,"elapsed":3.000181140,"completed":10776}
+sf-default-both {"event":"MEASUREMENT_START","utc":1790826968.536607981,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"MEASUREMENT_END","utc":1790826978.536732197,"elapsed":10.000120818,"completed":34996}
+sf-default-both {"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":34996,"elapsed_s":10.000120818,"operations_per_s":3499.557719044,"checked_elements":262144,"mismatches":0}
+sf-default-both {"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3718242304,"total_bytes":4294967296}
+sf-default-both {"event":"WARMUP_START","utc":1790826978.563724279,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"WARMUP_END","utc":1790826981.564146996,"elapsed":3.000411928,"completed":4729}
+sf-default-both {"event":"MEASUREMENT_START","utc":1790826981.564165354,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"MEASUREMENT_END","utc":1790826991.564456463,"elapsed":10.000288148,"completed":16370}
+sf-default-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":16370,"elapsed_s":10.000288148,"operations_per_s":1636.952831532,"checked_elements":1024,"mismatches":0}
+sf-default-both {"event":"CONDITION","mode":"copy","bytes":1048576,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-default-both {"event":"WARMUP_START","utc":1790826991.578768253,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"WARMUP_END","utc":1790826994.579651117,"elapsed":3.000873942,"completed":1361}
+sf-default-both {"event":"MEASUREMENT_START","utc":1790826994.579677582,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"MEASUREMENT_END","utc":1790827004.581342936,"elapsed":10.001658450,"completed":4545}
+sf-default-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":1048576,"completed":4545,"elapsed_s":10.001658450,"operations_per_s":454.424635946,"checked_elements":262144,"mismatches":0}
+sf-default-both {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3684696064,"total_bytes":4294967296}
+sf-default-both {"event":"WARMUP_START","utc":1790827004.698580980,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"WARMUP_END","utc":1790827007.710589647,"elapsed":3.011991714,"completed":182}
+sf-default-both {"event":"MEASUREMENT_START","utc":1790827007.710623264,"elapsed":0.000000000,"completed":0}
+sf-default-both {"event":"MEASUREMENT_END","utc":1790827017.722156048,"elapsed":10.011526018,"completed":682}
+sf-default-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":682,"elapsed_s":10.011526018,"operations_per_s":68.121483056,"checked_elements":4194304,"mismatches":0}
+COMMAND sf-shared-a ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/final-artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-shm-first/runs/sf-shared-a/known-hosts ubuntu@10.85.0.87 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 5 1048576 0 1790827156.0112224 /tmp/perf/sf-shared-a /tmp/perf/work.ptx'
+COMMAND sf-shared-b ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/final-artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-shm-first/runs/sf-shared-b/known-hosts ubuntu@10.85.0.24 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 40 5 1048576 0 1790827195.716525 /tmp/perf/sf-shared-b /tmp/perf/work.ptx'
+sf-shared-b {"event":"WARMUP_START","phase":"warmup","utc":1790827131.033536434,"elapsed":0.000000000,"completed":0}
+sf-shared-a {"event":"WARMUP_START","phase":"warmup","utc":1790827131.721798658,"elapsed":0.000000000,"completed":0}
+sf-shared-b {"event":"WARMUP_END","phase":"warmup","utc":1790827136.044730663,"elapsed":5.011141789,"completed":222}
+sf-shared-b {"event":"WAIT_START","phase":"waiting","utc":1790827136.044810057,"elapsed":0.000000000,"completed":0}
+sf-shared-a {"event":"WARMUP_END","phase":"warmup","utc":1790827136.727761984,"elapsed":5.005906132,"completed":222}
+sf-shared-a {"event":"WAIT_START","phase":"waiting","utc":1790827136.729157209,"elapsed":0.000000000,"completed":0}
+sf-shared-a {"event":"MEASUREMENT_START","phase":"timed","utc":1790827156.012363672,"elapsed":0.000000000,"completed":0}
+sf-shared-b {"event":"MEASUREMENT_START","phase":"timed","utc":1790827195.717056751,"elapsed":0.000000000,"completed":0}
+sf-shared-b {"event":"MEASUREMENT_END","phase":"timed","utc":1790827235.721785307,"elapsed":40.004666901,"completed":1670}
+sf-shared-b {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790827195.717118025,"reps":1048576,"bytes":2097152,"completed":1670,"elapsed_s":40.004666901,"operations_per_s":41.745129490,"checked_elements":524288,"mismatches":0}
+sf-shared-a {"event":"MEASUREMENT_END","phase":"timed","utc":1790827276.023412943,"elapsed":120.010995156,"completed":8572}
+sf-shared-a {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790827156.012417316,"reps":1048576,"bytes":2097152,"completed":8572,"elapsed_s":120.010995156,"operations_per_s":71.426788761,"checked_elements":524288,"mismatches":0}
+
+Script done on 2026-10-01 13:01:29+09:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,54 @@
+Script started on 2026-10-01 12:05:24+09:00 [COMMAND="python3 -u experiments/shm-first-bundle/run.py formal" <not executed on terminal>]
+COMMAND sf-r1-both ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-shm-first/runs/sf-r1-both/known-hosts ubuntu@10.85.0.9 'sudo env FLYT_WAIT_MODE=bounded FLYT_COPY_MODE=optimized FLYT_SPIN_US=0 FLYT_METRICS=1 FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S batch 10 10 3 /tmp/perf/sf-r1-both /tmp/perf/work.ptx 0 31'
+sf-r1-both {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-r1-both {"event":"WARMUP_START","utc":1790823977.227142096,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"WARMUP_END","utc":1790823980.227396965,"elapsed":3.000228900,"completed":16588}
+sf-r1-both {"event":"MEASUREMENT_START","utc":1790823980.227435827,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"MEASUREMENT_END","utc":1790823990.227519989,"elapsed":10.000076602,"completed":54423}
+sf-r1-both {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":54423,"elapsed_s":10.000076602,"operations_per_s":5442.258311213,"checked_elements":262144,"mismatches":0}
+sf-r1-both {"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":10,"warmup_min_s":3,"iterations":1,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-r1-both {"event":"WARMUP_START","utc":1790823990.323971987,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"WARMUP_END","utc":1790823993.324185610,"elapsed":3.000199763,"completed":10938}
+sf-r1-both {"event":"MEASUREMENT_START","utc":1790823993.324208975,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"MEASUREMENT_END","utc":1790824003.324419260,"elapsed":10.000207079,"completed":35804}
+sf-r1-both {"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":35804,"elapsed_s":10.000207079,"operations_per_s":3580.325858970,"checked_elements":262144,"mismatches":0}
+sf-r1-both {"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3718242304,"total_bytes":4294967296}
+sf-r1-both {"event":"WARMUP_START","utc":1790824003.350915909,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"WARMUP_END","utc":1790824006.351274490,"elapsed":3.000347666,"completed":4857}
+sf-r1-both {"event":"MEASUREMENT_START","utc":1790824006.351339340,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"MEASUREMENT_END","utc":1790824016.351399183,"elapsed":10.000054110,"completed":15795}
+sf-r1-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":15795,"elapsed_s":10.000054110,"operations_per_s":1579.491453372,"checked_elements":1024,"mismatches":0}
+sf-r1-both {"event":"CONDITION","mode":"copy","bytes":1048576,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sf-r1-both {"event":"WARMUP_START","utc":1790824016.372376204,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"WARMUP_END","utc":1790824019.373665571,"elapsed":3.001275515,"completed":1245}
+sf-r1-both {"event":"MEASUREMENT_START","utc":1790824019.373701334,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"MEASUREMENT_END","utc":1790824029.376015902,"elapsed":10.002307598,"completed":3984}
+sf-r1-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":1048576,"completed":3984,"elapsed_s":10.002307598,"operations_per_s":398.308086506,"checked_elements":262144,"mismatches":0}
+sf-r1-both {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":10,"warmup_min_s":3,"iterations":64,"free_bytes":3684696064,"total_bytes":4294967296}
+sf-r1-both {"event":"WARMUP_START","utc":1790824029.513796329,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"WARMUP_END","utc":1790824032.515644312,"elapsed":3.001831409,"completed":177}
+sf-r1-both {"event":"MEASUREMENT_START","utc":1790824032.515679121,"elapsed":0.000000000,"completed":0}
+sf-r1-both {"event":"MEASUREMENT_END","utc":1790824042.523294687,"elapsed":10.007608268,"completed":648}
+sf-r1-both {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":648,"elapsed_s":10.007608268,"operations_per_s":64.750735905,"checked_elements":4194304,"mismatches":0}
+SESSION_COMPLETE sf-r1-both
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/run.py", line 54, in <module>
+    run_one(name,v,10,3)
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/run.py", line 14, in run_one
+    s=Session(name);s.variant=variant;s.prepare()
+                                      ^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/runtime.py", line 57, in prepare
+    result=k('exec','-i','-n',NS,HELPER,'--','python3','-',pod['metadata']['uid'],cpus,input=affinity)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/common.py", line 38, in k
+    def k(*args, **kw): return call(['kubectl',*args],**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/common.py", line 35, in call
+    raise RuntimeError(shlex.join(args)+': '+result.stderr[-2000:])
+RuntimeError: kubectl exec -i -n vmweave-test-a shm-first-admin -- python3 - 8c07ba5b-412d-4526-8588-9f1c537e2659 16-19: Traceback (most recent call last):
+  File "<stdin>", line 21, in <module>
+RuntimeError: No QEMU/Worker process matched exact Pod UID
+command terminated with exit code 1
+
+
+Script done on 2026-10-01 12:08:26+09:00 [COMMAND_EXIT_CODE="1"]

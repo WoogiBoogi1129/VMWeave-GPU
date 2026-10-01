@@ -1,0 +1,32 @@
++ cc -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer -pthread -Iruntime/shm/shm-queue/include -Iruntime/shm/shm-contract/include tests/integration/queue_payload_bounds.c runtime/shm/shm-queue/src/perf.c -o .local/shm-first-20261001/final-queue-asan
++ ASAN_OPTIONS=detect_leaks=1
++ .local/shm-first-20261001/final-queue-asan
+PASS: guarded payload tails, private snapshot, single pending, receive retry, corrupted offset and timeout
++ cc -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer -pthread -Iruntime/shm/cuda-dispatch/include -Iruntime/shm/shm-contract/include tests/integration/private_copy_buffers.c runtime/shm/cuda-dispatch/src/exec.c -o .local/shm-first-20261001/final-private-asan
++ ASAN_OPTIONS=detect_leaks=1
++ .local/shm-first-20261001/final-private-asan
+PASS: private input/output borrowing, capacity preflight, ownership and bounds
++ ASAN_OPTIONS=detect_leaks=1
++ .local/shm-first-20261001/final-private-asan fatal
+
+=================================================================
+==34671==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 98392 byte(s) in 1 object(s) allocated from:
+    #0 0x791bfcefd340 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x6359ba8eceb4 in flyt_cuda_exec_create runtime/shm/cuda-dispatch/src/exec.c:45
+    #2 0x6359ba8eba17 in main tests/integration/private_copy_buffers.c:20
+    #3 0x791bfc22a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #4 0x791bfc22a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #5 0x6359ba8eb464 in _start (/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/final-private-asan+0xa464) (BuildId: 1c0ada4d88dbd972a18dcffd2b9d29a3abce5231)
+
+Indirect leak of 64 byte(s) in 1 object(s) allocated from:
+    #0 0x791bfcefd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x6359ba8eb70d in alloc tests/integration/private_copy_buffers.c:10
+    #2 0x6359ba8ee25c in flyt_cuda_exec_call runtime/shm/cuda-dispatch/src/exec.c:173
+    #3 0x6359ba8ebb5d in main tests/integration/private_copy_buffers.c:21
+    #4 0x791bfc22a1c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #5 0x791bfc22a28a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #6 0x6359ba8eb464 in _start (/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/final-private-asan+0xa464) (BuildId: 1c0ada4d88dbd972a18dcffd2b9d29a3abce5231)
+
+SUMMARY: AddressSanitizer: 98456 byte(s) leaked in 2 allocation(s).

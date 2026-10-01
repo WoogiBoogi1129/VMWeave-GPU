@@ -1,0 +1,7 @@
+{
+  "run": "sf-shared-b",
+  "issue": "Worker Pod disappeared before deferred log retrieval after waiting for A. kubectl logs returned NotFound; the command and exit code are retained.",
+  "effect": "No terminal Worker wait counters for B. Original workload output, CSV, in-flight Worker hash/environment/HAMi mapping, Guest hash and Released evidence remain.",
+  "validation": "Initial supplemental verifier rejected absent terminal counters. Scope was narrowed explicitly to available evidence for B; default-policy counters are verified in the default run and A. Formal 20-session eligibility checks were not changed.",
+  "change": "Capture Worker logs at each execute_stream completion and preserve earlier nonempty logs during close. No performance sample rerun."
+}

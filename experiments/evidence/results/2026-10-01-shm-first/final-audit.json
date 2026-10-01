@@ -1,0 +1,128 @@
+{
+  "utc": 1790827510.8832102,
+  "remaining_campaign_resources": [],
+  "target_gpu_compute_processes": "",
+  "monitoring_health": {
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "10.97.206.19:31992",
+            "job": "hami"
+          },
+          "value": [
+            1790827510.881,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "10.105.14.111:9400",
+            "job": "dcgm"
+          },
+          "value": [
+            1790827510.881,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "10.110.216.21:9100",
+            "job": "node"
+          },
+          "value": [
+            1790827510.881,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "192.168.24.21:9899",
+            "job": "shm-first"
+          },
+          "value": [
+            1790827510.881,
+            "1"
+          ]
+        }
+      ]
+    }
+  },
+  "exporter_stop_pid": 4032712,
+  "preserved_namespace_resources": [
+    {
+      "kind": "Pod",
+      "name": "same-channel-2-prepare"
+    },
+    {
+      "kind": "Pod",
+      "name": "same-channel-2-reclaim"
+    },
+    {
+      "kind": "Pod",
+      "name": "same-channel-3-019edb7b38b3-prepare"
+    },
+    {
+      "kind": "Pod",
+      "name": "same-channel-3-019edb7b38b3-reclaim"
+    },
+    {
+      "kind": "Pod",
+      "name": "same-channel-prepare"
+    },
+    {
+      "kind": "Pod",
+      "name": "same-channel-reclaim"
+    },
+    {
+      "kind": "VirtualMachine",
+      "name": "same-vm"
+    },
+    {
+      "kind": "VirtualMachine",
+      "name": "same-vm-2"
+    },
+    {
+      "kind": "VirtualMachine",
+      "name": "same-vm-3"
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "name": "backing"
+    },
+    {
+      "kind": "GPUProfile",
+      "name": "approved"
+    },
+    {
+      "kind": "GPURequest",
+      "name": "same-channel"
+    },
+    {
+      "kind": "GPURequest",
+      "name": "same-channel-2"
+    },
+    {
+      "kind": "GPURequest",
+      "name": "same-channel-3"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "name": "same-channel"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "name": "same-channel-2"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "name": "same-channel-3"
+    }
+  ]
+}

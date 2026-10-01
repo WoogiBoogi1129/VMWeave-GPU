@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-10-01-shm-first$ # Saturated CPU cores and CPU microseconds per kernel itera
+tion
+ubuntu@gpu-4:2026-10-01-shm-first$ jq -r '.summary|to_entries[]|[.key,.value["kernel-1048576"]
+.cores,.value["kernel-1048576"].cpu_us_iteration]|@tsv' cpu-summary.json | column -t
+base  0.33215554573777845  940.1671346019492
+wait  1.9169105691130028   546.4611692456301
+copy  0.33230872990450677  940.5517599419128
+both  1.9380632593012392   537.1588868595499
+ubuntu@gpu-4:2026-10-01-shm-first$ # Explicit preparation recovery; no measurement replay
+ubuntu@gpu-4:2026-10-01-shm-first$ cat runs/sf-r1-base/preparation-resume.json
+{
+  "utc": 1790824316.5305464,
+  "reason": "Node image GC removed local Worker image before first workload; restored exact im
+age and retained stopped references. No measurement was restarted.",
+  "channel_uid": "5875ca3b-b686-4150-b4ea-203d6f600942"
+}
+ubuntu@gpu-4:2026-10-01-shm-first$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

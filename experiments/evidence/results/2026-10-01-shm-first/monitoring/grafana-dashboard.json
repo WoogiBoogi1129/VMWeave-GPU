@@ -1,0 +1,399 @@
+{
+  "uid": "vmweave-shm-first",
+  "title": "VMWeave SHM first bundle — actual observations",
+  "schemaVersion": 40,
+  "version": 1,
+  "timezone": "utc",
+  "refresh": "",
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "GPU utilization — whole device",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_GPU_UTIL",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Completed operations per second",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "rate(vmweave_completed_total[5s])",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Application phase",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 7,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "vmweave_phase",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "GPU framebuffer used",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 7,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_FB_USED",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "mbytes",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "GPU power",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 14,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_POWER_USAGE",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "watt",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "GPU SM clock",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 14,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_SM_CLOCK",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "suffix:MHz",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "GPU temperature",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 21,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "DCGM_FI_DEV_GPU_TEMP",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "Requested HAMi cap",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 21,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "vmweave_compute_cap_percent",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{vm}} {{UUID}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "custom": {
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "Pod memory — Worker and launcher",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 28,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "vmweave_pod_memory_bytes",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{role}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0
+        },
+        "overrides": []
+      },
+      "description": "API latency distributions are computed from the benchmark raw CSVs, not approximated from this memory panel."
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "CPU cores — non-overlapping Pod cgroups",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 28,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "rate(vmweave_pod_cpu_seconds_total[10s])",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{role}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "HAMi per-container SM utilization (100 may be unavailable)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 35,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "hami_container_device_utilization_ratio{namespace=\"vmweave-test-a\"}",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{role}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 12,
+      "type": "timeseries",
+      "title": "Host CPU activity",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "perf-prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 35,
+        "w": 12,
+        "h": 7
+      },
+      "targets": [
+        {
+          "expr": "100 * (1 - avg(rate(node_cpu_seconds_total{mode=\"idle\"}[10s])))",
+          "refId": "A",
+          "legendFormat": "{{run_id}} {{role}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0
+        },
+        "overrides": []
+      }
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": false,
+        "iconColor": "rgba(255, 153, 0, 1)",
+        "name": "Recorded measurement events",
+        "type": "dashboard"
+      }
+    ]
+  }
+}

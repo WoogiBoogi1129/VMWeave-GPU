@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-10-01-shm-first$ # Actual formal measurements and full-output validation
+ubuntu@gpu-4:2026-10-01-shm-first$ jq -Rr 'fromjson? | select(.event=="RESULT") | [.mode,.byte
+s,.completed,.operations_per_s,.mismatches] | @tsv' runs/sf-r1-both/stdout.jsonl | column -t
+query   1048576   54423  5442.258311213  0
+kernel  1048576   35804  3580.325858970  0
+copy    4096      15795  1579.491453372  0
+copy    1048576   3984   398.308086506   0
+copy    16777216  648    64.750735905    0
+ubuntu@gpu-4:2026-10-01-shm-first$ jq '{released,uid,utc}' runs/sf-r1-both/cleanup.json
+{
+  "released": true,
+  "uid": "adb1f98b-f03c-45e6-92fd-14c48735ed29",
+  "utc": 1790824058.3779457
+}
+ubuntu@gpu-4:2026-10-01-shm-first$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

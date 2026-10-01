@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "sessions": [
+    "sf-default-both",
+    "sf-shared-a",
+    "sf-shared-b"
+  ],
+  "default_latency": [
+    {
+      "metric": "h2d-1048576",
+      "mean_us": 1148.4995623762377,
+      "formal_both_mean_us": 1316.2151052135182,
+      "samples": 4545
+    },
+    {
+      "metric": "d2h-1048576",
+      "mean_us": 1050.8440585258527,
+      "formal_both_mean_us": 1216.593797363189,
+      "samples": 4545
+    },
+    {
+      "metric": "h2d-16777216",
+      "mean_us": 8826.913519061583,
+      "formal_both_mean_us": 9438.169478298603,
+      "samples": 682
+    },
+    {
+      "metric": "d2h-16777216",
+      "mean_us": 5851.033873900294,
+      "formal_both_mean_us": 6410.500152932865,
+      "samples": 682
+    },
+    {
+      "metric": "h2d-4096",
+      "mean_us": 301.05481197312156,
+      "formal_both_mean_us": 290.3289611263561,
+      "samples": 16370
+    },
+    {
+      "metric": "d2h-4096",
+      "mean_us": 309.55273891264505,
+      "formal_both_mean_us": 297.5906127962404,
+      "samples": 16370
+    },
+    {
+      "metric": "kernel",
+      "mean_us": 285.5530780946394,
+      "formal_both_mean_us": 276.9570730029581,
+      "samples": 34996
+    },
+    {
+      "metric": "query",
+      "mean_us": 181.90396001823984,
+      "formal_both_mean_us": 181.1808874055064,
+      "samples": 54825
+    }
+  ],
+  "shared_windows": [
+    {
+      "window": "A before B",
+      "start_host_utc": 1790827161.5047069,
+      "end_host_utc": 1790827191.5041049,
+      "samples": 2582,
+      "mean_ms": 11.612476915956623,
+      "completed_per_s": 86.06839379226625
+    },
+    {
+      "window": "A with B",
+      "start_host_utc": 1790827201.5041049,
+      "end_host_utc": 1790827231.5087717,
+      "samples": 1251,
+      "mean_ms": 23.975613417266185,
+      "completed_per_s": 41.69351414961843
+    },
+    {
+      "window": "A after B",
+      "start_host_utc": 1790827241.5087717,
+      "end_host_utc": 1790827271.515702,
+      "samples": 2592,
+      "mean_ms": 11.570289242669753,
+      "completed_per_s": 86.38004519817177
+    }
+  ],
+  "missing_worker_wait_telemetry": [
+    "sf-shared-b"
+  ],
+  "scope": "One default-policy smoke run and one shared start/stop pair; not additional independent formal repetitions or quota-enforcement evidence. Shared B Worker termination metrics were unavailable after Pod removal; its in-flight hash/environment and output/release evidence were verified."
+}

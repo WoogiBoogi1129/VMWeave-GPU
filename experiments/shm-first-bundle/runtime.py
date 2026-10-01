@@ -100,7 +100,8 @@ class Session:
    current=get(CHAN,self.name)
    if current['metadata']['uid']!=self.uid:raise RuntimeError('Channel UID changed')
    if getattr(self,'worker',None):
-    (self.out/'worker-output.txt').write_text(k('logs','-n',NS,self.worker,check=False))
+    output=k('logs','-n',NS,self.worker,check=False)
+    if output or not (self.out/'worker-output.txt').exists():(self.out/'worker-output.txt').write_text(output)
    k('patch',CHAN,self.name,'-n',NS,'--type=json','-p',json.dumps([{'op':'test','path':'/metadata/uid','value':self.uid},{'op':'add','path':'/spec/drain','value':True}]))
    released=wait(lambda:(c if (c:=get(CHAN,self.name)).get('status',{}).get('phase')=='Released' else None))
    save(self.out/'channel-released.json',released)
@@ -155,5 +156,10 @@ def execute_stream(s,cmd,prefix):
   files=list(incoming.glob('*.csv'))
  for file in files:
   with file.open('rb') as f,gzip.open(s.out/(file.name+'.gz'),'wb') as g:shutil.copyfileobj(f,g)
+ # Shared jobs can finish long before their peer. Preserve logs immediately,
+ # before a controller removes the terminated Worker Pod.
+ if s.path=='S':
+  output=k('logs','-n',NS,s.worker,check=False)
+  if output:(s.out/'worker-output.txt').write_text(output)
  if code or not results or any(r.get('status')!='PASS' for r in results):raise RuntimeError('Invalid workload '+s.name)
  return results

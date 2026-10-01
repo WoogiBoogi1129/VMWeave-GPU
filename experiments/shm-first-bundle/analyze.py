@@ -1,5 +1,5 @@
 """Independent per-session aggregation; raw samples are never repetitions."""
-import csv,gzip,statistics
+import csv,gzip,statistics,math
 from common import *
 
 def quantile(xs,p):
@@ -16,9 +16,11 @@ for run in sorted((OUT/'runs').glob('sf-*')):
         with gzip.open(path,'rt') as f:samples=list(csv.DictReader(f))
         result=next(r for r in results if r['mode']==mode and r['bytes']==int(size))
         assert len(samples)==result['completed'] and result['status']=='PASS' and not result['mismatches']
+        assert all(int(r['sample'])==i for i,r in enumerate(samples))
         fields=[('h2d','first_seconds'),('d2h','second_seconds')] if mode=='copy' else [(mode,'first_seconds' if mode=='query' else 'second_seconds')]
         for metric,field in fields:
             values=[float(r[field])*1e6 for r in samples]
+            assert values and all(math.isfinite(x) and x>0 for x in values)
             rows.append({'run':run.name,'variant':run.name.split('-')[-1],'metric':metric+('-'+size if mode=='copy' else ''),
                          'count':len(values),'mean_us':statistics.mean(values),'p50_us':quantile(values,.5),
                          'p95_us':quantile(values,.95),'p99_us':quantile(values,.99) if len(values)>=10000 else None})

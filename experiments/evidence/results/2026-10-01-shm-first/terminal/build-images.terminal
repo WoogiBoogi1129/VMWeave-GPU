@@ -1,0 +1,10 @@
+Script started on 2026-10-01 11:50:08+09:00 [COMMAND="python3 -u experiments/shm-first-bundle/build_images.py" <not executed on terminal>]
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/build_images.py", line 13, in <module>
+    call(['podman','build','-f',containerfile,'-t',tag,ROOT],timeout=600)
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/shm-first-bundle/common.py", line 35, in call
+    raise RuntimeError(shlex.join(args)+': '+result.stderr[-2000:])
+RuntimeError: podman build -f /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/Worker-base.Containerfile -t localhost/vmweave-worker:shmfirst-base-20261001 /home/ubuntu/taeuk/flyt-k8s-poc-github: Error: building at STEP "COPY .local/shm-first-20261001/artifacts/bin/flyt-shm-worker /opt/flyt/bin/flyt-shm-worker": no items matching glob "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/shm-first-20261001/artifacts/bin/flyt-shm-worker" copied (1 filtered out using /home/ubuntu/taeuk/flyt-k8s-poc-github/.dockerignore): no such file or directory
+
+
+Script done on 2026-10-01 11:50:08+09:00 [COMMAND_EXIT_CODE="1"]

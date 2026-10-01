@@ -1,0 +1,41 @@
+{
+  "complete": true,
+  "checked_sessions": [
+    "sf-r1-base",
+    "sf-r1-wait",
+    "sf-r1-copy",
+    "sf-r1-both",
+    "sf-r2-base",
+    "sf-r2-wait",
+    "sf-r2-copy",
+    "sf-r2-both",
+    "sf-r3-base",
+    "sf-r3-wait",
+    "sf-r3-copy",
+    "sf-r3-both",
+    "sf-r4-base",
+    "sf-r4-wait",
+    "sf-r4-copy",
+    "sf-r4-both",
+    "sf-r5-base",
+    "sf-r5-wait",
+    "sf-r5-copy",
+    "sf-r5-both"
+  ],
+  "errors": [],
+  "improvements": {
+    "d2h-1048576": 0.7662290803262422,
+    "d2h-16777216": 0.8685058870500152,
+    "d2h-4096": 0.8965513533402341,
+    "h2d-1048576": 0.7514142960334762,
+    "h2d-16777216": 0.7882508503599546,
+    "h2d-4096": 0.898991478839738,
+    "kernel": 0.9020884877956522,
+    "query": 0.8763273372934937
+  },
+  "latency_targets_pass": true,
+  "p95_regression_guard_pass": true,
+  "cpu_per_iteration_guard_pass": true,
+  "candidate_eligible": true,
+  "scope": "Eligibility requires review of saturated CPU and per-iteration CPU costs. No quota enforcement or TCP-only claim."
+}

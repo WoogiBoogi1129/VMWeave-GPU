@@ -1,0 +1,7 @@
++ cc -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer -pthread -Iruntime/shm/cuda-dispatch/include -Iruntime/shm/shm-contract/include tests/integration/private_copy_buffers.c runtime/shm/cuda-dispatch/src/exec.c -o .local/shm-first-20261001/final-private-asan
++ ASAN_OPTIONS=detect_leaks=1
++ .local/shm-first-20261001/final-private-asan
+PASS: private input/output borrowing, capacity preflight, ownership and bounds
++ ASAN_OPTIONS=detect_leaks=0
++ .local/shm-first-20261001/final-private-asan fatal
+PASS: borrowed output failure poisons context without freeing caller buffer

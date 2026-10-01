@@ -1,0 +1,59 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+Consolidate compiler generated dependencies of target flyt_shm_queue
+Consolidate compiler generated dependencies of target flyt_cuda_exec
+[ 13%] Built target flyt_shm_queue
+[ 17%] Building C object exec/CMakeFiles/flyt_cuda_exec.dir/src/exec.c.o
+Consolidate compiler generated dependencies of target flyt_mapping
+[ 26%] Built target flyt_mapping
+Consolidate compiler generated dependencies of target flyt_guest
+[ 30%] Building C object CMakeFiles/flyt_guest.dir/src/guest.c.o
+[ 34%] Building C object CMakeFiles/flyt_guest.dir/src/guest_async.c.o
+[ 39%] Building C object CMakeFiles/flyt_guest.dir/src/guest_torch.c.o
+[ 43%] Building C object CMakeFiles/flyt_guest.dir/src/guest_compat.c.o
+[ 47%] Linking C static library libflyt_cuda_exec.a
+[ 47%] Built target flyt_cuda_exec
+Consolidate compiler generated dependencies of target flyt_dispatch
+Consolidate compiler generated dependencies of target flyt_cuda_runtime
+[ 52%] Building C object CMakeFiles/flyt_dispatch.dir/src/dispatch.c.o
+[ 56%] Building C object exec/CMakeFiles/flyt_cuda_runtime.dir/src/runtime.c.o
+[ 60%] Linking C static library libflyt_dispatch.a
+[ 65%] Linking C static library libflyt_cuda_runtime.a
+[ 65%] Built target flyt_dispatch
+Consolidate compiler generated dependencies of target flyt_async
+[ 65%] Built target flyt_cuda_runtime
+[ 69%] Building C object CMakeFiles/flyt_async.dir/src/async.c.o
+[ 73%] Building C object CMakeFiles/flyt_async.dir/src/torch.c.o
+[ 78%] Linking C shared library libflyt_guest.so
+[ 78%] Built target flyt_guest
+[ 82%] Linking C static library libflyt_async.a
+[ 82%] Built target flyt_async
+Consolidate compiler generated dependencies of target flyt_compat
+[ 86%] Building C object CMakeFiles/flyt_compat.dir/src/compat.c.o
+[ 91%] Linking C static library libflyt_compat.a
+[ 91%] Built target flyt_compat
+Consolidate compiler generated dependencies of target flyt-shm-worker
+[ 95%] Building C object CMakeFiles/flyt-shm-worker.dir/src/worker.c.o
+[100%] Linking C executable flyt-shm-worker
+[100%] Built target flyt-shm-worker
+-- Install configuration: "Release"
+-- Installing: /out/artifacts/bin/flyt-shm-worker
+-- Set runtime path of "/out/artifacts/bin/flyt-shm-worker" to ""
+-- Installing: /out/artifacts/lib/libflyt_guest.so

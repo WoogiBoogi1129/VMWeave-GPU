@@ -1,0 +1,104 @@
+[
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.481Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.547Z"
+  },
+  {
+    "pane": 0,
+    "command": "# Actual measured Worker environment",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.562Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq '.[] | {pid,environment,executable_sha256}' runs/sf-r1-both/runtime-libraries.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.622Z"
+  },
+  {
+    "pane": 0,
+    "command": "cat runs/sf-r1-both/guest-artifact-hashes.txt",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.687Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Actual formal measurements and full-output validation",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.702Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq -Rr 'fromjson? | select(.event==\"RESULT\") | [.mode,.bytes,.completed,.operations_per_s,.mismatches] | @tsv' runs/sf-r1-both/stdout.jsonl | column -t",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.765Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq '{released,uid,utc}' runs/sf-r1-both/cleanup.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:12.830Z"
+  },
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.416Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.479Z"
+  },
+  {
+    "pane": 0,
+    "command": "# Mean latency in microseconds: query, kernel, H2D16MiB, D2H16MiB",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.494Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq -r '.summary|to_entries[]|[.key,.value.query.mean_us,.value.kernel.mean_us,.value[\"h2d-16777216\"].mean_us,.value[\"d2h-16777216\"].mean_us]|@tsv' summary.json | column -t",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.555Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq '{complete,latency_targets_pass,p95_regression_guard_pass,candidate_eligible,improvements}' validation.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.619Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Saturated CPU cores and CPU microseconds per kernel iteration",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.633Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq -r '.summary|to_entries[]|[.key,.value[\"kernel-1048576\"].cores,.value[\"kernel-1048576\"].cpu_us_iteration]|@tsv' cpu-summary.json | column -t",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.696Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Explicit preparation recovery; no measurement replay",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.708Z"
+  },
+  {
+    "pane": 1,
+    "command": "cat runs/sf-r1-base/preparation-resume.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T04:03:13.769Z"
+  }
+]

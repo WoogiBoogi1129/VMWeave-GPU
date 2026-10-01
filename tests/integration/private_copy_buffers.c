@@ -26,7 +26,13 @@ int main(int argc,char**argv){
  assert(flyt_cuda_exec_call(s,&c,&r)==FLYT_SHM_BAD_DESCRIPTOR&&copies==1);flyt_cuda_result_release(&r);
  c.args.copy.host_output_bytes=64;expected_output=output+1;inject=argc>1;
  assert(!flyt_cuda_exec_call(s,&c,&r));
- if(inject){assert(r.api_result==700&&!r.data);flyt_cuda_result_release(&r);assert(flyt_cuda_exec_check(s)==FLYT_SHM_CHANNEL_CLOSED);puts("PASS: borrowed output failure poisons context without freeing caller buffer");return 0;}
+ if(inject){
+  assert(r.api_result==700&&!r.data);flyt_cuda_result_release(&r);
+  assert(flyt_cuda_exec_check(s)==FLYT_SHM_CHANNEL_CLOSED);
+  uint32_t fatal=0;assert(flyt_cuda_exec_destroy(&s,&fatal)==FLYT_SHM_INTERNAL_ERROR&&fatal==700&&s);
+  puts("PASS: borrowed output failure poisons context without freeing caller buffer");
+  return 0; /* Existing fatal-context contract: supervisor process exit owns cleanup. */
+ }
  assert(!r.api_result&&r.data_borrowed&&r.data==output+1&&r.data_bytes==64);flyt_cuda_result_release(&r);
  assert(!memcmp(input,output+1,64)&&output[0]==0xcc&&output[65]==0xcc);
  uint32_t e;assert(!flyt_cuda_exec_destroy(&s,&e));puts("PASS: private input/output borrowing, capacity preflight, ownership and bounds");

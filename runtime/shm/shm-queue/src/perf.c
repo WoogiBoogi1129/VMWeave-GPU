@@ -8,7 +8,7 @@
 #include <time.h>
 static pthread_once_t once=PTHREAD_ONCE_INIT;
 static int enabled, optimized, bounded;
-static unsigned spin_us=20, sleep_us=50;
+static unsigned spin_us=0, sleep_us=50;
 struct measure { uint64_t calls,ns,bytes; };
 static _Thread_local struct measure measures[FLYT_PERF_STAGES];
 static _Thread_local uint64_t spin_calls,sleep_calls,sleep_ns;
@@ -20,10 +20,10 @@ static unsigned setting(const char *key,unsigned fallback,unsigned maximum){
 }
 static void configure(void){
     const char *s=getenv("FLYT_WAIT_MODE");
-    bounded=s&&!strcmp(s,"bounded");
-    s=getenv("FLYT_COPY_MODE");optimized=s&&!strcmp(s,"optimized");
+    bounded=!s||!strcmp(s,"bounded");
+    s=getenv("FLYT_COPY_MODE");optimized=!s||!strcmp(s,"optimized");
     s=getenv("FLYT_METRICS");enabled=s&&!strcmp(s,"1");
-    spin_us=setting("FLYT_SPIN_US",20,1000);
+    spin_us=setting("FLYT_SPIN_US",0,1000);
     sleep_us=setting("FLYT_SLEEP_US",50,1000);if(!sleep_us)sleep_us=50;
 }
 int flyt_perf_enabled(void){pthread_once(&once,configure);return enabled;}
