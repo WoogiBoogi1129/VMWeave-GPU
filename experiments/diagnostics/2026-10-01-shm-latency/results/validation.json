@@ -1,0 +1,79 @@
+{
+  "utc": 1790819582.1278052,
+  "original_manifest_check": "PASS",
+  "original_manifest_entries": 2065,
+  "source_matches": {
+    "runtime/shm/shm-queue/src/queue.c": {
+      "build_context_path": "experiments/shm-queue/src/queue.c",
+      "identical": true,
+      "sha256": "cc9ff3ae285862c84499106329bbf5ae567d82b2cc3808889e12f820b2935c9d"
+    },
+    "runtime/shm/src/worker.c": {
+      "build_context_path": "runtime/shm/src/worker.c",
+      "identical": true,
+      "sha256": "1f02b3214b5a3f46ef679cdee1119b9d22bc6fff51c64499a54d4d64c1665420"
+    },
+    "runtime/shm/src/guest.c": {
+      "build_context_path": "runtime/shm/src/guest.c",
+      "identical": true,
+      "sha256": "0f4ad6ccd31098cce482d47e417bef2929c27a89fd2cd4ef7cebc01ee9fc7c88"
+    },
+    "runtime/shm/src/mapping.c": {
+      "build_context_path": "runtime/shm/src/mapping.c",
+      "identical": true,
+      "sha256": "3422758ab347c290c1ad61242e54402dc3987241dbc2e0c937981be9b8f38345"
+    },
+    "runtime/shm/src/dispatch.c": {
+      "build_context_path": "runtime/shm/src/dispatch.c",
+      "identical": true,
+      "sha256": "40e8e372dc9693d1f45ed6ff431be5880fa47280feb4c9b55b49cacdb699acb3"
+    },
+    "runtime/shm/cuda-dispatch/src/exec.c": {
+      "build_context_path": "experiments/cuda-dispatch/src/exec.c",
+      "identical": true,
+      "sha256": "143fa25f92687613c738643efb7f8c5e4383f568d8d68133f249daf8995223a3"
+    }
+  },
+  "queue_processes": 30,
+  "copy_processes": 18,
+  "copy_validation": "PASS",
+  "checks": [
+    {
+      "argv": [
+        "python3",
+        "scripts/check-repository.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: CRD copies, migrated code references, evidence figure hashes\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check-doc-contracts.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: 12 current guides, 7 CLI examples, administrator/user split\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        ".local/docs-venv/bin/mkdocs",
+        "build",
+        "--strict"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "\n\u001b[31m \u2502  \u26a0  Warning from the Material for MkDocs team\u001b[0m\n\u001b[31m \u2502\u001b[0m\n\u001b[31m \u2502\u001b[0m  MkDocs 2.0, the underlying framework of Material for MkDocs,\n\u001b[31m \u2502\u001b[0m  will introduce backward-incompatible changes, including:\n\u001b[31m \u2502\u001b[0m\n\u001b[31m \u2502  \u00d7 \u001b[0mAll plugins will stop working \u2013 the plugin system has been removed\n\u001b[31m \u2502  \u00d7 \u001b[0mAll theme overrides will break \u2013 the theming system has been rewritten\n\u001b[31m \u2502  \u00d7 \u001b[0mNo migration path exists \u2013 existing projects cannot be upgraded\n\u001b[31m \u2502  \u00d7 \u001b[0mClosed contribution model \u2013 community members can't report bugs\n\u001b[31m \u2502  \u00d7 \u001b[0mCurrently unlicensed \u2013 unsuitable for production use\n\u001b[31m \u2502\u001b[0m\n\u001b[31m \u2502\u001b[0m  Our full analysis:\n\u001b[31m \u2502\u001b[0m\n\u001b[31m \u2502\u001b[0m  \u001b[4mhttps://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/\u001b[0m\n\u001b[0m\nINFO    -  Cleaning site directory\nINFO    -  Building documentation to directory: /home/ubuntu/taeuk/flyt-k8s-poc-github/site\nINFO    -  The following pages exist in the docs directory, but are not included in the \"nav\" configuration:\n  - 2026-08-26-FLYT-VM-SERVICE-VALIDATION-REPORT.md\n  - 2026-08-31-FLYT-K8S-EXPERIMENT-PRESENTATION.md\n  - ARCHITECTURE.md\n  - ARTIFACT_POLICY.md\n  - CONTROL_PLANE_STAGE1.md\n  - CONTROL_PLANE_VALIDATION.md\n  - DEVELOPMENT_STAGES.md\n  - DRIVER_PROXY_ARCHITECTURE.md\n  - GITHUB_PUBLISHING.md\n  - KNOWN_LIMITATIONS.md\n  - MANAGED_DEPLOYMENT.md\n  - PATCH_CATALOG.md\n  - PROVENANCE.md\n  - REPRODUCING.md\n  - WHOLE_GPU_EXPERIMENT.md\n  - archive/2026-08-experiment-report.md\n  - development/central-controller-plan.md\n  - development/operator-migration-plan.md\n  - installation/README.md\n  - installation/GPU_VALIDATION_2026-09-21.md\n  - installation/INSTALLATION_REPORT_2026-09-22.md\nINFO    -  Documentation built in 0.80 seconds\n"
+    },
+    {
+      "argv": [
+        "python3",
+        "scripts/check-site.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: 56 HTML pages, local links/assets/anchors, 132 search entries\n",
+      "stderr": ""
+    }
+  ]
+}

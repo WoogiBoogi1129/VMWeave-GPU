@@ -1,0 +1,34 @@
+Script started on 2026-10-01 10:45:27+09:00 [COMMAND="python3 -u experiments/diagnostics/2026-10-01-shm-latency/run.py" <not executed on terminal>]
+q-r1-both_spin-1048576-0 624.361 us
+q-r1-worker_spin-0-16 1083.764 us
+q-r1-both_spin-4096-0 8.021 us
+q-r1-stock-0-16 1084.405 us
+q-r1-both_spin-16777216-0 10947.218 us
+q-r1-both_spin-0-1048576 628.544 us
+q-r1-both_spin-0-16 2.831 us
+q-r1-both_spin-0-4096 7.869 us
+q-r1-both_spin-0-16777216 8709.186 us
+q-r1-guest_spin-0-16 1077.915 us
+q-r2-both_spin-0-1048576 325.685 us
+q-r2-both_spin-1048576-0 551.241 us
+q-r2-both_spin-4096-0 3.925 us
+q-r2-both_spin-16777216-0 9418.298 us
+q-r2-guest_spin-0-16 1074.598 us
+q-r2-both_spin-0-16 1.152 us
+q-r2-worker_spin-0-16 1094.773 us
+q-r2-both_spin-0-4096 3.435 us
+q-r2-both_spin-0-16777216 5807.724 us
+q-r2-stock-0-16 1091.672 us
+q-r3-both_spin-1048576-0 553.737 us
+q-r3-both_spin-16777216-0 9007.998 us
+q-r3-both_spin-0-4096 3.472 us
+q-r3-worker_spin-0-16 1075.333 us
+q-r3-both_spin-0-1048576 326.428 us
+q-r3-both_spin-0-16777216 5841.483 us
+q-r3-both_spin-0-16 1.145 us
+q-r3-both_spin-4096-0 3.879 us
+q-r3-stock-0-16 1100.786 us
+q-r3-guest_spin-0-16 1077.555 us
+DIAGNOSTICS_COMPLETE {"stock/0/16": {"n": 3, "mean_us": 1092.2875776666667, "sd_us": 8.207553571046187, "cpu_cores": 0.045117}, "worker_spin/0/16": {"n": 3, "mean_us": 1084.6236966666668, "sd_us": 9.748496289845715, "cpu_cores": 1.020061}, "guest_spin/0/16": {"n": 3, "mean_us": 1076.6889956666666, "sd_us": 1.8199171053991874, "cpu_cores": 1.0178176666666667}, "both_spin/0/16": {"n": 3, "mean_us": 1.7093393333333333, "sd_us": 0.9713478394377233, "cpu_cores": 1.9999036666666665}, "both_spin/4096/0": {"n": 3, "mean_us": 5.275125333333333, "sd_us": 2.3780360080529337, "cpu_cores": 1.9999936666666667}, "both_spin/0/4096": {"n": 3, "mean_us": 4.925313, "sd_us": 2.549513659024599, "cpu_cores": 1.999964}, "both_spin/1048576/0": {"n": 3, "mean_us": 576.4463883333334, "sd_us": 41.51419831023197, "cpu_cores": 2.000077}, "both_spin/0/1048576": {"n": 3, "mean_us": 426.88595, "sd_us": 174.64160721888163, "cpu_cores": 1.9998556666666667}, "both_spin/16777216/0": {"n": 3, "mean_us": 9791.171122333333, "sd_us": 1021.9682851854808, "cpu_cores": 1.9996633333333333}, "both_spin/0/16777216": {"n": 3, "mean_us": 6786.131230666667, "sd_us": 1665.5000920731025, "cpu_cores": 1.999929}}
+
+Script done on 2026-10-01 10:46:39+09:00 [COMMAND_EXIT_CODE="0"]

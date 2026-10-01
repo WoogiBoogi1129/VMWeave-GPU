@@ -44,6 +44,12 @@ HAMi와 node-exporter, VM/Worker Pod cgroup CPU, 실제 GPU 프로세스 이용�
 N/T/S의 8개 호출·전송 지표 모두 S 평균 지연이 T보다 컸습니다.
 MPS/HAMi 정책과 실행기 차이가 포함되므로 전송 매체만의 효과로 해석하지 않습니다.
 
+2026-10-01 [SHM 지연 원인 후속 분석](../../experiments/diagnostics/2026-10-01-shm-latency/README.md)에서
+기존 라이브러리의 호스트 큐 진단을 추가했습니다. 양쪽 1ms sleep을 사용하는 큐 왕복은
+1,092µs, 양쪽 busy polling은 1.71µs였지만 CPU 약 두 코어를 사용했습니다.
+이는 VM·CUDA·HAMi를 제외한 구성요소 시험이며 실제 VM의 개선 결과가 아닙니다.
+대형 전송의 다중 복사와 volatile snapshot 비용도 확인했습니다. 원본 campaign은 변경하지 않았습니다.
+
 ## 다중 VM의 부하 시작·종료
 
 별도 정상 상태 실험을 추가하지 않고 같은 실행의 단독·동시·회복 구간을 비교했습니다.
