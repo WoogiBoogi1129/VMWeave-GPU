@@ -2,6 +2,10 @@
 #include "flyt_guest.h"
 #include "flyt_torch.h"
 #include "flyt_trace.h"
+#include "flyt_perf.h"
+/* Protected by flyt_guest_lock; one synchronous copy owns this private buffer. */
+static unsigned char *copy_buffer;
+static size_t copy_capacity;
 #include <cuda_runtime_api.h>
 #include <cuda.h>
 #include <stdlib.h>
@@ -78,6 +82,7 @@ static void *io_main(void *unused){
 }
 int flyt_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received){
     if(owner_pid&&owner_pid!=getpid())return 999;
+    uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
     pthread_mutex_lock(&io_lock);
     if(!started){owner_pid=getpid();started=1;if(pthread_create(&io_thread,NULL,io_main,NULL)){broken=1;initialized=1;}}
     while(!initialized)pthread_cond_wait(&io_cond,&io_lock);
@@ -88,12 +93,14 @@ int flyt_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output
     int result=finished?job.result:999;if(received)*received=job.received;
     pthread_mutex_unlock(&io_lock);
     if(getenv("FLYT_TRACE_CALLS"))fprintf(stderr,"flyt api=0x%x bytes=%zu result=%d\n",api,bytes,result);
+    flyt_perf_add(FLYT_PERF_EXCHANGE,measured,bytes);
     return result;
 }
 __attribute__((destructor)) static void shutdown_guest(void){
     if(!started||owner_pid!=getpid()||pthread_mutex_trylock(&flyt_guest_lock))return;
     size_t ignored;if(!broken)flyt_guest_exchange(FLYT_GOODBYE,NULL,0,NULL,0,&ignored);
     pthread_mutex_unlock(&flyt_guest_lock);if(initialized)pthread_join(io_thread,NULL);
+    free(copy_buffer);copy_buffer=NULL;copy_capacity=0;flyt_perf_dump("guest-caller");
 }
 int flyt_guest_ref(const void *p,size_t n,struct flyt_device_ref *r){
     uintptr_t v=(uintptr_t)p;
@@ -164,12 +171,17 @@ cudaError_t cudaMemcpy(void *dst,const void *src,size_t n,enum cudaMemcpyKind ki
     if(kind!=cudaMemcpyDeviceToHost&&flyt_guest_ref(dst,n,&d)){e=1;goto done;}
     if(kind!=cudaMemcpyHostToDevice&&flyt_guest_ref(src,n,&s)){e=1;goto done;}
     if(n&&((kind==cudaMemcpyHostToDevice&&!src)||(kind==cudaMemcpyDeviceToHost&&!dst))){e=1;goto done;}
-    size_t bytes=48+(kind==cudaMemcpyHostToDevice?n:0);uint8_t *in=calloc(1,bytes);if(!in){e=2;goto done;}
+    size_t bytes=48+(kind==cudaMemcpyHostToDevice?n:0);uint8_t *in;
+    int optimized=flyt_copy_optimized();
+    if(optimized){
+        if(bytes>copy_capacity){void *p=realloc(copy_buffer,bytes);if(!p){e=2;goto done;}copy_buffer=p;copy_capacity=bytes;}
+        in=copy_buffer;memset(in,0,48);
+    }else{in=calloc(1,bytes);if(!in){e=2;goto done;}}
     flyt_put(in,kind==cudaMemcpyHostToDevice?1:kind==cudaMemcpyDeviceToHost?2:3,4);
     flyt_put(in+8,d.handle,8);flyt_put(in+16,d.offset,8);flyt_put(in+24,s.handle,8);flyt_put(in+32,s.offset,8);flyt_put(in+40,n,8);
     if(kind==cudaMemcpyHostToDevice&&n)memcpy(in+48,src,n);
     e=flyt_guest_exchange(FLYT_API_RUNTIME_MEMCPY,in,bytes,kind==cudaMemcpyDeviceToHost?dst:NULL,kind==cudaMemcpyDeviceToHost?n:0,&got);
-    if(!e&&got!=(kind==cudaMemcpyDeviceToHost?n:0))e=999;free(in);
+    if(!e&&got!=(kind==cudaMemcpyDeviceToHost?n:0))e=999;if(!optimized)free(in);
 done:pthread_mutex_unlock(&flyt_guest_lock);return finish(e);
 }
 static cudaError_t scalar(uint32_t api,int *out,int input){

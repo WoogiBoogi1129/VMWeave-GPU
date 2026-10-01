@@ -1,4 +1,5 @@
 #include "flyt_wire.h"
+#include "flyt_perf.h"
 #include <string.h>
 #include <cuda_runtime_api.h>
 int flyt_cuda_dispatch(struct flyt_cuda_session *s,const struct flyt_shm_request *q,struct flyt_shm_response *r){
@@ -43,12 +44,16 @@ int flyt_cuda_dispatch(struct flyt_cuda_session *s,const struct flyt_shm_request
     }
     /* Reserve caller's response space BEFORE any CUDA side effect. */
     if(need>r->output_capacity||(need&&!r->output))goto invalid;
+    if(c.api_id==FLYT_API_RUNTIME_MEMCPY && flyt_copy_optimized()){
+        if(c.args.copy.direction==FLYT_COPY_HTOD)c.args.copy.borrow_input=1;
+        if(c.args.copy.direction==FLYT_COPY_DTOH){c.args.copy.host_output=r->output;c.args.copy.host_output_bytes=r->output_capacity;}
+    }
     rc=flyt_cuda_exec_call(s->exec,&c,&result);
     r->transport_status=(uint32_t)rc;r->result_domain=result.result_domain;r->api_result=result.api_result;
     if(!rc&&!result.api_result){
         if(c.api_id==FLYT_API_RUNTIME_MALLOC)flyt_put(r->output,result.handle,8);
         else if(c.api_id==FLYT_API_RUNTIME_GET_DEVICE_COUNT||c.api_id==FLYT_API_RUNTIME_GET_DEVICE)flyt_put(r->output,(uint32_t)result.device,4);
-        else if(result.data_bytes){memcpy(r->output,result.data,result.data_bytes);}
+        else if(result.data_bytes && result.data!=r->output){memcpy(r->output,result.data,result.data_bytes);}
         r->output_bytes=need;
     }
     flyt_cuda_result_release(&result);return 0;

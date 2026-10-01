@@ -4,6 +4,7 @@
 #include "flyt_compat.h"
 #include "flyt_torch.h"
 #include "flyt_trace.h"
+#include "flyt_perf.h"
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,14 +28,17 @@ int main(int argc,char **argv){
     if(!output)goto done;
     snprintf(ready,sizeof(ready),"/tmp/flyt-slot-%u-mapped",slot);FILE *f=fopen(ready,"wx");if(!f){free(output);goto done;}fclose(f);
     struct timespec last,now;clock_gettime(CLOCK_MONOTONIC,&last);
+    struct flyt_wait idle={0};
     while(!stopping){
         if(flyt_cuda_exec_check(session.exec)!=FLYT_SHM_OK)break;
         clock_gettime(CLOCK_MONOTONIC,&now);
         if(now.tv_sec-last.tv_sec>(hello?60:600))break;
         if(flyt_async_reap())break;
         struct flyt_shm_request q={0};int rc=flyt_shm_worker_take(channel,&q);
-        if(rc==FLYT_SHM_AGAIN){struct timespec pause={0,1000000};nanosleep(&pause,NULL);continue;}
+        if(rc==FLYT_SHM_AGAIN){if(flyt_wait_pause(&idle))break;continue;}
         if(rc)break;
+        memset(&idle,0,sizeof(idle));
+        uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
         flyt_trace("worker","take",layout.allocation_id,&q,NULL);
         clock_gettime(CLOCK_MONOTONIC,&last);
         struct flyt_shm_response r={.output=output,.output_capacity=capacity};
@@ -48,6 +52,7 @@ int main(int argc,char **argv){
         else if(q.api_id>=0x2100&&q.api_id!=FLYT_STREAM_PRIORITY_CREATE){if(flyt_torch_dispatch(&session,&q,&r)){flyt_shm_request_release(&q);break;}}
         else if(q.api_id>=0x2000){if(flyt_async_dispatch(&session,&q,&r)){flyt_shm_request_release(&q);break;}}
         else if(flyt_cuda_dispatch(&session,&q,&r)){flyt_shm_request_release(&q);break;}
+        flyt_perf_add(FLYT_PERF_DISPATCH,measured,q.input_bytes);
         rc=flyt_shm_worker_respond(channel,&r);
         if(!rc)flyt_trace("worker","respond",layout.allocation_id,&q,&r);
         flyt_shm_request_release(&q);if(rc)break;

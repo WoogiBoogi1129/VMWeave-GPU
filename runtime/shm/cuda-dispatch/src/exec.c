@@ -94,6 +94,12 @@ static int copy_call(struct flyt_cuda_exec *s, const struct flyt_cuda_call *c,
     } else if (c->args.copy.host_input_bytes || c->args.copy.host_input) {
         return status(r, FLYT_SHM_BAD_DESCRIPTOR);
     }
+    if(c->args.copy.borrow_input && kind!=FLYT_COPY_HTOD)
+        return status(r, FLYT_SHM_BAD_DESCRIPTOR);
+    if(c->args.copy.host_output || c->args.copy.host_output_bytes){
+        if(kind!=FLYT_COPY_DTOH || !c->args.copy.host_output || c->args.copy.host_output_bytes<n)
+            return status(r, FLYT_SHM_BAD_DESCRIPTOR);
+    }
     /* Reject overlapping device ranges before CUDA. */
     if (kind == FLYT_COPY_DTOD && n &&
         c->args.copy.dst.handle == c->args.copy.src.handle) {
@@ -102,7 +108,11 @@ static int copy_call(struct flyt_cuda_exec *s, const struct flyt_cuda_call *c,
             return status(r, FLYT_SHM_BAD_DESCRIPTOR);
     }
     if (!n) return status(r, FLYT_SHM_OK);
-    if (kind != FLYT_COPY_DTOD) {
+    if(kind==FLYT_COPY_HTOD && c->args.copy.borrow_input){
+        src=(void *)c->args.copy.host_input;
+    }else if(kind==FLYT_COPY_DTOH && c->args.copy.host_output){
+        dst=c->args.copy.host_output;
+    }else if (kind != FLYT_COPY_DTOD) {
         host = malloc((size_t)n);
         if (!host) return status(r, FLYT_SHM_INTERNAL_ERROR);
         if (kind == FLYT_COPY_HTOD) {
@@ -116,8 +126,9 @@ static int copy_call(struct flyt_cuda_exec *s, const struct flyt_cuda_call *c,
         s->fatal_error = r->api_result;
     }
     if (!r->api_result && kind == FLYT_COPY_DTOH) {
-        r->data = host;
+        r->data = dst;
         r->data_bytes = (size_t)n;
+        r->data_borrowed = c->args.copy.host_output != NULL;
     } else free(host);
     return status(r, FLYT_SHM_OK);
 }
@@ -220,7 +231,7 @@ int flyt_cuda_exec_call(struct flyt_cuda_exec *s, const struct flyt_cuda_call *c
 void flyt_cuda_result_release(struct flyt_cuda_result *r)
 {
     if (!r) return;
-    free(r->data);
+    if(!r->data_borrowed)free(r->data);
     memset(r, 0, sizeof(*r));
 }
 

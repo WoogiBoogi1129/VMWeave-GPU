@@ -1,5 +1,6 @@
 #define _POSIX_C_SOURCE 200809L
 #include "flyt_shm_queue.h"
+#include "flyt_perf.h"
 #include <pthread.h>
 #include <stdlib.h>
 #include <string.h>
@@ -55,6 +56,20 @@ static void snapshot(void *dst, const void *src, size_t n)
     const volatile uint8_t *s = src;
     size_t i;
     for (i = 0; i < n; ++i) d[i] = s[i];
+}
+/* Payload remains private before decoding. Aligned, bounded volatile word loads
+ * on the supported x86 coherent memory mapping; no rereads or overreads. This
+ * is not an atomic snapshot, just as the byte loop is not. Descriptor snapshots
+ * stay unchanged. A hostile peer still cannot bypass private bounds validation.
+ */
+static void payload_snapshot(void *dst, const void *src, size_t n)
+{
+    uint8_t *d=dst;const volatile uint8_t *s=src;
+    if(!flyt_copy_optimized()){snapshot(dst,src,n);return;}
+    while(n && ((uintptr_t)s&7)){*d++=*s++;--n;}
+    typedef uint64_t alias_word __attribute__((__may_alias__));
+    while(n>=8){uint64_t v=*(const volatile alias_word *)s;memcpy(d,&v,8);s+=8;d+=8;n-=8;}
+    while(n--)*d++=*s++;
 }
 static uint64_t acquire(uint8_t *p)
 { return __atomic_load_n((uint64_t *)(void *)p, __ATOMIC_ACQUIRE); }
@@ -263,6 +278,7 @@ int flyt_shm_submit(struct flyt_shm_channel *c, const struct flyt_shm_request *q
     int rc = usable(c, FLYT_SHM_GUEST);
     if (rc) return rc;
     if (c->pending) return FLYT_SHM_QUEUE_FULL;
+    uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
     if (!q || q->request_id != c->next || c->next == UINT64_MAX || !q->api_id ||
         !q->payload_schema || q->input_bytes > c->request_bytes ||
         q->input_bytes > FLYT_SHM_MAX_MESSAGE_BYTES ||
@@ -279,6 +295,7 @@ int flyt_shm_submit(struct flyt_shm_channel *c, const struct flyt_shm_request *q
     c->active = r.id; c->api = r.api; c->schema = r.schema;
     c->pending = 1; c->deadline_ns = now + delta;
     push(&c->req, &r);
+    flyt_perf_add(FLYT_PERF_SUBMIT,measured,q->input_bytes);
     return 0;
 }
 int flyt_shm_worker_take(struct flyt_shm_channel *c, struct flyt_shm_request *q)
@@ -296,6 +313,7 @@ int flyt_shm_worker_take(struct flyt_shm_channel *c, struct flyt_shm_request *q)
     if (rc) return fail(c, rc);
     rc = peek(&c->req, &r);
     if (rc) return rc == FLYT_SHM_AGAIN ? rc : fail(c, rc);
+    uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
     rc = matches(c, &r, 1);
     if (rc) return fail(c, rc);
     if (r.id != c->next || r.bytes > FLYT_SHM_MAX_MESSAGE_BYTES || r.offset > c->request_bytes ||
@@ -303,12 +321,13 @@ int flyt_shm_worker_take(struct flyt_shm_channel *c, struct flyt_shm_request *q)
     if (r.bytes) {
         payload = malloc((size_t)r.bytes);
         if (!payload) return FLYT_SHM_INTERNAL_ERROR; /* not consumed or executed */
-        snapshot(payload, c->request_payload + r.offset, (size_t)r.bytes);
+        payload_snapshot(payload, c->request_payload + r.offset, (size_t)r.bytes);
     }
     q->identity = r.identity; q->request_id = r.id; q->api_id = r.api;
     q->payload_schema = r.schema; q->input = payload; q->input_bytes = (size_t)r.bytes;
     c->active = r.id; c->api = r.api; c->schema = r.schema; c->pending = 1;
     consume(&c->req);
+    flyt_perf_add(FLYT_PERF_TAKE,measured,q->input_bytes);
     return 0;
 }
 void flyt_shm_request_release(struct flyt_shm_request *q)
@@ -327,6 +346,7 @@ int flyt_shm_worker_respond(struct flyt_shm_channel *c, const struct flyt_shm_re
     uint8_t encoded[128];
     int rc = usable(c, FLYT_SHM_WORKER);
     if (rc) return rc;
+    uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
     if (!c->pending || !s || s->output_bytes > flyt_shm_response_capacity(c) ||
         s->output_bytes > s->output_capacity || (s->output_bytes && !s->output))
         return FLYT_SHM_BAD_DESCRIPTOR;
@@ -341,6 +361,7 @@ int flyt_shm_worker_respond(struct flyt_shm_channel *c, const struct flyt_shm_re
     if (s->output_bytes) memcpy(c->response_payload, s->output, s->output_bytes);
     push(&c->resp, &r);
     c->pending = 0; ++c->next;
+    flyt_perf_add(FLYT_PERF_RESPOND,measured,s->output_bytes);
     return 0;
 }
 int flyt_shm_try_receive(struct flyt_shm_channel *c, uint64_t id, struct flyt_shm_response *s)
@@ -363,7 +384,7 @@ int flyt_shm_try_receive(struct flyt_shm_channel *c, uint64_t id, struct flyt_sh
     s->output_bytes = (size_t)r.bytes;
     if (r.bytes > s->output_capacity || (r.bytes && !s->output))
         return FLYT_SHM_BAD_DESCRIPTOR; /* retry receive, not execution */
-    if (r.bytes) snapshot(s->output, c->response_payload + r.offset, (size_t)r.bytes);
+    if (r.bytes) payload_snapshot(s->output, c->response_payload + r.offset, (size_t)r.bytes);
     s->transport_status = r.status; s->result_domain = r.domain; s->api_result = r.result;
     consume(&c->resp);
     c->pending = 0; ++c->next;
@@ -371,16 +392,15 @@ int flyt_shm_try_receive(struct flyt_shm_channel *c, uint64_t id, struct flyt_sh
 }
 int flyt_shm_receive(struct flyt_shm_channel *c, uint64_t id, struct flyt_shm_response *s)
 {
-    int rc;
+    int rc;struct flyt_wait wait={0};uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
     for (;;) {
-        struct timespec pause = {0, 1000000};
         rc = flyt_shm_try_receive(c, id, s);
-        if (rc != FLYT_SHM_AGAIN) return rc;
-        if (nanosleep(&pause, NULL) && errno != EINTR)
+        if (rc != FLYT_SHM_AGAIN){if(!rc)flyt_perf_add(FLYT_PERF_RECEIVE,measured,s->output_bytes);return rc;}
+        if (flyt_wait_pause(&wait))
             return fail(c, FLYT_SHM_EXECUTION_UNKNOWN);
     }
 }
 void flyt_shm_abort(struct flyt_shm_channel *c)
 { if (c && pthread_equal(c->owner, pthread_self())) c->failed = 1; }
 void flyt_shm_close(struct flyt_shm_channel *c)
-{ if (c && pthread_equal(c->owner, pthread_self())) free(c); }
+{ if (c && pthread_equal(c->owner, pthread_self())){flyt_perf_dump(c->role==FLYT_SHM_GUEST?"guest-io":"worker");free(c);} }

@@ -28,6 +28,11 @@ struct flyt_cuda_call {
             uint64_t bytes;
             const void *host_input;
             size_t host_input_bytes;
+            /* Borrow PRIVATE buffers only; synchronous backend releases all
+             * host buffer dependence before returning. Not wire fields. */
+            int borrow_input;
+            void *host_output;
+            size_t host_output_bytes;
         } copy;
     } args;
 };
@@ -35,9 +40,11 @@ struct flyt_cuda_result {
     uint32_t status, result_domain, api_result;
     int32_t device;
     uint64_t handle;
-    /* Owned by result; release after adapter copies it. Empty on errors. */
+    /* Owned unless data_borrowed is set; always release the result after use.
+     * Borrowed output belongs to the caller and is never freed here. */
     void *data;
     size_t data_bytes;
+    int data_borrowed;
 };
 
 /* Backend callbacks use host addresses only and return raw CUDA Runtime errors.
