@@ -20,6 +20,23 @@ python3 experiments/evidence/verify_stage2.py \
 `analyze.py`, `plot.py`, `report.py`는 파생 결과를 다시 생성합니다. 실행 검증 PASS와 이용률 상한 준수는 별도 판정입니다.
 분석은 Python 3.12, NumPy 2.5.3, Matplotlib 3.9.4를 사용했습니다.
 
+완료된 결과 묶음은 다음 순서로 확인합니다. 재분석은 복사본에서 수행하면
+공개된 원본과 체크섬을 그대로 유지할 수 있습니다.
+
+```sh
+(cd experiments/evidence/results/2026-09-30-performance && sha256sum -c SHA256SUMS)
+cp -a experiments/evidence/results/2026-09-30-performance /tmp/vmweave-performance-review
+python3 experiments/performance/verify.py /tmp/vmweave-performance-review
+python3 experiments/performance/analyze.py /tmp/vmweave-performance-review
+python3 experiments/performance/plot.py /tmp/vmweave-performance-review
+python3 experiments/performance/report.py /tmp/vmweave-performance-review
+```
+
+검증 결과의 `campaign_complete`와 `repeat_coverage`를 함께 확인합니다.
+중단된 시도는 `interruptions.json`과 원래 실행 디렉터리에 남아 있으며,
+새 이름의 대체 실행만 완료 반복에 포함합니다. 자원 정리·모니터링 보존은
+측정 검증과 별개로 `final-audit.json`에서 확인합니다.
+
 새 GPU 측정에는 기록된 이미지·키·프로토콜과 새로운 출력 경로를 준비해야 합니다.
 실행 도구는 기록된 testbed용이며 다른 클러스터의 자동 설치 도구가 아닙니다.
 

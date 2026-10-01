@@ -32,7 +32,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  'python3 ../../../performance/terminal_table.py . single'],[
  '# Integrated start/stop sharing experiment',
  'python3 ../../../performance/terminal_table.py . shared',
- `jq '.shared | {conditions,solo_window_s,shared_window_s,recovery_window_s}' protocol.json`]],
+ `jq -c '.shared | {conditions,solo_window_s,shared_window_s,recovery_window_s}' protocol.json`]],
  ['04-verification-and-resource-audit',[
  '# Independently checked sample counts, clocks, output and release',
  `jq '{status,campaign_complete,valid_runs,validated_pairs,errors}' validation.json`,
