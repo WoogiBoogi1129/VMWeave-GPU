@@ -8,6 +8,8 @@
 - 중앙화·새 API 배포와 기존 실험 namespace 정리는 완료. 구 CRD 정의 제거와
   PyTorch campaign의 새 API 전환·재검증은 후속 작업이다. 성능 실행기는 새 API로 전환했다.
 - Worker 대기·큐·복사·동기화 비용의 원인 분석과 최적화.
+- 이미 Released인 채널의 Foreground 삭제에서도 분리 증거 GC와 최종 처리가 충돌하지 않도록
+  제어기 종료 경로 개선. [실제 정리 실패·복구](../../experiments/evidence/results/2026-09-30-performance/cleanup-recovery/README.md)를 회귀 사례로 사용한다.
 
 ## 검증
 

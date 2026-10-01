@@ -1,0 +1,166 @@
+{
+  "utc": 1790785141.5378911,
+  "scope": "Snapshot during shared stage, before final cleanup; checks preservation across cleanup only. Earlier mutations remain in command audit.",
+  "resources": [
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-a",
+      "name": "same-vm",
+      "uid": "f8349ff8-1f7d-4f18-87a2-934838ad860a",
+      "spec_sha256": "72a8c34928543e42a60e4d8bb1531d237d01f07e21d88f1dc5a5f3f45d12efe9"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-a",
+      "name": "same-vm-2",
+      "uid": "07389e8e-b51f-4a8f-bfa5-54d36e041655",
+      "spec_sha256": "c364213585702f332b98320d2bfe1a3339d9f44954d4e21db45343e713b5b6b9"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-a",
+      "name": "same-vm-3",
+      "uid": "23fc6932-e2cf-4bc3-8ec5-181d20d8950b",
+      "spec_sha256": "b4fed3e12ba85cf631536c399559b83095b3b341c9665b754839eeb7511400bf"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel",
+      "uid": "f999c073-48c0-4fa1-9526-764cfeb1b2d5",
+      "spec_sha256": "759d4d0b4be0d95364333a30c7d55869c0c606cc5aaa89303ee6bd99a22fb129"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-2",
+      "uid": "7a72a3c6-a643-4252-b631-dcad3e3af9db",
+      "spec_sha256": "6370bc073d11e79116b084a6625db0eb7aa0b08d64200d484caec826ae2df724"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-3",
+      "uid": "97d72b30-fb2d-4baf-92f2-b034dbdf9340",
+      "spec_sha256": "dc9da6b2d3be6a9af0161cd5f2e99cca23e5608b7a88ece30088c5889c546959"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel",
+      "uid": "e64c8293-39e5-498b-b9be-c4f232d4fb4b",
+      "spec_sha256": "00e5f414d89feb704d599a3e8c05723c2281e4f0d092f8d337f19cc864d37f57"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-2",
+      "uid": "3bca460a-843c-464c-9cf9-31a379ecc334",
+      "spec_sha256": "16616dcf2190819237c01d2b1089c2d905060717e0786215eb2ec9f8010ea009"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-3",
+      "uid": "019edb7b-38b3-4e13-9f10-bd867e39e845",
+      "spec_sha256": "e2d07293daa570f88f39a752d8f892754fb4622a2703026ab5635b71c1ce8162"
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "namespace": "vmweave-test-a",
+      "name": "backing",
+      "uid": "f5d12c57-c2a1-44af-8104-1089e133aafb",
+      "spec_sha256": "7d6ed3c418a72177f99e62d49baf5dc651fb012e19b2fcede467d8fccedbecda"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-b",
+      "name": "same-vm",
+      "uid": "cb726af1-0bfd-47c6-a018-15957e06e2d0",
+      "spec_sha256": "cf017d2697b6c85086c82c583393c4fd9c323dbf74b20d3c4d2e6b1a9814f91a"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-b",
+      "name": "same-vm-2",
+      "uid": "e15c6979-cf76-4157-ac1e-67e3aa138905",
+      "spec_sha256": "9353d4e2b7a62ad18facca7170f7955f78a169c8544e485eb7d3899c50c452bc"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-b",
+      "name": "same-vm-3",
+      "uid": "2c4e2d7d-a1d3-4be9-89c5-35493b545563",
+      "spec_sha256": "1f8d8c97d20f319ed80f626cab02e4167db8aa88cc18658672c68744c0f5d067"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel",
+      "uid": "3796420c-8dbe-4731-85f5-16690e03e7f0",
+      "spec_sha256": "c25f353a723db8a6146898ea51443c623325621163f0657590006af9e54869c5"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-2",
+      "uid": "12307042-9179-4d9e-814d-1b01b1b6fce2",
+      "spec_sha256": "fab3842fee5663d97f0ecf2760a95d58d290e10382dc11bf2017eb85f78177f8"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-3",
+      "uid": "b565317b-dad9-4d14-9ab0-73019359f288",
+      "spec_sha256": "43cee0bdb83d913f7f9da0c6225d16b93588865a32d2594df72ccd729284a8c6"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel",
+      "uid": "abe49eb5-83f9-4642-81f6-6ca04b891c64",
+      "spec_sha256": "857c2287a7bd3fd12952fb28938b343646262cf08bdb25d1027e986954e27f0a"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-2",
+      "uid": "00d037dc-15b3-45e3-ab55-0f243bf33ae9",
+      "spec_sha256": "9563565336d3e278ca46b7f004029a938dbddc911f050bc10dace9f755f5f15b"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-3",
+      "uid": "74663412-307b-44c3-bda7-f5505f3cfd68",
+      "spec_sha256": "cfe43452d508c699dc8e4df63e58edff1977483ff8fdd06537fe4d4a85753249"
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "namespace": "vmweave-test-b",
+      "name": "backing",
+      "uid": "3339335c-30fa-4662-a5b8-e6d6de9e3fdf",
+      "spec_sha256": "b252c1e34afe754f53d87be67ed5ae4c863d8f8d229f7d39483e2176817ad6d8"
+    }
+  ]
+}

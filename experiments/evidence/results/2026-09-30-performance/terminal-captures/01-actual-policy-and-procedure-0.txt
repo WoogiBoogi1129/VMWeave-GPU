@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-30-performance$ # Actual Worker environment captured during warmup
+ubuntu@gpu-4:2026-09-30-performance$ jq '.[] | select(.command|contains("flyt-shm-worker")) |
+{pid,policy:.environment.GPU_CORE_UTILIZATION_POLICY,cap:.environment.CUDA_DEVICE_SM_LIMIT,mem
+ory:.environment.CUDA_DEVICE_MEMORY_LIMIT_0}' runs/perf-c-r1-25/runtime-libraries.json
+{
+  "pid": 3165032,
+  "policy": "FORCE",
+  "cap": "25",
+  "memory": "4096m"
+}
+ubuntu@gpu-4:2026-09-30-performance$ jq '{cap,gpu_uuid,worker,worker_uid}' runs/perf-c-r1-25/i
+dentity.json
+{
+  "cap": 25,
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "worker": "perf-c-r1-25-bafd56250a86-worker",
+  "worker_uid": "e1d49527-e655-4950-b94e-a48f8cb0d580"
+}
+ubuntu@gpu-4:2026-09-30-performance$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

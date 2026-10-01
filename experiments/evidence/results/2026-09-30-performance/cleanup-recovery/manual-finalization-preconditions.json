@@ -1,0 +1,310 @@
+{
+  "utc": 1790816383.6429067,
+  "channel": {
+    "apiVersion": "vmweave.io/v1alpha1",
+    "kind": "SharedMemoryChannel",
+    "metadata": {
+      "creationTimestamp": "2026-09-30T14:55:08Z",
+      "deletionGracePeriodSeconds": 0,
+      "deletionTimestamp": "2026-10-01T00:54:54Z",
+      "finalizers": [
+        "vmweave.io/shm-detach"
+      ],
+      "generation": 3,
+      "name": "perf-c-r1-100",
+      "namespace": "vmweave-test-a",
+      "resourceVersion": "3717464",
+      "uid": "103638a8-0f39-40ef-ab09-a6d1ce059f96"
+    },
+    "spec": {
+      "drain": true,
+      "gid": 107,
+      "hookImage": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+      "image": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+      "pvcRef": {
+        "name": "perf-c-r1-100",
+        "uid": "1e798a80-337d-4cc1-8f92-4c4747342504"
+      },
+      "requestRef": {
+        "name": "perf-c-r1-100",
+        "uid": "17f8f58a-48a0-4c61-b35a-aec0294b493f"
+      },
+      "sessions": 1,
+      "uid": 107,
+      "vmRef": {
+        "name": "perf-c-r1-100",
+        "uid": "29fd6ea2-1c62-41f2-a55e-dbf7f1baee92"
+      },
+      "workerImage": "localhost/vmweave-worker@sha256:002c13d3ef8d5ce26d812d630c57b64df24a53d3e2d019b0f3fa0be83d04be57"
+    },
+    "status": {
+      "allocation": "03f7590919c9aaaa4624505adf215578",
+      "compute": 100,
+      "everBound": true,
+      "generation": "e035748d215088c8cc8975471e63cb8f",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 4096,
+      "nodeName": "gpu-4",
+      "phase": "Draining",
+      "profileGeneration": 1,
+      "reason": "AwaitingDetachEvidence",
+      "requestGeneration": 1,
+      "resourcePrefix": "perf-c-r1-100-103638a80f39",
+      "sessions": [
+        "22d6d22457632100783d40333f512208"
+      ],
+      "vmiUID": "e01749fc-9735-44f4-879b-ca60fee0a26b",
+      "workerPodUID": "02327b9d-e234-44b8-a05d-9777a7d34784"
+    }
+  },
+  "historical_release_commit": "67cffa2",
+  "historical_release_sha256": "eeea11ee5d69d0df86211e3b67e1b7c7fc05bf7d6d057c93dc7ef352475ea2eb",
+  "vm": {
+    "apiVersion": "kubevirt.io/v1",
+    "kind": "VirtualMachine",
+    "metadata": {
+      "annotations": {
+        "kubevirt.io/latest-observed-api-version": "v1",
+        "kubevirt.io/storage-observed-api-version": "v1"
+      },
+      "creationTimestamp": "2026-09-30T14:55:07Z",
+      "finalizers": [
+        "kubevirt.io/virtualMachineControllerFinalize"
+      ],
+      "generation": 4,
+      "name": "perf-c-r1-100",
+      "namespace": "vmweave-test-a",
+      "resourceVersion": "3529103",
+      "uid": "29fd6ea2-1c62-41f2-a55e-dbf7f1baee92"
+    },
+    "spec": {
+      "runStrategy": "Halted",
+      "template": {
+        "metadata": {
+          "annotations": {
+            "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f\",\"pvc\":{\"name\":\"perf-c-r1-100\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+            "kubevirt.io/pci-topology-version": "v3",
+            "vmweave.io/shm-allocation": "03f7590919c9aaaa4624505adf215578",
+            "vmweave.io/shm-channel": "perf-c-r1-100",
+            "vmweave.io/shm-channel-uid": "103638a8-0f39-40ef-ab09-a6d1ce059f96",
+            "vmweave.io/shm-generation": "e035748d215088c8cc8975471e63cb8f"
+          }
+        },
+        "spec": {
+          "architecture": "amd64",
+          "domain": {
+            "cpu": {
+              "cores": 8
+            },
+            "devices": {
+              "disks": [
+                {
+                  "disk": {
+                    "bus": "virtio"
+                  },
+                  "name": "root"
+                },
+                {
+                  "disk": {
+                    "bus": "virtio"
+                  },
+                  "name": "cloudinit"
+                }
+              ],
+              "interfaces": [
+                {
+                  "masquerade": {},
+                  "name": "default"
+                }
+              ]
+            },
+            "firmware": {
+              "serial": "940da03b-242b-4840-b045-65c82e2f0800",
+              "uuid": "daded504-5d48-455f-b1d2-abb1fbce2240"
+            },
+            "machine": {
+              "type": "q35"
+            },
+            "resources": {
+              "requests": {
+                "memory": "16Gi"
+              }
+            }
+          },
+          "networks": [
+            {
+              "name": "default",
+              "pod": {}
+            }
+          ],
+          "nodeSelector": {
+            "kubernetes.io/hostname": "gpu-4"
+          },
+          "volumes": [
+            {
+              "containerDisk": {
+                "image": "localhost/flyt-evidence-guest@sha256:47e520785c49e6db93631ef4876dcb40b73b23ffc766327e6b02cdfe3496c052"
+              },
+              "name": "root"
+            },
+            {
+              "cloudInitNoCloud": {
+                "userData": "#cloud-config\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKdMWCpvXPb7efaG24ws5p+j4N7Ze1TiUIFj96x2FXdr ubuntu@gpu-4\n"
+              },
+              "name": "cloudinit"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": "2026-09-30T14:59:07Z",
+          "lastTransitionTime": "2026-09-30T14:59:07Z",
+          "message": "VMI does not exist",
+          "reason": "VMINotExists",
+          "status": "False",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": null,
+          "status": "True",
+          "type": "LiveMigratable"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": null,
+          "status": "True",
+          "type": "StorageLiveMigratable"
+        }
+      ],
+      "desiredGeneration": 4,
+      "observedGeneration": 4,
+      "printableStatus": "Stopped",
+      "runStrategy": "Halted",
+      "volumeSnapshotStatuses": [
+        {
+          "enabled": false,
+          "name": "root",
+          "reason": "Snapshot is not supported for this volumeSource type [root]"
+        },
+        {
+          "enabled": false,
+          "name": "cloudinit",
+          "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+        }
+      ]
+    }
+  },
+  "pvc": {
+    "apiVersion": "v1",
+    "kind": "PersistentVolumeClaim",
+    "metadata": {
+      "annotations": {
+        "pv.kubernetes.io/bind-completed": "yes"
+      },
+      "creationTimestamp": "2026-09-30T14:55:07Z",
+      "finalizers": [
+        "kubernetes.io/pvc-protection"
+      ],
+      "name": "perf-c-r1-100",
+      "namespace": "vmweave-test-a",
+      "resourceVersion": "3529122",
+      "uid": "1e798a80-337d-4cc1-8f92-4c4747342504"
+    },
+    "spec": {
+      "accessModes": [
+        "ReadWriteOnce"
+      ],
+      "resources": {
+        "requests": {
+          "storage": "1Gi"
+        }
+      },
+      "storageClassName": "",
+      "volumeMode": "Filesystem",
+      "volumeName": "perf-c-r1-100"
+    },
+    "status": {
+      "accessModes": [
+        "ReadWriteOnce"
+      ],
+      "capacity": {
+        "storage": "1Gi"
+      },
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-09-30T14:59:09Z",
+          "message": "No pods are currently referencing this PVC",
+          "reason": "NoPodsUsingPVC",
+          "status": "True",
+          "type": "Unused"
+        }
+      ],
+      "phase": "Bound"
+    }
+  },
+  "pv": {
+    "apiVersion": "v1",
+    "kind": "PersistentVolume",
+    "metadata": {
+      "creationTimestamp": "2026-09-30T14:55:07Z",
+      "finalizers": [
+        "kubernetes.io/pv-protection"
+      ],
+      "name": "perf-c-r1-100",
+      "resourceVersion": "3527729",
+      "uid": "b45acf82-b1e0-4a36-9131-23b8fd2b62d0"
+    },
+    "spec": {
+      "accessModes": [
+        "ReadWriteOnce"
+      ],
+      "capacity": {
+        "storage": "1Gi"
+      },
+      "claimRef": {
+        "apiVersion": "v1",
+        "kind": "PersistentVolumeClaim",
+        "name": "perf-c-r1-100",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "3527727",
+        "uid": "1e798a80-337d-4cc1-8f92-4c4747342504"
+      },
+      "local": {
+        "path": "/var/lib/vmweave/performance-20260930/perf-c-r1-100"
+      },
+      "nodeAffinity": {
+        "required": {
+          "nodeSelectorTerms": [
+            {
+              "matchExpressions": [
+                {
+                  "key": "kubernetes.io/hostname",
+                  "operator": "In",
+                  "values": [
+                    "gpu-4"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "persistentVolumeReclaimPolicy": "Retain",
+      "volumeMode": "Filesystem"
+    },
+    "status": {
+      "lastPhaseTransitionTime": "2026-09-30T14:55:07Z",
+      "phase": "Bound"
+    }
+  },
+  "pvc_holders": [],
+  "target_gpu_processes": "",
+  "backing_contents": "",
+  "node_ready": true,
+  "scope": "One already Released allocation. No new attachment/measurement success records are synthesized."
+}

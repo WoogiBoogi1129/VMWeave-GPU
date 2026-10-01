@@ -1,0 +1,14 @@
+Script started on 2026-10-01 10:00:14+09:00 [COMMAND="python3 -u experiments/performance/finish_campaign.py --resume-cleanup" <not executed on terminal>]
+POSTPROCESS_START 1 ['python3', 'experiments/performance/cleanup.py'] 1790816414.572295
+POSTPROCESS_COMPLETE 1 1790816830.6040206
+POSTPROCESS_START 2 ['python3', 'experiments/performance/final_audit.py'] 1790816830.6041028
+POSTPROCESS_COMPLETE 2 1790816834.781617
+POSTPROCESS_START 3 ['node', 'experiments/performance/capture_terminal.cjs', '/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930'] 1790816834.7817814
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/finish_campaign.py", line 34, in <module>
+    subprocess.run(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT,
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['node', 'experiments/performance/capture_terminal.cjs', '/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930']' returned non-zero exit status 1.
+
+Script done on 2026-10-01 10:07:15+09:00 [COMMAND_EXIT_CODE="1"]

@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-30-performance$ # Original measured events; automated run, post-run inspe
+ction
+ubuntu@gpu-4:2026-09-30-performance$ jq -Rr 'fromjson? | select(.event=="MEASUREMENT_START" or
+ .event=="MEASUREMENT_END" or .event=="RESULT") | [.event,.phase,.completed,.elapsed_s,.status
+] | @tsv' runs/perf-c-r1-25/stdout.jsonl | column -t
+MEASUREMENT_START  timed  0
+MEASUREMENT_END    timed  9684
+RESULT             timed  9684  120.000959696  PASS
+MEASUREMENT_START  fixed  0
+MEASUREMENT_END    fixed  2500
+RESULT             fixed  2500  31.676918426   PASS
+ubuntu@gpu-4:2026-09-30-performance$ jq '{released,uid,utc}' runs/perf-c-r1-25/cleanup.json
+{
+  "released": true,
+  "uid": "bafd5625-0a86-42dc-9721-8e621f8a4059",
+  "utc": 1790780597.028334
+}
+ubuntu@gpu-4:2026-09-30-performance$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

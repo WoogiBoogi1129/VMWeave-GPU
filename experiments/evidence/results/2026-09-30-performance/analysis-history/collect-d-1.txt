@@ -1,0 +1,272 @@
+{
+  "status": "PASS",
+  "campaign_complete": true,
+  "valid_runs": {
+    "o": 15,
+    "c": 20,
+    "d": 40
+  },
+  "expected_runs": {
+    "o": 15,
+    "c": 20,
+    "d": 40
+  },
+  "validated_pairs": 20,
+  "repeat_coverage": {
+    "overhead": {
+      "N": 5,
+      "S": 5,
+      "T": 5
+    },
+    "single": {
+      "100": 5,
+      "25": 5,
+      "50": 5,
+      "75": 5
+    },
+    "shared": {
+      "25/75/a": 5,
+      "50/50/a": 5,
+      "50/50/b": 5,
+      "75/25/b": 5
+    }
+  },
+  "pair_checks": [
+    {
+      "pair": "perf-d-r1-25-75-a",
+      "condition": [
+        25,
+        75,
+        "a"
+      ],
+      "start_delay_s": 59.999627351760864,
+      "b_context_held_until_a_s": 250.04418992996216,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-50-50-a",
+      "condition": [
+        50,
+        50,
+        "a"
+      ],
+      "start_delay_s": 60.000895261764526,
+      "b_context_held_until_a_s": 250.040367603302,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-50-50-b",
+      "condition": [
+        50,
+        50,
+        "b"
+      ],
+      "start_delay_s": 60.00179743766785,
+      "b_context_held_until_a_s": 250.04024982452393,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-75-25-b",
+      "condition": [
+        75,
+        25,
+        "b"
+      ],
+      "start_delay_s": 60.001131772994995,
+      "b_context_held_until_a_s": 250.015953540802,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r2-25-75-a-resume1",
+      "condition": [
+        25,
+        75,
+        "a"
+      ],
+      "start_delay_s": 60.00110483169556,
+      "b_context_held_until_a_s": 250.01323246955872,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r2-50-50-a",
+      "condition": [
+        50,
+        50,
+        "a"
+      ],
+      "start_delay_s": 59.99623107910156,
+      "b_context_held_until_a_s": 250.03392815589905,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r2-50-50-b",
+      "condition": [
+        50,
+        50,
+        "b"
+      ],
+      "start_delay_s": 60.003310680389404,
+      "b_context_held_until_a_s": 250.00391030311584,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r2-75-25-b",
+      "condition": [
+        75,
+        25,
+        "b"
+      ],
+      "start_delay_s": 59.9995334148407,
+      "b_context_held_until_a_s": 250.02638387680054,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r3-25-75-a",
+      "condition": [
+        25,
+        75,
+        "a"
+      ],
+      "start_delay_s": 59.99994874000549,
+      "b_context_held_until_a_s": 250.02459001541138,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r3-50-50-a",
+      "condition": [
+        50,
+        50,
+        "a"
+      ],
+      "start_delay_s": 59.99905180931091,
+      "b_context_held_until_a_s": 250.01538014411926,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r3-50-50-b",
+      "condition": [
+        50,
+        50,
+        "b"
+      ],
+      "start_delay_s": 60.00081396102905,
+      "b_context_held_until_a_s": 250.02437543869019,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r3-75-25-b",
+      "condition": [
+        75,
+        25,
+        "b"
+      ],
+      "start_delay_s": 60.00092124938965,
+      "b_context_held_until_a_s": 250.04332518577576,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r4-25-75-a",
+      "condition": [
+        25,
+        75,
+        "a"
+      ],
+      "start_delay_s": 59.99989199638367,
+      "b_context_held_until_a_s": 250.03671789169312,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r4-50-50-a",
+      "condition": [
+        50,
+        50,
+        "a"
+      ],
+      "start_delay_s": 60.00043344497681,
+      "b_context_held_until_a_s": 250.0430085659027,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r4-50-50-b",
+      "condition": [
+        50,
+        50,
+        "b"
+      ],
+      "start_delay_s": 59.99871635437012,
+      "b_context_held_until_a_s": 250.00485730171204,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r4-75-25-b",
+      "condition": [
+        75,
+        25,
+        "b"
+      ],
+      "start_delay_s": 59.9994330406189,
+      "b_context_held_until_a_s": 250.04222297668457,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r5-25-75-a",
+      "condition": [
+        25,
+        75,
+        "a"
+      ],
+      "start_delay_s": 60.00158715248108,
+      "b_context_held_until_a_s": 250.0430076122284,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r5-50-50-a",
+      "condition": [
+        50,
+        50,
+        "a"
+      ],
+      "start_delay_s": 59.99980044364929,
+      "b_context_held_until_a_s": 250.0347752571106,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r5-50-50-b",
+      "condition": [
+        50,
+        50,
+        "b"
+      ],
+      "start_delay_s": 60.00015830993652,
+      "b_context_held_until_a_s": 250.02834558486938,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r5-75-25-b",
+      "condition": [
+        75,
+        25,
+        "b"
+      ],
+      "start_delay_s": 60.000760078430176,
+      "b_context_held_until_a_s": 250.04626560211182,
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "meaning": "Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance on corrected timestamps), B context hold through A end, repeat coverage, and normal release. This is not a verdict that HAMi limits were enforced.",
+  "interrupted_attempts": [
+    {
+      "detected_utc": 1790810289.8863413,
+      "pair": "perf-d-r2-25-75-a",
+      "runs": [
+        "perf-d-r2-25-75-a-a",
+        "perf-d-r2-25-75-a-b"
+      ],
+      "classification": "Orchestration stopped before any recorded MEASUREMENT_START; exact termination cause unconfirmed. Last persisted events are warmup completion/waiting.",
+      "outcome": "Interrupted attempt, not counted as a completed performance repeat. Original files retained.",
+      "replacement_pair": "perf-d-r2-25-75-a-resume1"
+    }
+  ],
+  "unresolved_runs": []
+}

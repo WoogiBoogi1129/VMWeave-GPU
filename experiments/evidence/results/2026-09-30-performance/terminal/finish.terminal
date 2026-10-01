@@ -1,0 +1,12 @@
+Script started on 2026-10-01 08:54:04+09:00 [COMMAND="python3 -u experiments/performance/finish_campaign.py" <not executed on terminal>]
+POSTPROCESS_START 0 ['python3', 'experiments/performance/retain_monitoring.py'] 1790816044.6747835
+POSTPROCESS_COMPLETE 0 1790816065.86865
+POSTPROCESS_START 1 ['python3', 'experiments/performance/cleanup.py'] 1790816065.86876
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/finish_campaign.py", line 25, in <module>
+    subprocess.run(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT,
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', 'experiments/performance/cleanup.py']' returned non-zero exit status 1.
+
+Script done on 2026-10-01 09:57:54+09:00 [COMMAND_EXIT_CODE="1"]

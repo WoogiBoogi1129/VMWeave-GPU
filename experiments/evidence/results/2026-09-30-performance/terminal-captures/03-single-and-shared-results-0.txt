@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-30-performance$ # Output correctness and utilization enforcement are sepa
+rate
+ubuntu@gpu-4:2026-09-30-performance$ python3 ../../../performance/terminal_table.py . single
+cap   n  GPU_%    jobs/s +/- SD     p95_ms    fixed_s   cap verdicts
+ 25   5   84.39    80.61 +/-  0.65    12.75      31.23 FAIL,FAIL,FAIL,FAIL,FAIL
+ 50   5   85.75    82.68 +/-  0.38    12.75      30.43 FAIL,FAIL,FAIL,FAIL,FAIL
+ 75   5   87.22    83.24 +/-  0.12    12.77      30.06 FAIL,FAIL,FAIL,FAIL,FAIL
+100   5   88.07    83.90 +/-  0.13    12.76      29.77 BASELINE,BASELINE,BASELINE,BASELINE,BAS
+ELINE
+ubuntu@gpu-4:2026-09-30-performance$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

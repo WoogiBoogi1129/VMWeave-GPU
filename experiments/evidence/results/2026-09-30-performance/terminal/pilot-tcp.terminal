@@ -1,0 +1,16 @@
+Script started on 2026-09-30 22:36:55+09:00 [COMMAND="python3 .local/performance-20260930/pilot-t.py" <not executed on terminal>]
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/pilot-t.py", line 9, in <module>
+    s.prepare()
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/tcp_runtime.py", line 53, in prepare
+    affinity=(Path(__file__).parent/'campaign_affinity.py').read_text();(self.out/'cpu-pinning.txt').write_text(k(['exec','-i','-n',NS,HELPER,'--','python3','-',p['metadata']['uid'],'0-7'],input=affinity))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1029, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/campaign_affinity.py'
+
+Script done on 2026-09-30 22:43:36+09:00 [COMMAND_EXIT_CODE="1"]

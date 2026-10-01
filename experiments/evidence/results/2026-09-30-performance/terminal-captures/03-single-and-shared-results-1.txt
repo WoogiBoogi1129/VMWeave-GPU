@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-30-performance$ # Integrated start/stop sharing experiment
+ubuntu@gpu-4:2026-09-30-performance$ python3 ../../../performance/terminal_table.py . shared
+A/B/slot   n    solo_q   shared_q  retention  solo_p95 shared_p95
+50/50/a     5     83.53     41.88     0.501     12.83      24.73
+50/50/b     5     83.65     41.53     0.496     12.82      24.99
+25/75/a     5     83.81     41.49     0.495     12.80      24.95
+75/25/b     5     83.75     41.41     0.494     12.80      24.84
+ubuntu@gpu-4:2026-09-30-performance$ jq -c '.shared | {conditions,solo_window_s,shared_window_
+s,recovery_window_s}' protocol.json
+{"conditions":[[50,50,"a"],[50,50,"b"],[25,75,"a"],[75,25,"b"]],"solo_window_s":[15,45],"share
+d_window_s":[90,150],"recovery_window_s":[195,225]}
+ubuntu@gpu-4:2026-09-30-performance$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

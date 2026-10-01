@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-30-performance$ # Recomputed from all five independent sessions per path
+ubuntu@gpu-4:2026-09-30-performance$ python3 ../../../performance/terminal_table.py . paths
+metric / bytes              N(us)         T(us)         S(us)   n/path
+D2H-4096                          7.89       1881.40       2833.73   5
+D2H-1048576                      78.43       3090.13       5169.57   5
+D2H-16777216                    925.86      11923.68      46973.84   5
+H2D-4096                          6.69       1890.81       2827.81   5
+H2D-1048576                      72.73       2990.97       5272.18   5
+H2D-16777216                    890.66      10525.22      43955.63   5
+kernel-1048576                    8.12       1769.03       2825.06   5
+query-1048576                     6.59        716.73       1467.05   5
+
+throughput (jobs/s)          N             T             S
+resident-2097152             113190.43        637.80        355.19
+transfer-2097152               3638.83        133.54         64.15
+ubuntu@gpu-4:2026-09-30-performance$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

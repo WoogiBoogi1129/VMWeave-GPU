@@ -44,7 +44,9 @@ for (kind,ns,name),saved in sorted(records.items(),key=lambda x:(x[0][2]==HELPER
   # Empty backing only: do not erase unexpected files.
   admin(['rmdir','/host'+current['spec']['local']['path']])
  path=('/api/'+api if '/' not in api else '/apis/'+api)+('/namespaces/'+ns if ns else '')+'/'+plural[kind]+'/'+name
- body={'apiVersion':'v1','kind':'DeleteOptions','preconditions':{'uid':current['metadata']['uid']},'propagationPolicy':'Foreground'}
+ # Keep detach attachments until the channel controller removes its finalizer.
+ # Foreground GC can remove those records first and deadlock an already Released channel.
+ body={'apiVersion':'v1','kind':'DeleteOptions','preconditions':{'uid':current['metadata']['uid']},'propagationPolicy':'Background' if kind=='SharedMemoryChannel' else 'Foreground'}
  response=k('delete','--raw',path,'-f','-',input=json.dumps(body))
  wait(lambda:not get(resource,name,ns),180)
  removed.append({'kind':kind,'namespace':ns,'name':name,'uid':current['metadata']['uid'],'utc':time.time()})

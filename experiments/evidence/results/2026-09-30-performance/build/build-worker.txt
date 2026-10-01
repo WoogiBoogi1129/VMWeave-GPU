@@ -1,0 +1,8 @@
+STEP 1/3: FROM localhost/flyt-worker:stage2-20260928
+STEP 2/3: COPY runtime/shm/control /opt/flyt/control
+--> 461198ea2e8a
+STEP 3/3: ENV FLYT_TRACE_REQUESTS=0 GPU_CORE_UTILIZATION_POLICY=FORCE VMWEAVE_API_GROUP=vmweave.io
+COMMIT localhost/vmweave-worker:performance-20260930
+--> e7fcb0b80f5e
+Successfully tagged localhost/vmweave-worker:performance-20260930
+e7fcb0b80f5ed61a69f3e961ff185347cce8e30f854c02882f14ee01adfa2209

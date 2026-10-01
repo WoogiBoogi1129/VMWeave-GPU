@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ssh",
+    "-i",
+    "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "StrictHostKeyChecking=accept-new",
+    "-o",
+    "UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/pilot-s100-v2/known-hosts",
+    "ubuntu@10.85.0.63",
+    "sudo env FLYT_TRACE_REQUESTS=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 30 10 524288 0 0 /tmp/perf/pilot-s100-v2 /tmp/perf/work.ptx"
+  ],
+  "utc": 1790775023.6949875
+}

@@ -1,0 +1,37 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+/usr/bin/ld: warning: libelf.so.1, needed by /out/cricket-client.so, not found (try using -rpath or -rpath-link)
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_errmsg@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_version@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_end@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_memory@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_getshdrstrndx@ELFUTILS_1.5'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_strptr@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `gelf_getsym@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `gelf_getehdr@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_kind@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_getident@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_getshdrnum@ELFUTILS_1.5'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_getphdrnum@ELFUTILS_1.6'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_nextscn@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `gelf_getshdr@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `elf_getdata@ELFUTILS_1.0'
+/usr/bin/ld: /out/cricket-client.so: undefined reference to `gelf_getclass@ELFUTILS_1.0'
+collect2: error: ld returned 1 exit status

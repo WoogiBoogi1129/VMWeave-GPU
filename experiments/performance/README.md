@@ -91,6 +91,13 @@ driver for diagnosis; no silent rerun or deletion. Resume only missing runs with
 new names and an explicit deviation record. Drain owned channels by UID; do not
 force finalizers or modify unrelated user resources.
 
+Post-measurement cleanup exposed a foreground-GC race: owner-dependent detach
+records disappeared before the controller finalized an already Released channel.
+`cleanup.py` now uses Background deletion for channels. One already affected
+channel required the explicitly audited, historical-release-and-idle-state-gated
+administrative exception in `recover_released_delete.py`; it is not routine
+cleanup or new detach evidence. See the campaign's `cleanup-recovery/README.md`.
+
 After collection, `verify.py` independently checks exact sample counts, output,
 clock continuity, shared start offsets (250 ms tolerance), B context lifetime,
 and release identities. `analyze.py`, `plot.py`, and `report.py` regenerate the

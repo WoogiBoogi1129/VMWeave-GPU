@@ -1,0 +1,53 @@
+Script started on 2026-10-01 10:09:29+09:00 [COMMAND="bash .local/performance-20260930/final-checks.sh" <not executed on terminal>]
++ python3 -m compileall -q experiments/performance
++ python3 scripts/check-repository.py
+PASS: CRD copies, migrated code references, evidence figure hashes
++ python3 scripts/check-doc-contracts.py
+PASS: 12 current guides, 7 CLI examples, administrator/user split
++ .local/docs-venv/bin/mkdocs build --strict
+
+[31m │  ⚠  Warning from the Material for MkDocs team[0m
+[31m │[0m
+[31m │[0m  MkDocs 2.0, the underlying framework of Material for MkDocs,
+[31m │[0m  will introduce backward-incompatible changes, including:
+[31m │[0m
+[31m │  × [0mAll plugins will stop working – the plugin system has been removed
+[31m │  × [0mAll theme overrides will break – the theming system has been rewritten
+[31m │  × [0mNo migration path exists – existing projects cannot be upgraded
+[31m │  × [0mClosed contribution model – community members can't report bugs
+[31m │  × [0mCurrently unlicensed – unsuitable for production use
+[31m │[0m
+[31m │[0m  Our full analysis:
+[31m │[0m
+[31m │[0m  [4mhttps://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/[0m
+[0m
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: /home/ubuntu/taeuk/flyt-k8s-poc-github/site
+INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
+  - 2026-08-26-FLYT-VM-SERVICE-VALIDATION-REPORT.md
+  - 2026-08-31-FLYT-K8S-EXPERIMENT-PRESENTATION.md
+  - ARCHITECTURE.md
+  - ARTIFACT_POLICY.md
+  - CONTROL_PLANE_STAGE1.md
+  - CONTROL_PLANE_VALIDATION.md
+  - DEVELOPMENT_STAGES.md
+  - DRIVER_PROXY_ARCHITECTURE.md
+  - GITHUB_PUBLISHING.md
+  - KNOWN_LIMITATIONS.md
+  - MANAGED_DEPLOYMENT.md
+  - PATCH_CATALOG.md
+  - PROVENANCE.md
+  - REPRODUCING.md
+  - WHOLE_GPU_EXPERIMENT.md
+  - archive/2026-08-experiment-report.md
+  - development/central-controller-plan.md
+  - development/operator-migration-plan.md
+  - installation/README.md
+  - installation/GPU_VALIDATION_2026-09-21.md
+  - installation/INSTALLATION_REPORT_2026-09-22.md
+INFO    -  Documentation built in 0.80 seconds
++ python3 scripts/check-site.py
+PASS: 56 HTML pages, local links/assets/anchors, 132 search entries
++ git diff --check -- README.md docs experiments/performance
+
+Script done on 2026-10-01 10:09:31+09:00 [COMMAND_EXIT_CODE="0"]

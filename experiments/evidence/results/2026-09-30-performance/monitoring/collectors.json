@@ -1,0 +1,26 @@
+[
+  {
+    "name": "app-exporter",
+    "pid": 3029784,
+    "command": [
+      "python3",
+      "experiments/performance/exporter.py"
+    ]
+  },
+  {
+    "name": "pmon",
+    "pid": 3003182,
+    "command": [
+      "nvidia-smi",
+      "pmon",
+      "-i",
+      "1",
+      "-s",
+      "um",
+      "-d",
+      "1",
+      "-o",
+      "DT"
+    ]
+  }
+]

@@ -19,7 +19,7 @@ for r in baseline['resources']:
     preserved.append(r)
 remaining=[]
 for ns in [NS,'vmweave-performance-tcp']:
-    objects=json.loads(k('get','vm,vmi,pod,pvc,gpurequests.vmweave.io,sharedmemorychannels.vmweave.io,gpuprofiles.vmweave.io','-n',ns,'-o','json'))['items']
+    objects=json.loads(k('get','vm,vmi,pod,pvc,serviceaccount,role,rolebinding,gpurequests.vmweave.io,sharedmemorychannels.vmweave.io,channelattachments.vmweave.io,gpuprofiles.vmweave.io','-n',ns,'-o','json'))['items']
     remaining += [o for o in objects if o['metadata']['name'].startswith(('perf-','pilot-','virt-launcher-perf-','virt-launcher-pilot-'))]
 for obj in json.loads(k('get','pv','-o','json'))['items']:
     if obj['metadata']['name'].startswith(('perf-','pilot-')):remaining.append(obj)
@@ -45,6 +45,7 @@ save(OUT/'final-audit.json',{
     'measurement_windows':sum(r['windows'] for r in validation['details']),
     'shared_pairs':validation['validated_pairs'],
     'interrupted_attempts_retained':len(validation.get('interrupted_attempts',[])),
+    'manual_finalizer_releases_after_historical_release_verification':int((OUT/'cleanup-recovery/manual-finalization-result.json').exists()),
     'owned_resources_removed':len(cleanup['removed']),
     'owned_workloads_remaining':0,
     'pre_existing_resources_preserved_across_cleanup':len(preserved),

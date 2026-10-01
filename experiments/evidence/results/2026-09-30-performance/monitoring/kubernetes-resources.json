@@ -1,0 +1,720 @@
+{
+  "pods": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-01T00:54:10Z",
+        "generation": 1,
+        "labels": {
+          "vmweave.io/monitor": "perf-monitor"
+        },
+        "name": "perf-monitor",
+        "namespace": "vmweave-performance",
+        "resourceVersion": "3717236",
+        "uid": "f5602321-c972-452b-a097-6d2d30586a9a"
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "command": [
+              "/tools/prometheus-3.5.0.linux-amd64/prometheus",
+              "--config.file=/monitor/prometheus.yml",
+              "--storage.tsdb.path=/monitor/prom-data",
+              "--storage.tsdb.retention.time=30d",
+              "--web.enable-admin-api"
+            ],
+            "image": "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "prometheus",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/tools",
+                "name": "tools",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/monitor",
+                "name": "monitor"
+              }
+            ]
+          },
+          {
+            "command": [
+              "/tools/grafana-v12.0.2/bin/grafana",
+              "server",
+              "--homepath",
+              "/tools/grafana-v12.0.2",
+              "--config",
+              "/monitor/grafana.ini"
+            ],
+            "env": [
+              {
+                "name": "GF_SECURITY_ADMIN_PASSWORD",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "key": "password",
+                    "name": "perf-grafana-auth"
+                  }
+                }
+              }
+            ],
+            "image": "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "grafana",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/tools",
+                "name": "tools",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/monitor",
+                "name": "monitor"
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "gpu-4",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "runAsUser": 0
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ],
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/campaign-20260928/tools",
+              "type": "Directory"
+            },
+            "name": "tools"
+          },
+          {
+            "hostPath": {
+              "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/monitoring",
+              "type": "Directory"
+            },
+            "name": "monitor"
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-01T00:54:11Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-01T00:54:10Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-01T00:54:11Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-01T00:54:11Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-01T00:54:10Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "cri-o://dfa57e32a5dda9acb821dfcade161527b8593f0fb2354b309690e5644a654168",
+            "image": "localhost/vmweave-worker:dev",
+            "imageID": "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+            "lastState": {},
+            "name": "grafana",
+            "ready": true,
+            "resources": {},
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-10-01T00:54:11Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 0,
+                "supplementalGroups": [
+                  0
+                ],
+                "uid": 0
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/tools",
+                "name": "tools",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/monitor",
+                "name": "monitor"
+              }
+            ]
+          },
+          {
+            "containerID": "cri-o://f79a0c49f6cef582e2e7adcebdd7cd2c3b597ff0ba175f557ef7bba9fb0ad8a9",
+            "image": "localhost/vmweave-worker:dev",
+            "imageID": "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+            "lastState": {},
+            "name": "prometheus",
+            "ready": true,
+            "resources": {},
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-10-01T00:54:11Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 0,
+                "supplementalGroups": [
+                  0
+                ],
+                "uid": 0
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/tools",
+                "name": "tools",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/monitor",
+                "name": "monitor"
+              }
+            ]
+          }
+        ],
+        "hostIP": "192.168.24.21",
+        "hostIPs": [
+          {
+            "ip": "192.168.24.21"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.85.0.170",
+        "podIPs": [
+          {
+            "ip": "10.85.0.170"
+          }
+        ],
+        "qosClass": "BestEffort",
+        "resources": {},
+        "startTime": "2026-10-01T00:54:10Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-09-30T13:20:54Z",
+        "generation": 1,
+        "labels": {
+          "vmweave.io/monitor": "perf-dcgm"
+        },
+        "name": "perf-dcgm",
+        "namespace": "vmweave-performance",
+        "resourceVersion": "3717178",
+        "uid": "3ac55a9b-c2ba-4424-a204-78b835a0d52d"
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "-c",
+              "1000"
+            ],
+            "env": [
+              {
+                "name": "NVIDIA_VISIBLE_DEVICES",
+                "value": "k8s.device-plugin.nvidia.com/gpu=GPU-7d708c42-8d4a-16d5-0746-474567157aa3"
+              },
+              {
+                "name": "NVIDIA_DRIVER_CAPABILITIES",
+                "value": "compute,utility"
+              },
+              {
+                "name": "DCGM_EXPORTER_KUBERNETES",
+                "value": "false"
+              }
+            ],
+            "image": "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "dcgm",
+            "ports": [
+              {
+                "containerPort": 9400,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {},
+            "securityContext": {
+              "capabilities": {
+                "add": [
+                  "SYS_ADMIN"
+                ]
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File"
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "gpu-4",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "runtimeClassName": "nvidia",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:20:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:20:54Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:20:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:20:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:20:54Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "cri-o://b353f1fa2421c882e41c926f10af98223c670ec2872b7a97ae536e87343bd1a1",
+            "image": "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless",
+            "imageID": "nvcr.io/nvidia/k8s/dcgm-exporter@sha256:613ab03c11d442fd960ff515f547e9921537454a712d08160bc8f677f89f1c35",
+            "lastState": {},
+            "name": "dcgm",
+            "ready": true,
+            "resources": {},
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-09-30T13:20:55Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 0,
+                "supplementalGroups": [
+                  0
+                ],
+                "uid": 0
+              }
+            }
+          }
+        ],
+        "hostIP": "192.168.24.21",
+        "hostIPs": [
+          {
+            "ip": "192.168.24.21"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.85.0.25",
+        "podIPs": [
+          {
+            "ip": "10.85.0.25"
+          }
+        ],
+        "qosClass": "BestEffort",
+        "resources": {},
+        "startTime": "2026-09-30T13:20:54Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-09-30T13:30:27Z",
+        "generation": 1,
+        "labels": {
+          "vmweave.io/monitor": "perf-node-exporter"
+        },
+        "name": "perf-node-exporter",
+        "namespace": "vmweave-performance",
+        "resourceVersion": "3717186",
+        "uid": "f1ce1117-a25a-4995-82f2-3dc71732891f"
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "--path.rootfs=/host",
+              "--path.procfs=/host/proc",
+              "--path.sysfs=/host/sys",
+              "--collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/containers|var/lib/kubelet)($|/)"
+            ],
+            "image": "quay.io/prometheus/node-exporter:v1.9.1",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "node-exporter",
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/host",
+                "name": "host",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "hostPID": true,
+        "nodeName": "gpu-4",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ],
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/",
+              "type": "Directory"
+            },
+            "name": "host"
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:30:28Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:30:27Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:31:53Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:31:53Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-09-30T13:30:27Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "containerID": "cri-o://a5d380b2dd684a791f361ac8548d250f1d8b140e80d947d121f06ec36b659287",
+            "image": "quay.io/prometheus/node-exporter:v1.9.1",
+            "imageID": "quay.io/prometheus/node-exporter@sha256:863b62ff9f392b6f472e22b4b670ad1cabb66b3042502ebd4b2cd192733e1bce",
+            "lastState": {},
+            "name": "node-exporter",
+            "ready": true,
+            "resources": {},
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-09-30T13:31:53Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 65534,
+                "supplementalGroups": [
+                  65534
+                ],
+                "uid": 65534
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/host",
+                "name": "host",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "192.168.24.21",
+        "hostIPs": [
+          {
+            "ip": "192.168.24.21"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.85.0.86",
+        "podIPs": [
+          {
+            "ip": "10.85.0.86"
+          }
+        ],
+        "qosClass": "BestEffort",
+        "resources": {},
+        "startTime": "2026-09-30T13:30:27Z"
+      }
+    }
+  ],
+  "services": [
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "creationTimestamp": "2026-10-01T00:54:06Z",
+        "name": "perf-monitor",
+        "namespace": "vmweave-performance",
+        "resourceVersion": "3717174",
+        "uid": "98a965ed-24fd-4925-ab9e-29246c004c19"
+      },
+      "spec": {
+        "clusterIP": "10.98.3.238",
+        "clusterIPs": [
+          "10.98.3.238"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "grafana",
+            "port": 3000,
+            "protocol": "TCP",
+            "targetPort": 3000
+          },
+          {
+            "name": "prometheus",
+            "port": 9090,
+            "protocol": "TCP",
+            "targetPort": 9090
+          }
+        ],
+        "selector": {
+          "vmweave.io/monitor": "perf-monitor"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "creationTimestamp": "2026-10-01T00:54:07Z",
+        "name": "perf-dcgm",
+        "namespace": "vmweave-performance",
+        "resourceVersion": "3717183",
+        "uid": "9a81669f-2e1d-4698-8bc2-d152f5ca179f"
+      },
+      "spec": {
+        "clusterIP": "10.105.14.111",
+        "clusterIPs": [
+          "10.105.14.111"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "metrics",
+            "port": 9400,
+            "protocol": "TCP",
+            "targetPort": 9400
+          }
+        ],
+        "selector": {
+          "vmweave.io/monitor": "perf-dcgm"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "creationTimestamp": "2026-10-01T00:54:07Z",
+        "name": "perf-node-exporter",
+        "namespace": "vmweave-performance",
+        "resourceVersion": "3717190",
+        "uid": "154a3045-c824-4990-9014-492d7b5d8aa5"
+      },
+      "spec": {
+        "clusterIP": "10.110.216.21",
+        "clusterIPs": [
+          "10.110.216.21"
+        ],
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+          "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+          {
+            "name": "metrics",
+            "port": 9100,
+            "protocol": "TCP",
+            "targetPort": 9100
+          }
+        ],
+        "selector": {
+          "vmweave.io/monitor": "perf-node-exporter"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    }
+  ]
+}

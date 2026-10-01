@@ -1,0 +1,1769 @@
+{
+  "preserved_resources": [
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-a",
+      "name": "same-vm",
+      "uid": "f8349ff8-1f7d-4f18-87a2-934838ad860a",
+      "spec_sha256": "72a8c34928543e42a60e4d8bb1531d237d01f07e21d88f1dc5a5f3f45d12efe9"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-a",
+      "name": "same-vm-2",
+      "uid": "07389e8e-b51f-4a8f-bfa5-54d36e041655",
+      "spec_sha256": "c364213585702f332b98320d2bfe1a3339d9f44954d4e21db45343e713b5b6b9"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-a",
+      "name": "same-vm-3",
+      "uid": "23fc6932-e2cf-4bc3-8ec5-181d20d8950b",
+      "spec_sha256": "b4fed3e12ba85cf631536c399559b83095b3b341c9665b754839eeb7511400bf"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel",
+      "uid": "f999c073-48c0-4fa1-9526-764cfeb1b2d5",
+      "spec_sha256": "759d4d0b4be0d95364333a30c7d55869c0c606cc5aaa89303ee6bd99a22fb129"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-2",
+      "uid": "7a72a3c6-a643-4252-b631-dcad3e3af9db",
+      "spec_sha256": "6370bc073d11e79116b084a6625db0eb7aa0b08d64200d484caec826ae2df724"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-3",
+      "uid": "97d72b30-fb2d-4baf-92f2-b034dbdf9340",
+      "spec_sha256": "dc9da6b2d3be6a9af0161cd5f2e99cca23e5608b7a88ece30088c5889c546959"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel",
+      "uid": "e64c8293-39e5-498b-b9be-c4f232d4fb4b",
+      "spec_sha256": "00e5f414d89feb704d599a3e8c05723c2281e4f0d092f8d337f19cc864d37f57"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-2",
+      "uid": "3bca460a-843c-464c-9cf9-31a379ecc334",
+      "spec_sha256": "16616dcf2190819237c01d2b1089c2d905060717e0786215eb2ec9f8010ea009"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-3",
+      "uid": "019edb7b-38b3-4e13-9f10-bd867e39e845",
+      "spec_sha256": "e2d07293daa570f88f39a752d8f892754fb4622a2703026ab5635b71c1ce8162"
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "namespace": "vmweave-test-a",
+      "name": "backing",
+      "uid": "f5d12c57-c2a1-44af-8104-1089e133aafb",
+      "spec_sha256": "7d6ed3c418a72177f99e62d49baf5dc651fb012e19b2fcede467d8fccedbecda"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-b",
+      "name": "same-vm",
+      "uid": "cb726af1-0bfd-47c6-a018-15957e06e2d0",
+      "spec_sha256": "cf017d2697b6c85086c82c583393c4fd9c323dbf74b20d3c4d2e6b1a9814f91a"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-b",
+      "name": "same-vm-2",
+      "uid": "e15c6979-cf76-4157-ac1e-67e3aa138905",
+      "spec_sha256": "9353d4e2b7a62ad18facca7170f7955f78a169c8544e485eb7d3899c50c452bc"
+    },
+    {
+      "kind": "VirtualMachine",
+      "apiVersion": "kubevirt.io/v1",
+      "namespace": "vmweave-test-b",
+      "name": "same-vm-3",
+      "uid": "2c4e2d7d-a1d3-4be9-89c5-35493b545563",
+      "spec_sha256": "1f8d8c97d20f319ed80f626cab02e4167db8aa88cc18658672c68744c0f5d067"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel",
+      "uid": "3796420c-8dbe-4731-85f5-16690e03e7f0",
+      "spec_sha256": "c25f353a723db8a6146898ea51443c623325621163f0657590006af9e54869c5"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-2",
+      "uid": "12307042-9179-4d9e-814d-1b01b1b6fce2",
+      "spec_sha256": "fab3842fee5663d97f0ecf2760a95d58d290e10382dc11bf2017eb85f78177f8"
+    },
+    {
+      "kind": "GPURequest",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-3",
+      "uid": "b565317b-dad9-4d14-9ab0-73019359f288",
+      "spec_sha256": "43cee0bdb83d913f7f9da0c6225d16b93588865a32d2594df72ccd729284a8c6"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel",
+      "uid": "abe49eb5-83f9-4642-81f6-6ca04b891c64",
+      "spec_sha256": "857c2287a7bd3fd12952fb28938b343646262cf08bdb25d1027e986954e27f0a"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-2",
+      "uid": "00d037dc-15b3-45e3-ab55-0f243bf33ae9",
+      "spec_sha256": "9563565336d3e278ca46b7f004029a938dbddc911f050bc10dace9f755f5f15b"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "apiVersion": "vmweave.io/v1alpha1",
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-3",
+      "uid": "74663412-307b-44c3-bda7-f5505f3cfd68",
+      "spec_sha256": "cfe43452d508c699dc8e4df63e58edff1977483ff8fdd06537fe4d4a85753249"
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "namespace": "vmweave-test-b",
+      "name": "backing",
+      "uid": "3339335c-30fa-4662-a5b8-e6d6de9e3fdf",
+      "spec_sha256": "b252c1e34afe754f53d87be67ed5ae4c863d8f8d229f7d39483e2176817ad6d8"
+    }
+  ],
+  "node": {
+    "apiVersion": "v1",
+    "kind": "Node",
+    "metadata": {
+      "annotations": {
+        "hami.io/node-handshake": "Requesting_2026-09-22 12:40:25",
+        "hami.io/node-handshake-biren": "Requesting_2026-09-21 15:18:25",
+        "hami.io/node-handshake-dcu": "Requesting_2026-09-21 15:18:25",
+        "hami.io/node-handshake-va": "Requesting_2026-09-21 15:18:25",
+        "hami.io/node-handshake-xpu": "Requesting_2026-09-21 15:18:25",
+        "hami.io/node-nvidia-register": "[{\"id\":\"GPU-772181af-05a4-0c24-de59-8487bd37c142\",\"count\":10,\"devmem\":97887,\"devcore\":100,\"type\":\"NVIDIA RTX PRO 6000 Blackwell Server Edition\",\"mode\":\"hami-core\",\"health\":true},{\"id\":\"GPU-7d708c42-8d4a-16d5-0746-474567157aa3\",\"index\":1,\"count\":10,\"devmem\":97887,\"devcore\":100,\"type\":\"NVIDIA RTX PRO 6000 Blackwell Server Edition\",\"mode\":\"hami-core\",\"health\":true},{\"id\":\"GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a\",\"index\":2,\"count\":10,\"devmem\":97887,\"devcore\":100,\"type\":\"NVIDIA RTX PRO 6000 Blackwell Server Edition\",\"numa\":2,\"mode\":\"hami-core\",\"health\":true},{\"id\":\"GPU-1b4de6a0-88ae-4004-98b9-035906a2473f\",\"index\":3,\"count\":10,\"devmem\":97887,\"devcore\":100,\"type\":\"NVIDIA RTX PRO 6000 Blackwell Server Edition\",\"numa\":2,\"mode\":\"hami-core\",\"health\":true}]",
+        "kubevirt.io/heartbeat": "2026-10-01T01:06:53Z",
+        "kubevirt.io/ksm-handler-managed": "false",
+        "nfd.node.kubernetes.io/feature-labels": "cpu-cpuid.ADX,cpu-cpuid.AESNI,cpu-cpuid.AMXBF16,cpu-cpuid.AMXFP8,cpu-cpuid.AMXINT8,cpu-cpuid.AMXTILE,cpu-cpuid.AVX,cpu-cpuid.AVX2,cpu-cpuid.AVX512BF16,cpu-cpuid.AVX512BITALG,cpu-cpuid.AVX512BW,cpu-cpuid.AVX512CD,cpu-cpuid.AVX512DQ,cpu-cpuid.AVX512F,cpu-cpuid.AVX512FP16,cpu-cpuid.AVX512IFMA,cpu-cpuid.AVX512VBMI,cpu-cpuid.AVX512VBMI2,cpu-cpuid.AVX512VL,cpu-cpuid.AVX512VNNI,cpu-cpuid.AVX512VPOPCNTDQ,cpu-cpuid.AVXVNNI,cpu-cpuid.BHI_CTRL,cpu-cpuid.CETIBT,cpu-cpuid.CETSS,cpu-cpuid.CLDEMOTE,cpu-cpuid.CMPSB_SCADBS_SHORT,cpu-cpuid.CMPXCHG8,cpu-cpuid.ENQCMD,cpu-cpuid.FLUSH_L1D,cpu-cpuid.FMA3,cpu-cpuid.FSRM,cpu-cpuid.FXSR,cpu-cpuid.FXSROPT,cpu-cpuid.GFNI,cpu-cpuid.IA32_ARCH_CAP,cpu-cpuid.IA32_CORE_CAP,cpu-cpuid.IBPB,cpu-cpuid.IDPRED_CTRL,cpu-cpuid.LAHF,cpu-cpuid.MD_CLEAR,cpu-cpuid.MOVBE,cpu-cpuid.MOVDIR64B,cpu-cpuid.MOVDIRI,cpu-cpuid.MOVSB_ZL,cpu-cpuid.OSXSAVE,cpu-cpuid.PCONFIG,cpu-cpuid.PMU_FIXEDCOUNTER_CYCLES,cpu-cpuid.PMU_FIXEDCOUNTER_INSTRUCTIONS,cpu-cpuid.PMU_FIXEDCOUNTER_REFCYCLES,cpu-cpuid.PMU_FIXEDCOUNTER_TOPDOWN_SLOTS,cpu-cpuid.PSFD,cpu-cpuid.RRSBA_CTRL,cpu-cpuid.SERIALIZE,cpu-cpuid.SHA,cpu-cpuid.SPEC_CTRL_SSBD,cpu-cpuid.STIBP,cpu-cpuid.STOSB_SHORT,cpu-cpuid.SYSCALL,cpu-cpuid.SYSEE,cpu-cpuid.TME,cpu-cpuid.TSXLDTRK,cpu-cpuid.VAES,cpu-cpuid.VMX,cpu-cpuid.VPCLMULQDQ,cpu-cpuid.WAITPKG,cpu-cpuid.WBNOINVD,cpu-cpuid.X86_64_V1,cpu-cpuid.X86_64_V2,cpu-cpuid.X86_64_V3,cpu-cpuid.X86_64_V4,cpu-cpuid.X87,cpu-cpuid.XGETBV1,cpu-cpuid.XSAVE,cpu-cpuid.XSAVEC,cpu-cpuid.XSAVEOPT,cpu-cpuid.XSAVES,cpu-cstate.enabled,cpu-hardware_multithreading,cpu-model.family,cpu-model.hypervisor,cpu-model.id,cpu-model.vendor_id,cpu-pstate.status,cpu-pstate.turbo,kernel-config.NO_HZ,kernel-config.NO_HZ_FULL,kernel-version.full,kernel-version.major,kernel-version.minor,kernel-version.revision,memory-numa,network-sriov.capable,nvidia.com/cuda.driver-version.full,nvidia.com/cuda.driver-version.major,nvidia.com/cuda.driver-version.minor,nvidia.com/cuda.driver-version.revision,nvidia.com/cuda.driver.major,nvidia.com/cuda.driver.minor,nvidia.com/cuda.driver.rev,nvidia.com/cuda.runtime-version.full,nvidia.com/cuda.runtime-version.major,nvidia.com/cuda.runtime-version.minor,nvidia.com/cuda.runtime.major,nvidia.com/cuda.runtime.minor,nvidia.com/gfd.timestamp,nvidia.com/gpu.compute.major,nvidia.com/gpu.compute.minor,nvidia.com/gpu.count,nvidia.com/gpu.family,nvidia.com/gpu.machine,nvidia.com/gpu.memory,nvidia.com/gpu.mode,nvidia.com/gpu.product,nvidia.com/gpu.replicas,nvidia.com/gpu.sharing-strategy,nvidia.com/mig.capable,nvidia.com/mig.strategy,nvidia.com/mps.capable,nvidia.com/vgpu.present,pci-10de.present,pci-10de.sriov.capable,pci-1a03.present,pci-8086.present,pci-8086.sriov.capable,storage-nonrotationaldisk,system-os_release.ID,system-os_release.VERSION_ID,system-os_release.VERSION_ID.major,system-os_release.VERSION_ID.minor,usb-ef_0b1f_03ee.present",
+        "node.alpha.kubernetes.io/ttl": "0",
+        "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+      },
+      "creationTimestamp": "2026-09-21T14:09:32Z",
+      "labels": {
+        "beta.kubernetes.io/arch": "amd64",
+        "beta.kubernetes.io/os": "linux",
+        "cpu-feature.node.kubevirt.io/3dnowprefetch": "true",
+        "cpu-feature.node.kubevirt.io/abm": "true",
+        "cpu-feature.node.kubevirt.io/adx": "true",
+        "cpu-feature.node.kubevirt.io/aes": "true",
+        "cpu-feature.node.kubevirt.io/amd-ssbd": "true",
+        "cpu-feature.node.kubevirt.io/amd-stibp": "true",
+        "cpu-feature.node.kubevirt.io/amx-bf16": "true",
+        "cpu-feature.node.kubevirt.io/amx-int8": "true",
+        "cpu-feature.node.kubevirt.io/amx-tile": "true",
+        "cpu-feature.node.kubevirt.io/apic": "true",
+        "cpu-feature.node.kubevirt.io/arat": "true",
+        "cpu-feature.node.kubevirt.io/arch-capabilities": "true",
+        "cpu-feature.node.kubevirt.io/avx": "true",
+        "cpu-feature.node.kubevirt.io/avx-vnni": "true",
+        "cpu-feature.node.kubevirt.io/avx2": "true",
+        "cpu-feature.node.kubevirt.io/avx512-bf16": "true",
+        "cpu-feature.node.kubevirt.io/avx512-fp16": "true",
+        "cpu-feature.node.kubevirt.io/avx512-vpopcntdq": "true",
+        "cpu-feature.node.kubevirt.io/avx512bitalg": "true",
+        "cpu-feature.node.kubevirt.io/avx512bw": "true",
+        "cpu-feature.node.kubevirt.io/avx512cd": "true",
+        "cpu-feature.node.kubevirt.io/avx512dq": "true",
+        "cpu-feature.node.kubevirt.io/avx512f": "true",
+        "cpu-feature.node.kubevirt.io/avx512ifma": "true",
+        "cpu-feature.node.kubevirt.io/avx512vbmi": "true",
+        "cpu-feature.node.kubevirt.io/avx512vbmi2": "true",
+        "cpu-feature.node.kubevirt.io/avx512vl": "true",
+        "cpu-feature.node.kubevirt.io/avx512vnni": "true",
+        "cpu-feature.node.kubevirt.io/bhi-ctrl": "true",
+        "cpu-feature.node.kubevirt.io/bmi1": "true",
+        "cpu-feature.node.kubevirt.io/bmi2": "true",
+        "cpu-feature.node.kubevirt.io/bus-lock-detect": "true",
+        "cpu-feature.node.kubevirt.io/cldemote": "true",
+        "cpu-feature.node.kubevirt.io/clflush": "true",
+        "cpu-feature.node.kubevirt.io/clflushopt": "true",
+        "cpu-feature.node.kubevirt.io/clwb": "true",
+        "cpu-feature.node.kubevirt.io/cmov": "true",
+        "cpu-feature.node.kubevirt.io/cx16": "true",
+        "cpu-feature.node.kubevirt.io/cx8": "true",
+        "cpu-feature.node.kubevirt.io/ddpd-u": "true",
+        "cpu-feature.node.kubevirt.io/de": "true",
+        "cpu-feature.node.kubevirt.io/ds": "true",
+        "cpu-feature.node.kubevirt.io/dtes64": "true",
+        "cpu-feature.node.kubevirt.io/erms": "true",
+        "cpu-feature.node.kubevirt.io/f16c": "true",
+        "cpu-feature.node.kubevirt.io/fbsdp-no": "true",
+        "cpu-feature.node.kubevirt.io/fdp-excptn-only": "true",
+        "cpu-feature.node.kubevirt.io/flush-l1d": "true",
+        "cpu-feature.node.kubevirt.io/fma": "true",
+        "cpu-feature.node.kubevirt.io/fpu": "true",
+        "cpu-feature.node.kubevirt.io/fsgsbase": "true",
+        "cpu-feature.node.kubevirt.io/fsrc": "true",
+        "cpu-feature.node.kubevirt.io/fsrm": "true",
+        "cpu-feature.node.kubevirt.io/fsrs": "true",
+        "cpu-feature.node.kubevirt.io/fxsr": "true",
+        "cpu-feature.node.kubevirt.io/fzrm": "true",
+        "cpu-feature.node.kubevirt.io/gds-no": "true",
+        "cpu-feature.node.kubevirt.io/gfni": "true",
+        "cpu-feature.node.kubevirt.io/hypervisor": "true",
+        "cpu-feature.node.kubevirt.io/ibpb": "true",
+        "cpu-feature.node.kubevirt.io/ibrs": "true",
+        "cpu-feature.node.kubevirt.io/ibrs-all": "true",
+        "cpu-feature.node.kubevirt.io/intel-psfd": "true",
+        "cpu-feature.node.kubevirt.io/invpcid": "true",
+        "cpu-feature.node.kubevirt.io/invtsc": "true",
+        "cpu-feature.node.kubevirt.io/ipred-ctrl": "true",
+        "cpu-feature.node.kubevirt.io/its-no": "true",
+        "cpu-feature.node.kubevirt.io/la57": "true",
+        "cpu-feature.node.kubevirt.io/lahf_lm": "true",
+        "cpu-feature.node.kubevirt.io/lm": "true",
+        "cpu-feature.node.kubevirt.io/mca": "true",
+        "cpu-feature.node.kubevirt.io/mce": "true",
+        "cpu-feature.node.kubevirt.io/md-clear": "true",
+        "cpu-feature.node.kubevirt.io/mds-no": "true",
+        "cpu-feature.node.kubevirt.io/mmx": "true",
+        "cpu-feature.node.kubevirt.io/movbe": "true",
+        "cpu-feature.node.kubevirt.io/movdir64b": "true",
+        "cpu-feature.node.kubevirt.io/movdiri": "true",
+        "cpu-feature.node.kubevirt.io/msr": "true",
+        "cpu-feature.node.kubevirt.io/mtrr": "true",
+        "cpu-feature.node.kubevirt.io/nx": "true",
+        "cpu-feature.node.kubevirt.io/pae": "true",
+        "cpu-feature.node.kubevirt.io/pat": "true",
+        "cpu-feature.node.kubevirt.io/pcid": "true",
+        "cpu-feature.node.kubevirt.io/pclmuldq": "true",
+        "cpu-feature.node.kubevirt.io/pdcm": "true",
+        "cpu-feature.node.kubevirt.io/pdpe1gb": "true",
+        "cpu-feature.node.kubevirt.io/pge": "true",
+        "cpu-feature.node.kubevirt.io/pku": "true",
+        "cpu-feature.node.kubevirt.io/pni": "true",
+        "cpu-feature.node.kubevirt.io/popcnt": "true",
+        "cpu-feature.node.kubevirt.io/pschange-mc-no": "true",
+        "cpu-feature.node.kubevirt.io/psdp-no": "true",
+        "cpu-feature.node.kubevirt.io/pse": "true",
+        "cpu-feature.node.kubevirt.io/pse36": "true",
+        "cpu-feature.node.kubevirt.io/rdctl-no": "true",
+        "cpu-feature.node.kubevirt.io/rdpid": "true",
+        "cpu-feature.node.kubevirt.io/rdrand": "true",
+        "cpu-feature.node.kubevirt.io/rdseed": "true",
+        "cpu-feature.node.kubevirt.io/rdtscp": "true",
+        "cpu-feature.node.kubevirt.io/rfds-no": "true",
+        "cpu-feature.node.kubevirt.io/rrsba-ctrl": "true",
+        "cpu-feature.node.kubevirt.io/sbdr-ssdp-no": "true",
+        "cpu-feature.node.kubevirt.io/sep": "true",
+        "cpu-feature.node.kubevirt.io/serialize": "true",
+        "cpu-feature.node.kubevirt.io/sha-ni": "true",
+        "cpu-feature.node.kubevirt.io/skip-l1dfl-vmentry": "true",
+        "cpu-feature.node.kubevirt.io/smap": "true",
+        "cpu-feature.node.kubevirt.io/smep": "true",
+        "cpu-feature.node.kubevirt.io/spec-ctrl": "true",
+        "cpu-feature.node.kubevirt.io/ss": "true",
+        "cpu-feature.node.kubevirt.io/ssbd": "true",
+        "cpu-feature.node.kubevirt.io/sse": "true",
+        "cpu-feature.node.kubevirt.io/sse2": "true",
+        "cpu-feature.node.kubevirt.io/sse4.1": "true",
+        "cpu-feature.node.kubevirt.io/sse4.2": "true",
+        "cpu-feature.node.kubevirt.io/ssse3": "true",
+        "cpu-feature.node.kubevirt.io/stibp": "true",
+        "cpu-feature.node.kubevirt.io/syscall": "true",
+        "cpu-feature.node.kubevirt.io/tsc": "true",
+        "cpu-feature.node.kubevirt.io/tsc-deadline": "true",
+        "cpu-feature.node.kubevirt.io/tsc_adjust": "true",
+        "cpu-feature.node.kubevirt.io/tsx-ctrl": "true",
+        "cpu-feature.node.kubevirt.io/tsx-ldtrk": "true",
+        "cpu-feature.node.kubevirt.io/umip": "true",
+        "cpu-feature.node.kubevirt.io/vaes": "true",
+        "cpu-feature.node.kubevirt.io/vme": "true",
+        "cpu-feature.node.kubevirt.io/vmx": "true",
+        "cpu-feature.node.kubevirt.io/vmx-activity-hlt": "true",
+        "cpu-feature.node.kubevirt.io/vmx-activity-wait-sipi": "true",
+        "cpu-feature.node.kubevirt.io/vmx-apicv-register": "true",
+        "cpu-feature.node.kubevirt.io/vmx-apicv-vid": "true",
+        "cpu-feature.node.kubevirt.io/vmx-apicv-x2apic": "true",
+        "cpu-feature.node.kubevirt.io/vmx-apicv-xapic": "true",
+        "cpu-feature.node.kubevirt.io/vmx-cr3-load-noexit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-cr3-store-noexit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-cr8-load-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-cr8-store-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-desc-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-enable-user-wait-pause": "true",
+        "cpu-feature.node.kubevirt.io/vmx-entry-ia32e-mode": "true",
+        "cpu-feature.node.kubevirt.io/vmx-entry-load-efer": "true",
+        "cpu-feature.node.kubevirt.io/vmx-entry-load-pat": "true",
+        "cpu-feature.node.kubevirt.io/vmx-entry-load-perf-global-ctrl": "true",
+        "cpu-feature.node.kubevirt.io/vmx-entry-noload-debugctl": "true",
+        "cpu-feature.node.kubevirt.io/vmx-ept": "true",
+        "cpu-feature.node.kubevirt.io/vmx-ept-1gb": "true",
+        "cpu-feature.node.kubevirt.io/vmx-ept-2mb": "true",
+        "cpu-feature.node.kubevirt.io/vmx-ept-execonly": "true",
+        "cpu-feature.node.kubevirt.io/vmx-eptad": "true",
+        "cpu-feature.node.kubevirt.io/vmx-eptp-switching": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-ack-intr": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-load-efer": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-load-pat": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-load-perf-global-ctrl": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-nosave-debugctl": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-save-efer": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-save-pat": "true",
+        "cpu-feature.node.kubevirt.io/vmx-exit-save-preemption-timer": "true",
+        "cpu-feature.node.kubevirt.io/vmx-flexpriority": "true",
+        "cpu-feature.node.kubevirt.io/vmx-hlt-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-ins-outs": "true",
+        "cpu-feature.node.kubevirt.io/vmx-intr-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invept": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invept-all-context": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invept-single-context": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invlpg-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invpcid-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invvpid": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invvpid-all-context": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invvpid-single-addr": "true",
+        "cpu-feature.node.kubevirt.io/vmx-invvpid-single-context-noglobals": "true",
+        "cpu-feature.node.kubevirt.io/vmx-io-bitmap": "true",
+        "cpu-feature.node.kubevirt.io/vmx-io-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-monitor-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-movdr-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-msr-bitmap": "true",
+        "cpu-feature.node.kubevirt.io/vmx-mtf": "true",
+        "cpu-feature.node.kubevirt.io/vmx-mwait-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-nmi-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-page-walk-4": "true",
+        "cpu-feature.node.kubevirt.io/vmx-page-walk-5": "true",
+        "cpu-feature.node.kubevirt.io/vmx-pause-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-pml": "true",
+        "cpu-feature.node.kubevirt.io/vmx-posted-intr": "true",
+        "cpu-feature.node.kubevirt.io/vmx-preemption-timer": "true",
+        "cpu-feature.node.kubevirt.io/vmx-rdpmc-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-rdrand-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-rdseed-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-rdtsc-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-rdtscp-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-secondary-ctls": "true",
+        "cpu-feature.node.kubevirt.io/vmx-shadow-vmcs": "true",
+        "cpu-feature.node.kubevirt.io/vmx-store-lma": "true",
+        "cpu-feature.node.kubevirt.io/vmx-true-ctls": "true",
+        "cpu-feature.node.kubevirt.io/vmx-tsc-offset": "true",
+        "cpu-feature.node.kubevirt.io/vmx-tsc-scaling": "true",
+        "cpu-feature.node.kubevirt.io/vmx-unrestricted-guest": "true",
+        "cpu-feature.node.kubevirt.io/vmx-vintr-pending": "true",
+        "cpu-feature.node.kubevirt.io/vmx-vmfunc": "true",
+        "cpu-feature.node.kubevirt.io/vmx-vmwrite-vmexit-fields": "true",
+        "cpu-feature.node.kubevirt.io/vmx-vnmi": "true",
+        "cpu-feature.node.kubevirt.io/vmx-vnmi-pending": "true",
+        "cpu-feature.node.kubevirt.io/vmx-vpid": "true",
+        "cpu-feature.node.kubevirt.io/vmx-wbinvd-exit": "true",
+        "cpu-feature.node.kubevirt.io/vmx-xsaves": "true",
+        "cpu-feature.node.kubevirt.io/vpclmulqdq": "true",
+        "cpu-feature.node.kubevirt.io/waitpkg": "true",
+        "cpu-feature.node.kubevirt.io/wbnoinvd": "true",
+        "cpu-feature.node.kubevirt.io/x2apic": "true",
+        "cpu-feature.node.kubevirt.io/xfd": "true",
+        "cpu-feature.node.kubevirt.io/xgetbv1": "true",
+        "cpu-feature.node.kubevirt.io/xsave": "true",
+        "cpu-feature.node.kubevirt.io/xsavec": "true",
+        "cpu-feature.node.kubevirt.io/xsaveopt": "true",
+        "cpu-feature.node.kubevirt.io/xsaves": "true",
+        "cpu-feature.node.kubevirt.io/zero-fcs-fds": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell-noTSX": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell-noTSX-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Broadwell-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/Cascadelake-Server": "true",
+        "cpu-model-migration.node.kubevirt.io/Cascadelake-Server-noTSX": "true",
+        "cpu-model-migration.node.kubevirt.io/Cascadelake-Server-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Cascadelake-Server-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Cascadelake-Server-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Cascadelake-Server-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/Cascadelake-Server-v5": "true",
+        "cpu-model-migration.node.kubevirt.io/ClearwaterForest": "true",
+        "cpu-model-migration.node.kubevirt.io/ClearwaterForest-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Cooperlake": "true",
+        "cpu-model-migration.node.kubevirt.io/Cooperlake-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Cooperlake-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Denverton": "true",
+        "cpu-model-migration.node.kubevirt.io/Denverton-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Denverton-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Denverton-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Dhyana": "true",
+        "cpu-model-migration.node.kubevirt.io/Dhyana-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Dhyana-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Genoa": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Genoa-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Genoa-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-IBPB": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Milan": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Milan-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Milan-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Milan-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Rome": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Rome-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Rome-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Rome-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Rome-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Rome-v5": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Turin": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-Turin-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/EPYC-v5": "true",
+        "cpu-model-migration.node.kubevirt.io/GraniteRapids": "true",
+        "cpu-model-migration.node.kubevirt.io/GraniteRapids-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/GraniteRapids-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/GraniteRapids-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell-noTSX": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell-noTSX-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Haswell-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-noTSX": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-v5": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-v6": "true",
+        "cpu-model-migration.node.kubevirt.io/Icelake-Server-v7": "true",
+        "cpu-model-migration.node.kubevirt.io/IvyBridge": "true",
+        "cpu-model-migration.node.kubevirt.io/IvyBridge-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/IvyBridge-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/IvyBridge-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/KnightsMill": "true",
+        "cpu-model-migration.node.kubevirt.io/KnightsMill-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Nehalem": "true",
+        "cpu-model-migration.node.kubevirt.io/Nehalem-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Nehalem-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Nehalem-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Opteron_G3": "true",
+        "cpu-model-migration.node.kubevirt.io/Opteron_G3-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Opteron_G4": "true",
+        "cpu-model-migration.node.kubevirt.io/Opteron_G4-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Opteron_G5": "true",
+        "cpu-model-migration.node.kubevirt.io/Opteron_G5-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Penryn": "true",
+        "cpu-model-migration.node.kubevirt.io/Penryn-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/SandyBridge": "true",
+        "cpu-model-migration.node.kubevirt.io/SandyBridge-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/SandyBridge-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/SandyBridge-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/SapphireRapids": "true",
+        "cpu-model-migration.node.kubevirt.io/SapphireRapids-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/SapphireRapids-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/SapphireRapids-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/SapphireRapids-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/SierraForest": "true",
+        "cpu-model-migration.node.kubevirt.io/SierraForest-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/SierraForest-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/SierraForest-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Client": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Client-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Client-noTSX-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Client-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Client-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Client-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Client-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server-noTSX-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/Skylake-Server-v5": "true",
+        "cpu-model-migration.node.kubevirt.io/Snowridge": "true",
+        "cpu-model-migration.node.kubevirt.io/Snowridge-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Snowridge-v2": "true",
+        "cpu-model-migration.node.kubevirt.io/Snowridge-v3": "true",
+        "cpu-model-migration.node.kubevirt.io/Snowridge-v4": "true",
+        "cpu-model-migration.node.kubevirt.io/Westmere": "true",
+        "cpu-model-migration.node.kubevirt.io/Westmere-IBRS": "true",
+        "cpu-model-migration.node.kubevirt.io/Westmere-v1": "true",
+        "cpu-model-migration.node.kubevirt.io/Westmere-v2": "true",
+        "cpu-model.node.kubevirt.io/Broadwell-noTSX": "true",
+        "cpu-model.node.kubevirt.io/Broadwell-noTSX-IBRS": "true",
+        "cpu-model.node.kubevirt.io/Broadwell-v2": "true",
+        "cpu-model.node.kubevirt.io/Broadwell-v4": "true",
+        "cpu-model.node.kubevirt.io/Cascadelake-Server-noTSX": "true",
+        "cpu-model.node.kubevirt.io/Cascadelake-Server-v3": "true",
+        "cpu-model.node.kubevirt.io/Cascadelake-Server-v4": "true",
+        "cpu-model.node.kubevirt.io/Cascadelake-Server-v5": "true",
+        "cpu-model.node.kubevirt.io/Denverton-v2": "true",
+        "cpu-model.node.kubevirt.io/Denverton-v3": "true",
+        "cpu-model.node.kubevirt.io/Haswell-noTSX": "true",
+        "cpu-model.node.kubevirt.io/Haswell-noTSX-IBRS": "true",
+        "cpu-model.node.kubevirt.io/Haswell-v2": "true",
+        "cpu-model.node.kubevirt.io/Haswell-v4": "true",
+        "cpu-model.node.kubevirt.io/Icelake-Server-noTSX": "true",
+        "cpu-model.node.kubevirt.io/Icelake-Server-v2": "true",
+        "cpu-model.node.kubevirt.io/IvyBridge": "true",
+        "cpu-model.node.kubevirt.io/IvyBridge-IBRS": "true",
+        "cpu-model.node.kubevirt.io/IvyBridge-v1": "true",
+        "cpu-model.node.kubevirt.io/IvyBridge-v2": "true",
+        "cpu-model.node.kubevirt.io/Nehalem": "true",
+        "cpu-model.node.kubevirt.io/Nehalem-IBRS": "true",
+        "cpu-model.node.kubevirt.io/Nehalem-v1": "true",
+        "cpu-model.node.kubevirt.io/Nehalem-v2": "true",
+        "cpu-model.node.kubevirt.io/Penryn": "true",
+        "cpu-model.node.kubevirt.io/Penryn-v1": "true",
+        "cpu-model.node.kubevirt.io/SandyBridge": "true",
+        "cpu-model.node.kubevirt.io/SandyBridge-IBRS": "true",
+        "cpu-model.node.kubevirt.io/SandyBridge-v1": "true",
+        "cpu-model.node.kubevirt.io/SandyBridge-v2": "true",
+        "cpu-model.node.kubevirt.io/Skylake-Client-noTSX-IBRS": "true",
+        "cpu-model.node.kubevirt.io/Skylake-Client-v3": "true",
+        "cpu-model.node.kubevirt.io/Skylake-Client-v4": "true",
+        "cpu-model.node.kubevirt.io/Skylake-Server-noTSX-IBRS": "true",
+        "cpu-model.node.kubevirt.io/Skylake-Server-v3": "true",
+        "cpu-model.node.kubevirt.io/Skylake-Server-v4": "true",
+        "cpu-model.node.kubevirt.io/Skylake-Server-v5": "true",
+        "cpu-model.node.kubevirt.io/Snowridge-v4": "true",
+        "cpu-model.node.kubevirt.io/Westmere": "true",
+        "cpu-model.node.kubevirt.io/Westmere-IBRS": "true",
+        "cpu-model.node.kubevirt.io/Westmere-v1": "true",
+        "cpu-model.node.kubevirt.io/Westmere-v2": "true",
+        "cpu-timer.node.kubevirt.io/tsc-frequency": "2100000000",
+        "cpu-timer.node.kubevirt.io/tsc-scalable": "true",
+        "cpu-vendor.node.kubevirt.io/Intel": "true",
+        "cpumanager": "false",
+        "feature.node.kubernetes.io/cpu-cpuid.ADX": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AESNI": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AMXBF16": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AMXFP8": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AMXINT8": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AMXTILE": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX2": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512BF16": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512BITALG": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512BW": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512CD": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512DQ": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512F": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512FP16": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512IFMA": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512VBMI": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512VBMI2": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512VL": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512VNNI": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVX512VPOPCNTDQ": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.AVXVNNI": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.BHI_CTRL": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.CETIBT": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.CETSS": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.CLDEMOTE": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.CMPSB_SCADBS_SHORT": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.CMPXCHG8": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.ENQCMD": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.FLUSH_L1D": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.FMA3": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.FSRM": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.FXSR": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.FXSROPT": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.GFNI": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.IA32_ARCH_CAP": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.IA32_CORE_CAP": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.IBPB": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.IDPRED_CTRL": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.LAHF": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.MD_CLEAR": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.MOVBE": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.MOVDIR64B": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.MOVDIRI": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.MOVSB_ZL": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.OSXSAVE": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.PCONFIG": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.PMU_FIXEDCOUNTER_CYCLES": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.PMU_FIXEDCOUNTER_INSTRUCTIONS": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.PMU_FIXEDCOUNTER_REFCYCLES": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.PMU_FIXEDCOUNTER_TOPDOWN_SLOTS": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.PSFD": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.RRSBA_CTRL": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.SERIALIZE": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.SHA": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.SPEC_CTRL_SSBD": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.STIBP": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.STOSB_SHORT": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.SYSCALL": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.SYSEE": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.TME": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.TSXLDTRK": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.VAES": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.VMX": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.VPCLMULQDQ": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.WAITPKG": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.WBNOINVD": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.X86_64_V1": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.X86_64_V2": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.X86_64_V3": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.X86_64_V4": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.X87": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.XGETBV1": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.XSAVE": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.XSAVEC": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.XSAVEOPT": "true",
+        "feature.node.kubernetes.io/cpu-cpuid.XSAVES": "true",
+        "feature.node.kubernetes.io/cpu-cstate.enabled": "true",
+        "feature.node.kubernetes.io/cpu-hardware_multithreading": "true",
+        "feature.node.kubernetes.io/cpu-model.family": "6",
+        "feature.node.kubernetes.io/cpu-model.hypervisor": "none",
+        "feature.node.kubernetes.io/cpu-model.id": "207",
+        "feature.node.kubernetes.io/cpu-model.vendor_id": "Intel",
+        "feature.node.kubernetes.io/cpu-pstate.status": "passive",
+        "feature.node.kubernetes.io/cpu-pstate.turbo": "true",
+        "feature.node.kubernetes.io/kernel-config.NO_HZ": "true",
+        "feature.node.kubernetes.io/kernel-config.NO_HZ_FULL": "true",
+        "feature.node.kubernetes.io/kernel-version.full": "6.8.0-138-generic",
+        "feature.node.kubernetes.io/kernel-version.major": "6",
+        "feature.node.kubernetes.io/kernel-version.minor": "8",
+        "feature.node.kubernetes.io/kernel-version.revision": "0",
+        "feature.node.kubernetes.io/memory-numa": "true",
+        "feature.node.kubernetes.io/network-sriov.capable": "true",
+        "feature.node.kubernetes.io/pci-10de.present": "true",
+        "feature.node.kubernetes.io/pci-10de.sriov.capable": "true",
+        "feature.node.kubernetes.io/pci-1a03.present": "true",
+        "feature.node.kubernetes.io/pci-8086.present": "true",
+        "feature.node.kubernetes.io/pci-8086.sriov.capable": "true",
+        "feature.node.kubernetes.io/storage-nonrotationaldisk": "true",
+        "feature.node.kubernetes.io/system-os_release.ID": "ubuntu",
+        "feature.node.kubernetes.io/system-os_release.VERSION_ID": "24.04",
+        "feature.node.kubernetes.io/system-os_release.VERSION_ID.major": "24",
+        "feature.node.kubernetes.io/system-os_release.VERSION_ID.minor": "04",
+        "feature.node.kubernetes.io/usb-ef_0b1f_03ee.present": "true",
+        "gpu": "on",
+        "host-model-cpu.node.kubevirt.io/GraniteRapids": "true",
+        "host-model-required-features.node.kubevirt.io/amd-ssbd": "true",
+        "host-model-required-features.node.kubevirt.io/amd-stibp": "true",
+        "host-model-required-features.node.kubevirt.io/bhi-ctrl": "true",
+        "host-model-required-features.node.kubevirt.io/cldemote": "true",
+        "host-model-required-features.node.kubevirt.io/ddpd-u": "true",
+        "host-model-required-features.node.kubevirt.io/ds": "true",
+        "host-model-required-features.node.kubevirt.io/dtes64": "true",
+        "host-model-required-features.node.kubevirt.io/fdp-excptn-only": "true",
+        "host-model-required-features.node.kubevirt.io/flush-l1d": "true",
+        "host-model-required-features.node.kubevirt.io/gds-no": "true",
+        "host-model-required-features.node.kubevirt.io/hypervisor": "true",
+        "host-model-required-features.node.kubevirt.io/ibpb": "true",
+        "host-model-required-features.node.kubevirt.io/ibrs": "true",
+        "host-model-required-features.node.kubevirt.io/intel-psfd": "true",
+        "host-model-required-features.node.kubevirt.io/invtsc": "true",
+        "host-model-required-features.node.kubevirt.io/ipred-ctrl": "true",
+        "host-model-required-features.node.kubevirt.io/its-no": "true",
+        "host-model-required-features.node.kubevirt.io/md-clear": "true",
+        "host-model-required-features.node.kubevirt.io/movdir64b": "true",
+        "host-model-required-features.node.kubevirt.io/movdiri": "true",
+        "host-model-required-features.node.kubevirt.io/pdcm": "true",
+        "host-model-required-features.node.kubevirt.io/rfds-no": "true",
+        "host-model-required-features.node.kubevirt.io/rrsba-ctrl": "true",
+        "host-model-required-features.node.kubevirt.io/ss": "true",
+        "host-model-required-features.node.kubevirt.io/stibp": "true",
+        "host-model-required-features.node.kubevirt.io/tsc_adjust": "true",
+        "host-model-required-features.node.kubevirt.io/tsx-ctrl": "true",
+        "host-model-required-features.node.kubevirt.io/vmx": "true",
+        "host-model-required-features.node.kubevirt.io/vmx-activity-wait-sipi": "true",
+        "host-model-required-features.node.kubevirt.io/vmx-enable-user-wait-pause": "true",
+        "host-model-required-features.node.kubevirt.io/vmx-tsc-scaling": "true",
+        "host-model-required-features.node.kubevirt.io/waitpkg": "true",
+        "host-model-required-features.node.kubevirt.io/zero-fcs-fds": "true",
+        "hyperv.node.kubevirt.io/base": "true",
+        "hyperv.node.kubevirt.io/frequencies": "true",
+        "hyperv.node.kubevirt.io/ipi": "true",
+        "hyperv.node.kubevirt.io/reenlightenment": "true",
+        "hyperv.node.kubevirt.io/reset": "true",
+        "hyperv.node.kubevirt.io/runtime": "true",
+        "hyperv.node.kubevirt.io/synic": "true",
+        "hyperv.node.kubevirt.io/synic2": "true",
+        "hyperv.node.kubevirt.io/synictimer": "true",
+        "hyperv.node.kubevirt.io/time": "true",
+        "hyperv.node.kubevirt.io/tlbflush": "true",
+        "hyperv.node.kubevirt.io/vpindex": "true",
+        "kubernetes.io/arch": "amd64",
+        "kubernetes.io/hostname": "gpu-4",
+        "kubernetes.io/os": "linux",
+        "kubevirt.io/cpumanager": "false",
+        "kubevirt.io/ksm-enabled": "false",
+        "kubevirt.io/schedulable": "true",
+        "machine-type.node.kubevirt.io/pc": "true",
+        "machine-type.node.kubevirt.io/pc-i440fx-rhel7.6.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel7.6.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel8.0.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel8.1.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel8.2.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel8.3.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel8.4.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel8.5.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel8.6.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel9.0.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel9.2.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel9.4.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel9.6.0": "true",
+        "machine-type.node.kubevirt.io/pc-q35-rhel9.8.0": "true",
+        "machine-type.node.kubevirt.io/q35": "true",
+        "node-role.kubernetes.io/control-plane": "",
+        "node.kubernetes.io/exclude-from-external-load-balancers": "",
+        "nvidia.com/cuda.driver-version.full": "580.173.02",
+        "nvidia.com/cuda.driver-version.major": "580",
+        "nvidia.com/cuda.driver-version.minor": "173",
+        "nvidia.com/cuda.driver-version.revision": "02",
+        "nvidia.com/cuda.driver.major": "580",
+        "nvidia.com/cuda.driver.minor": "173",
+        "nvidia.com/cuda.driver.rev": "02",
+        "nvidia.com/cuda.runtime-version.full": "13.0",
+        "nvidia.com/cuda.runtime-version.major": "13",
+        "nvidia.com/cuda.runtime-version.minor": "0",
+        "nvidia.com/cuda.runtime.major": "13",
+        "nvidia.com/cuda.runtime.minor": "0",
+        "nvidia.com/gfd.timestamp": "1790004357",
+        "nvidia.com/gpu.compute.major": "12",
+        "nvidia.com/gpu.compute.minor": "0",
+        "nvidia.com/gpu.count": "4",
+        "nvidia.com/gpu.deploy.client": "true",
+        "nvidia.com/gpu.deploy.container-toolkit": "true",
+        "nvidia.com/gpu.deploy.dcgm": "true",
+        "nvidia.com/gpu.deploy.dcgm-exporter": "true",
+        "nvidia.com/gpu.deploy.device-plugin": "true",
+        "nvidia.com/gpu.deploy.driver": "true",
+        "nvidia.com/gpu.deploy.gpu-feature-discovery": "true",
+        "nvidia.com/gpu.deploy.mig-manager": "true",
+        "nvidia.com/gpu.deploy.node-status-exporter": "true",
+        "nvidia.com/gpu.deploy.operator-validator": "true",
+        "nvidia.com/gpu.family": "blackwell",
+        "nvidia.com/gpu.machine": "SYS-521GE-TNRT",
+        "nvidia.com/gpu.memory": "97887",
+        "nvidia.com/gpu.mode": "compute",
+        "nvidia.com/gpu.present": "true",
+        "nvidia.com/gpu.product": "NVIDIA-RTX-PRO-6000-Blackwell-Server-Edition",
+        "nvidia.com/gpu.replicas": "1",
+        "nvidia.com/gpu.sharing-strategy": "none",
+        "nvidia.com/mig.capable": "true",
+        "nvidia.com/mig.strategy": "single",
+        "nvidia.com/mps.capable": "false",
+        "nvidia.com/vgpu.present": "false",
+        "scheduling.node.kubevirt.io/tsc-frequency-2100000000": "true"
+      },
+      "name": "gpu-4",
+      "resourceVersion": "3722929",
+      "uid": "5a96e0b8-1309-4190-883e-863470aad2ad"
+    },
+    "spec": {
+      "podCIDR": "10.85.0.0/24",
+      "podCIDRs": [
+        "10.85.0.0/24"
+      ]
+    },
+    "status": {
+      "addresses": [
+        {
+          "address": "192.168.24.21",
+          "type": "InternalIP"
+        },
+        {
+          "address": "gpu-4",
+          "type": "Hostname"
+        }
+      ],
+      "allocatable": {
+        "cpu": "128",
+        "devices.kubevirt.io/kvm": "1k",
+        "devices.kubevirt.io/sev": "0",
+        "devices.kubevirt.io/tun": "1k",
+        "devices.kubevirt.io/vhost-net": "1k",
+        "ephemeral-storage": "3398467853625",
+        "flyt.dev/evidence-passthrough": "0",
+        "hugepages-1Gi": "0",
+        "hugepages-2Mi": "0",
+        "memory": "791032816Ki",
+        "nvidia.com/gpu": "40",
+        "pods": "110"
+      },
+      "capacity": {
+        "cpu": "128",
+        "devices.kubevirt.io/kvm": "1k",
+        "devices.kubevirt.io/sev": "1k",
+        "devices.kubevirt.io/tun": "1k",
+        "devices.kubevirt.io/vhost-net": "1k",
+        "ephemeral-storage": "3776075399168",
+        "flyt.dev/evidence-passthrough": "0",
+        "hugepages-1Gi": "0",
+        "hugepages-2Mi": "0",
+        "memory": "791135216Ki",
+        "nvidia.com/gpu": "40",
+        "pods": "110"
+      },
+      "conditions": [
+        {
+          "lastHeartbeatTime": "2026-09-21T14:29:30Z",
+          "lastTransitionTime": "2026-09-21T14:29:30Z",
+          "message": "Cilium is running on this node",
+          "reason": "CiliumIsUp",
+          "status": "False",
+          "type": "NetworkUnavailable"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-01T01:04:49Z",
+          "lastTransitionTime": "2026-09-21T14:09:30Z",
+          "message": "kubelet has sufficient memory available",
+          "reason": "KubeletHasSufficientMemory",
+          "status": "False",
+          "type": "MemoryPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-01T01:04:49Z",
+          "lastTransitionTime": "2026-09-30T08:20:23Z",
+          "message": "kubelet has no disk pressure",
+          "reason": "KubeletHasNoDiskPressure",
+          "status": "False",
+          "type": "DiskPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-01T01:04:49Z",
+          "lastTransitionTime": "2026-09-21T14:09:30Z",
+          "message": "kubelet has sufficient PID available",
+          "reason": "KubeletHasSufficientPID",
+          "status": "False",
+          "type": "PIDPressure"
+        },
+        {
+          "lastHeartbeatTime": "2026-10-01T01:04:49Z",
+          "lastTransitionTime": "2026-09-21T15:12:26Z",
+          "message": "kubelet is posting ready status",
+          "reason": "KubeletReady",
+          "status": "True",
+          "type": "Ready"
+        }
+      ],
+      "daemonEndpoints": {
+        "kubeletEndpoint": {
+          "Port": 10250
+        }
+      },
+      "declaredFeatures": [
+        "ExtendWebSocketsToKubelet",
+        "InPlacePodLevelResourcesVerticalScaling",
+        "InPlacePodVerticalScalingInitContainers",
+        "RestartAllContainersOnContainerExits"
+      ],
+      "features": {
+        "supplementalGroupsPolicy": true
+      },
+      "images": [
+        {
+          "names": [
+            "docker.io/library/9f4f5e17f2e682ac27e2ae462caf3867ca64826e76bf98feaf8f35fb80e43c36-tmp@sha256:74d09e8497afd23b46cc9c1d990fbe94859621ef50cb489f7f29fa7a8b086733"
+          ],
+          "sizeBytes": 18306783301
+        },
+        {
+          "names": [
+            "docker.io/library/564eb44290bb62cbe7f974cc87588e572aa19750542392d58fa5c989bd9defe6-tmp@sha256:17c96169bc09a72f7c90ba7198301cd1a13e090a5d4905be7be91fba53cbd3ac"
+          ],
+          "sizeBytes": 18306782927
+        },
+        {
+          "names": [
+            "docker.io/library/efbadca6312af8d151c4340b227e50fdfd7f6cb6fe96f47b6fa33df068194843-tmp@sha256:8e4c716546198b280cdbffd5a44c4779c2a4506ce2b23ac0af5f454c9102372f"
+          ],
+          "sizeBytes": 17014896510
+        },
+        {
+          "names": [
+            "docker.io/library/b925324530c78d6b8b08705e18d41e2ca8a970bb9ceb2d14826b6ce89f4a26df-tmp@sha256:2dea61733840105b2ca98f402206f03f28fa654cb3b9128d652837de878b828b"
+          ],
+          "sizeBytes": 16849068463
+        },
+        {
+          "names": [
+            "docker.io/library/7998660dd4049340f38148080f225b04b3ba732cea9598c7f012758967c4817c-tmp@sha256:5273d5720e4ff662621282324c584413618cc44b01b7475ff988c1e712ec497b"
+          ],
+          "sizeBytes": 16760678622
+        },
+        {
+          "names": [
+            "docker.io/library/0d00cc17b9ccd2784a5f0cf2ef0c5ef1eeb6589a65056f8e02691c9dec0e0915-tmp@sha256:767cdb72c921951d89b57b94fb911e3433b8dfb875d665a507dad3017e5d4c43"
+          ],
+          "sizeBytes": 16021239244
+        },
+        {
+          "names": [
+            "docker.io/library/6c416dc840b4cdb3e977e30ed817a535620af9faefe43d4cd25ec6a8e877a818-tmp@sha256:522869186b0535e957a66c5385d00c554406eee178e85ee198a0a4ebeb58b500"
+          ],
+          "sizeBytes": 15980696597
+        },
+        {
+          "names": [
+            "docker.io/library/e0260fe7f1b3eadfe8e9144ad19fd6f8cba19d16331c414432a52dddc658d0de-tmp@sha256:e81b508600923c7411da8fbc78563a8a7db149db5b555bb47139c40fbfa16cb6"
+          ],
+          "sizeBytes": 15349467817
+        },
+        {
+          "names": [
+            "docker.io/library/c876be9879a1cb1c3a33e196ce8491b6304b53cabc16d4fd8f1ceb87dafcb2fa-tmp@sha256:b01373c876d3e15fc1fff76c64d0103a882f9720eda8f9653b34a7f2864f2d6c"
+          ],
+          "sizeBytes": 8948929532
+        },
+        {
+          "names": [
+            "docker.io/deepspeed/deepspeed@sha256:4ed8ec9ead174ed7b62bbb0500fe9ca1cf437525ccf189ba06373e8a0bf488ea",
+            "docker.io/deepspeed/deepspeed:latest"
+          ],
+          "sizeBytes": 5208299128
+        },
+        {
+          "names": [
+            "localhost/vmweave-worker@sha256:002c13d3ef8d5ce26d812d630c57b64df24a53d3e2d019b0f3fa0be83d04be57",
+            "localhost/vmweave-worker:performance-20260930"
+          ],
+          "sizeBytes": 4484837506
+        },
+        {
+          "names": [
+            "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+            "localhost/vmweave-worker:dev"
+          ],
+          "sizeBytes": 4484827587
+        },
+        {
+          "names": [
+            "docker.io/projecthami/hami@sha256:8c45cd84d8df3e6a8fe8c95e0141684973b5015692a0ef87588da05284f34447",
+            "docker.io/projecthami/hami@sha256:8cd48fffc6f7420dbd7748a10b4a4a219791c9c2a97490335d0a75a287862d9c",
+            "docker.io/projecthami/hami:v2.10.0"
+          ],
+          "sizeBytes": 1240962894
+        },
+        {
+          "names": [
+            "docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e",
+            "docker.io/library/mongo@sha256:9854f7139445d766a9523571d6f047530c45547460ffcf8259eb2bf4264632ca",
+            "docker.io/library/mongo:7.0"
+          ],
+          "sizeBytes": 869773314
+        },
+        {
+          "names": [
+            "quay.io/cilium/cilium@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+            "quay.io/cilium/cilium@sha256:d2a30f8445c649c9118b2304451ba793bac703d59a3020665c7c59e940a618aa"
+          ],
+          "sizeBytes": 722869873
+        },
+        {
+          "names": [
+            "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+            "localhost/flyt-virt-launcher:ivshmem-v2-20260922"
+          ],
+          "sizeBytes": 691568632
+        },
+        {
+          "names": [
+            "nvcr.io/nvidia/gpu-operator@sha256:ddba086bb593713ad6f3b207fd0f9b16eb8910134bb656cb1a2e2ae1b5092400",
+            "nvcr.io/nvidia/gpu-operator@sha256:fb3d030e4ec356f88834a594765511c02758a7466d2a2f58de6f9428f4895d49",
+            "nvcr.io/nvidia/gpu-operator:v26.7.0"
+          ],
+          "sizeBytes": 651304995
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-launcher@sha256:2a47dceaa6ed4176175f58f4f7d927064f55d935fdd56e3999ac4dbe7d3a8e6a",
+            "quay.io/kubevirt/virt-launcher@sha256:f23102ca00bf12f7962021adfdfdad63c873b01a03001a6d20d5813950254b9c",
+            "quay.io/kubevirt/virt-launcher:v1.9.0"
+          ],
+          "sizeBytes": 565496504
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-handler@sha256:df9f2069924a28ba76f47e7f4fbd9a0be3aa13cfa004a59e7a708bbff2a90424",
+            "quay.io/kubevirt/virt-handler@sha256:e4a80ca9d9693d0d785b1928bd3edafe81a5d00771169723db57c4be2f8cfe06",
+            "quay.io/kubevirt/virt-handler:v1.9.0"
+          ],
+          "sizeBytes": 285421484
+        },
+        {
+          "names": [
+            "registry.k8s.io/nfd/node-feature-discovery@sha256:2fa1c99ad09bdf2c8ad97706a4ad2fd548c84d5ecd70ba32a6152c667b96c4d2",
+            "registry.k8s.io/nfd/node-feature-discovery@sha256:aa5be8691e4d5876d8a774063b37e1430c75e09468ba98d8bd07f6deec1f1756",
+            "registry.k8s.io/nfd/node-feature-discovery:v0.19.0"
+          ],
+          "sizeBytes": 281280514
+        },
+        {
+          "names": [
+            "quay.io/cilium/cilium-envoy@sha256:81398e449f2d3d0a6a70527e4f641aaa685d3156bea0bb30712fae3fd8822b86",
+            "quay.io/cilium/cilium-envoy@sha256:e6d403895b5dac014c811f44c553050414f3c2fb2948257f7ee26d68b146aafd"
+          ],
+          "sizeBytes": 187868626
+        },
+        {
+          "names": [
+            "nvcr.io/nvidia/k8s-device-plugin@sha256:1de09dda8d1c179fe84e280f28a48a75c9a1a529d90eefcee1f80c012ac11640",
+            "nvcr.io/nvidia/k8s-device-plugin@sha256:a61ba9fd8efb82f3a79f877f7580e02c1e8e7593f62473644bc9c79e315c3312",
+            "nvcr.io/nvidia/k8s-device-plugin:v0.20.0"
+          ],
+          "sizeBytes": 161444057
+        },
+        {
+          "names": [
+            "nvcr.io/nvidia/k8s/dcgm-exporter@sha256:613ab03c11d442fd960ff515f547e9921537454a712d08160bc8f677f89f1c35",
+            "nvcr.io/nvidia/k8s/dcgm-exporter@sha256:b4df763de9558e5b3f1f1d79bc65b772fcf65b8a9c3664ea7173e47153112b4a",
+            "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless"
+          ],
+          "sizeBytes": 155043914
+        },
+        {
+          "names": [
+            "nvcr.io/nvidia/k8s/container-toolkit@sha256:f7857a9c346c743b9ee7d39c30261caf0a34dcc1bc90481a57b23bff75fbaaa7",
+            "nvcr.io/nvidia/k8s/container-toolkit@sha256:f8c647d581f7c8b178efdb7e6c94f5fb6eb12ebc05e2157fa314d327560fcb7a",
+            "nvcr.io/nvidia/k8s/container-toolkit:v1.20.0"
+          ],
+          "sizeBytes": 149554759
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-operator@sha256:bac92f1ee2dca92e8d29e0868d3abafb95623970c799192e0ae09c5c7122b370",
+            "quay.io/kubevirt/virt-operator@sha256:d08b5b5ad1c0d694fad13279e44b44b6fad961aa7508acd53b87ce6ef468cbae",
+            "quay.io/kubevirt/virt-operator:v1.9.0"
+          ],
+          "sizeBytes": 148042468
+        },
+        {
+          "names": [
+            "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+            "localhost/vmweave-hook:dev"
+          ],
+          "sizeBytes": 138906990
+        },
+        {
+          "names": [
+            "localhost/flyt-cluster-manager@sha256:7789348f62da6f2d9fa1ee031d323be1cf7f6e1b44c563d104745e0deca9a0b8",
+            "localhost/flyt-cluster-manager:dev"
+          ],
+          "sizeBytes": 131320200
+        },
+        {
+          "names": [
+            "quay.io/cilium/operator-generic@sha256:11575030c9b1432f34d788347c086b14129e12023d817047d140e61b6e322db7",
+            "quay.io/cilium/operator-generic@sha256:34a827ce9ed021c8adf8f0feca131f53b3c54a3ef529053d871d0347ec4d69af"
+          ],
+          "sizeBytes": 117388989
+        },
+        {
+          "names": [
+            "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+            "localhost/vmweave-helper:dev"
+          ],
+          "sizeBytes": 115293562
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-template-apiserver@sha256:104545cf22d9d6ea0d675b650742f07fbffad18bdae5454e8ad79c93e0fa3eeb",
+            "quay.io/kubevirt/virt-template-apiserver@sha256:af326822d8907ce3c96a6458444f5af0f1e3f912215710eae3fa562c92a3470e",
+            "quay.io/kubevirt/virt-template-apiserver:v0.2.2"
+          ],
+          "sizeBytes": 113240963
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-template-controller@sha256:1d7a44eeb45987852f796d1f4ac6a3ab9bed7ee9bfa553bb093e3b114dc72c9c",
+            "quay.io/kubevirt/virt-template-controller@sha256:2cd0770ce24b40d742bd6bac438c55c886352366c90e8165c11b715b7cfd94c7",
+            "quay.io/kubevirt/virt-template-controller:v0.2.2"
+          ],
+          "sizeBytes": 105852799
+        },
+        {
+          "names": [
+            "registry.k8s.io/kube-apiserver@sha256:83f25d9626d2860003425ad0e31b4d3c73738b2ee16505fca9645d6443b719da",
+            "registry.k8s.io/kube-apiserver@sha256:d1045e5c6d2f016797d22143eba7502e1bb712a4681836a7c35763a9c192dd70",
+            "registry.k8s.io/kube-apiserver:v1.37.0"
+          ],
+          "sizeBytes": 104333681
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-api@sha256:42341b1d52699f4bb87f3996151bafe2e3fe065e9146cc64a15959ddf7bf2c69",
+            "quay.io/kubevirt/virt-api@sha256:9eaa0c1a913d701916d31fb2e7177d697e3ce24975225214f22ee6b391bbe9b3",
+            "quay.io/kubevirt/virt-api:v1.9.0"
+          ],
+          "sizeBytes": 102320842
+        },
+        {
+          "names": [
+            "docker.io/searxng/searxng@sha256:a94c8dd36a3a2565d91b94bac666dc44132d180e73255b406f74ee57898d87ac",
+            "docker.io/searxng/searxng:latest"
+          ],
+          "sizeBytes": 97014816
+        },
+        {
+          "names": [
+            "unknown@sha256:5666f14de59bf0c8c0c4558f1f5308ea5660d537dc51ea1d7eab60c14a2a8df6"
+          ],
+          "sizeBytes": 96984233
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-controller@sha256:7c6034ab39b97c0bb2b31bab2aaf576b616a3d6e59777002d63e2f2bf51e73c2",
+            "quay.io/kubevirt/virt-controller@sha256:83ef2f9a4fa7769f76bda755b19d5e2142cab7c85aaa5a834f283eb44088c302",
+            "quay.io/kubevirt/virt-controller:v1.9.0"
+          ],
+          "sizeBytes": 94456550
+        },
+        {
+          "names": [
+            "registry.k8s.io/kube-controller-manager@sha256:997c997924eb8574f63f204a0b0af133aaf33c10df84009c32d34037f4e0e077",
+            "registry.k8s.io/kube-controller-manager@sha256:9db48abfafe1ca12b8cd6208331e0867fa225cb173e7588627cdada1818bcee9",
+            "registry.k8s.io/kube-controller-manager:v1.37.0"
+          ],
+          "sizeBytes": 91043032
+        },
+        {
+          "names": [
+            "quay.io/kubevirt/virt-exportproxy@sha256:042443b8f58246623e440af59cd34c0627f843b6094c41794d16c98c8d0049ea",
+            "quay.io/kubevirt/virt-exportproxy@sha256:afd7933d0a8158bff9752b202722f110f4a1a88bcfb8e7340ccd406567a5cd64",
+            "quay.io/kubevirt/virt-exportproxy:v1.9.0"
+          ],
+          "sizeBytes": 88773354
+        },
+        {
+          "names": [
+            "registry.k8s.io/kube-proxy@sha256:77bf2b08ff8ac1a4a446cffaa85e79e87379c8cb54fcf60f2cb6c62c966829c8",
+            "registry.k8s.io/kube-proxy@sha256:f12572a048cde334f140cd7cbe04d7d1f064d630c65dacd9a979adc030d5998f",
+            "registry.k8s.io/kube-proxy:v1.37.0"
+          ],
+          "sizeBytes": 82825407
+        },
+        {
+          "names": [
+            "registry.k8s.io/coredns/coredns@sha256:1ba6f47265602e2e50a9c4669e3a955e4298a0d30dc82f39293d4bf1a851e0ff",
+            "registry.k8s.io/coredns/coredns@sha256:900f9c109f7a33545d3c811516e8376df9019147b750f5ce3e254468769176ea",
+            "registry.k8s.io/coredns/coredns:v1.14.6"
+          ],
+          "sizeBytes": 78497451
+        },
+        {
+          "names": [
+            "registry.k8s.io/kube-scheduler@sha256:a27622f132aa09cf2461ba077894a070c0186ec607366d14e805912d4804d11f",
+            "registry.k8s.io/kube-scheduler@sha256:f705b23a4c819ed0f571ce1f618531acf59e3d53bec13896eb1c3a1d28488041",
+            "registry.k8s.io/kube-scheduler:v1.37.0"
+          ],
+          "sizeBytes": 62694616
+        },
+        {
+          "names": [
+            "registry.k8s.io/etcd@sha256:1f445fa5dd06b08f3c0cf9f46e2891e9bc66cbf7e0b9c66627c40658edf4bc98",
+            "registry.k8s.io/etcd@sha256:6ecefbe2510c4a30573a62a4d6dd175acf881ca67003fcd91849a16df7a724d5",
+            "registry.k8s.io/etcd:3.7.0-0"
+          ],
+          "sizeBytes": 61160401
+        },
+        {
+          "names": [
+            "docker.io/tailscale/tailscale@sha256:6146dfe83373a68b57379f8a748676971f036c418d8bc8f4ed3b6ba3f7cc04dc",
+            "docker.io/tailscale/tailscale:v1.98.4"
+          ],
+          "sizeBytes": 57873045
+        },
+        {
+          "names": [
+            "docker.io/bitnamilegacy/redis@sha256:5198ecae99f4eb44bf34626d458bc78651626f5041f65ec077aeee29eba0cc76",
+            "docker.io/bitnamilegacy/redis:7.2.4-debian-12-r13"
+          ],
+          "sizeBytes": 50715653
+        },
+        {
+          "names": [
+            "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+            "localhost/vmweave-operator:dev"
+          ],
+          "sizeBytes": 44534922
+        },
+        {
+          "names": [
+            "quay.io/prometheus/node-exporter@sha256:863b62ff9f392b6f472e22b4b670ad1cabb66b3042502ebd4b2cd192733e1bce",
+            "quay.io/prometheus/node-exporter@sha256:d00a542e409ee618a4edc67da14dd48c5da66726bbd5537ab2af9c1dfc442c8a",
+            "quay.io/prometheus/node-exporter:v1.9.1"
+          ],
+          "sizeBytes": 26124611
+        },
+        {
+          "names": [
+            "docker.io/polinux/stress@sha256:58cadd12a9ffd720780b9095faeccfe38f26301bf73499b4fcc486c52075f65b",
+            "docker.io/polinux/stress:latest"
+          ],
+          "sizeBytes": 4038205
+        },
+        {
+          "names": [
+            "docker.io/library/busybox@sha256:70ce0a747f09cd7c09c2d6eaeab69d60adb0398f569296e8c0e844599388ebd6",
+            "docker.io/library/busybox:latest"
+          ],
+          "sizeBytes": 2211656
+        },
+        {
+          "names": [
+            "registry.k8s.io/pause@sha256:412c4a7219cb8a299a37337f3d87810c5340095322e15594a1637785adad0f17",
+            "registry.k8s.io/pause@sha256:f548e0e8e3dc1896ca956272154dde3314e8cc4fde0a57577ee9fa1c63f5baf4",
+            "registry.k8s.io/pause:3.10.2"
+          ],
+          "sizeBytes": 742448
+        }
+      ],
+      "nodeInfo": {
+        "architecture": "amd64",
+        "bootID": "8df59f8a-2964-43cc-8aac-4469572afbdd",
+        "containerRuntimeVersion": "cri-o://1.37.0",
+        "kernelVersion": "6.8.0-138-generic",
+        "kubeProxyVersion": "",
+        "kubeletVersion": "v1.37.0",
+        "machineID": "71c3f08b1d134e1692ab7254b38f6591",
+        "operatingSystem": "linux",
+        "osImage": "Ubuntu 24.04.4 LTS",
+        "runningInUserNamespace": false,
+        "systemUUID": "00000000-0000-0000-0000-905a08ba7595"
+      },
+      "runtimeHandlers": [
+        {
+          "features": {
+            "recursiveReadOnlyMounts": true,
+            "userNamespaces": true
+          },
+          "name": ""
+        },
+        {
+          "features": {
+            "recursiveReadOnlyMounts": true,
+            "userNamespaces": true
+          },
+          "name": "crun"
+        },
+        {
+          "features": {
+            "recursiveReadOnlyMounts": true,
+            "userNamespaces": true
+          },
+          "name": "nvidia"
+        },
+        {
+          "features": {
+            "recursiveReadOnlyMounts": true,
+            "userNamespaces": true
+          },
+          "name": "nvidia-cdi"
+        },
+        {
+          "features": {
+            "recursiveReadOnlyMounts": true,
+            "userNamespaces": true
+          },
+          "name": "nvidia-legacy"
+        },
+        {
+          "features": {
+            "recursiveReadOnlyMounts": true,
+            "userNamespaces": true
+          },
+          "name": "runc"
+        }
+      ]
+    }
+  },
+  "operator_deployments": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/revision": "3",
+          "meta.helm.sh/release-name": "vmweave",
+          "meta.helm.sh/release-namespace": "vmweave-system"
+        },
+        "creationTimestamp": "2026-09-30T08:46:07Z",
+        "generation": 5,
+        "labels": {
+          "app.kubernetes.io/component": "controller",
+          "app.kubernetes.io/managed-by": "Helm",
+          "app.kubernetes.io/part-of": "vmweave"
+        },
+        "name": "vmweave-controller",
+        "namespace": "vmweave-system",
+        "resourceVersion": "3441512",
+        "uid": "93bf4fd4-264c-44c1-9889-d3c1854a33ac"
+      },
+      "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 10,
+        "selector": {
+          "matchLabels": {
+            "app": "vmweave-controller"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "vmweave-controller",
+              "app.kubernetes.io/part-of": "vmweave"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "args": [
+                  "--component=controller",
+                  "--mode=active",
+                  "--namespaces=vmweave-test-a,vmweave-test-b",
+                  "--system-namespace=vmweave-system",
+                  "--controller-service-account=vmweave-controller",
+                  "--leader-elect=true"
+                ],
+                "command": [
+                  "/manager"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_WORKLOAD_TOLERATIONS",
+                    "value": "[]"
+                  }
+                ],
+                "image": "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/healthz",
+                    "port": "health",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "controller",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "name": "metrics",
+                    "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 8081,
+                    "name": "health",
+                    "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 9443,
+                    "name": "webhook",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/readyz",
+                    "port": "health",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "memory": "512Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "96Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "readOnlyRootFilesystem": true
+                },
+                "startupProbe": {
+                  "failureThreshold": 60,
+                  "httpGet": {
+                    "path": "/healthz",
+                    "port": "health",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 2,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "gpu-4"
+            },
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 65532,
+              "runAsNonRoot": true,
+              "runAsUser": 65532,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "serviceAccount": "vmweave-controller",
+            "serviceAccountName": "vmweave-controller",
+            "terminationGracePeriodSeconds": 30
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-09-30T08:46:07Z",
+            "lastUpdateTime": "2026-09-30T10:20:00Z",
+            "message": "ReplicaSet \"vmweave-controller-577f8dd948\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2026-09-30T10:20:24Z",
+            "lastUpdateTime": "2026-09-30T10:20:24Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          }
+        ],
+        "observedGeneration": 5,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "terminatingReplicas": 0,
+        "updatedReplicas": 1
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/revision": "3",
+          "meta.helm.sh/release-name": "vmweave",
+          "meta.helm.sh/release-namespace": "vmweave-system"
+        },
+        "creationTimestamp": "2026-09-30T08:46:07Z",
+        "generation": 3,
+        "labels": {
+          "app.kubernetes.io/component": "webhook",
+          "app.kubernetes.io/managed-by": "Helm",
+          "app.kubernetes.io/part-of": "vmweave"
+        },
+        "name": "vmweave-webhook",
+        "namespace": "vmweave-system",
+        "resourceVersion": "3441387",
+        "uid": "f638107c-0f06-4395-9856-657b23fc2c49"
+      },
+      "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 10,
+        "selector": {
+          "matchLabels": {
+            "app": "vmweave-webhook"
+          }
+        },
+        "strategy": {
+          "type": "Recreate"
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "vmweave-webhook",
+              "app.kubernetes.io/part-of": "vmweave"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "args": [
+                  "--component=webhook",
+                  "--mode=active",
+                  "--namespaces=vmweave-test-a,vmweave-test-b",
+                  "--system-namespace=vmweave-system",
+                  "--controller-service-account=vmweave-controller",
+                  "--leader-elect=true"
+                ],
+                "command": [
+                  "/manager"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_WORKLOAD_TOLERATIONS",
+                    "value": "[]"
+                  }
+                ],
+                "image": "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/healthz",
+                    "port": "health",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "name": "webhook",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "name": "metrics",
+                    "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 8081,
+                    "name": "health",
+                    "protocol": "TCP"
+                  },
+                  {
+                    "containerPort": 9443,
+                    "name": "webhook",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 3,
+                  "httpGet": {
+                    "path": "/readyz",
+                    "port": "health",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "memory": "512Mi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "96Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  },
+                  "readOnlyRootFilesystem": true
+                },
+                "startupProbe": {
+                  "failureThreshold": 60,
+                  "httpGet": {
+                    "path": "/healthz",
+                    "port": "health",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 2,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/tls",
+                    "name": "tls",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "gpu-4"
+            },
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 65532,
+              "runAsNonRoot": true,
+              "runAsUser": 65532,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "serviceAccount": "vmweave-webhook",
+            "serviceAccountName": "vmweave-webhook",
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "name": "tls",
+                "secret": {
+                  "defaultMode": 420,
+                  "secretName": "vmweave-webhook-tls"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-09-30T10:20:03Z",
+            "lastUpdateTime": "2026-09-30T10:20:03Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-09-30T08:46:07Z",
+            "lastUpdateTime": "2026-09-30T10:20:03Z",
+            "message": "ReplicaSet \"vmweave-webhook-7fbf99b85\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          }
+        ],
+        "observedGeneration": 3,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "terminatingReplicas": 0,
+        "updatedReplicas": 1
+      }
+    }
+  ],
+  "prometheus_targets": [
+    {
+      "discoveredLabels": {
+        "__address__": "10.105.14.111:9400",
+        "__metrics_path__": "/metrics",
+        "__scheme__": "http",
+        "__scrape_interval__": "1s",
+        "__scrape_timeout__": "900ms",
+        "job": "dcgm"
+      },
+      "labels": {
+        "instance": "10.105.14.111:9400",
+        "job": "dcgm"
+      },
+      "scrapePool": "dcgm",
+      "scrapeUrl": "http://10.105.14.111:9400/metrics",
+      "globalUrl": "http://10.105.14.111:9400/metrics",
+      "lastError": "",
+      "lastScrape": "2026-10-01T01:07:13.768323456Z",
+      "lastScrapeDuration": 0.003299794,
+      "health": "up",
+      "scrapeInterval": "1s",
+      "scrapeTimeout": "900ms"
+    },
+    {
+      "discoveredLabels": {
+        "__address__": "10.97.206.19:31992",
+        "__metrics_path__": "/metrics",
+        "__scheme__": "http",
+        "__scrape_interval__": "1s",
+        "__scrape_timeout__": "900ms",
+        "job": "hami"
+      },
+      "labels": {
+        "instance": "10.97.206.19:31992",
+        "job": "hami"
+      },
+      "scrapePool": "hami",
+      "scrapeUrl": "http://10.97.206.19:31992/metrics",
+      "globalUrl": "http://10.97.206.19:31992/metrics",
+      "lastError": "",
+      "lastScrape": "2026-10-01T01:07:14.643543617Z",
+      "lastScrapeDuration": 0.002461077,
+      "health": "up",
+      "scrapeInterval": "1s",
+      "scrapeTimeout": "900ms"
+    },
+    {
+      "discoveredLabels": {
+        "__address__": "10.110.216.21:9100",
+        "__metrics_path__": "/metrics",
+        "__scheme__": "http",
+        "__scrape_interval__": "1s",
+        "__scrape_timeout__": "900ms",
+        "job": "node"
+      },
+      "labels": {
+        "instance": "10.110.216.21:9100",
+        "job": "node"
+      },
+      "scrapePool": "node",
+      "scrapeUrl": "http://10.110.216.21:9100/metrics",
+      "globalUrl": "http://10.110.216.21:9100/metrics",
+      "lastError": "",
+      "lastScrape": "2026-10-01T01:07:13.857006063Z",
+      "lastScrapeDuration": 0.225927537,
+      "health": "up",
+      "scrapeInterval": "1s",
+      "scrapeTimeout": "900ms"
+    }
+  ],
+  "grafana_health": {
+    "database": "ok",
+    "version": "12.0.2",
+    "commit": "5bda17e7c1cb313eb96266f2fdda73a6b35c3977"
+  },
+  "target_gpu_processes": ""
+}

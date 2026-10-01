@@ -1,0 +1,47 @@
+Script started on 2026-09-30 22:43:45+09:00 [COMMAND="python3 .local/performance-20260930/pilot-t-v2.py" <not executed on terminal>]
+COMMAND pilot-tcp-v2 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/pilot-tcp-v2/known-hosts ubuntu@10.85.0.128 'sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T batch 2 3 1 /tmp/perf/pilot-tcp-v2 /tmp/perf/work.cubin 0 127'
+pilot-tcp-v2 {"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+pilot-tcp-v2 {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":2,"warmup_min_s":1,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+pilot-tcp-v2 {"event":"WARMUP_START","utc":1790775918.074270010,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"WARMUP_END","utc":1790775919.075105667,"elapsed":1.000814412,"completed":1552}
+pilot-tcp-v2 {"event":"MEASUREMENT_START","utc":1790775919.075135708,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"MEASUREMENT_END","utc":1790775921.076042652,"elapsed":2.000899482,"completed":3216}
+pilot-tcp-v2 {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":3216,"elapsed_s":2.000899482,"operations_per_s":1607.277141571,"checked_elements":262144,"mismatches":0}
+pilot-tcp-v2 {"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":2,"warmup_min_s":1,"iterations":1,"free_bytes":4290772992,"total_bytes":4294967296}
+pilot-tcp-v2 {"event":"WARMUP_START","utc":1790775921.103386164,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"WARMUP_END","utc":1790775922.104241371,"elapsed":1.000820711,"completed":514}
+pilot-tcp-v2 {"event":"MEASUREMENT_START","utc":1790775922.104271650,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"MEASUREMENT_END","utc":1790775924.104579210,"elapsed":2.000300375,"completed":1151}
+pilot-tcp-v2 {"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":1151,"elapsed_s":2.000300375,"operations_per_s":575.413580073,"checked_elements":262144,"mismatches":0}
+pilot-tcp-v2 {"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":2,"warmup_min_s":1,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+pilot-tcp-v2 {"event":"WARMUP_START","utc":1790775924.123388767,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"WARMUP_END","utc":1790775925.123842239,"elapsed":1.000432825,"completed":331}
+pilot-tcp-v2 {"event":"MEASUREMENT_START","utc":1790775925.123870850,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"MEASUREMENT_END","utc":1790775927.124248981,"elapsed":2.000370732,"completed":1669}
+pilot-tcp-v2 {"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":1669,"elapsed_s":2.000370732,"operations_per_s":834.345340742,"checked_elements":1024,"mismatches":0}
+pilot-tcp-v2 {"event":"CONDITION","mode":"copy","bytes":1048576,"duration_s":2,"warmup_min_s":1,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+pilot-tcp-v2 {"event":"WARMUP_START","utc":1790775927.136811972,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"WARMUP_END","utc":1790775928.142020941,"elapsed":1.005187644,"completed":167}
+pilot-tcp-v2 {"event":"MEASUREMENT_START","utc":1790775928.142052174,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"MEASUREMENT_END","utc":1790775930.144957542,"elapsed":2.002898483,"completed":326}
+pilot-tcp-v2 {"event":"RESULT","status":"PASS","mode":"copy","bytes":1048576,"completed":326,"elapsed_s":2.002898483,"operations_per_s":162.764115489,"checked_elements":262144,"mismatches":0}
+pilot-tcp-v2 {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":2,"warmup_min_s":1,"iterations":64,"free_bytes":4261412864,"total_bytes":4294967296}
+pilot-tcp-v2 {"event":"WARMUP_START","utc":1790775930.214627028,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"WARMUP_END","utc":1790775931.388276815,"elapsed":1.173628270,"completed":50}
+pilot-tcp-v2 {"event":"MEASUREMENT_START","utc":1790775931.388296843,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"MEASUREMENT_END","utc":1790775933.391679049,"elapsed":2.003378459,"completed":90}
+pilot-tcp-v2 {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":90,"elapsed_s":2.003378459,"operations_per_s":44.924112863,"checked_elements":4194304,"mismatches":0}
+pilot-tcp-v2 {"event":"CONDITION","mode":"resident","bytes":2097152,"duration_s":3,"warmup_min_s":1,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+pilot-tcp-v2 {"event":"WARMUP_START","utc":1790775933.431532383,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"WARMUP_END","utc":1790775934.433511972,"elapsed":1.001968640,"completed":509}
+pilot-tcp-v2 {"event":"MEASUREMENT_START","utc":1790775934.433553696,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"MEASUREMENT_END","utc":1790775938.465094090,"elapsed":3.000107237,"completed":2449}
+pilot-tcp-v2 {"event":"RESULT","status":"PASS","mode":"resident","bytes":2097152,"completed":2449,"elapsed_s":3.000107237,"operations_per_s":816.304153997,"checked_elements":524288,"mismatches":0}
+pilot-tcp-v2 {"event":"CONDITION","mode":"transfer","bytes":2097152,"duration_s":3,"warmup_min_s":1,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+pilot-tcp-v2 {"event":"WARMUP_START","utc":1790775938.495294809,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"WARMUP_END","utc":1790775939.498331785,"elapsed":1.003017476,"completed":136}
+pilot-tcp-v2 {"event":"MEASUREMENT_START","utc":1790775939.498362780,"elapsed":0.000000000,"completed":0}
+pilot-tcp-v2 {"event":"MEASUREMENT_END","utc":1790775942.500624180,"elapsed":3.002254476,"completed":442}
+pilot-tcp-v2 {"event":"RESULT","status":"PASS","mode":"transfer","bytes":2097152,"completed":442,"elapsed_s":3.002254476,"operations_per_s":147.222696655,"checked_elements":524288,"mismatches":0}
+
+Script done on 2026-09-30 22:45:53+09:00 [COMMAND_EXIT_CODE="0"]

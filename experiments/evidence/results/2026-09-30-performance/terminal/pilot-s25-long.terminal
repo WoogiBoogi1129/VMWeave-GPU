@@ -1,0 +1,9 @@
+Script started on 2026-09-30 22:33:39+09:00 [COMMAND="python3 experiments/performance/pilot.py --path S --cap 25 --reps 1048576 --name pilot-s25-long --seconds 120" <not executed on terminal>]
+COMMAND pilot-s25-long ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/pilot-s25-long/known-hosts ubuntu@10.85.0.68 'sudo env FLYT_TRACE_REQUESTS=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 10 1048576 0 0 /tmp/perf/pilot-s25-long /tmp/perf/work.ptx'
+pilot-s25-long {"event":"WARMUP_START","phase":"warmup","utc":1790775270.830161810,"elapsed":0.000000000,"completed":0}
+pilot-s25-long {"event":"WARMUP_END","phase":"warmup","utc":1790775280.830245972,"elapsed":10.000032201,"completed":834}
+pilot-s25-long {"event":"MEASUREMENT_START","phase":"timed","utc":1790775280.830287695,"elapsed":0.000000000,"completed":0}
+pilot-s25-long {"event":"MEASUREMENT_END","phase":"timed","utc":1790775400.841397524,"elapsed":120.011101513,"completed":9656}
+pilot-s25-long {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790775280.830295563,"reps":1048576,"bytes":2097152,"completed":9656,"elapsed_s":120.011101513,"operations_per_s":80.459223174,"checked_elements":524288,"mismatches":0}
+
+Script done on 2026-09-30 22:36:53+09:00 [COMMAND_EXIT_CODE="0"]

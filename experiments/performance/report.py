@@ -81,5 +81,17 @@ lines += ['', '각 값은 독립 실행 5회의 평균 ± SD입니다. A는 계�
  '예비 실행의 준비 오류·이미지 GC 복구·부하 선택·시계 보정은 별도 이력에 남겼으며 본 실험 반복에 합산하지 않았습니다. SSH 비밀키와 인증 비밀값은 공개 증거에서 제외 또는 마스킹했습니다. 전체 계획 완료 여부와 자원 정리 상태는 검증 결과 및 최종 감사 파일을 기준으로 확인합니다.','']
 if v.get('interrupted_attempts'):
  lines[4:4]=['', f"공유 단계에서 {len(v['interrupted_attempts'])}쌍의 실행기가 중단됐습니다. 해당 시도에는 측정 시작·완료 기록이 없어 원본을 보존하고 완료 반복에서 제외했습니다. 이미 완료한 7쌍을 유지한 채 별도 이름의 대체 실행과 나머지 조건을 재개했습니다. 원래 대기 로그와 재개 사이에 약 6시간의 공백이 있으며 시간대별 환경 차이를 완전히 배제하지 못합니다. 따라서 연속 무중단 실행을 뜻하지 않습니다. [중단 이력](interruptions.json)과 [재개 절차](RECOVERY.md)를 함께 확인하세요.", '']
+if v['campaign_complete']:
+ limited=[r for cap,r in s['single'].items() if int(cap)<100]
+ failed=sum(r['enforcement'].count('FAIL') for r in limited)
+ trials=sum(r['n'] for r in limited)
+ latency=[p for k,p in s['overhead'].items() if not k.startswith(('resident','transfer'))]
+ slower=sum(p['S']['mean_us']['mean']>p['T']['mean_us']['mean'] for p in latency)
+ retention=[r['retention']*100 for r in s['shared'].values()]
+ lines[4:4]=['', '전체 실행을 완료했지만, 기대한 상한 제어와 SHM 성능 우위를 확인한 결과는 아닙니다.',
+  f"단일 VM의 상한 25·50·75는 {trials}회 중 {failed}회 사전 이용률 기준을 초과했습니다. N/T/S 호출·전송 지표 {len(latency)}개 중 {slower}개에서 SHM의 평균 지연이 TCP/RPC보다 컸습니다. 공유 시 A의 처리량 유지율은 조건별 평균 {min(retention):.1f}–{max(retention):.1f}%였습니다. 세부 범위와 해석상의 한계는 아래에 기록합니다.",
+  '[최종 자원 감사](final-audit.json) · [모니터링 재조회](monitoring/README.md) · [원본 체크섬](SHA256SUMS)', '']
+if (root/'cleanup-recovery/manual-finalization-result.json').exists():
+ lines[4:4]=['', '측정 후 정리에서도 Foreground 삭제와 제어기 증거 확인 순서가 충돌했습니다. 채널 삭제 방식을 수정했고, 이미 Released였던 채널 한 개는 이전 커밋의 회수 기록과 현재 유휴·빈 자원 상태를 확인한 뒤 finalizer를 수동 해제했습니다. 이를 정상 자동 회수로 표시하지 않습니다. [정리 실패와 복구 증거](cleanup-recovery/README.md)를 함께 확인하세요.', '']
 (root/'README.md').write_text('\n'.join(lines))
 print(root/'README.md')

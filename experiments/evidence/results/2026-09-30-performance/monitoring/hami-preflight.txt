@@ -1,0 +1,45 @@
+# HELP hami_build_info hami build metadata exposed as labels with a constant value of 1.
+# TYPE hami_build_info gauge
+hami_build_info{build_date="20260821-06:43:52",compiler="gc",go_version="go1.26.6",platform="linux/amd64",revision="4707fb0",version="v2.10.0"} 1
+# HELP hami_container_device_memory_bytes Container device memory usage in bytes
+# TYPE hami_container_device_memory_bytes gauge
+hami_container_device_memory_bytes{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 5.767168e+08
+# HELP hami_container_device_utilization_ratio Container device SM utilization ratio
+# TYPE hami_container_device_utilization_ratio gauge
+hami_container_device_utilization_ratio{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 0
+# HELP hami_container_last_kernel_elapsed_seconds Seconds since last kernel execution in container
+# TYPE hami_container_last_kernel_elapsed_seconds gauge
+hami_container_last_kernel_elapsed_seconds{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 30
+# HELP hami_host_gpu_memory_controller_utilization_ratio GPU memory controller utilization ratio (0-100)
+# TYPE hami_host_gpu_memory_controller_utilization_ratio gauge
+hami_host_gpu_memory_controller_utilization_ratio{device_index="0",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-772181af-05a4-0c24-de59-8487bd37c142",zone="vGPU"} 0
+hami_host_gpu_memory_controller_utilization_ratio{device_index="1",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",zone="vGPU"} 0
+hami_host_gpu_memory_controller_utilization_ratio{device_index="2",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",zone="vGPU"} 0
+hami_host_gpu_memory_controller_utilization_ratio{device_index="3",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-1b4de6a0-88ae-4004-98b9-035906a2473f",zone="vGPU"} 0
+# HELP hami_host_gpu_memory_used_bytes GPU device memory usage in bytes
+# TYPE hami_host_gpu_memory_used_bytes gauge
+hami_host_gpu_memory_used_bytes{device_index="0",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-772181af-05a4-0c24-de59-8487bd37c142",node="gpu-4",zone="vGPU"} 6.6813952e+08
+hami_host_gpu_memory_used_bytes{device_index="1",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",node="gpu-4",zone="vGPU"} 1.253441536e+09
+hami_host_gpu_memory_used_bytes{device_index="2",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",node="gpu-4",zone="vGPU"} 6.6813952e+08
+hami_host_gpu_memory_used_bytes{device_index="3",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-1b4de6a0-88ae-4004-98b9-035906a2473f",node="gpu-4",zone="vGPU"} 6.6813952e+08
+# HELP hami_host_gpu_utilization_ratio GPU core utilization ratio (0-100)
+# TYPE hami_host_gpu_utilization_ratio gauge
+hami_host_gpu_utilization_ratio{device_index="0",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-772181af-05a4-0c24-de59-8487bd37c142",node="gpu-4",zone="vGPU"} 0
+hami_host_gpu_utilization_ratio{device_index="1",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",node="gpu-4",zone="vGPU"} 0
+hami_host_gpu_utilization_ratio{device_index="2",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",node="gpu-4",zone="vGPU"} 0
+hami_host_gpu_utilization_ratio{device_index="3",device_type="NVIDIA-NVIDIA RTX PRO 6000 Blackwell Server Edition",device_uuid="GPU-1b4de6a0-88ae-4004-98b9-035906a2473f",node="gpu-4",zone="vGPU"} 0
+# HELP hami_vgpu_memory_buffer_bytes Container device memory buffer size in bytes
+# TYPE hami_vgpu_memory_buffer_bytes gauge
+hami_vgpu_memory_buffer_bytes{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 0
+# HELP hami_vgpu_memory_context_bytes Container device memory context size in bytes
+# TYPE hami_vgpu_memory_context_bytes gauge
+hami_vgpu_memory_context_bytes{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 5.767168e+08
+# HELP hami_vgpu_memory_limit_bytes vGPU device memory limit in bytes
+# TYPE hami_vgpu_memory_limit_bytes gauge
+hami_vgpu_memory_limit_bytes{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 4.294967296e+09
+# HELP hami_vgpu_memory_module_bytes Container device memory module size in bytes
+# TYPE hami_vgpu_memory_module_bytes gauge
+hami_vgpu_memory_module_bytes{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 0
+# HELP hami_vgpu_memory_used_bytes vGPU device memory usage in bytes
+# TYPE hami_vgpu_memory_used_bytes gauge
+hami_vgpu_memory_used_bytes{container="main",device_uuid="GPU-7d708c42-8d4a-16d5-0746-474567157aa3",namespace="vmweave-test-a",pod="pilot-s100-769af0f045a1-worker",vdevice_index="0",zone="vGPU"} 5.767168e+08

@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-30-performance$ # Protocol and raw first-run output
+ubuntu@gpu-4:2026-09-30-performance$ jq '.overhead' protocol-overhead.json
+{
+  "micro_s": 10,
+  "throughput_s": 30,
+  "warmup_s": 10,
+  "warmup_min_operations": 50,
+  "copy_bytes": [
+    4096,
+    1048576,
+    16777216
+  ],
+  "orders": [
+    "NTS",
+    "TSN",
+    "SNT",
+    "NST",
+    "STN"
+  ]
+}
+ubuntu@gpu-4:2026-09-30-performance$ jq -Rr 'fromjson? | select(.event=="RESULT") | [.mode,.by
+tes,.completed,.operations_per_s,.mismatches] | @tsv' runs/perf-o-r1-t/stdout.jsonl | column -
+t
+query     1048576   12776  1277.555514367  0
+kernel    1048576   6499   649.846604834   0
+copy      4096      2559   255.860848685   0
+copy      1048576   1686   168.574259082   0
+copy      16777216  452    45.148319621    0
+resident  2097152   16686  556.167013178   0
+transfer  2097152   3990   132.964561213   0
+ubuntu@gpu-4:2026-09-30-performance$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

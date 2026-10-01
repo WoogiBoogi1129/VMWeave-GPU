@@ -1,0 +1,25 @@
+[
+  {
+    "stage": "pilot preparation",
+    "run": "pilot-s100",
+    "change": "Runner now discovers UID-owned worker Pods by generated name suffix, instead of legacy container name worker. Current container is main. Failed preparation preserved and channel Released; new allocation pilot-s100-v2 succeeded."
+  },
+  {
+    "stage": "pilot preparation",
+    "run": "pilot-tcp",
+    "change": "Kubelet image GC removed idle imported images. Reimported immutable archives and added campaign-owned retention Pods; no measured window ran during image recovery."
+  },
+  {
+    "stage": "protocol",
+    "change": "Policy delivery, actual libvgpu mapping and throttling pauses verified; cap 25 still exceeds upper-limit criterion. Formal campaign characterizes enforcement failure and sharing interference; it does not assert successful cap enforcement."
+  },
+  {
+    "stage": "pilot",
+    "run": "pilot-tcp-v2",
+    "change": "Pilot revealed a guest wall-clock step while monotonic latency remained valid. Fresh formal guests disable NTP before clock mapping; runtime capture occurs during warmup. Pilot data are excluded from formal repeats."
+  },
+  {
+    "stage": "before load/shared formal measurements",
+    "change": "Added idle hold after transient B workload so its process/Worker/VM remains alive through the A recovery window. New load binary hashes frozen before load experiments; N/T/S overhead binaries and active campaign are unchanged. Original overhead protocol preserved."
+  }
+]

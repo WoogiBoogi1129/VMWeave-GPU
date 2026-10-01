@@ -6,5 +6,13 @@
     "correction": "Record null cap for T; preserve actual T path and require five T sessions. Existing output, sample, clock, and release checks unchanged.",
     "original_error_log": "analysis-history/recovery-checkpoint-1.txt",
     "note": "Verifier schema error, not a failed benchmark. No measurements repeated or removed."
+  },
+  {
+    "utc": 1790816941.793408,
+    "component": "Terminal capture supervisor environment",
+    "issue": "Postprocessing service resolved system Node.js 18.19.1, incompatible with the installed Playwright; capture did not start.",
+    "correction": "Use explicit PERF_NODE pointing to existing Node.js v24.16.0, as used for successful Grafana captures. Resume captures only; do not rerun measurements, retention or cleanup.",
+    "original_error_log": "analysis-history/final-postprocess-retry-3.txt",
+    "note": "Postprocessing environment error; measurement data unchanged."
   }
 ]

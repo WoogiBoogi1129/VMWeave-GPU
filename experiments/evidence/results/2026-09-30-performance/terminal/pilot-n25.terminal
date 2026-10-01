@@ -1,0 +1,9 @@
+Script started on 2026-09-30 22:26:29+09:00 [COMMAND="python3 experiments/performance/pilot.py --path N --cap 25 --name pilot-n25 --seconds 30" <not executed on terminal>]
+COMMAND pilot-n25 kubectl exec -n vmweave-test-a pilot-n25 -- taskset -c 0-7 /evidence/load-N 30 10 524288 0 0 /evidence/pilot-n25 /evidence/work.ptx
+pilot-n25 {"event":"WARMUP_START","phase":"warmup","utc":1790774834.770829916,"elapsed":0.000000000,"completed":0}
+pilot-n25 {"event":"WARMUP_END","phase":"warmup","utc":1790774845.586044073,"elapsed":10.815172372,"completed":1719}
+pilot-n25 {"event":"MEASUREMENT_START","phase":"timed","utc":1790774845.586127043,"elapsed":0.000000000,"completed":0}
+pilot-n25 {"event":"MEASUREMENT_END","phase":"timed","utc":1790774876.339700937,"elapsed":30.753565096,"completed":4866}
+pilot-n25 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790774845.586135626,"reps":524288,"bytes":2097152,"completed":4866,"elapsed_s":30.753565096,"operations_per_s":158.225558071,"checked_elements":524288,"mismatches":0}
+
+Script done on 2026-09-30 22:28:27+09:00 [COMMAND_EXIT_CODE="0"]

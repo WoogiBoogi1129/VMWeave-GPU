@@ -1,0 +1,223 @@
+Script started on 2026-09-30 23:51:02+09:00 [COMMAND="python3 experiments/performance/run.py single" <not executed on terminal>]
+SESSION_START perf-c-r1-75 1790779862.197393
+COMMAND perf-c-r1-75 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r1-75/known-hosts ubuntu@10.85.0.82 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r1-75 /tmp/perf/work.ptx'
+perf-c-r1-75 {"event":"WARMUP_START","phase":"warmup","utc":1790779910.946848154,"elapsed":0.000000000,"completed":0}
+perf-c-r1-75 {"event":"WARMUP_END","phase":"warmup","utc":1790779940.955425739,"elapsed":30.008526478,"completed":2494}
+perf-c-r1-75 {"event":"MEASUREMENT_START","phase":"timed","utc":1790779940.955499411,"elapsed":0.000000000,"completed":0}
+perf-c-r1-75 {"event":"MEASUREMENT_END","phase":"timed","utc":1790780060.957088947,"elapsed":120.001581243,"completed":9997}
+perf-c-r1-75 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790779940.955507517,"reps":1048576,"bytes":2097152,"completed":9997,"elapsed_s":120.001581243,"operations_per_s":83.307235592,"checked_elements":524288,"mismatches":0}
+perf-c-r1-75 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790780060.985698700,"elapsed":0.000000000,"completed":0}
+perf-c-r1-75 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790780091.181819201,"elapsed":30.196112309,"completed":2500}
+perf-c-r1-75 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790780060.985706568,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.196112309,"operations_per_s":82.792114906,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r1-75 1790780106.8234453
+SESSION_START perf-c-r1-100 1790780106.823728
+COMMAND perf-c-r1-100 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r1-100/known-hosts ubuntu@10.85.0.87 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r1-100 /tmp/perf/work.ptx'
+perf-c-r1-100 {"event":"WARMUP_START","phase":"warmup","utc":1790780157.765853882,"elapsed":0.000000000,"completed":0}
+perf-c-r1-100 {"event":"WARMUP_END","phase":"warmup","utc":1790780187.771512747,"elapsed":30.005604747,"completed":2517}
+perf-c-r1-100 {"event":"MEASUREMENT_START","phase":"timed","utc":1790780187.773319006,"elapsed":0.000000000,"completed":0}
+perf-c-r1-100 {"event":"MEASUREMENT_END","phase":"timed","utc":1790780307.780916691,"elapsed":120.007589417,"completed":10077}
+perf-c-r1-100 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790780187.773326874,"reps":1048576,"bytes":2097152,"completed":10077,"elapsed_s":120.007589417,"operations_per_s":83.969689325,"checked_elements":524288,"mismatches":0}
+perf-c-r1-100 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790780307.844049454,"elapsed":0.000000000,"completed":0}
+perf-c-r1-100 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790780337.736941576,"elapsed":29.892884232,"completed":2500}
+perf-c-r1-100 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790780307.844056845,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.892884232,"operations_per_s":83.631943328,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r1-100 1790780350.00817
+SESSION_START perf-c-r1-25 1790780350.008547
+COMMAND perf-c-r1-25 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r1-25/known-hosts ubuntu@10.85.0.28 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r1-25 /tmp/perf/work.ptx'
+perf-c-r1-25 {"event":"WARMUP_START","phase":"warmup","utc":1790780401.240649223,"elapsed":0.000000000,"completed":0}
+perf-c-r1-25 {"event":"WARMUP_END","phase":"warmup","utc":1790780431.247928619,"elapsed":30.007223241,"completed":2513}
+perf-c-r1-25 {"event":"MEASUREMENT_START","phase":"timed","utc":1790780431.247961760,"elapsed":0.000000000,"completed":0}
+perf-c-r1-25 {"event":"MEASUREMENT_END","phase":"timed","utc":1790780551.248929739,"elapsed":120.000959696,"completed":9684}
+perf-c-r1-25 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790780431.247969627,"reps":1048576,"bytes":2097152,"completed":9684,"elapsed_s":120.000959696,"operations_per_s":80.699354610,"checked_elements":524288,"mismatches":0}
+perf-c-r1-25 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790780551.286090612,"elapsed":0.000000000,"completed":0}
+perf-c-r1-25 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790780582.963016272,"elapsed":31.676918426,"completed":2500}
+perf-c-r1-25 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790780551.286097527,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":31.676918426,"operations_per_s":78.921818290,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r1-25 1790780597.028451
+SESSION_START perf-c-r1-50 1790780597.028587
+COMMAND perf-c-r1-50 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r1-50/known-hosts ubuntu@10.85.0.233 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r1-50 /tmp/perf/work.ptx'
+perf-c-r1-50 {"event":"WARMUP_START","phase":"warmup","utc":1790780647.779404402,"elapsed":0.000000000,"completed":0}
+perf-c-r1-50 {"event":"WARMUP_END","phase":"warmup","utc":1790780677.791754961,"elapsed":30.012293731,"completed":2510}
+perf-c-r1-50 {"event":"MEASUREMENT_START","phase":"timed","utc":1790780677.791782856,"elapsed":0.000000000,"completed":0}
+perf-c-r1-50 {"event":"MEASUREMENT_END","phase":"timed","utc":1790780797.798820019,"elapsed":120.007032876,"completed":9969}
+perf-c-r1-50 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790780677.791786909,"reps":1048576,"bytes":2097152,"completed":9969,"elapsed_s":120.007032876,"operations_per_s":83.070131484,"checked_elements":524288,"mismatches":0}
+perf-c-r1-50 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790780797.833625555,"elapsed":0.000000000,"completed":0}
+perf-c-r1-50 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790780828.333660126,"elapsed":30.500027526,"completed":2500}
+perf-c-r1-50 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790780797.833632231,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.500027526,"operations_per_s":81.967139140,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r1-50 1790780840.923338
+SESSION_START perf-c-r2-100 1790780840.923975
+COMMAND perf-c-r2-100 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r2-100/known-hosts ubuntu@10.85.0.114 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r2-100 /tmp/perf/work.ptx'
+perf-c-r2-100 {"event":"WARMUP_START","phase":"warmup","utc":1790780891.291374207,"elapsed":0.000000000,"completed":0}
+perf-c-r2-100 {"event":"WARMUP_END","phase":"warmup","utc":1790780921.297460556,"elapsed":30.006031400,"completed":2521}
+perf-c-r2-100 {"event":"MEASUREMENT_START","phase":"timed","utc":1790780921.297493935,"elapsed":0.000000000,"completed":0}
+perf-c-r2-100 {"event":"MEASUREMENT_END","phase":"timed","utc":1790781041.308321238,"elapsed":120.010819236,"completed":10087}
+perf-c-r2-100 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790780921.297501802,"reps":1048576,"bytes":2097152,"completed":10087,"elapsed_s":120.010819236,"operations_per_s":84.050755292,"checked_elements":524288,"mismatches":0}
+perf-c-r2-100 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790781041.343022823,"elapsed":0.000000000,"completed":0}
+perf-c-r2-100 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790781071.097550154,"elapsed":29.754520049,"completed":2500}
+perf-c-r2-100 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790781041.343029737,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.754520049,"operations_per_s":84.020847787,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r2-100 1790781086.1832414
+SESSION_START perf-c-r2-25 1790781086.1838965
+COMMAND perf-c-r2-25 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r2-25/known-hosts ubuntu@10.85.0.76 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r2-25 /tmp/perf/work.ptx'
+perf-c-r2-25 {"event":"WARMUP_START","phase":"warmup","utc":1790781133.903155565,"elapsed":0.000000000,"completed":0}
+perf-c-r2-25 {"event":"WARMUP_END","phase":"warmup","utc":1790781163.907649755,"elapsed":30.004425123,"completed":2503}
+perf-c-r2-25 {"event":"MEASUREMENT_START","phase":"timed","utc":1790781163.907681465,"elapsed":0.000000000,"completed":0}
+perf-c-r2-25 {"event":"MEASUREMENT_END","phase":"timed","utc":1790781283.910086155,"elapsed":120.002397362,"completed":9702}
+perf-c-r2-25 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790781163.907688379,"reps":1048576,"bytes":2097152,"completed":9702,"elapsed_s":120.002397362,"operations_per_s":80.848384810,"checked_elements":524288,"mismatches":0}
+perf-c-r2-25 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790781283.941845179,"elapsed":0.000000000,"completed":0}
+perf-c-r2-25 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790781314.471096039,"elapsed":30.529243253,"completed":2500}
+perf-c-r2-25 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790781283.941852331,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.529243253,"operations_per_s":81.888698625,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r2-25 1790781329.5677595
+SESSION_START perf-c-r2-50 1790781329.567971
+COMMAND perf-c-r2-50 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r2-50/known-hosts ubuntu@10.85.0.113 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r2-50 /tmp/perf/work.ptx'
+perf-c-r2-50 {"event":"WARMUP_START","phase":"warmup","utc":1790781379.305767298,"elapsed":0.000000000,"completed":0}
+perf-c-r2-50 {"event":"WARMUP_END","phase":"warmup","utc":1790781409.314491987,"elapsed":30.008672814,"completed":2511}
+perf-c-r2-50 {"event":"MEASUREMENT_START","phase":"timed","utc":1790781409.314525604,"elapsed":0.000000000,"completed":0}
+perf-c-r2-50 {"event":"MEASUREMENT_END","phase":"timed","utc":1790781529.315522909,"elapsed":120.000989504,"completed":9975}
+perf-c-r2-50 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790781409.314532995,"reps":1048576,"bytes":2097152,"completed":9975,"elapsed_s":120.000989504,"operations_per_s":83.124314568,"checked_elements":524288,"mismatches":0}
+perf-c-r2-50 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790781529.347753286,"elapsed":0.000000000,"completed":0}
+perf-c-r2-50 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790781559.758135796,"elapsed":30.410375002,"completed":2500}
+perf-c-r2-50 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790781529.347760439,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.410375002,"operations_per_s":82.208785648,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r2-50 1790781572.7355974
+SESSION_START perf-c-r2-75 1790781572.7358623
+COMMAND perf-c-r2-75 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r2-75/known-hosts ubuntu@10.85.0.1 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r2-75 /tmp/perf/work.ptx'
+perf-c-r2-75 {"event":"WARMUP_START","phase":"warmup","utc":1790781623.604535818,"elapsed":0.000000000,"completed":0}
+perf-c-r2-75 {"event":"WARMUP_END","phase":"warmup","utc":1790781653.612922430,"elapsed":30.008333752,"completed":2511}
+perf-c-r2-75 {"event":"MEASUREMENT_START","phase":"timed","utc":1790781653.612957478,"elapsed":0.000000000,"completed":0}
+perf-c-r2-75 {"event":"MEASUREMENT_END","phase":"timed","utc":1790781773.625052929,"elapsed":120.012087960,"completed":9993}
+perf-c-r2-75 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790781653.612964630,"reps":1048576,"bytes":2097152,"completed":9993,"elapsed_s":120.012087960,"operations_per_s":83.266612304,"checked_elements":524288,"mismatches":0}
+perf-c-r2-75 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790781773.691518545,"elapsed":0.000000000,"completed":0}
+perf-c-r2-75 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790781803.819261789,"elapsed":30.127735203,"completed":2500}
+perf-c-r2-75 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790781773.691526175,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.127735203,"operations_per_s":82.980017687,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r2-75 1790781818.2387905
+SESSION_START perf-c-r3-100 1790781818.2391264
+COMMAND perf-c-r3-100 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r3-100/known-hosts ubuntu@10.85.0.195 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r3-100 /tmp/perf/work.ptx'
+perf-c-r3-100 {"event":"WARMUP_START","phase":"warmup","utc":1790781866.996690989,"elapsed":0.000000000,"completed":0}
+perf-c-r3-100 {"event":"WARMUP_END","phase":"warmup","utc":1790781897.002984524,"elapsed":30.006237154,"completed":2503}
+perf-c-r3-100 {"event":"MEASUREMENT_START","phase":"timed","utc":1790781897.003031254,"elapsed":0.000000000,"completed":0}
+perf-c-r3-100 {"event":"MEASUREMENT_END","phase":"timed","utc":1790782017.006192684,"elapsed":120.003152464,"completed":10050}
+perf-c-r3-100 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790781897.003039837,"reps":1048576,"bytes":2097152,"completed":10050,"elapsed_s":120.003152464,"operations_per_s":83.747799901,"checked_elements":524288,"mismatches":0}
+perf-c-r3-100 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790782017.052319050,"elapsed":0.000000000,"completed":0}
+perf-c-r3-100 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790782046.805707216,"elapsed":29.753379498,"completed":2500}
+perf-c-r3-100 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790782017.052327394,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.753379498,"operations_per_s":84.024068599,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r3-100 1790782062.4266953
+SESSION_START perf-c-r3-75 1790782062.4268913
+COMMAND perf-c-r3-75 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r3-75/known-hosts ubuntu@10.85.0.31 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r3-75 /tmp/perf/work.ptx'
+perf-c-r3-75 {"event":"WARMUP_START","phase":"warmup","utc":1790782111.505074501,"elapsed":0.000000000,"completed":0}
+perf-c-r3-75 {"event":"WARMUP_END","phase":"warmup","utc":1790782141.515974998,"elapsed":30.010823118,"completed":2513}
+perf-c-r3-75 {"event":"MEASUREMENT_START","phase":"timed","utc":1790782141.516010284,"elapsed":0.000000000,"completed":0}
+perf-c-r3-75 {"event":"MEASUREMENT_END","phase":"timed","utc":1790782261.524440050,"elapsed":120.008421714,"completed":9990}
+perf-c-r3-75 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790782141.516017914,"reps":1048576,"bytes":2097152,"completed":9990,"elapsed_s":120.008421714,"operations_per_s":83.244157846,"checked_elements":524288,"mismatches":0}
+perf-c-r3-75 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790782261.574741602,"elapsed":0.000000000,"completed":0}
+perf-c-r3-75 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790782291.402024269,"elapsed":29.827274261,"completed":2500}
+perf-c-r3-75 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790782261.574749708,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.827274261,"operations_per_s":83.815905474,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r3-75 1790782306.6493666
+SESSION_START perf-c-r3-50 1790782306.6496174
+COMMAND perf-c-r3-50 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r3-50/known-hosts ubuntu@10.85.0.72 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r3-50 /tmp/perf/work.ptx'
+perf-c-r3-50 {"event":"WARMUP_START","phase":"warmup","utc":1790782353.718203068,"elapsed":0.000000000,"completed":0}
+perf-c-r3-50 {"event":"WARMUP_END","phase":"warmup","utc":1790782383.719566345,"elapsed":30.001311128,"completed":2511}
+perf-c-r3-50 {"event":"MEASUREMENT_START","phase":"timed","utc":1790782383.719606161,"elapsed":0.000000000,"completed":0}
+perf-c-r3-50 {"event":"MEASUREMENT_END","phase":"timed","utc":1790782503.721345663,"elapsed":120.001731216,"completed":9932}
+perf-c-r3-50 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790782383.719614029,"reps":1048576,"bytes":2097152,"completed":9932,"elapsed_s":120.001731216,"operations_per_s":82.765472626,"checked_elements":524288,"mismatches":0}
+perf-c-r3-50 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790782503.754359245,"elapsed":0.000000000,"completed":0}
+perf-c-r3-50 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790782533.621426821,"elapsed":29.867059084,"completed":2500}
+perf-c-r3-50 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790782503.754367352,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.867059084,"operations_per_s":83.704257355,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r3-50 1790782546.5243099
+SESSION_START perf-c-r3-25 1790782546.5245683
+COMMAND perf-c-r3-25 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r3-25/known-hosts ubuntu@10.85.0.151 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r3-25 /tmp/perf/work.ptx'
+perf-c-r3-25 {"event":"WARMUP_START","phase":"warmup","utc":1790782598.273483038,"elapsed":0.000000000,"completed":0}
+perf-c-r3-25 {"event":"WARMUP_END","phase":"warmup","utc":1790782628.285727024,"elapsed":30.012189231,"completed":2508}
+perf-c-r3-25 {"event":"MEASUREMENT_START","phase":"timed","utc":1790782628.285761833,"elapsed":0.000000000,"completed":0}
+perf-c-r3-25 {"event":"MEASUREMENT_END","phase":"timed","utc":1790782748.293734074,"elapsed":120.007964474,"completed":9775}
+perf-c-r3-25 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790782628.285769224,"reps":1048576,"bytes":2097152,"completed":9775,"elapsed_s":120.007964474,"operations_per_s":81.452927252,"checked_elements":524288,"mismatches":0}
+perf-c-r3-25 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790782748.332591534,"elapsed":0.000000000,"completed":0}
+perf-c-r3-25 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790782779.947747707,"elapsed":31.615148279,"completed":2500}
+perf-c-r3-25 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790782748.332598925,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":31.615148279,"operations_per_s":79.076016912,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r3-25 1790782792.5415785
+SESSION_START perf-c-r4-50 1790782792.5417695
+COMMAND perf-c-r4-50 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r4-50/known-hosts ubuntu@10.85.0.99 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r4-50 /tmp/perf/work.ptx'
+perf-c-r4-50 {"event":"WARMUP_START","phase":"warmup","utc":1790782842.069532156,"elapsed":0.000000000,"completed":0}
+perf-c-r4-50 {"event":"WARMUP_END","phase":"warmup","utc":1790782872.074278593,"elapsed":30.004692120,"completed":2502}
+perf-c-r4-50 {"event":"MEASUREMENT_START","phase":"timed","utc":1790782872.074353695,"elapsed":0.000000000,"completed":0}
+perf-c-r4-50 {"event":"MEASUREMENT_END","phase":"timed","utc":1790782992.085255146,"elapsed":120.010893432,"completed":9855}
+perf-c-r4-50 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790782872.074361324,"reps":1048576,"bytes":2097152,"completed":9855,"elapsed_s":120.010893432,"operations_per_s":82.117545484,"checked_elements":524288,"mismatches":0}
+perf-c-r4-50 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790782992.128428459,"elapsed":0.000000000,"completed":0}
+perf-c-r4-50 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790783022.468130827,"elapsed":30.339694160,"completed":2500}
+perf-c-r4-50 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790782992.128436089,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.339694160,"operations_per_s":82.400303273,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r4-50 1790783038.2120352
+SESSION_START perf-c-r4-75 1790783038.2128198
+COMMAND perf-c-r4-75 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r4-75/known-hosts ubuntu@10.85.0.214 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r4-75 /tmp/perf/work.ptx'
+perf-c-r4-75 {"event":"WARMUP_START","phase":"warmup","utc":1790783088.255484581,"elapsed":0.000000000,"completed":0}
+perf-c-r4-75 {"event":"WARMUP_END","phase":"warmup","utc":1790783118.263439417,"elapsed":30.007897629,"completed":2503}
+perf-c-r4-75 {"event":"MEASUREMENT_START","phase":"timed","utc":1790783118.263508558,"elapsed":0.000000000,"completed":0}
+perf-c-r4-75 {"event":"MEASUREMENT_END","phase":"timed","utc":1790783238.274970055,"elapsed":120.011450830,"completed":9993}
+perf-c-r4-75 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790783118.263518810,"reps":1048576,"bytes":2097152,"completed":9993,"elapsed_s":120.011450830,"operations_per_s":83.267054359,"checked_elements":524288,"mismatches":0}
+perf-c-r4-75 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790783238.310957909,"elapsed":0.000000000,"completed":0}
+perf-c-r4-75 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790783268.297728300,"elapsed":29.986762330,"completed":2500}
+perf-c-r4-75 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790783238.310965538,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.986762330,"operations_per_s":83.370120872,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r4-75 1790783283.3070161
+SESSION_START perf-c-r4-100 1790783283.3073075
+COMMAND perf-c-r4-100 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r4-100/known-hosts ubuntu@10.85.0.87 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r4-100 /tmp/perf/work.ptx'
+perf-c-r4-100 {"event":"WARMUP_START","phase":"warmup","utc":1790783332.983712196,"elapsed":0.000000000,"completed":0}
+perf-c-r4-100 {"event":"WARMUP_END","phase":"warmup","utc":1790783362.983966351,"elapsed":30.000199921,"completed":2514}
+perf-c-r4-100 {"event":"MEASUREMENT_START","phase":"timed","utc":1790783362.984920740,"elapsed":0.000000000,"completed":0}
+perf-c-r4-100 {"event":"MEASUREMENT_END","phase":"timed","utc":1790783482.993838072,"elapsed":120.008909094,"completed":10065}
+perf-c-r4-100 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790783362.984928608,"reps":1048576,"bytes":2097152,"completed":10065,"elapsed_s":120.008909094,"operations_per_s":83.868773377,"checked_elements":524288,"mismatches":0}
+perf-c-r4-100 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790783483.034651041,"elapsed":0.000000000,"completed":0}
+perf-c-r4-100 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790783512.706200600,"elapsed":29.671541274,"completed":2500}
+perf-c-r4-100 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790783483.034658909,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.671541274,"operations_per_s":84.255818628,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r4-100 1790783526.1948857
+SESSION_START perf-c-r4-25 1790783526.1951296
+COMMAND perf-c-r4-25 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r4-25/known-hosts ubuntu@10.85.0.225 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r4-25 /tmp/perf/work.ptx'
+perf-c-r4-25 {"event":"WARMUP_START","phase":"warmup","utc":1790783575.603670597,"elapsed":0.000000000,"completed":0}
+perf-c-r4-25 {"event":"WARMUP_END","phase":"warmup","utc":1790783605.611279011,"elapsed":30.007551587,"completed":2513}
+perf-c-r4-25 {"event":"MEASUREMENT_START","phase":"timed","utc":1790783605.612573624,"elapsed":0.000000000,"completed":0}
+perf-c-r4-25 {"event":"MEASUREMENT_END","phase":"timed","utc":1790783725.618897200,"elapsed":120.006314776,"completed":9718}
+perf-c-r4-25 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790783605.612581968,"reps":1048576,"bytes":2097152,"completed":9718,"elapsed_s":120.006314776,"operations_per_s":80.979071961,"checked_elements":524288,"mismatches":0}
+perf-c-r4-25 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790783725.667026520,"elapsed":0.000000000,"completed":0}
+perf-c-r4-25 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790783756.401369333,"elapsed":30.734335499,"completed":2500}
+perf-c-r4-25 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790783725.667033434,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.734335499,"operations_per_s":81.342249943,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r4-25 1790783772.0972464
+SESSION_START perf-c-r5-50 1790783772.0975778
+COMMAND perf-c-r5-50 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r5-50/known-hosts ubuntu@10.85.0.26 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r5-50 /tmp/perf/work.ptx'
+perf-c-r5-50 {"event":"WARMUP_START","phase":"warmup","utc":1790783821.615701914,"elapsed":0.000000000,"completed":0}
+perf-c-r5-50 {"event":"WARMUP_END","phase":"warmup","utc":1790783851.621693611,"elapsed":30.005936100,"completed":2504}
+perf-c-r5-50 {"event":"MEASUREMENT_START","phase":"timed","utc":1790783851.621734858,"elapsed":0.000000000,"completed":0}
+perf-c-r5-50 {"event":"MEASUREMENT_END","phase":"timed","utc":1790783971.622166157,"elapsed":120.000422760,"completed":9983}
+perf-c-r5-50 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790783851.621742964,"reps":1048576,"bytes":2097152,"completed":9983,"elapsed_s":120.000422760,"operations_per_s":83.191373583,"checked_elements":524288,"mismatches":0}
+perf-c-r5-50 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790783971.674919844,"elapsed":0.000000000,"completed":0}
+perf-c-r5-50 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790784002.709591866,"elapsed":31.034665270,"completed":2500}
+perf-c-r5-50 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790783971.674926281,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":31.034665270,"operations_per_s":80.555081817,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r5-50 1790784018.3924875
+SESSION_START perf-c-r5-75 1790784018.3927872
+COMMAND perf-c-r5-75 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r5-75/known-hosts ubuntu@10.85.0.141 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r5-75 /tmp/perf/work.ptx'
+perf-c-r5-75 {"event":"WARMUP_START","phase":"warmup","utc":1790784068.818062067,"elapsed":0.000000000,"completed":0}
+perf-c-r5-75 {"event":"WARMUP_END","phase":"warmup","utc":1790784098.820137739,"elapsed":30.001992438,"completed":2499}
+perf-c-r5-75 {"event":"MEASUREMENT_START","phase":"timed","utc":1790784098.822581530,"elapsed":0.000000000,"completed":0}
+perf-c-r5-75 {"event":"MEASUREMENT_END","phase":"timed","utc":1790784218.828922272,"elapsed":120.006332180,"completed":10018}
+perf-c-r5-75 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790784098.822589874,"reps":1048576,"bytes":2097152,"completed":10018,"elapsed_s":120.006332180,"operations_per_s":83.478928303,"checked_elements":524288,"mismatches":0}
+perf-c-r5-75 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790784218.881498814,"elapsed":0.000000000,"completed":0}
+perf-c-r5-75 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790784249.038610458,"elapsed":30.157105153,"completed":2500}
+perf-c-r5-75 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790784218.881504774,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":30.157105153,"operations_per_s":82.899203598,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r5-75 1790784263.944499
+SESSION_START perf-c-r5-25 1790784263.944733
+COMMAND perf-c-r5-25 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r5-25/known-hosts ubuntu@10.85.0.107 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r5-25 /tmp/perf/work.ptx'
+perf-c-r5-25 {"event":"WARMUP_START","phase":"warmup","utc":1790784314.106056452,"elapsed":0.000000000,"completed":0}
+perf-c-r5-25 {"event":"WARMUP_END","phase":"warmup","utc":1790784344.110675335,"elapsed":30.004567568,"completed":2507}
+perf-c-r5-25 {"event":"MEASUREMENT_START","phase":"timed","utc":1790784344.110735893,"elapsed":0.000000000,"completed":0}
+perf-c-r5-25 {"event":"MEASUREMENT_END","phase":"timed","utc":1790784464.113590956,"elapsed":120.002845954,"completed":9700}
+perf-c-r5-25 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790784344.110744476,"reps":1048576,"bytes":2097152,"completed":9700,"elapsed_s":120.002845954,"operations_per_s":80.831416313,"checked_elements":524288,"mismatches":0}
+perf-c-r5-25 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790784464.148667574,"elapsed":0.000000000,"completed":0}
+perf-c-r5-25 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790784495.732024431,"elapsed":31.583349377,"completed":2500}
+perf-c-r5-25 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790784464.148674726,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":31.583349377,"operations_per_s":79.155632614,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r5-25 1790784510.6394598
+SESSION_START perf-c-r5-100 1790784510.6397305
+COMMAND perf-c-r5-100 ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/perf-c-r5-100/known-hosts ubuntu@10.85.0.41 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/load-S 120 30 1048576 2500 0 /tmp/perf/perf-c-r5-100 /tmp/perf/work.ptx'
+perf-c-r5-100 {"event":"WARMUP_START","phase":"warmup","utc":1790784563.535825968,"elapsed":0.000000000,"completed":0}
+perf-c-r5-100 {"event":"WARMUP_END","phase":"warmup","utc":1790784593.537036180,"elapsed":30.001153010,"completed":2510}
+perf-c-r5-100 {"event":"MEASUREMENT_START","phase":"timed","utc":1790784593.537126780,"elapsed":0.000000000,"completed":0}
+perf-c-r5-100 {"event":"MEASUREMENT_END","phase":"timed","utc":1790784713.538101196,"elapsed":120.000965463,"completed":10075}
+perf-c-r5-100 {"event":"RESULT","status":"PASS","phase":"timed","utc_start":1790784593.537135363,"reps":1048576,"bytes":2097152,"completed":10075,"elapsed_s":120.000965463,"operations_per_s":83.957657850,"checked_elements":524288,"mismatches":0}
+perf-c-r5-100 {"event":"MEASUREMENT_START","phase":"fixed","utc":1790784713.602773666,"elapsed":0.000000000,"completed":0}
+perf-c-r5-100 {"event":"MEASUREMENT_END","phase":"fixed","utc":1790784743.391409159,"elapsed":29.788627711,"completed":2500}
+perf-c-r5-100 {"event":"RESULT","status":"PASS","phase":"fixed","utc_start":1790784713.602781057,"reps":1048576,"bytes":2097152,"completed":2500,"elapsed_s":29.788627711,"operations_per_s":83.924644809,"checked_elements":524288,"mismatches":0}
+SESSION_COMPLETE perf-c-r5-100 1790784757.9070601
+
+Script done on 2026-10-01 01:12:37+09:00 [COMMAND_EXIT_CODE="0"]

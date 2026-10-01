@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/cleanup.py", line 49, in <module>
+    wait(lambda:not get(resource,name,ns),180)
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/common.py", line 50, in wait
+    raise TimeoutError(str(fn))
+TimeoutError: <function <lambda> at 0x73aed67da340>

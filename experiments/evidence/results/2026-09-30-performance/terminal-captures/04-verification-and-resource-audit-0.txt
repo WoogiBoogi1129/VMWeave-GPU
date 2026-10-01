@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-09-30-performance$ # Independently checked sample counts, clocks, output and
+ release
+ubuntu@gpu-4:2026-09-30-performance$ jq '{status,campaign_complete,valid_runs,validated_pairs,
+errors}' validation.json
+{
+  "status": "PASS",
+  "campaign_complete": true,
+  "valid_runs": {
+    "o": 15,
+    "c": 20,
+    "d": 40
+  },
+  "validated_pairs": 20,
+  "errors": []
+}
+ubuntu@gpu-4:2026-09-30-performance$ cat campaign-execution-complete.json
+{
+  "utc": 1790816039.881136,
+  "stages": [
+    "overhead",
+    "single",
+    "shared"
+  ],
+  "status": "Completed valid repetitions with one explicitly retained interrupted pre-measurem
+ent attempt; see enforcement separately."
+}
+ubuntu@gpu-4:2026-09-30-performance$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

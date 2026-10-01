@@ -1,0 +1,11 @@
+Script started on 2026-09-30 22:28:29+09:00 [COMMAND="python3 experiments/performance/pilot.py --path S --cap 100 --name pilot-s100 --seconds 30" <not executed on terminal>]
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/pilot.py", line 5, in <module>
+    try:s.prepare();s.execute(seconds=a.seconds,warmup=10,reps=a.reps)
+        ^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/performance/runtime.py", line 51, in prepare
+    self.worker=owned[0]['metadata']['name'];launcher=next(p for p in pods if p['metadata']['name'].startswith('virt-launcher-'+self.name+'-'))
+                ~~~~~^^^
+IndexError: list index out of range
+
+Script done on 2026-09-30 22:29:28+09:00 [COMMAND_EXIT_CODE="1"]

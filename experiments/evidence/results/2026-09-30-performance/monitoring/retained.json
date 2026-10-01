@@ -1,0 +1,57 @@
+{
+  "utc": 1790816065.833453,
+  "services": {
+    "perf-monitor": "10.98.3.238",
+    "perf-dcgm": "10.105.14.111",
+    "perf-node-exporter": "10.110.216.21"
+  },
+  "targets": [
+    {
+      "labels": {
+        "instance": "10.105.14.111:9400",
+        "job": "dcgm"
+      },
+      "health": "up",
+      "scrapeUrl": "http://10.105.14.111:9400/metrics",
+      "lastError": ""
+    },
+    {
+      "labels": {
+        "instance": "10.97.206.19:31992",
+        "job": "hami"
+      },
+      "health": "up",
+      "scrapeUrl": "http://10.97.206.19:31992/metrics",
+      "lastError": ""
+    },
+    {
+      "labels": {
+        "instance": "10.110.216.21:9100",
+        "job": "node"
+      },
+      "health": "up",
+      "scrapeUrl": "http://10.110.216.21:9100/metrics",
+      "lastError": ""
+    }
+  ],
+  "stopped_measurement_collectors": [
+    {
+      "name": "app-exporter",
+      "pid": 3029784,
+      "utc": 1790816065.8333144
+    },
+    {
+      "name": "pmon",
+      "pid": 3003182,
+      "utc": 1790816065.8334422
+    }
+  ],
+  "grafana_health": {
+    "database": "ok",
+    "version": "12.0.2",
+    "commit": "5bda17e7c1cb313eb96266f2fdda73a6b35c3977"
+  },
+  "history": "Full measurement query responses are in runs/*/telemetry.json; live TSDB retained 30 days, local snapshot retained under monitoring/prom-data/snapshots.",
+  "credentials": "Grafana now uses a Kubernetes Secret reference; anonymous Viewer remains enabled.",
+  "port_forward": "kubectl -n vmweave-performance port-forward svc/perf-monitor 3000:3000 9090:9090"
+}

@@ -1,0 +1,152 @@
+{
+  "status": "FAIL",
+  "campaign_complete": false,
+  "valid_runs": {
+    "o": 10,
+    "c": 20,
+    "d": 14
+  },
+  "expected_runs": {
+    "o": 15,
+    "c": 20,
+    "d": 40
+  },
+  "validated_pairs": 7,
+  "repeat_coverage": {
+    "overhead": {
+      "N": 5,
+      "S": 5
+    },
+    "single": {
+      "100": 5,
+      "25": 5,
+      "50": 5,
+      "75": 5
+    },
+    "shared": {
+      "25/75/a": 1,
+      "50/50/a": 2,
+      "50/50/b": 2,
+      "75/25/b": 2
+    }
+  },
+  "pair_checks": [
+    {
+      "pair": "perf-d-r1-25-75-a",
+      "condition": [
+        25,
+        75,
+        "a"
+      ],
+      "start_delay_s": 59.999627351760864,
+      "b_context_held_until_a_s": 250.04418992996216,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-50-50-a",
+      "condition": [
+        50,
+        50,
+        "a"
+      ],
+      "start_delay_s": 60.000895261764526,
+      "b_context_held_until_a_s": 250.040367603302,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-50-50-b",
+      "condition": [
+        50,
+        50,
+        "b"
+      ],
+      "start_delay_s": 60.00179743766785,
+      "b_context_held_until_a_s": 250.04024982452393,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-75-25-b",
+      "condition": [
+        75,
+        25,
+        "b"
+      ],
+      "start_delay_s": 60.001131772994995,
+      "b_context_held_until_a_s": 250.015953540802,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r2-50-50-a",
+      "condition": [
+        50,
+        50,
+        "a"
+      ],
+      "start_delay_s": 59.99623107910156,
+      "b_context_held_until_a_s": 250.03392815589905,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r2-50-50-b",
+      "condition": [
+        50,
+        50,
+        "b"
+      ],
+      "start_delay_s": 60.003310680389404,
+      "b_context_held_until_a_s": 250.00391030311584,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r2-75-25-b",
+      "condition": [
+        75,
+        25,
+        "b"
+      ],
+      "start_delay_s": 59.9995334148407,
+      "b_context_held_until_a_s": 250.02638387680054,
+      "status": "PASS"
+    }
+  ],
+  "errors": [
+    {
+      "run": "perf-o-r1-t",
+      "error": "'cap'"
+    },
+    {
+      "run": "perf-o-r2-t",
+      "error": "'cap'"
+    },
+    {
+      "run": "perf-o-r3-t",
+      "error": "'cap'"
+    },
+    {
+      "run": "perf-o-r4-t",
+      "error": "'cap'"
+    },
+    {
+      "run": "perf-o-r5-t",
+      "error": "'cap'"
+    }
+  ],
+  "meaning": "Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance on corrected timestamps), B context hold through A end, repeat coverage, and normal release. This is not a verdict that HAMi limits were enforced.",
+  "interrupted_attempts": [
+    {
+      "detected_utc": 1790810289.8863413,
+      "pair": "perf-d-r2-25-75-a",
+      "runs": [
+        "perf-d-r2-25-75-a-a",
+        "perf-d-r2-25-75-a-b"
+      ],
+      "classification": "Orchestration stopped before any recorded MEASUREMENT_START; exact termination cause unconfirmed. Last persisted events are warmup completion/waiting.",
+      "outcome": "Interrupted attempt, not counted as a completed performance repeat. Original files retained.",
+      "replacement_pair": "perf-d-r2-25-75-a-resume1"
+    }
+  ],
+  "unresolved_runs": [
+    "perf-d-r2-25-75-a-resume1-b",
+    "perf-d-r2-25-75-a-resume1-a"
+  ]
+}

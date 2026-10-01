@@ -25,11 +25,12 @@ python3 experiments/evidence/verify_stage2.py \
 
 ```sh
 (cd experiments/evidence/results/2026-09-30-performance && sha256sum -c SHA256SUMS)
-cp -a experiments/evidence/results/2026-09-30-performance /tmp/vmweave-performance-review
-python3 experiments/performance/verify.py /tmp/vmweave-performance-review
-python3 experiments/performance/analyze.py /tmp/vmweave-performance-review
-python3 experiments/performance/plot.py /tmp/vmweave-performance-review
-python3 experiments/performance/report.py /tmp/vmweave-performance-review
+perf_review_dir=$(mktemp -d /tmp/vmweave-performance-review.XXXXXX)
+cp -a experiments/evidence/results/2026-09-30-performance/. "$perf_review_dir/"
+python3 experiments/performance/verify.py "$perf_review_dir"
+python3 experiments/performance/analyze.py "$perf_review_dir"
+python3 experiments/performance/plot.py "$perf_review_dir"
+python3 experiments/performance/report.py "$perf_review_dir"
 ```
 
 검증 결과의 `campaign_complete`와 `repeat_coverage`를 함께 확인합니다.

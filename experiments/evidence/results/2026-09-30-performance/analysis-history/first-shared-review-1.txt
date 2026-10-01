@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "campaign_complete": false,
+  "valid_runs": {
+    "o": 15,
+    "c": 20,
+    "d": 8
+  },
+  "expected_runs": {
+    "o": 15,
+    "c": 20,
+    "d": 40
+  },
+  "validated_pairs": 4,
+  "pair_checks": [
+    {
+      "pair": "perf-d-r1-25-75-a",
+      "start_delay_s": 59.999627351760864,
+      "b_context_held_until_a_s": 250.04418992996216,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-50-50-a",
+      "start_delay_s": 60.000895261764526,
+      "b_context_held_until_a_s": 250.040367603302,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-50-50-b",
+      "start_delay_s": 60.00179743766785,
+      "b_context_held_until_a_s": 250.04024982452393,
+      "status": "PASS"
+    },
+    {
+      "pair": "perf-d-r1-75-25-b",
+      "start_delay_s": 60.001131772994995,
+      "b_context_held_until_a_s": 250.015953540802,
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "meaning": "Checks execution, sample counts, output verification, clock continuity, shared start timing (250 ms tolerance), B context hold through A end, and normal release. This is not a verdict that HAMi limits were enforced."
+}

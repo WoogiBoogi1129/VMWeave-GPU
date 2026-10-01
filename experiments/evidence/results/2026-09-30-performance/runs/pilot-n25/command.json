@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "kubectl",
+    "exec",
+    "-n",
+    "vmweave-test-a",
+    "pilot-n25",
+    "--",
+    "taskset",
+    "-c",
+    "0-7",
+    "/evidence/load-N",
+    "30",
+    "10",
+    "524288",
+    "0",
+    "0",
+    "/evidence/pilot-n25",
+    "/evidence/work.ptx"
+  ],
+  "utc": 1790774834.0342078
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ssh",
+    "-i",
+    "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/performance-20260930/artifacts/guest-key",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "StrictHostKeyChecking=accept-new",
+    "-o",
+    "UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-09-30-performance/runs/pilot-tcp-v2/known-hosts",
+    "ubuntu@10.85.0.128",
+    "sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T batch 2 3 1 /tmp/perf/pilot-tcp-v2 /tmp/perf/work.cubin 0 127"
+  ],
+  "utc": 1790775918.1481354
+}

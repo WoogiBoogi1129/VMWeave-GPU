@@ -11,6 +11,7 @@
 | PyTorch 학습 | 과거 학습 도구·고정 wheel을 별도로 이식 | 새 Operator campaign 검증 미완료 |
 | N/T/S 성능 비교 | `experiments/performance/`의 새 API 실행기 | 경로별 5회·105구간 완료; [결과](resource-performance.md) |
 | 단일 VM 상한 | 같은 실행기의 `single` 단계 | 20회 완료; 25·50·75에서 사전 이용률 기준 위반 |
+| 다중 VM 부하 변화 | 같은 실행기의 `shared` 단계와 명시적 재개 절차 | 20쌍 완료; [결과·중단 기록](resource-performance.md) |
 
 API 명칭 변경만으로 모든 상위 실험 도구가 호환되는 것은 아닙니다.
 과거 성능·학습 결과는 [역사 재현](reproduction.md)의 기록이며 새 제어기의 측정 결과로 표시하지 않습니다.

@@ -1,0 +1,45 @@
+{
+  "utc": 1790817017.8807032,
+  "measurement_validation": true,
+  "resource_audit": {
+    "utc": "2026-10-01T01:07:14.762826+00:00",
+    "execution_validation": "PASS",
+    "campaign_complete": true,
+    "formal_sessions": 75,
+    "measurement_windows": 185,
+    "shared_pairs": 20,
+    "interrupted_attempts_retained": 1,
+    "manual_finalizer_releases_after_historical_release_verification": 1,
+    "owned_resources_removed": 372,
+    "owned_workloads_remaining": 0,
+    "pre_existing_resources_preserved_across_cleanup": 20,
+    "target_gpu_idle": true,
+    "node_ready": true,
+    "operator_ready": true,
+    "monitoring_retained": true,
+    "prometheus_healthy_targets": 3,
+    "grafana_database": "ok",
+    "enforcement_verdict": "See single/shared analysis; execution PASS does not establish cap compliance."
+  },
+  "local_checks": {
+    "python_compilation": "PASS",
+    "analysis_boundary_tests": "2 tests PASS",
+    "repository_contracts": "PASS",
+    "documentation_contracts": "12 guides, 7 CLI examples PASS",
+    "mkdocs_strict": "PASS",
+    "site_links_assets_anchors": "56 HTML pages, 132 search entries PASS",
+    "source_documentation_diff_whitespace": "PASS"
+  },
+  "visual_review": {
+    "terminal_frames": [
+      "01-actual-policy-and-procedure.png",
+      "02-nts-path-comparison.png",
+      "03-single-and-shared-results.png",
+      "04-verification-and-resource-audit.png"
+    ],
+    "shared_figure": "figures/shared-25-75.png",
+    "grafana": "captures/perf-d-r1-25-75-a-a-grafana.png",
+    "outcome": "Actual screenshots inspected; result text, command output and final audit visible. Post-run inspection is labeled."
+  },
+  "scope": "Measurement execution and cleanup are complete with documented interrupted attempt and one administrative finalizer release. Enforcement findings remain negative; this review does not convert them to PASS."
+}

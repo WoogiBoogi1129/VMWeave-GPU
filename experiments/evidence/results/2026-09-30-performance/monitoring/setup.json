@@ -1,0 +1,8 @@
+{
+  "prometheus_version": "3.5.0",
+  "grafana_version": "12.0.2",
+  "dcgm_image": "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless",
+  "dcgm_collect_ms": 1000,
+  "scrape_seconds": 1,
+  "deployment": "Kubernetes Pods; dedicated hostPath data; existing exporter untouched"
+}
