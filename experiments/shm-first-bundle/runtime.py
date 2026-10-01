@@ -48,6 +48,7 @@ class Session:
   self.scp=['scp','-i',str(self.art/'guest-key'),'-o','BatchMode=yes','-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile='+str(self.out/'known-hosts')]
   call(self.ssh+['mkdir -p /tmp/perf'])
   call(self.scp+[str(self.art/f) for f in ['libflyt_guest.so','load-S','probe-S','work.ptx']]+[str(self.out/'guest-config/layout.bin'),'ubuntu@'+self.ip+':/tmp/perf/'])
+  (self.out/'guest-artifact-hashes.txt').write_text(call(self.ssh+['sha256sum /tmp/perf/libflyt_guest.so /tmp/perf/probe-S /tmp/perf/work.ptx']))
   pods=json.loads(k('get','pods','-n',NS,'-o','json'))['items']
   owned=[p for p in pods if any(r.get('uid')==self.uid for r in p['metadata'].get('ownerReferences',[])) and p['metadata']['name'].endswith('-worker')]
   self.worker=owned[0]['metadata']['name'];launcher=next(p for p in pods if p['metadata']['name'].startswith('virt-launcher-'+self.name+'-'))
@@ -106,9 +107,12 @@ def execute_stream(s,cmd,prefix):
     if row.get('event')!='TICK':print(s.name,line.strip(),flush=True)
     if row.get('event')=='RESULT':results.append(row)
     if row.get('event')=='WARMUP_START' and not snapshot:
-     pod=get('pod',s.worker);source=(ROOT/'experiments/performance/read_runtime.py').read_text()
+     pod=get('pod',s.worker);source=(ROOT/'experiments/shm-first-bundle/read_runtime.py').read_text()
      (s.out/'runtime-libraries.json').write_text(k('exec','-i','-n',NS,HELPER,'--','python3','-',pod['metadata']['uid'],input=source))
      runtime=json.loads((s.out/'runtime-libraries.json').read_text())
+     expected=hashlib.sha256((BASE/'artifacts/bin/flyt-shm-worker').read_bytes()).hexdigest()
+     if s.path=='S' and (not runtime or any(r['executable_sha256']!=expected for r in runtime)):
+      raise RuntimeError('Worker binary differs from measured build')
      if s.path in ['N','S']:
       if not runtime or not all(r['environment'].get('GPU_CORE_UTILIZATION_POLICY')=='FORCE' and r['environment'].get('CUDA_DEVICE_SM_LIMIT')==str(s.cap) and any('libvgpu' in f for f in r['library_hashes']) for r in runtime):raise RuntimeError('Runtime policy/library does not match requested cap')
      if s.path=='T':
@@ -130,4 +134,3 @@ def execute_stream(s,cmd,prefix):
   with file.open('rb') as f,gzip.open(s.out/(file.name+'.gz'),'wb') as g:shutil.copyfileobj(f,g)
  if code or not results or any(r.get('status')!='PASS' for r in results):raise RuntimeError('Invalid workload '+s.name)
  return results
-

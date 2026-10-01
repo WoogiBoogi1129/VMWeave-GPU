@@ -17,7 +17,7 @@ int main(void){
  l.slots[0].request_ring=(struct flyt_shm_ring_layout){4096,64};l.slots[0].response_ring=(struct flyt_shm_ring_layout){16384,64};
  l.slots[0].request_payload=(struct flyt_shm_arena){32768,4096};l.slots[0].response_payload=(struct flyt_shm_arena){36864,4096};
  p=mmap(NULL,l.region_bytes,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0);assert(p!=MAP_FAILED);assert(!flyt_shm_format(p,l.region_bytes,&l));
- struct flyt_shm_channel *g,*w;assert(!flyt_shm_open(p,l.region_bytes,&l,0,FLYT_SHM_GUEST,1,&g));assert(!flyt_shm_open(p,l.region_bytes,&l,0,FLYT_SHM_WORKER,1,&w));
+ struct flyt_shm_channel *g,*w;assert(!flyt_shm_open(p,l.region_bytes,&l,0,FLYT_SHM_GUEST,1000,&g));assert(!flyt_shm_open(p,l.region_bytes,&l,0,FLYT_SHM_WORKER,1000,&w));
  unsigned char input[65],output[65];memset(input,0x5a,65);
  struct flyt_shm_request q={.request_id=1,.api_id=1,.payload_schema=1,.input=input,.input_bytes=65},taken;
  q.identity=g->identity;assert(!flyt_shm_submit(g,&q));assert(flyt_shm_submit(g,&q)==FLYT_SHM_QUEUE_FULL);assert(!flyt_shm_worker_take(w,&taken));
@@ -28,7 +28,7 @@ int main(void){
  q.request_id=2;assert(!flyt_shm_submit(g,&q));
  /* Corrupted peer payload offset must fail before touching a mapping. */
  put(p+4096+128+128+64,UINT64_MAX,8);assert(flyt_shm_worker_take(w,&taken)==FLYT_SHM_BAD_DESCRIPTOR);
- struct timespec delay={0,2000000};nanosleep(&delay,NULL);assert(flyt_shm_receive(g,2,&r)==FLYT_SHM_EXECUTION_UNKNOWN);
+ g->deadline_ns=1;assert(flyt_shm_receive(g,2,&r)==FLYT_SHM_EXECUTION_UNKNOWN);
  flyt_shm_close(g);flyt_shm_close(w);munmap(p,l.region_bytes);
  puts("PASS: guarded payload tails, private snapshot, single pending, receive retry, corrupted offset and timeout");
 }

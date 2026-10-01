@@ -99,8 +99,9 @@ int flyt_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output
 __attribute__((destructor)) static void shutdown_guest(void){
     if(!started||owner_pid!=getpid()||pthread_mutex_trylock(&flyt_guest_lock))return;
     size_t ignored;if(!broken)flyt_guest_exchange(FLYT_GOODBYE,NULL,0,NULL,0,&ignored);
+    free(copy_buffer);copy_buffer=NULL;copy_capacity=0;
     pthread_mutex_unlock(&flyt_guest_lock);if(initialized)pthread_join(io_thread,NULL);
-    free(copy_buffer);copy_buffer=NULL;copy_capacity=0;flyt_perf_dump("guest-caller");
+    flyt_perf_dump("guest-caller");
 }
 int flyt_guest_ref(const void *p,size_t n,struct flyt_device_ref *r){
     uintptr_t v=(uintptr_t)p;

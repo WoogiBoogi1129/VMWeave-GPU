@@ -17,7 +17,7 @@ def run_one(name,variant,seconds,warmup,mask=31):
  'cpu_before':cpu_snapshot(s)})
  prefix='/tmp/perf/'+name
  cmd=s.command('probe-S',['batch',seconds,seconds,warmup,prefix,'/tmp/perf/work.ptx',random.Random(name).randrange(5),mask])
- cmd[-1]=cmd[-1].replace('sudo env ','sudo env FLYT_WAIT_MODE='+variants[variant]['wait']+' FLYT_COPY_MODE='+variants[variant]['copy']+' FLYT_METRICS=1 ')
+ cmd[-1]=cmd[-1].replace('sudo env ','sudo env FLYT_WAIT_MODE='+variants[variant]['wait']+' FLYT_COPY_MODE='+variants[variant]['copy']+' FLYT_SPIN_US='+str(variants[variant].get('spin_us',20))+' FLYT_METRICS=1 ')
  try:
   execute_stream(s,cmd,prefix)
  finally:
@@ -34,6 +34,8 @@ def cpu_snapshot(s):
  return result
 if stage=='pilot':
  for v in ['base','both']:run_one('sf-pilot-'+v,v,2,1)
+elif stage=='pilot-zero':
+ run_one('sf-pilot-zero-both','both',5,2)
 elif stage=='formal':
  protocol={'repeats':5,'conditions':['query','kernel','copy-4096','copy-1048576','copy-16777216'],
   'duration_s':10,'warmup_min_s':3,'warmup_min_operations':50,'variants':variants,
