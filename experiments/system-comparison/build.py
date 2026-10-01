@@ -15,10 +15,12 @@ refs=[('worker',images['worker'],archive),('guest',GUEST,ROOT/'.local/pytorch-pa
  ('launcher','localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935',ROOT/'.local/implementation-20260922/launcher-v2.oci'),
  ('hook',images['hook'],Path('/dev/shm/vmweave-hook.oci')),
  ('cell',images['cell'],ROOT/'.local/performance-20260930/cell.oci'),
- ('manager',images['manager'],ROOT/'.local/performance-20260930/manager.oci')]
+ ('manager',images['manager'],ROOT/'.local/performance-20260930/manager.oci'),
+ ('helper',images['helper'],None)]
 records=[]
 for label,ref,archive in refs:
  if not admin(['chroot','/host','podman','image','inspect','--format','{{.Id}}',ref],check=False).strip():
+  if archive is None:raise RuntimeError('Provision the recorded helper image before this campaign: '+ref)
   admin(['chroot','/host','podman','load','-i',archive],timeout=600)
  cid=admin(['chroot','/host','podman','create','--name','sc-retain-'+label,'--label','vmweave.campaign=system-comparison-20261001','--entrypoint','/bin/true',ref]).strip()
  records.append({'name':'sc-retain-'+label,'container_id':cid,'image':ref});save(BASE/'retained-images.json',records)

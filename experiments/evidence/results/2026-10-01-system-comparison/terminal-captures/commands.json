@@ -1,0 +1,110 @@
+[
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.667Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.733Z"
+  },
+  {
+    "pane": 0,
+    "command": "# Frozen whole-system protocol",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.748Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq '{repeats,seconds,warmup_min_s,long_kernel_iterations,physical_sm_count,S_compute_cap,detailed_metrics,affinity}' protocol.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.812Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Actual TCP transport and GPU processes",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.826Z"
+  },
+  {
+    "pane": 1,
+    "command": "head -n 1 runs/sc-r1-t/stdout.jsonl",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.840Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq -r '.[] | [.command,.affinity_status[0]] | @tsv' runs/sc-r1-t/runtime-libraries.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.901Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Actual SHM Worker defaults and hash",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.915Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq '.[] | {executable_sha256,wait:.environment.FLYT_WAIT_MODE,copy:.environment.FLYT_COPY_MODE,metrics:.environment.FLYT_METRICS,policy:.environment.GPU_CORE_UTILIZATION_POLICY,cap:.environment.CUDA_DEVICE_SM_LIMIT}' runs/sc-r1-s/runtime-libraries.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:24.978Z"
+  },
+  {
+    "pane": 0,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.575Z"
+  },
+  {
+    "pane": 1,
+    "command": "clear",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.640Z"
+  },
+  {
+    "pane": 0,
+    "command": "# Mean latency in microseconds: query, short kernel, long kernel, H2D16MiB, D2H16MiB",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.655Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq -r '.summary|to_entries[]|[.key,.value.query.mean_us,.value.kernel.mean_us,.value.longkernel.mean_us,.value[\"h2d-16777216\"].mean_us,.value[\"d2h-16777216\"].mean_us]|map(if type==\"number\" then (. * 1000|round)/1000 else . end)|@tsv' summary.json | column -t",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.719Z"
+  },
+  {
+    "pane": 0,
+    "command": "jq '{complete,sessions:(.sessions|length),errors}' validation.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.784Z"
+  },
+  {
+    "pane": 1,
+    "command": "# CPU cores and CPU microseconds per long-kernel iteration",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.798Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq -r '.summary|to_entries[]|[.key,.value[\"longkernel-1048576\"].cores,.value[\"longkernel-1048576\"].cpu_us_iteration]|map(if type==\"number\" then (. * 1000|round)/1000 else . end)|@tsv' cpu-summary.json | column -t",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.859Z"
+  },
+  {
+    "pane": 1,
+    "command": "# Exact final resource audit",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.874Z"
+  },
+  {
+    "pane": 1,
+    "command": "jq '{remaining_campaign_resources,target_gpu_compute_processes}' final-audit.json",
+    "exit_code": 0,
+    "utc": "2026-10-01T06:43:25.938Z"
+  }
+]

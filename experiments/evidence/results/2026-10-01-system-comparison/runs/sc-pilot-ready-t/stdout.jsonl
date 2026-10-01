@@ -1,0 +1,76 @@
++00:00:00.371293 [34mINFO[0m:	connection to host "10.85.0.76"
++00:00:00.371462 [34mINFO[0m:	connecting via TCP...
+{"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+{"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830032.514685631,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830034.514731407,"elapsed":2.000022061,"completed":2596}
+{"event":"MEASUREMENT_START","utc":1790830034.514802456,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830035.514977455,"elapsed":1.000165650,"completed":1140}
+{"event":"TICK","utc":1790830036.515576124,"elapsed":2.000764442,"completed":2384}
+{"event":"TICK","utc":1790830037.515909195,"elapsed":3.001097354,"completed":3467}
+{"event":"MEASUREMENT_END","utc":1790830037.515974760,"elapsed":3.001163114,"completed":3467}
+{"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":3467,"elapsed_s":3.001163114,"operations_per_s":1155.218782953,"checked_elements":262144,"mismatches":0}
+[rpc] cuModuleLoadData(0x557b71c65230) = 0, result 0x646f97514be0
+[rpc] cuModuleGetFunction(0x646f97514be0, work) = 0, result 110430442838336
+{"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":1,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830037.550790548,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830039.552501202,"elapsed":2.001688052,"completed":1011}
+{"event":"MEASUREMENT_START","utc":1790830039.552538633,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830040.552619696,"elapsed":1.000074348,"completed":923}
+{"event":"TICK","utc":1790830041.554088593,"elapsed":2.001543422,"completed":1707}
+{"event":"MEASUREMENT_END","utc":1790830042.553720713,"elapsed":3.001175454,"completed":2393}
+{"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":2393,"elapsed_s":3.001175454,"operations_per_s":797.354248920,"checked_elements":262144,"mismatches":0}
+[rpc] cuModuleLoadData(0x557b71c8d030) = 0, result 0x646f9750d3a0
+[rpc] cuModuleGetFunction(0x646f9750d3a0, work) = 0, result 110430442827824
+{"event":"CONDITION","mode":"longkernel","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":1048576,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830042.587659836,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830044.590642929,"elapsed":2.002964514,"completed":244}
+{"event":"MEASUREMENT_START","utc":1790830044.590700388,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830045.591749191,"elapsed":1.001039910,"completed":122}
+{"event":"TICK","utc":1790830046.592805862,"elapsed":2.002096568,"completed":244}
+{"event":"TICK","utc":1790830047.593984842,"elapsed":3.003275394,"completed":366}
+{"event":"MEASUREMENT_END","utc":1790830047.594017267,"elapsed":3.003307889,"completed":366}
+{"event":"RESULT","status":"PASS","mode":"longkernel","bytes":1048576,"completed":366,"elapsed_s":3.003307889,"operations_per_s":121.865627344,"checked_elements":262144,"mismatches":0}
+{"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830047.612889051,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830049.615275621,"elapsed":2.002331635,"completed":727}
+{"event":"MEASUREMENT_START","utc":1790830049.615338802,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830050.615443945,"elapsed":1.000097692,"completed":309}
+{"event":"TICK","utc":1790830051.618534088,"elapsed":2.003187800,"completed":570}
+{"event":"MEASUREMENT_END","utc":1790830052.615538836,"elapsed":3.000192597,"completed":832}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":832,"elapsed_s":3.000192597,"operations_per_s":277.315529954,"checked_elements":1024,"mismatches":0}
+{"event":"CONDITION","mode":"copy","bytes":65536,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830052.629904509,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830054.631017685,"elapsed":2.001091792,"completed":546}
+{"event":"MEASUREMENT_START","utc":1790830054.631047487,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830055.632216215,"elapsed":1.001161044,"completed":259}
+{"event":"TICK","utc":1790830056.633601904,"elapsed":2.002546772,"completed":533}
+{"event":"MEASUREMENT_END","utc":1790830057.631769657,"elapsed":3.000714439,"completed":811}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":65536,"completed":811,"elapsed_s":3.000714439,"operations_per_s":270.268969769,"checked_elements":16384,"mismatches":0}
+{"event":"CONDITION","mode":"copy","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830057.649025917,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830059.651110411,"elapsed":2.002064628,"completed":368}
+{"event":"MEASUREMENT_START","utc":1790830059.651150227,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830060.652962923,"elapsed":1.001804638,"completed":171}
+{"event":"TICK","utc":1790830061.659463644,"elapsed":2.008305473,"completed":346}
+{"event":"MEASUREMENT_END","utc":1790830062.654036045,"elapsed":3.002877853,"completed":511}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":1048576,"completed":511,"elapsed_s":3.002877853,"operations_per_s":170.170091830,"checked_elements":262144,"mismatches":0}
+{"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4286578688,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830062.686371803,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830064.690257549,"elapsed":2.003864362,"completed":198}
+{"event":"MEASUREMENT_START","utc":1790830064.690292120,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830065.698824406,"elapsed":1.008525092,"completed":103}
+{"event":"TICK","utc":1790830066.703644037,"elapsed":2.013344846,"completed":207}
+{"event":"MEASUREMENT_END","utc":1790830067.695641518,"elapsed":3.005342248,"completed":310}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":310,"elapsed_s":3.005342248,"operations_per_s":103.149649663,"checked_elements":1048576,"mismatches":0}
+{"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4261412864,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1790830067.764675856,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1790830069.783390284,"elapsed":2.018698922,"completed":72}
+{"event":"MEASUREMENT_START","utc":1790830069.783420324,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1790830070.803226948,"elapsed":1.019800840,"completed":37}
+{"event":"TICK","utc":1790830071.823475122,"elapsed":2.040048984,"completed":74}
+{"event":"MEASUREMENT_END","utc":1790830072.798332453,"elapsed":3.014906572,"completed":110}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":110,"elapsed_s":3.014906572,"operations_per_s":36.485376038,"checked_elements":4194304,"mismatches":0}
++00:00:40.713120 [34mINFO[0m:	api-call-cnt: 28089
++00:00:40.713148 [34mINFO[0m:	memcpy-cnt: -432078848
++00:00:40.715506 [34mINFO[0m: completed deinit request and response	in [4mcpu-client-mgr-handler.c:222[0m

@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-10-01-system-comparison$ # Actual TCP transport and GPU processes
+ubuntu@gpu-4:2026-10-01-system-comparison$ head -n 1 runs/sc-r1-t/stdout.jsonl
++00:00:00.360360 INFO:  connection to host "10.85.0.213"
+ubuntu@gpu-4:2026-10-01-system-comparison$ jq -r '.[] | [.command,.affinity_status[0]] | @tsv'
+ runs/sc-r1-t/runtime-libraries.json
+nvidia-cuda-mps-server          Cpus_allowed_list:\t16-19
+/opt/flyt/bin/cricket-rpc-server 1 0 188 4294967296 0   Cpus_allowed_list:\t16-19
+ubuntu@gpu-4:2026-10-01-system-comparison$ # Actual SHM Worker defaults and hash
+ubuntu@gpu-4:2026-10-01-system-comparison$ jq '.[] | {executable_sha256,wait:.environment.FLYT
+_WAIT_MODE,copy:.environment.FLYT_COPY_MODE,metrics:.environment.FLYT_METRICS,policy:.environm
+ent.GPU_CORE_UTILIZATION_POLICY,cap:.environment.CUDA_DEVICE_SM_LIMIT}' runs/sc-r1-s/runtime-l
+ibraries.json
+{
+  "executable_sha256": "db1e087a72c02186e9a22dc3f0fc6269a17ad4cda35e46a26b634fafc73ca167",
+  "wait": null,
+  "copy": null,
+  "metrics": "0",
+  "policy": "FORCE",
+  "cap": "100"
+}
+ubuntu@gpu-4:2026-10-01-system-comparison$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

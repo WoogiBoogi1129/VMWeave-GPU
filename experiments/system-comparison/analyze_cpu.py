@@ -28,5 +28,6 @@ for system in ['T','S']:
  for condition in sorted({r['condition'] for r in selected}):
   group=[r for r in selected if r['condition']==condition]
   summary[system][condition]={'repeats':len(group),'cores':statistics.mean(r['total_cores'] for r in group),'cpu_us_iteration':statistics.mean(r['cpu_us_iteration'] for r in group),'min_coverage':min(x['coverage'] for r in group for x in r['parts'].values())}
+  summary[system][condition].update({'cores_sd':statistics.stdev(r['total_cores'] for r in group) if len(group)>1 else None,'cpu_us_iteration_sd':statistics.stdev(r['cpu_us_iteration'] for r in group) if len(group)>1 else None})
 save(OUT/'cpu-summary.json',{'rows':rows,'summary':summary,'scope':'T=launcher (includes Guest client manager)+cell (RPC/MPS/node manager)+isolated cluster manager/Mongo; S=launcher+Worker. Shared Kubernetes/monitoring infrastructure excluded; host CPU provided separately. Copy iteration includes both directions.'})
 print(json.dumps(summary,indent=2))

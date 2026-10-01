@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-10-01-system-comparison$ # Frozen whole-system protocol
+ubuntu@gpu-4:2026-10-01-system-comparison$ jq '{repeats,seconds,warmup_min_s,long_kernel_itera
+tions,physical_sm_count,S_compute_cap,detailed_metrics,affinity}' protocol.json
+{
+  "repeats": 5,
+  "seconds": 60,
+  "warmup_min_s": 10,
+  "long_kernel_iterations": 1048576,
+  "physical_sm_count": 188,
+  "S_compute_cap": 100,
+  "detailed_metrics": false,
+  "affinity": {
+    "guest": "0-7",
+    "worker_or_cell": "16-19",
+    "T_manager": "20-23"
+  }
+}
+ubuntu@gpu-4:2026-10-01-system-comparison$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

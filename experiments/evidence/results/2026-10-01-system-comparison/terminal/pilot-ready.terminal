@@ -1,0 +1,106 @@
+Script started on 2026-10-01 13:45:32+09:00 [COMMAND="python3 -u experiments/system-comparison/run.py pilot-ready" <not executed on terminal>]
+SESSION_START sc-pilot-ready-t 1790829933.7080657
+COMMAND sc-pilot-ready-t ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/system-comparison-20261001/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-system-comparison/runs/sc-pilot-ready-t/known-hosts ubuntu@10.85.0.134 'sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T batch 3 3 2 /tmp/perf/sc-pilot-ready-t /tmp/perf/work.cubin 0 255'
+sc-pilot-ready-t {"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+sc-pilot-ready-t {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830032.514685631,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830034.514731407,"elapsed":2.000022061,"completed":2596}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830034.514802456,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830037.515974760,"elapsed":3.001163114,"completed":3467}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":3467,"elapsed_s":3.001163114,"operations_per_s":1155.218782953,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-t {"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":1,"free_bytes":4290772992,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830037.550790548,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830039.552501202,"elapsed":2.001688052,"completed":1011}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830039.552538633,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830042.553720713,"elapsed":3.001175454,"completed":2393}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":2393,"elapsed_s":3.001175454,"operations_per_s":797.354248920,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-t {"event":"CONDITION","mode":"longkernel","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":1048576,"free_bytes":4290772992,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830042.587659836,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830044.590642929,"elapsed":2.002964514,"completed":244}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830044.590700388,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830047.594017267,"elapsed":3.003307889,"completed":366}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"longkernel","bytes":1048576,"completed":366,"elapsed_s":3.003307889,"operations_per_s":121.865627344,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-t {"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830047.612889051,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830049.615275621,"elapsed":2.002331635,"completed":727}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830049.615338802,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830052.615538836,"elapsed":3.000192597,"completed":832}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":832,"elapsed_s":3.000192597,"operations_per_s":277.315529954,"checked_elements":1024,"mismatches":0}
+sc-pilot-ready-t {"event":"CONDITION","mode":"copy","bytes":65536,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830052.629904509,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830054.631017685,"elapsed":2.001091792,"completed":546}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830054.631047487,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830057.631769657,"elapsed":3.000714439,"completed":811}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":65536,"completed":811,"elapsed_s":3.000714439,"operations_per_s":270.268969769,"checked_elements":16384,"mismatches":0}
+sc-pilot-ready-t {"event":"CONDITION","mode":"copy","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4290772992,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830057.649025917,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830059.651110411,"elapsed":2.002064628,"completed":368}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830059.651150227,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830062.654036045,"elapsed":3.002877853,"completed":511}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":1048576,"completed":511,"elapsed_s":3.002877853,"operations_per_s":170.170091830,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-t {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4286578688,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830062.686371803,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830064.690257549,"elapsed":2.003864362,"completed":198}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830064.690292120,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830067.695641518,"elapsed":3.005342248,"completed":310}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":310,"elapsed_s":3.005342248,"operations_per_s":103.149649663,"checked_elements":1048576,"mismatches":0}
+sc-pilot-ready-t {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4261412864,"total_bytes":4294967296}
+sc-pilot-ready-t {"event":"WARMUP_START","utc":1790830067.764675856,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"WARMUP_END","utc":1790830069.783390284,"elapsed":2.018698922,"completed":72}
+sc-pilot-ready-t {"event":"MEASUREMENT_START","utc":1790830069.783420324,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-t {"event":"MEASUREMENT_END","utc":1790830072.798332453,"elapsed":3.014906572,"completed":110}
+sc-pilot-ready-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":110,"elapsed_s":3.014906572,"operations_per_s":36.485376038,"checked_elements":4194304,"mismatches":0}
+SESSION_COMPLETE sc-pilot-ready-t 1790830115.5044734
+SESSION_START sc-pilot-ready-s 1790830115.574559
+COMMAND sc-pilot-ready-s ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/system-comparison-20261001/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-system-comparison/runs/sc-pilot-ready-s/known-hosts ubuntu@10.85.0.142 'sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S batch 3 3 2 /tmp/perf/sc-pilot-ready-s /tmp/perf/work.ptx 0 255'
+sc-pilot-ready-s {"event":"CONDITION","mode":"query","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830167.773616076,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830169.773860693,"elapsed":2.000218892,"completed":11526}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830169.777409554,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830172.778767824,"elapsed":3.001350027,"completed":16383}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"query","bytes":1048576,"completed":16383,"elapsed_s":3.001350027,"operations_per_s":5458.543606250,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-s {"event":"CONDITION","mode":"kernel","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":1,"free_bytes":3716153344,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830172.932870865,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830174.933140993,"elapsed":2.000240477,"completed":6933}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830174.933192968,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830177.933354139,"elapsed":3.000158143,"completed":10484}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"kernel","bytes":1048576,"completed":10484,"elapsed_s":3.000158143,"operations_per_s":3494.482457354,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-s {"event":"CONDITION","mode":"longkernel","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":1048576,"free_bytes":3716153344,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830177.998051643,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830179.998859882,"elapsed":2.000794790,"completed":262}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830179.998898745,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830183.006384850,"elapsed":3.007478468,"completed":394}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"longkernel","bytes":1048576,"completed":394,"elapsed_s":3.007478468,"operations_per_s":131.006756721,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-s {"event":"CONDITION","mode":"copy","bytes":4096,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":3718242304,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830183.026479006,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830185.027122021,"elapsed":2.000620157,"completed":3785}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830185.027141333,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830188.027172089,"elapsed":3.000027701,"completed":4835}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":4096,"completed":4835,"elapsed_s":3.000027701,"operations_per_s":1611.651785211,"checked_elements":1024,"mismatches":0}
+sc-pilot-ready-s {"event":"CONDITION","mode":"copy","bytes":65536,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":3718119424,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830188.035124302,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830190.035453320,"elapsed":2.000320178,"completed":2778}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830190.035487413,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830193.036025524,"elapsed":3.000531199,"completed":4168}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":65536,"completed":4168,"elapsed_s":3.000531199,"operations_per_s":1389.087372726,"checked_elements":16384,"mismatches":0}
+sc-pilot-ready-s {"event":"CONDITION","mode":"copy","bytes":1048576,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":3716153344,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830193.051265478,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830195.052979946,"elapsed":2.001690127,"completed":827}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830195.053048849,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830198.053722143,"elapsed":3.000664419,"completed":1179}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":1048576,"completed":1179,"elapsed_s":3.000664419,"operations_per_s":392.912980383,"checked_elements":262144,"mismatches":0}
+sc-pilot-ready-s {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":3709861888,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830198.112897396,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830200.113050938,"elapsed":2.000131471,"completed":354}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830200.113088846,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830203.117362261,"elapsed":3.004266243,"completed":561}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":561,"elapsed_s":3.004266243,"operations_per_s":186.734448489,"checked_elements":1048576,"mismatches":0}
+sc-pilot-ready-s {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":3684696064,"total_bytes":4294967296}
+sc-pilot-ready-s {"event":"WARMUP_START","utc":1790830203.229890585,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"WARMUP_END","utc":1790830205.232673407,"elapsed":2.002758938,"completed":106}
+sc-pilot-ready-s {"event":"MEASUREMENT_START","utc":1790830205.232706547,"elapsed":0.000000000,"completed":0}
+sc-pilot-ready-s {"event":"MEASUREMENT_END","utc":1790830208.235035419,"elapsed":3.002321648,"completed":190}
+sc-pilot-ready-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":190,"elapsed_s":3.002321648,"operations_per_s":63.284358665,"checked_elements":4194304,"mismatches":0}
+SESSION_COMPLETE sc-pilot-ready-s 1790830220.6331446
+
+Script done on 2026-10-01 13:50:20+09:00 [COMMAND_EXIT_CODE="0"]

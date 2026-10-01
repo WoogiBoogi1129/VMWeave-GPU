@@ -1,0 +1,224 @@
+Complete: True
+T {'d2h-1048576': 3112.076, 'd2h-16777216': 8159.897, 'd2h-4096': 1638.297, 'd2h-4194304': 5181.651, 'd2h-65536': 2059.218, 'h2d-1048576': 2978.743, 'h2d-16777216': 7716.262, 'h2d-4096': 1624.71, 'h2d-4194304': 5054.768, 'h2d-65536': 2303.573, 'kernel': 1642.989, 'longkernel': 7850.388, 'query': 718.35}
+S {'d2h-1048576': 1206.919, 'd2h-16777216': 6230.467, 'd2h-4096': 283.079, 'd2h-4194304': 2654.677, 'd2h-65536': 366.257, 'h2d-1048576': 1302.625, 'h2d-16777216': 9271.252, 'h2d-4096': 277.756, 'h2d-4194304': 3460.803, 'h2d-65536': 346.754, 'kernel': 273.584, 'longkernel': 7208.891, 'query': 167.641}
+sc-pilot-ready-s h2d-1048576 1315.926 1179
+sc-pilot-ready-s d2h-1048576 1226.684 1179
+sc-pilot-ready-s h2d-16777216 9399.98 190
+sc-pilot-ready-s d2h-16777216 6400.103 190
+sc-pilot-ready-s h2d-4096 307.389 4835
+sc-pilot-ready-s d2h-4096 312.745 4835
+sc-pilot-ready-s h2d-4194304 3062.241 561
+sc-pilot-ready-s d2h-4194304 2291.373 561
+sc-pilot-ready-s h2d-65536 349.862 4168
+sc-pilot-ready-s d2h-65536 369.485 4168
+sc-pilot-ready-s kernel 285.755 10484
+sc-pilot-ready-s longkernel 7631.233 394
+sc-pilot-ready-s query 181.36 16383
+sc-pilot-ready-t h2d-1048576 2882.143 511
+sc-pilot-ready-t d2h-1048576 2992.535 511
+sc-pilot-ready-t h2d-16777216 12304.459 110
+sc-pilot-ready-t d2h-16777216 15102.062 110
+sc-pilot-ready-t h2d-4096 1785.801 832
+sc-pilot-ready-t d2h-4096 1818.591 832
+sc-pilot-ready-t h2d-4194304 4861.547 310
+sc-pilot-ready-t d2h-4194304 4831.408 310
+sc-pilot-ready-t h2d-65536 2034.381 811
+sc-pilot-ready-t d2h-65536 1664.024 811
+sc-pilot-ready-t kernel 1253.146 2393
+sc-pilot-ready-t longkernel 8203.914 366
+sc-pilot-ready-t query 864.574 3467
+{
+  "T": {
+    "copy-1048576": {
+      "repeats": 5,
+      "cores": 1.4986621436101857,
+      "cpu_us_iteration": 9130.624321257548,
+      "min_coverage": 0.9832411219809265,
+      "cores_sd": 0.010379072208128632,
+      "cpu_us_iteration_sd": 57.47030541275941
+    },
+    "copy-16777216": {
+      "repeats": 5,
+      "cores": 2.77314206823861,
+      "cpu_us_iteration": 43984.17571279991,
+      "min_coverage": 0.966474923598802,
+      "cores_sd": 0.07209619885738522,
+      "cpu_us_iteration_sd": 2452.4551599547426
+    },
+    "copy-4096": {
+      "repeats": 5,
+      "cores": 0.8891092580920369,
+      "cpu_us_iteration": 2890.5519583676564,
+      "min_coverage": 0.9666180377980729,
+      "cores_sd": 0.03742275562950233,
+      "cpu_us_iteration_sd": 250.26555439055795
+    },
+    "copy-4194304": {
+      "repeats": 5,
+      "cores": 2.062677232915826,
+      "cpu_us_iteration": 21112.95882458071,
+      "min_coverage": 0.9831969226432321,
+      "cores_sd": 0.02211790640756517,
+      "cpu_us_iteration_sd": 515.6817540230743
+    },
+    "copy-65536": {
+      "repeats": 5,
+      "cores": 0.8878693843942137,
+      "cpu_us_iteration": 3875.030926859184,
+      "min_coverage": 0.9666189482580139,
+      "cores_sd": 0.005820664717603256,
+      "cpu_us_iteration_sd": 137.87583790183137
+    },
+    "kernel-1048576": {
+      "repeats": 5,
+      "cores": 0.8370029954362316,
+      "cpu_us_iteration": 1371.667137404363,
+      "min_coverage": 0.9666445853307987,
+      "cores_sd": 0.026027651060418804,
+      "cpu_us_iteration_sd": 142.29240388058523
+    },
+    "longkernel-1048576": {
+      "repeats": 5,
+      "cores": 0.9739924818809951,
+      "cpu_us_iteration": 7647.8309454654645,
+      "min_coverage": 0.9665751769804006,
+      "cores_sd": 0.003956681399803743,
+      "cpu_us_iteration_sd": 34.59476143506192
+    },
+    "query-1048576": {
+      "repeats": 5,
+      "cores": 0.8472852752554827,
+      "cpu_us_iteration": 607.6773568181161,
+      "min_coverage": 0.9666552495281991,
+      "cores_sd": 0.02863373763105013,
+      "cpu_us_iteration_sd": 45.57393145474866
+    }
+  },
+  "S": {
+    "copy-1048576": {
+      "repeats": 5,
+      "cores": 1.3827089158670467,
+      "cpu_us_iteration": 3472.0976026345793,
+      "min_coverage": 0.9832954374635858,
+      "cores_sd": 0.00916778575512777,
+      "cpu_us_iteration_sd": 63.1535794679295
+    },
+    "copy-16777216": {
+      "repeats": 5,
+      "cores": 1.5255890112556443,
+      "cpu_us_iteration": 23653.147588821445,
+      "min_coverage": 0.9664149310629627,
+      "cores_sd": 0.0048796599726374824,
+      "cpu_us_iteration_sd": 652.213552439087
+    },
+    "copy-4096": {
+      "repeats": 5,
+      "cores": 1.8236822839676676,
+      "cpu_us_iteration": 1023.1334060563994,
+      "min_coverage": 0.9666645373406327,
+      "cores_sd": 0.007620744618865078,
+      "cpu_us_iteration_sd": 34.99097061233149
+    },
+    "copy-4194304": {
+      "repeats": 5,
+      "cores": 1.5076796844209688,
+      "cpu_us_iteration": 9218.789346219026,
+      "min_coverage": 0.9832261183632736,
+      "cores_sd": 0.018815382544050012,
+      "cpu_us_iteration_sd": 390.79849122094316
+    },
+    "copy-65536": {
+      "repeats": 5,
+      "cores": 1.765459218670137,
+      "cpu_us_iteration": 1259.839139616415,
+      "min_coverage": 0.983319347025467,
+      "cores_sd": 0.01887171730285973,
+      "cpu_us_iteration_sd": 19.404238372675657
+    },
+    "kernel-1048576": {
+      "repeats": 5,
+      "cores": 1.880494520087417,
+      "cpu_us_iteration": 514.8013409254601,
+      "min_coverage": 0.966645991826862,
+      "cores_sd": 0.003909739475186811,
+      "cpu_us_iteration_sd": 12.410280329828012
+    },
+    "longkernel-1048576": {
+      "repeats": 5,
+      "cores": 1.9642094701580324,
+      "cpu_us_iteration": 14162.894176354635,
+      "min_coverage": 0.9665713533900535,
+      "cores_sd": 0.005387433053881347,
+      "cpu_us_iteration_sd": 29.559865364473563
+    },
+    "query-1048576": {
+      "repeats": 5,
+      "cores": 1.7731354026325483,
+      "cpu_us_iteration": 297.97407739509583,
+      "min_coverage": 0.9666517540229737,
+      "cores_sd": 0.022599344061715546,
+      "cpu_us_iteration_sd": 7.646569421620444
+    }
+  }
+}
+Recorded 80 window stability summaries
+EXPORTED sc-r5-s
+GPU telemetry windows: 80
+{
+  "complete": true,
+  "errors": [],
+  "comparison": {
+    "d2h-1048576": {
+      "latency_reduction": 0.6121820950806363,
+      "S_over_T": 0.3878179049193637
+    },
+    "d2h-16777216": {
+      "latency_reduction": 0.2364527072641791,
+      "S_over_T": 0.7635472927358209
+    },
+    "d2h-4096": {
+      "latency_reduction": 0.8272112608269875,
+      "S_over_T": 0.1727887391730125
+    },
+    "d2h-4194304": {
+      "latency_reduction": 0.487677407031061,
+      "S_over_T": 0.512322592968939
+    },
+    "d2h-65536": {
+      "latency_reduction": 0.8221378810787014,
+      "S_over_T": 0.1778621189212985
+    },
+    "h2d-1048576": {
+      "latency_reduction": 0.5626929892429982,
+      "S_over_T": 0.4373070107570018
+    },
+    "h2d-16777216": {
+      "latency_reduction": -0.20152113145859096,
+      "S_over_T": 1.201521131458591
+    },
+    "h2d-4096": {
+      "latency_reduction": 0.8290424361314677,
+      "S_over_T": 0.17095756386853236
+    },
+    "h2d-4194304": {
+      "latency_reduction": 0.31533887907044433,
+      "S_over_T": 0.6846611209295557
+    },
+    "h2d-65536": {
+      "latency_reduction": 0.8494710466653428,
+      "S_over_T": 0.15052895333465727
+    },
+    "kernel": {
+      "latency_reduction": 0.8334837515199854,
+      "S_over_T": 0.1665162484800146
+    },
+    "longkernel": {
+      "latency_reduction": 0.08171530913776182,
+      "S_over_T": 0.9182846908622382
+    },
+    "query": {
+      "latency_reduction": 0.7666311845154956,
+      "S_over_T": 0.23336881548450433
+    }
+  }
+}

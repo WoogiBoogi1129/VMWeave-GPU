@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-10-01-system-comparison$ # Mean latency in microseconds: query, short kernel
+, long kernel, H2D16MiB, D2H16MiB
+ubuntu@gpu-4:2026-10-01-system-comparison$ jq -r '.summary|to_entries[]|[.key,.value.query.mea
+n_us,.value.kernel.mean_us,.value.longkernel.mean_us,.value["h2d-16777216"].mean_us,.value["d2
+h-16777216"].mean_us]|map(if type=="number" then (. * 1000|round)/1000 else . end)|@tsv' summa
+ry.json | column -t
+T  718.35   1642.989  7850.388  7716.262  8159.897
+S  167.641  273.584   7208.891  9271.252  6230.467
+ubuntu@gpu-4:2026-10-01-system-comparison$ jq '{complete,sessions:(.sessions|length),errors}'
+validation.json
+{
+  "complete": true,
+  "sessions": 10,
+  "errors": []
+}
+ubuntu@gpu-4:2026-10-01-system-comparison$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

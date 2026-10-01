@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/build.py", line 26, in <module>
+    if not admin(['chroot','/host','podman','image','inspect','--format','{{.Id}}',mongo],check=False).strip():admin(['chroot','/host','podman','pull',mongo],timeout=600)
+                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/common.py", line 51, in admin
+    def admin(args, **kw): return k('exec','-n',NS,HELPER,'--',*args,**kw)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/common.py", line 38, in k
+    def k(*args, **kw): return call(['kubectl',*args],**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/common.py", line 35, in call
+    raise RuntimeError(shlex.join(args)+': '+result.stderr[-2000:])
+RuntimeError: kubectl exec -n vmweave-test-a sc-admin -- chroot /host podman pull docker.io/library/mongo:7.0: Trying to pull docker.io/library/mongo:7.0...
+Error: initializing source docker://mongo:7.0: pinging container registry registry-1.docker.io: Get "https://registry-1.docker.io/v2/": dial tcp: lookup registry-1.docker.io on 127.0.0.53:53: read udp 127.0.0.1:43353->127.0.0.53:53: read: connection refused
+command terminated with exit code 125
+

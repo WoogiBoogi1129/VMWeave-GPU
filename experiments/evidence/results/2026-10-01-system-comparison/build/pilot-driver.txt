@@ -1,0 +1,25 @@
+legacy manager running 10.85.0.126
+SESSION_START sc-pilot-t 1790829843.4852438
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/run.py", line 25, in <module>
+    for path in ['T','S']:one('sc-pilot-'+path.lower(),path,3,2,0)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/run.py", line 13, in one
+    s.prepare();prefix='/tmp/perf/'+name
+    ^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/tcp_runtime.py", line 32, in prepare
+    (self.out/'manager-affinity.txt').write_text(k(['exec','-i','-n',NS,HELPER,'--','python3','-',created['metadata']['uid'],'20-23'],input=affinity))
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/tcp_runtime.py", line 6, in k
+    def k(args, **kw):return common.k(*args, **kw)
+                             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/common.py", line 38, in k
+    def k(*args, **kw): return call(['kubectl',*args],**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/system-comparison/common.py", line 35, in call
+    raise RuntimeError(redact(shlex.join(args)+': '+result.stderr[-2000:]))
+RuntimeError: kubectl exec -i -n vmweave-test-a sc-admin -- python3 - f756910e-9847-40aa-b7d5-b66b6874a0ad 20-23: Traceback (most recent call last):
+  File "<stdin>", line 21, in <module>
+RuntimeError: No QEMU/Worker process matched exact Pod UID
+command terminated with exit code 1
+

@@ -1,0 +1,71 @@
+{
+  "complete": true,
+  "sessions": [
+    "sc-r1-t",
+    "sc-r1-s",
+    "sc-r2-s",
+    "sc-r2-t",
+    "sc-r3-t",
+    "sc-r3-s",
+    "sc-r4-s",
+    "sc-r4-t",
+    "sc-r5-t",
+    "sc-r5-s"
+  ],
+  "errors": [],
+  "comparison": {
+    "d2h-1048576": {
+      "latency_reduction": 0.6121820950806363,
+      "S_over_T": 0.3878179049193637
+    },
+    "d2h-16777216": {
+      "latency_reduction": 0.2364527072641791,
+      "S_over_T": 0.7635472927358209
+    },
+    "d2h-4096": {
+      "latency_reduction": 0.8272112608269875,
+      "S_over_T": 0.1727887391730125
+    },
+    "d2h-4194304": {
+      "latency_reduction": 0.487677407031061,
+      "S_over_T": 0.512322592968939
+    },
+    "d2h-65536": {
+      "latency_reduction": 0.8221378810787014,
+      "S_over_T": 0.1778621189212985
+    },
+    "h2d-1048576": {
+      "latency_reduction": 0.5626929892429982,
+      "S_over_T": 0.4373070107570018
+    },
+    "h2d-16777216": {
+      "latency_reduction": -0.20152113145859096,
+      "S_over_T": 1.201521131458591
+    },
+    "h2d-4096": {
+      "latency_reduction": 0.8290424361314677,
+      "S_over_T": 0.17095756386853236
+    },
+    "h2d-4194304": {
+      "latency_reduction": 0.31533887907044433,
+      "S_over_T": 0.6846611209295557
+    },
+    "h2d-65536": {
+      "latency_reduction": 0.8494710466653428,
+      "S_over_T": 0.15052895333465727
+    },
+    "kernel": {
+      "latency_reduction": 0.8334837515199854,
+      "S_over_T": 0.1665162484800146
+    },
+    "longkernel": {
+      "latency_reduction": 0.08171530913776182,
+      "S_over_T": 0.9182846908622382
+    },
+    "query": {
+      "latency_reduction": 0.7666311845154956,
+      "S_over_T": 0.23336881548450433
+    }
+  },
+  "scope": "Whole-system comparison. Validation does not require SHM to win and does not attribute all differences to transport."
+}

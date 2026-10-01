@@ -11,6 +11,9 @@ dashboard=json.loads((ROOT/'experiments/shm-first-bundle/grafana-dashboard.json'
 dashboard.update({'uid':'vmweave-system-comparison','title':'VMWeave TCP/RPC vs improved SHM — whole systems'})
 for panel in dashboard['panels']:
  if panel['title']=='Pod memory — Worker and launcher':panel['title']='Pod memory — runtime and launcher'
+ if panel['title']=='Requested HAMi cap':
+  panel['title']='Configured compute level — full GPU'
+  panel['description']='100 is HAMi FORCE 100 for S and all 188 physical SMs through MPS for T. This panel records configuration, not measured utilization or quota compliance.'
 save(ROOT/'.local/performance-20260930/monitoring/dashboards/system-comparison.json',dashboard)
 save(OUT/'monitoring/grafana-dashboard.json',dashboard)
 save(OUT/'monitoring/prometheus-config.json',d)

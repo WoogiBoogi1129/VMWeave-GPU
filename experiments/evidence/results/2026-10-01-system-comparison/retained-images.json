@@ -1,0 +1,42 @@
+[
+  {
+    "name": "sc-retain-worker",
+    "container_id": "a3a48774e7b9080c3e7f9417b5724addde62bf536ccafb302c92f8cfe32502d7",
+    "image": "localhost/vmweave-worker@sha256:8566144a77681353b49211d8ae5a2ab71c6f082b7f4dd22e76eb8dcd386670e7"
+  },
+  {
+    "name": "sc-retain-guest",
+    "container_id": "05974c767fcf18b3ec4b4ef5207ebab77a2c12413a08552139529a6da61e453c",
+    "image": "localhost/flyt-evidence-guest@sha256:47e520785c49e6db93631ef4876dcb40b73b23ffc766327e6b02cdfe3496c052"
+  },
+  {
+    "name": "sc-retain-launcher",
+    "container_id": "749e617161990932f023b3c37adcd5061f723492c5b8928a5d66fabf7e9268e1",
+    "image": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935"
+  },
+  {
+    "name": "sc-retain-hook",
+    "container_id": "a12f8f551484d8ad25bb378cb6cad7cc16e5af818d59272730d3a6076ee800de",
+    "image": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f"
+  },
+  {
+    "name": "sc-retain-cell",
+    "container_id": "b37ecdf0f62901d93f66bf410b7e61812740809155f2f448971b1c4a513adf7a",
+    "image": "localhost/flyt-gpu-cell@sha256:0b21e0df1222f5861b522994a80416e243870663372d3cd2a886d36a221efbbd"
+  },
+  {
+    "name": "sc-retain-manager",
+    "container_id": "3741a57e50bceb403d4f77a9607c21cab922c1f77ab8881575c2053bc89ee543",
+    "image": "localhost/flyt-cluster-manager@sha256:7789348f62da6f2d9fa1ee031d323be1cf7f6e1b44c563d104745e0deca9a0b8"
+  },
+  {
+    "name": "sc-retain-mongo",
+    "container_id": "88c62001ef6ddc7761746dea169dd0a8bfc86acf0a565c8164c4a1642aa44347",
+    "image": "docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e"
+  },
+  {
+    "name": "sc-retain-helper",
+    "container_id": "2ad2b02306371e8cdaa4a08e1695b6d821ddd54d0a2fb39a68b28ef727d5459e",
+    "image": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+  }
+]

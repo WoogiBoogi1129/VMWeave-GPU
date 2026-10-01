@@ -1,0 +1,162 @@
+{
+  "utc": 1790836930.7354653,
+  "remaining_campaign_resources": [],
+  "target_gpu_compute_processes": "",
+  "monitoring_health": {
+    "status": "success",
+    "data": {
+      "resultType": "vector",
+      "result": [
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "10.97.206.19:31992",
+            "job": "hami"
+          },
+          "value": [
+            1790836930.733,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "10.105.14.111:9400",
+            "job": "dcgm"
+          },
+          "value": [
+            1790836930.733,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "10.110.216.21:9100",
+            "job": "node"
+          },
+          "value": [
+            1790836930.733,
+            "1"
+          ]
+        },
+        {
+          "metric": {
+            "__name__": "up",
+            "instance": "192.168.24.21:9899",
+            "job": "system-comparison"
+          },
+          "value": [
+            1790836930.733,
+            "1"
+          ]
+        }
+      ]
+    }
+  },
+  "exporter_stop_pid": 60237,
+  "preserved_namespace_resources": [
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "Pod",
+      "name": "same-channel-2-prepare",
+      "uid": "a7d58819-5642-4a1d-a632-29dc4469d996"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "Pod",
+      "name": "same-channel-2-reclaim",
+      "uid": "b1d3e287-59ee-45bd-8b2b-07a76fca0799"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "Pod",
+      "name": "same-channel-3-019edb7b38b3-prepare",
+      "uid": "3ec27cf3-2063-4442-8a2e-70242dd5e67f"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "Pod",
+      "name": "same-channel-3-019edb7b38b3-reclaim",
+      "uid": "6e83b2e3-0a21-4220-9be0-a6f62164989e"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "Pod",
+      "name": "same-channel-prepare",
+      "uid": "1ec586dc-baca-4b80-8838-4b496dc4bb7d"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "Pod",
+      "name": "same-channel-reclaim",
+      "uid": "33ee3f86-568f-42b7-aa81-c6f4044b936f"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "VirtualMachine",
+      "name": "same-vm",
+      "uid": "f8349ff8-1f7d-4f18-87a2-934838ad860a"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "VirtualMachine",
+      "name": "same-vm-2",
+      "uid": "07389e8e-b51f-4a8f-bfa5-54d36e041655"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "VirtualMachine",
+      "name": "same-vm-3",
+      "uid": "23fc6932-e2cf-4bc3-8ec5-181d20d8950b"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "PersistentVolumeClaim",
+      "name": "backing",
+      "uid": "f5d12c57-c2a1-44af-8104-1089e133aafb"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "GPUProfile",
+      "name": "approved",
+      "uid": "27b57df2-586c-41bc-8af2-29dc65c5e1d6"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "GPURequest",
+      "name": "same-channel",
+      "uid": "f999c073-48c0-4fa1-9526-764cfeb1b2d5"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "GPURequest",
+      "name": "same-channel-2",
+      "uid": "7a72a3c6-a643-4252-b631-dcad3e3af9db"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "GPURequest",
+      "name": "same-channel-3",
+      "uid": "97d72b30-fb2d-4baf-92f2-b034dbdf9340"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "SharedMemoryChannel",
+      "name": "same-channel",
+      "uid": "e64c8293-39e5-498b-b9be-c4f232d4fb4b"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "SharedMemoryChannel",
+      "name": "same-channel-2",
+      "uid": "3bca460a-843c-464c-9cf9-31a379ecc334"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "kind": "SharedMemoryChannel",
+      "name": "same-channel-3",
+      "uid": "019edb7b-38b3-4e13-9f10-bd867e39e845"
+    }
+  ]
+}

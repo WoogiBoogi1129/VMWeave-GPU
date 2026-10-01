@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ssh",
+    "-i",
+    "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/system-comparison-20261001/artifacts/guest-key",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "StrictHostKeyChecking=accept-new",
+    "-o",
+    "UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-01-system-comparison/runs/sc-r5-t/known-hosts",
+    "ubuntu@10.85.0.253",
+    "sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T batch 60 60 10 /tmp/perf/sc-r5-t /tmp/perf/work.cubin 7 255"
+  ],
+  "utc": 1790835549.3380792
+}

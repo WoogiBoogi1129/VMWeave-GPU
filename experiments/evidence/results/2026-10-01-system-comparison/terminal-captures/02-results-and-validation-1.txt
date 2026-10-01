@@ -1,0 +1,51 @@
+ubuntu@gpu-4:2026-10-01-system-comparison$ # CPU cores and CPU microseconds per long-kernel it
+eration
+ubuntu@gpu-4:2026-10-01-system-comparison$ jq -r '.summary|to_entries[]|[.key,.value["longkern
+el-1048576"].cores,.value["longkernel-1048576"].cpu_us_iteration]|map(if type=="number" then (
+. * 1000|round)/1000 else . end)|@tsv' cpu-summary.json | column -t
+T  0.974  7647.831
+S  1.964  14162.894
+ubuntu@gpu-4:2026-10-01-system-comparison$ # Exact final resource audit
+ubuntu@gpu-4:2026-10-01-system-comparison$ jq '{remaining_campaign_resources,target_gpu_comput
+e_processes}' final-audit.json
+{
+  "remaining_campaign_resources": [],
+  "target_gpu_compute_processes": ""
+}
+ubuntu@gpu-4:2026-10-01-system-comparison$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

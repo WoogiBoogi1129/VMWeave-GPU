@@ -1,0 +1,18 @@
+[2026-10-01T06:07:08Z INFO  flyt_cluster_manager::servernode_handler] Server node handler started on port: 12401
+[2026-10-01T06:07:08Z INFO  flyt_cluster_manager::frontend_handler] Frontend handler listening on /tmp/flyt-frontend-socket
+[2026-10-01T06:07:12Z INFO  flyt_cluster_manager::servernode_handler] Server node connected: 10.85.0.115
+[2026-10-01T06:07:12Z INFO  flyt_cluster_manager::servernode_handler] Getting GPU details for servernode: 10.85.0.115
+[2026-10-01T06:07:12Z INFO  flyt_cluster_manager::servernode_handler] Server node gpu string: 0,CUDA-visible-device-0,101973819392,188,188,0
+[2026-10-01T06:07:12Z INFO  flyt_cluster_manager::servernode_handler] Server node gpus updated: 10.85.0.115
+[2026-10-01T06:07:57Z INFO  flyt_cluster_manager::client_handler] CLIENTD_RMGR_CONNECT command received from client 10.85.0.16,1
+[2026-10-01T06:07:57Z INFO  flyt_cluster_manager::client_handler] creating new client 10.85.0.16,1, sm_core: 188
+[2026-10-01T06:07:57Z INFO  flyt_cluster_manager::servernode_handler] Allocating VM resources for client: 10.85.0.16 1
+[2026-10-01T06:07:57Z INFO  flyt_cluster_manager::servernode_handler] VM resources required: Some(VMResources { vm_ip: "10.85.0.16", host_ip: "10.85.0.115", compute_units: 188, memory: 4294967296 })
+[2026-10-01T06:07:57Z INFO  flyt_cluster_manager::servernode_handler] client_id index in get_free_fpu 0 i: 0 total: 1
+[2026-10-01T06:07:57Z INFO  flyt_cluster_manager::servernode_handler] after get_free_gpu
+[2026-10-01T06:07:58Z INFO  flyt_cluster_manager::servernode_handler] after create_virt_server
+[2026-10-01T06:07:58Z INFO  flyt_cluster_manager::servernode_handler] Allocated for VM: 10.85.0.16 client_id: 1 GPU server: 10.85.0.115  gpu_id 0
+[2026-10-01T06:07:58Z INFO  flyt_cluster_manager::client_handler] after allocating vm resources new client 10.85.0.16,1
+[2026-10-01T06:07:58Z INFO  flyt_cluster_manager::client_handler] Adding new client 10.85.0.16,1
+[2026-10-01T06:17:18Z INFO  flyt_cluster_manager::client_handler] CLIENTD_RMGR_DISCONNECT command received from client 10.85.0.16,1
+[2026-10-01T06:17:18Z INFO  flyt_cluster_manager::servernode_handler] Deallocating virt server: 10.85.0.115:1

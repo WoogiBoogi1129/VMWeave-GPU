@@ -1,5 +1,6 @@
 """Validate completeness and comparability independently of which system wins."""
 from common import *
+import re
 summary=json.loads((OUT/'summary.json').read_text());assert summary['complete']
 cpu=json.loads((OUT/'cpu-summary.json').read_text());protocol=json.loads((OUT/'protocol.json').read_text())
 hashes=protocol['artifact_hashes'];errors=[];checked=[]
@@ -29,6 +30,11 @@ for pair in protocol['pairs']:
     transport=[x for x in events if x['event']=='TRANSPORT'];assert len(transport)==1 and transport[0]['socktype']==1 and transport[0]['connection_is_local']==0
     assert any('cricket-rpc-server' in r['command'] for r in runtime)
     assert any('nvidia-cuda-mps-server' in r['command'] for r in runtime)
+    for binary in ['cricket-rpc-server','nvidia-cuda-mps-server']:
+     expected=next(r['executable_sha256'] for r in protocol['T_runtime_hashes'] if binary in r['command'])
+     assert all(r['executable_sha256']==expected for r in runtime if binary in r['command'])
+    cores=re.findall(r'Changed SM cores to (\d+)',(p/'cell.txt').read_text())
+    assert cores and set(map(int,cores))=={protocol['physical_sm_count']}
     assert not any('libvgpu' in f for r in runtime for f in r['library_hashes'])
     assert (p/'tcp-connections.txt').stat().st_size>0
     binaries=['cricket-client.so','probe-T','work.cubin']
@@ -38,6 +44,10 @@ for pair in protocol['pairs']:
   except (AssertionError,KeyError,FileNotFoundError,ValueError) as e:errors.append({'run':name,'error':str(e) or type(e).__name__})
 for system in ['T','S']:
  if len(cpu['summary'][system])!=8 or any(x['repeats']!=5 or x['min_coverage']<.95 for x in cpu['summary'][system].values()):errors.append({'cpu':system,'error':'Missing windows or <95% coverage'})
+gpu=json.loads((OUT/'gpu-summary.json').read_text())
+for system in ['T','S']:
+ if len(gpu['summary'][system])!=8 or any(x['repeats']!=5 for x in gpu['summary'][system].values()):errors.append({'gpu':system,'error':'Missing telemetry windows'})
+if len(json.loads((OUT/'stability.json').read_text())['rows'])!=80:errors.append({'stability':'Missing descriptive windows'})
 comparison={k:{'latency_reduction':1-summary['summary']['S'][k]['mean_us']/v['mean_us'],'S_over_T':summary['summary']['S'][k]['mean_us']/v['mean_us']} for k,v in summary['summary']['T'].items()}
 save(OUT/'validation.json',{'complete':not errors,'sessions':checked,'errors':errors,'comparison':comparison,'scope':'Whole-system comparison. Validation does not require SHM to win and does not attribute all differences to transport.'})
 print(json.dumps({'complete':not errors,'errors':errors,'comparison':comparison},indent=2))

@@ -21,8 +21,8 @@ provenance are preserved. VM boot, CUDA setup, allocations, module loading and C
 writing are outside each measured window.
 
 Each of five matched repetitions contains a fresh T session and a fresh S
-session, run sequentially. Pair order alternates; workload order is shuffled
-with a frozen seed and is identical within each pair. Eight windows per session:
+session, run sequentially. Pair order alternates; the workload list is rotated
+by a seeded, frozen offset and is identical within each pair. Eight windows per session:
 query, short launch+sync, long launch+sync (1,048,576 integer loop iterations),
 and H2D/D2H copy pairs at 4KiB, 64KiB, 1MiB, 4MiB and 16MiB. Each window warms
 for at least 10 seconds/50 operations, then measures 60 seconds. Copies report
@@ -59,7 +59,8 @@ The Guest SSH key and legacy Mongo credentials must remain private.
    long-kernel timing before freezing `protocol.json`.
 5. Run `run.py formal` in a real terminal transcript. Measured failures are
    preserved, never silently overwritten. An incomplete attempt stops the driver.
-6. Run `analyze.py`, `analyze_cpu.py`, `export_telemetry.py`, and `verify.py`.
+6. Run `analyze.py`, `analyze_cpu.py`, `stability.py`, `export_telemetry.py`,
+   `analyze_gpu.py`, and `verify.py`.
    Completeness does not depend on which system wins. Report mean/SD across
    five sessions, p50/p95, and p99 only with at least 10,000 samples per run.
 7. Produce actual post-run Grafana and terminal captures, report limitations and
