@@ -9,9 +9,11 @@ ensure_admin()
 save(OUT/('environment-'+stage+'.json'),{'source_commit':call(['git','rev-parse','HEAD']).strip(),
  'source_diff':call(['git','diff','--','runtime','scripts/test-shm-training.sh']),
  'gpu':call(['nvidia-smi','-q']), 'monitor':json.loads((BASE/'monitor.json').read_text())})
-def run_one(name,variant,seconds,warmup,mask=31):
+def run_one(name,variant,seconds,warmup,mask=31,resume=False):
  runtime.IMAGES['worker']=variants[variant]['worker']
- s=Session(name);s.variant=variant;s.prepare()
+ if resume:s=Session.resume_premeasurement(name)
+ else:s=Session(name);s.prepare()
+ s.variant=variant
  save(s.out/'variant.json',variants[variant])
  save(s.out/'mapping.json',{'guest':call(s.ssh+["cat /proc/cpuinfo | head -25; cat /sys/bus/pci/devices/"+s.bdf+"/resource; ls /sys/bus/pci/devices/"+s.bdf+"/resource*; cat /sys/devices/system/clocksource/clocksource0/current_clocksource"]),
  'cpu_before':cpu_snapshot(s)})
@@ -36,6 +38,8 @@ if stage=='pilot':
  for v in ['base','both']:run_one('sf-pilot-'+v,v,2,1)
 elif stage=='pilot-zero':
  run_one('sf-pilot-zero-both','both',5,2)
+elif stage=='resume-prepared':
+ name=sys.argv[2];run_one(name,name.split('-')[-1],10,3,resume=True)
 elif stage=='formal':
  protocol={'repeats':5,'conditions':['query','kernel','copy-4096','copy-1048576','copy-16777216'],
   'duration_s':10,'warmup_min_s':3,'warmup_min_operations':50,'variants':variants,

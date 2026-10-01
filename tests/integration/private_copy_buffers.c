@@ -11,7 +11,8 @@ static uint32_t alloc(void*c,void**p,size_t n){(void)c;*p=malloc(n);return *p?0:
 static uint32_t release(void*c,void*p){(void)c;free(p);return 0;}
 static uint32_t copy(void*c,void*d,const void*s,size_t n,uint32_t k){
  (void)c;copies++;if(k==FLYT_COPY_HTOD)assert(s==expected_input);if(k==FLYT_COPY_DTOH)assert(d==expected_output);
- if(inject)return 700;memcpy(d,s,n);return 0;
+ if(inject)return 700;
+ memcpy(d,s,n);return 0;
 }
 static uint32_t sync_gpu(void*c){(void)c;return 0;}
 int main(int argc,char**argv){

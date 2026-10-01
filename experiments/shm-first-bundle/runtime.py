@@ -52,6 +52,7 @@ class Session:
   pods=json.loads(k('get','pods','-n',NS,'-o','json'))['items']
   owned=[p for p in pods if any(r.get('uid')==self.uid for r in p['metadata'].get('ownerReferences',[])) and p['metadata']['name'].endswith('-worker')]
   self.worker=owned[0]['metadata']['name'];launcher=next(p for p in pods if p['metadata']['name'].startswith('virt-launcher-'+self.name+'-'))
+  wait(lambda:get('pod',self.worker).get('status',{}).get('phase')=='Running')
   affinity=(ROOT/'experiments/evidence/campaign_affinity.py').read_text()
   for pod,cpus in [(launcher,'0-7' if self.slot=='a' else '8-15'),(owned[0],'16-19' if self.slot=='a' else '20-23')]:
    result=k('exec','-i','-n',NS,HELPER,'--','python3','-',pod['metadata']['uid'],cpus,input=affinity)
@@ -64,6 +65,28 @@ class Session:
  def command(self,program,args):
   if self.path=='N':return ['kubectl','exec','-n',NS,self.name,'--','taskset','-c','0-7','/evidence/'+program,*map(str,args)]
   return self.ssh+['sudo env FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC='+str(getattr(self,'hold_until',0))+' FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF='+self.bdf+' FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/'+program+' '+shlex.join(list(map(str,args)))]
+ @classmethod
+ def resume_premeasurement(cls,name):
+  s=cls.__new__(cls);s.name=name;s.path='S';s.cap=100;s.slot='a';s.art=BASE/'artifacts';s.out=OUT/'runs'/name;s.offset=0
+  assert not (s.out/'command.json').exists() and not (s.out/'execution.json').exists(), 'Never repeat a measured attempt'
+  original=json.loads((s.out/'channel-bound.json').read_text());channel=get(CHAN,name);s.uid=original['metadata']['uid'];assert channel['metadata']['uid']==s.uid
+  v=get('vmi',name);assert v['status']['phase']=='Running';s.ip=v['status']['interfaces'][0]['ipAddress']
+  s.ssh=['ssh','-i',str(s.art/'guest-key'),'-o','BatchMode=yes','-o','ConnectTimeout=5','-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile='+str(s.out/'known-hosts'),'ubuntu@'+s.ip]
+  s.scp=['scp','-i',str(s.art/'guest-key'),'-o','BatchMode=yes','-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile='+str(s.out/'known-hosts')]
+  s.bdf=call(s.ssh+["python3 -c \"from pathlib import Path; print(next(p.name for p in Path('/sys/bus/pci/devices').iterdir() if (p/'vendor').read_text().strip()=='0x1af4' and (p/'device').read_text().strip()=='0x1110'))\""]).strip()
+  pods=json.loads(k('get','pods','-n',NS,'-o','json'))['items'];worker=next(p for p in pods if p['metadata']['name'].endswith('-worker') and any(r.get('uid')==s.uid for r in p['metadata'].get('ownerReferences',[])))
+  s.worker=worker['metadata']['name'];wait(lambda:get('pod',s.worker)['status']['phase']=='Running')
+  launcher=next(p for p in pods if p['metadata']['name'].startswith('virt-launcher-'+name+'-'))
+  for pod,cpus in [(launcher,'0-7'),(worker,'16-19')]:
+   result=k('exec','-i','-n',NS,HELPER,'--','python3','-',pod['metadata']['uid'],cpus,input=(ROOT/'experiments/evidence/campaign_affinity.py').read_text())
+   (s.out/(pod['metadata']['name']+'-affinity.json')).write_text(result)
+  clocks=[]
+  for _ in range(5):
+   t0=time.time();g=float(call(s.ssh+['date +%s.%N']));t1=time.time();clocks.append({'before':t0,'guest':g,'after':t1,'offset':g-(t0+t1)/2,'uncertainty':(t1-t0)/2})
+  s.offset=min(clocks,key=lambda x:x['uncertainty'])['offset'];save(s.out/'clock-map.json',clocks)
+  save(s.out/'identity.json',{'path':'S','cap':100,'gpu_uuid':GPU,'channel_uid':s.uid,'worker':s.worker,'worker_uid':worker['metadata']['uid'],'launcher_uid':launcher['metadata']['uid'],'vm_ip':s.ip,'clock_offset':s.offset,'images':IMAGES})
+  save(s.out/'preparation-resume.json',{'utc':time.time(),'reason':'Node image GC removed local Worker image before first workload; restored exact image and retained stopped references. No measurement was restarted.','channel_uid':s.uid})
+  return s
  def execute(self,kind='load',seconds=120,warmup=30,reps=524288,count=0,start=0,hold_until=0):
   self.hold_until=hold_until+self.offset if hold_until else 0
   prefix=('/evidence/' if self.path=='N' else '/tmp/perf/')+self.name
@@ -110,7 +133,7 @@ def execute_stream(s,cmd,prefix):
      pod=get('pod',s.worker);source=(ROOT/'experiments/shm-first-bundle/read_runtime.py').read_text()
      (s.out/'runtime-libraries.json').write_text(k('exec','-i','-n',NS,HELPER,'--','python3','-',pod['metadata']['uid'],input=source))
      runtime=json.loads((s.out/'runtime-libraries.json').read_text())
-     expected=hashlib.sha256((BASE/'artifacts/bin/flyt-shm-worker').read_bytes()).hexdigest()
+     expected=getattr(s,'worker_hash',hashlib.sha256((BASE/'artifacts/bin/flyt-shm-worker').read_bytes()).hexdigest())
      if s.path=='S' and (not runtime or any(r['executable_sha256']!=expected for r in runtime)):
       raise RuntimeError('Worker binary differs from measured build')
      if s.path in ['N','S']:

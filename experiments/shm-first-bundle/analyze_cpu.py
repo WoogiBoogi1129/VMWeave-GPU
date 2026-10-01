@@ -4,6 +4,7 @@ import statistics
 samples=[json.loads(l) for l in (OUT/'monitoring/cpu.jsonl').read_text().splitlines()]
 rows=[]
 for run in sorted((OUT/'runs').glob('sf-*')):
+    if not run.name.startswith(('sf-r','sf-pilot')):continue
     if not (run/'execution.json').exists():continue
     identity=json.loads((run/'identity.json').read_text());offset=identity['clock_offset']
     start=None;condition=None

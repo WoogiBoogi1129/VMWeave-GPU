@@ -6,7 +6,7 @@ def quantile(xs,p):
     a=sorted(xs);return a[int((len(a)-1)*p)]
 rows=[]
 for run in sorted((OUT/'runs').glob('sf-*')):
-    if not (run/'execution.json').exists():continue
+    if not (run/'execution.json').exists() or not (run/'variant.json').exists():continue
     execution=json.loads((run/'execution.json').read_text())
     if execution['exit_code']:continue
     results=execution['results'];variant=json.loads((run/'variant.json').read_text())
