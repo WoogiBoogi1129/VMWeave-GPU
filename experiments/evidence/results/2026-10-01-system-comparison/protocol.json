@@ -1,0 +1,104 @@
+{
+  "frozen_utc": 1790830288.638036,
+  "scope": "Whole-system Flyt TCP/RPC+MPS vs improved VMWeave SHM+HAMi; HAMi quota tests deferred",
+  "repeats": 5,
+  "seconds": 60,
+  "warmup_min_s": 10,
+  "warmup_min_operations": 50,
+  "conditions": [
+    "query-1048576",
+    "kernel-1048576",
+    "longkernel-1048576",
+    "copy-4096",
+    "copy-65536",
+    "copy-1048576",
+    "copy-4194304",
+    "copy-16777216"
+  ],
+  "long_kernel_iterations": 1048576,
+  "physical_sm_count": 188,
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "S_compute_cap": 100,
+  "gpu_memory_mib": 4096,
+  "guest_vcpus": 8,
+  "guest_memory_gib": 16,
+  "detailed_metrics": false,
+  "affinity": {
+    "guest": "0-7",
+    "worker_or_cell": "16-19",
+    "T_manager": "20-23"
+  },
+  "artifact_hashes": {
+    "cricket-client.so": "6fbe79545c575ac44ea9d528982f583fcbf70558bfd747ba8f2348acfa08e857",
+    "libflyt_guest.so": "7af1e01014ef71a3ed4456b9d28c931c571b8324d72407d58c841dbdd157f61b",
+    "flyt-shm-worker": "db1e087a72c02186e9a22dc3f0fc6269a17ad4cda35e46a26b634fafc73ca167",
+    "probe-S": "3557d95606e556ef4283aee441e4bd1d6cea724d5705b3e682b2cb4525eb831f",
+    "probe-T": "ddbdd500d7f810dfade739918288f9f4a089b900581699ce1e2b12514c82ac5d",
+    "work.ptx": "f38461aa376a1e56f72533de8b1f6fae3dc559a94cb907c138c2ec8ebcd613da",
+    "work.cubin": "1b8ba91eb723944c13ae706381b44b71f5f4ec999242f070b8f2a7540e2b8dc0",
+    "flyt-client-manager": "6941195fb754413ac0b27f96a65e9a358b4524b8b2dc8d79807284c1a0a06b01",
+    "libtirpc.so.3.0.0": "e1edca8c831b2c2f6c986c570987676ec2fda6b3857ccafb7b739f503ec5755f"
+  },
+  "images": {
+    "worker": "localhost/vmweave-worker@sha256:8566144a77681353b49211d8ae5a2ab71c6f082b7f4dd22e76eb8dcd386670e7",
+    "helper": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+    "hook": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+    "cell": "localhost/flyt-gpu-cell@sha256:0b21e0df1222f5861b522994a80416e243870663372d3cd2a886d36a221efbbd",
+    "manager": "localhost/flyt-cluster-manager@sha256:7789348f62da6f2d9fa1ee031d323be1cf7f6e1b44c563d104745e0deca9a0b8",
+    "mongo": "docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e"
+  },
+  "pairs": [
+    {
+      "repeat": 1,
+      "order": [
+        "T",
+        "S"
+      ],
+      "shift": 2
+    },
+    {
+      "repeat": 2,
+      "order": [
+        "S",
+        "T"
+      ],
+      "shift": 0
+    },
+    {
+      "repeat": 3,
+      "order": [
+        "T",
+        "S"
+      ],
+      "shift": 2
+    },
+    {
+      "repeat": 4,
+      "order": [
+        "S",
+        "T"
+      ],
+      "shift": 4
+    },
+    {
+      "repeat": 5,
+      "order": [
+        "T",
+        "S"
+      ],
+      "shift": 7
+    }
+  ],
+  "runtime_source_commit": "cd0d872f1737a239a3212bdd051436b14ff51207",
+  "T_runtime_hashes": [
+    {
+      "command": "nvidia-cuda-mps-server  ",
+      "executable_sha256": "6bc97a5d38cebe0b8b11ef06dc1d0f1bc83b5b01cdeb44b79977f499a5fb43aa"
+    },
+    {
+      "command": "/opt/flyt/bin/cricket-rpc-server 1 0 188 4294967296 0 ",
+      "executable_sha256": "76bef9c6243ba32e13865e2a9f946d2f0632ee8a169134d611c3001ca7a8a28c"
+    }
+  ],
+  "completion": "10 valid independent sessions, 80 windows, correct output, matching hashes/policies, >=95% CPU window coverage, normal cleanup. No requirement that SHM win. Failed attempts preserved."
+}
