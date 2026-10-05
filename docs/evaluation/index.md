@@ -10,6 +10,7 @@
 | 3. 두 VM 메모리 제한 | VM 쌍 3/3 PASS, 1 GiB/4 GiB 정책과 OOM 후 재할당 | [평가 요약](memory.md) |
 | N/T/S 오버헤드 | 새 경로별 5회·105구간, 8개 지연 지표 모두 S > T | [새 평가](resource-performance.md) |
 | 연산 상한·공유 성능 | 단일 VM 20회·공유 20쌍 완료; 단일 25·50·75 및 공유 25 기준 위반 | [새 평가](resource-performance.md) |
+| 16MiB H2D 원인 | Guest 중간 복사 제거의 계측 OFF 개선과 CPU 비용 검증 | [원인 분석](h2d-diagnosis.md) |
 | 제한된 PyTorch 학습 | 고정 FP32 eager MLP·SGD, passthrough와 정확성 비교 | [구현·검증 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md) |
 
 ## 재현과 판정

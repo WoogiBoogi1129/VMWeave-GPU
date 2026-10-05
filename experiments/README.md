@@ -2,6 +2,7 @@
 
 현재 [실험·평가 문서](../docs/evaluation/index.md)에서 목적별 결과를 찾을 수 있습니다.
 
+- `h2d-diagnosis/`: 16MiB H2D의 재현·단계 계측·Guest 복사 제거 대조 실험.
 - `evidence/`: 실행·수집·분석·검증 도구 및 날짜별 결과 묶음.
 - 그 외 디렉터리: SHM 전환 당시 단계별 계약·검증 계획 기록.
 - 현재 빌드에서 사용하는 계약·큐·CUDA dispatcher는 `runtime/shm/`로 이동했습니다.
