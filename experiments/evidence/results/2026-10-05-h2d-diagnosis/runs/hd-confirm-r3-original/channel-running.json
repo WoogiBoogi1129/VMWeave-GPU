@@ -1,0 +1,55 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-10-05T12:59:36Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 1,
+    "name": "hd-confirm-r3-original",
+    "namespace": "vmweave-test-a",
+    "resourceVersion": "5649636",
+    "uid": "c3ada6f7-52d6-47c1-99b7-55d9ffe8fcdd"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+    "image": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+    "pvcRef": {
+      "name": "hd-confirm-r3-original",
+      "uid": "28b52f68-8260-4d16-a260-fa44e4843adc"
+    },
+    "requestRef": {
+      "name": "hd-confirm-r3-original",
+      "uid": "c49972c1-8e56-4373-b94d-f7bb6609fb80"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "hd-confirm-r3-original",
+      "uid": "fd934974-472c-454d-a863-6aadbdd66d30"
+    },
+    "workerImage": "localhost/vmweave-worker@sha256:31dd7f1af855ea081b0f9744fa05cffccc79be2ac5127e134a7858a0d65f6d2c"
+  },
+  "status": {
+    "allocation": "74e988e91877a4055b5838d40760f6db",
+    "compute": 100,
+    "everBound": true,
+    "generation": "c78fd32477141b225b76fa67dac27d22",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "memoryMiB": 4096,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "requestGeneration": 1,
+    "resourcePrefix": "hd-confirm-r3-original-c3ada6f752d6",
+    "sessions": [
+      "fef5e42a410559663ff1c38b8fe678e5"
+    ],
+    "vmiUID": "53215591-0fe8-40f7-bdeb-8092264a1b69",
+    "workerPodUID": "3dff42c2-3b93-4187-a0b7-47638ff1fe7c"
+  }
+}

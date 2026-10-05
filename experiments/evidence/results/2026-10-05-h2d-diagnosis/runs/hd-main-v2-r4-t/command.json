@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ssh",
+    "-i",
+    "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "StrictHostKeyChecking=accept-new",
+    "-o",
+    "UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-v2-r4-t/known-hosts",
+    "ubuntu@10.85.0.177",
+    "sudo env HD_COLLECT_BARRIER=/tmp/perf/hd-main-v2-r4-t.collected SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T sweep 16777216 60 10 /tmp/perf/hd-main-v2-r4-t /tmp/perf/work.cubin"
+  ],
+  "utc": 1791202407.3412495
+}

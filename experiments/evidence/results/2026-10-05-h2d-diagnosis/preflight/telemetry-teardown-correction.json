@@ -1,0 +1,7 @@
+{
+  "discovered": "Source review found hd_dump freed its buffer while enabled stayed true; Worker destruction calls instrumented synchronize after dumping.",
+  "scope": "Diagnostic pilots only; main formal uses unmodified production runtime, so is unaffected. Timed pilot intervals precede destructor, but pilots do not establish normal Worker shutdown.",
+  "correction": "Disable recording at dump and reject late records; final diagnostic rebuild before followup.",
+  "validation": "ASan/UBSan scatter test explicitly issues pending and newly-started records after dump without invalid buffer access. Formal diagnostics additionally require a post-CUDA-teardown exit-zero marker and preserve Pod status (Succeeded when still available; automatic deletion recorded separately).",
+  "old_pilots_preserved": true
+}

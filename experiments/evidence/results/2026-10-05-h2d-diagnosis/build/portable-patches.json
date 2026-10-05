@@ -1,0 +1,123 @@
+{
+  "base_commit": "00cf878",
+  "apply": "Copy runtime/shm at base commit, then patch -p1 inside that copy. Never patch production runtime to reproduce diagnostic trials.",
+  "versions": [
+    {
+      "label": "pilot-v1",
+      "patch": "pilot-v1-portable.patch",
+      "sha256": "b34d8b0f9cb3e6b5022cfd528d4f972e811e4d3ee0e29c9fd8fe0ba019375e8f",
+      "files": {
+        "CMakeLists.txt": {
+          "before": "7ccecb9eec484da434f2672ced031b94fdfff70237d877d0d50acbc2cc1ddcf6",
+          "after": "add2cdce3f150938318179f523359f0eda5504cc2fa6387d7d3fa1995fe3abd3"
+        },
+        "cuda-dispatch/src/runtime.c": {
+          "before": "524c731f3c272df6f26d3ba3477aaedffe0561a9904065c6955e7e1bb4e93983",
+          "after": "216cb6794b45d98be7a1bf88335628935f9ab80425dce505b00ad5cfbf9c85ab"
+        },
+        "shm-queue/CMakeLists.txt": {
+          "before": "cebaab94dcd890b5d1c1b00dcb97006b9afa70409a216c3ada68fb3eb34ac103",
+          "after": "9380cab14dd8cd46527949c54f76103956bb6af156413035d97b213fe9de5366"
+        },
+        "shm-queue/include/hd_diag.h": {
+          "before": null,
+          "after": "a52705f1e2939f237c473399e689017c41ee933585659cd8fe9207e8c93217a9"
+        },
+        "shm-queue/src/diag.c": {
+          "before": null,
+          "after": "a99c7b0fe9b931c1b8e423201f5431e896fc7102dda9eb267742642688ff6106"
+        },
+        "shm-queue/src/queue.c": {
+          "before": "09fa80332ed891df8f922159958ee36ace5d64df9c503fc3666eb742227c967b",
+          "after": "05e5155551ca0449e958f172b4fe03b35d72f273e3f3a9fbc580f6a9e6f18323"
+        },
+        "src/guest.c": {
+          "before": "80df166e5ec0511b1cfacfe68a731f65b70c4bdbfbef91a07a531f850fce6a42",
+          "after": "b022f6c362ce42faf6aef35558b616f8db1a6a05cf9d0489455ecc55ae441f22"
+        },
+        "src/worker.c": {
+          "before": "3f951cbd4d7b6530e44448bfb713358c271a398bba9db1e75aa29bb86a807410",
+          "after": "db44de6ac8f0fa1fdfa43da9ed4c0abbaa9dd9a93285c8c518f082bf67713d46"
+        }
+      }
+    },
+    {
+      "label": "pilot-v2",
+      "patch": "pilot-v2-portable.patch",
+      "sha256": "167c3fbb8e6acd93fa16ffc1e51d4cf49a115e25f234e1293f9c2e32fb4c1ba9",
+      "files": {
+        "CMakeLists.txt": {
+          "before": "7ccecb9eec484da434f2672ced031b94fdfff70237d877d0d50acbc2cc1ddcf6",
+          "after": "add2cdce3f150938318179f523359f0eda5504cc2fa6387d7d3fa1995fe3abd3"
+        },
+        "cuda-dispatch/src/runtime.c": {
+          "before": "524c731f3c272df6f26d3ba3477aaedffe0561a9904065c6955e7e1bb4e93983",
+          "after": "216cb6794b45d98be7a1bf88335628935f9ab80425dce505b00ad5cfbf9c85ab"
+        },
+        "shm-queue/CMakeLists.txt": {
+          "before": "cebaab94dcd890b5d1c1b00dcb97006b9afa70409a216c3ada68fb3eb34ac103",
+          "after": "9380cab14dd8cd46527949c54f76103956bb6af156413035d97b213fe9de5366"
+        },
+        "shm-queue/include/hd_diag.h": {
+          "before": null,
+          "after": "05bd6c9178213b4f984781b326af00717dc7e72893c8f9427d7eb91f57e434e2"
+        },
+        "shm-queue/src/diag.c": {
+          "before": null,
+          "after": "eca95c10655592635fb8a0b0d2323c1ecddade67212a81d84b1761f2e72d92b3"
+        },
+        "shm-queue/src/queue.c": {
+          "before": "09fa80332ed891df8f922159958ee36ace5d64df9c503fc3666eb742227c967b",
+          "after": "26a5074d6bdbf59c4cf8ced00e5ba20e36a5668550c8851b8e4c11bff5651e2e"
+        },
+        "src/guest.c": {
+          "before": "80df166e5ec0511b1cfacfe68a731f65b70c4bdbfbef91a07a531f850fce6a42",
+          "after": "4d4fc14a38d6bc1b68a1c115f611130b490afa2041f466d364cddc959600d7be"
+        },
+        "src/worker.c": {
+          "before": "3f951cbd4d7b6530e44448bfb713358c271a398bba9db1e75aa29bb86a807410",
+          "after": "db44de6ac8f0fa1fdfa43da9ed4c0abbaa9dd9a93285c8c518f082bf67713d46"
+        }
+      }
+    },
+    {
+      "label": "final",
+      "patch": "final-portable.patch",
+      "sha256": "604d93ddf73aad65e7008d8b6b874e839db23f84cd31f39fc834a5323d595bdc",
+      "files": {
+        "CMakeLists.txt": {
+          "before": "7ccecb9eec484da434f2672ced031b94fdfff70237d877d0d50acbc2cc1ddcf6",
+          "after": "add2cdce3f150938318179f523359f0eda5504cc2fa6387d7d3fa1995fe3abd3"
+        },
+        "cuda-dispatch/src/runtime.c": {
+          "before": "524c731f3c272df6f26d3ba3477aaedffe0561a9904065c6955e7e1bb4e93983",
+          "after": "216cb6794b45d98be7a1bf88335628935f9ab80425dce505b00ad5cfbf9c85ab"
+        },
+        "shm-queue/CMakeLists.txt": {
+          "before": "cebaab94dcd890b5d1c1b00dcb97006b9afa70409a216c3ada68fb3eb34ac103",
+          "after": "9380cab14dd8cd46527949c54f76103956bb6af156413035d97b213fe9de5366"
+        },
+        "shm-queue/include/hd_diag.h": {
+          "before": null,
+          "after": "a08a2702326409009066df52072cb3f3e6a88a88f2c38313684ae66f6fa292ed"
+        },
+        "shm-queue/src/diag.c": {
+          "before": null,
+          "after": "efc96f7ea65aad1e38a8e36ec7cec16b470ea76b609b0f6a53bf59495e4af375"
+        },
+        "shm-queue/src/queue.c": {
+          "before": "09fa80332ed891df8f922159958ee36ace5d64df9c503fc3666eb742227c967b",
+          "after": "81bb6ccf2adab3bd4b4f9a46c557d9d9107887365c8615c3cd95e4c909c4ff75"
+        },
+        "src/guest.c": {
+          "before": "80df166e5ec0511b1cfacfe68a731f65b70c4bdbfbef91a07a531f850fce6a42",
+          "after": "cedfbecbddf9e005bd64ab16374bae75490a78c7589b3dabd49fe0a564118165"
+        },
+        "src/worker.c": {
+          "before": "3f951cbd4d7b6530e44448bfb713358c271a398bba9db1e75aa29bb86a807410",
+          "after": "ef2fbf6751b38f4bb5206782378fcbbf48325f706cd43a7b7998a214a605869f"
+        }
+      }
+    }
+  ]
+}

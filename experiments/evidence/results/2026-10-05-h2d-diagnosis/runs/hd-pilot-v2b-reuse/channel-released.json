@@ -1,0 +1,55 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-10-05T10:33:54Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 2,
+    "name": "hd-pilot-v2b-reuse",
+    "namespace": "vmweave-test-a",
+    "resourceVersion": "5600487",
+    "uid": "5c57f7da-b698-42de-b0b7-b243b0e202bf"
+  },
+  "spec": {
+    "drain": true,
+    "gid": 107,
+    "hookImage": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+    "image": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+    "pvcRef": {
+      "name": "hd-pilot-v2b-reuse",
+      "uid": "2e7fab78-32d2-4bf0-b0fd-00d1291f07d3"
+    },
+    "requestRef": {
+      "name": "hd-pilot-v2b-reuse",
+      "uid": "3074501b-34af-4ee1-9261-bfcbd93d6481"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "hd-pilot-v2b-reuse",
+      "uid": "63f889b7-53d7-498d-a592-c8671b3438b2"
+    },
+    "workerImage": "localhost/vmweave-worker@sha256:6f3f2d0c6fa449340a209421e00f48dd82717a710774059709a7382c9542af6b"
+  },
+  "status": {
+    "allocation": "1ec870bd6907f29ea8548507d2dbe947",
+    "compute": 100,
+    "everBound": true,
+    "generation": "c56e9b5e3fc6d2713631926c19d9c96e",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "memoryMiB": 4096,
+    "nodeName": "gpu-4",
+    "phase": "Released",
+    "profileGeneration": 1,
+    "reason": "DetachAndReclamationConfirmed",
+    "requestGeneration": 1,
+    "resourcePrefix": "hd-pilot-v2b-reuse-5c57f7dab698",
+    "sessions": [
+      "90a478c028bb0bbff518d5a8c38a4943"
+    ],
+    "vmiUID": "131bc760-f6d1-4b31-a705-81c5ad32e88a",
+    "workerPodUID": "d74b628f-c0c0-4f2a-b00e-9d6218ed1ec5"
+  }
+}

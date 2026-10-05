@@ -1,0 +1,89 @@
+{
+  "frozen_utc": 1791197174.4134383,
+  "main": {
+    "runs": [
+      {
+        "repeat": 1,
+        "order": [
+          "T",
+          "S"
+        ]
+      },
+      {
+        "repeat": 2,
+        "order": [
+          "S",
+          "T"
+        ]
+      },
+      {
+        "repeat": 3,
+        "order": [
+          "T",
+          "S"
+        ]
+      },
+      {
+        "repeat": 4,
+        "order": [
+          "S",
+          "T"
+        ]
+      },
+      {
+        "repeat": 5,
+        "order": [
+          "T",
+          "S"
+        ]
+      }
+    ],
+    "systems": {
+      "T": "Original TCP/RPC+MPS runtime",
+      "S": "Original improved SHM+HAMi runtime, no internal diagnostic instrumentation"
+    },
+    "sizes_mib": [
+      4,
+      8,
+      12,
+      16
+    ],
+    "seconds_per_window": 60,
+    "warmup_seconds": 10,
+    "warmup_min_operations": 50,
+    "probe": "Same source on both paths; copy and explicit synchronization measured separately; whole-buffer guest validation and independent SHA256 of output outside timed windows",
+    "change_from_original_20261001_probe": "Extra monotonic timestamps between copy and sync; no API/order/payload changes. Original probe unchanged baseline attempts never reached measurement due provisioning failures; no claim of bit-identical probe."
+  },
+  "diagnostic_followup": "Separate instrumented controls and candidate trials. Pilot-selected candidates are not pooled into formal statistics.",
+  "runtime_hashes": {
+    "libflyt_guest.so": "7af1e01014ef71a3ed4456b9d28c931c571b8324d72407d58c841dbdd157f61b",
+    "flyt-shm-worker": "db1e087a72c02186e9a22dc3f0fc6269a17ad4cda35e46a26b634fafc73ca167",
+    "cricket-client.so": "6fbe79545c575ac44ea9d528982f583fcbf70558bfd747ba8f2348acfa08e857",
+    "probe-S": "05c0ab26fe4387e761768c61b971892389c066436fc8a09fc68a982f39f198b1",
+    "probe-T": "d14b30e17eee23fe29ec87079cf0d6be0bf6bf395e56b884f37457102135a402"
+  },
+  "runner_hashes": {
+    "analyze.py": "d4b9c21b333e2689f64bcf37d3951121592efcf32839635d81118b3d6db70c4a",
+    "runtime.py": "17c5423c6469f40bb007aca4ca5b164a67e9748b3fab100bce95f56aa1a3d88a",
+    "run_main.py": "d9ce70cb3c39f5d546e9ed33b5aa0b8ccdd3d10d99a4924ed56d98d7a86fc336",
+    "read_runtime.py": "d6377b56b5db5c4e3258d857fd36df217067c3f17821e715819e459543808490",
+    "run_direct_pilot.py": "10187a14338bb68082dcbb4b1b6eea9b8418b76b4febc384f8b34d443eed9f09",
+    "reanalyze_prior.py": "58df46d573f0baaed928b6aa8f27abd4b43c77ae392f24ae6f314beb19109bf6",
+    "manager_affinity.py": "14ebe83c1cd45894157b748665de8a962911034c9523c3f1b1f2dfb1682c98ec",
+    "monitor.py": "4be13b59cd88762498dc50fd4ffd2b99e22c4c59ec92be26a2a926c049fe5ba9",
+    "build_diagnostic.py": "850f5e4cf2eb2c26eebf25191d043f3f581e7e0b48d9122e4d579b189706e380",
+    "freeze_main.py": "4fde2dfcfbfc0a9806b4f3f82af3d3a4c2d849549da0aa80bbd254308735fdea",
+    "analyze_cpu.py": "01adcc1921612b0e07746317e34254423b04b97ad3da02f446893ae26a37454c",
+    "make_diagnostic_source.py": "c89d19455e46b4e6887d3c6508f9b330dfba5f738508769c9113c6384668468d",
+    "run_components.py": "572f34d6586c5748ca5434667f3aa0560042fd5a6f30dd4fb7d338fe4e267200",
+    "common.py": "628d85b23b461d5f19637bc6d2235b624329f849b8350ddb0fa32a2a8d9054f0",
+    "redact_evidence.py": "7caa2548668b24ae16a64b3f63cc55ccce87b97bcc769dea140aedcb66f8d9fc",
+    "run_candidates.py": "2e0069e1351eb0779e2cd106305d876c4644d3ec4c7b39713d2e754d9c2f5aa6",
+    "run_diagnostic.py": "5f01f4fd9e7187d355c679920458aa9a15a80d98bb52d973ecd233f2b63a2dff",
+    "tcp_runtime.py": "bcf64098abf382f29c1aaac51f6f93ddfba69a89473a1c32240523c286d7458b",
+    "prepare.py": "eef47170e5879428ffdf516bba0e4ad8e7d0c2fee1fd41f3883c94cd7842b269",
+    "setup_tcp.py": "a87c23c79b7ed4644fb2549e30ff406e4df0c1bde8761d73a1490fc2dd551ca5",
+    "run_baseline.py": "4e654b7f1169587dc74dacbe402edfd3d96b1737ef0da1b61973cdc00ab34711",
+    "test_diagnostic.py": "5d7b1fbd16d1d7850f2ff4f56d1f3fa1015a6ccfda2a5e9afcb3828e1a658d62"
+  }
+}

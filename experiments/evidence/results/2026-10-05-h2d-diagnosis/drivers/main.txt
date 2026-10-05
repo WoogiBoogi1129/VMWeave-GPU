@@ -1,0 +1,177 @@
+START hd-main-r1-t
+COMMAND hd-main-r1-t ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-r1-t/known-hosts ubuntu@10.85.0.148 'sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T sweep 16777216 60 10 /tmp/perf/cricket-client.so /tmp/perf/work.cubin'
+hd-main-r1-t {"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+hd-main-r1-t {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4286578688,"total_bytes":4294967296}
+hd-main-r1-t {"event":"WARMUP_START","utc":1791197240.541782618,"monotonic":32.037624513,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"WARMUP_END","utc":1791197250.549138546,"monotonic":42.044980678,"elapsed":10.007332778,"completed":958}
+hd-main-r1-t {"event":"MEASUREMENT_START","utc":1791197250.549189091,"monotonic":42.045031227,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"MEASUREMENT_END","utc":1791197310.550231457,"monotonic":102.046073579,"elapsed":60.001033285,"completed":5988}
+hd-main-r1-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":5988,"elapsed_s":60.001033285,"operations_per_s":99.798281332,"checked_elements":1048576,"mismatches":0}
+hd-main-r1-t {"event":"CONDITION","mode":"copy","bytes":8388608,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4278190080,"total_bytes":4294967296}
+hd-main-r1-t {"event":"WARMUP_START","utc":1791197310.603929043,"monotonic":102.099771129,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"WARMUP_END","utc":1791197320.618464470,"monotonic":112.114306537,"elapsed":10.014519335,"completed":622}
+hd-main-r1-t {"event":"MEASUREMENT_START","utc":1791197320.618546247,"monotonic":112.114388424,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"MEASUREMENT_END","utc":1791197380.625696182,"monotonic":172.121538447,"elapsed":60.007140986,"completed":5999}
+hd-main-r1-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":8388608,"completed":5999,"elapsed_s":60.007140986,"operations_per_s":99.971435090,"checked_elements":2097152,"mismatches":0}
+hd-main-r1-t {"event":"CONDITION","mode":"copy","bytes":12582912,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4269801472,"total_bytes":4294967296}
+hd-main-r1-t {"event":"WARMUP_START","utc":1791197380.665372610,"monotonic":172.161214650,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"WARMUP_END","utc":1791197390.670686483,"monotonic":182.166528614,"elapsed":10.005306118,"completed":852}
+hd-main-r1-t {"event":"MEASUREMENT_START","utc":1791197390.670719624,"monotonic":182.166561855,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"MEASUREMENT_END","utc":1791197450.678444862,"monotonic":242.174286991,"elapsed":60.007720755,"completed":4975}
+hd-main-r1-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":12582912,"completed":4975,"elapsed_s":60.007720755,"operations_per_s":82.905998385,"checked_elements":3145728,"mismatches":0}
+hd-main-r1-t {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4261412864,"total_bytes":4294967296}
+hd-main-r1-t {"event":"WARMUP_START","utc":1791197450.727349997,"monotonic":242.223192064,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"WARMUP_END","utc":1791197460.741450071,"monotonic":252.237292285,"elapsed":10.014092098,"completed":619}
+hd-main-r1-t {"event":"MEASUREMENT_START","utc":1791197460.741468668,"monotonic":252.237310934,"elapsed":0.000000000,"completed":0}
+hd-main-r1-t {"event":"MEASUREMENT_END","utc":1791197520.746408939,"monotonic":312.242251236,"elapsed":60.004936637,"completed":3983}
+hd-main-r1-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":3983,"elapsed_s":60.004936637,"operations_per_s":66.377871942,"checked_elements":4194304,"mismatches":0}
+COMPLETE cricket-client.so
+START hd-main-r1-s
+COMMAND hd-main-r1-s ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-r1-s/known-hosts ubuntu@10.85.0.14 'sudo env HD_METRICS=0 HD_VARIANT=stock FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S sweep 16777216 60 10 /tmp/perf/libflyt_guest.so /tmp/perf/work.ptx'
+hd-main-r1-s {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3709861888,"total_bytes":4294967296}
+hd-main-r1-s {"event":"WARMUP_START","utc":1791197618.434656858,"monotonic":30.977902235,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"WARMUP_END","utc":1791197628.437752247,"monotonic":40.980997848,"elapsed":10.003069248,"completed":1616}
+hd-main-r1-s {"event":"MEASUREMENT_START","utc":1791197628.437791348,"monotonic":40.981037154,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"MEASUREMENT_END","utc":1791197688.441966295,"monotonic":100.985212085,"elapsed":60.004166047,"completed":10167}
+hd-main-r1-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":10167,"elapsed_s":60.004166047,"operations_per_s":169.438235206,"checked_elements":1048576,"mismatches":0}
+hd-main-r1-s {"event":"CONDITION","mode":"copy","bytes":8388608,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3701473280,"total_bytes":4294967296}
+hd-main-r1-s {"event":"WARMUP_START","utc":1791197688.529959440,"monotonic":101.073205158,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"WARMUP_END","utc":1791197698.537242174,"monotonic":111.080487914,"elapsed":10.007264749,"completed":1083}
+hd-main-r1-s {"event":"MEASUREMENT_START","utc":1791197698.537281990,"monotonic":111.080527755,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"MEASUREMENT_END","utc":1791197758.538177729,"monotonic":171.081423471,"elapsed":60.000886590,"completed":6324}
+hd-main-r1-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":8388608,"completed":6324,"elapsed_s":60.000886590,"operations_per_s":105.398442580,"checked_elements":2097152,"mismatches":0}
+hd-main-r1-s {"event":"CONDITION","mode":"copy","bytes":12582912,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3693084672,"total_bytes":4294967296}
+hd-main-r1-s {"event":"WARMUP_START","utc":1791197758.628500938,"monotonic":171.171746613,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"WARMUP_END","utc":1791197768.631498337,"monotonic":181.174743914,"elapsed":10.002979943,"completed":741}
+hd-main-r1-s {"event":"MEASUREMENT_START","utc":1791197768.631535053,"monotonic":181.174780754,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"MEASUREMENT_END","utc":1791197828.635079384,"monotonic":241.178325088,"elapsed":60.003535448,"completed":5085}
+hd-main-r1-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":12582912,"completed":5085,"elapsed_s":60.003535448,"operations_per_s":84.745006474,"checked_elements":3145728,"mismatches":0}
+hd-main-r1-s {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3684696064,"total_bytes":4294967296}
+hd-main-r1-s {"event":"WARMUP_START","utc":1791197828.721646786,"monotonic":241.264892383,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"WARMUP_END","utc":1791197838.729681969,"monotonic":251.272927722,"elapsed":10.008020446,"completed":637}
+hd-main-r1-s {"event":"MEASUREMENT_START","utc":1791197838.729717970,"monotonic":251.272963766,"elapsed":0.000000000,"completed":0}
+hd-main-r1-s {"event":"MEASUREMENT_END","utc":1791197898.732309818,"monotonic":311.275555547,"elapsed":60.002582969,"completed":3868}
+hd-main-r1-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":3868,"elapsed_s":60.002582969,"operations_per_s":64.463891529,"checked_elements":4194304,"mismatches":0}
+COMPLETE libflyt_guest.so
+START hd-main-r2-s
+COMMAND hd-main-r2-s ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-r2-s/known-hosts ubuntu@10.85.0.190 'sudo env HD_METRICS=0 HD_VARIANT=stock FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S sweep 16777216 60 10 /tmp/perf/libflyt_guest.so /tmp/perf/work.ptx'
+hd-main-r2-s {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3709861888,"total_bytes":4294967296}
+hd-main-r2-s {"event":"WARMUP_START","utc":1791197963.826886177,"monotonic":30.291154487,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"WARMUP_END","utc":1791197973.830494642,"monotonic":40.294763183,"elapsed":10.003582966,"completed":1844}
+hd-main-r2-s {"event":"MEASUREMENT_START","utc":1791197973.830561638,"monotonic":40.294830121,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"MEASUREMENT_END","utc":1791198033.835727215,"monotonic":100.299995651,"elapsed":60.005154930,"completed":9820}
+hd-main-r2-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":9820,"elapsed_s":60.005154930,"operations_per_s":163.652606371,"checked_elements":1048576,"mismatches":0}
+hd-main-r2-s {"event":"CONDITION","mode":"copy","bytes":8388608,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3701473280,"total_bytes":4294967296}
+hd-main-r2-s {"event":"WARMUP_START","utc":1791198033.920995951,"monotonic":100.385264418,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"WARMUP_END","utc":1791198043.929450512,"monotonic":110.393718927,"elapsed":10.008433847,"completed":1060}
+hd-main-r2-s {"event":"MEASUREMENT_START","utc":1791198043.929485798,"monotonic":110.393754336,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"MEASUREMENT_END","utc":1791198103.937638521,"monotonic":170.401906964,"elapsed":60.008143688,"completed":6948}
+hd-main-r2-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":8388608,"completed":6948,"elapsed_s":60.008143688,"operations_per_s":115.784284815,"checked_elements":2097152,"mismatches":0}
+hd-main-r2-s {"event":"CONDITION","mode":"copy","bytes":12582912,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3693084672,"total_bytes":4294967296}
+hd-main-r2-s {"event":"WARMUP_START","utc":1791198104.030790806,"monotonic":170.495059379,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"WARMUP_END","utc":1791198114.031767607,"monotonic":180.496036189,"elapsed":10.000958575,"completed":772}
+hd-main-r2-s {"event":"MEASUREMENT_START","utc":1791198114.031800747,"monotonic":180.496069167,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"MEASUREMENT_END","utc":1791198174.032379866,"monotonic":240.496648410,"elapsed":60.000569912,"completed":4818}
+hd-main-r2-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":12582912,"completed":4818,"elapsed_s":60.000569912,"operations_per_s":80.299237275,"checked_elements":3145728,"mismatches":0}
+hd-main-r2-s {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3684696064,"total_bytes":4294967296}
+hd-main-r2-s {"event":"WARMUP_START","utc":1791198174.142386913,"monotonic":240.606655230,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"WARMUP_END","utc":1791198184.149298906,"monotonic":250.613567319,"elapsed":10.006887185,"completed":606}
+hd-main-r2-s {"event":"MEASUREMENT_START","utc":1791198184.149335146,"monotonic":250.613603608,"elapsed":0.000000000,"completed":0}
+hd-main-r2-s {"event":"MEASUREMENT_END","utc":1791198244.160067797,"monotonic":310.624336284,"elapsed":60.010723795,"completed":4008}
+hd-main-r2-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":4008,"elapsed_s":60.010723795,"operations_per_s":66.788062975,"checked_elements":4194304,"mismatches":0}
+COMPLETE libflyt_guest.so
+START hd-main-r2-t
+COMMAND hd-main-r2-t ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-r2-t/known-hosts ubuntu@10.85.0.91 'sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T sweep 16777216 60 10 /tmp/perf/cricket-client.so /tmp/perf/work.cubin'
+hd-main-r2-t {"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+hd-main-r2-t {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4286578688,"total_bytes":4294967296}
+hd-main-r2-t {"event":"WARMUP_START","utc":1791198324.829125881,"monotonic":31.248463603,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"WARMUP_END","utc":1791198334.835040569,"monotonic":41.254378214,"elapsed":10.005892558,"completed":1042}
+hd-main-r2-t {"event":"MEASUREMENT_START","utc":1791198334.835069180,"monotonic":41.254406932,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"MEASUREMENT_END","utc":1791198394.842009306,"monotonic":101.261347158,"elapsed":60.006932538,"completed":7547}
+hd-main-r2-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":7547,"elapsed_s":60.006932538,"operations_per_s":125.768801717,"checked_elements":1048576,"mismatches":0}
+hd-main-r2-t {"event":"CONDITION","mode":"copy","bytes":8388608,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4278190080,"total_bytes":4294967296}
+hd-main-r2-t {"event":"WARMUP_START","utc":1791198394.901319504,"monotonic":101.320657185,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"WARMUP_END","utc":1791198404.906767130,"monotonic":111.326104956,"elapsed":10.005432727,"completed":804}
+hd-main-r2-t {"event":"MEASUREMENT_START","utc":1791198404.906831503,"monotonic":111.326169253,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"MEASUREMENT_END","utc":1791198464.910600185,"monotonic":171.329938028,"elapsed":60.003761477,"completed":5753}
+hd-main-r2-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":8388608,"completed":5753,"elapsed_s":60.003761477,"operations_per_s":95.877322661,"checked_elements":2097152,"mismatches":0}
+hd-main-r2-t {"event":"CONDITION","mode":"copy","bytes":12582912,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4269801472,"total_bytes":4294967296}
+hd-main-r2-t {"event":"WARMUP_START","utc":1791198464.970435858,"monotonic":171.389773587,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"WARMUP_END","utc":1791198474.973231554,"monotonic":181.392569446,"elapsed":10.002784467,"completed":880}
+hd-main-r2-t {"event":"MEASUREMENT_START","utc":1791198474.973250151,"monotonic":181.392587990,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"MEASUREMENT_END","utc":1791198534.986976862,"monotonic":241.406314556,"elapsed":60.013722865,"completed":5088}
+hd-main-r2-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":12582912,"completed":5088,"elapsed_s":60.013722865,"operations_per_s":84.780609452,"checked_elements":3145728,"mismatches":0}
+hd-main-r2-t {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4261412864,"total_bytes":4294967296}
+hd-main-r2-t {"event":"WARMUP_START","utc":1791198535.052633524,"monotonic":241.471971340,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"WARMUP_END","utc":1791198545.059705257,"monotonic":251.479043126,"elapsed":10.007060848,"completed":579}
+hd-main-r2-t {"event":"MEASUREMENT_START","utc":1791198545.059724331,"monotonic":251.479062289,"elapsed":0.000000000,"completed":0}
+hd-main-r2-t {"event":"MEASUREMENT_END","utc":1791198605.077022314,"monotonic":311.496360175,"elapsed":60.017294198,"completed":3871}
+hd-main-r2-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":3871,"elapsed_s":60.017294198,"operations_per_s":64.498075958,"checked_elements":4194304,"mismatches":0}
+COMPLETE cricket-client.so
+START hd-main-r3-t
+COMMAND hd-main-r3-t ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-r3-t/known-hosts ubuntu@10.85.0.64 'sudo env SM_CORE=188 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-T sweep 16777216 60 10 /tmp/perf/cricket-client.so /tmp/perf/work.cubin'
+hd-main-r3-t {"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+hd-main-r3-t {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4286578688,"total_bytes":4294967296}
+hd-main-r3-t {"event":"WARMUP_START","utc":1791198715.801188707,"monotonic":31.337643904,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"WARMUP_END","utc":1791198725.807301998,"monotonic":41.343757388,"elapsed":10.006090777,"completed":955}
+hd-main-r3-t {"event":"MEASUREMENT_START","utc":1791198725.807341337,"monotonic":41.343796670,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"MEASUREMENT_END","utc":1791198785.813895464,"monotonic":101.350350763,"elapsed":60.006544793,"completed":6054}
+hd-main-r3-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":6054,"elapsed_s":60.006544793,"operations_per_s":100.888995040,"checked_elements":1048576,"mismatches":0}
+hd-main-r3-t {"event":"CONDITION","mode":"copy","bytes":8388608,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4278190080,"total_bytes":4294967296}
+hd-main-r3-t {"event":"WARMUP_START","utc":1791198785.870948553,"monotonic":101.407403898,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"WARMUP_END","utc":1791198795.874111176,"monotonic":111.410566521,"elapsed":10.003146503,"completed":794}
+hd-main-r3-t {"event":"MEASUREMENT_START","utc":1791198795.874193907,"monotonic":111.410649343,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"MEASUREMENT_END","utc":1791198855.878486156,"monotonic":171.414941566,"elapsed":60.004283560,"completed":7097}
+hd-main-r3-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":8388608,"completed":7097,"elapsed_s":60.004283560,"operations_per_s":118.274889374,"checked_elements":2097152,"mismatches":0}
+hd-main-r3-t {"event":"CONDITION","mode":"copy","bytes":12582912,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4269801472,"total_bytes":4294967296}
+hd-main-r3-t {"event":"WARMUP_START","utc":1791198855.923095465,"monotonic":171.459550925,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"WARMUP_END","utc":1791198865.934051991,"monotonic":181.470507458,"elapsed":10.010947856,"completed":840}
+hd-main-r3-t {"event":"MEASUREMENT_START","utc":1791198865.934070826,"monotonic":181.470526360,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"MEASUREMENT_END","utc":1791198925.937409639,"monotonic":241.473865194,"elapsed":60.003335060,"completed":5407}
+hd-main-r3-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":12582912,"completed":5407,"elapsed_s":60.003335060,"operations_per_s":90.111657870,"checked_elements":3145728,"mismatches":0}
+hd-main-r3-t {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":4261412864,"total_bytes":4294967296}
+hd-main-r3-t {"event":"WARMUP_START","utc":1791198925.987251997,"monotonic":241.523707386,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"WARMUP_END","utc":1791198935.990840673,"monotonic":251.527296117,"elapsed":10.003580404,"completed":732}
+hd-main-r3-t {"event":"MEASUREMENT_START","utc":1791198935.990859747,"monotonic":251.527315290,"elapsed":0.000000000,"completed":0}
+hd-main-r3-t {"event":"MEASUREMENT_END","utc":1791198995.993505478,"monotonic":311.529960857,"elapsed":60.002641901,"completed":4247}
+hd-main-r3-t {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":4247,"elapsed_s":60.002641901,"operations_per_s":70.780216761,"checked_elements":4194304,"mismatches":0}
+COMPLETE cricket-client.so
+START hd-main-r3-s
+COMMAND hd-main-r3-s ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-r3-s/known-hosts ubuntu@10.85.0.12 'sudo env HD_METRICS=0 HD_VARIANT=stock FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S sweep 16777216 60 10 /tmp/perf/libflyt_guest.so /tmp/perf/work.ptx'
+hd-main-r3-s {"event":"CONDITION","mode":"copy","bytes":4194304,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3709861888,"total_bytes":4294967296}
+hd-main-r3-s {"event":"WARMUP_START","utc":1791199093.395939112,"monotonic":30.927547603,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"WARMUP_END","utc":1791199103.396236897,"monotonic":40.927845531,"elapsed":10.000272207,"completed":1656}
+hd-main-r3-s {"event":"MEASUREMENT_START","utc":1791199103.396276474,"monotonic":40.927885144,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"MEASUREMENT_END","utc":1791199163.398907900,"monotonic":100.930516317,"elapsed":60.002622316,"completed":10166}
+hd-main-r3-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":4194304,"completed":10166,"elapsed_s":60.002622316,"operations_per_s":169.425928528,"checked_elements":1048576,"mismatches":0}
+hd-main-r3-s {"event":"CONDITION","mode":"copy","bytes":8388608,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3701473280,"total_bytes":4294967296}
+hd-main-r3-s {"event":"WARMUP_START","utc":1791199163.494421959,"monotonic":101.026030549,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"WARMUP_END","utc":1791199173.498194933,"monotonic":111.029803539,"elapsed":10.003754543,"completed":1082}
+hd-main-r3-s {"event":"MEASUREMENT_START","utc":1791199173.498233557,"monotonic":111.029842147,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"MEASUREMENT_END","utc":1791199233.505151272,"monotonic":171.036759755,"elapsed":60.006909176,"completed":6804}
+hd-main-r3-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":8388608,"completed":6804,"elapsed_s":60.006909176,"operations_per_s":113.386943161,"checked_elements":2097152,"mismatches":0}
+hd-main-r3-s {"event":"CONDITION","mode":"copy","bytes":12582912,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3693084672,"total_bytes":4294967296}
+hd-main-r3-s {"event":"WARMUP_START","utc":1791199233.589706421,"monotonic":171.121314941,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"WARMUP_END","utc":1791199243.594128609,"monotonic":181.125737269,"elapsed":10.004403912,"completed":780}
+hd-main-r3-s {"event":"MEASUREMENT_START","utc":1791199243.595160246,"monotonic":181.126768829,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"MEASUREMENT_END","utc":1791199303.626083374,"monotonic":241.157691792,"elapsed":60.030910643,"completed":4817}
+hd-main-r3-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":12582912,"completed":4817,"elapsed_s":60.030910643,"operations_per_s":80.241994473,"checked_elements":3145728,"mismatches":0}
+hd-main-r3-s {"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":60,"warmup_min_s":10,"iterations":64,"free_bytes":3684696064,"total_bytes":4294967296}
+hd-main-r3-s {"event":"WARMUP_START","utc":1791199303.731528759,"monotonic":241.263137256,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"WARMUP_END","utc":1791199313.743957520,"monotonic":251.275566023,"elapsed":10.012410356,"completed":626}
+hd-main-r3-s {"event":"MEASUREMENT_START","utc":1791199313.743993998,"monotonic":251.275602530,"elapsed":0.000000000,"completed":0}
+hd-main-r3-s {"event":"MEASUREMENT_END","utc":1791199373.755769730,"monotonic":311.287378347,"elapsed":60.011766992,"completed":3986}
+hd-main-r3-s {"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":3986,"elapsed_s":60.011766992,"operations_per_s":66.420307213,"checked_elements":4194304,"mismatches":0}
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/run_main.py", line 9, in <module>
+    one(name,'stock',metrics=False,path=path)
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/run_diagnostic.py", line 34, in one
+    assert digest==hashlib.sha256(local.read_bytes()).hexdigest(),artifact_name
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/runtime.py", line 162, in execute_stream
+    hashes=call(s.ssh+['sha256sum '+shlex.quote(prefix)+'*.output.bin'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/common.py", line 38, in call
+    raise RuntimeError(redact(shlex.join(args)+': '+result.stderr[-2000:]))
+RuntimeError: ssh -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-main-r3-s/known-hosts ubuntu@10.85.0.12 'sha256sum /tmp/perf/libflyt_guest.so*.output.bin': Connection to 10.85.0.12 closed by remote host.
+

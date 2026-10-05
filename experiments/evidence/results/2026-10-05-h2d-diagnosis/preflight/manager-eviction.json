@@ -1,0 +1,226 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "creationTimestamp": "2026-10-05T09:58:37Z",
+        "generation": 1,
+        "name": "hd-tcp-manager",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "5589778",
+        "uid": "80c552fe-5a11-42d0-9773-d4f4ac030ec2"
+    },
+    "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+            {
+                "command": [
+                    "/bin/sh",
+                    "-c",
+                    "sleep 15; exec /opt/flyt/bin/flyt-cluster-manager"
+                ],
+                "env": [
+                    {
+                        "name": "RUST_LOG",
+                        "value": "info"
+                    }
+                ],
+                "image": "localhost/flyt-cluster-manager@sha256:7789348f62da6f2d9fa1ee031d323be1cf7f6e1b44c563d104745e0deca9a0b8",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "manager",
+                "resources": {},
+                "securityContext": {
+                    "runAsUser": 0
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/etc/flyt",
+                        "name": "cfg",
+                        "readOnly": true
+                    }
+                ]
+            },
+            {
+                "env": [
+                    {
+                        "name": "MONGO_INITDB_ROOT_USERNAME",
+                        "value": "perf"
+                    },
+                    {
+                        "name": "MONGO_INITDB_ROOT_PASSWORD",
+                        "value": "[REDACTED]"
+                    }
+                ],
+                "image": "docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "mongo",
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "gpu-4",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Never",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "hostPath": {
+                    "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/legacy-config",
+                    "type": "Directory"
+                },
+                "name": "cfg"
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-05T10:02:38Z",
+                "message": "The node was low on resource: ephemeral-storage. Threshold quantity: 566411332382, available: 551382812Ki. ",
+                "observedGeneration": 1,
+                "reason": "TerminationByKubelet",
+                "status": "True",
+                "type": "DisruptionTarget"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-05T10:02:38Z",
+                "message": "pod sandbox is not ready",
+                "observedGeneration": 1,
+                "reason": "PodSandboxNotReady",
+                "status": "False",
+                "type": "PodReadyToStartContainers"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-05T09:58:37Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-05T09:58:37Z",
+                "observedGeneration": 1,
+                "reason": "PodFailed",
+                "status": "False",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-05T09:58:37Z",
+                "observedGeneration": 1,
+                "reason": "PodFailed",
+                "status": "False",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-10-05T09:58:37Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "image": "localhost/flyt-cluster-manager@sha256:7789348f62da6f2d9fa1ee031d323be1cf7f6e1b44c563d104745e0deca9a0b8",
+                "imageID": "",
+                "lastState": {},
+                "name": "manager",
+                "ready": false,
+                "restartCount": 0,
+                "started": false,
+                "state": {
+                    "terminated": {
+                        "exitCode": 137,
+                        "finishedAt": null,
+                        "message": "The container could not be located when the pod was terminated",
+                        "reason": "ContainerStatusUnknown",
+                        "startedAt": null
+                    }
+                },
+                "volumeMounts": [
+                    {
+                        "mountPath": "/etc/flyt",
+                        "name": "cfg",
+                        "readOnly": true,
+                        "recursiveReadOnly": "Disabled"
+                    }
+                ]
+            },
+            {
+                "containerID": "cri-o://940a99efc47665eb020df3a5867841a41715104071cb74c7d8e1023758d89e2e",
+                "image": "docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e",
+                "imageID": "docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e",
+                "lastState": {},
+                "name": "mongo",
+                "ready": false,
+                "resources": {},
+                "restartCount": 0,
+                "started": false,
+                "state": {
+                    "terminated": {
+                        "containerID": "cri-o://940a99efc47665eb020df3a5867841a41715104071cb74c7d8e1023758d89e2e",
+                        "exitCode": 137,
+                        "finishedAt": "2026-10-05T10:02:38Z",
+                        "reason": "Error",
+                        "startedAt": "2026-10-05T10:02:35Z"
+                    }
+                },
+                "user": {
+                    "linux": {
+                        "gid": 0,
+                        "supplementalGroups": [
+                            0
+                        ],
+                        "uid": 0
+                    }
+                }
+            }
+        ],
+        "hostIP": "192.168.24.21",
+        "hostIPs": [
+            {
+                "ip": "192.168.24.21"
+            }
+        ],
+        "message": "The node was low on resource: ephemeral-storage. Threshold quantity: 566411332382, available: 551382812Ki. ",
+        "observedGeneration": 1,
+        "phase": "Failed",
+        "podIP": "10.85.0.74",
+        "podIPs": [
+            {
+                "ip": "10.85.0.74"
+            }
+        ],
+        "qosClass": "BestEffort",
+        "reason": "Evicted",
+        "resources": {},
+        "startTime": "2026-10-05T09:58:37Z"
+    }
+}

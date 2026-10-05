@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/build_diagnostic.py", line 14, in <module>
+    admin(['chroot','/host','podman','load','-i',archive],timeout=600)
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/common.py", line 51, in admin
+    def admin(args, **kw): return k('exec','-n',NS,HELPER,'--',*args,**kw)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/common.py", line 38, in k
+    def k(*args, **kw): return call(['kubectl',*args],**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/common.py", line 35, in call
+    raise RuntimeError(redact(shlex.join(args)+': '+result.stderr[-2000:]))
+RuntimeError: kubectl exec -n vmweave-test-a hd-admin -- chroot /host podman load -i /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/pinned.oci: error: cannot exec into a container in a completed pod; current phase is Failed
+

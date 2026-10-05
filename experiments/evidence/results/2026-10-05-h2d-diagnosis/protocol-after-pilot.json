@@ -1,0 +1,32 @@
+{
+  "purpose": "Prioritize payload copies measured in the first pilot, without claiming an identified cause yet.",
+  "pilot_only_ms": {
+    "guest_pack": 3.0417,
+    "guest_shm_write": 1.7845,
+    "worker_snapshot": 2.6581,
+    "worker_alloc": 0.0005,
+    "cuda_api": 1.7737
+  },
+  "candidate_screen": {
+    "repeats": 1,
+    "seconds": 10,
+    "warmup_min_seconds": 3,
+    "bytes": 16777216,
+    "variants": [
+      "original",
+      "reuse",
+      "pinned",
+      "unroll",
+      "chunk"
+    ],
+    "interpretation": "Pilot candidate selection, not independent five-repeat evidence."
+  },
+  "single_changes": {
+    "reuse": "Worker private buffer reuse",
+    "pinned": "Reuse plus pinned host allocation; compare with reuse to isolate allocation type",
+    "unroll": "Only Worker snapshot word loop unrolled eightfold; volatile loads and private validation preserved",
+    "chunk": "Only Guest pack memcpy divided into <=1MiB chunks"
+  },
+  "formal_selection": "Freeze after pilot; repeat supported candidates independently five times, account for selection using separate formal samples.",
+  "cpu_topology": "Original Guest CPUs0-7 are NUMA0; Worker16-19 NUMA1; GPU1 is NUMA0. Same placement retained in primary comparison; NUMA candidate changes worker affinity separately."
+}

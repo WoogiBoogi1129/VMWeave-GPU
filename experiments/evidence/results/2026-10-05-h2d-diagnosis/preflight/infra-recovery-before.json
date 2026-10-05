@@ -1,0 +1,3798 @@
+{
+  "pods": [
+    {
+      "namespace": "gpu-operator",
+      "name": "gpu-feature-discovery-49jtv",
+      "uid": "2ac06ba4-b24e-4b8a-ad8f-5f8246642e76",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://00e6daa6cec5205bcd19d7890c5b8c4061f7425c0fbb3192163f56cb4200254b",
+          "image": "nvcr.io/nvidia/k8s-device-plugin:v0.20.0",
+          "imageID": "nvcr.io/nvidia/k8s-device-plugin@sha256:1de09dda8d1c179fe84e280f28a48a75c9a1a529d90eefcee1f80c012ac11640",
+          "lastState": {},
+          "name": "gpu-feature-discovery",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:25:57Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/kubernetes/node-feature-discovery/features.d",
+              "name": "output-dir"
+            },
+            {
+              "mountPath": "/sys",
+              "name": "host-sys",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-bmmt8",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "nvcr.io/nvidia/gpu-operator:v26.7.0",
+        "nvcr.io/nvidia/k8s-device-plugin:v0.20.0"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "gpu-operator-7d958d78d9-f79rm",
+      "uid": "c78502af-3d04-4367-a07c-2ec7e329e59e",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "200m",
+            "memory": "100Mi"
+          },
+          "containerID": "cri-o://cf56706c0c785fce8e3c56116881bc6abe666798cb25b59129ce36ec65fdcbb3",
+          "image": "nvcr.io/nvidia/gpu-operator:v26.7.0",
+          "imageID": "nvcr.io/nvidia/gpu-operator@sha256:ddba086bb593713ad6f3b207fd0f9b16eb8910134bb656cb1a2e2ae1b5092400",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "gpu-operator",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "350Mi"
+            },
+            "requests": {
+              "cpu": "200m",
+              "memory": "100Mi"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:10:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1000,
+              "supplementalGroups": [
+                1000
+              ],
+              "uid": 1000
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-p276b",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "nvcr.io/nvidia/gpu-operator:v26.7.0"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "gpu-operator-node-feature-discovery-gc-86d8ddb99b-f58jc",
+      "uid": "be00c76f-428b-4372-b048-aa4274da1eab",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "128Mi"
+          },
+          "containerID": "cri-o://9d6ffd3267df16a92ff83fb32d388de797bd17db371dc228d213d971dc3f45c3",
+          "image": "registry.k8s.io/nfd/node-feature-discovery:v0.19.0",
+          "imageID": "registry.k8s.io/nfd/node-feature-discovery@sha256:2fa1c99ad09bdf2c8ad97706a4ad2fd548c84d5ecd70ba32a6152c667b96c4d2",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "gc",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "memory": "1Gi"
+            },
+            "requests": {
+              "cpu": "10m",
+              "memory": "128Mi"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:10:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 65534
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-l9w2s",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/nfd/node-feature-discovery:v0.19.0"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "gpu-operator-node-feature-discovery-master-775f5ccccc-hrsgb",
+      "uid": "b806b297-f76e-40d4-972c-efd200c3fee0",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "128Mi"
+          },
+          "containerID": "cri-o://d7f123c8d54a063835cf21cd96a5d430ec2560d3c3eaad3660c5c5fb8ee2e7bc",
+          "image": "registry.k8s.io/nfd/node-feature-discovery:v0.19.0",
+          "imageID": "registry.k8s.io/nfd/node-feature-discovery@sha256:2fa1c99ad09bdf2c8ad97706a4ad2fd548c84d5ecd70ba32a6152c667b96c4d2",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "master",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "memory": "4Gi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "128Mi"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:10:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 65534
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/kubernetes/node-feature-discovery",
+              "name": "nfd-master-conf",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-c9c5g",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/nfd/node-feature-discovery:v0.19.0"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "gpu-operator-node-feature-discovery-worker-mggcw",
+      "uid": "65183167-1cbf-48b4-83ff-cb92fb48bafc",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "5m",
+            "memory": "64Mi"
+          },
+          "containerID": "cri-o://8a0ecb3fb5b016a06949c9c79628aa4d08518fce04047f1243635dc23f19cb1e",
+          "image": "registry.k8s.io/nfd/node-feature-discovery:v0.19.0",
+          "imageID": "registry.k8s.io/nfd/node-feature-discovery@sha256:2fa1c99ad09bdf2c8ad97706a4ad2fd548c84d5ecd70ba32a6152c667b96c4d2",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "worker",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "memory": "512Mi"
+            },
+            "requests": {
+              "cpu": "5m",
+              "memory": "64Mi"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:10:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 65534
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/host-boot",
+              "name": "host-boot",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/host-etc/os-release",
+              "name": "host-os-release",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/host-sys",
+              "name": "host-sys",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/host-usr/lib",
+              "name": "host-usr-lib",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/host-lib",
+              "name": "host-lib",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/host-proc/swaps",
+              "name": "host-proc-swaps",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/kubernetes/node-feature-discovery/features.d/",
+              "name": "features-d",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/kubernetes/node-feature-discovery",
+              "name": "nfd-worker-conf",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-gqh5t",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/nfd/node-feature-discovery:v0.19.0"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "nvidia-container-toolkit-daemonset-d7s25",
+      "uid": "f952517e-c78f-4eb1-9bd6-dc9f9010c016",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://edf7cfdce5d09ab26f3d56583415f227dc5cfd33675e8ee0ac66337c5617a5dc",
+          "image": "nvcr.io/nvidia/k8s/container-toolkit:v1.20.0",
+          "imageID": "nvcr.io/nvidia/k8s/container-toolkit@sha256:f7857a9c346c743b9ee7d39c30261caf0a34dcc1bc90481a57b23bff75fbaaa7",
+          "lastState": {},
+          "name": "nvidia-container-toolkit-ctr",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:25:52Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/bin/entrypoint.sh",
+              "name": "nvidia-container-toolkit-entrypoint",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/run/nvidia/toolkit",
+              "name": "toolkit-root"
+            },
+            {
+              "mountPath": "/run/nvidia/validations",
+              "name": "run-nvidia-validations"
+            },
+            {
+              "mountPath": "/usr/local/nvidia",
+              "name": "toolkit-install-dir"
+            },
+            {
+              "mountPath": "/usr/share/containers/oci/hooks.d",
+              "name": "crio-hooks"
+            },
+            {
+              "mountPath": "/driver-root",
+              "name": "driver-install-dir"
+            },
+            {
+              "mountPath": "/host",
+              "name": "host-root",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/cdi",
+              "name": "cdi-root"
+            },
+            {
+              "mountPath": "/runtime/config-dir/",
+              "name": "crio-config"
+            },
+            {
+              "mountPath": "/runtime/config-dir.d/",
+              "name": "crio-drop-in-config"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-vffnc",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "nvcr.io/nvidia/gpu-operator:v26.7.0",
+        "nvcr.io/nvidia/k8s/container-toolkit:v1.20.0"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "nvidia-cuda-validator-vgnfv",
+      "uid": "898eb39a-0c34-4777-9b84-93b299cf491e",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://b1568fb8ef3845750f47bcf9cb8cd5ff40237d37433e766f4cea104cfd26aeaf",
+          "image": "nvcr.io/nvidia/gpu-operator:v26.7.0",
+          "imageID": "nvcr.io/nvidia/gpu-operator@sha256:ddba086bb593713ad6f3b207fd0f9b16eb8910134bb656cb1a2e2ae1b5092400",
+          "lastState": {},
+          "name": "nvidia-cuda-validator",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://b1568fb8ef3845750f47bcf9cb8cd5ff40237d37433e766f4cea104cfd26aeaf",
+              "exitCode": 0,
+              "finishedAt": "2026-09-21T15:25:57Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-21T15:25:57Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1000,
+              "supplementalGroups": [
+                1000
+              ],
+              "uid": 1000
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-wj86x",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "nvcr.io/nvidia/gpu-operator:v26.7.0",
+        "nvcr.io/nvidia/gpu-operator:v26.7.0"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "nvidia-dcgm-exporter-scbq4",
+      "uid": "891d679e-a7f1-496c-8614-337ce4537f61",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://b431bb9b28c9631e8d5299557c5b47513e3922e6eb29f09991e63c7411fde363",
+          "image": "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless",
+          "imageID": "nvcr.io/nvidia/k8s/dcgm-exporter@sha256:613ab03c11d442fd960ff515f547e9921537454a712d08160bc8f677f89f1c35",
+          "lastState": {},
+          "name": "nvidia-dcgm-exporter",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-22T12:44:44Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/lib/kubelet/pod-resources",
+              "name": "pod-gpu-resources",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "nvcr.io/nvidia/gpu-operator:v26.7.0",
+        "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless"
+      ]
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "nvidia-operator-validator-5vpfv",
+      "uid": "fbf23d90-80bf-424d-869c-e24c839a899e",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://59f0d2f419bfe1110748a6e612406c2271063784c1d3a64000a92384cd32a586",
+          "image": "nvcr.io/nvidia/gpu-operator:v26.7.0",
+          "imageID": "nvcr.io/nvidia/gpu-operator@sha256:ddba086bb593713ad6f3b207fd0f9b16eb8910134bb656cb1a2e2ae1b5092400",
+          "lastState": {},
+          "name": "nvidia-operator-validator",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:26:35Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/run/nvidia/validations",
+              "name": "run-nvidia-validations"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-sk22n",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "nvcr.io/nvidia/gpu-operator:v26.7.0",
+        "nvcr.io/nvidia/gpu-operator:v26.7.0",
+        "nvcr.io/nvidia/gpu-operator:v26.7.0",
+        "nvcr.io/nvidia/gpu-operator:v26.7.0"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "cilium-envoy-pn9ct",
+      "uid": "bfbbfb53-dec0-46e2-9547-90ace9c25553",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://cda7c5ac9674be1bc65ef62e64527b678839b3243ca454c8c7de538125a21f2a",
+          "image": "quay.io/cilium/cilium-envoy@sha256:81398e449f2d3d0a6a70527e4f641aaa685d3156bea0bb30712fae3fd8822b86",
+          "imageID": "quay.io/cilium/cilium-envoy@sha256:81398e449f2d3d0a6a70527e4f641aaa685d3156bea0bb30712fae3fd8822b86",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "cilium-envoy",
+          "ready": true,
+          "resources": {},
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:09:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/cilium/envoy/sockets",
+              "name": "envoy-sockets"
+            },
+            {
+              "mountPath": "/var/run/cilium/envoy/artifacts",
+              "name": "envoy-artifacts",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/cilium/envoy/",
+              "name": "envoy-config",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/sys/fs/bpf",
+              "name": "bpf-maps"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-s87cd",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/cilium/cilium-envoy:v1.35.9-1767794330-db497dd19e346b39d81d7b5c0dedf6c812bcc5c9@sha256:81398e449f2d3d0a6a70527e4f641aaa685d3156bea0bb30712fae3fd8822b86"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "cilium-operator-75c5f5ddd5-d4gww",
+      "uid": "c85ca6df-d31e-4281-a8c3-9f415a007a16",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://ceee18296765a5d3a2065d2954ea2173efcc430552cbe52e4ac6653ef0eebf53",
+          "image": "quay.io/cilium/operator-generic@sha256:34a827ce9ed021c8adf8f0feca131f53b3c54a3ef529053d871d0347ec4d69af",
+          "imageID": "quay.io/cilium/operator-generic@sha256:11575030c9b1432f34d788347c086b14129e12023d817047d140e61b6e322db7",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "cilium-operator",
+          "ready": true,
+          "resources": {},
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:09:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tmp/cilium/config-map",
+              "name": "cilium-config-path",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-8k25r",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/cilium/operator-generic:v1.18.6@sha256:34a827ce9ed021c8adf8f0feca131f53b3c54a3ef529053d871d0347ec4d69af"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "cilium-rlklc",
+      "uid": "e7e0582f-2864-4da8-9d1b-aaff07de348e",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://1a508239cdd73df2c5bbca79a329fd6ee2080b6bb89a9dbef40ed74b0f08cadf",
+          "image": "quay.io/cilium/cilium@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+          "imageID": "quay.io/cilium/cilium@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "cilium-agent",
+          "ready": true,
+          "resources": {},
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:10:10Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/cilium/envoy/sockets",
+              "name": "envoy-sockets"
+            },
+            {
+              "mountPath": "/host/proc/sys/net",
+              "name": "host-proc-sys-net"
+            },
+            {
+              "mountPath": "/host/proc/sys/kernel",
+              "name": "host-proc-sys-kernel"
+            },
+            {
+              "mountPath": "/sys/fs/bpf",
+              "name": "bpf-maps"
+            },
+            {
+              "mountPath": "/var/run/cilium",
+              "name": "cilium-run"
+            },
+            {
+              "mountPath": "/var/run/cilium/netns",
+              "name": "cilium-netns"
+            },
+            {
+              "mountPath": "/host/etc/cni/net.d",
+              "name": "etc-cni-netd"
+            },
+            {
+              "mountPath": "/var/lib/cilium/clustermesh",
+              "name": "clustermesh-secrets",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/lib/modules",
+              "name": "lib-modules",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/run/xtables.lock",
+              "name": "xtables-lock"
+            },
+            {
+              "mountPath": "/var/lib/cilium/tls/hubble",
+              "name": "hubble-tls",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/tmp",
+              "name": "tmp"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-ddgpx",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/cilium/cilium:v1.18.6@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+        "quay.io/cilium/cilium:v1.18.6@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+        "quay.io/cilium/cilium:v1.18.6@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+        "quay.io/cilium/cilium:v1.18.6@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+        "quay.io/cilium/cilium:v1.18.6@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+        "quay.io/cilium/cilium:v1.18.6@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4",
+        "quay.io/cilium/cilium:v1.18.6@sha256:42ec562a5ff6c8a860c0639f5a7611685e253fd9eb2d2fcdade693724c9166a4"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "coredns-559f6c778d-2wznz",
+      "uid": "78653151-7db0-4fc8-9549-fca460405aea",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "70Mi"
+          },
+          "containerID": "cri-o://ad8bc6ba1f72fd58bdcf117adbf807ab82b70e454df145824d3d0230a49102f4",
+          "image": "registry.k8s.io/coredns/coredns:v1.14.6",
+          "imageID": "registry.k8s.io/coredns/coredns@sha256:1ba6f47265602e2e50a9c4669e3a955e4298a0d30dc82f39293d4bf1a851e0ff",
+          "lastState": {},
+          "name": "coredns",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "memory": "170Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "70Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:10:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/coredns",
+              "name": "config-volume",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-274vm",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/coredns/coredns:v1.14.6"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "coredns-559f6c778d-w5d2m",
+      "uid": "d6686423-f880-4266-855f-010a9ddd8976",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "70Mi"
+          },
+          "containerID": "cri-o://28946c1699e6fe12548e0f52276475b07e856f76f961c56f7735e84069737b03",
+          "image": "registry.k8s.io/coredns/coredns:v1.14.6",
+          "imageID": "registry.k8s.io/coredns/coredns@sha256:1ba6f47265602e2e50a9c4669e3a955e4298a0d30dc82f39293d4bf1a851e0ff",
+          "lastState": {},
+          "name": "coredns",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "memory": "170Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "70Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:10:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/coredns",
+              "name": "config-volume",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-jpnvq",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/coredns/coredns:v1.14.6"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "etcd-gpu-4",
+      "uid": "25d713d0-631d-4302-be11-7b69156248a6",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "100Mi"
+          },
+          "containerID": "cri-o://a55adcf94102224792442c575db41aadbdf73e7e62d2025c1008fcfe54951c66",
+          "image": "registry.k8s.io/etcd:3.7.0-0",
+          "imageID": "registry.k8s.io/etcd@sha256:1f445fa5dd06b08f3c0cf9f46e2891e9bc66cbf7e0b9c66627c40658edf4bc98",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "etcd",
+          "ready": true,
+          "resources": {
+            "requests": {
+              "cpu": "100m",
+              "memory": "100Mi"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:09:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/lib/etcd",
+              "name": "etcd-data"
+            },
+            {
+              "mountPath": "/etc/kubernetes/pki/etcd",
+              "name": "etcd-certs"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/etcd:3.7.0-0"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "hami-device-plugin-jld7c",
+      "uid": "1df996fd-df9d-4e2a-873c-ac74fcb46bd7",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://eb99095a89f96b00efe02e676d60fdd5024d26559d3036f5126c79659249d5a6",
+          "image": "docker.io/projecthami/hami:v2.10.0",
+          "imageID": "docker.io/projecthami/hami@sha256:8c45cd84d8df3e6a8fe8c95e0141684973b5015692a0ef87588da05284f34447",
+          "lastState": {},
+          "name": "device-plugin",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-22T13:02:12Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/lib/kubelet/device-plugins",
+              "name": "device-plugin"
+            },
+            {
+              "mountPath": "/usr/local/vgpu",
+              "name": "lib"
+            },
+            {
+              "mountPath": "/usrbin",
+              "name": "usrbin"
+            },
+            {
+              "mountPath": "/config",
+              "name": "deviceconfig"
+            },
+            {
+              "mountPath": "/tmp",
+              "name": "hosttmp"
+            },
+            {
+              "mountPath": "/device-config.yaml",
+              "name": "device-config"
+            },
+            {
+              "mountPath": "/var/run/cdi",
+              "name": "cdi-root"
+            },
+            {
+              "mountPath": "/driver-root",
+              "name": "driver-root",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-b74nf",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        },
+        {
+          "containerID": "cri-o://70a657fe4643012f498258ba683202f4752d9b5284e138d0ff6693270a3f3c9f",
+          "image": "docker.io/projecthami/hami:v2.10.0",
+          "imageID": "docker.io/projecthami/hami@sha256:8c45cd84d8df3e6a8fe8c95e0141684973b5015692a0ef87588da05284f34447",
+          "lastState": {},
+          "name": "vgpu-monitor",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-22T13:02:13Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/usr/local/vgpu/containers",
+              "name": "ctrs"
+            },
+            {
+              "mountPath": "/run/docker",
+              "name": "dockers"
+            },
+            {
+              "mountPath": "/run/containerd",
+              "name": "containerds"
+            },
+            {
+              "mountPath": "/sysinfo",
+              "name": "sysinfo"
+            },
+            {
+              "mountPath": "/hostvar",
+              "name": "hostvar"
+            },
+            {
+              "mountPath": "/tmp",
+              "name": "hosttmp"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-b74nf",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "docker.io/projecthami/hami:v2.10.0",
+        "docker.io/projecthami/hami:v2.10.0"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "hami-scheduler-754645766-6rl99",
+      "uid": "1c86bf80-2d2c-4f19-b55f-f4bb34c2c601",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://27f7437f0b54d2721cc03fc6a8d9e5e3ed3d4ff098288b79b4d1a045bb350374",
+          "image": "registry.k8s.io/kube-scheduler:v1.37.0",
+          "imageID": "registry.k8s.io/kube-scheduler@sha256:a27622f132aa09cf2461ba077894a070c0186ec607366d14e805912d4804d11f",
+          "lastState": {},
+          "name": "kube-scheduler",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:12:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/config",
+              "name": "scheduler-config"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-s2l2b",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        },
+        {
+          "containerID": "cri-o://402e2cdba695b06832888393c260c4083c57605bca223efb00399130a3718201",
+          "image": "docker.io/projecthami/hami:v2.10.0",
+          "imageID": "docker.io/projecthami/hami@sha256:8c45cd84d8df3e6a8fe8c95e0141684973b5015692a0ef87588da05284f34447",
+          "lastState": {},
+          "name": "vgpu-scheduler-extender",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:18:10Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/device-config.yaml",
+              "name": "device-config"
+            },
+            {
+              "mountPath": "/tls",
+              "name": "tls-config"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-s2l2b",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/kube-scheduler:v1.37.0",
+        "docker.io/projecthami/hami:v2.10.0"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "kube-apiserver-gpu-4",
+      "uid": "2015bf2f-a50c-4a70-94a4-a827a92d6d46",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "250m"
+          },
+          "containerID": "cri-o://317af01139623be01fd08216bec1ddd5c807d2370e2b1c6e65e1996fc11a0372",
+          "image": "registry.k8s.io/kube-apiserver:v1.37.0",
+          "imageID": "registry.k8s.io/kube-apiserver@sha256:83f25d9626d2860003425ad0e31b4d3c73738b2ee16505fca9645d6443b719da",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "kube-apiserver",
+          "ready": true,
+          "resources": {
+            "requests": {
+              "cpu": "250m"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:09:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/ssl/certs",
+              "name": "ca-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/ca-certificates",
+              "name": "etc-ca-certificates",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/kubernetes/pki",
+              "name": "k8s-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/usr/local/share/ca-certificates",
+              "name": "usr-local-share-ca-certificates",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/usr/share/ca-certificates",
+              "name": "usr-share-ca-certificates",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/kube-apiserver:v1.37.0"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "kube-controller-manager-gpu-4",
+      "uid": "9aabc215-9841-40da-81be-d346c0697dbb",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "200m"
+          },
+          "containerID": "cri-o://7bc302572d4849e178e91156f678628d818a2fd2ef19083c04228bcd8a01f52e",
+          "image": "registry.k8s.io/kube-controller-manager:v1.37.0",
+          "imageID": "registry.k8s.io/kube-controller-manager@sha256:997c997924eb8574f63f204a0b0af133aaf33c10df84009c32d34037f4e0e077",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "kube-controller-manager",
+          "ready": true,
+          "resources": {
+            "requests": {
+              "cpu": "200m"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:09:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/ssl/certs",
+              "name": "ca-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/ca-certificates",
+              "name": "etc-ca-certificates",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/kubernetes/pki",
+              "name": "k8s-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/kubernetes/controller-manager.conf",
+              "name": "kubeconfig",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/usr/local/share/ca-certificates",
+              "name": "usr-local-share-ca-certificates",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/usr/share/ca-certificates",
+              "name": "usr-share-ca-certificates",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/kube-controller-manager:v1.37.0"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "kube-proxy-lf8k8",
+      "uid": "1afb8ba9-3a67-4169-a235-beb7ce835950",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://6e987fff0e820cf20e3725ee2d27c482ca783dc336e92fab92923416e0fffb84",
+          "image": "registry.k8s.io/kube-proxy:v1.37.0",
+          "imageID": "registry.k8s.io/kube-proxy@sha256:77bf2b08ff8ac1a4a446cffaa85e79e87379c8cb54fcf60f2cb6c62c966829c8",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "kube-proxy",
+          "ready": true,
+          "resources": {},
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:09:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/lib/kube-proxy",
+              "name": "kube-proxy"
+            },
+            {
+              "mountPath": "/run/xtables.lock",
+              "name": "xtables-lock"
+            },
+            {
+              "mountPath": "/lib/modules",
+              "name": "lib-modules",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-x272d",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/kube-proxy:v1.37.0"
+      ]
+    },
+    {
+      "namespace": "kube-system",
+      "name": "kube-scheduler-gpu-4",
+      "uid": "012b3c69-a600-4964-bc3d-ef6945316bb9",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "100m"
+          },
+          "containerID": "cri-o://b3d7a218bd2e8fe6ef0706503122191a947fb635b4f8c145d1c2b7ccc806184d",
+          "image": "registry.k8s.io/kube-scheduler:v1.37.0",
+          "imageID": "registry.k8s.io/kube-scheduler@sha256:a27622f132aa09cf2461ba077894a070c0186ec607366d14e805912d4804d11f",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "kube-scheduler",
+          "ready": true,
+          "resources": {
+            "requests": {
+              "cpu": "100m"
+            }
+          },
+          "restartCount": 1,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-09-21T15:09:59Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/kubernetes/scheduler.conf",
+              "name": "kubeconfig",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "registry.k8s.io/kube-scheduler:v1.37.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-api-994876cf-4xnxm",
+      "uid": "6faec371-ec70-4b5b-b167-1e384b9eb5e7",
+      "phase": "Failed",
+      "containers": [
+        {
+          "image": "quay.io/kubevirt/virt-api:v1.9.0",
+          "imageID": "",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "virt-api",
+          "ready": false,
+          "restartCount": 1,
+          "started": false,
+          "state": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was terminated",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-api/certificates",
+              "name": "kubevirt-virt-api-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-handler/clientcertificates",
+              "name": "kubevirt-virt-handler-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-4n5ww",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-api:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-api-994876cf-mkb2b",
+      "uid": "97fd80bd-7939-465c-a380-e19804ad8f5a",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "5m",
+            "memory": "500Mi"
+          },
+          "containerID": "cri-o://3cffb5559abdd0a3af1fd0611e74aee53fbc760c94203866fcdd158d0c526a68",
+          "image": "quay.io/kubevirt/virt-api:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-api@sha256:42341b1d52699f4bb87f3996151bafe2e3fe065e9146cc64a15959ddf7bf2c69",
+          "lastState": {},
+          "name": "virt-api",
+          "ready": true,
+          "resources": {
+            "requests": {
+              "cpu": "5m",
+              "memory": "500Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:11:31Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-api/certificates",
+              "name": "kubevirt-virt-api-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-handler/clientcertificates",
+              "name": "kubevirt-virt-handler-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-2n82f",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-api:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-controller-7df6b87b47-2n5gq",
+      "uid": "3ba343b4-7414-4edd-acce-8ca47d6e4b05",
+      "phase": "Failed",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "275Mi"
+          },
+          "containerID": "cri-o://704e859ed92cdaf343b8468f9a4b9786f62630de97ce11e0e5303e8b13fde4e0",
+          "image": "quay.io/kubevirt/virt-controller:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-controller@sha256:7c6034ab39b97c0bb2b31bab2aaf576b616a3d6e59777002d63e2f2bf51e73c2",
+          "lastState": {},
+          "name": "virt-controller",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "10m",
+              "memory": "275Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://704e859ed92cdaf343b8468f9a4b9786f62630de97ce11e0e5303e8b13fde4e0",
+              "exitCode": 2,
+              "finishedAt": "2026-10-05T10:03:00Z",
+              "message": ",\"pos\":\"application.go:562\",\"timestamp\":\"2026-10-05T00:33:03.126101Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"set log verbosity to 2\",\"pos\":\"application.go:571\",\"timestamp\":\"2026-10-05T00:33:03.126240Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"Updating cluster config from KubeVirt to resource version '5472747'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T03:26:20.703660Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"Updating cluster config from KubeVirt to resource version '5472747'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T03:26:20.703899Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"setting rate limiter to 200 QPS and 400 Burst\",\"pos\":\"application.go:562\",\"timestamp\":\"2026-10-05T03:26:20.703998Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"set log verbosity to 2\",\"pos\":\"application.go:571\",\"timestamp\":\"2026-10-05T03:26:20.704081Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-controller.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-05T08:14:38.313509Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-controller.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-05T08:14:38.314028Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"Updating cluster config from KubeVirt to resource version '5589871'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T10:02:47.778766Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"Updating cluster config from KubeVirt to resource version '5589871'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T10:02:47.778870Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"setting rate limiter to 200 QPS and 400 Burst\",\"pos\":\"application.go:562\",\"timestamp\":\"2026-10-05T10:02:47.779109Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"set log verbosity to 2\",\"pos\":\"application.go:571\",\"timestamp\":\"2026-10-05T10:02:47.779168Z\"}\n",
+              "reason": "Error",
+              "startedAt": "2026-09-30T08:21:02Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-controller/certificates",
+              "name": "kubevirt-controller-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/exportca",
+              "name": "kubevirt-export-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/backupca",
+              "name": "kubevirt-backup-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-kz7nk",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-controller:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-controller-7df6b87b47-2nsjl",
+      "uid": "bc8723a7-f72c-460b-ac97-7ba9473c2630",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "275Mi"
+          },
+          "containerID": "cri-o://a060792bebb0d924a6519af34fc8a1fc6f52a393d825f00275874b03cc8fa4de",
+          "image": "quay.io/kubevirt/virt-controller:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-controller@sha256:7c6034ab39b97c0bb2b31bab2aaf576b616a3d6e59777002d63e2f2bf51e73c2",
+          "lastState": {},
+          "name": "virt-controller",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "10m",
+              "memory": "275Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:13:26Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-controller/certificates",
+              "name": "kubevirt-controller-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/exportca",
+              "name": "kubevirt-export-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/backupca",
+              "name": "kubevirt-backup-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-92wzt",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-controller:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-controller-7df6b87b47-htwq5",
+      "uid": "0f2399e4-ac1a-4928-a21d-8a4b582ae9b3",
+      "phase": "Failed",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "275Mi"
+          },
+          "containerID": "cri-o://1989cd56187e2f6fdb51aa1d752b410bad719b4baf7cb1bdec2b4b7ea2b2b11e",
+          "image": "quay.io/kubevirt/virt-controller:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-controller@sha256:7c6034ab39b97c0bb2b31bab2aaf576b616a3d6e59777002d63e2f2bf51e73c2",
+          "lastState": {},
+          "name": "virt-controller",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "10m",
+              "memory": "275Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://1989cd56187e2f6fdb51aa1d752b410bad719b4baf7cb1bdec2b4b7ea2b2b11e",
+              "exitCode": 2,
+              "finishedAt": "2026-10-05T10:03:02Z",
+              "message": "rce version '5472747'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T03:26:20.703551Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"Updating cluster config from KubeVirt to resource version '5472747'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T03:26:20.703815Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"setting rate limiter to 200 QPS and 400 Burst\",\"pos\":\"application.go:562\",\"timestamp\":\"2026-10-05T03:26:20.703952Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"set log verbosity to 2\",\"pos\":\"application.go:571\",\"timestamp\":\"2026-10-05T03:26:20.704045Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"set log verbosity to 2\",\"pos\":\"application.go:571\",\"timestamp\":\"2026-10-05T07:01:54.927584Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"setting rate limiter to 200 QPS and 400 Burst\",\"pos\":\"application.go:562\",\"timestamp\":\"2026-10-05T07:01:54.927767Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-controller.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-05T08:15:03.177137Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-controller.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-05T08:15:03.177453Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"Updating cluster config from KubeVirt to resource version '5589871'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T10:02:47.778915Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"Updating cluster config from KubeVirt to resource version '5589871'\",\"pos\":\"configuration.go:355\",\"timestamp\":\"2026-10-05T10:02:47.779159Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"set log verbosity to 2\",\"pos\":\"application.go:571\",\"timestamp\":\"2026-10-05T10:02:47.779189Z\"}\n{\"component\":\"virt-controller\",\"level\":\"info\",\"msg\":\"setting rate limiter to 200 QPS and 400 Burst\",\"pos\":\"application.go:562\",\"timestamp\":\"2026-10-05T10:02:47.779262Z\"}\n",
+              "reason": "Error",
+              "startedAt": "2026-09-30T08:23:14Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-controller/certificates",
+              "name": "kubevirt-controller-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/exportca",
+              "name": "kubevirt-export-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/backupca",
+              "name": "kubevirt-backup-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-c8xzf",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-controller:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-controller-7df6b87b47-zkq2r",
+      "uid": "04928cfb-02bc-4410-a3d7-e2382219759d",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "275Mi"
+          },
+          "containerID": "cri-o://9b8b59eba5f27dd8d53206e6ae87b691fadd94901bf4666154e94950d6568fd4",
+          "image": "quay.io/kubevirt/virt-controller:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-controller@sha256:7c6034ab39b97c0bb2b31bab2aaf576b616a3d6e59777002d63e2f2bf51e73c2",
+          "lastState": {},
+          "name": "virt-controller",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "10m",
+              "memory": "275Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:13:30Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-controller/certificates",
+              "name": "kubevirt-controller-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/exportca",
+              "name": "kubevirt-export-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-controller/backupca",
+              "name": "kubevirt-backup-ca",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-nh6t8",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-controller:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-exportproxy-7465c9bc48-5tq2p",
+      "uid": "5a8d5648-da6e-4554-b192-05610c0e7981",
+      "phase": "Failed",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "5m",
+            "memory": "150Mi"
+          },
+          "containerID": "cri-o://c8dbe9975c951ca97a41b481fa0ea277ad93495aa2e57d16ec1bf90aa472b094",
+          "image": "quay.io/kubevirt/virt-exportproxy:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-exportproxy@sha256:042443b8f58246623e440af59cd34c0627f843b6094c41794d16c98c8d0049ea",
+          "lastState": {},
+          "name": "exportproxy",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "5m",
+              "memory": "150Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://c8dbe9975c951ca97a41b481fa0ea277ad93495aa2e57d16ec1bf90aa472b094",
+              "exitCode": 2,
+              "finishedAt": "2026-10-05T10:03:07Z",
+              "message": "Error on reading termination message from logs: failed to try resolving symlinks in path \"/var/log/pods/kubevirt_virt-exportproxy-7465c9bc48-5tq2p_5a8d5648-da6e-4554-b192-05610c0e7981/exportproxy/0.log\": lstat /var/log/pods/kubevirt_virt-exportproxy-7465c9bc48-5tq2p_5a8d5648-da6e-4554-b192-05610c0e7981/exportproxy/0.log: no such file or directory",
+              "reason": "Error",
+              "startedAt": "2026-09-30T08:24:16Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-exportproxy/certificates",
+              "name": "kubevirt-exportproxy-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-xc5tp",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-exportproxy:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-exportproxy-7465c9bc48-87564",
+      "uid": "7ad3750e-a49a-4d11-978b-0764aa8f468f",
+      "phase": "Failed",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "5m",
+            "memory": "150Mi"
+          },
+          "containerID": "cri-o://1ae8aaf32c4f07658d9b25e45922aa808999bb1a4880cbe578c845b093aadf26",
+          "image": "quay.io/kubevirt/virt-exportproxy:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-exportproxy@sha256:042443b8f58246623e440af59cd34c0627f843b6094c41794d16c98c8d0049ea",
+          "lastState": {},
+          "name": "exportproxy",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "5m",
+              "memory": "150Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://1ae8aaf32c4f07658d9b25e45922aa808999bb1a4880cbe578c845b093aadf26",
+              "exitCode": 2,
+              "finishedAt": "2026-10-05T10:03:05Z",
+              "message": "ommon name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-02T03:27:42.222891Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-02T03:27:42.223134Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-02T22:38:52.171888Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-02T22:38:52.172354Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-03T17:50:49.180916Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-03T17:50:49.181331Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-04T13:02:27.182024Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-04T13:02:27.182345Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-05T08:14:38.313213Z\"}\n{\"component\":\"virt-exportproxy\",\"level\":\"info\",\"msg\":\"certificate with common name 'virt-exportproxy.kubevirt.pod.cluster.local' retrieved.\",\"pos\":\"cert-manager.go:198\",\"timestamp\":\"2026-10-05T08:14:38.313572Z\"}\n",
+              "reason": "Error",
+              "startedAt": "2026-09-30T08:23:46Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-exportproxy/certificates",
+              "name": "kubevirt-exportproxy-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-9xmkb",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-exportproxy:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-exportproxy-7465c9bc48-9wm8w",
+      "uid": "19739a54-d8a3-4d8f-b3c7-539c08c60aeb",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "5m",
+            "memory": "150Mi"
+          },
+          "containerID": "cri-o://c58d10e80e7243b1a82c15d6f33c78ee03c56e7e4ba4aa4cd205b8c01967b60d",
+          "image": "quay.io/kubevirt/virt-exportproxy:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-exportproxy@sha256:042443b8f58246623e440af59cd34c0627f843b6094c41794d16c98c8d0049ea",
+          "lastState": {},
+          "name": "exportproxy",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "5m",
+              "memory": "150Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:13:33Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-exportproxy/certificates",
+              "name": "kubevirt-exportproxy-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-8z58g",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-exportproxy:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-exportproxy-7465c9bc48-qw6r4",
+      "uid": "7422ffea-4176-4e91-81b4-125ad81a0467",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "5m",
+            "memory": "150Mi"
+          },
+          "containerID": "cri-o://bbcc895e3d933a51c4888b49ab2e599f49d01ec1bc2fa87acc2ae272d82af85c",
+          "image": "quay.io/kubevirt/virt-exportproxy:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-exportproxy@sha256:042443b8f58246623e440af59cd34c0627f843b6094c41794d16c98c8d0049ea",
+          "lastState": {},
+          "name": "exportproxy",
+          "ready": true,
+          "resources": {
+            "requests": {
+              "cpu": "5m",
+              "memory": "150Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:12:11Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-exportproxy/certificates",
+              "name": "kubevirt-exportproxy-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-rrx6c",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-exportproxy:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-handler-2mbw2",
+      "uid": "bde2bbee-fccc-4563-a83d-20b12805d797",
+      "phase": "Pending",
+      "containers": [
+        {
+          "image": "quay.io/kubevirt/virt-handler:v1.9.0",
+          "imageID": "",
+          "lastState": {},
+          "name": "virt-handler",
+          "ready": false,
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "waiting": {
+              "reason": "PodInitializing"
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-handler/servercertificates",
+              "name": "kubevirt-virt-handler-server-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-handler/migrationservercertificates",
+              "name": "kubevirt-virt-handler-migration-client-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/etc/virt-handler/vsockclientcertificates",
+              "name": "kubevirt-virt-handler-vsock-client-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/kubevirt-libvirt-runtimes",
+              "name": "libvirt-runtimes"
+            },
+            {
+              "mountPath": "/var/run/kubevirt",
+              "name": "virt-share-dir"
+            },
+            {
+              "mountPath": "/var/run/kubevirt-private",
+              "name": "virt-private-dir"
+            },
+            {
+              "mountPath": "/pods",
+              "name": "kubelet-pods"
+            },
+            {
+              "mountPath": "/var/lib/kubelet",
+              "name": "kubelet"
+            },
+            {
+              "mountPath": "/var/lib/kubevirt-node-labeller",
+              "name": "node-labeller"
+            },
+            {
+              "mountPath": "/etc/podinfo",
+              "name": "podinfo"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-krccw",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-launcher:v1.9.0",
+        "quay.io/kubevirt/virt-handler:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-operator-859458cd98-9flf6",
+      "uid": "d5833fa1-078b-4588-aab7-2d25f969a772",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "450Mi"
+          },
+          "containerID": "cri-o://e9fb16b7eaf4d3974751354bb1cedda2a4c2cd860cc5996082b26a2be6e0acbb",
+          "image": "quay.io/kubevirt/virt-operator:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-operator@sha256:bac92f1ee2dca92e8d29e0868d3abafb95623970c799192e0ae09c5c7122b370",
+          "lastState": {},
+          "name": "virt-operator",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "10m",
+              "memory": "450Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:13:28Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-operator/certificates",
+              "name": "kubevirt-operator-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-njqfr",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-operator:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-operator-859458cd98-clxkg",
+      "uid": "a949f3eb-d29d-4dca-b418-faa4540e3c6c",
+      "phase": "Failed",
+      "containers": [
+        {
+          "image": "quay.io/kubevirt/virt-operator:v1.9.0",
+          "imageID": "",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "virt-operator",
+          "ready": false,
+          "restartCount": 1,
+          "started": false,
+          "state": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was terminated",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-operator/certificates",
+              "name": "kubevirt-operator-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-z4xlh",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-operator:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-operator-859458cd98-wjvc2",
+      "uid": "1d81a716-1798-4241-9b7a-88f2e20a4d1b",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "450Mi"
+          },
+          "containerID": "cri-o://1313b7e57711da9c9d0b3e99446bcce5e04384de69956931aec300f999238fb5",
+          "image": "quay.io/kubevirt/virt-operator:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-operator@sha256:bac92f1ee2dca92e8d29e0868d3abafb95623970c799192e0ae09c5c7122b370",
+          "lastState": {},
+          "name": "virt-operator",
+          "ready": true,
+          "resources": {
+            "requests": {
+              "cpu": "10m",
+              "memory": "450Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:10:50Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-operator/certificates",
+              "name": "kubevirt-operator-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-xfj9x",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-operator:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-operator-859458cd98-xkwrt",
+      "uid": "70af0e26-c4a7-428e-9185-83f416edf020",
+      "phase": "Failed",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "450Mi"
+          },
+          "containerID": "cri-o://b6c84db1b1d3d5c91573a25c54cdea8db03852fa054f040a68cf25b0fe7fd6ba",
+          "image": "quay.io/kubevirt/virt-operator:v1.9.0",
+          "imageID": "quay.io/kubevirt/virt-operator@sha256:bac92f1ee2dca92e8d29e0868d3abafb95623970c799192e0ae09c5c7122b370",
+          "lastState": {},
+          "name": "virt-operator",
+          "ready": false,
+          "resources": {
+            "requests": {
+              "cpu": "10m",
+              "memory": "450Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://b6c84db1b1d3d5c91573a25c54cdea8db03852fa054f040a68cf25b0fe7fd6ba",
+              "exitCode": 2,
+              "finishedAt": "2026-10-05T10:02:57Z",
+              "message": "e virt-template-api-service patched\",\"pos\":\"core.go:155\",\"timestamp\":\"2026-10-05T10:02:52.841874Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"service virt-template-controller-manager-metrics-service patched\",\"pos\":\"core.go:155\",\"timestamp\":\"2026-10-05T10:02:52.848934Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"service virt-template-webhook-service patched\",\"pos\":\"core.go:155\",\"timestamp\":\"2026-10-05T10:02:52.856129Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"validatingAdmissionPolicyBinding kubevirt-node-restriction-binding patched\",\"pos\":\"admissionregistration.go:454\",\"timestamp\":\"2026-10-05T10:02:52.863268Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"validatingAdmissionPolicy kubevirt-node-restriction-policy patched\",\"pos\":\"admissionregistration.go:517\",\"timestamp\":\"2026-10-05T10:02:52.889040Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"validatingAdmissionPolicy virt-template-vmtr-authz patched\",\"pos\":\"admissionregistration.go:517\",\"timestamp\":\"2026-10-05T10:02:52.907490Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"Kept old CA certificates for a duration of at least 33h36m0s, dropping them now.\",\"pos\":\"secrets.go:724\",\"timestamp\":\"2026-10-05T10:02:52.908872Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"Kept old CA certificates for a duration of at least 4h48m0s, dropping them now.\",\"pos\":\"secrets.go:724\",\"timestamp\":\"2026-10-05T10:02:52.915108Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"Kept old CA certificates for a duration of at least 4h48m0s, dropping them now.\",\"pos\":\"secrets.go:724\",\"timestamp\":\"2026-10-05T10:02:52.915279Z\"}\n{\"component\":\"virt-operator\",\"level\":\"info\",\"msg\":\"Kubevirt namespace (kubevirt) labels are in sync\",\"pos\":\"core.go:68\",\"timestamp\":\"2026-10-05T10:02:52.980462Z\"}\n{\"component\":\"virt-operator\",\"kind\":\"\",\"level\":\"info\",\"msg\":\"Processed deployment for this round\",\"name\":\"kubevirt\",\"namespace\":\"kubevirt\",\"pos\":\"kubevirt.go:1129\",\"timestamp\":\"2026-10-05T10:02:52.980535Z\",\"uid\":\"f4df115e-3713-4b5e-b922-5ef17a5d34ed\"}\n",
+              "reason": "Error",
+              "startedAt": "2026-09-30T08:22:31Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/etc/virt-operator/certificates",
+              "name": "kubevirt-operator-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/profile-data",
+              "name": "profile-data"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-zd5mv",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-operator:v1.9.0"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-apiserver-67b9fff869-2gx5z",
+      "uid": "82ea8f27-3e1f-472d-8147-b261e9d8eb20",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "64Mi"
+          },
+          "containerID": "cri-o://e114f871a1c13443d3d21167072ef1bc26459f5e623345a5e384320b67a9baca",
+          "image": "quay.io/kubevirt/virt-template-apiserver:v0.2.2",
+          "imageID": "quay.io/kubevirt/virt-template-apiserver@sha256:104545cf22d9d6ea0d675b650742f07fbffad18bdae5454e8ad79c93e0fa3eeb",
+          "lastState": {},
+          "name": "apiserver",
+          "ready": false,
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "128Mi"
+            },
+            "requests": {
+              "cpu": "10m",
+              "memory": "64Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://e114f871a1c13443d3d21167072ef1bc26459f5e623345a5e384320b67a9baca",
+              "exitCode": 0,
+              "finishedAt": "2026-10-05T10:02:44Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:24:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tmp/k8s-api-server/api-cert",
+              "name": "api-cert",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-2jxq8",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-template-apiserver:v0.2.2"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-apiserver-67b9fff869-xppgr",
+      "uid": "184e480b-0869-4401-8e06-190cab17895f",
+      "phase": "Running",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "10m",
+            "memory": "64Mi"
+          },
+          "containerID": "cri-o://1148a5f4dbe80209d6e9221e363dd17730022b5f07d92be8b25390c1b41db8ba",
+          "image": "quay.io/kubevirt/virt-template-apiserver:v0.2.2",
+          "imageID": "quay.io/kubevirt/virt-template-apiserver@sha256:104545cf22d9d6ea0d675b650742f07fbffad18bdae5454e8ad79c93e0fa3eeb",
+          "lastState": {},
+          "name": "apiserver",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "128Mi"
+            },
+            "requests": {
+              "cpu": "10m",
+              "memory": "64Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:12:40Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tmp/k8s-api-server/api-cert",
+              "name": "api-cert",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-l9mbh",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-template-apiserver:v0.2.2"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-controller-56b78dbff6-ljw9z",
+      "uid": "fda69c67-6758-4228-b97c-998fbd48d7eb",
+      "phase": "Pending",
+      "containers": [
+        {
+          "image": "quay.io/kubevirt/virt-template-controller:v0.2.2",
+          "imageID": "",
+          "lastState": {},
+          "name": "manager",
+          "ready": false,
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "waiting": {
+              "reason": "ContainerCreating"
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tmp/k8s-metrics-server/metrics-certs",
+              "name": "metrics-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/tmp/k8s-webhook-server/serving-certs",
+              "name": "webhook-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-sczjg",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-template-controller:v0.2.2"
+      ]
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-controller-56b78dbff6-t2plt",
+      "uid": "eecbe6a0-7a94-40ac-b178-5df6362fdcca",
+      "phase": "Failed",
+      "containers": [
+        {
+          "image": "quay.io/kubevirt/virt-template-controller:v0.2.2",
+          "imageID": "",
+          "lastState": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was deleted.  The container used to be Running",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "name": "manager",
+          "ready": false,
+          "restartCount": 1,
+          "started": false,
+          "state": {
+            "terminated": {
+              "exitCode": 137,
+              "finishedAt": null,
+              "message": "The container could not be located when the pod was terminated",
+              "reason": "ContainerStatusUnknown",
+              "startedAt": null
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tmp/k8s-metrics-server/metrics-certs",
+              "name": "metrics-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/tmp/k8s-webhook-server/serving-certs",
+              "name": "webhook-certs",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-8lv6h",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/kubevirt/virt-template-controller:v0.2.2"
+      ]
+    },
+    {
+      "namespace": "vmweave-performance",
+      "name": "perf-dcgm",
+      "uid": "3ac55a9b-c2ba-4424-a204-78b835a0d52d",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://b353f1fa2421c882e41c926f10af98223c670ec2872b7a97ae536e87343bd1a1",
+          "image": "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless",
+          "imageID": "nvcr.io/nvidia/k8s/dcgm-exporter@sha256:613ab03c11d442fd960ff515f547e9921537454a712d08160bc8f677f89f1c35",
+          "lastState": {},
+          "name": "dcgm",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://b353f1fa2421c882e41c926f10af98223c670ec2872b7a97ae536e87343bd1a1",
+              "exitCode": 0,
+              "finishedAt": "2026-10-05T10:02:41Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T13:20:55Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          }
+        }
+      ],
+      "images": [
+        "nvcr.io/nvidia/k8s/dcgm-exporter:4.6.0-4.8.3-distroless"
+      ]
+    },
+    {
+      "namespace": "vmweave-performance",
+      "name": "perf-monitor",
+      "uid": "f5602321-c972-452b-a097-6d2d30586a9a",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://dfa57e32a5dda9acb821dfcade161527b8593f0fb2354b309690e5644a654168",
+          "image": "localhost/vmweave-worker:dev",
+          "imageID": "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+          "lastState": {},
+          "name": "grafana",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://dfa57e32a5dda9acb821dfcade161527b8593f0fb2354b309690e5644a654168",
+              "exitCode": 0,
+              "finishedAt": "2026-10-05T10:02:42Z",
+              "reason": "Completed",
+              "startedAt": "2026-10-01T00:54:11Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tools",
+              "name": "tools",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/monitor",
+              "name": "monitor"
+            }
+          ]
+        },
+        {
+          "containerID": "cri-o://f79a0c49f6cef582e2e7adcebdd7cd2c3b597ff0ba175f557ef7bba9fb0ad8a9",
+          "image": "localhost/vmweave-worker:dev",
+          "imageID": "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+          "lastState": {},
+          "name": "prometheus",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://f79a0c49f6cef582e2e7adcebdd7cd2c3b597ff0ba175f557ef7bba9fb0ad8a9",
+              "exitCode": 0,
+              "finishedAt": "2026-10-05T10:02:42Z",
+              "reason": "Completed",
+              "startedAt": "2026-10-01T00:54:11Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tools",
+              "name": "tools",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/monitor",
+              "name": "monitor"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e",
+        "localhost/vmweave-worker@sha256:d5160d309cbe0daf00511bede8ea5118f10309843b214dcf587c629994ecd09e"
+      ]
+    },
+    {
+      "namespace": "vmweave-performance",
+      "name": "perf-node-exporter",
+      "uid": "f1ce1117-a25a-4995-82f2-3dc71732891f",
+      "phase": "Failed",
+      "containers": [
+        {
+          "containerID": "cri-o://a5d380b2dd684a791f361ac8548d250f1d8b140e80d947d121f06ec36b659287",
+          "image": "quay.io/prometheus/node-exporter:v1.9.1",
+          "imageID": "quay.io/prometheus/node-exporter@sha256:863b62ff9f392b6f472e22b4b670ad1cabb66b3042502ebd4b2cd192733e1bce",
+          "lastState": {},
+          "name": "node-exporter",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://a5d380b2dd684a791f361ac8548d250f1d8b140e80d947d121f06ec36b659287",
+              "exitCode": 143,
+              "finishedAt": "2026-10-05T10:02:50Z",
+              "reason": "Error",
+              "startedAt": "2026-09-30T13:31:53Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65534,
+              "supplementalGroups": [
+                65534
+              ],
+              "uid": 65534
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/host",
+              "name": "host",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "quay.io/prometheus/node-exporter:v1.9.1"
+      ]
+    },
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-controller-577f8dd948-cr47v",
+      "uid": "8e2180b9-1a24-4638-b28c-76530ff881d9",
+      "phase": "Pending",
+      "containers": [
+        {
+          "image": "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+          "imageID": "",
+          "lastState": {},
+          "name": "controller",
+          "ready": false,
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "waiting": {
+              "reason": "ContainerCreating"
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-ktk97",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6"
+      ]
+    },
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-controller-577f8dd948-z9kgx",
+      "uid": "d9895b8d-dc48-4eba-bcdd-c92d044763fe",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "96Mi"
+          },
+          "containerID": "cri-o://3987cf09a3ce0e23c2fcaf5e7f816b8fc95186dc9d5023cc9deca545d75beae3",
+          "image": "localhost/vmweave-operator:dev",
+          "imageID": "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+          "lastState": {},
+          "name": "controller",
+          "ready": false,
+          "resources": {
+            "limits": {
+              "memory": "512Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "96Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://3987cf09a3ce0e23c2fcaf5e7f816b8fc95186dc9d5023cc9deca545d75beae3",
+              "exitCode": 0,
+              "finishedAt": "2026-10-05T10:02:47Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T10:20:22Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-qpg4z",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6"
+      ]
+    },
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-webhook-7fbf99b85-bp6df",
+      "uid": "fa58fece-73d1-4762-83b6-5e4ec0039c6b",
+      "phase": "Pending",
+      "containers": [
+        {
+          "image": "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+          "imageID": "",
+          "lastState": {},
+          "name": "webhook",
+          "ready": false,
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "waiting": {
+              "message": "image pull failed for localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6 because the registry is unavailable: unable to pull image: initializing source docker://localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6: fetching manifest sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6 in localhost/vmweave-operator: pinging container registry localhost: Get \"https://localhost/v2/\": dial tcp 127.0.0.1:443: connect: connection refused",
+              "reason": "RegistryUnavailable"
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tls",
+              "name": "tls",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-6f9gq",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6"
+      ]
+    },
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-webhook-7fbf99b85-xttww",
+      "uid": "4c9678fa-b0a6-4731-8dea-3d286ac9f404",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "96Mi"
+          },
+          "containerID": "cri-o://7b7550b15ee9c3849f92419cbfee6063366df4cf3bb167a3a1997aa7aa3c6679",
+          "image": "localhost/vmweave-operator:dev",
+          "imageID": "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6",
+          "lastState": {},
+          "name": "webhook",
+          "ready": false,
+          "resources": {
+            "limits": {
+              "memory": "512Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "96Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://7b7550b15ee9c3849f92419cbfee6063366df4cf3bb167a3a1997aa7aa3c6679",
+              "exitCode": 0,
+              "finishedAt": "2026-10-05T10:02:49Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T10:20:01Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tls",
+              "name": "tls",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-k8r8w",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-operator@sha256:e9fdcc30a08a7a38b88dcd8dad0fe386c89687a87b0296da15e4dee8958d9cb6"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "hd-admin",
+      "uid": "f386a25e-0c2c-477a-b35e-080ced694dd9",
+      "phase": "Running",
+      "containers": [
+        {
+          "containerID": "cri-o://e4f17cf1145bf4d5aa21cf2c5ca65ee1879e99d09453755fe44b7c0f776fbbd5",
+          "image": "localhost/vmweave-worker:system-comparison-20261001",
+          "imageID": "localhost/vmweave-worker@sha256:8566144a77681353b49211d8ae5a2ab71c6f082b7f4dd22e76eb8dcd386670e7",
+          "lastState": {},
+          "name": "admin",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-05T10:11:27Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/host",
+              "name": "host"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-worker@sha256:8566144a77681353b49211d8ae5a2ab71c6f082b7f4dd22e76eb8dcd386670e7"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-2-prepare",
+      "uid": "a7d58819-5642-4a1d-a632-29dc4469d996",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://452f63854d200e2cddc404e63252da8bf9e15d0b2ce4a0a838abdf38a678bdd0",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://452f63854d200e2cddc404e63252da8bf9e15d0b2ce4a0a838abdf38a678bdd0",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:43:22Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:43:22Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-2-reclaim",
+      "uid": "b1d3e287-59ee-45bd-8b2b-07a76fca0799",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://66a4dd4218327646178c2479e92a45ea57f58b2de348a531e83d1f8ea18f3497",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://66a4dd4218327646178c2479e92a45ea57f58b2de348a531e83d1f8ea18f3497",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:45:02Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:45:02Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-3-019edb7b38b3-prepare",
+      "uid": "3ec27cf3-2063-4442-8a2e-70242dd5e67f",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://de3d1c74d92affcd5df2e0d117657f0edda3e9502144f3c5b86acd1a4250d3d1",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://de3d1c74d92affcd5df2e0d117657f0edda3e9502144f3c5b86acd1a4250d3d1",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:54:40Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:54:40Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-3-019edb7b38b3-reclaim",
+      "uid": "6e83b2e3-0a21-4220-9be0-a6f62164989e",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://890d28c7a945fc0e3b2d3fc8cfac4fe519fbbe1b908762872357a3318eb0ab05",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://890d28c7a945fc0e3b2d3fc8cfac4fe519fbbe1b908762872357a3318eb0ab05",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:56:16Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:56:16Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-prepare",
+      "uid": "1ec586dc-baca-4b80-8838-4b496dc4bb7d",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://0fd36c994a35d3796315dc7d01cab5fc4e236994b763618b9292b7c61707cd99",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://0fd36c994a35d3796315dc7d01cab5fc4e236994b763618b9292b7c61707cd99",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:24:16Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:24:16Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "same-channel-reclaim",
+      "uid": "33ee3f86-568f-42b7-aa81-c6f4044b936f",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://50a677e77d0e6976ae2cc6246b7ae1e2480b00108ea3b5bcf5bbe6f946625845",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://50a677e77d0e6976ae2cc6246b7ae1e2480b00108ea3b5bcf5bbe6f946625845",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:41:07Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:41:07Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-2-prepare",
+      "uid": "b00f5c6c-1541-4b26-bf41-6dda5243ade3",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://dd25dc0649874ff36ecb4d3e770efdd36a38aba86c7f607ce47a321e5c71448e",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://dd25dc0649874ff36ecb4d3e770efdd36a38aba86c7f607ce47a321e5c71448e",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:43:23Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:43:23Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-2-reclaim",
+      "uid": "67dc8d9e-a396-4565-ac47-ebabdb24d857",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://a1b5821b8dd91194269d743e44911fced6164031be7ca11186965353d3aec2a8",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://a1b5821b8dd91194269d743e44911fced6164031be7ca11186965353d3aec2a8",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:45:02Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:45:02Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-3-74663412307b-prepare",
+      "uid": "28ea0a15-ace3-433c-8332-4ea5ec55427a",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://78ae77b2fe97a7464d1992d7043d392604f1d6c6a9054aad277d758b87a01530",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://78ae77b2fe97a7464d1992d7043d392604f1d6c6a9054aad277d758b87a01530",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:54:41Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:54:41Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-3-74663412307b-reclaim",
+      "uid": "64b5fe70-4928-4d4d-8b57-636c241ff7ac",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://9aa580003830f9e50a62b960a6593e34323e3a7a2d2c75368f1bec82f400e206",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://9aa580003830f9e50a62b960a6593e34323e3a7a2d2c75368f1bec82f400e206",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:56:18Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:56:18Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-prepare",
+      "uid": "85876ce5-2a7b-49c9-9645-8aa9d4b11f0c",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://a4c59d02eac94b22a35000ca5fe18d9fb0143749b70e94fcf3da256b729bcdf7",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://a4c59d02eac94b22a35000ca5fe18d9fb0143749b70e94fcf3da256b729bcdf7",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:24:16Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:24:16Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    },
+    {
+      "namespace": "vmweave-test-b",
+      "name": "same-channel-reclaim",
+      "uid": "b76c15aa-5ac1-49a5-9797-ce5da07841ed",
+      "phase": "Succeeded",
+      "containers": [
+        {
+          "containerID": "cri-o://7e3ba9525fac1d3131faa6eb0ce66e7d51b52e785a5cef8d1b45c8ddbbeddbeb",
+          "image": "localhost/vmweave-helper:dev",
+          "imageID": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+          "lastState": {},
+          "name": "main",
+          "ready": false,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://7e3ba9525fac1d3131faa6eb0ce66e7d51b52e785a5cef8d1b45c8ddbbeddbeb",
+              "exitCode": 0,
+              "finishedAt": "2026-09-30T08:41:07Z",
+              "reason": "Completed",
+              "startedAt": "2026-09-30T08:41:07Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 107,
+              "supplementalGroups": [
+                107
+              ],
+              "uid": 107
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/flyt-channel",
+              "name": "channel"
+            }
+          ]
+        }
+      ],
+      "images": [
+        "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654"
+      ]
+    }
+  ]
+}

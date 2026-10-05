@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ssh",
+    "-i",
+    "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/h2d-diagnosis-20261005/artifacts/guest-key",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=5",
+    "-o",
+    "StrictHostKeyChecking=accept-new",
+    "-o",
+    "UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/evidence/results/2026-10-05-h2d-diagnosis/runs/hd-confirm-r5-original/known-hosts",
+    "ubuntu@10.85.0.58",
+    "sudo env HD_COLLECT_BARRIER=/tmp/perf/hd-confirm-r5-original.collected HD_PATTERN_ORDER=1 HD_METRICS=0 HD_VARIANT=original FLYT_TRACE_REQUESTS=0 PERF_HOLD_UNTIL_UTC=0 FLYT_LAYOUT=/tmp/perf/layout.bin FLYT_IVSHMEM_BDF=0000:00:1e.0 FLYT_SLOT=0 LD_LIBRARY_PATH=/tmp/perf /tmp/perf/probe-S regression 16777216 60 10 /tmp/perf/hd-confirm-r5-original /tmp/perf/work.ptx"
+  ],
+  "utc": 1791206903.206342
+}

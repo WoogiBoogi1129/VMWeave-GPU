@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/prepare.py", line 11, in <module>
+    admin(['nsenter','--net=/host/proc/1/ns/net','chroot','/host','podman','pull',ref],timeout=600)
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/common.py", line 51, in admin
+    def admin(args, **kw): return k('exec','-n',NS,HELPER,'--',*args,**kw)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/common.py", line 38, in k
+    def k(*args, **kw): return call(['kubectl',*args],**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/h2d-diagnosis/common.py", line 35, in call
+    raise RuntimeError(redact(shlex.join(args)+': '+result.stderr[-2000:]))
+RuntimeError: kubectl exec -n vmweave-test-a hd-admin -- nsenter --net=/host/proc/1/ns/net chroot /host podman pull docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e: Trying to pull docker.io/library/mongo@sha256:609d76574151bee8b148caee83cd9fec8b5f695e5a6db9f1e0f9dced0673574e...
+Getting image source signatures
+Copying blob sha256:6a1559542a9437266bf6773d7817aed9ca4849b31d5a8a0c4ab59b905db2bac9
+Copying blob sha256:3e6047151eb8135650fa293bf2c62b603bfe3f6f2162290ac82df62530ac556b
+Copying blob sha256:20c3783cc497b5b0df1fc5f92bd64c3d2fbb24057c88692c8fda205b6ea8a2f2
+Copying blob sha256:1cf15972ac40f5cf7548f69a15cc9cde461afb34fd947c2a8ef794dd666be289
+Copying blob sha256:caab767ae7599435016f4a206dc9bc7281197167e3c583f8f46370a56fd9b728
+Copying blob sha256:f699b2f6ea97a93044407574a07590c684a01bd7da51e5fd2c8361eeee65138b
+Copying blob sha256:d475674f6ccf4e965a512d64a08cbb771469746d7bc22fc51c96d2e5710fa20a
+Copying blob sha256:39262f72a6eb9662804c89b7f80e1c313ddbd45b80c3917904eb1d0afb5f6ab7
+error: Internal error occurred: Internal error occurred: error executing command in container: signal: killed
+

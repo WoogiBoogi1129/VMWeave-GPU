@@ -1,0 +1,11 @@
+{
+  "selection": "direct Guest-to-SHM payload write, retaining Worker private snapshot",
+  "basis": "Guest pack approximately3ms; removing this one staging copy in an independent pilot reduced H2D from9.8329 to5.1842ms and passed correctness. All candidate pilot data retained; no pilots pooled into formal.",
+  "rejected_pilot_candidates": [
+    "reuse: small effect",
+    "unroll: small effect",
+    "chunk: slower",
+    "pinned: lower backend H2D API but worse D2H and round-trip throughput"
+  ],
+  "followup": "Five fresh independent VM sessions per condition, 60s copy windows; separate telemetry-on/off controls, separate H2D-only exploratory windows. Placement and BAR diagnostics supplementary. No production-default change."
+}

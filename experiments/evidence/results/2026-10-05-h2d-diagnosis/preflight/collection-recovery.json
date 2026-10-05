@@ -1,0 +1,7 @@
+{
+  "utc": 1791199765.3401923,
+  "reason": "Initial r3-S completed CUDA validation and CSV capture, but VM automatic release raced independent SHA256 collection. Preserve all initial runs separately; restart ALL 10 formal sessions with the same fixed collection method. No performance-based exclusion.",
+  "change": "Only post-measurement atexit barrier added to probe: collect CSV and independently hash output while CUDA session remains alive, then release process; timed operations unchanged.",
+  "initial_protocol": "protocol-main-initial.json",
+  "initial_attempts_not_pooled": true
+}

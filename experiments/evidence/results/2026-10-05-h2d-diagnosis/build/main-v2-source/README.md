@@ -1,0 +1,1 @@
+Snapshot of the source used by the restarted formal main comparison. Python hashes match protocol-main.json. This is evidence, not a standalone entrypoint; use experiments/h2d-diagnosis for execution.

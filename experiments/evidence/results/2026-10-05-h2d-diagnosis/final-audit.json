@@ -1,0 +1,139 @@
+{
+  "utc": 1791207617.9835842,
+  "node_conditions": {
+    "NetworkUnavailable": "False",
+    "MemoryPressure": "False",
+    "DiskPressure": "False",
+    "PIDPressure": "False",
+    "Ready": "True"
+  },
+  "target_gpu_no_compute_process": true,
+  "compute_processes": "",
+  "deployments": [
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-controller",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-webhook",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-api",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-controller",
+      "desired": 2,
+      "ready": 2
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-exportproxy",
+      "desired": 2,
+      "ready": 2
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-operator",
+      "desired": 2,
+      "ready": 2
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-apiserver",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-controller",
+      "desired": 1,
+      "ready": 1
+    }
+  ],
+  "infra": [
+    {
+      "namespace": "kubevirt",
+      "name": "virt-api-994876cf-7jzvx",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-controller-7df6b87b47-2nsjl",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-controller-7df6b87b47-zkq2r",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-exportproxy-7465c9bc48-9wm8w",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-exportproxy-7465c9bc48-qw6r4",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-handler-2mbw2",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-operator-859458cd98-9flf6",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-operator-859458cd98-t9rxq",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-apiserver-67b9fff869-ssq9q",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "kubevirt",
+      "name": "virt-template-controller-56b78dbff6-dprvq",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-controller-577f8dd948-pcxrz",
+      "phase": "Running",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "name": "vmweave-webhook-7fbf99b85-tjz8v",
+      "phase": "Running",
+      "ready": true
+    }
+  ],
+  "campaign_resources_remaining": [],
+  "campaign_pods_remaining": [],
+  "production_runtime_operator_deploy_scripts_unchanged": true
+}

@@ -1,0 +1,115 @@
+{
+  "frozen_utc": 1791199765.3236094,
+  "main": {
+    "runs": [
+      {
+        "repeat": 1,
+        "order": [
+          "T",
+          "S"
+        ]
+      },
+      {
+        "repeat": 2,
+        "order": [
+          "S",
+          "T"
+        ]
+      },
+      {
+        "repeat": 3,
+        "order": [
+          "T",
+          "S"
+        ]
+      },
+      {
+        "repeat": 4,
+        "order": [
+          "S",
+          "T"
+        ]
+      },
+      {
+        "repeat": 5,
+        "order": [
+          "T",
+          "S"
+        ]
+      }
+    ],
+    "systems": {
+      "T": "Original TCP/RPC+MPS runtime",
+      "S": "Original improved SHM+HAMi runtime, no internal diagnostic instrumentation"
+    },
+    "sizes_mib": [
+      4,
+      8,
+      12,
+      16
+    ],
+    "seconds_per_window": 60,
+    "warmup_seconds": 10,
+    "warmup_min_operations": 50,
+    "probe": "Same source on both paths; copy and explicit synchronization measured separately; whole-buffer guest validation and independent SHA256 of output outside timed windows",
+    "change_from_original_20261001_probe": "Extra monotonic timestamps between copy and sync; no API/order/payload changes. Original probe unchanged baseline attempts never reached measurement due provisioning failures; no claim of bit-identical probe."
+  },
+  "diagnostic_followup": "Separate instrumented controls and candidate trials. Pilot-selected candidates are not pooled into formal statistics.",
+  "runtime_hashes": {
+    "libflyt_guest.so": "7af1e01014ef71a3ed4456b9d28c931c571b8324d72407d58c841dbdd157f61b",
+    "flyt-shm-worker": "db1e087a72c02186e9a22dc3f0fc6269a17ad4cda35e46a26b634fafc73ca167",
+    "cricket-client.so": "6fbe79545c575ac44ea9d528982f583fcbf70558bfd747ba8f2348acfa08e857",
+    "probe-S": "f3252594d2b8434b81a082a65455400f6152c30dfdd0d1532a56218dd9b44823",
+    "probe-T": "4bca4fbecde3ed38d6d0ba8f2d775a9e0d9f85761a2b107bfa9c9259a30f583e"
+  },
+  "runner_hashes": {
+    "evidence_io.py": "f4c1072177a20dccbbb793c39c34484fb042e80f5506eec2f117c35db7253362",
+    "analyze.py": "f0075a1d5128b9abfd336e5ace0f0e48a6234ee8dfc908ec57bff066ee1c9458",
+    "runtime.py": "ada539f1010d9b07a901be92245ccc585ebb4932e860d170735783169d00cd9d",
+    "run_followup.py": "d03c4c20269f856e0ab91b514e65bdb8c2bb4ffad6d2fca7e5e6e3e369e92daa",
+    "prepare_followup.py": "4ae2c32dcecfa39959228a93278f2b431893dd0c54d2dd1ba026aef759d290d7",
+    "run_main.py": "073407a96ef3f77a140fe38571df17715bb4f6f7f4fad72fd3a5356b374877a1",
+    "source_patch.py": "ac3f7573dccf11b64c883d20cea2a8ad720d9a7fa99f4d08d141fc4e2ab60a1e",
+    "read_runtime.py": "d6377b56b5db5c4e3258d857fd36df217067c3f17821e715819e459543808490",
+    "run_direct_pilot.py": "10187a14338bb68082dcbb4b1b6eea9b8418b76b4febc384f8b34d443eed9f09",
+    "reanalyze_prior.py": "58df46d573f0baaed928b6aa8f27abd4b43c77ae392f24ae6f314beb19109bf6",
+    "manager_affinity.py": "14ebe83c1cd45894157b748665de8a962911034c9523c3f1b1f2dfb1682c98ec",
+    "monitor.py": "4be13b59cd88762498dc50fd4ffd2b99e22c4c59ec92be26a2a926c049fe5ba9",
+    "build_diagnostic.py": "850f5e4cf2eb2c26eebf25191d043f3f581e7e0b48d9122e4d579b189706e380",
+    "recover_collection.py": "95a7cb38562690d3994ff865b9edb0a2874195a27d8eb1b13bcbefdb1c2b1042",
+    "plot.py": "b32484ce24a83c964d1753da39ee44f4f06e268c7b7bbb3249f222b73a9d970b",
+    "freeze_main.py": "4fde2dfcfbfc0a9806b4f3f82af3d3a4c2d849549da0aa80bbd254308735fdea",
+    "summarize.py": "66eb1cb59802bc7b4d24307c26c4ba91cbab7a95dc862d008bce1cd13e65b2d1",
+    "analyze_cpu.py": "61a9ae8690c6fab4c40efc9a787928239b6c329d76315f7dd61ec61f93b25da0",
+    "test_portable.py": "c9fb8abbba6d7d29d01e8a11475510a8f93cf0439272f3ff1da448fbfe2f2cbf",
+    "make_diagnostic_source.py": "2561e981ffa437254c6143731ee5fbbfa908a327270f11f0eeeb3aff19e0edb4",
+    "run_components.py": "572f34d6586c5748ca5434667f3aa0560042fd5a6f30dd4fb7d338fe4e267200",
+    "validate.py": "a73f0cdac3503c7f3f1dbb96d992ac4db522e1b24bd562bb026162a906a632b3",
+    "final_audit.py": "bd51dd130395b1f2d4c8cbc8c38c2fac8949999579a06759c4aa6fe76d93c8cf",
+    "common.py": "628d85b23b461d5f19637bc6d2235b624329f849b8350ddb0fa32a2a8d9054f0",
+    "cleanup_campaign.py": "3186871442e452bbabfc5ceda0b6c2932e29f7d58a0ada9c051c92399f4535f9",
+    "redact_evidence.py": "7caa2548668b24ae16a64b3f63cc55ccce87b97bcc769dea140aedcb66f8d9fc",
+    "run_candidates.py": "2e0069e1351eb0779e2cd106305d876c4644d3ec4c7b39713d2e754d9c2f5aa6",
+    "report.py": "642f3da2c8b47fafadba9c4e3cd0a2da10fc9478b793de73e4730031807fe72b",
+    "run_diagnostic.py": "2e3d262cd3efc5fd213aad444cb3715834eff450b85a2cb7cf434c0d3db20ab7",
+    "tcp_runtime.py": "bcf64098abf382f29c1aaac51f6f93ddfba69a89473a1c32240523c286d7458b",
+    "smoke_final.py": "7daf8966117b92caf70232c6b56eb01d358c48d6549195d298bcad40b8563b7d",
+    "check_publication.py": "11b6882e853f35fe74deee2633630ba2fc2949c76de1a6d16082413be678b380",
+    "prepare.py": "eef47170e5879428ffdf516bba0e4ad8e7d0c2fee1fd41f3883c94cd7842b269",
+    "preserve_drivers.py": "544371c56b5e8149d43b7889770263dd4a999671d6963bbfed2fc00b2e213f5c",
+    "setup_tcp.py": "a87c23c79b7ed4644fb2549e30ff406e4df0c1bde8761d73a1490fc2dd551ca5",
+    "smoke_collection.py": "4055bbb41e35358c4872efcb0b96fa2f88a5111fc18a476799382a905bb3a6d3",
+    "build_off.py": "66c7eb54335f1b73ae8333b35d80b9b3aa342ba86a8cd214004363c1a75ff047",
+    "archive_logs.py": "34f43dddeaace26fe9ec7287172c9b5a884085d8218d4640660a615c56f266e9",
+    "run_baseline.py": "4e654b7f1169587dc74dacbe402edfd3d96b1737ef0da1b61973cdc00ab34711",
+    "test_diagnostic.py": "5d7b1fbd16d1d7850f2ff4f56d1f3fa1015a6ccfda2a5e9afcb3828e1a658d62",
+    "build_final_diagnostics.py": "06e4211ec209915b866896f52aad3634150fa3a4ac8a5788eb3a4d242fc78ab8"
+  },
+  "run_prefix": "hd-main-v2-r",
+  "recovery": {
+    "reason": "Initial r3-S completed CUDA validation and CSV capture, but VM automatic release raced independent SHA256 collection. Preserve all initial runs separately; restart ALL 10 formal sessions with the same fixed collection method. No performance-based exclusion.",
+    "change": "Only post-measurement atexit barrier added to probe: collect CSV and independently hash output while CUDA session remains alive, then release process; timed operations unchanged.",
+    "initial_protocol": "protocol-main-initial.json",
+    "initial_attempts_not_pooled": true
+  }
+}

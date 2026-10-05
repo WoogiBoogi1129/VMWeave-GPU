@@ -1,0 +1,15 @@
++00:00:00.383838 [34mINFO[0m:	connection to host "10.85.0.116"
++00:00:00.383991 [34mINFO[0m:	connecting via TCP...
+{"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+{"event":"CONDITION","mode":"copy","bytes":16777216,"duration_s":3,"warmup_min_s":2,"iterations":64,"free_bytes":4261412864,"total_bytes":4294967296}
+{"event":"WARMUP_START","utc":1791199716.546773434,"monotonic":34.097323852,"elapsed":0.000000000,"completed":0}
+{"event":"WARMUP_END","utc":1791199718.555706501,"monotonic":36.106257076,"elapsed":2.008907919,"completed":85}
+{"event":"MEASUREMENT_START","utc":1791199718.555730820,"monotonic":36.106281336,"elapsed":0.000000000,"completed":0}
+{"event":"TICK","utc":1791199719.574641228,"monotonic":37.125191679,"elapsed":1.018906380,"completed":48}
+{"event":"TICK","utc":1791199720.594998598,"monotonic":38.145549251,"elapsed":2.039264007,"completed":91}
+{"event":"MEASUREMENT_END","utc":1791199721.577673912,"monotonic":39.128224340,"elapsed":3.021939095,"completed":130}
+{"event":"RESULT","status":"PASS","mode":"copy","bytes":16777216,"completed":130,"elapsed_s":3.021939095,"operations_per_s":43.018735955,"checked_elements":4194304,"mismatches":0}
+{"event":"ARTIFACTS_READY","utc":1791199721.614545822,"monotonic":39.165096290,"elapsed":0.000000000,"completed":0}
++00:00:07.135463 [34mINFO[0m:	api-call-cnt: 869
++00:00:07.135502 [34mINFO[0m:	memcpy-cnt: -1342177280
++00:00:07.137788 [34mINFO[0m: completed deinit request and response	in [4mcpu-client-mgr-handler.c:222[0m

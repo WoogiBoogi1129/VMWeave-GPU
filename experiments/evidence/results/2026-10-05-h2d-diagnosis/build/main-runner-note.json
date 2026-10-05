@@ -1,0 +1,10 @@
+{
+  "frozen_hash": "5f01f4fd9e7187d355c679920458aa9a15a80d98bb52d973ecd233f2b63a2dff",
+  "as_run_snapshot": "main-runner-frozen.py",
+  "difference_from_later_runner": "Adds optional between-session hold; prevents artifact_name from shadowing run-name used only for output prefix and COMPLETE printing. Running main campaign retains its frozen implementation; per-session directory and request data are unaffected.",
+  "main_output_prefixes": [
+    "cricket-client.so-copy-N",
+    "libflyt_guest.so-copy-N"
+  ],
+  "scope": "Initial interrupted comparison only. Restarted formal main uses build/main-v2-source snapshots and protocol-main.json."
+}
