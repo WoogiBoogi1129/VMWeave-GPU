@@ -1,0 +1,22 @@
+{
+  "bundle_path": ".local/thesis-isolation-20261012/guest-python-cuda.tgz",
+  "bundle_sha256": "d242f281efa068996e4c9893811d64b32a7965faaf16b58bc93cb957d78841ec",
+  "bundle_bytes": 1828353268,
+  "required_members": [
+    "opt/torch-venv/bin/python",
+    "opt/torch-venv/pyvenv.cfg",
+    "opt/torch-venv/lib/python3.10/site-packages/torch/__init__.py",
+    "opt/flyt-cuda-libs/libnuma.so.1",
+    "opt/flyt-cuda-libs/libgomp.so.1"
+  ],
+  "validated_environment": {
+    "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+    "torch": "2.11.0+flyt.cu128",
+    "cuda": "12.8",
+    "numpy": "2.2.6",
+    "cpu_check": true
+  },
+  "validation_image_id": "1b35ff3de21d818ec6eca44852852c0658d1a7e82256b09fce9302ab764bc207",
+  "guest_prerequisite": "Ubuntu 22.04 compatible Python 3.10 at /usr/bin/python3; actual Guest validation pending",
+  "scope": "Offline environment preparation only; no GPU experiment executed"
+}

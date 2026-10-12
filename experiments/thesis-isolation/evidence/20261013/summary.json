@@ -1,0 +1,283 @@
+{
+  "scope": "Original performance experiment; not current renumbered data-access isolation E2",
+  "raw_audit": "PASS",
+  "conditions": 30,
+  "attempts": 381945,
+  "successful": 381945,
+  "errors": 0,
+  "mismatches": 0,
+  "all_sample_targets_met": true,
+  "groups": [
+    {
+      "direction": "ab",
+      "condition": "baseline",
+      "repetitions": 5,
+      "successful": 63817,
+      "throughput_rps": {
+        "mean": 10.129370594752341,
+        "min": 10.115068361980251,
+        "max": 10.157760315223147,
+        "sample_sd": 0.016668941498747054
+      },
+      "p99_ms": {
+        "mean": 88.2048269999757,
+        "min": 87.98227099998712,
+        "max": 88.34086000024399,
+        "sample_sd": 0.16575562466020421
+      },
+      "throughput_retention_pct": {
+        "mean": 100.0,
+        "min": 100.0,
+        "max": 100.0,
+        "sample_sd": 0.0
+      },
+      "p99_increase_pct": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "sample_sd": 0.0
+      }
+    },
+    {
+      "direction": "ab",
+      "condition": "memory",
+      "repetitions": 5,
+      "successful": 63634,
+      "throughput_rps": {
+        "mean": 10.100380178444675,
+        "min": 10.072731253308907,
+        "max": 10.123246565970485,
+        "sample_sd": 0.02094856970379298
+      },
+      "p99_ms": {
+        "mean": 88.53515000005245,
+        "min": 88.23904500013668,
+        "max": 88.79916400019283,
+        "sample_sd": 0.20042875729638865
+      },
+      "throughput_retention_pct": {
+        "mean": 99.71383026397496,
+        "min": 99.58144515532413,
+        "max": 99.95651720850282,
+        "sample_sd": 0.15440094425714557
+      },
+      "p99_increase_pct": {
+        "mean": 0.3745106937846332,
+        "min": 0.25628457737878474,
+        "max": 0.5639379762230057,
+        "sample_sd": 0.1410841490228364
+      }
+    },
+    {
+      "direction": "ab",
+      "condition": "compute",
+      "repetitions": 5,
+      "successful": 63620,
+      "throughput_rps": {
+        "mean": 10.097986955779579,
+        "min": 10.083968231558856,
+        "max": 10.11904620296132,
+        "sample_sd": 0.013043106125708562
+      },
+      "p99_ms": {
+        "mean": 88.47599760006233,
+        "min": 88.3590829998866,
+        "max": 88.55256200013173,
+        "sample_sd": 0.07997189160275983
+      },
+      "throughput_retention_pct": {
+        "mean": 99.69024268167303,
+        "min": 99.58418577677982,
+        "max": 99.78874417170918,
+        "sample_sd": 0.08563837297912921
+      },
+      "p99_increase_pct": {
+        "mean": 0.30766092772569475,
+        "min": 0.12867545070245345,
+        "max": 0.5420825896540249,
+        "sample_sd": 0.17285965271443546
+      }
+    },
+    {
+      "direction": "ba",
+      "condition": "baseline",
+      "repetitions": 5,
+      "successful": 63781,
+      "throughput_rps": {
+        "mean": 10.123743878686636,
+        "min": 10.097512587283923,
+        "max": 10.142927617868436,
+        "sample_sd": 0.019831444761073933
+      },
+      "p99_ms": {
+        "mean": 88.21738660001301,
+        "min": 87.98759500007236,
+        "max": 88.38333999983661,
+        "sample_sd": 0.16982421763440073
+      },
+      "throughput_retention_pct": {
+        "mean": 100.0,
+        "min": 100.0,
+        "max": 100.0,
+        "sample_sd": 0.0
+      },
+      "p99_increase_pct": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "sample_sd": 0.0
+      }
+    },
+    {
+      "direction": "ba",
+      "condition": "memory",
+      "repetitions": 5,
+      "successful": 63515,
+      "throughput_rps": {
+        "mean": 10.08136926218268,
+        "min": 10.043514702312802,
+        "max": 10.109725913014197,
+        "sample_sd": 0.024126231383913236
+      },
+      "p99_ms": {
+        "mean": 88.48635280000963,
+        "min": 88.41155100026299,
+        "max": 88.59164000000419,
+        "sample_sd": 0.0956901116104684
+      },
+      "throughput_retention_pct": {
+        "mean": 99.5814630254956,
+        "min": 99.37146033242092,
+        "max": 99.77351023847581,
+        "sample_sd": 0.1617535526440478
+      },
+      "p99_increase_pct": {
+        "mean": 0.30509241316732716,
+        "min": 0.07262238338239246,
+        "max": 0.4924614654755022,
+        "sample_sd": 0.15858562320523323
+      }
+    },
+    {
+      "direction": "ba",
+      "condition": "compute",
+      "repetitions": 5,
+      "successful": 63578,
+      "throughput_rps": {
+        "mean": 10.091313033839308,
+        "min": 10.058014167265293,
+        "max": 10.109426584969942,
+        "sample_sd": 0.021452361164467835
+      },
+      "p99_ms": {
+        "mean": 88.41637720002495,
+        "min": 88.24211000001014,
+        "max": 88.68764799990458,
+        "sample_sd": 0.18470691727652178
+      },
+      "throughput_retention_pct": {
+        "mean": 99.67975673714376,
+        "min": 99.42477253924595,
+        "max": 99.86291989646642,
+        "sample_sd": 0.17886144296469475
+      },
+      "p99_increase_pct": {
+        "mean": 0.22580259861720187,
+        "min": -0.12542312546066636,
+        "max": 0.5685358261781959,
+        "sample_sd": 0.25541087379925115
+      }
+    },
+    {
+      "direction": "all",
+      "condition": "baseline",
+      "repetitions": 10,
+      "successful": 127598,
+      "throughput_rps": {
+        "mean": 10.126557236719488,
+        "min": 10.097512587283923,
+        "max": 10.157760315223147,
+        "sample_sd": 0.017523663627002178
+      },
+      "p99_ms": {
+        "mean": 88.21110679999435,
+        "min": 87.98227099998712,
+        "max": 88.38333999983661,
+        "sample_sd": 0.15834390381882468
+      },
+      "throughput_retention_pct": {
+        "mean": 100.0,
+        "min": 100.0,
+        "max": 100.0,
+        "sample_sd": 0.0
+      },
+      "p99_increase_pct": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "sample_sd": 0.0
+      }
+    },
+    {
+      "direction": "all",
+      "condition": "memory",
+      "repetitions": 10,
+      "successful": 127149,
+      "throughput_rps": {
+        "mean": 10.090874720313678,
+        "min": 10.043514702312802,
+        "max": 10.123246565970485,
+        "sample_sd": 0.023540055216825433
+      },
+      "p99_ms": {
+        "mean": 88.51075140003104,
+        "min": 88.23904500013668,
+        "max": 88.79916400019283,
+        "sample_sd": 0.15028345575967933
+      },
+      "throughput_retention_pct": {
+        "mean": 99.64764664473527,
+        "min": 99.37146033242092,
+        "max": 99.95651720850282,
+        "sample_sd": 0.16459315770796376
+      },
+      "p99_increase_pct": {
+        "mean": 0.3398015534759802,
+        "min": 0.07262238338239246,
+        "max": 0.5639379762230057,
+        "sample_sd": 0.14615965098374756
+      }
+    },
+    {
+      "direction": "all",
+      "condition": "compute",
+      "repetitions": 10,
+      "successful": 127198,
+      "throughput_rps": {
+        "mean": 10.094649994809442,
+        "min": 10.058014167265293,
+        "max": 10.11904620296132,
+        "sample_sd": 0.017103147055800846
+      },
+      "p99_ms": {
+        "mean": 88.44618740004364,
+        "min": 88.24211000001014,
+        "max": 88.68764799990458,
+        "sample_sd": 0.1378143175906622
+      },
+      "throughput_retention_pct": {
+        "mean": 99.6849997094084,
+        "min": 99.42477253924595,
+        "max": 99.86291989646642,
+        "sample_sd": 0.13231959391537937
+      },
+      "p99_increase_pct": {
+        "mean": 0.2667317631714483,
+        "min": -0.12542312546066636,
+        "max": 0.5685358261781959,
+        "sample_sd": 0.21008269828725776
+      }
+    }
+  ],
+  "service_suitability": "INCONCLUSIVE"
+}
