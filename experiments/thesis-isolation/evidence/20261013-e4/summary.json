@@ -1,0 +1,14 @@
+{
+  "experiment": "E4 Worker termination propagation",
+  "trials": 10,
+  "pass": 10,
+  "baseline_requests": 103339,
+  "fault_window_requests": 173054,
+  "observer_errors": 0,
+  "mismatches": 0,
+  "observed_timeouts": 0,
+  "min_completion_span_after_fault_s": 99.30162048339844,
+  "released_sessions": 20,
+  "minimum_baseline_request_span_s": 59.999976495,
+  "scope": "No propagation observed for the tested dedicated Worker SIGKILL and bounded observation window. Observation window starts just before termination; its requests are not all strictly post-fault."
+}
