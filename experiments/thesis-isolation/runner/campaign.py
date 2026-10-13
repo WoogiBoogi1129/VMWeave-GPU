@@ -3,10 +3,10 @@ import argparse,queue,concurrent.futures
 from session import *
 TIMEOUT=40
 class Probe:
- def __init__(self,s,seed):
+ def __init__(self,s,seed,program="isolation"):
   self.s=s;self.q=queue.Queue();self.rows=[]
   self.log=(s.out/'requests-events.jsonl').open('w');self.err=(s.out/'probe-stderr.txt').open('w')
-  self.p=subprocess.Popen(s.command('isolation',[seed]),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.err,text=True,bufsize=1)
+  self.p=subprocess.Popen(s.command(program,[seed]),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=self.err,text=True,bufsize=1)
   def reader():
    for line in self.p.stdout:
     try:r=json.loads(line)

@@ -1,0 +1,19 @@
+{
+  "experiment": "E2 data access",
+  "trials": 40,
+  "per_path": {
+    "rawread": 10,
+    "rawwrite": 10,
+    "read": 10,
+    "write": 10
+  },
+  "target_buffer_check_failures": 0,
+  "observed_cross_access": 0,
+  "released_sessions": 80,
+  "api_rejections": 0,
+  "kernel_launch_rejections": 20,
+  "gpu_cross_access_verified": false,
+  "verdict": "INCONCLUSIVE",
+  "rejection_layer": "Guest pointer rejection is supported by source inspection, not independently instrumented at the Worker boundary",
+  "write_limit": "API write returned success and target remained intact; requester post-write content was not read back, so own-buffer write is inferred from session-local handle resolution."
+}
