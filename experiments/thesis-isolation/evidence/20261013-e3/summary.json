@@ -1,0 +1,13 @@
+{
+  "experiment": "E3 context fault propagation",
+  "trials": 10,
+  "pass": 10,
+  "baseline_requests": 102945,
+  "fault_window_requests": 171955,
+  "observer_errors": 0,
+  "mismatches": 0,
+  "observed_timeouts": 0,
+  "min_completion_span_after_fault_s": 99.90671300888062,
+  "released_sessions": 20,
+  "scope": "No propagation observed for the tested single null-store CUDA error 700 and bounded observation window. Fault window starts just before injection; its requests are not all strictly post-fault."
+}
