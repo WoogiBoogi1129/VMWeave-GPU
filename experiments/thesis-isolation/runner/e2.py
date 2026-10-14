@@ -2,10 +2,10 @@ import argparse,concurrent.futures,random,math
 from campaign import *
 from environment import BUNDLE, validate
 class MLP(Probe):
- def __init__(self,s):
+ def __init__(self,s,source="mlp.py"):
   self.s=s;self.q=queue.Queue();self.rows=[]
   self.log=(s.out/'requests-events.jsonl').open('w');self.err=(s.out/'probe-stderr.txt').open('w')
-  call(s.scp+[str(ROOT/'experiments/thesis-isolation/probes/mlp.py'),'ubuntu@'+s.ip+':/tmp/perf/mlp.py'])
+  call(s.scp+[str(ROOT/'experiments/thesis-isolation/probes'/source),'ubuntu@'+s.ip+':/tmp/perf/mlp.py'])
   with BUNDLE.open('rb') as bundle,(s.out/'bootstrap.txt').open('w') as log:
    subprocess.run(s.ssh+['sudo tar -xz -C / opt/torch-venv opt/flyt-cuda-libs'],stdin=bundle,stdout=log,stderr=log,check=True,timeout=300)
   call(s.ssh+['ln -s libflyt_guest.so /tmp/perf/libcuda.so.1'])
