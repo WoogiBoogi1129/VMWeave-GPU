@@ -135,6 +135,9 @@ func (a API) Status(o *Obj, v Map) error {
 	if err := a.check(o); err != nil {
 		return err
 	}
+	if Get(o, "status") == nil {
+		Set(o, Map{}, "status")
+	}
 	changed := false
 	for k, x := range v {
 		if !Equal(Get(o, "status", k), x) {

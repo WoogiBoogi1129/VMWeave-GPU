@@ -64,3 +64,55 @@ ivshmem은 첫 연결 후보이며 현재 KubeVirt 환경에서 사용 가능하
 함께 구현한다. Hook/XML 수정만으로 동일 backing 접근이 성립했다고 판정하지 않는다.
 node-local backing provider는 원시 host path를 사용자 입력으로 받지 않고 allocation으로
 식별한다. 기능 사용에 필요한 플랫폼 확장은 검증 전 별도로 명시한다.
+
+## Durable VM lifecycle (`spec.lifecycle: VM`)
+
+The channel name must equal its VM name. The VM owns the channel object, which
+persists across stop/start; deleting the VM deletes the channel after detach and
+reclamation. `Allocation` remains the CRD default for existing experiments;
+`scripts/operator/create-channel.py` selects `VM` by default. Use
+`--lifecycle Allocation` to reproduce the previous single-allocation experiments.
+
+For `VM`, use `runStrategy: Always` to start and `Halted` to stop. The controller
+creates a fresh allocation, generation and Worker on each boot. VMI admission
+waits for backing preparation and Worker readiness. The stopped state retains
+the channel UID but has no Worker, attachment or backing allocation. A rapid
+stop/start waits for detach evidence and reclamation before admitting a new VMI.
+Runtime resource names include the allocation ID to avoid reusing a deleted Pod.
+
+A persistent guest broker is the sole SHM producer. Install the guest artifacts
+with `sh install_guest_broker.sh ARTIFACT_DIRECTORY`, then boot a fresh VMI. The
+VM needs inline `cloudInitNoCloud.userData`; the controller places a layout
+comment in each boot's config drive. The bootstrap reads that drive directly,
+so persistent root disks do not depend on cloud-init rerunning on every boot.
+Only slot 0 (one active application process) is supported by this mode.
+
+Applications use `/opt/flyt/lib/libflyt_guest.so` with
+`FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock`. Add authorized VM users to group
+`vmweave` (new login required). Pods can mount `/run/vmweave` and the guest library
+read-only and use the numeric `vmweave` supplemental group. They do not need
+privileged mode, a PCI BAR mount, or a physical GPU device. This path is the
+VMWeave CUDA proxy, not NVIDIA device-plugin GPU passthrough; its existing API
+support limits still apply.
+
+Each accepted application connection gets a random 128-bit epoch and a fresh
+CUDA child process. Every CUDA call carries that epoch. Normal exit or socket
+EOF, including SIGKILL, closes the session; the Worker waits for child exit before
+acknowledging close and admitting another application. Concurrent applications
+receive a busy error (46). The VM and transport Worker remain alive when no
+application is running. Queue counters are never reset or reopened for a new
+application. A crashed CUDA child fails that session; the next application can
+open a fresh child after the failed client's connection closes.
+
+A broken broker/transport is **not** transparently restarted against live rings.
+The channel becomes unavailable if its Worker exits; the controller does not
+halt the VM for that event in VM lifecycle mode. Recover by stopping and starting
+the VM, which allocates fresh rings. This implementation does not promise GPU
+checkpoint/restore, live migration, arbitrary CUDA compatibility, or concurrent
+process multiplexing. Each transport call retains bounded timeouts; long GPU
+operations remain subject to the existing transport timeout contract.
+
+Upgrade existing allocations only while halted after `Released` is confirmed.
+Remove their VM binding annotations, install the broker artifacts, and create a
+new VM-named durable channel with a profile referencing the updated Worker
+image. Do not change an active channel's immutable lifecycle or image fields.

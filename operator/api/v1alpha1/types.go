@@ -182,6 +182,7 @@ type SharedMemoryChannelSpec struct {
 	WorkerImage string                            `json:"workerImage"`
 	HookImage   string                            `json:"hookImage"`
 	Drain       bool                              `json:"drain,omitempty"`
+	Lifecycle   string                            `json:"lifecycle,omitempty"`
 }
 type SharedMemoryChannelStatusConditionsItem struct {
 	Type               string `json:"type"`

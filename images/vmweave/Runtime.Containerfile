@@ -16,5 +16,6 @@ ENTRYPOINT ["/usr/bin/tini","--","python3","/opt/flyt/control/supervisor.py"]
 FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f AS guest-artifacts
 COPY --from=build /opt/flyt/lib/libflyt_guest.so /opt/flyt/guest/libflyt_guest.so
 RUN ln -s libflyt_guest.so /opt/flyt/guest/libcuda.so.1
+COPY runtime/shm/control/guest_broker.py runtime/shm/control/guest_bootstrap.py runtime/shm/control/vmweave-guest-broker.service runtime/shm/control/install_guest_broker.sh /opt/flyt/guest/
 # Link applications explicitly to this artifact or preload it into supported apps.
 # No native CUDA, ONC RPC, libtirpc, rpcbind or Manager binary is copied here.

@@ -30,7 +30,7 @@ API group은 `vmweave.io/v1alpha1`입니다. Kind는 `GPUProfile`, `GPURequest`,
 신규 Channel에는 새 helper/Worker/hook image digest를 입력합니다. 과거 실행의 UID·allocation·status를 복사하지 않습니다.
 
 ```sh
-python3 scripts/operator/create-channel.py --namespace team-a --vm gpu-vm \
+python3 scripts/operator/create-channel.py --lifecycle Allocation --namespace team-a --vm gpu-vm \
   --profile approved-gpu --pvc gpu-backing --name gpu-request \
   --compute 25 --memory 1024Mi \
   --helper-image YOUR_HELPER_DIGEST_REFERENCE --hook-image YOUR_HOOK_DIGEST_REFERENCE
@@ -39,6 +39,41 @@ kubectl -n team-a get sharedmemorychannels.vmweave.io gpu-request -o yaml
 
 생성 도구는 참조 UID를 조회하고 Request와 Channel을 생성합니다. Worker 이미지는 Profile에서 가져옵니다.
 Profile 승인·PVC 준비·VM 실행까지 대신하지 않습니다.
+
+## VM과 함께 유지되는 채널
+
+위의 `Allocation` 예제는 기존 단발 smoke용입니다. 일반 사용 VM은 Guest에
+새 `guest-artifacts`의 `install_guest_broker.sh`를 실행하고 다음 부팅부터
+`vmweave-guest-broker.service`를 사용합니다. 영구 root disk에 설치해야 재시작 후에도
+유지됩니다. `cloudInitNoCloud.userData`는 inline 형식이어야 합니다.
+
+```sh
+# VM 내부: artifacts 디렉터리에 새 라이브러리와 broker 설치 파일이 있어야 합니다.
+sudo sh artifacts/install_guest_broker.sh artifacts
+sudo usermod -aG vmweave ubuntu
+# 호스트: VM이 Halted이고 이전 allocation 회수가 완료된 상태에서 생성합니다.
+python3 scripts/operator/create-channel.py --lifecycle VM --namespace team-a --vm gpu-vm \
+  --profile approved-gpu --pvc gpu-backing --name gpu-vm \
+  --compute 25 --memory 1024Mi \
+  --helper-image YOUR_HELPER_DIGEST_REFERENCE --hook-image YOUR_HOOK_DIGEST_REFERENCE
+kubectl -n team-a patch vm gpu-vm --type=merge -p '{"spec":{"runStrategy":"Always"}}'
+kubectl -n team-a wait sharedmemorychannel/gpu-vm \
+  --for=jsonpath='{.status.phase}'=Ready --timeout=180s
+```
+
+Profile에는 `flyt-shm-session-worker`가 포함된 새 Worker digest를 지정합니다.
+VM 부팅 시 Operator가 현재 layout을 config drive로 전달하므로 수동 layout 복사가
+필요 없습니다. Guest에서 새 로그인 후 아래 환경으로 지원되는 CUDA 프로그램을 실행합니다.
+
+```sh
+FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/flyt/lib ./gpu-program
+```
+
+프로그램 종료와 SIGKILL은 해당 CUDA 세션만 정리합니다. 현재는 활성 프로그램 한 개를
+지원하며 동시 접근은 오류 46으로 거부합니다. VM을 `Halted`로 바꾸면 Worker와 backing을
+정리하고 Channel은 `Stopped`로 남습니다. 다시 `Always`로 바꾸면 같은 Channel 객체에
+새 allocation/Worker를 연결합니다. 아래 단발 smoke 실행기는 이 모드에 사용하지 않습니다.
+상세 계약과 장애 복구 범위는 [수명주기](../../runtime/shm/shm-contract/LIFECYCLE.md)를 참고합니다.
 
 ## 자동 GPU smoke
 

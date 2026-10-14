@@ -130,12 +130,24 @@
                   "drain": {
                     "type": "boolean",
                     "default": false
+                  },
+                  "lifecycle": {
+                    "type": "string",
+                    "enum": [
+                      "Allocation",
+                      "VM"
+                    ],
+                    "default": "Allocation"
                   }
                 },
                 "x-kubernetes-validations": [
                   {
                     "rule": "self.vmRef == oldSelf.vmRef && self.requestRef == oldSelf.requestRef && self.pvcRef == oldSelf.pvcRef && self.sessions == oldSelf.sessions && self.uid == oldSelf.uid && self.gid == oldSelf.gid && self.image == oldSelf.image && self.workerImage == oldSelf.workerImage && self.hookImage == oldSelf.hookImage",
                     "message": "allocation spec is immutable; create a new channel"
+                  },
+                  {
+                    "rule": "self.lifecycle == oldSelf.lifecycle",
+                    "message": "lifecycle is immutable"
                   }
                 ]
               },

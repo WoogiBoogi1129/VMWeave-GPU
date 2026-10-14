@@ -127,6 +127,11 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 	if S(c, "status", "phase") == "Released" && c.GetDeletionTimestamp() == nil {
 		return nil
 	}
+	if persistent(c) {
+		if done, err := a.PersistentPrelude(c); done || err != nil {
+			return err
+		}
+	}
 	protected, e := a.Observe(c)
 	if e != nil {
 		return e
@@ -157,7 +162,7 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 		if e != nil {
 			return e
 		}
-		if vmi != nil || S(vm, "spec", "runStrategy") != "Halted" {
+		if vmi != nil || (!persistent(c) && S(vm, "spec", "runStrategy") != "Halted") {
 			return invalid("VM must initially be Halted without VMI")
 		}
 		m, _ := memory(S(q, "spec", "memory"))
@@ -165,7 +170,15 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 		for i := int64(0); i < N(c, "spec", "sessions"); i++ {
 			sessions = append(sessions, randomID())
 		}
-		return a.Status(c, Map{"phase": "Reserved", "allocation": randomID(), "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": allocationPrefix(c)})
+		aid := randomID()
+		prefix := allocationPrefix(c)
+		if persistent(c) {
+			if len(prefix) > 44 {
+				prefix = prefix[:44]
+			}
+			prefix += "-" + aid[:8]
+		}
+		return a.Status(c, Map{"phase": "Reserved", "allocation": aid, "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": prefix})
 	}
 	if N(c, "status", "requestGeneration") != q.GetGeneration() || N(c, "status", "profileGeneration") != p.GetGeneration() {
 		return invalid("frozen request/profile changed")
@@ -188,13 +201,18 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 	if e = a.checkPV(pvc, S(c, "status", "nodeName")); e != nil {
 		return e
 	}
-	if S(vm, "spec", "template", "metadata", "annotations", Group+"/shm-channel") == "" {
+	if S(vm, "spec", "template", "metadata", "annotations", Group+"/shm-channel") == "" || (persistent(c) && S(vm, "spec", "template", "metadata", "annotations", Group+"/shm-channel-uid") == string(c.GetUID()) && S(vm, "spec", "template", "metadata", "annotations", Group+"/shm-generation") != S(c, "status", "generation")) {
 		// Never take over an old API allocation implicitly.
 		if S(vm, "spec", "template", "metadata", "annotations", "flyt.dev/shm-channel") != "" {
 			return invalid("legacy VM binding must be migrated while halted")
 		}
 		for k, v := range map[string]string{"shm-channel": c.GetName(), "shm-channel-uid": string(c.GetUID()), "shm-allocation": S(c, "status", "allocation"), "shm-generation": S(c, "status", "generation")} {
 			Set(vm, v, "spec", "template", "metadata", "annotations", Group+"/"+k)
+		}
+		if persistent(c) {
+			if err := installBootLayout(vm, c); err != nil {
+				return err
+			}
 		}
 		hook, _ := json.Marshal(Hook(c))
 		Set(vm, string(hook), "spec", "template", "metadata", "annotations", "hooks.kubevirt.io/hookSidecars")
@@ -211,6 +229,23 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 	if vmi == nil {
 		if S(c, "status", "vmiUID") != "" {
 			return a.Status(c, Map{"phase": "Draining", "reason": "VMIEnded"})
+		}
+		if persistent(c) && S(vm, "spec", "runStrategy") != "Halted" {
+			w, err := a.Worker(c, p, opts)
+			if err != nil {
+				return err
+			}
+			if w == nil {
+				return invalid("worker unavailable before start")
+			}
+			att := Child("attachments", c.GetName()+"-worker", c)
+			Set(att, Map{"channelRef": Ref(c), "generation": S(c, "status", "generation"), "role": "worker", "holderUID": string(w.GetUID()), "nodeName": S(c, "status", "nodeName")}, "spec")
+			if _, err = a.Ensure(att, c); err != nil {
+				return err
+			}
+			if !podReady(w) {
+				return a.Status(c, Map{"phase": "Preparing", "reason": "WorkerStarting", "workerPodUID": string(w.GetUID())})
+			}
 		}
 		return a.Status(c, Map{"phase": "BackingReady", "reason": "ManualVMStartAllowed"})
 	}
@@ -240,6 +275,9 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 		return e
 	}
 	if w == nil {
+		if persistent(c) {
+			return a.Status(c, Map{"phase": "Unavailable", "reason": "WorkerEnded"})
+		}
 		return a.Status(c, Map{"phase": "Draining", "reason": "WorkerEnded"})
 	}
 	for role, uid := range map[string]string{"guest": string(vmi.GetUID()), "worker": string(w.GetUID())} {
@@ -250,6 +288,9 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 		}
 	}
 	if Has([]string{"Succeeded", "Failed"}, S(w, "status", "phase")) || w.GetDeletionTimestamp() != nil {
+		if persistent(c) {
+			return a.Status(c, Map{"phase": "Unavailable", "reason": "WorkerEnded", "workerPodUID": string(w.GetUID())})
+		}
 		return a.Status(c, Map{"phase": "Draining", "reason": "WorkerEnded", "workerPodUID": string(w.GetUID())})
 	}
 	ready := false

@@ -1,0 +1,45 @@
+{
+  "boot1": {
+    "channel_uid": "ac22a4d9-c984-44a6-8c5a-394b5522f4c7",
+    "phase": "Ready",
+    "allocation": "3e0c5990f9a5a052b76ed0bf61930acb",
+    "generation": "1de6310ae8d58b6e7ef53464a1801a78",
+    "workerPodUID": "2b97293c-a7da-4d08-9660-19b681fe3ea0",
+    "vmiUID": "0d6082f4-6687-449d-87ae-6eb197fd1fc9"
+  },
+  "boot2": {
+    "channel_uid": "ac22a4d9-c984-44a6-8c5a-394b5522f4c7",
+    "phase": "Ready",
+    "allocation": "c15d866001404ccfc3d9d7e562265cb5",
+    "generation": "3da0e5da770a332d0d2b793176369c71",
+    "workerPodUID": "4597275a-1a78-4c7e-9709-28818694317d",
+    "vmiUID": "df98db3c-7cd9-41a1-be73-f9c10e2a3c3e"
+  },
+  "stopped": {
+    "channel_uid": "ac22a4d9-c984-44a6-8c5a-394b5522f4c7",
+    "phase": "Stopped",
+    "allocation": "",
+    "workerPodUID": "",
+    "old_backing_absent": true
+  },
+  "scope": {
+    "namespace": "vmweave-test-a",
+    "vm": "vmweave-k8s-01",
+    "node": "gpu-4",
+    "guest_kubernetes": "1.35.9",
+    "guest_uid": 1000,
+    "guest_gpu_group": 998,
+    "memory_mib": 2048,
+    "compute": 50,
+    "active_processes": 1,
+    "pod_privileged": false,
+    "pod_gpu_path": "Unix socket to VM broker; no physical GPU device plugin"
+  },
+  "limitations": [
+    "Supported proxy API subset only",
+    "One application process per VM",
+    "Broker/transport failure requires VM stop/start",
+    "No performance or recovery-time SLA claim",
+    "Existing full isolation campaign was not rerun"
+  ]
+}

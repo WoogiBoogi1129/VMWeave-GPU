@@ -42,6 +42,9 @@ func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 		Set(w, r, "spec", "runtimeClassName")
 	}
 	env := []interface{}{}
+	if persistent(c) {
+		env = append(env, Map{"name": "VMWEAVE_PERSISTENT", "value": "1"})
+	}
 	for k, v := range map[string]interface{}{"FLYT_ALLOCATION": S(c, "status", "allocation"), "FLYT_GPU_UUID": S(c, "status", "gpuUUID"), "FLYT_RESOURCE_BACKEND": "hami", "FLYT_MEMORY_BYTES": N(c, "status", "memoryMiB") * 1048576, "FLYT_SESSIONS": N(c, "spec", "sessions"), "FLYT_CHANNEL_NAME": c.GetName(), "FLYT_CHANNEL_UID": string(c.GetUID()), "FLYT_GENERATION": S(c, "status", "generation"), "FLYT_NAMESPACE": a.Namespace, "VMWEAVE_API_GROUP": Group} {
 		env = append(env, Map{"name": k, "value": fmt.Sprint(v)})
 	}
@@ -59,13 +62,20 @@ func (a API) Drain(c *Obj, opts Options) error {
 	if e != nil {
 		return e
 	}
-	if vm != nil && string(vm.GetUID()) == S(c, "spec", "vmRef", "uid") && S(vm, "spec", "runStrategy") != "Halted" {
+	if vm != nil && string(vm.GetUID()) == S(c, "spec", "vmRef", "uid") && S(vm, "spec", "runStrategy") != "Halted" && (!persistent(c) || c.GetDeletionTimestamp() != nil || B(c, "spec", "drain")) {
 		spec := Get(vm, "spec").(map[string]interface{})
 		delete(spec, "running")
 		spec["runStrategy"] = "Halted"
 		if e = a.Update(vm); e != nil {
 			return e
 		}
+	}
+	if persistent(c) && S(c, "status", "allocation") == "" {
+		if c.GetDeletionTimestamp() != nil {
+			c.SetFinalizers(Remove(c.GetFinalizers(), Finalizer))
+			return a.Update(c)
+		}
+		return a.Status(c, Map{"phase": "Released", "reason": "NoAllocation"})
 	}
 	w, e := a.Get("pods", ResourceName(c, "worker"))
 	if e != nil {
@@ -77,7 +87,22 @@ func (a API) Drain(c *Obj, opts Options) error {
 		}
 	}
 	complete := B(c, "status", "everBound")
+	if persistent(c) && !complete && S(c, "status", "vmiUID") == "" {
+		vmi, err := a.Get("vmis", S(c, "spec", "vmRef", "name"))
+		if err != nil {
+			return err
+		}
+		if vmi == nil {
+			complete = true
+		}
+	}
 	for _, role := range []string{"guest", "worker"} {
+		if persistent(c) && !B(c, "status", "everBound") && role == "guest" {
+			continue
+		}
+		if persistent(c) && !B(c, "status", "everBound") && role == "worker" && w == nil && S(c, "status", "workerPodUID") == "" {
+			continue
+		}
 		att, e := a.Get("attachments", c.GetName()+"-"+role)
 		if e != nil {
 			return e
@@ -88,6 +113,15 @@ func (a API) Drain(c *Obj, opts Options) error {
 	}
 	if !complete {
 		return a.Status(c, Map{"phase": "Draining", "reason": "AwaitingDetachEvidence"})
+	}
+	if persistent(c) {
+		prep, err := a.Get("pods", ResourceName(c, "prepare"))
+		if err != nil {
+			return err
+		}
+		if prep != nil && !Has([]string{"Succeeded", "Failed"}, S(prep, "status", "phase")) {
+			return a.Status(c, Map{"phase": "Draining", "reason": "AwaitingProvisionExit"})
+		}
 	}
 	cleanup, e := a.Get("pods", ResourceName(c, "reclaim"))
 	if e != nil {
@@ -110,6 +144,9 @@ func (a API) Drain(c *Obj, opts Options) error {
 	}
 	if S(cleanup, "status", "phase") != "Succeeded" {
 		return a.Status(c, Map{"phase": "Draining", "reason": "ReclamationPending"})
+	}
+	if persistent(c) && c.GetDeletionTimestamp() == nil && !B(c, "spec", "drain") {
+		return a.Status(c, Map{"phase": "Reclaimed", "reason": "BackingReclaimed"})
 	}
 	if e = a.Status(c, Map{"phase": "Released", "reason": "DetachAndReclamationConfirmed"}); e != nil {
 		return e

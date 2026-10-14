@@ -80,7 +80,10 @@ static void *io_main(void *unused){
     }
     pthread_cond_broadcast(&io_cond);pthread_mutex_unlock(&io_lock);flyt_shm_close(c);flyt_unmap(&m);return NULL;
 }
+extern int flyt_broker_exchange(uint32_t,const void*,size_t,void*,size_t,size_t*);
+extern void flyt_broker_close(void);
 int flyt_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received){
+    if(getenv("FLYT_BROKER_SOCKET")){size_t ignored;return flyt_broker_exchange(api,input,bytes,output,capacity,received?received:&ignored);}
     if(owner_pid&&owner_pid!=getpid())return 999;
     uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
     pthread_mutex_lock(&io_lock);
@@ -97,6 +100,7 @@ int flyt_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output
     return result;
 }
 __attribute__((destructor)) static void shutdown_guest(void){
+    if(getenv("FLYT_BROKER_SOCKET")){flyt_broker_close();return;}
     if(!started||owner_pid!=getpid()||pthread_mutex_trylock(&flyt_guest_lock))return;
     size_t ignored;if(!broken)flyt_guest_exchange(FLYT_GOODBYE,NULL,0,NULL,0,&ignored);
     free(copy_buffer);copy_buffer=NULL;copy_capacity=0;

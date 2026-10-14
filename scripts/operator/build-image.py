@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Build deterministic OCI operator/helper images without Docker or registry writes."""
 import argparse,gzip,hashlib,io,json,pathlib,tarfile
-p=argparse.ArgumentParser();p.add_argument('--kind',choices=['operator','helper','worker','hook'],required=True);p.add_argument('--base',type=pathlib.Path);p.add_argument('--binary',type=pathlib.Path,default=pathlib.Path('.local/vmweave-operator/manager'));p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--name',required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--kind',choices=['operator','helper','worker','hook','guest'],required=True);p.add_argument('--base',type=pathlib.Path);p.add_argument('--binary',type=pathlib.Path,default=pathlib.Path('.local/vmweave-operator/manager'));p.add_argument('--runtime-dir',type=pathlib.Path);p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--name',required=True);a=p.parse_args()
+if a.kind=='guest' and not a.runtime_dir:p.error('guest requires --runtime-dir')
 root=pathlib.Path(__file__).resolve().parents[2]
 def digest(data):return 'sha256:'+hashlib.sha256(data).hexdigest()
 def pack(v):return json.dumps(v,separators=(',',':'),sort_keys=True).encode()
 def info(path,data):
  t=tarfile.TarInfo(path);t.size=len(data);t.mode=0o644;return t
 base=tarfile.open(a.base) if a.base else None
-if a.kind!='operator' and not base:p.error('helper/worker/hook requires --base OCI archive')
+if a.kind not in ['operator','guest'] and not base:p.error('helper/worker/hook requires --base OCI archive')
 if base:
  idx=json.load(base.extractfile('index.json'));d=idx['manifests'][0]['digest'];manifest=json.load(base.extractfile('blobs/sha256/'+d.split(':')[1]));cfg=json.load(base.extractfile('blobs/sha256/'+manifest['config']['digest'].split(':')[1]))
 else:manifest={'schemaVersion':2,'mediaType':'application/vnd.oci.image.manifest.v1+json','layers':[]};cfg={'architecture':'amd64','os':'linux','config':{},'rootfs':{'type':'layers','diff_ids':[]}}
@@ -16,14 +17,20 @@ buf=io.BytesIO()
 with tarfile.open(fileobj=buf,mode='w') as t:
  files=[]
  if a.kind=='operator':files=[('manager',a.binary,0o755),('etc/ssl/certs/ca-certificates.crt',pathlib.Path('/etc/ssl/certs/ca-certificates.crt'),0o644)]
+ elif a.kind=='guest':
+  files=[('opt/flyt/guest/libflyt_guest.so',a.runtime_dir/'lib/libflyt_guest.so',0o644)]
+  files += [('opt/flyt/guest/'+name,root/'runtime/shm/control'/name,0o644) for name in ['guest_broker.py','guest_bootstrap.py','vmweave-guest-broker.service','install_guest_broker.sh']]
  else:
   files=[('opt/flyt/control/'+f.name,f,0o644) for f in (root/'runtime/shm/control').glob('*.py')]
   if a.kind=='hook':files.append(('usr/bin/onDefineDomain',root/'runtime/shm/control/domain_hook.py',0o755))
+ if a.kind=='worker' and a.runtime_dir:
+  files += [('opt/flyt/bin/'+name,a.runtime_dir/'bin'/name,0o755) for name in ['flyt-shm-worker','flyt-shm-session-worker']]
  for name,f,mode in files:
   data=f.read_bytes();x=info(name,data);x.mode=mode;t.addfile(x,io.BytesIO(data))
 layer=buf.getvalue();gz=gzip.compress(layer,mtime=0);ld=digest(gz);cfg['rootfs']['diff_ids'].append(digest(layer));manifest['layers'].append({'mediaType':'application/vnd.oci.image.layer.v1.tar+gzip','size':len(gz),'digest':ld})
 cfg['config'].setdefault('Labels',{}).update({'org.opencontainers.image.title':'VMWeave '+a.kind,'vmweave.io/api-group':'vmweave.io','vmweave.io/helper-contract':'1'})
 if a.kind=='operator':cfg['config'].update(Entrypoint=['/manager'],Cmd=[],User='65532:65532')
+cfg.pop('history',None)  # Overlay layers have no inherited build-history entries.
 cb=pack(cfg);cd=digest(cb);manifest['config']={'mediaType':'application/vnd.oci.image.config.v1+json','size':len(cb),'digest':cd};mb=pack(manifest);md=digest(mb)
 idx={'schemaVersion':2,'manifests':[{'mediaType':'application/vnd.oci.image.manifest.v1+json','size':len(mb),'digest':md,'annotations':{'org.opencontainers.image.ref.name':a.name}}]}
 a.output.parent.mkdir(parents=True,exist_ok=True)

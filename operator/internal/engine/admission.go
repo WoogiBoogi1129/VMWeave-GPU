@@ -19,6 +19,23 @@ func (a API) Validate(r admissionv1.AdmissionRequest, controllerNS, controllerSA
 	}
 	switch r.Kind.Kind {
 	case "SharedMemoryChannel":
+		if persistent(o) {
+			if N(o, "spec", "sessions") != 1 {
+				return invalid("VM lifecycle currently requires one broker slot")
+			}
+			if o.GetName() != S(o, "spec", "vmRef", "name") {
+				return invalid("durable channel name must equal VM name")
+			}
+			cs, e := a.List("channels")
+			if e != nil {
+				return e
+			}
+			for _, c := range cs {
+				if c.GetName() != o.GetName() && persistent(&c) && Equal(Get(&c, "spec", "vmRef"), Get(o, "spec", "vmRef")) {
+					return invalid("one durable channel per VM required")
+				}
+			}
+		}
 		q, e := a.Get("requests", S(o, "spec", "requestRef", "name"))
 		if e != nil {
 			return e
@@ -134,6 +151,15 @@ func (a API) Validate(r admissionv1.AdmissionRequest, controllerNS, controllerSA
 		}
 		if c == nil || c.GetDeletionTimestamp() != nil || B(c, "spec", "drain") || S(c, "status", "phase") != "BackingReady" || S(c, "status", "vmiUID") != "" {
 			return invalid("channel unavailable")
+		}
+		if persistent(c) {
+			w, e := a.Get("pods", ResourceName(c, "worker"))
+			if e != nil {
+				return e
+			}
+			if w == nil || !Owned(w, c) || !podReady(w) {
+				return invalid("Worker not ready for VM start")
+			}
 		}
 		for k, v := range map[string]string{"shm-channel-uid": string(c.GetUID()), "shm-allocation": S(c, "status", "allocation"), "shm-generation": S(c, "status", "generation")} {
 			if o.GetAnnotations()[Group+"/"+k] != v {

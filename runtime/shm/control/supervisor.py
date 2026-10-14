@@ -24,7 +24,7 @@ def main():
             for suffix in ('mapped','guest'):
                 p=Path(f'/tmp/flyt-slot-{slot}-{suffix}')
                 if p.exists():raise RuntimeError('stale session markers')
-            processes.append(subprocess.Popen(['/opt/flyt/bin/flyt-shm-worker','/flyt-channel/'+aid,str(slot)],start_new_session=True))
+            processes.append(subprocess.Popen([('/opt/flyt/bin/flyt-shm-session-worker' if os.environ.get('VMWEAVE_PERSISTENT')=='1' else '/opt/flyt/bin/flyt-shm-worker'),'/flyt-channel/'+aid,str(slot)],start_new_session=True))
         while not stopping:
             live=[p.poll() is None for p in processes]
             if not any(live):break

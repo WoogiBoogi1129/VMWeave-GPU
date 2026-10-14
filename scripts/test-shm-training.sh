@@ -8,7 +8,7 @@ cd "$repo"
 includes=(-Iruntime/shm/include -Iruntime/shm/cuda-dispatch/include
   -Iruntime/shm/shm-queue/include -Iruntime/shm/shm-contract/include
   -I"$cuda_root/include")
-cc -O2 "${includes[@]}" tests/integration/guest_pointer_refs.c \
+cc -O2 "${includes[@]}" tests/integration/guest_pointer_refs.c runtime/shm/src/broker_client.c \
   "$build/libflyt_mapping.a" "$build/queue/libflyt_shm_queue.a" \
   -lpthread -o "$build/guest-pointer-refs-test"
 "$build/guest-pointer-refs-test"
