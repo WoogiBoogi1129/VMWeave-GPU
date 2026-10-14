@@ -1,0 +1,49 @@
+{
+  "vm_uid": "7c130b93-4bca-4264-827d-1c6e7a02a121",
+  "domain": {
+    "cpu": {
+      "cores": 8
+    },
+    "devices": {
+      "disks": [
+        {
+          "disk": {
+            "bus": "virtio"
+          },
+          "name": "root"
+        },
+        {
+          "disk": {
+            "bus": "virtio"
+          },
+          "name": "cloudinit"
+        }
+      ],
+      "interfaces": [
+        {
+          "macAddress": "02:00:00:14:10:01",
+          "masquerade": {},
+          "name": "default"
+        }
+      ]
+    },
+    "firmware": {
+      "serial": "1e8bcaff-d4f3-4c21-9822-d5f5fab37755",
+      "uuid": "2c36b884-5fbf-44f2-8152-8a6e96de6883"
+    },
+    "machine": {
+      "type": "q35"
+    },
+    "resources": {
+      "requests": {
+        "cpu": "8",
+        "memory": "16Gi"
+      }
+    }
+  },
+  "run_strategy": "Always",
+  "operator_images": {
+    "vmweave-controller": "localhost/vmweave-operator@sha256:032c382c0b7af7bc75322240cea2db9b5f8db4b27f9763dadc8ea37c2fe067cf",
+    "vmweave-webhook": "localhost/vmweave-operator@sha256:032c382c0b7af7bc75322240cea2db9b5f8db4b27f9763dadc8ea37c2fe067cf"
+  }
+}

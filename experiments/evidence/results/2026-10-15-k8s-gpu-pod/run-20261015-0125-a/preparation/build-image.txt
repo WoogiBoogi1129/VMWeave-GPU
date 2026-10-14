@@ -1,0 +1,19 @@
+STEP 1/6: FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f
+STEP 2/6: COPY gpu-pod-check /opt/flyt/bin/gpu-pod-check
+--> Using cache 124997866ac6b2acf290c1a0b66fa2c6daef67ed1cfd2cf3507aac123b1a2b4f
+--> 124997866ac6
+STEP 3/6: COPY libflyt_guest.so /opt/flyt/lib/libflyt_guest.so
+--> Using cache e9b58a012ca1463d05a1c2a4ca0924ceda514f9adc3a036f52aebee5aba8efb7
+--> e9b58a012ca1
+STEP 4/6: ENV FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/flyt/lib
+--> Using cache 35dc35e0c65054f0f90352259f459c953a90da53fc74aac504ed195c2a9e5664
+--> 35dc35e0c650
+STEP 5/6: USER 1000:998
+--> Using cache 1e63bd66224f3994414d5631de644d3794c18cd65a8411d482eccb4e54dbc839
+--> 1e63bd66224f
+STEP 6/6: ENTRYPOINT ["/opt/flyt/bin/gpu-pod-check"]
+--> Using cache e18732df9e08812ace960d6672a37f65f8a9deb423bb1b30fe816be025ef2cbb
+COMMIT localhost/vmweave-gpu-pod-check:20261015
+--> e18732df9e08
+Successfully tagged localhost/vmweave-gpu-pod-check:20261015
+e18732df9e08812ace960d6672a37f65f8a9deb423bb1b30fe816be025ef2cbb

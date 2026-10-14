@@ -1,0 +1,139 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-14T16:21:00Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vmweave-gpu-pod-check",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47502",
+        "uid": "0315ba68-6a3d-417f-a5b2-a427b8dd786b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-14T16:21:00Z",
+      "message": "Successfully assigned vmweave-gpu-validation/vmweave-gpu-pod-check to vmweave-k8s-01",
+      "metadata": {
+        "creationTimestamp": "2026-10-14T16:21:00Z",
+        "name": "vmweave-gpu-pod-check.18de71d4cac742de",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47504",
+        "uid": "b8c69952-99ff-4229-9505-ce508a1d8325"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-14T16:21:01Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{gpu}",
+        "kind": "Pod",
+        "name": "vmweave-gpu-pod-check",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47503",
+        "uid": "0315ba68-6a3d-417f-a5b2-a427b8dd786b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-14T16:21:01Z",
+      "message": "Container image \"localhost/vmweave-gpu-pod-check@sha256:87a0e6e0a0cceda9b43a685dd1e04f8fe604bc83e88e6851ac25eba14b5e91c1\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-14T16:21:01Z",
+        "name": "vmweave-gpu-pod-check.18de71d4f329d478",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47508",
+        "uid": "a02eb04b-98db-47d3-8e93-6ebf62862e11"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "vmweave-k8s-01",
+      "source": {
+        "component": "kubelet",
+        "host": "vmweave-k8s-01"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-14T16:21:01Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{gpu}",
+        "kind": "Pod",
+        "name": "vmweave-gpu-pod-check",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47503",
+        "uid": "0315ba68-6a3d-417f-a5b2-a427b8dd786b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-14T16:21:01Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-14T16:21:01Z",
+        "name": "vmweave-gpu-pod-check.18de71d4f6ebbd4e",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47509",
+        "uid": "fd139768-704a-44b7-aa60-4c98530ee511"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "vmweave-k8s-01",
+      "source": {
+        "component": "kubelet",
+        "host": "vmweave-k8s-01"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-14T16:21:01Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{gpu}",
+        "kind": "Pod",
+        "name": "vmweave-gpu-pod-check",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47503",
+        "uid": "0315ba68-6a3d-417f-a5b2-a427b8dd786b"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-14T16:21:01Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-14T16:21:01Z",
+        "name": "vmweave-gpu-pod-check.18de71d4f81b5098",
+        "namespace": "vmweave-gpu-validation",
+        "resourceVersion": "47510",
+        "uid": "7a615751-11e0-4a2f-bf0a-85a133cf4488"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "vmweave-k8s-01",
+      "source": {
+        "component": "kubelet",
+        "host": "vmweave-k8s-01"
+      },
+      "type": "Normal"
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

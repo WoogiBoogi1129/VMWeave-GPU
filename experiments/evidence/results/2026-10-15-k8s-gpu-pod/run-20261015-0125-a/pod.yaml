@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "vmweave-gpu-pod-check",
+    "namespace": "vmweave-gpu-validation",
+    "labels": {
+      "experiment": "vmweave-gpu-pod-check",
+      "run-id": "run-20261015-0125-a"
+    }
+  },
+  "spec": {
+    "restartPolicy": "Never",
+    "activeDeadlineSeconds": 300,
+    "automountServiceAccountToken": false,
+    "securityContext": {
+      "runAsUser": 1000,
+      "runAsGroup": 998,
+      "runAsNonRoot": true,
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "containers": [
+      {
+        "name": "gpu",
+        "image": "localhost/vmweave-gpu-pod-check@sha256:87a0e6e0a0cceda9b43a685dd1e04f8fe604bc83e88e6851ac25eba14b5e91c1",
+        "imagePullPolicy": "Never",
+        "env": [
+          {
+            "name": "FLYT_BROKER_SOCKET",
+            "value": "/run/vmweave/gpu.sock"
+          },
+          {
+            "name": "LD_LIBRARY_PATH",
+            "value": "/opt/flyt/lib"
+          }
+        ],
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "64Mi"
+          },
+          "limits": {
+            "cpu": "1",
+            "memory": "256Mi"
+          }
+        },
+        "volumeMounts": [
+          {
+            "name": "broker",
+            "mountPath": "/run/vmweave",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "broker",
+        "hostPath": {
+          "path": "/run/vmweave",
+          "type": "Directory"
+        }
+      }
+    ]
+  }
+}

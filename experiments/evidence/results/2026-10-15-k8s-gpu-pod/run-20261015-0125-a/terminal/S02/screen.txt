@@ -1,0 +1,50 @@
+evidence$ /usr/bin/python3 /home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/k8s-gpu-pod/run.py view /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/k8s-gpu-pod-20261015/run-20261015-0125-a
+S02
+RUN: run-20261015-0125-a  STAGE: S02
+CAPTURE TIME: 2026-10-15T01:20:59.783320+09:00
+HOST namespace: vmweave-test-a  VM: vmweave-k8s-01  GUEST namespace: vmweave-gpu-validation  POD: vmweave-gpu-pod-check
+Actual submitted Pod configuration:
+{
+  "image": "localhost/vmweave-gpu-pod-check@sha256:87a0e6e0a0cceda9b43a685dd1e04f8fe604bc83e88e6851ac25eba14b5e91c1",
+  "securityContext": {
+    "runAsUser": 1000,
+    "runAsGroup": 998,
+    "runAsNonRoot": true,
+    "seccompProfile": {
+      "type": "RuntimeDefault"
+    }
+  },
+  "containerSecurity": {
+    "allowPrivilegeEscalation": false,
+    "capabilities": {
+      "drop": [
+        "ALL"
+      ]
+    }
+  },
+  "volumes": [
+    {
+      "name": "broker",
+      "hostPath": {
+        "path": "/run/vmweave",
+        "type": "Directory"
+      }
+    }
+  ],
+  "environment": [
+    {
+      "name": "FLYT_BROKER_SOCKET",
+      "value": "/run/vmweave/gpu.sock"
+    },
+    {
+      "name": "LD_LIBRARY_PATH",
+      "value": "/opt/flyt/lib"
+    }
+  ]
+}
+[Guest] $ sudo kubectl create -f -
+pod/vmweave-gpu-pod-check created
+[Guest] $ sudo kubectl get pod vmweave-gpu-pod-check -n vmweave-gpu-validation -o wide
+NAME                    READY   STATUS              RESTARTS   AGE   IP       NODE             NOMINATED NODE   READINESS GATES
+vmweave-gpu-pod-check   0/1     ContainerCreating   0          1s    <none>   vmweave-k8s-01   <none>           <none>
+evidence$

@@ -1,0 +1,50 @@
+evidence$ /usr/bin/python3 /home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/k8s-gpu-pod/run.py view /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/k8s-gpu-pod-20261015/run-20261015-0125-a
+S01
+RUN: run-20261015-0125-a  STAGE: S01
+CAPTURE TIME: 2026-10-15T01:20:55.908487+09:00
+HOST namespace: vmweave-test-a  VM: vmweave-k8s-01  GUEST namespace: vmweave-gpu-validation  POD: vmweave-gpu-pod-check
+[Host] $ kubectl get vm vmweave-k8s-01 -n vmweave-test-a
+NAME             AGE     STATUS    READY
+vmweave-k8s-01   7h23m   Running   True
+[Host] $ kubectl get sharedmemorychannel vmweave-k8s-01 -n vmweave-test-a
+NAME             PHASE   AGE
+vmweave-k8s-01   Ready   77m
+[Host] $ kubectl get pod vmweave-k8s-01-ac22a4d9c984-c15d8660-worker -n vmweave-test-a
+NAME                                          READY   STATUS    RESTARTS   AGE
+vmweave-k8s-01-ac22a4d9c984-c15d8660-worker   1/1     Running   0          72m
+[Guest] $ sudo kubectl get nodes
+NAME             STATUS   ROLES           AGE     VERSION
+vmweave-k8s-01   Ready    control-plane   7h11m   v1.35.9
+[Guest] $ systemctl is-active vmweave-guest-broker
+active
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

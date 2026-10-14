@@ -1,0 +1,266 @@
+{
+  "collected_at": "2026-10-14T16:28:43.319977+00:00",
+  "vm": {
+    "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121",
+    "ready": true,
+    "runStrategy": "Always"
+  },
+  "channel": {
+    "uid": "ac22a4d9-c984-44a6-8c5a-394b5522f4c7",
+    "phase": "Ready"
+  },
+  "nodes": {
+    "apiVersion": "v1",
+    "items": [
+      {
+        "apiVersion": "v1",
+        "kind": "Node",
+        "metadata": {
+          "annotations": {
+            "node.alpha.kubernetes.io/ttl": "0",
+            "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+          },
+          "creationTimestamp": "2026-10-14T09:09:10Z",
+          "labels": {
+            "beta.kubernetes.io/arch": "amd64",
+            "beta.kubernetes.io/os": "linux",
+            "kubernetes.io/arch": "amd64",
+            "kubernetes.io/hostname": "vmweave-k8s-01",
+            "kubernetes.io/os": "linux",
+            "node-role.kubernetes.io/control-plane": "",
+            "node.kubernetes.io/exclude-from-external-load-balancers": ""
+          },
+          "name": "vmweave-k8s-01",
+          "resourceVersion": "48208",
+          "uid": "da27a929-8b85-4936-a4f7-4b752ba91870"
+        },
+        "spec": {
+          "podCIDR": "10.244.0.0/24",
+          "podCIDRs": [
+            "10.244.0.0/24"
+          ]
+        },
+        "status": {
+          "addresses": [
+            {
+              "address": "10.0.2.2",
+              "type": "InternalIP"
+            },
+            {
+              "address": "vmweave-k8s-01",
+              "type": "Hostname"
+            }
+          ],
+          "allocatable": {
+            "cpu": "8",
+            "ephemeral-storage": "93478772582",
+            "hugepages-1Gi": "0",
+            "hugepages-2Mi": "0",
+            "memory": "16268624Ki",
+            "pods": "110"
+          },
+          "capacity": {
+            "cpu": "8",
+            "ephemeral-storage": "101430960Ki",
+            "hugepages-1Gi": "0",
+            "hugepages-2Mi": "0",
+            "memory": "16371024Ki",
+            "pods": "110"
+          },
+          "conditions": [
+            {
+              "lastHeartbeatTime": "2026-10-14T09:13:35Z",
+              "lastTransitionTime": "2026-10-14T09:13:35Z",
+              "message": "Cilium is running on this node",
+              "reason": "CiliumIsUp",
+              "status": "False",
+              "type": "NetworkUnavailable"
+            },
+            {
+              "lastHeartbeatTime": "2026-10-14T16:27:20Z",
+              "lastTransitionTime": "2026-10-14T09:09:08Z",
+              "message": "kubelet has sufficient memory available",
+              "reason": "KubeletHasSufficientMemory",
+              "status": "False",
+              "type": "MemoryPressure"
+            },
+            {
+              "lastHeartbeatTime": "2026-10-14T16:27:20Z",
+              "lastTransitionTime": "2026-10-14T09:09:08Z",
+              "message": "kubelet has no disk pressure",
+              "reason": "KubeletHasNoDiskPressure",
+              "status": "False",
+              "type": "DiskPressure"
+            },
+            {
+              "lastHeartbeatTime": "2026-10-14T16:27:20Z",
+              "lastTransitionTime": "2026-10-14T09:09:08Z",
+              "message": "kubelet has sufficient PID available",
+              "reason": "KubeletHasSufficientPID",
+              "status": "False",
+              "type": "PIDPressure"
+            },
+            {
+              "lastHeartbeatTime": "2026-10-14T16:27:20Z",
+              "lastTransitionTime": "2026-10-14T09:13:39Z",
+              "message": "kubelet is posting ready status",
+              "reason": "KubeletReady",
+              "status": "True",
+              "type": "Ready"
+            }
+          ],
+          "daemonEndpoints": {
+            "kubeletEndpoint": {
+              "Port": 10250
+            }
+          },
+          "features": {
+            "supplementalGroupsPolicy": true
+          },
+          "images": [
+            {
+              "names": [
+                "quay.io/cilium/cilium@sha256:2939231d0d3e3ebddcd80fffa168b7ddcc78fdf0dc864d1c8c126ff523c54f01",
+                "quay.io/cilium/cilium@sha256:9d308e3f7f05972b0b0604c40d2b0f08fa2f6a55084fef1e1aaadb469e430639"
+              ],
+              "sizeBytes": 731989591
+            },
+            {
+              "names": [
+                "quay.io/cilium/cilium-envoy@sha256:33b00117d392f24ee5161f66242d12f58ceb62bf80a2bdd66eaf505d77933cb0",
+                "quay.io/cilium/cilium-envoy@sha256:af7382699576b9e65e9184efa52eeca0b58aea70ad6e511bf260c91d9f740463"
+              ],
+              "sizeBytes": 203243690
+            },
+            {
+              "names": [
+                "quay.io/cilium/operator-generic@sha256:5bb0f9d871dd7b80461f8e3056896daa51e7d9b70ffe51c3e2126b4c35c02b5e",
+                "quay.io/cilium/operator-generic@sha256:64d8798350e8569b8e7622563fed6e44dce2625f311e4651b774816516c744fc"
+              ],
+              "sizeBytes": 128174906
+            },
+            {
+              "names": [
+                "registry.k8s.io/kube-apiserver@sha256:32abf8e4e2ae679b35c719a04902c2ae1a98a5b8648ac034a4672e39660f8a73",
+                "registry.k8s.io/kube-apiserver@sha256:d331d5b4dfaa6f7076e8d40a77f0721020aaae918cdcd0928e477a5c8a24990d",
+                "registry.k8s.io/kube-apiserver:v1.35.9"
+              ],
+              "sizeBytes": 92311150
+            },
+            {
+              "names": [
+                "localhost/vmweave-gpu-pod-check@sha256:87a0e6e0a0cceda9b43a685dd1e04f8fe604bc83e88e6851ac25eba14b5e91c1",
+                "localhost/vmweave-gpu-pod-check:20261015"
+              ],
+              "sizeBytes": 80759511
+            },
+            {
+              "names": [
+                "docker.io/library/ubuntu@sha256:0199853f6d6b20b0424f3c5694a72a62764f01e6a771b1eb48a4197848986c7e",
+                "docker.io/library/ubuntu@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f"
+              ],
+              "sizeBytes": 80634739
+            },
+            {
+              "names": [
+                "registry.k8s.io/coredns/coredns@sha256:246e7333fde10251c693b68f13d21d6d64c7dbad866bbfa11bd49315e3f725a7",
+                "registry.k8s.io/coredns/coredns@sha256:9b9128672209474da07c91439bf15ed704ae05ad918dd6454e5b6ae14e35fee6",
+                "registry.k8s.io/coredns/coredns:v1.13.1"
+              ],
+              "sizeBytes": 79193994
+            },
+            {
+              "names": [
+                "registry.k8s.io/kube-controller-manager@sha256:d7e4983f79ee763f7c56226395ab9c55261ff6035df5ed23eef9bd26b63eb140",
+                "registry.k8s.io/kube-controller-manager@sha256:e2fe2b4a2d6986800a61c95741ff491b401be53053af2dbc2c5fc5444d53343e",
+                "registry.k8s.io/kube-controller-manager:v1.35.9"
+              ],
+              "sizeBytes": 78245332
+            },
+            {
+              "names": [
+                "registry.k8s.io/kube-proxy@sha256:80fd2dbab0211ccc3a4af58c8181de3f7d7659b4e19251a3722a9febf04046a6",
+                "registry.k8s.io/kube-proxy@sha256:d08adb0c8c2c68075f1e6fa6c4c82880c5af54c1686ac20d22af612082c32a31",
+                "registry.k8s.io/kube-proxy:v1.35.9"
+              ],
+              "sizeBytes": 74996121
+            },
+            {
+              "names": [
+                "registry.k8s.io/etcd@sha256:5279f56db4f32772bb41e47ca44c553f5c87a08fdf339d74c23a4cdc3c388d6a",
+                "registry.k8s.io/etcd@sha256:60a30b5d81b2217555e2cfb9537f655b7ba97220b99c39ee2e162a7127225890",
+                "registry.k8s.io/etcd:3.6.6-0"
+              ],
+              "sizeBytes": 63582405
+            },
+            {
+              "names": [
+                "registry.k8s.io/kube-scheduler@sha256:d96574ba699bc887eeefcc05d9f7828b4df5ba75feac6f20b98097aa85d1ed22",
+                "registry.k8s.io/kube-scheduler@sha256:efa1dc74136bc3c8826e3163f091284af85f817fd92916217cea1152628b941e",
+                "registry.k8s.io/kube-scheduler:v1.35.9"
+              ],
+              "sizeBytes": 53607892
+            },
+            {
+              "names": [
+                "docker.io/library/busybox@sha256:66a6306db78bf2dbf3487f293aa8d6990d8e506fdffab9cc43fe422becf886e4",
+                "docker.io/library/busybox@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e",
+                "docker.io/library/busybox:1.37.0"
+              ],
+              "sizeBytes": 4670414
+            },
+            {
+              "names": [
+                "registry.k8s.io/pause@sha256:278fb9dbcca9518083ad1e11276933a2e96f23de604a3a08cc3c80002767d24c",
+                "registry.k8s.io/pause@sha256:e5b941ef8f71de54dc3a13398226c269ba217d06650a21bd3afcf9d890cf1f41",
+                "registry.k8s.io/pause:3.10.1"
+              ],
+              "sizeBytes": 742092
+            }
+          ],
+          "nodeInfo": {
+            "architecture": "amd64",
+            "bootID": "69ea9ffe-2ba1-4e3e-b204-9c327a68d3a8",
+            "containerRuntimeVersion": "cri-o://1.35.10",
+            "kernelVersion": "5.15.0-191-generic",
+            "kubeProxyVersion": "",
+            "kubeletVersion": "v1.35.9",
+            "machineID": "2c36b8845fbf44f281528a6e96de6883",
+            "operatingSystem": "linux",
+            "osImage": "Ubuntu 22.04.5 LTS",
+            "systemUUID": "2c36b884-5fbf-44f2-8152-8a6e96de6883"
+          },
+          "runtimeHandlers": [
+            {
+              "features": {
+                "recursiveReadOnlyMounts": true,
+                "userNamespaces": true
+              },
+              "name": "crun"
+            },
+            {
+              "features": {
+                "recursiveReadOnlyMounts": true,
+                "userNamespaces": true
+              },
+              "name": ""
+            },
+            {
+              "features": {
+                "recursiveReadOnlyMounts": true,
+                "userNamespaces": true
+              },
+              "name": "runc"
+            }
+          ]
+        }
+      }
+    ],
+    "kind": "List",
+    "metadata": {
+      "resourceVersion": ""
+    }
+  },
+  "broker": "active",
+  "pod_absent": true
+}

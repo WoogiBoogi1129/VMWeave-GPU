@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""Verify original Pod/GPU execution evidence without rerunning GPU work."""
+import datetime,hashlib,json,pathlib,sys
+root=pathlib.Path(sys.argv[1])
+def read(name):return json.loads((root/name).read_text())
+def dt(value):return datetime.datetime.fromisoformat(value.replace('Z','+00:00'))
+p=read('pod-final.json');status=p['status']['containerStatuses'][0];term=status['state']['terminated'];spec=read('pod.yaml')
+assert p['metadata']['uid']==read('result.json')['pod_uid']
+assert p['status']['phase']=='Succeeded' and term['exitCode']==0 and status['restartCount']==0
+assert status['imageID']==spec['spec']['containers'][0]['image']
+assert spec['spec']['securityContext']['runAsNonRoot'] and spec['spec']['securityContext']['runAsUser']==1000
+assert not spec['spec']['containers'][0]['securityContext']['allowPrivilegeEscalation']
+assert spec['spec']['containers'][0]['securityContext']['capabilities']['drop']==['ALL']
+assert spec['spec']['containers'][0]['volumeMounts']==[{'name':'broker','mountPath':'/run/vmweave','readOnly':True}]
+assert 'nvidia.com/gpu' not in spec['spec']['containers'][0]['resources']['limits']
+records=[json.loads(line.split(' ',1)[1]) for line in (root/'container.log').read_text().splitlines()]
+events={r['event']:r for r in records}
+for name in ['GPU_ACCESS_OK','GPU_MEMORY_ALLOCATED_32MIB','HOST_TO_DEVICE_OK','GPU_KERNEL_SYNCHRONIZED','DEVICE_TO_HOST_OK','GPU_RESOURCES_RELEASED','COMPLETE']:assert name in events
+assert events['COMPLETE']['status']=='PASS' and events['COMPLETE']['elapsed_seconds']>=30
+assert not events['COMPLETE']['numerical_accuracy_test'] and not events['IDENTITY']['cpu_fallback']
+assert events['IDENTITY']['uid']==1000 and events['IDENTITY']['gid']==read('environment.json')['gid']
+states=[json.loads(x)['pod'] for x in (root/'pod-states.jsonl').read_text().splitlines()]
+assert all(x['metadata']['uid']==p['metadata']['uid'] for x in states)
+assert {'Running','Succeeded'} <= {x['status']['phase'] for x in states}
+gpu=read('worker/live-S04.json');assert dt(term['startedAt'])<=dt(gpu['at'])<=dt(term['finishedAt']);assert gpu['gpu_uuid']==read('environment.json')['channel']['status']['gpuUUID'];child=[x for x in gpu['gpu_processes'] if x.get('cuda_child_matches')];assert child
+before=read('channel-before.json');after=read('channel-after.json')
+assert gpu['worker_uid']==before['status']['workerPodUID'] and gpu['channel_uid']==before['uid']
+assert before['uid']==after['uid'] and after['status']['phase']=='Ready'
+for key in ['allocation','generation','vmiUID','workerPodUID']:assert before['status'][key]==after['status'][key]
+for row in child:
+ assert row['worker_uid_matches'] and row['namespace_pids'][0]==row['host_pid']
+ assert any(x['pid']==row['namespace_pids'][-1] and '--session' in x['command'] for x in gpu['worker_processes'])
+images=read('screenshots/index.json');assert {x['step'] for x in images}=={'S01','S02','S03','S04','S05','S07'}
+for item in images:
+ assert item['exit_code']==0 and not item['edited']
+ assert (root/item['file']).read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
+ assert (root/item['source']).is_file()
+ if item['step'] in ['S03','S04']:assert dt(term['startedAt'])<=dt(item['captured_at'])<=dt(term['finishedAt'])
+ assert item['pod_uid']==p['metadata']['uid'] and item['worker_uid']==gpu['worker_uid']
+assert all(e['type']=='Normal' for e in read('events.json')['items'])
+commands=[json.loads(x) for x in (root/'commands.jsonl').read_text().splitlines()]
+create=next(x for x in commands if x['command']=='sudo kubectl create -f -')
+nonzero=[x for x in commands if x['exit_code']]
+assert all('NotFound' in x['stderr'] and dt(x['finished'])<=dt(create['finished']) for x in nonzero)
+assert any('delete pod vmweave-gpu-pod-check' in x['command'] and x['exit_code']==0 for x in commands)
+cleanup=read('cleanup-state.json')
+assert cleanup['pod_absent'] and cleanup['vm']['ready'] and cleanup['broker']=='active' and cleanup['channel']['phase']=='Ready'
+assert all(any(c['type']=='Ready' and c['status']=='True' for c in n['status']['conditions']) for n in cleanup['nodes']['items'])
+count=0
+if (root/'SHA256SUMS').exists():
+ for line in (root/'SHA256SUMS').read_text().splitlines():
+  expected,name=line.split('  ',1);assert hashlib.sha256((root/name).read_bytes()).hexdigest()==expected,name;count+=1
+print(json.dumps({'status':'PASS','pod_uid':p['metadata']['uid'],'phase':'Succeeded','exit_code':0,'restarts':0,'gpu_seconds':events['COMPLETE']['elapsed_seconds'],'actual_screenshots':len(images),'live_running_screenshots':2,'attributed_gpu_host_pid':child[0]['host_pid'],'precreation_notfound_observations':len(nonzero),'gpu_execution_errors':0,'verified_hashes':count},indent=2))

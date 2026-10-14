@@ -1,0 +1,28 @@
+[2026/10/15 01:20:58:6932] N: ttyd 1.7.7-40e79c7 (libwebsockets 4.3.3-unknown)
+[2026/10/15 01:20:58:6933] N: tty configuration:
+[2026/10/15 01:20:58:6933] N:   start command: tmux -L gpu-pod-128274 attach-session -t evidence
+[2026/10/15 01:20:58:6933] N:   close signal: SIGHUP (1)
+[2026/10/15 01:20:58:6933] N:   terminal type: xterm-256color
+[2026/10/15 01:20:58:6933] N:   check origin: true
+[2026/10/15 01:20:58:6933] N: The --writable option is not set, will start in readonly mode
+[2026/10/15 01:20:58:6933] N: lws_create_context: LWS: 4.3.3-unknown, MbedTLS-2.28.5 NET SRV H1 H2 WS ConMon IPV6-off
+[2026/10/15 01:20:58:7045] N: elops_init_pt_uv:  Using foreign event loop...
+[2026/10/15 01:20:58:7045] N: __lws_lc_tag:  ++ [wsi|0|pipe] (1)
+[2026/10/15 01:20:58:7045] N: __lws_lc_tag:  ++ [vh|0|netlink] (1)
+[2026/10/15 01:20:58:7046] N: __lws_lc_tag:  ++ [vh|1|default|127.0.0.1|127.0.0.1|9908] (2)
+[2026/10/15 01:20:58:7151] N: [vh|1|default|127.0.0.1|127.0.0.1|9908]: lws_socket_bind: source ads 127.0.0.1
+[2026/10/15 01:20:58:7151] N: __lws_lc_tag:  ++ [wsi|1|listen|default|127.0.0.1|9908] (2)
+[2026/10/15 01:20:58:7151] N:  Listening on port: 9908
+[2026/10/15 01:20:58:8587] N: __lws_lc_tag:  ++ [wsisrv|0|adopted] (1)
+[2026/10/15 01:20:58:8591] N: HTTP / - 127.0.0.1
+[2026/10/15 01:20:59:0462] N: HTTP /token - 127.0.0.1
+[2026/10/15 01:20:59:1208] N: __lws_lc_tag:  ++ [wsisrv|1|adopted] (2)
+[2026/10/15 01:20:59:1213] N: WS   /ws - 127.0.0.1, clients: 1
+[2026/10/15 01:20:59:1347] N: started process, pid: 128367
+[2026/10/15 01:21:01:7211] N: WS closed from 127.0.0.1, clients: 0
+[2026/10/15 01:21:01:7212] N: killing process, pid: 128367
+[2026/10/15 01:21:01:7213] N: __lws_lc_untag:  -- [wsisrv|1|adopted] (1) 2.600s
+[2026/10/15 01:21:01:7215] N: __lws_lc_untag:  -- [wsisrv|0|adopted] (0) 2.862s
+[2026/10/15 01:21:01:7230] N: process killed with signal 0, pid: 128367
+[2026/10/15 01:21:01:7701] N: received signal: SIGTERM (15), exiting...
+[2026/10/15 01:21:01:7702] N: send ^C to force exit.

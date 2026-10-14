@@ -1,0 +1,14 @@
+{
+  "compiler_container_image": "d94699a19c42f78777eb8126bda5f823767801f1c9698d065319bede58dbc7e2",
+  "base_image": "docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f",
+  "image_distribution": "OCI archive imported into Guest root containers storage; imagePullPolicy Never; no external registry publication",
+  "compile_command": "cc -O2 -Wall -Wextra -Werror -I/usr/local/cuda/include gpu_pod_check.c -L<guest-library-directory> -Wl,-rpath,/opt/flyt/lib -lflyt_guest -o gpu-pod-check",
+  "build_command": "podman build --pull=never -f experiments/k8s-gpu-pod/Containerfile -t localhost/vmweave-gpu-pod-check:20261015 .local/k8s-gpu-pod-20261015",
+  "source_sha256": {
+    "capture_live.cjs": "fa6503ca8d89bad70b5cbe9eefc6f6cee24ea0f2db60c458ab29d094025ad269",
+    "Containerfile": "794e75cba6a27c9df2b98fb1349ecb5eefa2d0ce5353748239692eb656d9d3a2",
+    "gpu_pod_check.c": "695f5cbedecc71fdc2a7f1f5ea4bae666a602ecbcb7ea5ecc401e314a8e28975",
+    "run.py": "2b638fa7238c31dbbb856ca04f52d39b8d0c35c3d88b82069dfafc25a9877c9d"
+  },
+  "source_note": "sources/ is the exact experiment code used for this run. Repository run.py subsequently fixes optional precreation GET handling and guards against overwriting prior runs; GPU binary is unchanged and byte-identical on rebuild."
+}

@@ -1,0 +1,110 @@
+{
+  "gpu_execution_errors": 0,
+  "failed_pod_runs": 0,
+  "unresolved_errors": 0,
+  "items": [
+    {
+      "id": "E01",
+      "phase": "preparation",
+      "severity": "tool-error",
+      "symptom": "Node default lookup: Cannot find module playwright",
+      "cause": "Playwright is installed under the existing local evidence tool directory, outside default Node module lookup.",
+      "resolution": "Set NODE_PATH to .local/evidence-20260924/tools/node_modules for captures.",
+      "verification": "Six real Chromium/ttyd/tmux screenshots completed with exit code 0.",
+      "evidence": [
+        "preparation/capture-tools-fixed.txt",
+        "screenshots/index.json"
+      ],
+      "status": "RESOLVED"
+    },
+    {
+      "id": "E02",
+      "phase": "preparation",
+      "severity": "missing-prerequisite",
+      "symptom": "Guest had neither podman nor skopeo for importing the dedicated OCI image.",
+      "cause": "The existing Kubernetes installation included CRI-O but no separate OCI image import CLI.",
+      "resolution": "Installed podman with apt --no-install-recommends; imported OCI into the Guest root containers storage. No Kubernetes or VM restart.",
+      "verification": "Pod used the exact imported digest with imagePullPolicy Never; Kubernetes event reports image already present.",
+      "evidence": [
+        "preparation/guest-image-tools.txt",
+        "preparation/import-guest-image.txt",
+        "events.json",
+        "pod-final.json"
+      ],
+      "status": "RESOLVED",
+      "nonfatal_install_warnings": "Headless SSH produced debconf Dialog/Readline fallback and stdin warnings. apt completed with exit 0; Podman import and actual Pod execution succeeded. These are retained in the installation transcript."
+    },
+    {
+      "id": "E03",
+      "phase": "preparation",
+      "severity": "tool-error",
+      "symptom": "sudo: crictl: command not found during initial image tool discovery.",
+      "cause": "crictl was not installed in this VM.",
+      "resolution": "Used kubectl resource JSON for runtime status and podman for OCI image import/inspection; no dependency on crictl remains.",
+      "verification": "Final Pod imageID and podman inspection agree.",
+      "evidence": [
+        "preparation/final-environment.txt",
+        "pod-final.json"
+      ],
+      "status": "RESOLVED_BY_ALTERNATE_TOOL"
+    },
+    {
+      "id": "E04",
+      "phase": "build",
+      "severity": "compiler-warning",
+      "symptom": "-Wmisleading-indentation at first-kernel event followed by iterations++.",
+      "cause": "Two statements on the same line after an unbraced if.",
+      "resolution": "Added braces and moved increment to a separate line.",
+      "verification": "Compiled with -Wall -Wextra -Werror successfully before image import and GPU execution.",
+      "evidence": [
+        "sources/gpu_pod_check.c",
+        "preparation/compile-verification.txt"
+      ],
+      "status": "RESOLVED"
+    },
+    {
+      "id": "E05",
+      "phase": "observation",
+      "severity": "expected-state-reported-as-command-error",
+      "symptom": "Two NotFound responses when the monitor queried the Pod before creation.",
+      "cause": "The observer intentionally starts before Pod creation, but its initial query did not use --ignore-not-found.",
+      "resolution": "Preserved both original responses; updated optional monitor queries to --ignore-not-found and treat empty output as waiting for creation.",
+      "verification": "Querying the now-deleted experimental Pod returns exit code 0 and empty output. No extra GPU run was needed.",
+      "evidence": [
+        "commands.jsonl",
+        "preparation/absent-pod-query-fixed.txt"
+      ],
+      "status": "RESOLVED"
+    },
+    {
+      "id": "E06",
+      "phase": "offline-evidence-verification",
+      "severity": "verifier-error",
+      "symptom": "Initial verifier rejected the second NotFound observation.",
+      "cause": "It compared observation start to create command start; one GET overlapped the create request and returned NotFound before the create response completed.",
+      "resolution": "Compare completed NotFound observations to successful create completion, retaining all original timestamps and outputs.",
+      "verification": "Offline verifier passes with both original observations retained; no GPU rerun or source evidence rewrite.",
+      "evidence": [
+        "commands.jsonl",
+        "preparation/verification-initial-error.txt",
+        "verification.json"
+      ],
+      "status": "RESOLVED"
+    },
+    {
+      "id": "E07",
+      "phase": "evidence-publication",
+      "severity": "raw-evidence-format-check",
+      "symptom": "git diff --check flagged apt CRLF/trailing spaces and terminal blank lines.",
+      "cause": "Original captured terminal output naturally contains these bytes; source-format checks treated it as edited source text.",
+      "resolution": "Added narrowly scoped -whitespace attributes for the captured apt transcript and terminal screen dumps. Existing -text prevents EOL normalization. Did not trim or rewrite raw evidence.",
+      "verification": "Staged diff check passes and SHA256SUMS validates the retained original files.",
+      "evidence": [
+        "preparation/guest-image-tools.txt",
+        "terminal/S01/screen.txt",
+        "SHA256SUMS"
+      ],
+      "status": "RESOLVED"
+    }
+  ]
+}

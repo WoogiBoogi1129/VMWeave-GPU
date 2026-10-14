@@ -1,0 +1,50 @@
+evidence$ /usr/bin/python3 /home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/k8s-gpu-pod/run.py view /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/k8s-gpu-pod-20261015/run-20261015-0125-a
+S05
+RUN: run-20261015-0125-a  STAGE: S05
+CAPTURE TIME: 2026-10-15T01:21:36.213901+09:00
+HOST namespace: vmweave-test-a  VM: vmweave-k8s-01  GUEST namespace: vmweave-gpu-validation  POD: vmweave-gpu-pod-check
+[Guest] $ sudo kubectl get pod vmweave-gpu-pod-check -n vmweave-gpu-validation -o wide
+NAME                    READY   STATUS      RESTARTS   AGE   IP             NODE             NOMINATED NODE   READINESS GATES
+vmweave-gpu-pod-check   0/1     Completed   0          36s   10.244.0.123   vmweave-k8s-01   <none>           <none>
+[Guest] $ sudo kubectl logs vmweave-gpu-pod-check -n vmweave-gpu-validation --tail=16 --timestamps
+2026-10-14T16:21:01.243714528Z {"event":"START","unix_seconds":1791994861.243027656}
+2026-10-14T16:21:01.243714528Z {"event":"IDENTITY","uid":1000,"gid":998,"pid":1,"cpu_fallback":false}
+2026-10-14T16:21:01.865816855Z {"event":"GPU_ACCESS_OK","unix_seconds":1791994861.865688253}
+2026-10-14T16:21:01.868323044Z {"event":"GPU_MEMORY_ALLOCATED_32MIB","unix_seconds":1791994861.867964286}
+2026-10-14T16:21:01.869063205Z {"event":"HOST_TO_DEVICE_OK","unix_seconds":1791994861.869004572}
+2026-10-14T16:21:01.890735430Z {"event":"GPU_KERNEL_SYNCHRONIZED","unix_seconds":1791994861.890630471}
+2026-10-14T16:21:06.900782071Z {"event":"GPU_WORK_IN_PROGRESS","elapsed_seconds":5.011,"iterations":395}
+2026-10-14T16:21:11.899246576Z {"event":"GPU_WORK_IN_PROGRESS","elapsed_seconds":10.010,"iterations":791}
+2026-10-14T16:21:16.901170130Z {"event":"GPU_WORK_IN_PROGRESS","elapsed_seconds":15.011,"iterations":1184}
+2026-10-14T16:21:21.900117278Z {"event":"GPU_WORK_IN_PROGRESS","elapsed_seconds":20.011,"iterations":1580}
+2026-10-14T16:21:26.891564515Z {"event":"GPU_WORK_IN_PROGRESS","elapsed_seconds":25.002,"iterations":1975}
+2026-10-14T16:21:31.897362245Z {"event":"GPU_WORK_IN_PROGRESS","elapsed_seconds":30.008,"iterations":2367}
+2026-10-14T16:21:31.900896636Z {"event":"DEVICE_TO_HOST_OK","unix_seconds":1791994891.900610165}
+2026-10-14T16:21:31.903755064Z {"event":"GPU_RESOURCES_RELEASED","unix_seconds":1791994891.903489929}
+2026-10-14T16:21:31.903755064Z {"event":"COMPLETE","status":"PASS","elapsed_seconds":30.008,"iterations":2367,"numerical_accuracy_test":false}
+Container status: [{"allocatedResources": {"cpu": "100m", "memory": "64Mi"}, "containerID": "cri-o://438a03e7f3c2ac7e532ea8425444cc1f3eda8fc73e4bed9daf04369df23e5f1f", "image": "localhost/v
+mweave-gpu-pod-check:20261015", "imageID": "localhost/vmweave-gpu-pod-check@sha256:87a0e6e0a0cceda9b43a685dd1e04f8fe604bc83e88e6851ac25eba14b5e91c1", "lastState": {}, "name": "gpu", "ready"
+: false, "resources": {"limits": {"cpu": "1", "memory": "256Mi"}, "requests": {"cpu": "100m", "memory": "64Mi"}}, "restartCount": 0, "started": false, "state": {"terminated": {"containerID"
+: "cri-o://438a03e7f3c2ac7e532ea8425444cc1f3eda8fc73e4bed9daf04369df23e5f1f", "exitCode": 0, "finishedAt": "2026-10-14T16:21:32Z", "reason": "Completed", "startedAt": "2026-10-14T16:21:01Z"
+}}, "user": {"linux": {"gid": 998, "supplementalGroups": [998], "uid": 1000}}, "volumeMounts": [{"mountPath": "/run/vmweave", "name": "broker", "readOnly": true, "recursiveReadOnly": "Disab
+led"}]}]
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

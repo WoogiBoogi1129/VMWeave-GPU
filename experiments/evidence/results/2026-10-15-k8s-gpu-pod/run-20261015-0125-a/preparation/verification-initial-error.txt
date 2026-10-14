@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/k8s-gpu-pod/verify.py", line 44, in <module>
+    assert all('NotFound' in x['stderr'] and dt(x['started'])<dt(create['started']) for x in nonzero)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

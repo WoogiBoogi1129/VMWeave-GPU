@@ -1,0 +1,50 @@
+evidence$ /usr/bin/python3 /home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/k8s-gpu-pod/run.py view /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/k8s-gpu-pod-20261015/run-20261015-0125-a
+S07
+RUN: run-20261015-0125-a  STAGE: S07
+CAPTURE TIME: 2026-10-15T01:21:41.361353+09:00
+HOST namespace: vmweave-test-a  VM: vmweave-k8s-01  GUEST namespace: vmweave-gpu-validation  POD: vmweave-gpu-pod-check
+[Guest] $ sudo kubectl delete pod vmweave-gpu-pod-check -n vmweave-gpu-validation --wait=true --timeout=25s
+pod "vmweave-gpu-pod-check" deleted from vmweave-gpu-validation namespace
+[Guest] $ sudo kubectl get pods -n vmweave-gpu-validation
+No resources found in vmweave-gpu-validation namespace.
+[Host] $ kubectl get vm vmweave-k8s-01 -n vmweave-test-a
+NAME             AGE     STATUS    READY
+vmweave-k8s-01   7h24m   Running   True
+[Host] $ kubectl get sharedmemorychannel vmweave-k8s-01 -n vmweave-test-a
+NAME             PHASE   AGE
+vmweave-k8s-01   Ready   77m
+[Guest] $ sudo kubectl get nodes
+NAME             STATUS   ROLES           AGE     VERSION
+vmweave-k8s-01   Ready    control-plane   7h12m   v1.35.9
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

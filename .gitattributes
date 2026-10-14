@@ -3,3 +3,6 @@
 experiments/evidence/results/** -text
 experiments/evidence/results/**/guest-stdout.txt -whitespace
 experiments/evidence/results/**/guest-stderr.txt -whitespace
+# Preserve terminal whitespace and apt CRLF exactly in this live Pod evidence.
+experiments/evidence/results/2026-10-15-k8s-gpu-pod/**/preparation/guest-image-tools.txt -whitespace
+experiments/evidence/results/2026-10-15-k8s-gpu-pod/**/terminal/**/screen.txt -whitespace

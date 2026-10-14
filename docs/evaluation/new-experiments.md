@@ -16,6 +16,45 @@
 API 명칭 변경만으로 모든 상위 실험 도구가 호환되는 것은 아닙니다.
 과거 성능·학습 결과는 [역사 재현](reproduction.md)의 기록이며 새 제어기의 측정 결과로 표시하지 않습니다.
 
+## VM 내부 Kubernetes GPU Pod 동작 확인 — 2026-10-15
+
+기존 `vmweave-test-a/vmweave-k8s-01`의 내부 Kubernetes 1.35.9에서 단일 GPU Pod를
+생성해 **Succeeded, 종료 코드 0, 재시작 0**을 확인했습니다. UID 1000/GID 998의
+비특권 컨테이너가 전용 이미지의 Guest 라이브러리와 실행 파일을 사용하고,
+read-only로 마운트한 broker socket 디렉터리를 통해 GPU 작업을 수행했습니다.
+
+32 MiB GPU 메모리 할당, 약 30초의 커널 실행·동기화, 결과 복사와 자원 해제가
+성공했습니다. 외부 Worker의 CUDA 자식 PID와 호스트 GPU 프로세스를 NSpid 및
+cgroup의 Worker Pod UID로 연결했습니다. 내부 Kubernetes의 `nvidia.com/gpu` 자원
+광고·할당이나 device plugin 경로를 검증한 결과는 아닙니다.
+
+- [결과 보고서](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/report.txt)
+- [판정 및 실행 식별자](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/result.json)
+- [오류·해결 기록](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/errors.txt)
+- [실제 화면 6장의 색인](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/screenshots/index.json)
+- [GPU Pod 실행 중 화면](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/screenshots/original/S03_host-and-guest_2026-10-14T16-21-07-113Z.png)
+- [정상 완료 화면](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/screenshots/original/S05_host-and-guest_2026-10-14T16-21-38-564Z.png)
+
+GPU 실행 오류는 없었습니다. 준비·관측·오프라인 검증 도구의 문제는 별도 기록하고
+해결했으며, 생성 직전 NotFound 응답과 초기 검증 실패 출력도 원본으로 보존했습니다.
+실험 Pod는 정리했고 기존 VM·내부 Kubernetes·broker·채널은 유지했습니다.
+수치 정확성·성능·재사용·장애 복구·동시 접근·VM 재시작·PyTorch 확장은 시험하지 않았습니다.
+
+실행 소스는 `experiments/k8s-gpu-pod/`에 있습니다. 기존 VM과 broker가 준비된 환경에서
+호환 라이브러리로 C 실행 파일을 빌드하고, Containerfile로 전용 이미지를 만들어
+Guest CRI-O 저장소에 OCI로 반입합니다. 수집기는 로컬
+`.local/k8s-gpu-pod-20261015/connection.json`의 `ip`, `key`, `known_hosts`, `image`를
+사용합니다. SSH 키 내용과 이 접속 설정 파일은 저장소에 포함하지 않습니다.
+실행 환경에는 tmux, 기존 ttyd 실행 파일, Playwright와 Chromium이 필요합니다.
+
+```sh
+# 새 실행 ID의 빈 디렉터리를 사용합니다. 기존 증거를 덮어쓰지 않습니다.
+python3 experiments/k8s-gpu-pod/run.py run .local/k8s-gpu-pod-20261015/NEW_RUN_ID
+# GPU 재실행 없이 보존 자료·PID 대응·화면 시각·파일 hash를 검사합니다.
+python3 experiments/k8s-gpu-pod/verify.py \
+  experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a
+```
+
 ## GPU smoke
 
 [Guest 준비](../getting-started/guest-images.md)와 [첫 VM](../getting-started/first-vm.md)의 자동 smoke 경로를 따릅니다.

@@ -1,0 +1,81 @@
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  conmon containernetworking-plugins crun golang-github-containers-common
+  golang-github-containers-image libyajl2
+Suggested packages:
+  containers-storage docker-compose
+Recommended packages:
+  buildah fuse-overlayfs slirp4netns catatonit | tini | dumb-init uidmap
+  golang-github-containernetworking-plugin-dnsname
+The following NEW packages will be installed:
+  conmon containernetworking-plugins crun golang-github-containers-common
+  golang-github-containers-image libyajl2 podman
+0 upgraded, 7 newly installed, 0 to remove and 64 not upgraded.
+Need to get 17.8 MB of archives.
+After this operation, 84.5 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 conmon amd64 2.0.25+ds1-1.1 [35.1 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 containernetworking-plugins amd64 0.9.1+ds1-1ubuntu0.1 [6806 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libyajl2 amd64 2.1.0-3ubuntu0.22.04.1 [21.0 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 crun amd64 0.17+dfsg-1.1ubuntu0.1 [299 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containers-image all 5.16.0-3 [29.3 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 golang-github-containers-common all 0.44.4+ds1-1 [28.1 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 podman amd64 3.4.4+ds1-1ubuntu1.22.04.3 [10.6 MB]
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Fetched 17.8 MB in 10s (1870 kB/s)
+Selecting previously unselected package conmon.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64788 files and directories currently installed.)
+Preparing to unpack .../0-conmon_2.0.25+ds1-1.1_amd64.deb ...
+Unpacking conmon (2.0.25+ds1-1.1) ...
+Selecting previously unselected package containernetworking-plugins.
+Preparing to unpack .../1-containernetworking-plugins_0.9.1+ds1-1ubuntu0.1_amd64.deb ...
+Unpacking containernetworking-plugins (0.9.1+ds1-1ubuntu0.1) ...
+Selecting previously unselected package libyajl2:amd64.
+Preparing to unpack .../2-libyajl2_2.1.0-3ubuntu0.22.04.1_amd64.deb ...
+Unpacking libyajl2:amd64 (2.1.0-3ubuntu0.22.04.1) ...
+Selecting previously unselected package crun.
+Preparing to unpack .../3-crun_0.17+dfsg-1.1ubuntu0.1_amd64.deb ...
+Unpacking crun (0.17+dfsg-1.1ubuntu0.1) ...
+Selecting previously unselected package golang-github-containers-image.
+Preparing to unpack .../4-golang-github-containers-image_5.16.0-3_all.deb ...
+Unpacking golang-github-containers-image (5.16.0-3) ...
+Selecting previously unselected package golang-github-containers-common.
+Preparing to unpack .../5-golang-github-containers-common_0.44.4+ds1-1_all.deb ...
+Unpacking golang-github-containers-common (0.44.4+ds1-1) ...
+Selecting previously unselected package podman.
+Preparing to unpack .../6-podman_3.4.4+ds1-1ubuntu1.22.04.3_amd64.deb ...
+Unpacking podman (3.4.4+ds1-1ubuntu1.22.04.3) ...
+Setting up libyajl2:amd64 (2.1.0-3ubuntu0.22.04.1) ...
+Setting up golang-github-containers-image (5.16.0-3) ...
+Setting up conmon (2.0.25+ds1-1.1) ...
+Setting up containernetworking-plugins (0.9.1+ds1-1ubuntu0.1) ...
+Setting up golang-github-containers-common (0.44.4+ds1-1) ...
+Setting up crun (0.17+dfsg-1.1ubuntu0.1) ...
+Setting up podman (3.4.4+ds1-1ubuntu1.22.04.3) ...
+Created symlink /etc/systemd/user/default.target.wants/podman.service → /usr/lib/systemd/user/podman.service.
+Created symlink /etc/systemd/user/sockets.target.wants/podman.socket → /usr/lib/systemd/user/podman.socket.
+Created symlink /etc/systemd/system/default.target.wants/podman.service → /lib/systemd/system/podman.service.
+Created symlink /etc/systemd/system/sockets.target.wants/podman.socket → /lib/systemd/system/podman.socket.
+Created symlink /etc/systemd/system/default.target.wants/podman-auto-update.service → /lib/systemd/system/podman-auto-update.service.
+Created symlink /etc/systemd/system/timers.target.wants/podman-auto-update.timer → /lib/systemd/system/podman-auto-update.timer.
+Created symlink /etc/systemd/system/default.target.wants/podman-restart.service → /lib/systemd/system/podman-restart.service.
+Processing triggers for libc-bin (2.35-0ubuntu3.15) ...
+Processing triggers for man-db (2.10.2-1) ...
+
+Running kernel seems to be up-to-date.
+
+Services to be restarted:
+ systemctl restart vmweave-guest-broker.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.

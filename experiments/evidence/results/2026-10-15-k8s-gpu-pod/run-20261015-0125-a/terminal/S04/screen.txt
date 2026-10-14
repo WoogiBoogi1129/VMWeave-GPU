@@ -1,0 +1,50 @@
+evidence$ /usr/bin/python3 /home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/k8s-gpu-pod/run.py view /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/k8s-gpu-pod-20261015/run-20261015-0125-a
+S04
+RUN: run-20261015-0125-a  STAGE: S04
+CAPTURE TIME: 2026-10-15T01:21:08.883404+09:00
+HOST namespace: vmweave-test-a  VM: vmweave-k8s-01  GUEST namespace: vmweave-gpu-validation  POD: vmweave-gpu-pod-check
+[Host] Live Worker / GPU process observation (nvidia-smi + /proc NSpid/cgroup)
+{
+  "at": "2026-10-14T16:21:09.276635+00:00",
+  "worker": "vmweave-k8s-01-ac22a4d9c984-c15d8660-worker",
+  "worker_uid": "4597275a-1a78-4c7e-9709-28818694317d",
+  "channel_uid": "ac22a4d9-c984-44a6-8c5a-394b5522f4c7",
+  "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "worker_processes": [
+    {
+      "pid": 114,
+      "command": "/opt/flyt/bin/flyt-shm-session-worker /flyt-channel/c15d866001404ccfc3d9d7e562265cb5 0 "
+    },
+    {
+      "pid": 2308,
+      "command": "flyt-shm-session-worker --session 6 "
+    }
+  ],
+  "gpu_processes": [
+    {
+      "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "host_pid": 128421,
+      "process": "flyt-shm-session-worker",
+      "used_memory_mib": "582",
+      "namespace_pids": [
+        128421,
+        2308
+      ],
+      "cgroup": "0::/kubepods.slice/kubepods-besteffort.slice/kubepods-besteffort-pod4597275a_1a78_4c7e_9709_28818694317d.slice/crio-809079fb01a61d84183d8d5008735f1026d9f98f6bc8850c5edcd1aa
+ebe6fc1a.scope/container\n",
+      "worker_uid_matches": true,
+      "cuda_child_matches": true
+    }
+  ]
+}
+evidence$
+
+
+
+
+
+
+
+
+
+
