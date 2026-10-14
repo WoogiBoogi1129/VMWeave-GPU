@@ -1,0 +1,62 @@
+{
+  "status": "VERIFIED_NATIVE_PEER_PILOT",
+  "conditions": [
+    {
+      "direction": "ab",
+      "operation": "read",
+      "run": "iso-native-peer-ab-read-20261014054044",
+      "target": 137238157459456,
+      "launch": 0,
+      "sync": 700,
+      "read_result_valid": false,
+      "owner_buffer_intact": true,
+      "owner_post_kernel_success": true,
+      "closed": true
+    },
+    {
+      "direction": "ab",
+      "operation": "write",
+      "run": "iso-native-peer-ab-write-20261014054101",
+      "target": 130768930078720,
+      "launch": 0,
+      "sync": 700,
+      "read_result_valid": false,
+      "owner_buffer_intact": true,
+      "owner_post_kernel_success": true,
+      "closed": true
+    },
+    {
+      "direction": "ba",
+      "operation": "read",
+      "run": "iso-native-peer-ba-read-20261014054117",
+      "target": 126072920211456,
+      "launch": 0,
+      "sync": 700,
+      "read_result_valid": false,
+      "owner_buffer_intact": true,
+      "owner_post_kernel_success": true,
+      "closed": true
+    },
+    {
+      "direction": "ba",
+      "operation": "write",
+      "run": "iso-native-peer-ba-write-20261014054134",
+      "target": 127436773654528,
+      "launch": 0,
+      "sync": 700,
+      "read_result_valid": false,
+      "owner_buffer_intact": true,
+      "owner_post_kernel_success": true,
+      "closed": true
+    }
+  ],
+  "peer_kernels_submitted": 4,
+  "synchronization_error_700": 4,
+  "own_control_and_post_kernels": 28,
+  "buffer_checks": 72,
+  "buffer_mismatches": 0,
+  "unique_pods": 8,
+  "host_processes": 8,
+  "scope": "Four one-shot native CUDA/HAMi synthetic-address cases; not VMWeave end-to-end or universal GPU isolation proof.",
+  "cleanup_verified": true
+}

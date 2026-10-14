@@ -1,0 +1,52 @@
+{
+  "status": "REGISTERED_PATH_REJECTION_VERIFIED",
+  "cross_attempts": [
+    {
+      "requester": "iso-cross-boundary-20261014045839-b",
+      "target_vm": "iso-cross-boundary-20261014045839-a",
+      "operation": "cross_read",
+      "sequence": 4,
+      "guest_kernel_submits": 0,
+      "worker_kernel_receipts": 0,
+      "classification": "GUEST_REJECTED_BEFORE_SUBMIT",
+      "read_output_valid": false
+    },
+    {
+      "requester": "iso-cross-boundary-20261014045839-b",
+      "target_vm": "iso-cross-boundary-20261014045839-a",
+      "operation": "cross_write",
+      "sequence": 7,
+      "guest_kernel_submits": 0,
+      "worker_kernel_receipts": 0,
+      "classification": "GUEST_REJECTED_BEFORE_SUBMIT",
+      "read_output_valid": false
+    },
+    {
+      "requester": "iso-cross-boundary-20261014045839-a",
+      "target_vm": "iso-cross-boundary-20261014045839-b",
+      "operation": "cross_read",
+      "sequence": 8,
+      "guest_kernel_submits": 0,
+      "worker_kernel_receipts": 0,
+      "classification": "GUEST_REJECTED_BEFORE_SUBMIT",
+      "read_output_valid": false
+    },
+    {
+      "requester": "iso-cross-boundary-20261014045839-a",
+      "target_vm": "iso-cross-boundary-20261014045839-b",
+      "operation": "cross_write",
+      "sequence": 11,
+      "guest_kernel_submits": 0,
+      "worker_kernel_receipts": 0,
+      "classification": "GUEST_REJECTED_BEFORE_SUBMIT",
+      "read_output_valid": false
+    }
+  ],
+  "matched_requests": 56,
+  "positive_control_kernels": 2,
+  "buffer_checks": 18,
+  "buffer_mismatches": 0,
+  "gpu_cross_access_executed": false,
+  "gpu_memory_protection_verdict": "INCONCLUSIVE",
+  "cleanup_verified": true
+}

@@ -1,0 +1,159 @@
+{
+  "status": "REGISTERED_PATH_REJECTED_BEFORE_SUBMIT",
+  "sessions": [
+    "iso-cross-boundary-20261014045839-a",
+    "iso-cross-boundary-20261014045839-b"
+  ],
+  "trace_summary": [
+    {
+      "vm": "iso-cross-boundary-20261014045839-a",
+      "complete_request_chains": 29,
+      "kernel_launches": 1,
+      "contexts": [
+        {
+          "pid": 113,
+          "context": "0x5b7affea8760",
+          "context_query": 0,
+          "launch": 0
+        }
+      ]
+    },
+    {
+      "vm": "iso-cross-boundary-20261014045839-b",
+      "complete_request_chains": 27,
+      "kernel_launches": 1,
+      "contexts": [
+        {
+          "pid": 112,
+          "context": "0x5913e16a8760",
+          "context_query": 0,
+          "launch": 0
+        }
+      ]
+    }
+  ],
+  "cross_requests_attempted": 4,
+  "cross_gpu_access_executed": false,
+  "cross_results": [
+    {
+      "requester": "iso-cross-boundary-20261014045839-b",
+      "target_vm": "iso-cross-boundary-20261014045839-a",
+      "target_buffer": {
+        "event": "ready",
+        "address": 129448999387136,
+        "handle": 1,
+        "bytes": 4096,
+        "output_address": 129448999391232,
+        "output_handle": 2,
+        "seed": 202610140,
+        "received_host_utc": 1791954030.9385035
+      },
+      "observation": {
+        "event": "cross",
+        "op": "cross_read",
+        "sequence": 4,
+        "target": 129448999387136,
+        "local_lookup": 1,
+        "local_handle": 0,
+        "prep": 0,
+        "launch": 1,
+        "sync": -1,
+        "copy": -1,
+        "observed": 2779096485,
+        "read_valid": false,
+        "received_host_utc": 1791954037.184941
+      }
+    },
+    {
+      "requester": "iso-cross-boundary-20261014045839-b",
+      "target_vm": "iso-cross-boundary-20261014045839-a",
+      "target_buffer": {
+        "event": "ready",
+        "address": 129448999387136,
+        "handle": 1,
+        "bytes": 4096,
+        "output_address": 129448999391232,
+        "output_handle": 2,
+        "seed": 202610140,
+        "received_host_utc": 1791954030.9385035
+      },
+      "observation": {
+        "event": "cross",
+        "op": "cross_write",
+        "sequence": 7,
+        "target": 129448999387136,
+        "local_lookup": 1,
+        "local_handle": 0,
+        "prep": 0,
+        "launch": 1,
+        "sync": -1,
+        "copy": -1,
+        "observed": 2779096485,
+        "read_valid": false,
+        "received_host_utc": 1791954037.2122803
+      }
+    },
+    {
+      "requester": "iso-cross-boundary-20261014045839-a",
+      "target_vm": "iso-cross-boundary-20261014045839-b",
+      "target_buffer": {
+        "event": "ready",
+        "address": 131565008977920,
+        "handle": 1,
+        "bytes": 4096,
+        "output_address": 131565008982016,
+        "output_handle": 2,
+        "seed": 202610240,
+        "received_host_utc": 1791954033.8951573
+      },
+      "observation": {
+        "event": "cross",
+        "op": "cross_read",
+        "sequence": 8,
+        "target": 131565008977920,
+        "local_lookup": 1,
+        "local_handle": 0,
+        "prep": 0,
+        "launch": 1,
+        "sync": -1,
+        "copy": -1,
+        "observed": 2779096485,
+        "read_valid": false,
+        "received_host_utc": 1791954037.2371564
+      }
+    },
+    {
+      "requester": "iso-cross-boundary-20261014045839-a",
+      "target_vm": "iso-cross-boundary-20261014045839-b",
+      "target_buffer": {
+        "event": "ready",
+        "address": 131565008977920,
+        "handle": 1,
+        "bytes": 4096,
+        "output_address": 131565008982016,
+        "output_handle": 2,
+        "seed": 202610240,
+        "received_host_utc": 1791954033.8951573
+      },
+      "observation": {
+        "event": "cross",
+        "op": "cross_write",
+        "sequence": 11,
+        "target": 131565008977920,
+        "local_lookup": 1,
+        "local_handle": 0,
+        "prep": 0,
+        "launch": 1,
+        "sync": -1,
+        "copy": -1,
+        "observed": 2779096485,
+        "read_valid": false,
+        "received_host_utc": 1791954037.2619472
+      }
+    }
+  ],
+  "residual_data_tested": false,
+  "gpu_boundary_proven": false,
+  "sharing_scope": "dedicated per-process CUDA contexts; no sharing API called by this probe; not a global sharing audit",
+  "probe_sha256": "08705ba8de7622e032863fb252317827c95e730bcd212b163416b23909491b39"
+}

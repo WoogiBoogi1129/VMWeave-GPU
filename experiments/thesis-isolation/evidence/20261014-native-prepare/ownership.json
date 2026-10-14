@@ -1,0 +1,70 @@
+[
+  {
+    "process": "iso-native-prep-20261014052221-a",
+    "namespace": "vmweave-test-a",
+    "pod_uid": "9d87dac2-d294-4367-9ee9-7446539cf0cf",
+    "ready": {
+      "event": "ready",
+      "pid": 114,
+      "gpu": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "context": "0x630b30270b40",
+      "address": 130172600713216,
+      "bytes": 4096,
+      "mapping_base": 130172600713216,
+      "mapping_bytes": 4096,
+      "output_address": 130172600717312,
+      "seed": 202610141,
+      "quota_visible_bytes": 2147483648,
+      "hami_loaded": true,
+      "guest_shim_loaded": false,
+      "received_host_utc": 1791955347.5625138
+    },
+    "host": {
+      "host_pid": 3586233,
+      "exe": "/probe/native-boundary",
+      "nspid": [
+        "NSpid:\t3586233\t114"
+      ],
+      "environment": {},
+      "libraries": [
+        "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+        "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+        "/usr/local/vgpu/libvgpu.so"
+      ]
+    }
+  },
+  {
+    "process": "iso-native-prep-20261014052221-b",
+    "namespace": "vmweave-test-b",
+    "pod_uid": "032469c8-21a6-4a6f-9757-fa97ffabecac",
+    "ready": {
+      "event": "ready",
+      "pid": 115,
+      "gpu": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "context": "0x5cd59aed5b40",
+      "address": 124817380474880,
+      "bytes": 4096,
+      "mapping_base": 124817380474880,
+      "mapping_bytes": 4096,
+      "output_address": 124817380478976,
+      "seed": 202610241,
+      "quota_visible_bytes": 2147483648,
+      "hami_loaded": true,
+      "guest_shim_loaded": false,
+      "received_host_utc": 1791955348.131362
+    },
+    "host": {
+      "host_pid": 3586299,
+      "exe": "/probe/native-boundary",
+      "nspid": [
+        "NSpid:\t3586299\t115"
+      ],
+      "environment": {},
+      "libraries": [
+        "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+        "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+        "/usr/local/vgpu/libvgpu.so"
+      ]
+    }
+  }
+]

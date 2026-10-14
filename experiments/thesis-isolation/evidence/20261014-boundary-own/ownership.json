@@ -1,0 +1,76 @@
+[
+  {
+    "vm": "iso-own-boundary-20261014034315-a",
+    "namespace": "vmweave-test-a",
+    "worker": "iso-own-boundary-20261014034315-a-58720c92c4f2-worker",
+    "channel_uid": "58720c92-c4f2-4a4e-9e62-7e591b624a39",
+    "buffer": {
+      "event": "ready",
+      "address": 134723386998784,
+      "handle": 1,
+      "bytes": 4096,
+      "output_address": 134723387002880,
+      "output_handle": 2,
+      "seed": 202610140,
+      "received_host_utc": 1791949503.2484174
+    },
+    "process": {
+      "host_pid": 3502523,
+      "exe": "/opt/flyt/bin/flyt-shm-worker.original",
+      "start_ticks": "196171511",
+      "status_nspid": [
+        "NSpid:\t3502523\t114"
+      ],
+      "environment": {
+        "FLYT_RESOURCE_BACKEND": "hami",
+        "FLYT_TRACE_REQUESTS": "1",
+        "LD_PRELOAD": "/opt/flyt/lib/context-observer.so",
+        "FLYT_GPU_UUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "FLYT_MEMORY_BYTES": "2147483648"
+      },
+      "libraries": [
+        "/opt/flyt/lib/context-observer.so",
+        "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+        "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+        "/usr/local/vgpu/libvgpu.so"
+      ]
+    }
+  },
+  {
+    "vm": "iso-own-boundary-20261014034315-b",
+    "namespace": "vmweave-test-b",
+    "worker": "iso-own-boundary-20261014034315-b-1fd0c5f0cbdd-worker",
+    "channel_uid": "1fd0c5f0-cbdd-4b8e-8725-b20e95757170",
+    "buffer": {
+      "event": "ready",
+      "address": 125071152644096,
+      "handle": 1,
+      "bytes": 4096,
+      "output_address": 125071152648192,
+      "output_handle": 2,
+      "seed": 202610240,
+      "received_host_utc": 1791949506.261878
+    },
+    "process": {
+      "host_pid": 3505497,
+      "exe": "/opt/flyt/bin/flyt-shm-worker.original",
+      "start_ticks": "196176725",
+      "status_nspid": [
+        "NSpid:\t3505497\t112"
+      ],
+      "environment": {
+        "FLYT_RESOURCE_BACKEND": "hami",
+        "FLYT_TRACE_REQUESTS": "1",
+        "LD_PRELOAD": "/opt/flyt/lib/context-observer.so",
+        "FLYT_GPU_UUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "FLYT_MEMORY_BYTES": "2147483648"
+      },
+      "libraries": [
+        "/opt/flyt/lib/context-observer.so",
+        "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+        "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90",
+        "/usr/local/vgpu/libvgpu.so"
+      ]
+    }
+  }
+]

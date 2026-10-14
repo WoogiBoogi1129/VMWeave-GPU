@@ -1,0 +1,65 @@
+{
+  "status": "PASS_NATIVE_PREPARATION",
+  "sessions": [
+    "iso-native-prep-20261014052221-a",
+    "iso-native-prep-20261014052221-b"
+  ],
+  "own_kernel_operations": 6,
+  "mapping_queries": [
+    {
+      "requester": "iso-native-prep-20261014052221-a",
+      "owner": "iso-native-prep-20261014052221-b",
+      "own": {
+        "event": "mapping",
+        "sequence": 11,
+        "target": 130172600713216,
+        "code": 0,
+        "base": 130172600713216,
+        "bytes": 4096,
+        "own_buffer_alias": true,
+        "gpu_access_issued": false,
+        "received_host_utc": 1791955348.7582278
+      },
+      "peer": {
+        "event": "mapping",
+        "sequence": 12,
+        "target": 124817380474880,
+        "code": 500,
+        "base": 0,
+        "bytes": 0,
+        "own_buffer_alias": false,
+        "gpu_access_issued": false,
+        "received_host_utc": 1791955348.7613947
+      }
+    },
+    {
+      "requester": "iso-native-prep-20261014052221-b",
+      "owner": "iso-native-prep-20261014052221-a",
+      "own": {
+        "event": "mapping",
+        "sequence": 12,
+        "target": 124817380474880,
+        "code": 0,
+        "base": 124817380474880,
+        "bytes": 4096,
+        "own_buffer_alias": true,
+        "gpu_access_issued": false,
+        "received_host_utc": 1791955348.7736962
+      },
+      "peer": {
+        "event": "mapping",
+        "sequence": 13,
+        "target": 130172600713216,
+        "code": 500,
+        "base": 0,
+        "bytes": 0,
+        "own_buffer_alias": false,
+        "gpu_access_issued": false,
+        "received_host_utc": 1791955348.7784653
+      }
+    }
+  ],
+  "gpu_cross_access_executed": false,
+  "vmweave_end_to_end_test": false,
+  "limitation": "Native CUDA/HAMi control only. Failed address-range query is not proof of GPU read/write denial or exhaustive unmapped-address evidence."
+}

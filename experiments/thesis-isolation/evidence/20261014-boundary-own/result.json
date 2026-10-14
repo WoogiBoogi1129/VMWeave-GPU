@@ -1,0 +1,64 @@
+{
+  "status": "PASS_OWN_CONTROLS",
+  "sessions": [
+    "iso-own-boundary-20261014034315-a",
+    "iso-own-boundary-20261014034315-b"
+  ],
+  "trace_summary": [
+    {
+      "vm": "iso-own-boundary-20261014034315-a",
+      "complete_request_chains": 33,
+      "kernel_launches": 3,
+      "contexts": [
+        {
+          "pid": 114,
+          "context": "0x5b9072910760",
+          "context_query": 0,
+          "launch": 0
+        },
+        {
+          "pid": 114,
+          "context": "0x5b9072910760",
+          "context_query": 0,
+          "launch": 0
+        },
+        {
+          "pid": 114,
+          "context": "0x5b9072910760",
+          "context_query": 0,
+          "launch": 0
+        }
+      ]
+    },
+    {
+      "vm": "iso-own-boundary-20261014034315-b",
+      "complete_request_chains": 31,
+      "kernel_launches": 3,
+      "contexts": [
+        {
+          "pid": 112,
+          "context": "0x5a68dbb06760",
+          "context_query": 0,
+          "launch": 0
+        },
+        {
+          "pid": 112,
+          "context": "0x5a68dbb06760",
+          "context_query": 0,
+          "launch": 0
+        },
+        {
+          "pid": 112,
+          "context": "0x5a68dbb06760",
+          "context_query": 0,
+          "launch": 0
+        }
+      ]
+    }
+  ],
+  "cross_access_executed": false,
+  "residual_data_tested": false,
+  "gpu_boundary_proven": false,
+  "sharing_scope": "dedicated per-process CUDA contexts; no sharing API called by this probe; not a global sharing audit",
+  "probe_sha256": "268d0c64cc1660e4ecf7b59a7844eb2d413f439f9712298184c258d5c7cecbe9"
+}

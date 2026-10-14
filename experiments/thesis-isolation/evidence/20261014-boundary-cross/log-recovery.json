@@ -1,0 +1,13 @@
+{
+  "source": "commands.jsonl",
+  "command": [
+    "kubectl",
+    "logs",
+    "-n",
+    "vmweave-test-b",
+    "iso-cross-boundary-20261014045839-b-28f6a7db736e-worker"
+  ],
+  "utc": 1791954037.4913177,
+  "reason": "Final cleanup attempted logs after pod removal and overwrote snapshot; restored exact successful earlier audited stdout.",
+  "sha256": "4e5b6ad84df516661ab40dff7a86738edbe1b9d78de2c4602b5d365ed273ee32"
+}
