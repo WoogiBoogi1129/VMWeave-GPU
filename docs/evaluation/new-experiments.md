@@ -28,9 +28,9 @@ read-only로 마운트한 broker socket 디렉터리를 통해 GPU 작업을 수
 cgroup의 Worker Pod UID로 연결했습니다. 내부 Kubernetes의 `nvidia.com/gpu` 자원
 광고·할당이나 device plugin 경로를 검증한 결과는 아닙니다.
 
-- [결과 보고서](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/report.txt)
+- [결과 보고서](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/report.md)
 - [판정 및 실행 식별자](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/result.json)
-- [오류·해결 기록](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/errors.txt)
+- [오류·해결 기록](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/errors.md)
 - [실제 화면 6장의 색인](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/screenshots/index.json)
 - [GPU Pod 실행 중 화면](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/screenshots/original/S03_host-and-guest_2026-10-14T16-21-07-113Z.png)
 - [정상 완료 화면](../../experiments/evidence/results/2026-10-15-k8s-gpu-pod/run-20261015-0125-a/screenshots/original/S05_host-and-guest_2026-10-14T16-21-38-564Z.png)
