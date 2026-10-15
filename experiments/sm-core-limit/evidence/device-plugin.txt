@@ -1,0 +1,367 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "DaemonSet",
+    "metadata": {
+        "annotations": {
+            "deprecated.daemonset.template.generation": "2",
+            "meta.helm.sh/release-name": "hami",
+            "meta.helm.sh/release-namespace": "kube-system"
+        },
+        "creationTimestamp": "2026-09-21T15:12:58Z",
+        "generation": 2,
+        "labels": {
+            "app.kubernetes.io/component": "hami-device-plugin",
+            "app.kubernetes.io/instance": "hami",
+            "app.kubernetes.io/managed-by": "Helm",
+            "app.kubernetes.io/name": "hami",
+            "app.kubernetes.io/version": "2.10.0",
+            "helm.sh/chart": "hami-2.10.0"
+        },
+        "name": "hami-device-plugin",
+        "namespace": "kube-system",
+        "resourceVersion": "390483",
+        "uid": "37c1ffc1-3237-4496-81f2-a4690ae10b71"
+    },
+    "spec": {
+        "revisionHistoryLimit": 10,
+        "selector": {
+            "matchLabels": {
+                "app.kubernetes.io/component": "hami-device-plugin",
+                "app.kubernetes.io/instance": "hami",
+                "app.kubernetes.io/name": "hami"
+            }
+        },
+        "template": {
+            "metadata": {
+                "annotations": {
+                    "checksum/hami-scheduler-config": "25f59f38328307178da3b9304fdf140ede687e949004525067117a272a920da2",
+                    "checksum/hami-scheduler-device-config": "f0bee2e0e1b557aea9f321a300ba1f288944edbf533bcbef476d45f34e1cf172"
+                },
+                "labels": {
+                    "app.kubernetes.io/component": "hami-device-plugin",
+                    "app.kubernetes.io/instance": "hami",
+                    "app.kubernetes.io/name": "hami",
+                    "hami.io/webhook": "ignore"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "nvidia-device-plugin",
+                            "--config-file=/device-config.yaml",
+                            "--mig-strategy=none",
+                            "--disable-core-limit=false",
+                            "-v=4"
+                        ],
+                        "env": [
+                            {
+                                "name": "NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "NVIDIA_MIG_MONITOR_DEVICES",
+                                "value": "all"
+                            },
+                            {
+                                "name": "DEVICE_LIST_STRATEGY",
+                                "value": "cdi-annotations"
+                            },
+                            {
+                                "name": "HOOK_PATH",
+                                "value": "/usr/local"
+                            },
+                            {
+                                "name": "PASS_DEVICE_SPECS",
+                                "value": "false"
+                            },
+                            {
+                                "name": "NVIDIA_DRIVER_ROOT",
+                                "value": "/"
+                            },
+                            {
+                                "name": "NVIDIA_CDI_HOOK_PATH",
+                                "value": "/usr/local/nvidia/toolkit/nvidia-ctk"
+                            }
+                        ],
+                        "image": "docker.io/projecthami/hami:v2.10.0",
+                        "imagePullPolicy": "IfNotPresent",
+                        "lifecycle": {
+                            "postStart": {
+                                "exec": {
+                                    "command": [
+                                        "/bin/sh",
+                                        "-c",
+                                        "/k8s-vgpu/bin/vgpu-init.sh /usr/local/vgpu/"
+                                    ]
+                                }
+                            }
+                        },
+                        "name": "device-plugin",
+                        "resources": {},
+                        "securityContext": {
+                            "allowPrivilegeEscalation": true,
+                            "capabilities": {
+                                "add": [
+                                    "SYS_ADMIN"
+                                ],
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "privileged": true
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/lib/kubelet/device-plugins",
+                                "name": "device-plugin"
+                            },
+                            {
+                                "mountPath": "/usr/local/vgpu",
+                                "name": "lib"
+                            },
+                            {
+                                "mountPath": "/usrbin",
+                                "name": "usrbin"
+                            },
+                            {
+                                "mountPath": "/config",
+                                "name": "deviceconfig"
+                            },
+                            {
+                                "mountPath": "/tmp",
+                                "name": "hosttmp"
+                            },
+                            {
+                                "mountPath": "/device-config.yaml",
+                                "name": "device-config",
+                                "subPath": "device-config.yaml"
+                            },
+                            {
+                                "mountPath": "/var/run/cdi",
+                                "name": "cdi-root"
+                            },
+                            {
+                                "mountPath": "/driver-root",
+                                "name": "driver-root",
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    {
+                        "command": [
+                            "vGPUmonitor",
+                            "-v=4"
+                        ],
+                        "env": [
+                            {
+                                "name": "NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "NVIDIA_VISIBLE_DEVICES",
+                                "value": "all"
+                            },
+                            {
+                                "name": "NVIDIA_MIG_MONITOR_DEVICES",
+                                "value": "all"
+                            },
+                            {
+                                "name": "HOOK_PATH",
+                                "value": "/usr/local/vgpu"
+                            },
+                            {
+                                "name": "HAMI_RESYNC_INTERVAL",
+                                "value": "5m"
+                            }
+                        ],
+                        "image": "docker.io/projecthami/hami:v2.10.0",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "vgpu-monitor",
+                        "ports": [
+                            {
+                                "containerPort": 9394,
+                                "name": "metrics",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {},
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "add": [
+                                    "SYS_ADMIN"
+                                ],
+                                "drop": [
+                                    "ALL"
+                                ]
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/usr/local/vgpu/containers",
+                                "name": "ctrs"
+                            },
+                            {
+                                "mountPath": "/run/docker",
+                                "name": "dockers"
+                            },
+                            {
+                                "mountPath": "/run/containerd",
+                                "name": "containerds"
+                            },
+                            {
+                                "mountPath": "/sysinfo",
+                                "name": "sysinfo"
+                            },
+                            {
+                                "mountPath": "/hostvar",
+                                "name": "hostvar"
+                            },
+                            {
+                                "mountPath": "/tmp",
+                                "name": "hosttmp"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "hostPID": true,
+                "nodeSelector": {
+                    "gpu": "on"
+                },
+                "priorityClassName": "system-node-critical",
+                "restartPolicy": "Always",
+                "runtimeClassName": "nvidia",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "hami-device-plugin",
+                "serviceAccountName": "hami-device-plugin",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "hostPath": {
+                            "path": "/usr/local/vgpu/containers",
+                            "type": ""
+                        },
+                        "name": "ctrs"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/tmp",
+                            "type": ""
+                        },
+                        "name": "hosttmp"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/run/docker",
+                            "type": ""
+                        },
+                        "name": "dockers"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/run/containerd",
+                            "type": ""
+                        },
+                        "name": "containerds"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/lib/kubelet/device-plugins",
+                            "type": ""
+                        },
+                        "name": "device-plugin"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/usr/local/vgpu",
+                            "type": ""
+                        },
+                        "name": "lib"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/",
+                            "type": "Directory"
+                        },
+                        "name": "driver-root"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/run/cdi",
+                            "type": "DirectoryOrCreate"
+                        },
+                        "name": "cdi-root"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/usr/bin",
+                            "type": ""
+                        },
+                        "name": "usrbin"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/sys",
+                            "type": ""
+                        },
+                        "name": "sysinfo"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var",
+                            "type": ""
+                        },
+                        "name": "hostvar"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hami-device-plugin"
+                        },
+                        "name": "deviceconfig"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "name": "hami-scheduler-device"
+                        },
+                        "name": "device-config"
+                    }
+                ]
+            }
+        },
+        "updateStrategy": {
+            "rollingUpdate": {
+                "maxSurge": 0,
+                "maxUnavailable": 1
+            },
+            "type": "RollingUpdate"
+        }
+    },
+    "status": {
+        "currentNumberScheduled": 1,
+        "desiredNumberScheduled": 1,
+        "numberAvailable": 1,
+        "numberMisscheduled": 0,
+        "numberReady": 1,
+        "observedGeneration": 2,
+        "updatedNumberScheduled": 1
+    }
+}

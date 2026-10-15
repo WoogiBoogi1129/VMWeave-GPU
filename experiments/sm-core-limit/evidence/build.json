@@ -1,0 +1,26 @@
+{
+  "libvgpu-original.so": "f0414e380fcb16133ed75f3695e9b818201f464aaa99f80e0686a183379adf0e",
+  "sm-probe-guest": "cb797f0bdf90b5d3a3c5c23bac845e836e9b275ef51730abad04d7ea977c59ff",
+  "sm-probe": "a07caa5bee5e00da7ee1fee304d60a98a03404e9cbbb3688b345bb7656afbba2",
+  "libvgpu-patched.so": "c7ad52955e456797919afefd189b77dde1236507d6199ea6f6f2b76a5a813eab",
+  "commit": "b216ba1be1b8e21488d1c7370ed3357b3049aad1",
+  "patch_sha256": "1c5f26f796580e8ec9ed204f07e9f886f60c3ecc659214a763bd2fe3ac6d532f",
+  "flags": "upstream build.sh: Debug, DLSYM_HOOK_ENABLE=1, MULTIPROCESS_LIMIT_ENABLE=1, HOOK_MEMINFO_ENABLE=1, HOOK_NVML_ENABLE=1",
+  "unit_test": "actual delta function: scaling, direction, saturation, UBSan PASS",
+  "libvgpu-idle-reset.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8",
+  "idle_patch_sha256": "1a1062fc6c179f1ac5bd3f34b287c671266122b8dcea69a3edfd38e22d0242fc",
+  "activity_test": "actual idle predicate / 100% fast path / blocked producer / timeout boundary: PASS with UBSan",
+  "native_probe_current_source_rebuild": "SHA matches original tested binary",
+  "worker_image_original": "localhost/vmweave-worker@sha256:89ad53d0fd5af161fb7b6a8d458c76ebf0be3791cb899f1d348086dda0007d19",
+  "worker_image_canary": "sha256:be4a451d6d9f36ffbf11faafce6085ee7527d8577d9a19e0f334bd851afa0135",
+  "worker_base_history_normalization": {
+    "original_history_layers": 0,
+    "filesystem_layers": 15,
+    "normalized_manifest": "sha256:b7634b826178c639de92c780f47afe48faf0be2c19e4ef78ec80675dc1f90263"
+  },
+  "source_hashes": {
+    "experiments/sm-core-limit/probes/sm_probe.c": "acaa3a3b770d43c81290779a0f412bda10beb2272366fc5d7e5e0d23ef2e2e43",
+    "experiments/sm-core-limit/probes/memory_probe.c": "96493944e182002fca46382666a577f8f2f6ece673a195eca6ac3201f3db9b5d"
+  },
+  "reproduction_build": "runner/build.sh rebuilt all three libraries and both probes; SHA matches every tested artifact"
+}

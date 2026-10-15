@@ -1,0 +1,63 @@
+diff --git a/src/multiprocess/multiprocess_utilization_watcher.c b/src/multiprocess/multiprocess_utilization_watcher.c
+index 896c7e8..e4cffd8 100644
+--- a/src/multiprocess/multiprocess_utilization_watcher.c
++++ b/src/multiprocess/multiprocess_utilization_watcher.c
+@@ -29,6 +29,19 @@ static int g_sm_num[CUDA_DEVICE_MAX_COUNT];
+ static int g_max_thread_per_sm[CUDA_DEVICE_MAX_COUNT];
+ static volatile int64_t g_cur_cuda_cores[CUDA_DEVICE_MAX_COUNT] = {0};
+ static volatile int64_t g_total_cuda_cores[CUDA_DEVICE_MAX_COUNT] = {0};
++/* Per-process activity: an idle Worker must not bank future GPU runtime.
++ * Updated while waiting as well as submitting, so a throttled producer is
++ * never mistaken for an idle one. The 100% fast path remains unchanged. */
++static uint64_t g_last_activity_ns[CUDA_DEVICE_MAX_COUNT] = {0};
++static uint64_t monotonic_ns(void) {
++    struct timespec ts;
++    clock_gettime(CLOCK_MONOTONIC, &ts);
++    return (uint64_t)ts.tv_sec * 1000000000ULL + ts.tv_nsec;
++}
++static int device_is_idle(int dev, int userutil, uint64_t now) {
++    uint64_t last = __atomic_load_n(&g_last_activity_ns[dev], __ATOMIC_RELAXED);
++    return userutil == 0 && (last == 0 || (now > last && now - last > 1000000000ULL));
++}
+ extern int pidfound;
+ int cuda_to_nvml_map_array[CUDA_DEVICE_MAX_COUNT];
+ 
+@@ -60,6 +73,7 @@ void rate_limiter(int grids, int blocks) {
+ 
+   do {
+ CHECK:
++      __atomic_store_n(&g_last_activity_ns[device_id], monotonic_ns(), __ATOMIC_RELAXED);
+       before_cuda_cores = g_cur_cuda_cores[device_id];
+       if (before_cuda_cores < 0) {
+         nanosleep(&g_cycle, NULL);
+@@ -87,7 +101,7 @@ static int64_t delta(int up_limit, int user_current, int64_t share, int device_i
+   int utilization_diff =
+       abs(up_limit - user_current) < 5 ? 5 : abs(up_limit - user_current);
+   int64_t increment =
+-      (int64_t)g_sm_num[device_id] * (int64_t)g_sm_num[device_id] *
++      (int64_t)g_sm_num[device_id] *
+       (int64_t)g_max_thread_per_sm[device_id] * (int64_t)utilization_diff / 2560;
+ 
+   /* Accelerate cuda cores allocation when utilization vary widely */
+@@ -190,7 +204,7 @@ int setspec() {
+             CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT, cu_dev));
+         CHECK_CU_RESULT(cuDeviceGetAttribute(&g_max_thread_per_sm[dev],
+             CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR, cu_dev));
+-        g_total_cuda_cores[dev] = g_max_thread_per_sm[dev] * g_sm_num[dev] * FACTOR;
++        g_total_cuda_cores[dev] = (int64_t)g_max_thread_per_sm[dev] * g_sm_num[dev] * FACTOR;
+         LOG_INFO("setspec: device %d sm_num=%d max_threads_per_sm=%d total_cores=%ld FACTOR=%d",
+                  dev, g_sm_num[dev], g_max_thread_per_sm[dev], g_total_cuda_cores[dev], FACTOR);
+     }
+@@ -297,6 +311,12 @@ void* utilization_watcher() {
+                 continue;
+             }
+ 
++            if (device_is_idle(dev, userutil[dev], monotonic_ns())) {
++                share[dev] = 0;
++                __atomic_store_n(&g_cur_cuda_cores[dev], 0, __ATOMIC_RELAXED);
++                continue;
++            }
++
+             if ((share[dev] == g_total_cuda_cores[dev]) && (g_cur_cuda_cores[dev] < 0)) {
+               g_total_cuda_cores[dev] *= 2;
+               share[dev] = g_total_cuda_cores[dev];
