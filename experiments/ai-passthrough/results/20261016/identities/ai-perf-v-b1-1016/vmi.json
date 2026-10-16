@@ -1,0 +1,207 @@
+{
+  "apiVersion": "kubevirt.io/v1",
+  "kind": "VirtualMachineInstance",
+  "metadata": {
+    "annotations": {
+      "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f\",\"pvc\":{\"name\":\"ai-perf-v-b1-1016\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+      "kubevirt.io/latest-observed-api-version": "v1",
+      "kubevirt.io/pci-topology-version": "v3",
+      "kubevirt.io/storage-observed-api-version": "v1",
+      "kubevirt.io/vm-generation": "3",
+      "vmweave.io/shm-allocation": "7ad3bb81151ee5d0a2302e08de01750c",
+      "vmweave.io/shm-channel": "ai-perf-v-b1-1016",
+      "vmweave.io/shm-channel-uid": "a9f2df01-6387-46cc-a23c-98be37495073",
+      "vmweave.io/shm-generation": "e7887f09609b3074adcc33bcc671d049"
+    },
+    "creationTimestamp": "2026-10-16T10:10:36Z",
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize",
+      "kubevirt.io/foregroundDeleteVirtualMachine"
+    ],
+    "generation": 8,
+    "labels": {
+      "kubevirt.io/nodeName": "gpu-4"
+    },
+    "name": "ai-perf-v-b1-1016",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "ai-perf-v-b1-1016",
+        "uid": "1a232227-4090-408f-92da-e909db37587b"
+      }
+    ],
+    "resourceVersion": "11407935",
+    "uid": "00ffa0a1-ccce-4853-9e00-3a9811a16503"
+  },
+  "spec": {
+    "architecture": "amd64",
+    "domain": {
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "devices": {
+        "disks": [
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "root"
+          },
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "cloudinit"
+          }
+        ],
+        "interfaces": [
+          {
+            "masquerade": {},
+            "name": "default"
+          }
+        ]
+      },
+      "features": {
+        "acpi": {
+          "enabled": true
+        }
+      },
+      "firmware": {
+        "serial": "7474ea61-c4b4-4206-8a3d-a7a8c219f3e3",
+        "uuid": "d1ec7313-10b3-4c87-8f67-c0ecde0480cf"
+      },
+      "machine": {
+        "type": "q35"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      },
+      "resources": {
+        "requests": {
+          "memory": "16Gi"
+        }
+      }
+    },
+    "evictionStrategy": "None",
+    "networks": [
+      {
+        "name": "default",
+        "pod": {}
+      }
+    ],
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "volumes": [
+      {
+        "containerDisk": {
+          "image": "localhost/flyt-evidence-guest@sha256:47e520785c49e6db93631ef4876dcb40b73b23ffc766327e6b02cdfe3496c052",
+          "imagePullPolicy": "IfNotPresent"
+        },
+        "name": "root"
+      },
+      {
+        "cloudInitNoCloud": {
+          "userData": "#cloud-config\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKdMWCpvXPb7efaG24ws5p+j4N7Ze1TiUIFj96x2FXdr ubuntu@gpu-4\n# vmweave-layout-b64: etO7gRUe5dCiMC4I3gF1DOeIfwlgmzB0rcwzvMZx0EkAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL6CAq1zVY5e2Rqchyrp50QAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+        },
+        "name": "cloudinit"
+      }
+    ]
+  },
+  "status": {
+    "activePods": {
+      "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": "gpu-4"
+    },
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-16T10:10:42Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "status": "True",
+        "type": "LiveMigratable"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "status": "True",
+        "type": "StorageLiveMigratable"
+      }
+    ],
+    "currentCPUTopology": {
+      "cores": 8
+    },
+    "guestOSInfo": {},
+    "interfaces": [
+      {
+        "infoSource": "domain",
+        "ipAddress": "10.85.0.177",
+        "ipAddresses": [
+          "10.85.0.177"
+        ],
+        "linkState": "up",
+        "mac": "f2:b0:21:69:5d:49",
+        "name": "default",
+        "podInterfaceName": "eth0",
+        "queueCount": 1
+      }
+    ],
+    "launcherContainerImageVersion": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+    "machine": {
+      "type": "pc-q35-rhel9.8.0"
+    },
+    "memory": {
+      "guestAtBoot": "16Gi",
+      "guestCurrent": "16Gi",
+      "guestRequested": "16Gi",
+      "memoryOverhead": "373293057"
+    },
+    "migrationMethod": "BlockMigration",
+    "migrationTransport": "Unix",
+    "nodeName": "gpu-4",
+    "phase": "Running",
+    "phaseTransitionTimestamps": [
+      {
+        "phase": "Pending",
+        "phaseTransitionTimestamp": "2026-10-16T10:10:36Z"
+      },
+      {
+        "phase": "Scheduling",
+        "phaseTransitionTimestamp": "2026-10-16T10:10:36Z"
+      },
+      {
+        "phase": "Scheduled",
+        "phaseTransitionTimestamp": "2026-10-16T10:10:42Z"
+      },
+      {
+        "phase": "Running",
+        "phaseTransitionTimestamp": "2026-10-16T10:10:45Z"
+      }
+    ],
+    "qosClass": "Burstable",
+    "runtimeUser": 107,
+    "selinuxContext": "none",
+    "virtualMachineRevisionName": "revision-start-vm-1a232227-4090-408f-92da-e909db37587b-3",
+    "volumeStatus": [
+      {
+        "name": "cloudinit",
+        "size": 1048576,
+        "target": "vdb"
+      },
+      {
+        "name": "root",
+        "target": "vda"
+      }
+    ]
+  }
+}

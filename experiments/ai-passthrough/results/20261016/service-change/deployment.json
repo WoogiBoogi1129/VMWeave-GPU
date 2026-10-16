@@ -1,0 +1,374 @@
+{
+  "kind": "Deployment",
+  "metadata": {
+    "name": "qwen3-embedding-kserve",
+    "namespace": "aap-serving",
+    "uid": "b2f8c95c-4798-4024-ade2-a9060af79575",
+    "creationTimestamp": "2026-10-15T16:12:16Z",
+    "generation": 4,
+    "managedFields": [
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:labels": {
+              ".": {},
+              "f:aap.io/model": {},
+              "f:aap.io/role": {},
+              "f:app.kubernetes.io/component": {},
+              "f:app.kubernetes.io/name": {},
+              "f:app.kubernetes.io/part-of": {},
+              "f:kserve.io/component": {},
+              "f:llm-d.ai/role": {}
+            },
+            "f:ownerReferences": {
+              ".": {},
+              "k:{\"uid\":\"78da79d4-b9a1-47b3-9008-2c25cdb69d7e\"}": {}
+            }
+          },
+          "f:spec": {
+            "f:progressDeadlineSeconds": {},
+            "f:replicas": {},
+            "f:revisionHistoryLimit": {},
+            "f:selector": {},
+            "f:strategy": {
+              "f:rollingUpdate": {
+                ".": {},
+                "f:maxSurge": {},
+                "f:maxUnavailable": {}
+              },
+              "f:type": {}
+            },
+            "f:template": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:nvidia.com/use-gpuuuid": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:aap.io/model": {},
+                  "f:aap.io/role": {},
+                  "f:app.kubernetes.io/component": {},
+                  "f:app.kubernetes.io/name": {},
+                  "f:app.kubernetes.io/part-of": {},
+                  "f:kserve.io/component": {},
+                  "f:llm-d.ai/role": {}
+                }
+              },
+              "f:spec": {
+                "f:containers": {
+                  "k:{\"name\":\"main\"}": {
+                    ".": {},
+                    "f:args": {},
+                    "f:command": {},
+                    "f:env": {
+                      ".": {},
+                      "k:{\"name\":\"GPU_MEMORY_UTILIZATION\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"HF_HUB_CACHE\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"HF_HUB_OFFLINE\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"HOME\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MODEL_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"VLLM_CACHE_ROOT\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"VLLM_LOGGING_LEVEL\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"VLLM_NO_USAGE_STATS\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      }
+                    },
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:lifecycle": {
+                      ".": {},
+                      "f:preStop": {
+                        ".": {},
+                        "f:exec": {
+                          ".": {},
+                          "f:command": {}
+                        }
+                      }
+                    },
+                    "f:livenessProbe": {
+                      ".": {},
+                      "f:failureThreshold": {},
+                      "f:httpGet": {
+                        ".": {},
+                        "f:path": {},
+                        "f:port": {},
+                        "f:scheme": {}
+                      },
+                      "f:periodSeconds": {},
+                      "f:successThreshold": {},
+                      "f:timeoutSeconds": {}
+                    },
+                    "f:name": {},
+                    "f:ports": {
+                      ".": {},
+                      "k:{\"containerPort\":8000,\"protocol\":\"TCP\"}": {
+                        ".": {},
+                        "f:containerPort": {},
+                        "f:protocol": {}
+                      }
+                    },
+                    "f:readinessProbe": {
+                      ".": {},
+                      "f:failureThreshold": {},
+                      "f:httpGet": {
+                        ".": {},
+                        "f:path": {},
+                        "f:port": {},
+                        "f:scheme": {}
+                      },
+                      "f:periodSeconds": {},
+                      "f:successThreshold": {},
+                      "f:timeoutSeconds": {}
+                    },
+                    "f:resources": {
+                      ".": {},
+                      "f:limits": {
+                        ".": {},
+                        "f:cpu": {},
+                        "f:memory": {},
+                        "f:nvidia.com/gpu": {},
+                        "f:nvidia.com/gpumem": {}
+                      },
+                      "f:requests": {
+                        ".": {},
+                        "f:cpu": {},
+                        "f:memory": {},
+                        "f:nvidia.com/gpu": {},
+                        "f:nvidia.com/gpumem": {}
+                      }
+                    },
+                    "f:securityContext": {
+                      ".": {},
+                      "f:allowPrivilegeEscalation": {},
+                      "f:capabilities": {
+                        ".": {},
+                        "f:drop": {}
+                      },
+                      "f:readOnlyRootFilesystem": {},
+                      "f:runAsGroup": {},
+                      "f:runAsNonRoot": {},
+                      "f:runAsUser": {},
+                      "f:seccompProfile": {
+                        ".": {},
+                        "f:type": {}
+                      }
+                    },
+                    "f:startupProbe": {
+                      ".": {},
+                      "f:failureThreshold": {},
+                      "f:httpGet": {
+                        ".": {},
+                        "f:path": {},
+                        "f:port": {},
+                        "f:scheme": {}
+                      },
+                      "f:periodSeconds": {},
+                      "f:successThreshold": {},
+                      "f:timeoutSeconds": {}
+                    },
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {},
+                    "f:volumeMounts": {
+                      ".": {},
+                      "k:{\"mountPath\":\"/dev/shm\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/home\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/mnt/models\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {},
+                        "f:readOnly": {},
+                        "f:subPath": {}
+                      },
+                      "k:{\"mountPath\":\"/models\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/tmp\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/var/run/kserve/tls\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {},
+                        "f:readOnly": {}
+                      }
+                    }
+                  }
+                },
+                "f:dnsPolicy": {},
+                "f:enableServiceLinks": {},
+                "f:restartPolicy": {},
+                "f:schedulerName": {},
+                "f:securityContext": {},
+                "f:terminationGracePeriodSeconds": {},
+                "f:volumes": {
+                  ".": {},
+                  "k:{\"name\":\"dshm\"}": {
+                    ".": {},
+                    "f:emptyDir": {
+                      ".": {},
+                      "f:medium": {},
+                      "f:sizeLimit": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"home\"}": {
+                    ".": {},
+                    "f:emptyDir": {},
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"kserve-pvc-source\"}": {
+                    ".": {},
+                    "f:name": {},
+                    "f:persistentVolumeClaim": {
+                      ".": {},
+                      "f:claimName": {}
+                    }
+                  },
+                  "k:{\"name\":\"model-cache\"}": {
+                    ".": {},
+                    "f:emptyDir": {},
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"tls-certs\"}": {
+                    ".": {},
+                    "f:name": {},
+                    "f:secret": {
+                      ".": {},
+                      "f:defaultMode": {},
+                      "f:secretName": {}
+                    }
+                  },
+                  "k:{\"name\":\"tmp-dir\"}": {
+                    ".": {},
+                    "f:emptyDir": {},
+                    "f:name": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "manager": "manager",
+        "operation": "Update",
+        "time": "2026-10-16T11:34:30Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:deployment.kubernetes.io/revision": {}
+            }
+          },
+          "f:status": {
+            "f:availableReplicas": {},
+            "f:conditions": {
+              ".": {},
+              "k:{\"type\":\"Available\"}": {
+                ".": {},
+                "f:lastTransitionTime": {},
+                "f:lastUpdateTime": {},
+                "f:message": {},
+                "f:reason": {},
+                "f:status": {},
+                "f:type": {}
+              },
+              "k:{\"type\":\"Progressing\"}": {
+                ".": {},
+                "f:lastTransitionTime": {},
+                "f:lastUpdateTime": {},
+                "f:message": {},
+                "f:reason": {},
+                "f:status": {},
+                "f:type": {}
+              }
+            },
+            "f:observedGeneration": {},
+            "f:readyReplicas": {},
+            "f:replicas": {},
+            "f:terminatingReplicas": {},
+            "f:updatedReplicas": {}
+          }
+        },
+        "manager": "kube-controller-manager",
+        "operation": "Update",
+        "subresource": "status",
+        "time": "2026-10-16T11:38:01Z"
+      }
+    ]
+  },
+  "replicas": 1,
+  "status": {
+    "availableReplicas": 1,
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-15T16:12:17Z",
+        "lastUpdateTime": "2026-10-15T16:12:17Z",
+        "message": "Deployment has minimum availability.",
+        "reason": "MinimumReplicasAvailable",
+        "status": "True",
+        "type": "Available"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T16:12:17Z",
+        "lastUpdateTime": "2026-10-15T16:18:48Z",
+        "message": "ReplicaSet \"qwen3-embedding-kserve-559c48d657\" has successfully progressed.",
+        "reason": "NewReplicaSetAvailable",
+        "status": "True",
+        "type": "Progressing"
+      }
+    ],
+    "observedGeneration": 4,
+    "readyReplicas": 1,
+    "replicas": 1,
+    "terminatingReplicas": 0,
+    "updatedReplicas": 1
+  }
+}

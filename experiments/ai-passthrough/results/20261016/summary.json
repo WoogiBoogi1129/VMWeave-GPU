@@ -1,0 +1,4791 @@
+{
+  "runs": [
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792148006.7691267,
+      "end_utc": 1792148126.770458,
+      "steps": 30083,
+      "elapsed_seconds": 120.00128908199997,
+      "samples_per_second": 256705.5090462416,
+      "guest_cpu_seconds": 111.35273700000002,
+      "warmup_seconds": 30.010716961999947,
+      "warmup_steps": 7420,
+      "final_loss": 0.42257291078567505,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792148005.1034613,
+      "end_utc_guest": 1792148125.1047926,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 118.3487479686737,
+      "host_cpu_average_cores": 1.2880575639072256,
+      "host_cpu_seconds_per_sample": 5.017646752860304e-06,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 152.44000000000005
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 10.14102564102564,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2362.2820512820513,
+        "power_W": 143.8226923076923,
+        "temperature_C": 43.41025641025641
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792148163.6571774,
+      "end_utc": 1792148283.6615665,
+      "steps": 25916,
+      "elapsed_seconds": 120.00435914500008,
+      "samples_per_second": 221141.8334223544,
+      "guest_cpu_seconds": 112.75619900000002,
+      "warmup_seconds": 30.003774831999863,
+      "warmup_steps": 6500,
+      "final_loss": 0.4838787317276001,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792148161.991512,
+      "end_utc_guest": 1792148281.995901,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 118.4922022819519,
+      "host_cpu_average_cores": 1.2915617825706505,
+      "host_cpu_seconds_per_sample": 5.840422694262113e-06,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 153.0399999999999
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 15.064102564102564,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2355.923076923077,
+        "power_W": 134.97974358974358,
+        "temperature_C": 41.17948717948718
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792147690.489661,
+      "end_utc": 1792147810.4911914,
+      "steps": 31137,
+      "elapsed_seconds": 120.00148877999993,
+      "samples_per_second": 8303.096987627228,
+      "guest_cpu_seconds": 111.029773,
+      "warmup_seconds": 30.02138177300003,
+      "warmup_steps": 7480,
+      "final_loss": 1.0664012034533599e-10,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792147688.8239956,
+      "end_utc_guest": 1792147808.825526,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 118.46836161613464,
+      "host_cpu_average_cores": 1.2865882326783298,
+      "host_cpu_seconds_per_sample": 0.00015495281273909307,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 152.41999999999996
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 2.064935064935065,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 97.23584415584416,
+        "temperature_C": 36.94805194805195
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792147847.1133654,
+      "end_utc": 1792147967.1140783,
+      "steps": 29677,
+      "elapsed_seconds": 120.00067526100008,
+      "samples_per_second": 7913.822134204594,
+      "guest_cpu_seconds": 111.137627,
+      "warmup_seconds": 30.01678661799997,
+      "warmup_steps": 7360,
+      "final_loss": 1.1772854913161268e-10,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792147845.4477,
+      "end_utc_guest": 1792147965.448413,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 118.67643594741821,
+      "host_cpu_average_cores": 1.287365927197984,
+      "host_cpu_seconds_per_sample": 0.00016267309340120458,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 152.7800000000002
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.423076923076923,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 97.42153846153846,
+        "temperature_C": 37.256410256410255
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792147371.8736763,
+      "end_utc": 1792147491.8769934,
+      "steps": 29989,
+      "elapsed_seconds": 120.00327509599998,
+      "samples_per_second": 255899.14921433342,
+      "guest_cpu_seconds": 111.20329299999997,
+      "warmup_seconds": 30.077341192000006,
+      "warmup_steps": 7400,
+      "final_loss": 0.606704592704773,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792147370.208011,
+      "end_utc_guest": 1792147490.211328,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.42304682731628,
+      "host_cpu_average_cores": 1.28556057354271,
+      "host_cpu_seconds_per_sample": 5.0237000689125515e-06,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 152.23999999999992
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.0,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 90.07205128205128,
+        "temperature_C": 35.98717948717949
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792147530.9894912,
+      "end_utc": 1792147650.9913208,
+      "steps": 29710,
+      "elapsed_seconds": 120.00175718900005,
+      "samples_per_second": 253521.62095496987,
+      "guest_cpu_seconds": 111.72007400000003,
+      "warmup_seconds": 30.053319190000025,
+      "warmup_steps": 7320,
+      "final_loss": 0.6079065799713135,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792147529.3238258,
+      "end_utc_guest": 1792147649.3256555,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.36388111114502,
+      "host_cpu_average_cores": 1.284766928664705,
+      "host_cpu_seconds_per_sample": 5.067681895631708e-06,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 152.07000000000008
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.0384615384615383,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 90.35333333333334,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792147057.0167978,
+      "end_utc": 1792147177.02009,
+      "steps": 29907,
+      "elapsed_seconds": 120.00325047400001,
+      "samples_per_second": 7974.983979349372,
+      "guest_cpu_seconds": 111.40422299999997,
+      "warmup_seconds": 30.011471004999997,
+      "warmup_steps": 7340,
+      "final_loss": 1.954376799284674e-10,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792147055.3511324,
+      "end_utc_guest": 1792147175.3544247,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.34990048408508,
+      "host_cpu_average_cores": 1.2921007907443374,
+      "host_cpu_seconds_per_sample": 0.00016201923340412172,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 152.91999999999996
+      },
+      "gpu_samples": 76,
+      "gpu_means": {
+        "utilization": 1.881578947368421,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2391.4473684210525,
+        "power_W": 88.99236842105263,
+        "temperature_C": 34.10526315789474
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792147214.9114316,
+      "end_utc": 1792147334.9246583,
+      "steps": 29690,
+      "elapsed_seconds": 120.01146437999998,
+      "samples_per_second": 7916.577011273697,
+      "guest_cpu_seconds": 111.62145400000001,
+      "warmup_seconds": 30.029988043999992,
+      "warmup_steps": 7400,
+      "final_loss": 1.979017921760473e-10,
+      "guest_clock_offset_seconds": -1.6656653881072998,
+      "start_utc_guest": 1792147213.2457662,
+      "end_utc_guest": 1792147333.258993,
+      "block": 1,
+      "backend": "passthrough",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.3365273475647,
+      "host_cpu_average_cores": 1.2935988864232149,
+      "host_cpu_seconds_per_sample": 0.00016340381513134397,
+      "host_cpu_by_pod_seconds": {
+        "74f62ed3-52e5-452c-a191-f4ccd2d6f432": 153.08
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 1.9870129870129871,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.72974025974025,
+        "temperature_C": 35.23376623376623
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792146528.8678405,
+      "end_utc": 1792146648.976549,
+      "steps": 598,
+      "elapsed_seconds": 120.10863303499991,
+      "samples_per_second": 5098.317952062274,
+      "guest_cpu_seconds": 19.909374,
+      "warmup_seconds": 32.98917391600003,
+      "warmup_steps": 160,
+      "final_loss": 1.0189809799194336,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792146528.1676977,
+      "end_utc_guest": 1792146648.276406,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 119.60553407669067,
+      "host_cpu_average_cores": 1.366575562425033,
+      "host_cpu_seconds_per_sample": 0.0002680443972452232,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 31.720000000000002,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 131.73000000000002
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 809.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.57274336283186,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792146689.0370603,
+      "end_utc": 1792146809.1284194,
+      "steps": 460,
+      "elapsed_seconds": 120.09131946000002,
+      "samples_per_second": 3922.348443818155,
+      "guest_cpu_seconds": 20.562027,
+      "warmup_seconds": 32.40413662800006,
+      "warmup_steps": 120,
+      "final_loss": 1.0236461162567139,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792146688.3369174,
+      "end_utc_guest": 1792146808.4282765,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 119.83308291435242,
+      "host_cpu_average_cores": 1.416470275752792,
+      "host_cpu_seconds_per_sample": 0.00036112810884643106,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 37.35000000000001,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 132.38999999999993
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.23893805309734514,
+        "memory_MiB": 809.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.44238938053097,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792146208.6798675,
+      "end_utc": 1792146328.8221173,
+      "steps": 666,
+      "elapsed_seconds": 120.14221387600003,
+      "samples_per_second": 177.38977260728961,
+      "guest_cpu_seconds": 18.539481000000002,
+      "warmup_seconds": 30.380685104999998,
+      "warmup_steps": 160,
+      "final_loss": 0.513473391532898,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792146207.9797246,
+      "end_utc_guest": 1792146328.1219745,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 118.59497141838074,
+      "host_cpu_average_cores": 1.3939039575026957,
+      "host_cpu_seconds_per_sample": 0.007857859768435234,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 33.92999999999999,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 131.38
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.65522123893805,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792146368.7726333,
+      "end_utc": 1792146488.8908982,
+      "steps": 528,
+      "elapsed_seconds": 120.11813041799996,
+      "samples_per_second": 140.66152995558193,
+      "guest_cpu_seconds": 19.926195,
+      "warmup_seconds": 32.92654083799994,
+      "warmup_steps": 140,
+      "final_loss": 0.5979925394058228,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792146368.0724905,
+      "end_utc_guest": 1792146488.1907554,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 118.63696146011353,
+      "host_cpu_average_cores": 1.3897861001390663,
+      "host_cpu_seconds_per_sample": 0.009880356772586881,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 33.96999999999999,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 130.90999999999988
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.58842105263157,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792145891.260547,
+      "end_utc": 1792146011.2624116,
+      "steps": 638,
+      "elapsed_seconds": 120.00180550300001,
+      "samples_per_second": 5444.184754234113,
+      "guest_cpu_seconds": 19.265048999999998,
+      "warmup_seconds": 31.401338139000018,
+      "warmup_steps": 160,
+      "final_loss": 0.9698941707611084,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792145890.560404,
+      "end_utc_guest": 1792146010.5622687,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.51173806190491,
+      "host_cpu_average_cores": 1.3712565747294367,
+      "host_cpu_seconds_per_sample": 0.00025187546650817967,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 32.36,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 130.14999999999992
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.08097345132744,
+        "temperature_C": 35.176991150442475
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792146050.9032564,
+      "end_utc": 1792146171.061482,
+      "steps": 543,
+      "elapsed_seconds": 120.15809527800002,
+      "samples_per_second": 4627.503446301757,
+      "guest_cpu_seconds": 19.746812000000002,
+      "warmup_seconds": 33.13880211000003,
+      "warmup_steps": 160,
+      "final_loss": 0.9737721681594849,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792146050.2031136,
+      "end_utc_guest": 1792146170.361339,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.71323895454407,
+      "host_cpu_average_cores": 1.402202496250131,
+      "host_cpu_seconds_per_sample": 0.0003030149004795996,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 34.38999999999999,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 132.07
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.40424778761061,
+        "temperature_C": 35.80530973451327
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792145575.2045135,
+      "end_utc": 1792145695.2896233,
+      "steps": 637,
+      "elapsed_seconds": 120.085078653,
+      "samples_per_second": 169.7463184323006,
+      "guest_cpu_seconds": 19.910823999999998,
+      "warmup_seconds": 31.50811250999999,
+      "warmup_steps": 160,
+      "final_loss": 0.40909868478775024,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792145574.5043707,
+      "end_utc_guest": 1792145694.5894804,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.69352912902832,
+      "host_cpu_average_cores": 1.374969648282932,
+      "host_cpu_seconds_per_sample": 0.008100144150291583,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 31.93,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 131.27
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2391.5087719298244,
+        "power_W": 86.86605263157895,
+        "temperature_C": 32.58771929824562
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792145733.891691,
+      "end_utc": 1792145854.0128129,
+      "steps": 546,
+      "elapsed_seconds": 120.12101404000003,
+      "samples_per_second": 145.45331755342877,
+      "guest_cpu_seconds": 19.425563,
+      "warmup_seconds": 31.483196675999977,
+      "warmup_steps": 140,
+      "final_loss": 0.47538238763809204,
+      "guest_clock_offset_seconds": -0.7001428604125977,
+      "start_utc_guest": 1792145733.191548,
+      "end_utc_guest": 1792145853.31267,
+      "block": 1,
+      "backend": "vmweave",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.71871280670166,
+      "host_cpu_average_cores": 1.4127511664743406,
+      "host_cpu_seconds_per_sample": 0.009712746262768468,
+      "host_cpu_by_pod_seconds": {
+        "355749a8-5a95-4827-a8db-f72d28855a1f": 34.629999999999995,
+        "eb64aca6-0853-4afa-a79b-dfdbfe30b19b": 133.09
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2383.9210526315787,
+        "power_W": 87.85359649122807,
+        "temperature_C": 34.780701754385966
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792149390.541709,
+      "end_utc": 1792149510.54332,
+      "steps": 29662,
+      "elapsed_seconds": 120.00156715699995,
+      "samples_per_second": 253112.4277757253,
+      "guest_cpu_seconds": 111.40613200000001,
+      "warmup_seconds": 30.036413242000094,
+      "warmup_steps": 7360,
+      "final_loss": 0.42844271659851074,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792149389.9772036,
+      "end_utc_guest": 1792149509.9788146,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 118.44742441177368,
+      "host_cpu_average_cores": 1.2888418702063855,
+      "host_cpu_seconds_per_sample": 5.091973877111978e-06,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 152.65999999999988
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 10.128205128205128,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2355.448717948718,
+        "power_W": 145.16051282051282,
+        "temperature_C": 42.97435897435897
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792149547.2848992,
+      "end_utc": 1792149667.287667,
+      "steps": 25912,
+      "elapsed_seconds": 120.00273419099994,
+      "samples_per_second": 221110.69534272334,
+      "guest_cpu_seconds": 112.758099,
+      "warmup_seconds": 30.01350109400005,
+      "warmup_steps": 6240,
+      "final_loss": 0.4839409589767456,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792149546.720394,
+      "end_utc_guest": 1792149666.7231617,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 118.22525334358215,
+      "host_cpu_average_cores": 1.2849200632163118,
+      "host_cpu_seconds_per_sample": 5.811207192961315e-06,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 151.91000000000005
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 14.782051282051283,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2370.730769230769,
+        "power_W": 135.90384615384616,
+        "temperature_C": 44.1025641025641
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792149076.586068,
+      "end_utc": 1792149196.5869534,
+      "steps": 30647,
+      "elapsed_seconds": 120.00084854399995,
+      "samples_per_second": 8172.475544124269,
+      "guest_cpu_seconds": 111.06107799999998,
+      "warmup_seconds": 30.015989228999956,
+      "warmup_steps": 7580,
+      "final_loss": 1.101514851553631e-10,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792149076.0215626,
+      "end_utc_guest": 1792149196.022448,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 118.8917920589447,
+      "host_cpu_average_cores": 1.2894077660465932,
+      "host_cpu_seconds_per_sample": 0.00015777444167130406,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 153.29999999999998
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.1025641025641026,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2385.576923076923,
+        "power_W": 93.6826923076923,
+        "temperature_C": 34.06410256410256
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792149233.7356303,
+      "end_utc": 1792149353.7395878,
+      "steps": 29922,
+      "elapsed_seconds": 120.00391792599999,
+      "samples_per_second": 7978.9394925459155,
+      "guest_cpu_seconds": 111.22510099999998,
+      "warmup_seconds": 30.03503110600002,
+      "warmup_steps": 7360,
+      "final_loss": 1.1573132036035716e-10,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792149233.171125,
+      "end_utc_guest": 1792149353.1750824,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 118.34801578521729,
+      "host_cpu_average_cores": 1.2818127874261216,
+      "host_cpu_seconds_per_sample": 0.0001606495184759349,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 151.70000000000002
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.4358974358974357,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 95.73820512820512,
+        "temperature_C": 36.294871794871796
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792148760.7239642,
+      "end_utc": 1792148880.7270186,
+      "steps": 29712,
+      "elapsed_seconds": 120.00301651699999,
+      "samples_per_second": 253536.02670221118,
+      "guest_cpu_seconds": 111.696371,
+      "warmup_seconds": 30.052281652999966,
+      "warmup_steps": 7280,
+      "final_loss": 0.6078977584838867,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792148760.1594589,
+      "end_utc_guest": 1792148880.1625133,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.39895629882812,
+      "host_cpu_average_cores": 1.2961262902747301,
+      "host_cpu_seconds_per_sample": 5.112197690930471e-06,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 153.45999999999998
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 1.9871794871794872,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2387.3846153846152,
+        "power_W": 89.47051282051282,
+        "temperature_C": 34.64102564102564
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792148920.0596895,
+      "end_utc": 1792149040.0606487,
+      "steps": 29639,
+      "elapsed_seconds": 120.000922866,
+      "samples_per_second": 252917.521591821,
+      "guest_cpu_seconds": 111.71334099999999,
+      "warmup_seconds": 30.07610452299997,
+      "warmup_steps": 7260,
+      "final_loss": 0.6082144975662231,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792148919.4951842,
+      "end_utc_guest": 1792149039.4961433,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.4416561126709,
+      "host_cpu_average_cores": 1.292619548095135,
+      "host_cpu_seconds_per_sample": 5.110834314521199e-06,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 153.10000000000005
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.08974358974359,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.70461538461538,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792149706.3884933,
+      "end_utc": 1792149826.391153,
+      "steps": 30366,
+      "elapsed_seconds": 120.00262121900005,
+      "samples_per_second": 8097.423124005466,
+      "guest_cpu_seconds": 111.25732699999999,
+      "warmup_seconds": 30.04928125099991,
+      "warmup_steps": 7560,
+      "final_loss": 1.8998219664112526e-10,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792149705.823988,
+      "end_utc_guest": 1792149825.8266478,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.49935913085938,
+      "host_cpu_average_cores": 1.2920744983179184,
+      "host_cpu_seconds_per_sample": 0.0001595661333897026,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 153.10999999999999
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 1.9871794871794872,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 91.59025641025642,
+        "temperature_C": 38.6025641025641
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792148602.437492,
+      "end_utc": 1792148722.4384465,
+      "steps": 29261,
+      "elapsed_seconds": 120.000900745,
+      "samples_per_second": 7802.874763329761,
+      "guest_cpu_seconds": 111.659944,
+      "warmup_seconds": 30.015286876999994,
+      "warmup_steps": 6880,
+      "final_loss": 2.0321799798495022e-10,
+      "guest_clock_offset_seconds": -0.5645053386688232,
+      "start_utc_guest": 1792148601.8729866,
+      "end_utc_guest": 1792148721.8739412,
+      "block": 2,
+      "backend": "passthrough",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.54738593101501,
+      "host_cpu_average_cores": 1.2925632969179723,
+      "host_cpu_seconds_per_sample": 0.0001656521905224569,
+      "host_cpu_by_pod_seconds": {
+        "67ef7d42-f833-48e3-8591-a46296ad52d0": 153.23000000000002
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 1.974025974025974,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2390.7272727272725,
+        "power_W": 88.52922077922078,
+        "temperature_C": 32.98701298701299
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792150862.06461,
+      "end_utc": 1792150982.2652717,
+      "steps": 583,
+      "elapsed_seconds": 120.20052003399996,
+      "samples_per_second": 4966.6340863678015,
+      "guest_cpu_seconds": 19.715178,
+      "warmup_seconds": 33.50860032800006,
+      "warmup_steps": 160,
+      "final_loss": 1.0194728374481201,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792150861.8411942,
+      "end_utc_guest": 1792150982.0418558,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 118.6713719367981,
+      "host_cpu_average_cores": 1.359384301092564,
+      "host_cpu_seconds_per_sample": 0.00027370333256958513,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 31.980000000000015,
+        "43516618-5479-4d60-b60a-11c80687c691": 129.33999999999997
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 808.858407079646,
+        "clock_MHz": 2385.6814159292035,
+        "power_W": 89.00530973451328,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792151022.1821563,
+      "end_utc": 1792151142.21754,
+      "steps": 449,
+      "elapsed_seconds": 120.0353524159998,
+      "samples_per_second": 3830.3382357439173,
+      "guest_cpu_seconds": 20.4594,
+      "warmup_seconds": 32.86439853999991,
+      "warmup_steps": 120,
+      "final_loss": 1.0240370035171509,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792151021.9587405,
+      "end_utc_guest": 1792151141.9941242,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 118.52012634277344,
+      "host_cpu_average_cores": 1.4096340018809543,
+      "host_cpu_seconds_per_sample": 0.00036801815273819526,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 37.080000000000005,
+        "43516618-5479-4d60-b60a-11c80687c691": 129.99000000000004
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.26548672566371684,
+        "memory_MiB": 809.0,
+        "clock_MHz": 2382.83185840708,
+        "power_W": 89.0133628318584,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792150543.5810966,
+      "end_utc": 1792150663.6235938,
+      "steps": 736,
+      "elapsed_seconds": 120.04246564200002,
+      "samples_per_second": 196.19723632000867,
+      "guest_cpu_seconds": 19.940853,
+      "warmup_seconds": 34.026583923999965,
+      "warmup_steps": 180,
+      "final_loss": 0.4730754494667053,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792150543.3576808,
+      "end_utc_guest": 1792150663.400178,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 119.38619947433472,
+      "host_cpu_average_cores": 1.4127261001909854,
+      "host_cpu_seconds_per_sample": 0.007200540265953339,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 32.0,
+        "43516618-5479-4d60-b60a-11c80687c691": 136.65999999999997
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2377.0,
+        "power_W": 87.91097345132744,
+        "temperature_C": 34.7787610619469
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792150701.4554698,
+      "end_utc": 1792150821.477843,
+      "steps": 530,
+      "elapsed_seconds": 120.02230226799998,
+      "samples_per_second": 141.3070710985839,
+      "guest_cpu_seconds": 20.12146,
+      "warmup_seconds": 30.992006299999957,
+      "warmup_steps": 140,
+      "final_loss": 0.5967188477516174,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792150701.232054,
+      "end_utc_guest": 1792150821.2544272,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 118.61594820022583,
+      "host_cpu_average_cores": 1.3964395388080248,
+      "host_cpu_seconds_per_sample": 0.009882304742087455,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 34.019999999999996,
+        "43516618-5479-4d60-b60a-11c80687c691": 131.61999999999995
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2390.637168141593,
+        "power_W": 87.79955752212389,
+        "temperature_C": 34.05309734513274
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792150223.5372417,
+      "end_utc": 1792150343.570856,
+      "steps": 651,
+      "elapsed_seconds": 120.03355226399998,
+      "samples_per_second": 5553.647188028204,
+      "guest_cpu_seconds": 19.194872000000004,
+      "warmup_seconds": 32.881948609999995,
+      "warmup_steps": 180,
+      "final_loss": 0.9693959951400757,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792150223.3138258,
+      "end_utc_guest": 1792150343.3474402,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.44512724876404,
+      "host_cpu_average_cores": 1.384607402679888,
+      "host_cpu_seconds_per_sample": 0.0002493149737103639,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 32.86,
+        "43516618-5479-4d60-b60a-11c80687c691": 131.14
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.1675221238938,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792150382.4839528,
+      "end_utc": 1792150502.4994888,
+      "steps": 551,
+      "elapsed_seconds": 120.01544786900001,
+      "samples_per_second": 4701.261462739906,
+      "guest_cpu_seconds": 18.810949,
+      "warmup_seconds": 32.044937798000035,
+      "warmup_steps": 140,
+      "final_loss": 0.9734284281730652,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792150382.260537,
+      "end_utc_guest": 1792150502.276073,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.62688422203064,
+      "host_cpu_average_cores": 1.402633147546659,
+      "host_cpu_seconds_per_sample": 0.00029835250786694196,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 35.2,
+        "43516618-5479-4d60-b60a-11c80687c691": 131.18999999999994
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2376.9380530973453,
+        "power_W": 88.05796460176991,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792151182.1528409,
+      "end_utc": 1792151302.345997,
+      "steps": 611,
+      "elapsed_seconds": 120.19311799399998,
+      "samples_per_second": 162.67154331561673,
+      "guest_cpu_seconds": 20.420006,
+      "warmup_seconds": 33.218984011999964,
+      "warmup_steps": 160,
+      "final_loss": 0.4272189736366272,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792151181.929425,
+      "end_utc_guest": 1792151302.1225812,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.57164573669434,
+      "host_cpu_average_cores": 1.3620456981649252,
+      "host_cpu_seconds_per_sample": 0.008372980734081267,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 31.63000000000001,
+        "43516618-5479-4d60-b60a-11c80687c691": 129.86999999999998
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.17377192982457,
+        "temperature_C": 35.04385964912281
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792150063.4933848,
+      "end_utc": 1792150183.524738,
+      "steps": 552,
+      "elapsed_seconds": 120.03131647299999,
+      "samples_per_second": 147.16159514899067,
+      "guest_cpu_seconds": 19.670563,
+      "warmup_seconds": 31.821414564999998,
+      "warmup_steps": 140,
+      "final_loss": 0.47077077627182007,
+      "guest_clock_offset_seconds": -0.22341585159301758,
+      "start_utc_guest": 1792150063.269969,
+      "end_utc_guest": 1792150183.3013222,
+      "block": 2,
+      "backend": "vmweave",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 119.58103322982788,
+      "host_cpu_average_cores": 1.4057413241857633,
+      "host_cpu_seconds_per_sample": 0.009552365362461245,
+      "host_cpu_by_pod_seconds": {
+        "c46e3222-5ec7-4514-b684-c3284b29c16d": 34.81999999999999,
+        "43516618-5479-4d60-b60a-11c80687c691": 133.28
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2390.221238938053,
+        "power_W": 87.35221238938053,
+        "temperature_C": 33.72566371681416
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792153611.6499789,
+      "end_utc": 1792153731.6515656,
+      "steps": 29715,
+      "elapsed_seconds": 120.00155026599998,
+      "samples_per_second": 253564.7242269103,
+      "guest_cpu_seconds": 111.51906299999999,
+      "warmup_seconds": 30.036185519000014,
+      "warmup_steps": 7460,
+      "final_loss": 0.4276997447013855,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792153611.5335298,
+      "end_utc_guest": 1792153731.5351164,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 118.31599354743958,
+      "host_cpu_average_cores": 1.29010453636429,
+      "host_cpu_seconds_per_sample": 5.087870721361855e-06,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 152.63999999999987
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 9.807692307692308,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2357.1794871794873,
+        "power_W": 144.12371794871794,
+        "temperature_C": 42.717948717948715
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792153768.4104056,
+      "end_utc": 1792153888.4179478,
+      "steps": 25312,
+      "elapsed_seconds": 120.00750334700001,
+      "samples_per_second": 215982.22841995273,
+      "guest_cpu_seconds": 113.113928,
+      "warmup_seconds": 30.00173482899993,
+      "warmup_steps": 6300,
+      "final_loss": 0.49335774779319763,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792153768.2939565,
+      "end_utc_guest": 1792153888.3014987,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 118.37889122962952,
+      "host_cpu_average_cores": 1.2919533069737021,
+      "host_cpu_seconds_per_sample": 5.981757464144905e-06,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 152.94000000000003
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 14.256410256410257,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2366.051282051282,
+        "power_W": 137.48846153846154,
+        "temperature_C": 44.205128205128204
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792153297.4860988,
+      "end_utc": 1792153417.4922664,
+      "steps": 30429,
+      "elapsed_seconds": 120.00418267400005,
+      "samples_per_second": 8114.117177442072,
+      "guest_cpu_seconds": 111.11718799999997,
+      "warmup_seconds": 30.047819934000017,
+      "warmup_steps": 7520,
+      "final_loss": 1.1175114306150036e-10,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792153297.3696496,
+      "end_utc_guest": 1792153417.3758173,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 118.3792986869812,
+      "host_cpu_average_cores": 1.282572220684203,
+      "host_cpu_seconds_per_sample": 0.0001580667610088084,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 151.83000000000004
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.0384615384615383,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 94.94371794871795,
+        "temperature_C": 35.57692307692308
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792153454.7446423,
+      "end_utc": 1792153574.7475944,
+      "steps": 30065,
+      "elapsed_seconds": 120.00291998800003,
+      "samples_per_second": 8017.138250437618,
+      "guest_cpu_seconds": 111.259283,
+      "warmup_seconds": 30.026238276999948,
+      "warmup_steps": 7440,
+      "final_loss": 1.1460993959433452e-10,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792153454.6281931,
+      "end_utc_guest": 1792153574.6311452,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 118.8207700252533,
+      "host_cpu_average_cores": 1.2852130142528457,
+      "host_cpu_seconds_per_sample": 0.0001603082015185022,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 152.70999999999998
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.4358974358974357,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 95.84833333333333,
+        "temperature_C": 36.07692307692308
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792152977.4312403,
+      "end_utc": 1792153097.4367456,
+      "steps": 29854,
+      "elapsed_seconds": 120.00545961600001,
+      "samples_per_second": 254742.54336278644,
+      "guest_cpu_seconds": 111.44948699999998,
+      "warmup_seconds": 30.064918542,
+      "warmup_steps": 7180,
+      "final_loss": 0.6072799563407898,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792152977.3147912,
+      "end_utc_guest": 1792153097.3202965,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.38333129882812,
+      "host_cpu_average_cores": 1.2888638824907808,
+      "host_cpu_seconds_per_sample": 5.059476385360852e-06,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 152.57999999999998
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.0,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2385.8076923076924,
+        "power_W": 88.52884615384616,
+        "temperature_C": 32.84615384615385
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792153138.122911,
+      "end_utc": 1792153258.1258924,
+      "steps": 29708,
+      "elapsed_seconds": 120.00294771300003,
+      "samples_per_second": 253502.03957285348,
+      "guest_cpu_seconds": 111.626259,
+      "warmup_seconds": 30.035328481999983,
+      "warmup_steps": 7180,
+      "final_loss": 0.6079151630401611,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792153138.0064619,
+      "end_utc_guest": 1792153258.0094433,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.1985821723938,
+      "host_cpu_average_cores": 1.2902862047665058,
+      "host_cpu_seconds_per_sample": 5.0898454582086025e-06,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 152.50999999999996
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.08974358974359,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2384.076923076923,
+        "power_W": 89.51576923076924,
+        "temperature_C": 34.52564102564103
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792153924.8922076,
+      "end_utc": 1792154044.8951912,
+      "steps": 29928,
+      "elapsed_seconds": 120.00294654300001,
+      "samples_per_second": 7980.6040400585825,
+      "guest_cpu_seconds": 111.68529000000001,
+      "warmup_seconds": 30.0586718269999,
+      "warmup_steps": 7460,
+      "final_loss": 1.9484984459250398e-10,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792153924.7757585,
+      "end_utc_guest": 1792154044.778742,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.35463738441467,
+      "host_cpu_average_cores": 1.2874020263786006,
+      "host_cpu_seconds_per_sample": 0.00016131636401411418,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 152.36999999999992
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 1.9102564102564104,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 91.63858974358975,
+        "temperature_C": 38.73076923076923
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792154081.7719505,
+      "end_utc": 1792154201.7721524,
+      "steps": 29797,
+      "elapsed_seconds": 120.0001719899999,
+      "samples_per_second": 7945.855278269596,
+      "guest_cpu_seconds": 111.79430100000002,
+      "warmup_seconds": 30.016616662999922,
+      "warmup_steps": 7220,
+      "final_loss": 1.9670334805432788e-10,
+      "guest_clock_offset_seconds": -0.11644911766052246,
+      "start_utc_guest": 1792154081.6555014,
+      "end_utc_guest": 1792154201.6557033,
+      "block": 3,
+      "backend": "passthrough",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.3885293006897,
+      "host_cpu_average_cores": 1.2877092138951989,
+      "host_cpu_seconds_per_sample": 0.00016206049176566793,
+      "host_cpu_by_pod_seconds": {
+        "7b18d14f-ecfe-4b8d-a52d-5f1dc02aa8dc": 152.44999999999985
+      },
+      "gpu_samples": 79,
+      "gpu_means": {
+        "utilization": 2.0,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 90.71822784810126,
+        "temperature_C": 37.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792152120.9644926,
+      "end_utc": 1792152241.1454391,
+      "steps": 602,
+      "elapsed_seconds": 120.18086346100006,
+      "samples_per_second": 5129.335754856212,
+      "guest_cpu_seconds": 19.181479000000003,
+      "warmup_seconds": 33.823383624999906,
+      "warmup_steps": 180,
+      "final_loss": 1.018850326538086,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792152120.887031,
+      "end_utc_guest": 1792152241.0679777,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 119.49992513656616,
+      "host_cpu_average_cores": 1.3714652943313916,
+      "host_cpu_seconds_per_sample": 0.0002673767832478023,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 32.94,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 130.95
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 808.859649122807,
+        "clock_MHz": 2377.0,
+        "power_W": 89.73859649122807,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792152281.3637617,
+      "end_utc": 1792152401.4046755,
+      "steps": 457,
+      "elapsed_seconds": 120.0408787670001,
+      "samples_per_second": 3898.405316644908,
+      "guest_cpu_seconds": 20.329389,
+      "warmup_seconds": 32.533438907000004,
+      "warmup_steps": 120,
+      "final_loss": 1.023752212524414,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792152281.2863002,
+      "end_utc_guest": 1792152401.327214,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 119.78121328353882,
+      "host_cpu_average_cores": 1.4139112082551812,
+      "host_cpu_seconds_per_sample": 0.0003626896367646139,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 37.75,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 131.60999999999993
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.23893805309734514,
+        "memory_MiB": 809.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.47106194690265,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792151798.6479082,
+      "end_utc": 1792151918.7523808,
+      "steps": 635,
+      "elapsed_seconds": 120.10443299600001,
+      "samples_per_second": 169.18609491022485,
+      "guest_cpu_seconds": 19.651585000000004,
+      "warmup_seconds": 33.273174339000036,
+      "warmup_steps": 160,
+      "final_loss": 0.5318851470947266,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792151798.5704467,
+      "end_utc_guest": 1792151918.6749194,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 119.6141414642334,
+      "host_cpu_average_cores": 1.3735834073526205,
+      "host_cpu_seconds_per_sample": 0.008118772456338593,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 32.64,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 131.66000000000005
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.58530973451327,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792151959.3438406,
+      "end_utc": 1792152079.3518977,
+      "steps": 535,
+      "elapsed_seconds": 120.00792935699997,
+      "samples_per_second": 142.6572401651175,
+      "guest_cpu_seconds": 19.673814,
+      "warmup_seconds": 33.27904472799992,
+      "warmup_steps": 140,
+      "final_loss": 0.5935410857200623,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792151959.266379,
+      "end_utc_guest": 1792152079.2744362,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 119.50074458122253,
+      "host_cpu_average_cores": 1.3958072025788002,
+      "host_cpu_seconds_per_sample": 0.009784341831954929,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 34.82000000000001,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 131.97999999999993
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.68008849557522,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792151479.4679625,
+      "end_utc": 1792151599.5130608,
+      "steps": 632,
+      "elapsed_seconds": 120.045067492,
+      "samples_per_second": 5391.041993817266,
+      "guest_cpu_seconds": 19.724446,
+      "warmup_seconds": 31.341962689,
+      "warmup_steps": 160,
+      "final_loss": 0.9701265096664429,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792151479.390501,
+      "end_utc_guest": 1792151599.4355993,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.50709915161133,
+      "host_cpu_average_cores": 1.372575998944181,
+      "host_cpu_seconds_per_sample": 0.0002546030990888819,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 32.47,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 130.19000000000003
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2391.380530973451,
+        "power_W": 87.26761061946902,
+        "temperature_C": 33.5929203539823
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792151637.867387,
+      "end_utc": 1792151757.8957446,
+      "steps": 554,
+      "elapsed_seconds": 120.02826203199999,
+      "samples_per_second": 4726.353530377343,
+      "guest_cpu_seconds": 19.401305999999998,
+      "warmup_seconds": 31.854359657000003,
+      "warmup_steps": 140,
+      "final_loss": 0.9733004570007324,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792151637.7899256,
+      "end_utc_guest": 1792151757.818283,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 119.458899974823,
+      "host_cpu_average_cores": 1.4142102433188786,
+      "host_cpu_seconds_per_sample": 0.00029921804076428677,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 35.26,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 133.68
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2383.238938053097,
+        "power_W": 88.28513274336284,
+        "temperature_C": 35.26548672566372
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792152440.5114832,
+      "end_utc": 1792152560.5166807,
+      "steps": 622,
+      "elapsed_seconds": 120.00510303600004,
+      "samples_per_second": 165.85961343684733,
+      "guest_cpu_seconds": 20.234972,
+      "warmup_seconds": 32.32643944999995,
+      "warmup_steps": 160,
+      "final_loss": 0.41946476697921753,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792152440.4340217,
+      "end_utc_guest": 1792152560.4392192,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 119.55294299125671,
+      "host_cpu_average_cores": 1.366507556505304,
+      "host_cpu_seconds_per_sample": 0.008238940922321726,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 32.17999999999999,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 131.19000000000014
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.7169298245614,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792152599.7799094,
+      "end_utc": 1792152719.8068101,
+      "steps": 546,
+      "elapsed_seconds": 120.0268208760001,
+      "samples_per_second": 145.56746460901726,
+      "guest_cpu_seconds": 19.909881000000002,
+      "warmup_seconds": 31.80985296799986,
+      "warmup_steps": 140,
+      "final_loss": 0.47538238763809204,
+      "guest_clock_offset_seconds": -0.07746148109436035,
+      "start_utc_guest": 1792152599.702448,
+      "end_utc_guest": 1792152719.7293487,
+      "block": 3,
+      "backend": "vmweave",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.51096963882446,
+      "host_cpu_average_cores": 1.4034143886163355,
+      "host_cpu_seconds_per_sample": 0.009640989436656026,
+      "host_cpu_by_pod_seconds": {
+        "4fd3f1a7-64e1-47e2-af21-1530fef851d2": 34.47000000000001,
+        "dc9fe2cb-8a2e-41d8-82cb-85b878bbde53": 131.84999999999994
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.2912389380531,
+        "temperature_C": 35.6283185840708
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792155003.2897928,
+      "end_utc": 1792155123.2920291,
+      "steps": 30244,
+      "elapsed_seconds": 120.00217310599999,
+      "samples_per_second": 258077.4597526979,
+      "guest_cpu_seconds": 111.38338200000001,
+      "warmup_seconds": 30.010157264999975,
+      "warmup_steps": 7440,
+      "final_loss": 0.4203474223613739,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792155001.9729223,
+      "end_utc_guest": 1792155121.9751587,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 118.47724771499634,
+      "host_cpu_average_cores": 1.2886018450332026,
+      "host_cpu_seconds_per_sample": 4.993081713792449e-06,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 152.67000000000007
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 10.181818181818182,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2374.2727272727275,
+        "power_W": 139.04285714285714,
+        "temperature_C": 43.62337662337662
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792155162.9563189,
+      "end_utc": 1792155282.9589438,
+      "steps": 25892,
+      "elapsed_seconds": 120.00258941499999,
+      "samples_per_second": 220940.29911562806,
+      "guest_cpu_seconds": 112.78126799999998,
+      "warmup_seconds": 30.03195606600002,
+      "warmup_steps": 6340,
+      "final_loss": 0.4842525124549866,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792155161.6394484,
+      "end_utc_guest": 1792155281.6420734,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 118.42254114151001,
+      "host_cpu_average_cores": 1.2918148734639574,
+      "host_cpu_seconds_per_sample": 5.846895648438912e-06,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 152.98000000000005
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 14.974025974025974,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2381.285714285714,
+        "power_W": 131.35792207792207,
+        "temperature_C": 44.01298701298701
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792154683.3098755,
+      "end_utc": 1792154803.3408263,
+      "steps": 30455,
+      "elapsed_seconds": 120.03091496900004,
+      "samples_per_second": 8119.241615809528,
+      "guest_cpu_seconds": 111.13278299999999,
+      "warmup_seconds": 30.035892675999975,
+      "warmup_steps": 7340,
+      "final_loss": 1.1156924689670333e-10,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792154681.993005,
+      "end_utc_guest": 1792154802.0239558,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 118.49910140037537,
+      "host_cpu_average_cores": 1.2901363655363185,
+      "host_cpu_seconds_per_sample": 0.00015889862952522636,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 152.87999999999994
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 2.064935064935065,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 97.16818181818182,
+        "temperature_C": 37.01298701298701
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792154843.5361226,
+      "end_utc": 1792154963.5400662,
+      "steps": 29926,
+      "elapsed_seconds": 120.00390056099997,
+      "samples_per_second": 7980.007279123563,
+      "guest_cpu_seconds": 111.20294099999998,
+      "warmup_seconds": 30.03123946300002,
+      "warmup_steps": 7240,
+      "final_loss": 1.1569840918657093e-10,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792154842.219252,
+      "end_utc_guest": 1792154962.2231958,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 118.37902569770813,
+      "host_cpu_average_cores": 1.28384229473298,
+      "host_cpu_seconds_per_sample": 0.00016088234632211803,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 151.98000000000002
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.371794871794872,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 98.0398717948718,
+        "temperature_C": 37.8974358974359
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792155635.6291604,
+      "end_utc": 1792155755.6322944,
+      "steps": 30262,
+      "elapsed_seconds": 120.00309447599989,
+      "samples_per_second": 258229.0743027258,
+      "guest_cpu_seconds": 111.41427199999998,
+      "warmup_seconds": 30.042712979999806,
+      "warmup_steps": 7440,
+      "final_loss": 0.6055765748023987,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792155634.31229,
+      "end_utc_guest": 1792155754.315424,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.5289044380188,
+      "host_cpu_average_cores": 1.292005530010447,
+      "host_cpu_seconds_per_sample": 5.003330990126269e-06,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 153.1400000000001
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.0384615384615383,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.83423076923077,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792154522.6704612,
+      "end_utc": 1792154642.673118,
+      "steps": 29336,
+      "elapsed_seconds": 120.002597268,
+      "samples_per_second": 250328.44858275837,
+      "guest_cpu_seconds": 111.63769300000001,
+      "warmup_seconds": 30.061522980999996,
+      "warmup_steps": 7040,
+      "final_loss": 0.609520435333252,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792154521.3535907,
+      "end_utc_guest": 1792154641.3562477,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.41293263435364,
+      "host_cpu_average_cores": 1.2941154026916013,
+      "host_cpu_seconds_per_sample": 5.169669727984464e-06,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 153.24
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 2.090909090909091,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2385.6753246753246,
+        "power_W": 89.55233766233766,
+        "temperature_C": 34.58441558441559
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792155319.7731342,
+      "end_utc": 1792155439.7763355,
+      "steps": 29825,
+      "elapsed_seconds": 120.0031615260001,
+      "samples_per_second": 7953.123799936037,
+      "guest_cpu_seconds": 111.515327,
+      "warmup_seconds": 30.047087464000015,
+      "warmup_steps": 7460,
+      "final_loss": 1.962505435937345e-10,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792155318.4562638,
+      "end_utc_guest": 1792155438.459465,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.46768307685852,
+      "host_cpu_average_cores": 1.2881994146959974,
+      "host_cpu_seconds_per_sample": 0.00016197401764403034,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 152.61000000000007
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 1.9230769230769231,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 91.53551282051282,
+        "temperature_C": 38.43589743589744
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792155478.9287288,
+      "end_utc": 1792155598.930289,
+      "steps": 29819,
+      "elapsed_seconds": 120.00147770800004,
+      "samples_per_second": 7951.635415039448,
+      "guest_cpu_seconds": 111.46372,
+      "warmup_seconds": 30.07235357799982,
+      "warmup_steps": 7240,
+      "final_loss": 1.9645482463026553e-10,
+      "guest_clock_offset_seconds": -1.3168704509735107,
+      "start_utc_guest": 1792155477.6118584,
+      "end_utc_guest": 1792155597.6134186,
+      "block": 4,
+      "backend": "passthrough",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.60982966423035,
+      "host_cpu_average_cores": 1.2897750585517866,
+      "host_cpu_seconds_per_sample": 0.00016220248932846578,
+      "host_cpu_by_pod_seconds": {
+        "4042eb56-baa3-4459-8a72-a8afe1587b1b": 152.98000000000013
+      },
+      "gpu_samples": 77,
+      "gpu_means": {
+        "utilization": 1.9870129870129871,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 90.22142857142858,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792156472.7941043,
+      "end_utc": 1792156592.891525,
+      "steps": 618,
+      "elapsed_seconds": 120.09729006700002,
+      "samples_per_second": 5269.327889471569,
+      "guest_cpu_seconds": 18.646785,
+      "warmup_seconds": 30.48882546699997,
+      "warmup_steps": 160,
+      "final_loss": 1.0183289051055908,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792156473.1635032,
+      "end_utc_guest": 1792156593.2609239,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 119.00229668617249,
+      "host_cpu_average_cores": 1.3775364389168798,
+      "host_cpu_seconds_per_sample": 0.0002614254545953156,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 33.24,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 130.69000000000005
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 808.858407079646,
+        "clock_MHz": 2376.9380530973453,
+        "power_W": 89.22964601769911,
+        "temperature_C": 35.690265486725664
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792156633.0119386,
+      "end_utc": 1792156753.0708318,
+      "steps": 484,
+      "elapsed_seconds": 120.0588634930001,
+      "samples_per_second": 4128.108376012541,
+      "guest_cpu_seconds": 20.89066,
+      "warmup_seconds": 33.17907967199994,
+      "warmup_steps": 120,
+      "final_loss": 1.02280592918396,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792156633.3813374,
+      "end_utc_guest": 1792156753.4402306,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 119.0873076915741,
+      "host_cpu_average_cores": 1.4417153542900005,
+      "host_cpu_seconds_per_sample": 0.000349243581556014,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 37.989999999999995,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 133.70000000000005
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.19298245614035087,
+        "memory_MiB": 809.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.25087719298246,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792156154.7555127,
+      "end_utc": 1792156274.762878,
+      "steps": 618,
+      "elapsed_seconds": 120.007331717,
+      "samples_per_second": 164.78993172380126,
+      "guest_cpu_seconds": 19.806275000000003,
+      "warmup_seconds": 33.05069206500002,
+      "warmup_steps": 160,
+      "final_loss": 0.5421198606491089,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792156155.1249115,
+      "end_utc_guest": 1792156275.1322768,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 119.00892424583435,
+      "host_cpu_average_cores": 1.3618306444415487,
+      "host_cpu_seconds_per_sample": 0.008264040346373019,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 32.04,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 130.03000000000006
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2379.8245614035086,
+        "power_W": 87.96570175438596,
+        "temperature_C": 34.666666666666664
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792156315.0542517,
+      "end_utc": 1792156435.1902106,
+      "steps": 573,
+      "elapsed_seconds": 120.13588277099996,
+      "samples_per_second": 152.62717164156214,
+      "guest_cpu_seconds": 19.258004999999997,
+      "warmup_seconds": 32.31150390099998,
+      "warmup_steps": 140,
+      "final_loss": 0.5696923732757568,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792156315.4236505,
+      "end_utc_guest": 1792156435.5596094,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 120.01475191116333,
+      "host_cpu_average_cores": 1.422325149881196,
+      "host_cpu_seconds_per_sample": 0.009318951105386797,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 35.879999999999995,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 134.81999999999994
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.27035398230089,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792157113.0452483,
+      "end_utc": 1792157233.1783469,
+      "steps": 631,
+      "elapsed_seconds": 120.13296210900012,
+      "samples_per_second": 5378.573779057698,
+      "guest_cpu_seconds": 20.406494000000002,
+      "warmup_seconds": 33.65470884299998,
+      "warmup_steps": 180,
+      "final_loss": 0.9701653718948364,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792157113.414647,
+      "end_utc_guest": 1792157233.5477457,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.88047480583191,
+      "host_cpu_average_cores": 1.3694427134977547,
+      "host_cpu_seconds_per_sample": 0.0002546107518000199,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 31.64000000000002,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 131.1599999999999
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.36628318584071,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792155994.8178604,
+      "end_utc": 1792156114.9441457,
+      "steps": 557,
+      "elapsed_seconds": 120.126194123,
+      "samples_per_second": 4748.073508563727,
+      "guest_cpu_seconds": 19.616764000000003,
+      "warmup_seconds": 32.796317714,
+      "warmup_steps": 140,
+      "final_loss": 0.9731729030609131,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792155995.1872592,
+      "end_utc_guest": 1792156115.3135445,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.90970373153687,
+      "host_cpu_average_cores": 1.4130049502043986,
+      "host_cpu_seconds_per_sample": 0.0002975954242612025,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 34.980000000000004,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 133.04000000000002
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2387.3333333333335,
+        "power_W": 86.7488596491228,
+        "temperature_C": 32.55263157894737
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792156793.8220127,
+      "end_utc": 1792156913.8299773,
+      "steps": 624,
+      "elapsed_seconds": 120.00792485599993,
+      "samples_per_second": 166.38901159202635,
+      "guest_cpu_seconds": 20.233775,
+      "warmup_seconds": 33.247615662000044,
+      "warmup_steps": 180,
+      "final_loss": 0.41806668043136597,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792156794.1914115,
+      "end_utc_guest": 1792156914.199376,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 119.00964903831482,
+      "host_cpu_average_cores": 1.3634188598250627,
+      "host_cpu_seconds_per_sample": 0.008194164066363143,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 31.81999999999999,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 130.44000000000008
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.37902654867257,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792156951.683531,
+      "end_utc": 1792157071.8876846,
+      "steps": 549,
+      "elapsed_seconds": 120.20408445599992,
+      "samples_per_second": 146.15143969114192,
+      "guest_cpu_seconds": 20.192473999999997,
+      "warmup_seconds": 31.30687129199987,
+      "warmup_steps": 140,
+      "final_loss": 0.4730710983276367,
+      "guest_clock_offset_seconds": 0.369398832321167,
+      "start_utc_guest": 1792156952.0529299,
+      "end_utc_guest": 1792157072.2570834,
+      "block": 4,
+      "backend": "vmweave",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.8303496837616,
+      "host_cpu_average_cores": 1.4082261008684664,
+      "host_cpu_seconds_per_sample": 0.00963538986577508,
+      "host_cpu_by_pod_seconds": {
+        "9eefce9c-beb1-45b7-a4cc-43a8ab157fb6": 34.27,
+        "5449df4b-c7ab-47e6-b065-23f6c18c7c14": 133.07
+      },
+      "gpu_samples": 114,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.43877192982455,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792159225.8307607,
+      "end_utc": 1792159345.8346798,
+      "steps": 30709,
+      "elapsed_seconds": 120.00387979200002,
+      "samples_per_second": 262041.66110716303,
+      "guest_cpu_seconds": 110.991689,
+      "warmup_seconds": 30.025240193000002,
+      "warmup_steps": 7580,
+      "final_loss": 0.4139793813228607,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792159225.4681158,
+      "end_utc_guest": 1792159345.472035,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 118.29461884498596,
+      "host_cpu_average_cores": 1.2884778824955023,
+      "host_cpu_seconds_per_sample": 4.9170726404782405e-06,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 152.42000000000004
+      },
+      "gpu_samples": 79,
+      "gpu_means": {
+        "utilization": 10.177215189873417,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2357.5822784810125,
+        "power_W": 144.1912658227848,
+        "temperature_C": 43.10126582278481
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792159382.8401093,
+      "end_utc": 1792159502.8425007,
+      "steps": 26651,
+      "elapsed_seconds": 120.00232907700001,
+      "samples_per_second": 227417.4527270121,
+      "guest_cpu_seconds": 112.49655599999997,
+      "warmup_seconds": 30.00940897299995,
+      "warmup_steps": 6480,
+      "final_loss": 0.4725457429885864,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792159382.4774644,
+      "end_utc_guest": 1792159502.4798558,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 118.45293235778809,
+      "host_cpu_average_cores": 1.2846452761538165,
+      "host_cpu_seconds_per_sample": 5.648842077638966e-06,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 152.17000000000002
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 14.692307692307692,
+        "memory_MiB": 857.0,
+        "clock_MHz": 2355.141025641026,
+        "power_W": 142.9628205128205,
+        "temperature_C": 44.294871794871796
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792158908.6378732,
+      "end_utc": 1792159028.6451964,
+      "steps": 31734,
+      "elapsed_seconds": 120.007277264,
+      "samples_per_second": 8461.88683846282,
+      "guest_cpu_seconds": 110.625415,
+      "warmup_seconds": 30.076313052000003,
+      "warmup_steps": 7560,
+      "final_loss": 1.0265496785955008e-10,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792158908.2752283,
+      "end_utc_guest": 1792159028.2825515,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 118.56943368911743,
+      "host_cpu_average_cores": 1.2818649399853712,
+      "host_cpu_seconds_per_sample": 0.0001514868922801896,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 151.98999999999998
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.08974358974359,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2383.8333333333335,
+        "power_W": 94.80384615384615,
+        "temperature_C": 35.19230769230769
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792159066.591108,
+      "end_utc": 1792159186.592599,
+      "steps": 30611,
+      "elapsed_seconds": 120.001456286,
+      "samples_per_second": 8162.834271489417,
+      "guest_cpu_seconds": 111.27224000000001,
+      "warmup_seconds": 30.073763154999995,
+      "warmup_steps": 7380,
+      "final_loss": 1.1041030589797884e-10,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792159066.2284632,
+      "end_utc_guest": 1792159186.229954,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 119.69517111778259,
+      "host_cpu_average_cores": 1.2860167921772687,
+      "host_cpu_seconds_per_sample": 0.00015754537571208315,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 153.93000000000004
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.5,
+        "memory_MiB": 821.0,
+        "clock_MHz": 2377.0,
+        "power_W": 97.23384615384616,
+        "temperature_C": 37.05128205128205
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792159857.9545767,
+      "end_utc": 1792159977.9568255,
+      "steps": 30881,
+      "elapsed_seconds": 120.002212525,
+      "samples_per_second": 263513.00809068145,
+      "guest_cpu_seconds": 110.955411,
+      "warmup_seconds": 30.062473510000018,
+      "warmup_steps": 7500,
+      "final_loss": 0.6029325723648071,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792159857.5919318,
+      "end_utc_guest": 1792159977.5941806,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 118.3988745212555,
+      "host_cpu_average_cores": 1.282529083270459,
+      "host_cpu_seconds_per_sample": 4.86704277926617e-06,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 151.8499999999999
+      },
+      "gpu_samples": 79,
+      "gpu_means": {
+        "utilization": 2.050632911392405,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.86481012658228,
+        "temperature_C": 35.0126582278481
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792160017.001759,
+      "end_utc": 1792160137.00507,
+      "steps": 29882,
+      "elapsed_seconds": 120.00325323100014,
+      "samples_per_second": 254986.153926162,
+      "guest_cpu_seconds": 111.414949,
+      "warmup_seconds": 30.045265957000083,
+      "warmup_steps": 7320,
+      "final_loss": 0.6071599721908569,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792160016.6391141,
+      "end_utc_guest": 1792160136.642425,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 118.49824142456055,
+      "host_cpu_average_cores": 1.2903145073029667,
+      "host_cpu_seconds_per_sample": 5.060331658936319e-06,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 152.89999999999984
+      },
+      "gpu_samples": 78,
+      "gpu_means": {
+        "utilization": 2.1153846153846154,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 90.0852564102564,
+        "temperature_C": 35.717948717948715
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792159542.2515311,
+      "end_utc": 1792159662.2542098,
+      "steps": 30592,
+      "elapsed_seconds": 120.00264133400003,
+      "samples_per_second": 8157.687106864025,
+      "guest_cpu_seconds": 110.98389900000001,
+      "warmup_seconds": 30.054373897000005,
+      "warmup_steps": 7520,
+      "final_loss": 1.8749701791165307e-10,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792159541.8888862,
+      "end_utc_guest": 1792159661.8915648,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.42444372177124,
+      "host_cpu_average_cores": 1.2871498080085733,
+      "host_cpu_seconds_per_sample": 0.0001577836697028429,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 152.42999999999995
+      },
+      "gpu_samples": 79,
+      "gpu_means": {
+        "utilization": 1.9873417721518987,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 91.0832911392405,
+        "temperature_C": 37.721518987341774
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792159698.862276,
+      "end_utc": 1792159818.8650742,
+      "steps": 30089,
+      "elapsed_seconds": 120.00276044299994,
+      "samples_per_second": 8023.548762091542,
+      "guest_cpu_seconds": 111.19756900000002,
+      "warmup_seconds": 30.064174757000046,
+      "warmup_steps": 7440,
+      "final_loss": 1.933053439540089e-10,
+      "guest_clock_offset_seconds": -0.36264491081237793,
+      "start_utc_guest": 1792159698.4996312,
+      "end_utc_guest": 1792159818.5024292,
+      "block": 5,
+      "backend": "passthrough",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 118.49168801307678,
+      "host_cpu_average_cores": 1.2828747952617918,
+      "host_cpu_seconds_per_sample": 0.0001598887017827979,
+      "host_cpu_by_pod_seconds": {
+        "cf13d8f9-2143-446f-b085-8fb1d02217da": 152.01
+      },
+      "gpu_samples": 79,
+      "gpu_means": {
+        "utilization": 2.0,
+        "memory_MiB": 781.0,
+        "clock_MHz": 2377.0,
+        "power_W": 89.86835443037975,
+        "temperature_C": 35.25316455696203
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792157727.6365407,
+      "end_utc": 1792157847.721619,
+      "steps": 586,
+      "elapsed_seconds": 120.08496169999995,
+      "samples_per_second": 4996.995389806584,
+      "guest_cpu_seconds": 19.56364,
+      "warmup_seconds": 30.794162804999985,
+      "warmup_steps": 140,
+      "final_loss": 1.0193743705749512,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792157727.908593,
+      "end_utc_guest": 1792157847.9936712,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "medium-1024-resident",
+      "host_cpu_sampled_seconds": 118.84354543685913,
+      "host_cpu_average_cores": 1.3597709442778037,
+      "host_cpu_seconds_per_sample": 0.00027211771038484697,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 31.690000000000005,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 129.91
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 809.0,
+        "clock_MHz": 2391.1327433628317,
+        "power_W": 88.99088495575221,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792157889.7168968,
+      "end_utc": 1792158009.9406238,
+      "steps": 473,
+      "elapsed_seconds": 120.22366782699999,
+      "samples_per_second": 4028.757471423806,
+      "guest_cpu_seconds": 20.788371,
+      "warmup_seconds": 34.49507851699991,
+      "warmup_steps": 140,
+      "final_loss": 1.0231889486312866,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792157889.988949,
+      "end_utc_guest": 1792158010.212676,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "medium-1024-transfer",
+      "host_cpu_sampled_seconds": 119.96382784843445,
+      "host_cpu_average_cores": 1.433932236785031,
+      "host_cpu_seconds_per_sample": 0.0003559241892707589,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 37.93000000000001,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 134.08999999999997
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.2831858407079646,
+        "memory_MiB": 809.0,
+        "clock_MHz": 2390.8849557522126,
+        "power_W": 88.93610619469027,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792157409.248377,
+      "end_utc": 1792157529.4386966,
+      "steps": 628,
+      "elapsed_seconds": 120.19021401799999,
+      "samples_per_second": 167.20163254714208,
+      "guest_cpu_seconds": 19.943938999999997,
+      "warmup_seconds": 30.596478034,
+      "warmup_steps": 160,
+      "final_loss": 0.5360875129699707,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792157409.5204294,
+      "end_utc_guest": 1792157529.710749,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "medium-32-resident",
+      "host_cpu_sampled_seconds": 118.85739183425903,
+      "host_cpu_average_cores": 1.3657543506117098,
+      "host_cpu_seconds_per_sample": 0.008168307508759753,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 32.04,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 130.29
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2390.0353982300885,
+        "power_W": 87.62141592920354,
+        "temperature_C": 33.69911504424779
+      }
+    },
+    {
+      "model": "medium",
+      "widths": [
+        1024,
+        2048,
+        512
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792157569.640578,
+      "end_utc": 1792157689.6824536,
+      "steps": 547,
+      "elapsed_seconds": 120.04180367599997,
+      "samples_per_second": 145.81586967190484,
+      "guest_cpu_seconds": 19.838203,
+      "warmup_seconds": 32.847305637000005,
+      "warmup_steps": 140,
+      "final_loss": 0.5859516859054565,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792157569.9126303,
+      "end_utc_guest": 1792157689.954506,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "medium-32-transfer",
+      "host_cpu_sampled_seconds": 118.85988569259644,
+      "host_cpu_average_cores": 1.4097270834784006,
+      "host_cpu_seconds_per_sample": 0.009667857734897978,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 34.36,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 133.20000000000005
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.008849557522123894,
+        "memory_MiB": 773.0,
+        "clock_MHz": 2392.0,
+        "power_W": 88.24106194690266,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792158365.2229483,
+      "end_utc": 1792158485.2926009,
+      "steps": 630,
+      "elapsed_seconds": 120.06961374599996,
+      "samples_per_second": 5372.883112331089,
+      "guest_cpu_seconds": 20.566691999999996,
+      "warmup_seconds": 32.981833984000104,
+      "warmup_steps": 160,
+      "final_loss": 0.9702043533325195,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792158365.4950006,
+      "end_utc_guest": 1792158485.5646532,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "small-1024-resident",
+      "host_cpu_sampled_seconds": 119.70931005477905,
+      "host_cpu_average_cores": 1.3751645542411848,
+      "host_cpu_seconds_per_sample": 0.0002559453696442976,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 31.790000000000006,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 132.82999999999998
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.36353982300885,
+        "temperature_C": 35.991150442477874
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 1024,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792158523.723312,
+      "end_utc": 1792158643.8147123,
+      "steps": 546,
+      "elapsed_seconds": 120.09135809100007,
+      "samples_per_second": 4655.655568291058,
+      "guest_cpu_seconds": 20.444415,
+      "warmup_seconds": 31.677087445000097,
+      "warmup_steps": 140,
+      "final_loss": 0.9736429452896118,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792158523.9953642,
+      "end_utc_guest": 1792158644.0867646,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "small-1024-transfer",
+      "host_cpu_sampled_seconds": 119.66765785217285,
+      "host_cpu_average_cores": 1.406562165760176,
+      "host_cpu_seconds_per_sample": 0.000302119034608155,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 34.24000000000001,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 134.07999999999996
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.50079646017699,
+        "temperature_C": 36.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "resident",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792158047.764657,
+      "end_utc": 1792158167.900089,
+      "steps": 614,
+      "elapsed_seconds": 120.13539342199999,
+      "samples_per_second": 163.54880473052938,
+      "guest_cpu_seconds": 20.120713000000002,
+      "warmup_seconds": 30.953232184000058,
+      "warmup_steps": 160,
+      "final_loss": 0.4250946044921875,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792158048.0367093,
+      "end_utc_guest": 1792158168.1721413,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "small-32-resident",
+      "host_cpu_sampled_seconds": 118.72951316833496,
+      "host_cpu_average_cores": 1.3620033948149632,
+      "host_cpu_seconds_per_sample": 0.008327810142416285,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 31.65,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 130.0600000000001
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2381.646017699115,
+        "power_W": 88.10884955752212,
+        "temperature_C": 35.0
+      }
+    },
+    {
+      "model": "small",
+      "widths": [
+        32,
+        64,
+        8
+      ],
+      "batch": 32,
+      "input": "transfer",
+      "mode": "performance",
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "fixture_sha256": "9febb9bd08a54a45af25d9dcf67f3dd3aea1e9d100e57aefe63b69ed0db69189",
+      "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "start_utc": 1792158205.0683265,
+      "end_utc": 1792158325.177678,
+      "steps": 540,
+      "elapsed_seconds": 120.109306704,
+      "samples_per_second": 143.8689513260218,
+      "guest_cpu_seconds": 19.964481,
+      "warmup_seconds": 30.59975780100001,
+      "warmup_steps": 140,
+      "final_loss": 0.4800207018852234,
+      "guest_clock_offset_seconds": 0.2720522880554199,
+      "start_utc_guest": 1792158205.3403788,
+      "end_utc_guest": 1792158325.4497304,
+      "block": 5,
+      "backend": "vmweave",
+      "condition": "small-32-transfer",
+      "host_cpu_sampled_seconds": 119.95163536071777,
+      "host_cpu_average_cores": 1.4033989573695178,
+      "host_cpu_seconds_per_sample": 0.009754703460576924,
+      "host_cpu_by_pod_seconds": {
+        "2d9200a4-a70a-44e7-ae54-1df1f1565321": 34.739999999999995,
+        "a3c81d4e-5e2d-4813-8d4a-0fccf86e1aee": 133.59999999999994
+      },
+      "gpu_samples": 113,
+      "gpu_means": {
+        "utilization": 0.0,
+        "memory_MiB": 733.0,
+        "clock_MHz": 2377.0,
+        "power_W": 88.36893805309734,
+        "temperature_C": 35.575221238938056
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "condition": "medium-1024-resident",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01986057085804064
+        },
+        {
+          "block": 2,
+          "ratio": 0.019622245063243497
+        },
+        {
+          "block": 3,
+          "ratio": 0.020228901202621802
+        },
+        {
+          "block": 4,
+          "ratio": 0.02041762149441834
+        },
+        {
+          "block": 5,
+          "ratio": 0.019069469216053556
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.019834044984896746,
+      "ratio_95ci": [
+        0.01918289617082635,
+        0.020507296549995432
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 5092.122214512888,
+          "sd_samples_per_second": 120.02236153139144,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 256700.35638174764,
+          "sd_samples_per_second": 3644.564346610653,
+          "n": 5
+        }
+      }
+    },
+    {
+      "condition": "medium-1024-transfer",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01773679987687784
+        },
+        {
+          "block": 2,
+          "ratio": 0.01732317032338423
+        },
+        {
+          "block": 3,
+          "ratio": 0.01804965781288683
+        },
+        {
+          "block": 4,
+          "ratio": 0.01868427078507808
+        },
+        {
+          "block": 5,
+          "ratio": 0.01771525194356941
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.017896125639032964,
+      "ratio_95ci": [
+        0.01728125306022499,
+        0.018532875583264174
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 3961.5915687286656,
+          "sd_samples_per_second": 117.25940081461243,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 221318.50180553412,
+          "sd_samples_per_second": 4058.64658804246,
+          "n": 5
+        }
+      }
+    },
+    {
+      "condition": "medium-32-resident",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.021364290080150224
+        },
+        {
+          "block": 2,
+          "ratio": 0.024007075366663876
+        },
+        {
+          "block": 3,
+          "ratio": 0.020850832100450363
+        },
+        {
+          "block": 4,
+          "ratio": 0.020296222174608962
+        },
+        {
+          "block": 5,
+          "ratio": 0.01975937940781016
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.02120644763089456,
+      "ratio_95ci": [
+        0.01931516460569232,
+        0.023282919421216824
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 174.9529336216933,
+          "sd_samples_per_second": 12.785580608916035,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 8234.163632693184,
+          "sd_samples_per_second": 148.35203699537962,
+          "n": 5
+        }
+      }
+    },
+    {
+      "condition": "medium-32-transfer",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01777415862654078
+        },
+        {
+          "block": 2,
+          "ratio": 0.0177100066030825
+        },
+        {
+          "block": 3,
+          "ratio": 0.01779403519171327
+        },
+        {
+          "block": 4,
+          "ratio": 0.0191261945388006
+        },
+        {
+          "block": 5,
+          "ratio": 0.01786338725278307
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.01804574933135175,
+      "ratio_95ci": [
+        0.01732888583908203,
+        0.018792268121216562
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 144.61377650655007,
+          "sd_samples_per_second": 4.900054017000385,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 8010.548285560221,
+          "sd_samples_per_second": 92.90084280237924,
+          "n": 5
+        }
+      }
+    },
+    {
+      "condition": "small-1024-resident",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.021274727840826964
+        },
+        {
+          "block": 2,
+          "ratio": 0.021904765410523684
+        },
+        {
+          "block": 3,
+          "ratio": 0.02116270773876872
+        },
+        {
+          "block": 4,
+          "ratio": 0.02082869170940959
+        },
+        {
+          "block": 5,
+          "ratio": 0.02038944168738017
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.021106111879392958,
+      "ratio_95ci": [
+        0.020421915698586923,
+        0.021813230709608514
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 5428.066165493674,
+          "sd_samples_per_second": 75.65688515197803,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 257183.96033454765,
+          "sd_samples_per_second": 3939.1555229663386,
+          "n": 5
+        }
+      }
+    },
+    {
+      "condition": "small-1024-transfer",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.018252894679636367
+        },
+        {
+          "block": 2,
+          "ratio": 0.01858812087494352
+        },
+        {
+          "block": 3,
+          "ratio": 0.018644242619669515
+        },
+        {
+          "block": 4,
+          "ratio": 0.018967374804761825
+        },
+        {
+          "block": 5,
+          "ratio": 0.0182584642209209
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.01854029715496344,
+      "ratio_95ci": [
+        0.018173678840385423,
+        0.01891431127474769
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 4691.769503254758,
+          "sd_samples_per_second": 49.72583738753042,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 253051.15692571294,
+          "sd_samples_per_second": 1702.9271915823927,
+          "n": 5
+        }
+      }
+    },
+    {
+      "condition": "small-32-resident",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.02128484757735515
+        },
+        {
+          "block": 2,
+          "ratio": 0.020089297647465622
+        },
+        {
+          "block": 3,
+          "ratio": 0.02078283957007718
+        },
+        {
+          "block": 4,
+          "ratio": 0.020921214830500252
+        },
+        {
+          "block": 5,
+          "ratio": 0.020048428260127368
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.020619659179670784,
+      "ratio_95ci": [
+        0.01995934647656177,
+        0.021301816929981073
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 165.64305830146407,
+          "sd_samples_per_second": 2.7683878643608697,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 8032.764410042697,
+          "sd_samples_per_second": 89.70554416893555,
+          "n": 5
+        }
+      }
+    },
+    {
+      "condition": "small-32-transfer",
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01837325871349375
+        },
+        {
+          "block": 2,
+          "ratio": 0.01885992017206126
+        },
+        {
+          "block": 3,
+          "ratio": 0.018319923974341266
+        },
+        {
+          "block": 4,
+          "ratio": 0.018380047884830854
+        },
+        {
+          "block": 5,
+          "ratio": 0.01793083778661036
+        }
+      ],
+      "n": 5,
+      "paired_geomean_ratio": 0.01837043268698085,
+      "ratio_95ci": [
+        0.017966021963223118,
+        0.018783946596397875
+      ],
+      "backends": {
+        "vmweave": {
+          "mean_samples_per_second": 145.6405536657201,
+          "sd_samples_per_second": 1.199327514357672,
+          "n": 5
+        },
+        "passthrough": {
+          "mean_samples_per_second": 7928.098246000809,
+          "sd_samples_per_second": 80.3021964289256,
+          "n": 5
+        }
+      }
+    }
+  ],
+  "ci_method": "Student t interval on paired log throughput ratios; no normality assurance with n=5"
+}

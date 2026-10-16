@@ -1,0 +1,34 @@
+{
+  "main_commit": "3f980b0f0706312c615e9ded4facac7bc2849e9f",
+  "binaries": [
+    {
+      "path": ".local/ai-passthrough-20261016/build/libflyt_guest.so",
+      "sha256": "af4204fbda13bd30b6526793cf953ad33874582e1d045810ff2e3fc686b8799f",
+      "bytes": 103624
+    },
+    {
+      "path": ".local/ai-passthrough-20261016/build/flyt-shm-worker",
+      "sha256": "b98d335210c86271a811824ee090e8b7911b192e2ed77e5027a212423fb382ba",
+      "bytes": 73000
+    },
+    {
+      "path": ".local/ai-passthrough-20261016/build/flyt-shm-session-worker",
+      "sha256": "be0202cfb58fc13a010eabaf8846679e03e6f34c68676d9e0f31c4181bffce36",
+      "bytes": 77616
+    },
+    {
+      "path": ".local/hami-release-20261016/libvgpu.so",
+      "sha256": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8",
+      "bytes": 718112
+    },
+    {
+      "path": ".local/thesis-isolation-20261012/guest-python-cuda.tgz",
+      "sha256": "d242f281efa068996e4c9893811d64b32a7965faaf16b58bc93cb957d78841ec",
+      "bytes": 1828353268
+    }
+  ],
+  "superseded_allocation_worker_digest": "sha256:1d7b5084dde01f8a710f8fafd387cac3c24d53d71627084dda9b48afd82adfbc",
+  "worker_digest": "sha256:a75ad8730b9368191eba9fac9bad5534dd38a187964026736111b6d33301d3e4",
+  "lifecycle": "VM",
+  "guest_transport": "guest_broker.py + per-process CUDA session"
+}

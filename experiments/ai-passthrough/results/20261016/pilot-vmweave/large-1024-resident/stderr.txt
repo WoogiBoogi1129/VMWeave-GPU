@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/tmp/perf/bench.py", line 17, in <module>
+    f=torch.load(a.fixture,map_location='cpu',weights_only=True);m=model().cuda();m.load_state_dict(f['weights']);o=torch.optim.SGD(m.parameters(),lr=0.01,foreach=False,fused=False)
+  File "/opt/torch-venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1097, in cuda
+    return self._apply(lambda t: t.cuda(device))
+  File "/opt/torch-venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 934, in _apply
+    module._apply(fn)
+  File "/opt/torch-venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 965, in _apply
+    param_applied = fn(param)
+  File "/opt/torch-venv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1097, in <lambda>
+    return self._apply(lambda t: t.cuda(device))
+torch.AcceleratorError: CUDA error: invalid value
+Search for `cudaErrorInvalidValue' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

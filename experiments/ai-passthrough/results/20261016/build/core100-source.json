@@ -1,0 +1,47 @@
+{
+  "source_commit": "b216ba1be1b8e21488d1c7370ed3357b3049aad1 + runtime/hami/patches/0001-sm-limit.patch",
+  "source_sha256": "fb7512c2cd6e69aa2674f0ac9d95a834191d64c7394b7c7f183fdda7d888bdc9",
+  "path": "src/multiprocess/multiprocess_utilization_watcher.c",
+  "excerpts": [
+    {
+      "first_line": 61,
+      "lines": [
+        "  /* Fast exit using cached values \u2014 no shared memory access needed */",
+        "  if (cached_sm_limit[device_id] >= 100 || cached_sm_limit[device_id] == 0) {",
+        "      return;",
+        "  }",
+        "  if (cached_util_switch == 0) {",
+        "      return;",
+        "  }"
+      ]
+    },
+    {
+      "first_line": 308,
+      "lines": [
+        "        // Calculate independently for each device",
+        "        for (unsigned int dev = 0; dev < device_count && dev < CUDA_DEVICE_MAX_COUNT; dev++) {",
+        "            if (cached_sm_limit[dev] <= 0 || cached_sm_limit[dev] >= 100) {",
+        "                continue;",
+        "            }"
+      ]
+    },
+    {
+      "first_line": 346,
+      "lines": [
+        "    // Initialize cached_sm_limit for each device",
+        "    int has_limit = 0;",
+        "    for (unsigned int dev = 0; dev < device_count && dev < CUDA_DEVICE_MAX_COUNT; dev++) {",
+        "        cached_sm_limit[dev] = get_current_device_sm_limit(dev);",
+        "        LOG_INFO(\"device %d: core utilization limit = %d\", dev, cached_sm_limit[dev]);",
+        "        if (cached_sm_limit[dev] > 0 && cached_sm_limit[dev] <= 100) {",
+        "            has_limit = 1;",
+        "        }",
+        "    }",
+        "",
+        "    pthread_t tid;",
+        "    if (has_limit) {",
+        "        pthread_create(&tid, NULL, utilization_watcher, NULL);"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "post_hoc": true,
+  "excluded_block": 2,
+  "reason": "Observed GPU 3 embedding service scale-down/up during block 2 VMWeave; original five-block results remain primary. This does not isolate the causal effect of the service change.",
+  "conditions": [
+    {
+      "condition": "medium-1024-resident",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01986057085804064
+        },
+        {
+          "block": 3,
+          "ratio": 0.020228901202621802
+        },
+        {
+          "block": 4,
+          "ratio": 0.02041762149441834
+        },
+        {
+          "block": 5,
+          "ratio": 0.019069469216053556
+        }
+      ],
+      "all_five_ratio": 0.019834044984896746,
+      "excluding_block2_ratio": 0.01988735121535187,
+      "excluding_block2_95ci": [
+        0.018952444622653213,
+        0.020868375886983034
+      ]
+    },
+    {
+      "condition": "medium-1024-transfer",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01773679987687784
+        },
+        {
+          "block": 3,
+          "ratio": 0.01804965781288683
+        },
+        {
+          "block": 4,
+          "ratio": 0.01868427078507808
+        },
+        {
+          "block": 5,
+          "ratio": 0.01771525194356941
+        }
+      ],
+      "all_five_ratio": 0.017896125639032964,
+      "excluding_block2_ratio": 0.01804230130375872,
+      "excluding_block2_95ci": [
+        0.017343579300886796,
+        0.018769172769254685
+      ]
+    },
+    {
+      "condition": "medium-32-resident",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.021364290080150224
+        },
+        {
+          "block": 3,
+          "ratio": 0.020850832100450363
+        },
+        {
+          "block": 4,
+          "ratio": 0.020296222174608962
+        },
+        {
+          "block": 5,
+          "ratio": 0.01975937940781016
+        }
+      ],
+      "all_five_ratio": 0.02120644763089456,
+      "excluding_block2_ratio": 0.02055891029061413,
+      "excluding_block2_95ci": [
+        0.01948455313996568,
+        0.021692506330594965
+      ]
+    },
+    {
+      "condition": "medium-32-transfer",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01777415862654078
+        },
+        {
+          "block": 3,
+          "ratio": 0.01779403519171327
+        },
+        {
+          "block": 4,
+          "ratio": 0.0191261945388006
+        },
+        {
+          "block": 5,
+          "ratio": 0.01786338725278307
+        }
+      ],
+      "all_five_ratio": 0.01804574933135175,
+      "excluding_block2_ratio": 0.01813067486093927,
+      "excluding_block2_95ci": [
+        0.01712956766514247,
+        0.019190289990915606
+      ]
+    },
+    {
+      "condition": "small-1024-resident",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.021274727840826964
+        },
+        {
+          "block": 3,
+          "ratio": 0.02116270773876872
+        },
+        {
+          "block": 4,
+          "ratio": 0.02082869170940959
+        },
+        {
+          "block": 5,
+          "ratio": 0.02038944168738017
+        }
+      ],
+      "all_five_ratio": 0.021106111879392958,
+      "excluding_block2_ratio": 0.020911040506308688,
+      "excluding_block2_95ci": [
+        0.02028525345052304,
+        0.021556132691317592
+      ]
+    },
+    {
+      "condition": "small-1024-transfer",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.018252894679636367
+        },
+        {
+          "block": 3,
+          "ratio": 0.018644242619669515
+        },
+        {
+          "block": 4,
+          "ratio": 0.018967374804761825
+        },
+        {
+          "block": 5,
+          "ratio": 0.0182584642209209
+        }
+      ],
+      "all_five_ratio": 0.01854029715496344,
+      "excluding_block2_ratio": 0.018528360462564942,
+      "excluding_block2_95ci": [
+        0.017990900816026563,
+        0.01908187616291691
+      ]
+    },
+    {
+      "condition": "small-32-resident",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.02128484757735515
+        },
+        {
+          "block": 3,
+          "ratio": 0.02078283957007718
+        },
+        {
+          "block": 4,
+          "ratio": 0.020921214830500252
+        },
+        {
+          "block": 5,
+          "ratio": 0.020048428260127368
+        }
+      ],
+      "all_five_ratio": 0.020619659179670784,
+      "excluding_block2_ratio": 0.02075442304592755,
+      "excluding_block2_95ci": [
+        0.019939730122343825,
+        0.021602402506273058
+      ]
+    },
+    {
+      "condition": "small-32-transfer",
+      "n": 4,
+      "pairs": [
+        {
+          "block": 1,
+          "ratio": 0.01837325871349375
+        },
+        {
+          "block": 3,
+          "ratio": 0.018319923974341266
+        },
+        {
+          "block": 4,
+          "ratio": 0.018380047884830854
+        },
+        {
+          "block": 5,
+          "ratio": 0.01793083778661036
+        }
+      ],
+      "all_five_ratio": 0.01837043268698085,
+      "excluding_block2_ratio": 0.018250058856785465,
+      "excluding_block2_95ci": [
+        0.017909062100222726,
+        0.018597548347994805
+      ]
+    }
+  ]
+}

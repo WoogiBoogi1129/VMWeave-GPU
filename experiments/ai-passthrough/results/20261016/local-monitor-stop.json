@@ -1,0 +1,30 @@
+{
+  "utc": 1792163517.9566655,
+  "processes": [
+    {
+      "name": "prometheus",
+      "pid": 3880110,
+      "command": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/campaign-20260928/tools/prometheus-3.5.0.linux-amd64/prometheus --config.file=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/ai-passthrough-20261016/prometheus.yml --storage.tsdb.path=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/ai-passthrough-20261016/prom-data --web.listen-address=127.0.0.1:19098 --storage.tsdb.retention.time=30d "
+    },
+    {
+      "name": "grafana",
+      "pid": 3880111,
+      "command": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/campaign-20260928/tools/grafana-v12.0.2/bin/grafana server --homepath /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/campaign-20260928/tools/grafana-v12.0.2 --config /home/ubuntu/taeuk/flyt-k8s-poc-github/.local/ai-passthrough-20261016/grafana.ini "
+    },
+    {
+      "name": "service-monitor",
+      "pid": 4120033,
+      "command": "python3 experiments/ai-passthrough/runner/service_monitor.py "
+    },
+    {
+      "name": "exporter",
+      "pid": 220577,
+      "command": "python3 experiments/ai-passthrough/runner/exporter.py "
+    }
+  ],
+  "ports_closed": {
+    "13098": true,
+    "19098": true,
+    "19898": true
+  }
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/ai-passthrough/runner/cleanup.py", line 45, in <module>
+    requests=json.loads(c.k('get','gpurequests.vmweave.io','-n','vmweave-test-a','-o','json'))['items'];assert not any(q['spec'].get('profileRef',{}).get('name')==name for q in requests)
+                                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

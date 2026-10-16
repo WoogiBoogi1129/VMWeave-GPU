@@ -1,0 +1,213 @@
+{
+  "uid": "vmweave-ai-perf-20261016",
+  "title": "VMWeave vs GPU passthrough: FP32 AI training \u2014 2026-10-16",
+  "schemaVersion": 41,
+  "version": 1,
+  "timezone": "Asia/Seoul",
+  "refresh": "5s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "GPU utilization",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ai-perf-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ai_gpu_utilization{run=~\"$run\",condition=~\"$condition\"}",
+          "legendFormat": "{{run}} / {{condition}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "title": "Completed training throughput (samples/s)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ai-perf-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ai_throughput{run=~\"$run\",condition=~\"$condition\"}",
+          "legendFormat": "{{run}} / {{condition}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "title": "Device memory (MiB)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 10,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ai-perf-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ai_gpu_memory_MiB{run=~\"$run\",condition=~\"$condition\"}",
+          "legendFormat": "{{run}} / {{condition}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "title": "GPU power (W)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 10,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ai-perf-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ai_gpu_power_W{run=~\"$run\",condition=~\"$condition\"}",
+          "legendFormat": "{{run}} / {{condition}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "watt",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 5,
+      "title": "SM clock (MHz)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 20,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ai-perf-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ai_gpu_clock_MHz{run=~\"$run\",condition=~\"$condition\"}",
+          "legendFormat": "{{run}} / {{condition}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 6,
+      "title": "Temperature",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 20,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ai-perf-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ai_gpu_temperature_C{run=~\"$run\",condition=~\"$condition\"}",
+          "legendFormat": "{{run}} / {{condition}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "min": 0
+        },
+        "overrides": []
+      }
+    }
+  ],
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "templating": {
+    "list": [
+      {
+        "name": "run",
+        "type": "textbox",
+        "label": "run regex",
+        "current": {
+          "text": ".*",
+          "value": ".*"
+        },
+        "query": ".*"
+      },
+      {
+        "name": "condition",
+        "type": "textbox",
+        "label": "condition regex",
+        "current": {
+          "text": ".*",
+          "value": ".*"
+        },
+        "query": ".*"
+      }
+    ]
+  }
+}

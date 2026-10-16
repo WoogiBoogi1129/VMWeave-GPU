@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/ai-passthrough/runner/cleanup.py", line 58, in <module>
+    assert not json.loads(c.k('get',kind,'-n','ai-perf-baseline','-o','json'))['items'],kind
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/thesis-isolation/runner/common.py", line 38, in k
+    def k(*args, **kw): return call(['kubectl',*args],**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/thesis-isolation/runner/common.py", line 35, in call
+    raise RuntimeError(shlex.join(args)+': '+result.stderr[-2000:])
+RuntimeError: kubectl get pvcs -n ai-perf-baseline -o json: error: the server doesn't have a resource type "pvcs"
+

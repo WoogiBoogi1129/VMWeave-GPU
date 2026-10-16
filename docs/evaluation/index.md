@@ -14,6 +14,7 @@
 | VRAM 경계·계상 (2026-10-16) | 단일 10회·동시 10쌍·학습 10회+추가 2회; 초기 550 MiB, 학습 상태 물리 한도 초과 확인 | [보고서·Grafana·그래프](../../experiments/vram-accounting/README.md) |
 | PyTorch 학습 재검증 (2026-10-16) | 새 VM·SSH·CUDA MLP 100 step 및 CPU 정확성 비교 PASS, 첫 loss.item() 실패 보존 | [보고서·스크린샷](../../experiments/pytorch-smoke/README.md) |
 | 제한된 PyTorch 학습 | 고정 FP32 eager MLP·SGD, passthrough와 정확성 비교 | [구현·검증 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md) |
+| VMWeave/passthrough 학습 성능 (2026-10-16~17) | 동일 GPU·FP32 MLP 80측정; VMWeave/PT 처리량 1.790–2.121%, 큰 모델 복사 제한과 공유 호스트 변경 기록 | [보고서·Grafana·그래프](../../experiments/ai-passthrough/README.md) |
 
 ## 재현과 판정
 

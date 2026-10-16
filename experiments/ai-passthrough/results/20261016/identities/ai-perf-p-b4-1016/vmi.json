@@ -1,0 +1,233 @@
+{
+  "apiVersion": "kubevirt.io/v1",
+  "kind": "VirtualMachineInstance",
+  "metadata": {
+    "annotations": {
+      "kubevirt.io/latest-observed-api-version": "v1",
+      "kubevirt.io/pci-topology-version": "v3",
+      "kubevirt.io/storage-observed-api-version": "v1",
+      "kubevirt.io/vm-generation": "1"
+    },
+    "creationTimestamp": "2026-10-16T12:39:11Z",
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize",
+      "kubevirt.io/foregroundDeleteVirtualMachine"
+    ],
+    "generation": 8,
+    "labels": {
+      "app.kubernetes.io/part-of": "flyt-evidence",
+      "kubevirt.io/nodeName": "gpu-4"
+    },
+    "name": "ai-perf-p-b4-1016",
+    "namespace": "ai-perf-baseline",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "ai-perf-p-b4-1016",
+        "uid": "73d7bd15-b922-44ce-b6a9-8b1e0451ec22"
+      }
+    ],
+    "resourceVersion": "11469783",
+    "uid": "cdfb3ba5-2cb7-4d67-b10d-33fc1425e67c"
+  },
+  "spec": {
+    "architecture": "amd64",
+    "domain": {
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "devices": {
+        "disks": [
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "root"
+          },
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "cloudinit"
+          }
+        ],
+        "gpus": [
+          {
+            "deviceName": "vmweave.io/ai-perf-passthrough",
+            "name": "gpu"
+          }
+        ],
+        "interfaces": [
+          {
+            "macAddress": "02:00:00:09:22:01",
+            "masquerade": {},
+            "name": "default"
+          }
+        ]
+      },
+      "features": {
+        "acpi": {
+          "enabled": true
+        }
+      },
+      "firmware": {
+        "bootloader": {
+          "efi": {
+            "secureBoot": false
+          }
+        },
+        "serial": "4e83d535-157e-4cf5-be64-ad620a01ade1",
+        "uuid": "735ef38a-b0d9-4352-be6d-bbdd435e7683"
+      },
+      "machine": {
+        "type": "q35"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      },
+      "resources": {
+        "requests": {
+          "memory": "16Gi"
+        }
+      }
+    },
+    "evictionStrategy": "None",
+    "networks": [
+      {
+        "name": "default",
+        "pod": {}
+      }
+    ],
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "volumes": [
+      {
+        "name": "root",
+        "persistentVolumeClaim": {
+          "claimName": "ai-perf-native"
+        }
+      },
+      {
+        "cloudInitNoCloud": {
+          "networkData": "version: 2\nethernets:\n  evidence:\n    match:\n      macaddress: \"02:00:00:09:22:01\"\n    set-name: eth0\n    dhcp4: true\n",
+          "userData": "#cloud-config\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKdMWCpvXPb7efaG24ws5p+j4N7Ze1TiUIFj96x2FXdr ubuntu@gpu-4\nssh_pwauth: false\n"
+        },
+        "name": "cloudinit"
+      }
+    ]
+  },
+  "status": {
+    "activePods": {
+      "4042eb56-baa3-4459-8a72-a8afe1587b1b": "gpu-4"
+    },
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-16T12:39:14Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "message": "VMI specifies a GPU but feature gate VGPULiveMigration is not enabled",
+        "reason": "HostDeviceNotLiveMigratable",
+        "status": "False",
+        "type": "LiveMigratable"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "message": "HostDeviceNotLiveMigratable: VMI specifies a GPU but feature gate VGPULiveMigration is not enabled",
+        "reason": "NotMigratable",
+        "status": "False",
+        "type": "StorageLiveMigratable"
+      }
+    ],
+    "currentCPUTopology": {
+      "cores": 8
+    },
+    "guestOSInfo": {},
+    "interfaces": [
+      {
+        "infoSource": "domain",
+        "ipAddress": "10.85.0.160",
+        "ipAddresses": [
+          "10.85.0.160"
+        ],
+        "linkState": "up",
+        "mac": "02:00:00:09:22:01",
+        "name": "default",
+        "podInterfaceName": "eth0",
+        "queueCount": 1
+      }
+    ],
+    "launcherContainerImageVersion": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+    "machine": {
+      "type": "pc-q35-rhel9.8.0"
+    },
+    "memory": {
+      "guestAtBoot": "16Gi",
+      "guestCurrent": "16Gi",
+      "guestRequested": "16Gi",
+      "memoryOverhead": "1447034881"
+    },
+    "migrationMethod": "BlockMigration",
+    "migrationTransport": "Unix",
+    "nodeName": "gpu-4",
+    "phase": "Running",
+    "phaseTransitionTimestamps": [
+      {
+        "phase": "Pending",
+        "phaseTransitionTimestamp": "2026-10-16T12:39:11Z"
+      },
+      {
+        "phase": "Scheduling",
+        "phaseTransitionTimestamp": "2026-10-16T12:39:11Z"
+      },
+      {
+        "phase": "Scheduled",
+        "phaseTransitionTimestamp": "2026-10-16T12:39:14Z"
+      },
+      {
+        "phase": "Running",
+        "phaseTransitionTimestamp": "2026-10-16T12:39:22Z"
+      }
+    ],
+    "qosClass": "Burstable",
+    "runtimeUser": 107,
+    "selinuxContext": "none",
+    "virtualMachineRevisionName": "revision-start-vm-73d7bd15-b922-44ce-b6a9-8b1e0451ec22-1",
+    "volumeStatus": [
+      {
+        "name": "cloudinit",
+        "size": 1048576,
+        "target": "vdb"
+      },
+      {
+        "name": "root",
+        "persistentVolumeClaimInfo": {
+          "accessModes": [
+            "ReadWriteOnce"
+          ],
+          "capacity": {
+            "storage": "16Gi"
+          },
+          "claimName": "ai-perf-native",
+          "filesystemOverhead": "0.055",
+          "requests": {
+            "storage": "16Gi"
+          },
+          "volumeMode": "Filesystem"
+        },
+        "target": "vda"
+      }
+    ]
+  }
+}

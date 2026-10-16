@@ -1,0 +1,823 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:34:30Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442779",
+                "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:30Z",
+            "message": "find fit node(gpu-4), 0 nodes not fit, 1 nodes fit(gpu-4:7.56)",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:30Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "scheduler",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:30Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f.18deff5bab6a8275",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442785",
+                "uid": "d228133a-620f-4049-8899-c8ba874bf615"
+            },
+            "reason": "FilteringSucceed",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "hami-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:34:31Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442783",
+                "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:31Z",
+            "message": "Successfully binding node [gpu-4] to aap-serving/qwen3-embedding-kserve-559c48d657-4q42f",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:31Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "scheduler",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:31Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f.18deff5bb019cca2",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442789",
+                "uid": "379be22a-2fe1-4e55-86db-a4fffc01429e"
+            },
+            "reason": "BindingSucceed",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "hami-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "action": "Binding",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-16T11:34:31.002378Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442779",
+                "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Successfully assigned aap-serving/qwen3-embedding-kserve-559c48d657-4q42f to gpu-4",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:31Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "events.k8s.io/v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:action": {},
+                            "f:eventTime": {},
+                            "f:note": {},
+                            "f:reason": {},
+                            "f:regarding": {},
+                            "f:reportingController": {},
+                            "f:reportingInstance": {},
+                            "f:type": {}
+                        },
+                        "manager": "kube-scheduler",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:31Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f.18deff5bb02607ba",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442790",
+                "uid": "f4985413-1689-4a8b-968b-111c767f65c0"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:34:32Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{main}",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442788",
+                "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:32Z",
+            "message": "Container image \"vllm/vllm-openai:v0.31.0\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:32Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:reportingInstance": {},
+                            "f:source": {
+                                "f:component": {},
+                                "f:host": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kubelet",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:32Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f.18deff5bee39da49",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442799",
+                "uid": "e64a99e2-88f3-4abd-be6d-810ffcc0ac99"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:34:32Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{main}",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442788",
+                "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:32Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:32Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:reportingInstance": {},
+                            "f:source": {
+                                "f:component": {},
+                                "f:host": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kubelet",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:32Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f.18deff5c0e73d24c",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442809",
+                "uid": "42609a4a-c8b7-4968-a235-c7df8a0cfaec"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:34:32Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{main}",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442788",
+                "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:32Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:32Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:reportingInstance": {},
+                            "f:source": {
+                                "f:component": {},
+                                "f:host": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kubelet",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:32Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f.18deff5c106bb2e1",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442810",
+                "uid": "c6859dc8-9860-4084-a884-c825edd3a253"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 20,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:34:41Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{main}",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442788",
+                "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:37:51Z",
+            "message": "Startup probe failed: Get \"http://10.85.0.180:8000/health\": dial tcp 10.85.0.180:8000: connect: connection refused",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:41Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:reportingInstance": {},
+                            "f:source": {
+                                "f:component": {},
+                                "f:host": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kubelet",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:37:51Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-4q42f.18deff5e23424297",
+                "namespace": "aap-serving",
+                "resourceVersion": "11444149",
+                "uid": "0e491376-8e4d-44bb-a1d2-c1689464fb94"
+            },
+            "reason": "Unhealthy",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Warning"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:32:49Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{main}",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-zd4rf",
+                "namespace": "aap-serving",
+                "resourceVersion": "10969062",
+                "uid": "fca24df8-4779-4bd8-a9a7-0bb521058cb6"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:32:49Z",
+            "message": "Stopping container main",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:32:49Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:reportingInstance": {},
+                            "f:source": {
+                                "f:component": {},
+                                "f:host": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kubelet",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:32:49Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-zd4rf.18deff441dd312d0",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442086",
+                "uid": "b2bfa96b-b9f2-49aa-884f-f7187bb55ae3"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 2,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:33:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{main}",
+                "kind": "Pod",
+                "name": "qwen3-embedding-kserve-559c48d657-zd4rf",
+                "namespace": "aap-serving",
+                "resourceVersion": "10969062",
+                "uid": "fca24df8-4779-4bd8-a9a7-0bb521058cb6"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:33:06Z",
+            "message": "Readiness probe failed: Get \"http://10.85.0.13:8000/health\": dial tcp 10.85.0.13:8000: connect: connection refused",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:33:05Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:reportingInstance": {},
+                            "f:source": {
+                                "f:component": {},
+                                "f:host": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kubelet",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:33:06Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657-zd4rf.18deff47ab6b64ed",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442197",
+                "uid": "1b41fcf4-3f10-45a8-b689-1d8adaf8d20f"
+            },
+            "reason": "Unhealthy",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Warning"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:32:49Z",
+            "involvedObject": {
+                "apiVersion": "apps/v1",
+                "kind": "ReplicaSet",
+                "name": "qwen3-embedding-kserve-559c48d657",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442076",
+                "uid": "a8602cdb-d9bb-473c-abc5-7bc836a65fd0"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:32:49Z",
+            "message": "Deleted pod: qwen3-embedding-kserve-559c48d657-zd4rf",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:32:49Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kube-controller-manager",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:32:49Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657.18deff441bdab4cc",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442079",
+                "uid": "3f46ddcd-56a0-411e-a108-35fc7dd64c87"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "replicaset-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "replicaset-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:34:30Z",
+            "involvedObject": {
+                "apiVersion": "apps/v1",
+                "kind": "ReplicaSet",
+                "name": "qwen3-embedding-kserve-559c48d657",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442774",
+                "uid": "a8602cdb-d9bb-473c-abc5-7bc836a65fd0"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:30Z",
+            "message": "Created pod: qwen3-embedding-kserve-559c48d657-4q42f",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:30Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kube-controller-manager",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:30Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve-559c48d657.18deff5baa0c0659",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442780",
+                "uid": "f0025a89-fb61-42da-97a1-b7f3cf3d060b"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "replicaset-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "replicaset-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 2,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-15T16:15:09Z",
+            "involvedObject": {
+                "apiVersion": "apps/v1",
+                "kind": "Deployment",
+                "name": "qwen3-embedding-kserve",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442771",
+                "uid": "b2f8c95c-4798-4024-ade2-a9060af79575"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:30Z",
+            "message": "Scaled up replica set qwen3-embedding-kserve-559c48d657 from 0 to 1",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:30Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kube-controller-manager",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:30Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve.18dec017b963ec6e",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442777",
+                "uid": "0f6bb3e8-efc0-44fa-b4a5-91ade340d07c"
+            },
+            "reason": "ScalingReplicaSet",
+            "reportingComponent": "deployment-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "deployment-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-16T11:32:49Z",
+            "involvedObject": {
+                "apiVersion": "apps/v1",
+                "kind": "Deployment",
+                "name": "qwen3-embedding-kserve",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442073",
+                "uid": "b2f8c95c-4798-4024-ade2-a9060af79575"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:32:49Z",
+            "message": "Scaled down replica set qwen3-embedding-kserve-559c48d657 from 1 to 0",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:32:49Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "kube-controller-manager",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:32:49Z"
+                    }
+                ],
+                "name": "qwen3-embedding-kserve.18deff441b30af85",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442077",
+                "uid": "41f8301e-6320-4a42-bb9e-76a588ed7dfb"
+            },
+            "reason": "ScalingReplicaSet",
+            "reportingComponent": "deployment-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "deployment-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 5,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-15T16:12:41Z",
+            "involvedObject": {
+                "apiVersion": "serving.kserve.io/v1alpha2",
+                "kind": "LLMInferenceService",
+                "name": "qwen3-embedding",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442795",
+                "uid": "78da79d4-b9a1-47b3-9008-2c25cdb69d7e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:47Z",
+            "message": "Updated v1.Secret aap-serving/qwen3-embedding-kserve-self-signed-certs",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:34:39Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "manager",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:47Z"
+                    }
+                ],
+                "name": "qwen3-embedding.18debff51f5046d8",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442919",
+                "uid": "6a88ee94-b217-4f87-ab56-fb38e47ea928"
+            },
+            "reason": "Updated",
+            "reportingComponent": "LLMInferenceServiceController",
+            "reportingInstance": "",
+            "source": {
+                "component": "LLMInferenceServiceController"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 3,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-15T16:15:09Z",
+            "involvedObject": {
+                "apiVersion": "serving.kserve.io/v1alpha2",
+                "kind": "LLMInferenceService",
+                "name": "qwen3-embedding",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442071",
+                "uid": "78da79d4-b9a1-47b3-9008-2c25cdb69d7e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-16T11:34:30Z",
+            "message": "Updated v1.Deployment aap-serving/qwen3-embedding-kserve",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T11:32:49Z",
+                "managedFields": [
+                    {
+                        "apiVersion": "v1",
+                        "fieldsType": "FieldsV1",
+                        "fieldsV1": {
+                            "f:count": {},
+                            "f:firstTimestamp": {},
+                            "f:involvedObject": {},
+                            "f:lastTimestamp": {},
+                            "f:message": {},
+                            "f:reason": {},
+                            "f:reportingComponent": {},
+                            "f:source": {
+                                "f:component": {}
+                            },
+                            "f:type": {}
+                        },
+                        "manager": "manager",
+                        "operation": "Update",
+                        "time": "2026-10-16T11:34:30Z"
+                    }
+                ],
+                "name": "qwen3-embedding.18dec017b58810a2",
+                "namespace": "aap-serving",
+                "resourceVersion": "11442772",
+                "uid": "d5735e63-c098-4c21-b2c3-955058edf448"
+            },
+            "reason": "Updated",
+            "reportingComponent": "LLMInferenceServiceController",
+            "reportingInstance": "",
+            "source": {
+                "component": "LLMInferenceServiceController"
+            },
+            "type": "Normal"
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "model": "medium",
+  "widths": [
+    1024,
+    2048,
+    512
+  ],
+  "batch": 1024,
+  "input": "resident",
+  "mode": "performance",
+  "torch": "2.11.0+flyt.cu128",
+  "cuda": "12.8",
+  "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "fixture_sha256": "71b4d070b90d84845b4c126c3479c4f055a1ed827e1adaef57c7ca4ba2696de7",
+  "source_sha256": "eb09a2743a59b2476264de82c9992583e223cc53229de2466ce224d7e1057c00",
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "start_utc": 1792155003.2897928,
+  "end_utc": 1792155123.2920291,
+  "steps": 30244,
+  "elapsed_seconds": 120.00217310599999,
+  "samples_per_second": 258077.4597526979,
+  "guest_cpu_seconds": 111.38338200000001,
+  "warmup_seconds": 30.010157264999975,
+  "warmup_steps": 7440,
+  "final_loss": 0.4203474223613739,
+  "guest_clock_offset_seconds": -1.3168704509735107,
+  "start_utc_guest": 1792155001.9729223,
+  "end_utc_guest": 1792155121.9751587
+}

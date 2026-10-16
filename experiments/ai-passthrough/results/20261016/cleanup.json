@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "scope": "Experiment resource cleanup and current readiness; not uninterrupted service continuity",
+  "completed_utc": 1792163486.2545533,
+  "gpu2_driver": "nvidia",
+  "gpu2_compute_processes": 0,
+  "restored": {
+    "hami-device-plugin": {
+      "nodeSelector": {
+        "gpu": "on"
+      },
+      "ready": true
+    },
+    "nvidia-dcgm-exporter": {
+      "nodeSelector": {
+        "nvidia.com/gpu.deploy.dcgm-exporter": "true"
+      },
+      "ready": true
+    },
+    "permittedHostDevices_restored": true
+  },
+  "existing_services": [
+    {
+      "namespace": "aap-serving",
+      "name": "gpt-oss-20b-kserve-79cc66b887-bqfws",
+      "uid": "b05791e5-b77f-4375-aa3f-7c903186860d",
+      "ready": true,
+      "original_pod_preserved": true,
+      "container_restarts_unchanged": true
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "qwen3-asr-kserve-5d97d58c9f-kznvx",
+      "uid": "bc274e0b-2d96-4ab5-b230-6569a35b86fc",
+      "ready": true,
+      "original_pod_preserved": true,
+      "container_restarts_unchanged": true
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "qwen3-embedding-kserve-559c48d657-4q42f",
+      "uid": "0ea74aca-cbcd-4258-b509-bdf7ab4bb4e7",
+      "ready": true,
+      "original_pod_preserved": false,
+      "container_restarts_unchanged": true
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "qwen35-27b-kserve-7d7c787dfd-697kk",
+      "uid": "d8a97613-0e4a-4b9e-b2a1-36571a91b06b",
+      "ready": true,
+      "original_pod_preserved": true,
+      "container_restarts_unchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "virt-launcher-vmweave-k8s-01-ksrcz",
+      "uid": "0b47c9e9-060e-47c4-bd70-4cbf250fa27d",
+      "ready": true,
+      "original_pod_preserved": true,
+      "container_restarts_unchanged": true
+    }
+  ],
+  "original_gpu3_pids_alive": {
+    "1840504": true,
+    "1930105": false,
+    "2359792": true,
+    "2469212": true
+  },
+  "service_replacement_observed": {
+    "observed_utc": 1792151112.2742846,
+    "service": "qwen3-embedding",
+    "scale_down_utc": "2026-10-16T11:32:49Z",
+    "scale_up_utc": "2026-10-16T11:34:30Z",
+    "old_pod": "qwen3-embedding-kserve-559c48d657-zd4rf",
+    "new_pod": "qwen3-embedding-kserve-559c48d657-4q42f",
+    "old_gpu3_pid": 1930105,
+    "new_gpu3_pid": 4102310,
+    "new_pod_ready": true,
+    "manager_recorded_on_service": "app",
+    "causality": "Scale events and managedFields observed; initiating actor and root cause not established. Experiment runner does not mutate aap-serving. Shared-host workload changed during block 2 VMWeave.",
+    "monitor_limitation": "Original monitor selected original pod names; later samples can omit a replaced pod. Updated monitor also selects replica-set prefixes and records missing originals."
+  },
+  "native_vm_pvc_pv_namespace_removed": true,
+  "experiment_profiles_removed": true,
+  "helper_removed": true
+}

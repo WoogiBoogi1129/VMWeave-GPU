@@ -1,0 +1,65 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-10-16T11:48:41Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 2,
+    "name": "ai-perf-v-b3-1016",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "ai-perf-v-b3-1016",
+        "uid": "731f9ec7-1e3b-4b75-8d17-966f2dbf825b"
+      }
+    ],
+    "resourceVersion": "11458061",
+    "uid": "77d4bca4-3013-489c-ae60-5f89a363d171"
+  },
+  "spec": {
+    "drain": true,
+    "gid": 107,
+    "hookImage": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+    "image": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "ai-perf-v-b3-1016",
+      "uid": "466791b8-1335-4370-8bef-f848a169c65a"
+    },
+    "requestRef": {
+      "name": "ai-perf-v-b3-1016",
+      "uid": "f8a92072-6949-4c34-865a-5a83cf43ee0a"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "ai-perf-v-b3-1016",
+      "uid": "731f9ec7-1e3b-4b75-8d17-966f2dbf825b"
+    },
+    "workerImage": "localhost/vmweave-worker@sha256:a75ad8730b9368191eba9fac9bad5534dd38a187964026736111b6d33301d3e4"
+  },
+  "status": {
+    "allocation": "f6848d09b44573949615063d23639e6b",
+    "compute": 100,
+    "everBound": true,
+    "generation": "676930e5e289dda91618fc2db295e7e4",
+    "gpuUUID": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",
+    "memoryMiB": 8192,
+    "nodeName": "gpu-4",
+    "phase": "Released",
+    "profileGeneration": 1,
+    "reason": "DetachAndReclamationConfirmed",
+    "requestGeneration": 1,
+    "resourcePrefix": "ai-perf-v-b3-1016-77d4bca43013-f6848d09",
+    "sessions": [
+      "38e762ee1613124d2370053355ee57ab"
+    ],
+    "vmiUID": "b0542dca-8949-4799-b512-694f94497598",
+    "workerPodUID": "4fd3f1a7-64e1-47e2-af21-1530fef851d2"
+  }
+}

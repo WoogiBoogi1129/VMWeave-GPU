@@ -1,0 +1,320 @@
+{
+  "kind": "LLMInferenceService",
+  "metadata": {
+    "name": "qwen3-embedding",
+    "namespace": "aap-serving",
+    "uid": "78da79d4-b9a1-47b3-9008-2c25cdb69d7e",
+    "creationTimestamp": "2026-10-15T16:12:03Z",
+    "generation": 5,
+    "managedFields": [
+      {
+        "apiVersion": "serving.kserve.io/v1alpha2",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:finalizers": {
+              ".": {},
+              "v:\"serving.kserve.io/llmisvc-finalizer\"": {}
+            }
+          }
+        },
+        "manager": "manager",
+        "operation": "Update",
+        "time": "2026-10-15T16:12:03Z"
+      },
+      {
+        "apiVersion": "serving.kserve.io/v1alpha2",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:kubectl.kubernetes.io/last-applied-configuration": {}
+            },
+            "f:labels": {
+              ".": {},
+              "f:app.kubernetes.io/part-of": {}
+            }
+          },
+          "f:spec": {
+            ".": {},
+            "f:annotations": {
+              ".": {},
+              "f:nvidia.com/use-gpuuuid": {},
+              "f:serving.kserve.io/model-based-routing-enabled": {}
+            },
+            "f:baseRefs": {},
+            "f:labels": {
+              ".": {},
+              "f:aap.io/model": {},
+              "f:aap.io/role": {}
+            },
+            "f:model": {
+              ".": {},
+              "f:name": {},
+              "f:uri": {}
+            },
+            "f:rolloutStrategy": {
+              ".": {},
+              "f:maxSurge": {},
+              "f:maxUnavailable": {}
+            },
+            "f:router": {
+              ".": {},
+              "f:gateway": {
+                ".": {},
+                "f:refs": {}
+              },
+              "f:route": {
+                ".": {},
+                "f:http": {
+                  ".": {},
+                  "f:refs": {}
+                }
+              }
+            },
+            "f:template": {
+              ".": {},
+              "f:containers": {
+                ".": {},
+                "k:{\"name\":\"main\"}": {
+                  ".": {},
+                  "f:args": {},
+                  "f:env": {
+                    ".": {},
+                    "k:{\"name\":\"GPU_MEMORY_UTILIZATION\"}": {
+                      ".": {},
+                      "f:name": {},
+                      "f:value": {}
+                    },
+                    "k:{\"name\":\"MODEL_PATH\"}": {
+                      ".": {},
+                      "f:name": {},
+                      "f:value": {}
+                    }
+                  },
+                  "f:name": {},
+                  "f:resources": {
+                    ".": {},
+                    "f:limits": {
+                      ".": {},
+                      "f:cpu": {},
+                      "f:memory": {},
+                      "f:nvidia.com/gpu": {},
+                      "f:nvidia.com/gpumem": {}
+                    },
+                    "f:requests": {
+                      ".": {},
+                      "f:cpu": {},
+                      "f:memory": {},
+                      "f:nvidia.com/gpu": {},
+                      "f:nvidia.com/gpumem": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "manager": "kubectl-client-side-apply",
+        "operation": "Update",
+        "time": "2026-10-16T05:18:44Z"
+      },
+      {
+        "apiVersion": "serving.kserve.io/v1alpha2",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:spec": {
+            "f:replicas": {}
+          }
+        },
+        "manager": "app",
+        "operation": "Update",
+        "time": "2026-10-16T11:34:30Z"
+      },
+      {
+        "apiVersion": "serving.kserve.io/v1alpha2",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:status": {
+            ".": {},
+            "f:addresses": {},
+            "f:annotations": {
+              ".": {},
+              "f:serving.kserve.io/config-llm-decode-template": {},
+              "f:serving.kserve.io/config-llm-decode-worker-data-parallel": {},
+              "f:serving.kserve.io/config-llm-prefill-template": {},
+              "f:serving.kserve.io/config-llm-prefill-worker-data-parallel": {},
+              "f:serving.kserve.io/config-llm-router-route": {},
+              "f:serving.kserve.io/config-llm-scheduler": {},
+              "f:serving.kserve.io/config-llm-scheduler-eppconfig-default": {},
+              "f:serving.kserve.io/config-llm-scheduler-eppconfig-default-pd": {},
+              "f:serving.kserve.io/config-llm-scheduler-latency-predictor": {},
+              "f:serving.kserve.io/config-llm-template": {},
+              "f:serving.kserve.io/config-llm-tokenizer": {},
+              "f:serving.kserve.io/config-llm-tracing": {},
+              "f:serving.kserve.io/config-llm-worker-data-parallel": {}
+            },
+            "f:appliedConfigs": {},
+            "f:conditions": {},
+            "f:observedGeneration": {},
+            "f:router": {
+              ".": {},
+              "f:gateways": {}
+            },
+            "f:url": {},
+            "f:workloads": {
+              ".": {},
+              "f:primary": {},
+              "f:service": {}
+            }
+          }
+        },
+        "manager": "manager",
+        "operation": "Update",
+        "subresource": "status",
+        "time": "2026-10-16T11:38:02Z"
+      }
+    ]
+  },
+  "replicas": 1,
+  "status": {
+    "addresses": [
+      {
+        "models": [
+          {
+            "name": "publishers/aap-serving/models/qwen3-embedding"
+          },
+          {
+            "name": "qwen3-embedding"
+          }
+        ],
+        "name": "internal",
+        "origin": {
+          "group": "gateway.networking.k8s.io",
+          "kind": "Gateway",
+          "name": "aap-gateway",
+          "namespace": "aap-gateway"
+        },
+        "url": "http://10.110.195.125:8080/models/qwen3-embedding/v1/models"
+      },
+      {
+        "models": [
+          {
+            "name": "publishers/aap-serving/models/qwen3-embedding"
+          },
+          {
+            "name": "qwen3-embedding"
+          }
+        ],
+        "name": "gateway-internal",
+        "origin": {
+          "group": "gateway.networking.k8s.io",
+          "kind": "Gateway",
+          "name": "aap-gateway",
+          "namespace": "aap-gateway"
+        },
+        "url": "http://aap-gateway.aap-gateway.svc.cluster.local:8080/models/qwen3-embedding/v1/models"
+      }
+    ],
+    "annotations": {
+      "serving.kserve.io/config-llm-decode-template": "kserve-config-llm-decode-template",
+      "serving.kserve.io/config-llm-decode-worker-data-parallel": "kserve-config-llm-decode-worker-data-parallel",
+      "serving.kserve.io/config-llm-prefill-template": "kserve-config-llm-prefill-template",
+      "serving.kserve.io/config-llm-prefill-worker-data-parallel": "kserve-config-llm-prefill-worker-data-parallel",
+      "serving.kserve.io/config-llm-router-route": "kserve-config-llm-router-route",
+      "serving.kserve.io/config-llm-scheduler": "kserve-config-llm-scheduler",
+      "serving.kserve.io/config-llm-scheduler-eppconfig-default": "kserve-config-llm-scheduler-eppconfig-default",
+      "serving.kserve.io/config-llm-scheduler-eppconfig-default-pd": "kserve-config-llm-scheduler-eppconfig-default-pd",
+      "serving.kserve.io/config-llm-scheduler-latency-predictor": "kserve-config-llm-scheduler-latency-predictor",
+      "serving.kserve.io/config-llm-template": "kserve-config-llm-template",
+      "serving.kserve.io/config-llm-tokenizer": "kserve-config-llm-tokenizer",
+      "serving.kserve.io/config-llm-tracing": "kserve-config-llm-tracing",
+      "serving.kserve.io/config-llm-worker-data-parallel": "kserve-config-llm-worker-data-parallel"
+    },
+    "appliedConfigs": [
+      {
+        "name": "kserve-config-llm-template",
+        "namespace": "aap-kserve",
+        "source": "Preset"
+      },
+      {
+        "name": "aap-preset-vllm",
+        "namespace": "aap-serving",
+        "source": "UserRef"
+      }
+    ],
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-15T16:12:17Z",
+        "severity": "Info",
+        "status": "True",
+        "type": "GatewaysReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T16:12:41Z",
+        "severity": "Info",
+        "status": "True",
+        "type": "HTTPRoutesReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T16:12:41Z",
+        "severity": "Info",
+        "status": "True",
+        "type": "MainWorkloadReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T16:12:17Z",
+        "status": "True",
+        "type": "PresetsCombined"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T16:12:41Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T16:12:41Z",
+        "status": "True",
+        "type": "RouterReady"
+      },
+      {
+        "lastTransitionTime": "2026-10-15T16:12:41Z",
+        "status": "True",
+        "type": "WorkloadsReady"
+      }
+    ],
+    "observedGeneration": 5,
+    "router": {
+      "gateways": [
+        {
+          "group": "gateway.networking.k8s.io",
+          "httpRoutes": [
+            {
+              "group": "gateway.networking.k8s.io",
+              "kind": "HTTPRoute",
+              "name": "qwen3-embedding",
+              "namespace": "aap-serving"
+            }
+          ],
+          "kind": "Gateway",
+          "name": "aap-gateway",
+          "namespace": "aap-gateway"
+        }
+      ]
+    },
+    "url": "http://10.110.195.125:8080/models/qwen3-embedding/v1/models",
+    "workloads": {
+      "primary": {
+        "apiGroup": "apps",
+        "kind": "Deployment",
+        "name": "qwen3-embedding-kserve",
+        "readyReplicas": 1
+      },
+      "service": {
+        "kind": "Service",
+        "name": "qwen3-embedding-kserve-workload-svc"
+      }
+    }
+  }
+}

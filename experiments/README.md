@@ -11,3 +11,4 @@
 새 재실행은 새 결과 디렉터리를 사용합니다.
 
 - [2026-10-12~13 VRAM 할당량 및 성능 경합 결과](thesis-isolation/report.md)
+- [2026-10-16~17 VMWeave와 passthrough VM의 동일 FP32 학습 성능 비교](ai-passthrough/README.md)
