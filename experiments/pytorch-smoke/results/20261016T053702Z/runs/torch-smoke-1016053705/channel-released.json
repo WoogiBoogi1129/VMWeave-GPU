@@ -1,0 +1,56 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-10-16T05:37:29Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 2,
+    "name": "torch-smoke-1016053705",
+    "namespace": "vmweave-test-a",
+    "resourceVersion": "11287614",
+    "uid": "26b10af8-6f62-4df7-8a36-0bd5bfaf3cc8"
+  },
+  "spec": {
+    "drain": true,
+    "gid": 107,
+    "hookImage": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+    "image": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+    "lifecycle": "Allocation",
+    "pvcRef": {
+      "name": "torch-smoke-1016053705",
+      "uid": "22a4c810-d129-466c-b578-65a9ded01bac"
+    },
+    "requestRef": {
+      "name": "torch-smoke-1016053705",
+      "uid": "cefd5363-f976-4dfb-882e-58e7c7256b42"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "torch-smoke-1016053705",
+      "uid": "5d3a8837-b564-4ad8-b9bf-031532fd7f88"
+    },
+    "workerImage": "localhost/vmweave-worker@sha256:89ad53d0fd5af161fb7b6a8d458c76ebf0be3791cb899f1d348086dda0007d19"
+  },
+  "status": {
+    "allocation": "01f178550358b4ed880c4e2c0dbd6d44",
+    "compute": 50,
+    "everBound": true,
+    "generation": "dbefd91f302fcb54291fa2451288670c",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "memoryMiB": 2048,
+    "nodeName": "gpu-4",
+    "phase": "Released",
+    "profileGeneration": 1,
+    "reason": "DetachAndReclamationConfirmed",
+    "requestGeneration": 1,
+    "resourcePrefix": "torch-smoke-1016053705-26b10af86f62",
+    "sessions": [
+      "384fed1d52fea7c0426b5af62710c267"
+    ],
+    "vmiUID": "2616b946-923f-49a5-8509-7f21cd7c287b",
+    "workerPodUID": "a6037c47-6e89-46bb-bed6-0e215954c408"
+  }
+}

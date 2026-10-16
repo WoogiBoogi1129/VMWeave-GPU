@@ -1,0 +1,50 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><title>실행 원본 증거와 첫 실패</title><style>*{box-sizing:border-box}body{margin:0;background:#edf2f7;color:#172b45;font-family:"Noto Sans KR",sans-serif}main{width:1280px;margin:auto;padding:40px}h1{font-size:34px;margin:10px 0}h2{font-size:23px;margin:0 0 16px}p{line-height:1.7}small,.muted{color:#53677f}.top{color:#2266ac;font-size:15px;letter-spacing:2px}.cards{display:flex;gap:16px;margin:24px 0}.card,section{background:white;border:1px solid #d8e2ec;border-radius:14px;padding:24px}.card{flex:1}.value{font-size:28px;font-weight:700;margin-top:8px}.pass{color:#087c60}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}section{margin-bottom:20px}td,th{text-align:left;padding:10px;border-bottom:1px solid #e6ebf0;font-size:15px}table{width:100%;border-collapse:collapse}pre{background:#13243b;color:#e6f1ff;padding:20px;border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.65 monospace}.note{background:#fff6e7;border-left:5px solid #d99026;padding:16px 20px}footer{font-size:13px;color:#53677f}</style><main><div class="top">VMWEAVE · GPU VALIDATION RECORD</div><h1>실행 원본 증거와 첫 실패</h1><p class="muted">실험일 2026-10-16 KST · 저장된 원본 로그의 사후 렌더링 · 실시간 콘솔 캡처 아님</p><section><h2>1. 최종 실행 결과 — result.json 원문</h2><pre>{
+  &quot;event&quot;: &quot;result&quot;,
+  &quot;status&quot;: &quot;PASS&quot;,
+  &quot;torch&quot;: &quot;2.11.0+flyt.cu128&quot;,
+  &quot;cuda&quot;: &quot;12.8&quot;,
+  &quot;gpu&quot;: &quot;NVIDIA RTX PRO 6000 Blackwell Server Edition&quot;,
+  &quot;steps&quot;: 100,
+  &quot;batch&quot;: 128,
+  &quot;widths&quot;: [
+    32,
+    64,
+    8
+  ],
+  &quot;optimizer&quot;: &quot;SGD lr=0.1&quot;,
+  &quot;loss&quot;: &quot;MSE&quot;,
+  &quot;initial_loss&quot;: 0.3166755437850952,
+  &quot;final_loss&quot;: 0.07618092745542526,
+  &quot;training_seconds&quot;: 6.634076350000001,
+  &quot;parameters_gradients_and_losses_match_cpu&quot;: true,
+  &quot;rtol&quot;: 0.0001,
+  &quot;atol&quot;: 1e-06,
+  &quot;max_parameter_abs_error&quot;: 2.9802322387695312e-08
+}</pre></section><section><h2>2. 지정 GPU 프로세스 및 회수 후 상태 — 로그 발췌</h2><pre>gpu_uuid, pid, process_name, used_gpu_memory [MiB]
+GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 3270766, /opt/flyt/bin/flyt-shm-worker, 724 MiB
+
+uuid, memory.used [MiB], utilization.gpu [%]
+GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 0 MiB, 0 %
+</pre><p>다른 GPU의 프로세스 행은 화면에서 제외했다. 원본 파일은 그대로 보존.</p></section><section><h2>3. Channel 수명주기 — JSON 필드 발췌</h2><pre>{
+  &quot;name&quot;: &quot;torch-smoke-1016053953&quot;,
+  &quot;uid&quot;: &quot;2d4696d5-cc55-47d6-848a-ec28b45a3e49&quot;,
+  &quot;live_phase&quot;: &quot;Ready&quot;,
+  &quot;final_phase&quot;: &quot;Released&quot;,
+  &quot;release_reason&quot;: &quot;DetachAndReclamationConfirmed&quot;,
+  &quot;cleanup&quot;: {
+    &quot;released&quot;: true,
+    &quot;uid&quot;: &quot;2d4696d5-cc55-47d6-848a-ec28b45a3e49&quot;,
+    &quot;utc&quot;: 1792129343.008319
+  }
+}</pre></section><section><h2>4. 첫 실행 실패 — stderr.txt 원문</h2><pre>Traceback (most recent call last):
+  File &quot;/tmp/perf/train.py&quot;, line 45, in &lt;module&gt;
+    gpu = train(&#x27;cuda&#x27;)
+  File &quot;/tmp/perf/train.py&quot;, line 33, in train
+    losses.append(loss.item())
+torch.AcceleratorError: CUDA error: SHM CUDA error; inspect Worker and Guest logs
+Search for `cudaErrorUnknown&#x27; in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+</pre></section><footer>캡처 생성: 2026-10-16T14:45:03+09:00<br>출처: experiments/pytorch-smoke/results/20261016T053951Z · 원본 해시: raw-sha256.json</footer></main></html>

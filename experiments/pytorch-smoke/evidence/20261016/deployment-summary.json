@@ -1,0 +1,81 @@
+{
+  "scope": "Selected experiment deployment fields; original full snapshots retained locally",
+  "vmi": {
+    "name": "torch-smoke-1016053953",
+    "uid": "75ab5745-591b-45cc-8f67-25059b64e895",
+    "namespace": "vmweave-test-a",
+    "phase": "Running",
+    "nodeName": "gpu-4",
+    "interfaces": [
+      {
+        "infoSource": "domain",
+        "ipAddress": "10.85.0.233",
+        "ipAddresses": [
+          "10.85.0.233"
+        ],
+        "linkState": "up",
+        "mac": "3e:0e:b3:75:0f:fd",
+        "name": "default",
+        "podInterfaceName": "eth0",
+        "queueCount": 1
+      }
+    ],
+    "cpu": {
+      "cores": 8,
+      "model": "host-model"
+    },
+    "resources": {
+      "requests": {
+        "memory": "16Gi"
+      }
+    }
+  },
+  "worker": {
+    "name": "torch-smoke-1016053953-2d4696d5cc55-worker",
+    "uid": "0b778edd-570a-435e-8a17-8d3d83e587a3",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "torch-smoke-1016053953",
+        "uid": "2d4696d5-cc55-47d6-848a-ec28b45a3e49"
+      }
+    ],
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "main",
+        "image": "localhost/vmweave-worker@sha256:89ad53d0fd5af161fb7b6a8d458c76ebf0be3791cb899f1d348086dda0007d19",
+        "resources": {
+          "limits": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "50",
+            "nvidia.com/gpumem": "2048"
+          },
+          "requests": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "50",
+            "nvidia.com/gpumem": "2048"
+          }
+        }
+      }
+    ]
+  },
+  "after": {
+    "source": "results/20261016T053951Z/cluster-after.json",
+    "experiment_resources": [
+      {
+        "kind": "Pod",
+        "name": "torch-smoke-1016053953-2d4696d5cc55-prepare",
+        "phase": "Succeeded"
+      },
+      {
+        "kind": "Pod",
+        "name": "torch-smoke-1016053953-2d4696d5cc55-reclaim",
+        "phase": "Succeeded"
+      }
+    ]
+  }
+}

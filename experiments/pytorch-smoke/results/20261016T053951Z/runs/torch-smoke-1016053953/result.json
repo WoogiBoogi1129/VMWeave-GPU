@@ -1,0 +1,23 @@
+{
+  "event": "result",
+  "status": "PASS",
+  "torch": "2.11.0+flyt.cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "steps": 100,
+  "batch": 128,
+  "widths": [
+    32,
+    64,
+    8
+  ],
+  "optimizer": "SGD lr=0.1",
+  "loss": "MSE",
+  "initial_loss": 0.3166755437850952,
+  "final_loss": 0.07618092745542526,
+  "training_seconds": 6.634076350000001,
+  "parameters_gradients_and_losses_match_cpu": true,
+  "rtol": 0.0001,
+  "atol": 1e-06,
+  "max_parameter_abs_error": 2.9802322387695312e-08
+}
