@@ -1,0 +1,34 @@
+{
+  "stage": "first paired preparation, before GPU probe execution",
+  "error": "Worker process not yet present when CPU affinity helper ran",
+  "change": "wait/retry exact-Pod process readiness up to 120s; cleanup on preparation failure",
+  "excluded_from_measurement": true,
+  "cleanup": [
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-r1-ab-a",
+      "uid": "0a5631ff-36a5-46fd-b0fd-cb6db492283e",
+      "phase": "Released",
+      "reason": "DetachAndReclamationConfirmed"
+    },
+    {
+      "namespace": "vmweave-test-b",
+      "name": "vram-pair-r1-ab-b",
+      "uid": "386237b8-6a3b-45c8-b96b-06ce65318e3e",
+      "phase": "Released",
+      "reason": "DetachAndReclamationConfirmed"
+    }
+  ],
+  "root_cause_confirmed": "HAMi CardInsufficientCore: existing persistent VM reserves 50%; two additional 50% Workers exceed scheduling core capacity. Initial missing-process error was a symptom.",
+  "second_attempt": "vram-pair-v2-r1-ab; waiting alone did not resolve scheduling",
+  "resolution": "Preserve existing VM; set paired test Workers to 25% each. Keep single and PyTorch stages at 50%.",
+  "remaining_cleanup_gap": {
+    "channel": "vmweave-test-a/vram-pair-v2-r1-ab-a",
+    "phase": "Draining",
+    "reason": "AwaitingDetachEvidence",
+    "worker_never_scheduled": true,
+    "worker_nodeName": null,
+    "gpu_probe_started": false,
+    "forced_recovery": false
+  }
+}

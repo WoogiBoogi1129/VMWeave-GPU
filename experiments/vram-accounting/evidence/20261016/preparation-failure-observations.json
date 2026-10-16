@@ -1,0 +1,295 @@
+{
+  "captured_utc": 1792133621.3939118,
+  "kind": "Read-only Kubernetes status and scheduler event evidence; selected fields, not full cluster dump",
+  "channel": {
+    "apiVersion": "vmweave.io/v1alpha1",
+    "kind": "SharedMemoryChannel",
+    "metadata": {
+      "creationTimestamp": "2026-10-16T06:18:33Z",
+      "finalizers": [
+        "vmweave.io/shm-detach"
+      ],
+      "generation": 2,
+      "name": "vram-pair-v2-r1-ab-a",
+      "namespace": "vmweave-test-a",
+      "resourceVersion": "11307184",
+      "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b"
+    },
+    "spec": {
+      "drain": true,
+      "gid": 107,
+      "hookImage": "localhost/vmweave-hook@sha256:391f0fada973141eb07da8e4aaaada80aabfd59b2460a124b0e1376b4221100f",
+      "image": "localhost/vmweave-helper@sha256:36a7208680a38964122d60eeb27c289b5cbfdc6ac7b91b88b2f01d3933242654",
+      "lifecycle": "Allocation",
+      "pvcRef": {
+        "name": "vram-pair-v2-r1-ab-a",
+        "uid": "7c645eb9-d966-42cd-a7a5-bba7683fe6a3"
+      },
+      "requestRef": {
+        "name": "vram-pair-v2-r1-ab-a",
+        "uid": "20f4e6f5-f157-483f-b5e2-7a7f0d220f4e"
+      },
+      "sessions": 1,
+      "uid": 107,
+      "vmRef": {
+        "name": "vram-pair-v2-r1-ab-a",
+        "uid": "78b679b9-9212-4dec-aa57-2857292d4adc"
+      },
+      "workerImage": "localhost/vmweave-worker@sha256:89ad53d0fd5af161fb7b6a8d458c76ebf0be3791cb899f1d348086dda0007d19"
+    },
+    "status": {
+      "allocation": "c72b09dfb6e5c9f784748682f978d303",
+      "compute": 50,
+      "everBound": true,
+      "generation": "36cd0792fc4a39f83cbef7540e235d5e",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 1024,
+      "nodeName": "gpu-4",
+      "phase": "Draining",
+      "profileGeneration": 1,
+      "reason": "AwaitingDetachEvidence",
+      "requestGeneration": 1,
+      "resourcePrefix": "vram-pair-v2-r1-ab-a-27b9c3330493",
+      "sessions": [
+        "a07fc1a4ff073b48c0dceab7861fd81b"
+      ],
+      "vmiUID": "bdfadae0-094a-4aa0-89c0-e446c0c28881",
+      "workerPodUID": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+    }
+  },
+  "worker": {
+    "metadata": {
+      "annotations": {
+        "nvidia.com/use-gpuuuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "vmweave.io/detach-channel-uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b"
+      },
+      "creationTimestamp": "2026-10-16T06:18:38Z",
+      "deletionGracePeriodSeconds": 0,
+      "deletionTimestamp": "2026-10-16T06:21:25Z",
+      "finalizers": [
+        "vmweave.io/detach-observation"
+      ],
+      "generation": 2,
+      "labels": {
+        "vmweave.io/channel": "vram-pair-v2-r1-ab-a"
+      },
+      "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+      "namespace": "vmweave-test-a",
+      "ownerReferences": [
+        {
+          "apiVersion": "vmweave.io/v1alpha1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "SharedMemoryChannel",
+          "name": "vram-pair-v2-r1-ab-a",
+          "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b"
+        }
+      ],
+      "resourceVersion": "11307338",
+      "uid": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+    },
+    "nodeName": null,
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-16T06:18:38Z",
+          "message": "0/1 nodes are available: 1 1/4 CardInsufficientCore, 3/4 CardUuidMismatch. preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.",
+          "observedGeneration": 1,
+          "reason": "Unschedulable",
+          "status": "False",
+          "type": "PodScheduled"
+        }
+      ],
+      "observedGeneration": 2,
+      "phase": "Failed",
+      "qosClass": "BestEffort"
+    }
+  },
+  "events": [
+    {
+      "apiVersion": "v1",
+      "count": 8,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-16T06:18:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11305945",
+        "uid": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-16T06:18:39Z",
+      "message": "1 nodes CardInsufficientCore(gpu-4)",
+      "metadata": {
+        "creationTimestamp": "2026-10-16T06:18:38Z",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker.18deee1efa3d61bb",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11306035",
+        "uid": "0e1b19d5-ddfb-4553-aefb-3b0dcdf024af"
+      },
+      "reason": "FilteringFailed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 9,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-16T06:18:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11305945",
+        "uid": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-16T06:18:39Z",
+      "message": "1 nodes CardUuidMismatch(gpu-4)",
+      "metadata": {
+        "creationTimestamp": "2026-10-16T06:18:38Z",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker.18deee1efa3ef4d6",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11306051",
+        "uid": "ce87b11a-5d9f-4b94-9164-a48be077a1d1"
+      },
+      "reason": "FilteringFailed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 8,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-16T06:18:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11305945",
+        "uid": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-16T06:18:39Z",
+      "message": "no available node, 1 nodes do not meet",
+      "metadata": {
+        "creationTimestamp": "2026-10-16T06:18:38Z",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker.18deee1efa402eb1",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11306041",
+        "uid": "2c1f1e59-1348-4119-a1c7-16dff38aec5b"
+      },
+      "reason": "FilteringFailed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Warning"
+    },
+    {
+      "action": "Scheduling",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-16T06:18:38.556540Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11305945",
+        "uid": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "0/1 nodes are available: 1 1/4 CardInsufficientCore, 3/4 CardUuidMismatch. preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.",
+      "metadata": {
+        "creationTimestamp": "2026-10-16T06:18:38Z",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker.18deee1efa5837f3",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11305948",
+        "uid": "a1f70b27-429f-4894-b4d7-bb21d4ea7208"
+      },
+      "reason": "FailedScheduling",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+      "source": {},
+      "type": "Warning"
+    },
+    {
+      "action": "Scheduling",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-16T06:18:38.571503Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11305949",
+        "uid": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "0/1 nodes are available: 1 1/4 CardInsufficientCore, 3/4 CardUuidMismatch. preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.",
+      "metadata": {
+        "creationTimestamp": "2026-10-16T06:18:38Z",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker.18deee1efb3c7289",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11313213",
+        "uid": "5df7f69d-1f0c-4098-a731-eb9a2fb6c3da"
+      },
+      "reason": "FailedScheduling",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+      "series": {
+        "count": 32,
+        "lastObservedTime": "2026-10-16T06:21:19.811868Z"
+      },
+      "source": {},
+      "type": "Warning"
+    },
+    {
+      "action": "Scheduling",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-16T06:21:25.802408Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11307182",
+        "uid": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "skip schedule deleting pod: vmweave-test-a/vram-pair-v2-r1-ab-a-27b9c3330493-worker",
+      "metadata": {
+        "creationTimestamp": "2026-10-16T06:21:25Z",
+        "name": "vram-pair-v2-r1-ab-a-27b9c3330493-worker.18deee45eaf99f7b",
+        "namespace": "vmweave-test-a",
+        "resourceVersion": "11307183",
+        "uid": "c07cd2eb-c97b-41c4-ba5e-7b930c2a4268"
+      },
+      "reason": "FailedScheduling",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+      "source": {},
+      "type": "Warning"
+    }
+  ]
+}

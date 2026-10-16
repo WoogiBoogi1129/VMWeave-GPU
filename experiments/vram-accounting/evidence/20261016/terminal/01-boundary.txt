@@ -1,0 +1,52 @@
+evidence$ # POST-RUN ORIGINAL LOG INSPECTION: exact successful / failed allocations
+evidence$ jq -c 'select(.label=="warm-max" or .label=="warm-min-fail") | {label,rc,bytes,live_requested,free,total,verify_rc}' results/20261016/runs/vram-single-r1-{1024,4096}/events.jsonl
+{"label":"warm-max","rc":0,"bytes":497025024,"live_requested":497025024,"free":0,"total":1073741824,"verify_rc":0}
+{"label":"warm-min-fail","rc":2,"bytes":497029120,"live_requested":0,"free":497025024,"total":1073741824,"verify_rc":0}
+{"label":"warm-max","rc":0,"bytes":3718250496,"live_requested":3718250496,"free":0,"total":4294967296,"verify_rc":0}
+{"label":"warm-min-fail","rc":2,"bytes":3718254592,"live_requested":0,"free":3718250496,"total":4294967296,"verify_rc":0}
+evidence$ # Independent repeats, quota bytes, usable bytes, accounting residual
+evidence$ jq -c '.singles[] | {run,quota_mib,baseline_bytes,warm_max,min_failure,ledger_max_abs_residual}' evidence/20261016/summary.json
+{"run":"vram-single-r1-1024","quota_mib":1024,"baseline_bytes":576716800,"warm_max":497025024,"min_failure":497029120,"ledger_max_abs_residual":0}
+{"run":"vram-single-r1-4096","quota_mib":4096,"baseline_bytes":576716800,"warm_max":3718250496,"min_failure":3718254592,"ledger_max_abs_residual":0}
+{"run":"vram-single-r2-1024","quota_mib":1024,"baseline_bytes":576716800,"warm_max":497025024,"min_failure":497029120,"ledger_max_abs_residual":0}
+{"run":"vram-single-r2-4096","quota_mib":4096,"baseline_bytes":576716800,"warm_max":3718250496,"min_failure":3718254592,"ledger_max_abs_residual":0}
+{"run":"vram-single-r3-1024","quota_mib":1024,"baseline_bytes":576716800,"warm_max":497025024,"min_failure":497029120,"ledger_max_abs_residual":0}
+{"run":"vram-single-r3-4096","quota_mib":4096,"baseline_bytes":576716800,"warm_max":3718250496,"min_failure":3718254592,"ledger_max_abs_residual":0}
+{"run":"vram-single-r4-1024","quota_mib":1024,"baseline_bytes":576716800,"warm_max":497025024,"min_failure":497029120,"ledger_max_abs_residual":0}
+{"run":"vram-single-r4-4096","quota_mib":4096,"baseline_bytes":576716800,"warm_max":3718250496,"min_failure":3718254592,"ledger_max_abs_residual":0}
+{"run":"vram-single-r5-1024","quota_mib":1024,"baseline_bytes":576716800,"warm_max":497025024,"min_failure":497029120,"ledger_max_abs_residual":0}
+{"run":"vram-single-r5-4096","quota_mib":4096,"baseline_bytes":576716800,"warm_max":3718250496,"min_failure":3718254592,"ledger_max_abs_residual":0}
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

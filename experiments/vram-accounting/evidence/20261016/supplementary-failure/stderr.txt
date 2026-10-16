@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/tmp/perf/torch_boundary.py", line 32, in <module>
+    exec(compile(source.replace('del loss,opt,x,y,net;',extra+'\ndel loss,opt,x,y,net;'),str(Path(__file__)), 'exec'))
+  File "/tmp/perf/torch_boundary.py", line 32, in <module>
+    exec(compile(source.replace('del loss,opt,x,y,net;',extra+'\ndel loss,opt,x,y,net;'),str(Path(__file__)), 'exec'))
+AssertionError

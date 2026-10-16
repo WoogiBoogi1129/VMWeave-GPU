@@ -1,0 +1,16 @@
+RUN python3 /home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/vram-accounting/run_torch_boundary.py
+PREPARED vram-mlp-boundary-r1-1024
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/vram-accounting/run_torch_boundary.py", line 24, in <module>
+    if l is None:raise RuntimeError('torch ended without completion')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: torch ended without completion
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/vram-accounting-20261016/finalize.py", line 7, in <module>
+    execute(['python3',str(P/'run_torch_boundary.py')])
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/vram-accounting-20261016/finalize.py", line 6, in execute
+    print('RUN',*args,flush=True);subprocess.run(args,cwd=ROOT,check=True)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/vram-accounting/run_torch_boundary.py']' returned non-zero exit status 1.

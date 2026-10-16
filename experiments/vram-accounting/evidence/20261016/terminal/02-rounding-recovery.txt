@@ -1,0 +1,52 @@
+evidence$ # Byte-level rounding and successful recovery after quota OOM
+evidence$ jq -c 'select(.label=="rounding" or .label=="cumulative-over" or .label=="after-oom-check" or .label=="refill-check" or .label=="recovery") | {label,bytes,rc,live_requested,free,v
+erify_rc}' results/20261016/runs/vram-single-r1-1024/events.jsonl
+{"label":"rounding","bytes":1,"rc":0,"live_requested":1,"free":497020928,"verify_rc":0}
+{"label":"rounding","bytes":4095,"rc":0,"live_requested":4095,"free":497020928,"verify_rc":0}
+{"label":"rounding","bytes":4096,"rc":0,"live_requested":4096,"free":497020928,"verify_rc":0}
+{"label":"rounding","bytes":4097,"rc":0,"live_requested":4097,"free":497016832,"verify_rc":0}
+{"label":"rounding","bytes":65535,"rc":0,"live_requested":65535,"free":496959488,"verify_rc":0}
+{"label":"rounding","bytes":65536,"rc":0,"live_requested":65536,"free":496959488,"verify_rc":0}
+{"label":"rounding","bytes":65537,"rc":0,"live_requested":65537,"free":496955392,"verify_rc":0}
+{"label":"rounding","bytes":1048576,"rc":0,"live_requested":1048576,"free":495976448,"verify_rc":0}
+{"label":"cumulative-over","bytes":4096,"rc":2,"live_requested":497025024,"free":0,"verify_rc":0}
+{"label":"after-oom-check","bytes":0,"rc":0,"live_requested":497025024,"free":0,"verify_rc":0}
+{"label":"refill-check","bytes":0,"rc":0,"live_requested":497025024,"free":0,"verify_rc":0}
+{"label":"recovery","bytes":134217728,"rc":0,"live_requested":134217728,"free":362807296,"verify_rc":0}
+evidence$ # Channel release evidence (both quotas)
+evidence$ jq -c '{name:.metadata.name,phase:.status.phase,reason:.status.reason}' results/20261016/runs/vram-single-r1-{1024,4096}/channel-released.json
+{"name":"vram-single-r1-1024","phase":"Released","reason":"DetachAndReclamationConfirmed"}
+{"name":"vram-single-r1-4096","phase":"Released","reason":"DetachAndReclamationConfirmed"}
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

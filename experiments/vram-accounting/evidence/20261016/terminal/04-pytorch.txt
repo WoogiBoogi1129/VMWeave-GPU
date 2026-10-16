@@ -1,0 +1,52 @@
+evidence$ # PyTorch staged allocator observations, original JSON fields
+evidence$ jq -c 'select(.stage!="done") | {stage,allocated,reserved,free,total}' results/20261016/runs/vram-torch-r1-{1024,4096}/torch-events.jsonl
+{"stage":"torch-context","allocated":0,"reserved":0,"free":497025024,"total":1073741824}
+{"stage":"model-data","allocated":17051648,"reserved":23068672,"free":473956352,"total":1073741824}
+{"stage":"first-training-step","allocated":101081088,"reserved":111149056,"free":368834560,"total":1073741824}
+{"stage":"training-complete","allocated":101081088,"reserved":111149056,"free":368834560,"total":1073741824}
+{"stage":"tensors-deleted","allocated":67108864,"reserved":111149056,"free":368834560,"total":1073741824}
+{"stage":"empty-cache","allocated":67108864,"reserved":67108864,"free":412874752,"total":1073741824}
+{"stage":"torch-context","allocated":0,"reserved":0,"free":3718250496,"total":4294967296}
+{"stage":"model-data","allocated":17051648,"reserved":23068672,"free":3695181824,"total":4294967296}
+{"stage":"first-training-step","allocated":101081088,"reserved":111149056,"free":3590060032,"total":4294967296}
+{"stage":"training-complete","allocated":101081088,"reserved":111149056,"free":3590060032,"total":4294967296}
+{"stage":"tensors-deleted","allocated":67108864,"reserved":111149056,"free":3590060032,"total":4294967296}
+{"stage":"empty-cache","allocated":67108864,"reserved":67108864,"free":3634100224,"total":4294967296}
+evidence$ # Full evidence audit
+evidence$ python3 analyze.py --final
+AUDIT 10 single 10 pairs 10 torch; 2 supplementary; raw evidence consistency checks passed; accounting mismatches retained
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

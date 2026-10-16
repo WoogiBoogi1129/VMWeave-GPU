@@ -1,0 +1,16 @@
+{
+  "start_utc": 1792130333.1522,
+  "end_utc": 1792134668.9284086,
+  "step_seconds": 1,
+  "queries": {
+    "device": "vram_device_used_bytes",
+    "util": "vram_device_util_pct",
+    "hami": "hami_container_device_memory_bytes{pod=~\"vram-.*\"}",
+    "requested": "vram_live_requested_bytes",
+    "free": "vram_free_bytes",
+    "total": "vram_total_bytes",
+    "scrape": "up{job=\"vram\"}"
+  },
+  "raw_observer_nominal_interval_seconds": 0.5,
+  "note": "Initial Prometheus scrape rejected missing Content-Type; fixed before later complete intervals. Raw observer data retained separately. No interpolation or reconstructed samples."
+}

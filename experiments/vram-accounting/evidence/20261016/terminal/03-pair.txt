@@ -1,0 +1,52 @@
+evidence$ # Two VMs: simultaneous near-boundary allocations, OOM and survivor checks
+evidence$ jq -c 'select(.label=="pair-near" or .label=="pair-over" or .label=="pair-survivor") | {label,rc,live_requested,free,total,verify_rc}' results/20261016/runs/vram-pair-v3-r1-ab-{a,
+b}/events.jsonl
+{"label":"pair-near","rc":0,"live_requested":497025024,"free":0,"total":1073741824,"verify_rc":0}
+{"label":"pair-over","rc":2,"live_requested":497025024,"free":0,"total":1073741824,"verify_rc":0}
+{"label":"pair-survivor","rc":0,"live_requested":497025024,"free":0,"total":1073741824,"verify_rc":0}
+{"label":"pair-near","rc":0,"live_requested":497025024,"free":0,"total":1073741824,"verify_rc":0}
+{"label":"pair-over","rc":2,"live_requested":497025024,"free":0,"total":1073741824,"verify_rc":0}
+{"label":"pair-survivor","rc":0,"live_requested":497025024,"free":0,"total":1073741824,"verify_rc":0}
+{"label":"pair-near","rc":0,"live_requested":3718250496,"free":0,"total":4294967296,"verify_rc":0}
+{"label":"pair-over","rc":2,"live_requested":3718250496,"free":0,"total":4294967296,"verify_rc":0}
+{"label":"pair-survivor","rc":0,"live_requested":3718250496,"free":0,"total":4294967296,"verify_rc":0}
+{"label":"pair-near","rc":0,"live_requested":3718250496,"free":0,"total":4294967296,"verify_rc":0}
+{"label":"pair-over","rc":2,"live_requested":3718250496,"free":0,"total":4294967296,"verify_rc":0}
+{"label":"pair-survivor","rc":0,"live_requested":3718250496,"free":0,"total":4294967296,"verify_rc":0}
+evidence$ # Repeated independent pairs
+evidence$ jq -c '.pairs[] | {run,status,direction}' evidence/20261016/summary.json
+{"run":"vram-pair-v3-r1-ab","status":"PASS","direction":"ab"}
+{"run":"vram-pair-v3-r1-ba","status":"PASS","direction":"ba"}
+{"run":"vram-pair-v3-r2-ab","status":"PASS","direction":"ab"}
+{"run":"vram-pair-v3-r2-ba","status":"PASS","direction":"ba"}
+{"run":"vram-pair-v3-r3-ab","status":"PASS","direction":"ab"}
+{"run":"vram-pair-v3-r3-ba","status":"PASS","direction":"ba"}
+{"run":"vram-pair-v3-r4-ab","status":"PASS","direction":"ab"}
+{"run":"vram-pair-v3-r4-ba","status":"PASS","direction":"ba"}
+{"run":"vram-pair-v3-r5-ab","status":"PASS","direction":"ab"}
+{"run":"vram-pair-v3-r5-ba","status":"PASS","direction":"ba"}
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

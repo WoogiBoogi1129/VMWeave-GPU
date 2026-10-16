@@ -1,0 +1,62 @@
+{
+  "status": "frozen_after_pilot_before_formal",
+  "source_commit": "835a4b44f0f3d3e341ebe08efee45953766feb08",
+  "date_kst": "2026-10-16",
+  "quotas_mib": [
+    1024,
+    4096
+  ],
+  "single_independent_repetitions_per_quota": 5,
+  "pair_repetitions_per_direction": 5,
+  "allocation_granularity_bytes": 4096,
+  "candidate_prediction_from_pilot": "quota minus 550 MiB; hypothesis tested, not assumed result",
+  "data_verification": "warm: every byte (GPU u32 verification and CPU head/tail); cold: memset whole allocation + synchronize",
+  "limit_error_required": 2,
+  "hami_steady_tolerance_bytes": 4096,
+  "nvml_per_process_tolerance_bytes": 2097152,
+  "post_worker_device_tolerance_bytes": 16777216,
+  "post_worker_wait_seconds": 30,
+  "sampling_seconds": 0.5,
+  "prometheus_scrape_seconds": 1,
+  "stable_hold_seconds": 3,
+  "max_live_allocations": 3000,
+  "conditions": [
+    "cold single boundary",
+    "module-warm single boundary",
+    "cumulative boundary",
+    "4KiB rounding",
+    "partition count",
+    "partial free and refill",
+    "two VM order reversal and alternating allocation",
+    "PyTorch allocator accounting"
+  ],
+  "limitations": [
+    "NVML values MiB resolution",
+    "HAMi exporter can include stale records; join exact Worker name",
+    "no physical oversubscription guarantee claim"
+  ],
+  "probe_sha256": "8d11d081f3910a5c7dd8a1b17c2c25e25452496bb2c04887293ea2e8bf7a0b29",
+  "torch_independent_repetitions_per_quota": 5,
+  "endpoint_trace": "Guest endpoint trace ON for pair stage, OFF for single stage; verify actual forwarded allocation sizes and backend OOM responses",
+  "checker_negative_control": "Before every pair probe: own scratch buffer head/middle/tail corruption must be detected, then restored buffer must pass. Added before pair stage; base verifier code unchanged.",
+  "compute_percent": {
+    "single": 50,
+    "pair": 25,
+    "torch": 50
+  },
+  "pair_amendment": "Two 50% test Workers cannot coexist with preserved existing VM 50% reservation (CardInsufficientCore). Pair stage changed to 25% each before any paired GPU measurements; two failed preparations excluded.",
+  "supplementary_trained_boundary": {
+    "added_utc": 1792133291.7355018,
+    "reason": "Repeated 91.75 MiB NVML minus HAMi discrepancy during training; measure physical process usage when post-training logical headroom is exhausted.",
+    "independent_runs_per_quota": 1,
+    "separate_from_predeclared_repeats": true,
+    "compute_percent": 50,
+    "allocation": "direct cudaMalloc through Guest library; maximum reported free, then extra 4096 bytes",
+    "verification": "whole allocation memset and synchronization; 48-byte head/middle/tail sample, then training step recovery; not full-buffer checker",
+    "amendment": {
+      "utc": 1792134306.0565286,
+      "reason": "First supplementary preparation reached training, then asserted 4KiB-aligned reported free; actual remainder was 2048 bytes. No direct boundary allocation occurred. Retained failure and start new v2 run names.",
+      "allocation": "direct malloc request grid floor(reported_free/4096)*4096; explicitly preserve sub-page residual"
+    }
+  }
+}

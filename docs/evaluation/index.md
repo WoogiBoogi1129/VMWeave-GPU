@@ -11,6 +11,7 @@
 | N/T/S 오버헤드 | 새 경로별 5회·105구간, 8개 지연 지표 모두 S > T | [새 평가](resource-performance.md) |
 | 연산 상한·공유 성능 | 단일 VM 20회·공유 20쌍 완료; 단일 25·50·75 및 공유 25 기준 위반 | [새 평가](resource-performance.md) |
 | 16MiB H2D 원인 | Guest 중간 복사 제거의 계측 OFF 개선과 CPU 비용 검증 | [원인 분석](h2d-diagnosis.md) |
+| VRAM 경계·계상 (2026-10-16) | 단일 10회·동시 10쌍·학습 10회+추가 2회; 초기 550 MiB, 학습 상태 물리 한도 초과 확인 | [보고서·Grafana·그래프](../../experiments/vram-accounting/README.md) |
 | PyTorch 학습 재검증 (2026-10-16) | 새 VM·SSH·CUDA MLP 100 step 및 CPU 정확성 비교 PASS, 첫 loss.item() 실패 보존 | [보고서·스크린샷](../../experiments/pytorch-smoke/README.md) |
 | 제한된 PyTorch 학습 | 고정 FP32 eager MLP·SGD, passthrough와 정확성 비교 | [구현·검증 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md) |
 

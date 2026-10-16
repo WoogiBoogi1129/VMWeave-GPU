@@ -1,0 +1,11 @@
+{
+  "utc": 1792134306.0555687,
+  "run": "vram-mlp-boundary-r1-1024",
+  "status": "FAILED_EXPLORATORY_ASSUMPTION",
+  "failed_assertion": "reported_free > 0 and reported_free % 4096 == 0",
+  "observed_training_free_bytes": 368834560,
+  "observed_remainder_bytes": 2048,
+  "direct_boundary_allocation_started": false,
+  "released": true,
+  "correction": "Search 4 KiB request grid using floor(reported_free/4096)*4096, retain and report residual. Do not assume all PyTorch-associated HAMi charges are multiples of 4096."
+}

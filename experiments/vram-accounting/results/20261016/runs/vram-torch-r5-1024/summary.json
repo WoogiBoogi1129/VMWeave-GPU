@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "quota_mib": 1024,
+  "stages": [
+    {
+      "stage": "torch-context",
+      "guest_utc": 1792133916.6216805,
+      "free": 497025024,
+      "total": 1073741824,
+      "allocated": 0,
+      "reserved": 0,
+      "peak_allocated": 0,
+      "peak_reserved": 0,
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "host_utc": 1792133916.8726087
+    },
+    {
+      "stage": "model-data",
+      "guest_utc": 1792133922.3354933,
+      "free": 473956352,
+      "total": 1073741824,
+      "allocated": 17051648,
+      "reserved": 23068672,
+      "peak_allocated": 17051648,
+      "peak_reserved": 23068672,
+      "host_utc": 1792133922.5863554
+    },
+    {
+      "stage": "first-training-step",
+      "guest_utc": 1792133926.0223608,
+      "free": 368834560,
+      "total": 1073741824,
+      "allocated": 101081088,
+      "reserved": 111149056,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "loss": 1.0602686405181885,
+      "host_utc": 1792133926.2742896
+    },
+    {
+      "stage": "training-complete",
+      "guest_utc": 1792133930.1166425,
+      "free": 368834560,
+      "total": 1073741824,
+      "allocated": 101081088,
+      "reserved": 111149056,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "initial_loss": 1.0602686405181885,
+      "final_loss": 1.0462801456451416,
+      "steps": 20,
+      "host_utc": 1792133930.368157
+    },
+    {
+      "stage": "tensors-deleted",
+      "guest_utc": 1792133933.2942169,
+      "free": 368834560,
+      "total": 1073741824,
+      "allocated": 67108864,
+      "reserved": 111149056,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "host_utc": 1792133933.54573
+    },
+    {
+      "stage": "empty-cache",
+      "guest_utc": 1792133936.366857,
+      "free": 412874752,
+      "total": 1073741824,
+      "allocated": 67108864,
+      "reserved": 67108864,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "host_utc": 1792133936.6200235
+    },
+    {
+      "stage": "done",
+      "status": "PASS",
+      "host_utc": 1792133939.6890836
+    }
+  ]
+}

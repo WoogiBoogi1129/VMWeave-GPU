@@ -4,6 +4,7 @@
 
 | 결과 묶음 | 내용 |
 |---|---|
+| [2026-10-16 VRAM 계상](../../experiments/vram-accounting/README.md) | 단일 10회·동시 10쌍·PyTorch 10회+추가 2회, 4 KiB 경계·물리 한도 초과·Grafana·원본 |
 | [2026-09-30 performance](../../experiments/evidence/results/2026-09-30-performance/) | 10월 1일 완료: 75세션·185구간·공유 20쌍, 중단 1쌍 보존, 원시 표본·Grafana·명령 이력 |
 | [2026-09-30 Operator](../../experiments/operator/2026-09-30/) | 중앙 Go Operator·두 namespace GPU smoke; 성능 재측정 아님 |
 | [2026-09-22](../../experiments/evidence/results/2026-09-22/) | 초기 VM 실행·개발 증거 |

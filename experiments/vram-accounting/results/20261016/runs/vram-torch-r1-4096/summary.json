@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "quota_mib": 4096,
+  "stages": [
+    {
+      "stage": "torch-context",
+      "guest_utc": 1792132914.1286085,
+      "free": 3718250496,
+      "total": 4294967296,
+      "allocated": 0,
+      "reserved": 0,
+      "peak_allocated": 0,
+      "peak_reserved": 0,
+      "torch": "2.11.0+flyt.cu128",
+      "cuda": "12.8",
+      "host_utc": 1792132915.3040707
+    },
+    {
+      "stage": "model-data",
+      "guest_utc": 1792132919.9381235,
+      "free": 3695181824,
+      "total": 4294967296,
+      "allocated": 17051648,
+      "reserved": 23068672,
+      "peak_allocated": 17051648,
+      "peak_reserved": 23068672,
+      "host_utc": 1792132921.1129003
+    },
+    {
+      "stage": "first-training-step",
+      "guest_utc": 1792132923.6551833,
+      "free": 3590060032,
+      "total": 4294967296,
+      "allocated": 101081088,
+      "reserved": 111149056,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "loss": 1.0602686405181885,
+      "host_utc": 1792132924.8309684
+    },
+    {
+      "stage": "training-complete",
+      "guest_utc": 1792132927.7907715,
+      "free": 3590060032,
+      "total": 4294967296,
+      "allocated": 101081088,
+      "reserved": 111149056,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "initial_loss": 1.0602686405181885,
+      "final_loss": 1.0462801456451416,
+      "steps": 20,
+      "host_utc": 1792132928.9661305
+    },
+    {
+      "stage": "tensors-deleted",
+      "guest_utc": 1792132930.9629047,
+      "free": 3590060032,
+      "total": 4294967296,
+      "allocated": 67108864,
+      "reserved": 111149056,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "host_utc": 1792132932.1375132
+    },
+    {
+      "stage": "empty-cache",
+      "guest_utc": 1792132934.0304375,
+      "free": 3634100224,
+      "total": 4294967296,
+      "allocated": 67108864,
+      "reserved": 67108864,
+      "peak_allocated": 101343744,
+      "peak_reserved": 111149056,
+      "host_utc": 1792132935.2073007
+    },
+    {
+      "stage": "done",
+      "status": "PASS",
+      "host_utc": 1792132938.267371
+    }
+  ]
+}

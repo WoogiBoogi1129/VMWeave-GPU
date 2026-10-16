@@ -1,0 +1,207 @@
+{
+  "uid": "vmweave-vram-20261016",
+  "title": "VMWeave VRAM boundary and accounting \u2014 2026-10-16",
+  "schemaVersion": 41,
+  "version": 1,
+  "timezone": "Asia/Seoul",
+  "refresh": "5s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "GPU physical memory (NVML, MiB resolution)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "vram-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "vram_device_used_bytes",
+          "legendFormat": "{{run}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "title": "HAMi accounted memory per Worker",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "vram-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "hami_container_device_memory_bytes{pod=~\"${run:regex}-.*\"}",
+          "legendFormat": "{{run}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "title": "Requested / PyTorch allocated \u2014 last event",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 9,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "vram-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "vram_live_requested_bytes{run=~\"${run:regex}\"}",
+          "legendFormat": "{{run}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "description": "CUDA probe: live requested bytes. PyTorch: memory_allocated(), including allocations retained by the framework. Last API event held until the next event; zero after Channel release is a lifecycle marker. Supplementary trained-boundary runs also add successful retained direct cudaMalloc bytes."
+    },
+    {
+      "id": 4,
+      "title": "Guest free \u2014 last event, zero after release",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 9,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "vram-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "vram_free_bytes{run=~\"${run:regex}\"}",
+          "legendFormat": "{{run}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "description": "Event-driven latest observation; exporter emits zero as a lifecycle release marker, not as a new CUDA API measurement."
+    },
+    {
+      "id": 5,
+      "title": "GPU utilization",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 18,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "vram-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "vram_device_util_pct",
+          "legendFormat": "{{run}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 6,
+      "title": "Guest total \u2014 last event, zero after release",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 18,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "vram-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "vram_total_bytes{run=~\"${run:regex}\"}",
+          "legendFormat": "{{run}} {{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "description": "Event-driven latest observation; exporter emits zero as a lifecycle release marker, not as a new CUDA API measurement."
+    }
+  ],
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "templating": {
+    "list": [
+      {
+        "name": "run",
+        "label": "Experiment run",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "vram-prom"
+        },
+        "query": "label_values(vram_total_bytes, run)",
+        "refresh": 1,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        }
+      }
+    ]
+  }
+}
