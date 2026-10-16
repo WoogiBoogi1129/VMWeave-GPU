@@ -6,6 +6,9 @@
 
 기준일: 2026-10-15 KST. 배포 여부와 최종 수치는 [report.md](report.md), 원시 결과는 [evidence](evidence/)에 기록한다.
 
+2026-10-16 후속 검증: 수정본을 적용한 [25/75 다중 VM 동시 사용 보고서](pair-validation.md).
+새 VM 3쌍의 적용 신원, 이용률·처리량, Grafana/터미널 화면과 회수 증거를 포함한다.
+
 ## 25/50/75% 추가 반복 실험
 
 추가 결과는 [limit-validation.md](limit-validation.md)에 별도로 정리한다. 각 제한률에서 새 VM/Worker로 3회씩, 회당 150초(준비 30초) 실행한다. 후보는 `idle-reset`, 정책은 FORCE, GPU는 유휴 GPU 2다. 실행 순서는 25/50/75 → 75/50/25 → 50/25/75다.

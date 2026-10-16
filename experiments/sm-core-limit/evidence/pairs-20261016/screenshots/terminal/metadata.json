@@ -1,0 +1,73 @@
+{
+  "kind": "Real ttyd/tmux/bash post-run inspection of original experiment files",
+  "live_experiment_capture": false,
+  "captured_utc": "2026-10-16T08:31:09.023Z",
+  "browser": "153.0.8010.12",
+  "commands": [
+    {
+      "cmd": "clear",
+      "code": 0,
+      "utc": "2026-10-16T08:31:07.122Z"
+    },
+    {
+      "cmd": "# ACTUAL SAVED MEASUREMENTS: 3 fresh pairs, patched HAMi, one GPU",
+      "code": 0,
+      "utc": "2026-10-16T08:31:07.141Z"
+    },
+    {
+      "cmd": "jq -c '.aggregate[] | {cap,runs,hami_util_mean,pmon_util_mean,launches_per_second,throughput_share_pct}' summary.json",
+      "code": 0,
+      "utc": "2026-10-16T08:31:07.207Z"
+    },
+    {
+      "cmd": "# Per-pair observed usage and throughput",
+      "code": 0,
+      "utc": "2026-10-16T08:31:07.223Z"
+    },
+    {
+      "cmd": "jq -c '.pairs[] | {pair,device_util_mean,workers:[.workers[]|{slot,cap,hami_util_mean,launches_per_second,throughput_share_pct}]}' summary.json",
+      "code": 0,
+      "utc": "2026-10-16T08:31:07.294Z"
+    },
+    {
+      "cmd": "clear",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.033Z"
+    },
+    {
+      "cmd": "# Actual loaded library and enforced Worker environment",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.050Z"
+    },
+    {
+      "cmd": "jq -c '{sha256,pod_uid}' pair-1/{a,b}/library-mount.json",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.116Z"
+    },
+    {
+      "cmd": "jq -c '{pid,env}' pair-1/{a,b}/host-process.json",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.183Z"
+    },
+    {
+      "cmd": "# All six channels reached Released",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.198Z"
+    },
+    {
+      "cmd": "jq -c '{name:.metadata.name,phase:.status.phase}' pair-{1,2,3}/{a,b}/channel-released.json",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.263Z"
+    },
+    {
+      "cmd": "# Preserved evidence hashes",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.278Z"
+    },
+    {
+      "cmd": "sha256sum -c SHA256SUMS | tail -5",
+      "code": 0,
+      "utc": "2026-10-16T08:31:08.344Z"
+    }
+  ]
+}

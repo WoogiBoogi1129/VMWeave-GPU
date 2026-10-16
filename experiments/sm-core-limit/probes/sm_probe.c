@@ -12,7 +12,7 @@ extern int cudaFree(void *);
 #define CHECK(x) do { CUresult e=(x); if(e){fprintf(stderr,"%s: %d\n",#x,e);return 1;} } while(0)
 static double now(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec+t.tv_nsec/1e9;}
 int main(int argc,char **argv){
- if(argc!=4)return 2;
+ if(argc!=4 && argc!=5)return 2;
  double duration=atof(argv[1]),warmup=atof(argv[2]);int reps=atoi(argv[3]);
  if(duration<=warmup||warmup<0||duration>3600||reps<=0)return 2;
  CHECK(cuInit(0));int count;CHECK(cuDeviceGetCount(&count));if(count!=1)return 3;
@@ -37,10 +37,17 @@ int main(int argc,char **argv){
  CUmodule module;CUfunction fn;CHECK(cuModuleLoadData(&module,ptx));CHECK(cuModuleGetFunction(&fn,module,"load"));
  if(flytRegisterKernelABI){unsigned char sizes[]={8},pointers[]={1};if(flytRegisterKernelABI(fn,1,sizes,pointers))return 4;}
  printf("{\"event\":\"ready\",\"pid\":%d,\"sm\":%d,\"threads_per_sm\":%d,\"reps\":%d}\n",getpid(),sm,threads,reps);fflush(stdout);
- double start=now(),measure=0;unsigned long launches=0;void *params[]={&ptr};
+ /* Optional coordinated wall-clock start; each Guest's measured clock offset
+  * is applied by the runner. Initialization completes before this barrier. */
+ if(argc==5){
+  double target=atof(argv[4]);struct timespec wall;
+  for(;;){clock_gettime(CLOCK_REALTIME,&wall);if(wall.tv_sec+wall.tv_nsec/1e9>=target)break;usleep(1000);}
+ }
+ double start=now(),measure=0,last_report=0;unsigned long launches=0;void *params[]={&ptr};
  while(now()-start<duration){
   CHECK(cuLaunchKernel(fn,2048,1,1,256,1,1,0,NULL,params,NULL));CHECK(cuCtxSynchronize());
   if(measure)launches++;else if(now()-start>=warmup){measure=now();printf("{\"event\":\"measurement_start\",\"elapsed\":%.6f}\n",measure-start);fflush(stdout);}
+  if(argc==5 && now()-last_report>=1){last_report=now();printf("{\"event\":\"progress\",\"elapsed\":%.6f,\"launches\":%lu}\n",last_report-start,launches);fflush(stdout);}
  }
  double elapsed=now()-measure;
  float value;CHECK(cuMemcpyDtoH(&value,ptr,sizeof(value)));

@@ -15,3 +15,5 @@ experiments/vram-accounting/evidence/**/*.csv whitespace=cr-at-eol
 # Deployment evidence is hashed verbatim; unified patches retain context spaces.
 experiments/sm-core-limit/evidence/deployment-20261016/** -text -whitespace
 runtime/hami/patches/*.patch -whitespace
+# Concurrent VM campaign: preserve hashed sensor and terminal captures verbatim.
+experiments/sm-core-limit/evidence/pairs-20261016/** -text -whitespace

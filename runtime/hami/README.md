@@ -28,6 +28,9 @@ Core 보정/idle 회귀 검사, Helm 이미지 선택, 저장소 검사 및 문�
 현재 단계는 배포 이미지와 릴리스 경로 반영이다. 레지스트리 게시 및 현재 클러스터
 업그레이드는 이 검증에서 실행하지 않았다.
 
+동일 바이너리의 후속 [25/75 다중 VM 동시 사용 검증](../../experiments/sm-core-limit/pair-validation.md)은
+단일 VM 검증과 별도로 기록했다. 두 VM의 정상 실행과 설정값 추종 정확도는 구분해서 평가한다.
+
 ## 빌드와 배포
 
 Worker의 `/usr/local/vgpu/libvgpu.so`와 `/etc/ld.so.preload`는 HAMi가

@@ -1,0 +1,10 @@
+{
+  "repository_base": "8c197a7020c1e84f1411ab269aa83b31be09b087",
+  "gpu": "0, GPU-772181af-05a4-0c24-de59-8487bd37c142, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02\n1, GPU-7d708c42-8d4a-16d5-0746-474567157aa3, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02\n2, GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02\n3, GPU-1b4de6a0-88ae-4004-98b9-035906a2473f, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02",
+  "guest_probe_sha256": "1717655aea6a2804f2f12bd832eccc4f4d7bf57d40e9590669ce4c7603382d2e",
+  "probe_source_sha256": "7fa21408c6f07206b961b786552a88c70a510d84c3ed98c2938b673d81bb463b",
+  "clock_policy": "Guest NTP disabled, five SSH round-trip clock probes; minimum uncertainty offset used for the shared start epoch",
+  "gpu_monitor": "nvidia-smi device query; pmon -i 2 -s um -d 1 -o DT; HAMi exporter HTTP metrics",
+  "grafana": "12.0.2",
+  "prometheus": "3.5.0"
+}

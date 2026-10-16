@@ -1,0 +1,130 @@
+{
+  "uid": "vmweave-sm-pair-20261016",
+  "title": "VMWeave patched Core limits: two VMs, one GPU \u2014 2026-10-16",
+  "schemaVersion": 41,
+  "version": 1,
+  "timezone": "Asia/Seoul",
+  "refresh": "5s",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Worker SM utilization (HAMi, percent)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sm-pair-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "hami_container_device_utilization_ratio",
+          "legendFormat": "{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "title": "Configured Core limits",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sm-pair-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sm_pair_core_limit",
+          "legendFormat": "{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "title": "Single physical GPU utilization (NVML)",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 0,
+        "y": 10,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sm-pair-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sm_pair_gpu_util",
+          "legendFormat": "{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "title": "Worker accounted memory",
+      "type": "timeseries",
+      "gridPos": {
+        "x": 12,
+        "y": 10,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "sm-pair-prom"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "hami_container_device_memory_bytes",
+          "legendFormat": "{{pod}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "min": 0
+        },
+        "overrides": []
+      }
+    }
+  ],
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  }
+}

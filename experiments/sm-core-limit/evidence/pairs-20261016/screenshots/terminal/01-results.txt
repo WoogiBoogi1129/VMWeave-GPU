@@ -1,0 +1,52 @@
+evidence$ # ACTUAL SAVED MEASUREMENTS: 3 fresh pairs, patched HAMi, one GPU
+evidence$ jq -c '.aggregate[] | {cap,runs,hami_util_mean,pmon_util_mean,launches_per_second,throughput_share_pct}' summary.json
+{"cap":25,"runs":3,"hami_util_mean":36.54545454545455,"pmon_util_mean":37.12919896640827,"launches_per_second":33.463646,"throughput_share_pct":39.23680045190394}
+{"cap":75,"runs":3,"hami_util_mean":59.08888888888889,"pmon_util_mean":59.3510101010101,"launches_per_second":51.818697666666665,"throughput_share_pct":60.763199548096054}
+evidence$ # Per-pair observed usage and throughput
+evidence$ jq -c '.pairs[] | {pair,device_util_mean,workers:[.workers[]|{slot,cap,hami_util_mean,launches_per_second,throughput_share_pct}]}' summary.json
+{"pair":"pair-1","device_util_mean":96.89696969696969,"workers":[{"slot":"a","cap":25,"hami_util_mean":34.93939393939394,"launches_per_second":31.932108,"throughput_share_pct":37.4194959742
+65516},{"slot":"b","cap":75,"hami_util_mean":60.842424242424244,"launches_per_second":53.403376,"throughput_share_pct":62.58050402573447}]}
+{"pair":"pair-2","device_util_mean":97.88484848484849,"workers":[{"slot":"a","cap":75,"hami_util_mean":57.07878787878788,"launches_per_second":49.866938,"throughput_share_pct":58.3500169204
+3774},{"slot":"b","cap":25,"hami_util_mean":38.4969696969697,"launches_per_second":35.594799,"throughput_share_pct":41.64998307956226}]}
+{"pair":"pair-3","device_util_mean":96.7939393939394,"workers":[{"slot":"a","cap":25,"hami_util_mean":36.2,"launches_per_second":32.864031,"throughput_share_pct":38.64092230188403},{"slot":
+"b","cap":75,"hami_util_mean":59.345454545454544,"launches_per_second":52.185779,"throughput_share_pct":61.35907769811596}]}
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

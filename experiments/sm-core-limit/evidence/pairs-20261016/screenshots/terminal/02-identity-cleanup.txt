@@ -1,0 +1,52 @@
+evidence$ # Actual loaded library and enforced Worker environment
+evidence$ jq -c '{sha256,pod_uid}' pair-1/{a,b}/library-mount.json
+{"sha256":"f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8","pod_uid":"6e43608c-503d-4ce6-b2fd-e5b99117c98e"}
+{"sha256":"f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8","pod_uid":"edf72363-edd6-43da-9576-cd4701f64901"}
+evidence$ jq -c '{pid,env}' pair-1/{a,b}/host-process.json
+{"pid":3701158,"env":{"GPU_CORE_UTILIZATION_POLICY":"FORCE","FLYT_RESOURCE_BACKEND":"hami","CUDA_DEVICE_SM_LIMIT":"25","CUDA_DEVICE_MEMORY_SHARED_CACHE":"/usr/local/vgpu/f8f6b217-791e-4189-
+9317-04ea017dd666.cache","CUDA_DEVICE_MEMORY_LIMIT_0":"2048m"}}
+{"pid":3706175,"env":{"GPU_CORE_UTILIZATION_POLICY":"FORCE","FLYT_RESOURCE_BACKEND":"hami","CUDA_DEVICE_SM_LIMIT":"75","CUDA_DEVICE_MEMORY_SHARED_CACHE":"/usr/local/vgpu/d8ffa8c9-b077-4aeb-
+8d0e-340545aa8be3.cache","CUDA_DEVICE_MEMORY_LIMIT_0":"2048m"}}
+evidence$ # All six channels reached Released
+evidence$ jq -c '{name:.metadata.name,phase:.status.phase}' pair-{1,2,3}/{a,b}/channel-released.json
+{"name":"sm-pair-r1-a-1016","phase":"Released"}
+{"name":"sm-pair-r1-b-1016","phase":"Released"}
+{"name":"sm-pair-r2-a-1016","phase":"Released"}
+{"name":"sm-pair-r2-b-1016","phase":"Released"}
+{"name":"sm-pair-r3-a-1016","phase":"Released"}
+{"name":"sm-pair-r3-b-1016","phase":"Released"}
+evidence$ # Preserved evidence hashes
+evidence$ sha256sum -c SHA256SUMS | tail -5
+screenshots/pair-2/grafana.txt: OK
+screenshots/pair-3/capture.json: OK
+screenshots/pair-3/grafana.png: OK
+screenshots/pair-3/grafana.txt: OK
+summary.json: OK
+evidence$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

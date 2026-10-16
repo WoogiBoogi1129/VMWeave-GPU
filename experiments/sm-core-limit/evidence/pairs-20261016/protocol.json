@@ -1,0 +1,24 @@
+{
+  "order": [
+    [
+      25,
+      75
+    ],
+    [
+      75,
+      25
+    ],
+    [
+      25,
+      75
+    ]
+  ],
+  "gpu_uuid": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",
+  "library_sha256": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8",
+  "memory_mib_per_vm": 2048,
+  "new_vm_each_trial": true,
+  "seconds": 180,
+  "warmup": 30,
+  "measurement_host_window": "start+35 <= timestamp < start+178",
+  "scope": "Two isolated Workers use the exact release library in Pod-local read-only mounts; cluster-wide HAMi unchanged."
+}
