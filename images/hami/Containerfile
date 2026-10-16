@@ -1,0 +1,22 @@
+ARG CUDA_DEVEL_IMAGE=docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85
+ARG HAMI_IMAGE=docker.io/projecthami/hami:v2.10.0@sha256:8c45cd84d8df3e6a8fe8c95e0141684973b5015692a0ef87588da05284f34447
+FROM ${CUDA_DEVEL_IMAGE} AS core
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake git ca-certificates && rm -rf /var/lib/apt/lists/*
+WORKDIR /src
+RUN git init && git remote add origin https://github.com/Project-HAMi/HAMi-core.git \
+    && git fetch --depth 1 origin b216ba1be1b8e21488d1c7370ed3357b3049aad1 \
+    && git checkout --detach FETCH_HEAD
+COPY runtime/hami/patches/0001-sm-limit.patch /tmp/sm-limit.patch
+RUN git apply --check /tmp/sm-limit.patch && git apply /tmp/sm-limit.patch \
+    && J=4 ./build.sh \
+    && sha256sum build/libvgpu.so > /src/libvgpu.sha256
+
+FROM ${HAMI_IMAGE}
+COPY --from=core /src/build/libvgpu.so /k8s-vgpu/lib/nvidia/libvgpu.so.v2.10.0
+COPY --from=core /src/libvgpu.sha256 /opt/vmweave/hami/libvgpu.sha256
+COPY runtime/hami/patches/0001-sm-limit.patch /opt/vmweave/hami/sm-limit.patch
+RUN mv /k8s-vgpu/bin/vgpu-init.sh /k8s-vgpu/bin/vgpu-init.upstream.sh
+COPY runtime/hami/install-core.sh /k8s-vgpu/bin/vgpu-init.sh
+RUN chmod 755 /k8s-vgpu/bin/vgpu-init.sh
+LABEL vmweave.io/hami-core-revision="b216ba1be1b8e21488d1c7370ed3357b3049aad1" \
+      vmweave.io/core-limiter="linear-sm-idle-reset-v1"

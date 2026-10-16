@@ -1,5 +1,9 @@
 # VMWeave SM Core 제한 수정 검증
 
+> 2026-10-16 배포 결정: 55.61% 관측값을 배포 차단 사유에서 제외하고
+> 선형 보정 + idle-reset을 [배포용 HAMi 이미지](../../runtime/hami/README.md)에 포함했다.
+> 아래 수치와 실험 당시의 배포 상태는 원 기록을 유지한다.
+
 기준일: 2026-10-15 KST. 배포 여부와 최종 수치는 [report.md](report.md), 원시 결과는 [evidence](evidence/)에 기록한다.
 
 ## 25/50/75% 추가 반복 실험

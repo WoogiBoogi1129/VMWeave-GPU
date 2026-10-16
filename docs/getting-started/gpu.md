@@ -7,6 +7,8 @@ CUDA 실행 성공과 성능 검증을 각각 확인해야 합니다.
 
 - CUDA 12.8 계열과 현재 런타임이 사용하는 cuDNN 9 개발/실행 라이브러리.
 - GPU 자원을 등록하고 Worker에 정책을 적용하는 HAMi.
+  Core 제한 보정이 포함된 [배포용 HAMi 이미지](../../runtime/hami/README.md)를 사용합니다.
+  upstream HAMi 이미지만 설치하면 VMWeave의 Core 제한 수정은 적용되지 않습니다.
 - Sidecar hook 및 ivshmem을 지원하는 KubeVirt/QEMU 구성.
 - VM과 Worker가 사용하는 동일 노드의 로컬 filesystem PVC.
 - 일치하는 Guest/Worker ABI, 이미지 digest, layout 및 Guest 장치 정보.

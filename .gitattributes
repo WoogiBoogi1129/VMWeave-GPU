@@ -12,3 +12,6 @@ experiments/vram-accounting/results/** -text
 experiments/vram-accounting/evidence/** -text
 experiments/vram-accounting/evidence/**/terminal/*.txt -whitespace
 experiments/vram-accounting/evidence/**/*.csv whitespace=cr-at-eol
+# Deployment evidence is hashed verbatim; unified patches retain context spaces.
+experiments/sm-core-limit/evidence/deployment-20261016/** -text -whitespace
+runtime/hami/patches/*.patch -whitespace

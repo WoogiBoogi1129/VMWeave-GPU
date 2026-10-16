@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-16",
+  "image": "localhost/vmweave-hami:sm-limit-20261016",
+  "image_id": "def29a478132d8931dff06f2787946577e8dd995bc7d81abc74f5bfadf989512",
+  "library_sha256": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8",
+  "checks": {
+    "image_build": "PASS",
+    "atomic_install_and_repeat": "PASS",
+    "original_inode_preserved": "PASS",
+    "core_delta_regression": "PASS",
+    "idle_activity_regression": "PASS",
+    "helm_image_selection": "PASS",
+    "repository_check": "PASS",
+    "strict_documentation_build_and_links": "PASS",
+    "native_gpu_smoke": "PASS"
+  },
+  "cluster_rollout": false,
+  "registry_publication": false,
+  "note": "First native run completed GPU work but the harness compared a symlink path with resolved /proc/maps paths. Repeated with a regular library file; confirmed run and maps are retained here."
+}

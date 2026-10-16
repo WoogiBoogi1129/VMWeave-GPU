@@ -1,0 +1,8 @@
+# Overlay on your existing HAMi v2.10.0 values. Image is published on v* tags.
+# Replace tag with the actual published VMWeave release tag before upgrading.
+devicePlugin:
+  image:
+    registry: ghcr.io
+    repository: woogiboogi1129/vmweave-hami
+    tag: REQUIRED_RELEASE_TAG
+  disablecorelimit: false

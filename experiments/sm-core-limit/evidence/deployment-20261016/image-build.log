@@ -1,0 +1,36 @@
+[1/2] STEP 1/6: FROM docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85 AS core
+[1/2] STEP 2/6: RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake git ca-certificates && rm -rf /var/lib/apt/lists/*
+--> Using cache fffa6d9a8d4a471d16583f38cc3ee478584562893692721eca714d08c0e8217e
+--> fffa6d9a8d4a
+[1/2] STEP 3/6: WORKDIR /src
+--> Using cache 3798b870c90ecfb1ca25419811d963a02e05f41c9e9947024f7450898c7a4fff
+--> 3798b870c90e
+[1/2] STEP 4/6: RUN git init && git remote add origin https://github.com/Project-HAMi/HAMi-core.git     && git fetch --depth 1 origin b216ba1be1b8e21488d1c7370ed3357b3049aad1     && git checkout --detach FETCH_HEAD
+--> Using cache ebb32b7d9aea02da7e57866fd334c2b8663261211464e615b45b45c32be24774
+--> ebb32b7d9aea
+[1/2] STEP 5/6: COPY runtime/hami/patches/0001-sm-limit.patch /tmp/sm-limit.patch
+--> Using cache 756edfe814f40a3f7b6f6345d6cede3b23bcd425d9aeec58fbadfbcf9a350361
+--> 756edfe814f4
+[1/2] STEP 6/6: RUN git apply --check /tmp/sm-limit.patch && git apply /tmp/sm-limit.patch     && J=4 ./build.sh     && sha256sum build/libvgpu.so > /src/libvgpu.sha256
+--> Using cache 3dd3c2cea01d13af01c4f38470e931ef0fcc7ea00fc5299c2c28f80a4282b696
+--> 3dd3c2cea01d
+[2/2] STEP 1/8: FROM docker.io/projecthami/hami:v2.10.0@sha256:8c45cd84d8df3e6a8fe8c95e0141684973b5015692a0ef87588da05284f34447
+[2/2] STEP 2/8: COPY --from=core /src/build/libvgpu.so /k8s-vgpu/lib/nvidia/libvgpu.so.v2.10.0
+--> Using cache eb6f9e80181d00c1b967c2b7004de955e1780bbcaffbcd053d57011e871a7868
+--> eb6f9e80181d
+[2/2] STEP 3/8: COPY --from=core /src/libvgpu.sha256 /opt/vmweave/hami/libvgpu.sha256
+--> Using cache d90f4c0aeb734405f9c3f6c5e8f2e16f6187b04cff82e29c41653395a120f3fb
+--> d90f4c0aeb73
+[2/2] STEP 4/8: COPY runtime/hami/patches/0001-sm-limit.patch /opt/vmweave/hami/sm-limit.patch
+--> 1553c04c544f
+[2/2] STEP 5/8: RUN mv /k8s-vgpu/bin/vgpu-init.sh /k8s-vgpu/bin/vgpu-init.upstream.sh
+--> 16fe1fba24cc
+[2/2] STEP 6/8: COPY runtime/hami/install-core.sh /k8s-vgpu/bin/vgpu-init.sh
+--> fbc91655a5bf
+[2/2] STEP 7/8: RUN chmod 755 /k8s-vgpu/bin/vgpu-init.sh
+--> 1cb27a42d898
+[2/2] STEP 8/8: LABEL vmweave.io/hami-core-revision="b216ba1be1b8e21488d1c7370ed3357b3049aad1"       vmweave.io/core-limiter="linear-sm-idle-reset-v1"
+[2/2] COMMIT localhost/vmweave-hami:sm-limit-20261016
+--> def29a478132
+Successfully tagged localhost/vmweave-hami:sm-limit-20261016
+def29a478132d8931dff06f2787946577e8dd995bc7d81abc74f5bfadf989512

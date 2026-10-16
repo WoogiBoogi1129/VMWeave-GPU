@@ -1,4 +1,10 @@
 schemaVersion: 2
+hami:
+  version: v2.10.0
+  coreRevision: b216ba1be1b8e21488d1c7370ed3357b3049aad1
+  coreLimiter: linear-sm-idle-reset-v1
+  containerfile: images/hami/Containerfile
+  patch: runtime/hami/patches/0001-sm-limit.patch
 runtime:
   transport: shm-only
   abi: '1.0'
