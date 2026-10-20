@@ -36,6 +36,7 @@ python3 -m venv .local/docs-venv
 .local/docs-venv/bin/mkdocs serve
 ```
 
+- 다른 클러스터 배포: [배포 패키지·Helm·Guest·검증 절차](docs/getting-started/portable-deployment.md)
 - 중앙 설치: [관리자 설치](docs/getting-started/install.md) → [namespace 등록](docs/getting-started/namespaces.md) → [첫 VM](docs/getting-started/first-vm.md)
 - 기존 배포: [새 API 이전](docs/guides/migrate-to-vmweave-api.md)
 - CPU 환경: [제어기 설치와 검증](docs/getting-started/cpu-control-plane.md)

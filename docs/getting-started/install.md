@@ -3,6 +3,9 @@
 관리자용 절차입니다. Go Controller와 Webhook은 `vmweave-system`에 한 번 설치합니다.
 사용자 namespace에는 Controller를 설치하지 않습니다. 새 API는 `vmweave.io/v1alpha1`입니다.
 
+다른 시스템의 전체 설치 순서는 [이식 배포 가이드](portable-deployment.md)를 따릅니다.
+기존 TLS Secret과 이미 설치된 cert-manager의 CA issuer를 선택할 수 있습니다.
+
 ## 준비
 
 [사전 조건](prerequisites.md)을 확인하고 저장소 루트에서 실행합니다.
@@ -23,7 +26,8 @@ kubectl -n vmweave-system create secret tls vmweave-webhook-tls \
 ```
 
 개발용 CA는 365일, 서버 인증서는 90일입니다. 운영에서는 조직의 인증서 발급 절차를 사용하고
-Service DNS `vmweave-webhook.vmweave-system.svc`를 포함합니다. cert-manager 자동 설치는 제공하지 않습니다.
+Service DNS `vmweave-webhook.vmweave-system.svc`를 포함합니다. cert-manager 자체의 자동 설치는 제공하지 않습니다. 이미 설치된 cert-manager와 issuer는
+`tls.mode=certManager`로 연동할 수 있습니다.
 
 ## 이미지 빌드
 
@@ -34,10 +38,17 @@ Guest/Worker의 C ABI와 KubeVirt shim 버전을 함께 고정합니다.
 docker build -f images/vmweave/Operator.Containerfile -t YOUR_REGISTRY/vmweave-operator:VERSION .
 docker build -f images/vmweave/Helper.Containerfile -t YOUR_REGISTRY/vmweave-helper:VERSION .
 docker build -f images/vmweave/Runtime.Containerfile --target worker -t YOUR_REGISTRY/vmweave-worker:VERSION .
+docker build -f images/vmweave/Runtime.Containerfile --target guest-artifacts \
+  --build-arg SOURCE_REVISION="$(git rev-parse HEAD)" \
+  -t YOUR_REGISTRY/vmweave-guest-artifacts:VERSION .
 docker build -f images/vmweave/Hook.Containerfile \
   --build-arg KUBEVIRT_SHIM_IMAGE=YOUR_DIGEST_PINNED_SHIM \
   -t YOUR_REGISTRY/vmweave-hook:VERSION .
 ```
+
+직접 릴리스를 빌드하면 모든 이미지에 `--label org.opencontainers.image.revision="$(git rev-parse HEAD)"`를
+추가하고 같은 소스에서 만든 뒤 registry에 push합니다. `release-manifest.py`는 이 label을 검사합니다.
+HAMi 이미지는 [수정 HAMi 빌드 절차](../../runtime/hami/README.md)를 따릅니다.
 
 CPU 환경은 Operator/helper/hook 빌드가 가능하며 Worker 빌드에는 CUDA 개발 image가 필요합니다.
 `build-image.py`는 이미 검증한 로컬 OCI base를 사용하는 실험 노드용 대안입니다.

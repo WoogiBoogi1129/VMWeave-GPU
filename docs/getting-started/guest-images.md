@@ -11,6 +11,9 @@ VMWeave Operator 이미지는 VM의 OS 이미지가 아닙니다. 다음 세 가
 `images/vmweave/Runtime.Containerfile`의 `guest-artifacts` target은 라이브러리 묶음입니다.
 부팅 가능한 OS containerDisk로 사용할 수 없습니다. 공개 배포된 완성 Guest 이미지는 현재 제공하지 않습니다.
 
+VM lifecycle용 설치 파일과 검증 프로그램은 [배포 패키지 추출 절차](portable-deployment.md)를 사용합니다.
+아래 수동 빌드 예제는 단발 smoke용이며 broker 설치용 전체 패키지를 대신하지 않습니다.
+
 ## OS 디스크
 
 Ubuntu 22.04 계열 등 Guest artifact와 호환되는 OS의 **오프라인 QCOW2 복사본**을 준비합니다.
