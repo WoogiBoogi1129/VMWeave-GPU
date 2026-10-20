@@ -25,6 +25,8 @@ sm_70을 사용하므로 대상 GPU·드라이버에서 이 PTX를 지원하는�
 
 ## 1. 릴리스 산출물 확보
 
+게시된 버전: [v0.3.0 산출물·다운로드·검증 기록](release-v0.3.0.md).
+
 `vmweave-operator`, `vmweave-helper`, `vmweave-worker`, `vmweave-hook`,
 `vmweave-guest-artifacts`, `vmweave-hami`를 같은 소스 릴리스로 준비합니다.
 현재 변경의 registry 게시 여부는 릴리스 기록을 확인하세요. 과거 `v1.0.0` 이미지를

@@ -1,0 +1,32 @@
+{
+  "sourceRevision": "0ff184a649c59eeb3145e5ec5340447918d2ce02",
+  "tag": "v0.3.0",
+  "scope": "Published digests and revision labels checked; labels are not cryptographic provenance. Cluster smoke is separate.",
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:37990e9d8819008a1f545e0b203b2fa06836bc44e66ccadce9d487594ea62212",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:90ac48fa9f53617bc51aa0a6266bc15808aff83773fef63b619f637289fb85c1",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:35a4896b92bc6f290128d58b3a8db666bf471bba753a31ac693f4c12891b1fa4",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:bf61ca2d8f9cd44633d633ec870a87ca278adeae6388f8500dd9ce0aa8447259",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:2d23e7edb2c5aafd161ee1c61c5905392ff577cfb2ff14b40740684e7c94cc77",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:cebfd283e530834f67aee615ca90b58f6e14df3e6d5d8c3cc4281ed1a8ec5697"
+  },
+  "publishedDateKST": "2026-10-20",
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.3.0",
+    "digest": "sha256:7a34df1f3640136b2b9c3ccfc08fd166dbb844465ea6ee95ab0eb8b460034e42"
+  },
+  "verification": {
+    "anonymousImageMetadata": "PASS",
+    "imageRevisionLabels": "PASS",
+    "anonymousChartDownload": "PASS",
+    "chartSourceContentComparison": "PASS",
+    "newGPUCluster": "NOT_RUN",
+    "anonymousGuestDownloadAndChecksums": "PASS"
+  },
+  "workflows": {
+    "images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39398769193",
+    "hami": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39398769150",
+    "chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39398769179"
+  }
+}

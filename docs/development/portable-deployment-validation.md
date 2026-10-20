@@ -35,7 +35,10 @@ CPU 회귀 테스트의 모의 API와 실제 GPU 검증은 구분한다. 문법�
 연속성이나 다른 GPU에서의 CUDA 실행 성공을 의미하지 않는다.
 빌드·검사 로그는 `.local/portable-deployment-review/`에 보존한다.
 
-## 미실행
+## 당시 미실행
+
+이미지·차트 게시와 CI 실행은 이후 [v0.3.0 릴리스](../getting-started/release-v0.3.0.md)에서 완료했습니다.
+아래 목록은 이 로컬 패키지 검사 당시의 범위이며 클러스터 검증은 계속 미실행입니다.
 
 - registry 이미지·Helm 차트 게시, GitHub Actions 실제 실행.
 - 새 GPU 클러스터 신규 설치·실제 GPU smoke·VM 재시작·backing 파일 회수.
