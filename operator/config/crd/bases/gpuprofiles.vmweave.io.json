@@ -131,6 +131,19 @@
                     "minLength": 1,
                     "maxLength": 253,
                     "pattern": "^[a-z0-9]([-a-z0-9.]*[a-z0-9])?$"
+                  },
+                  "backend": {
+                    "type": "string",
+                    "enum": [
+                      "hami",
+                      "hami-dra"
+                    ],
+                    "default": "hami"
+                  },
+                  "draDeviceClass": {
+                    "type": "string",
+                    "maxLength": 253,
+                    "default": ""
                   }
                 },
                 "x-kubernetes-validations": [
@@ -169,6 +182,18 @@
                   {
                     "rule": "self.schedulerName == oldSelf.schedulerName",
                     "message": "schedulerName is immutable; create a new resource or clean up the old allocation first"
+                  },
+                  {
+                    "rule": "self.backend == oldSelf.backend",
+                    "message": "backend is immutable"
+                  },
+                  {
+                    "rule": "self.draDeviceClass == oldSelf.draDeviceClass",
+                    "message": "draDeviceClass is immutable"
+                  },
+                  {
+                    "rule": "self.backend != 'hami-dra' || (size(self.draDeviceClass) > 0 && self.schedulerName != 'hami-scheduler')",
+                    "message": "DRA requires a DeviceClass and DRA-capable scheduler"
                   }
                 ]
               },

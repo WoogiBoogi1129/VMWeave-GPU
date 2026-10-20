@@ -1,0 +1,19 @@
+ARG CORE_IMAGE=ghcr.io/woogiboogi1129/vmweave-hami@sha256:cebfd283e530834f67aee615ca90b58f6e14df3e6d5d8c3cc4281ed1a8ec5697
+FROM ${CORE_IMAGE} AS core
+FROM docker.io/library/golang:1.25@sha256:54b6b88db6fe375c6676625d87d668273f85c6d09153635d0cbba89cba7a207a AS builder
+WORKDIR /src
+RUN git init && git remote add origin https://github.com/Project-HAMi/k8s-dra-driver.git \
+    && git fetch --depth 1 origin 300224ac789ad40ced1ea2d9b47f6ba4a7cb5c69 \
+    && git checkout --detach FETCH_HEAD
+COPY runtime/hami-dra/patches/0001-gpu-allowlist.patch /tmp/allowlist.patch
+RUN git apply --check /tmp/allowlist.patch && git apply /tmp/allowlist.patch
+RUN go build -trimpath -ldflags='-s -w -X github.com/NVIDIA/k8s-dra-driver-gpu/internal/info.version=v25.12.0 -X github.com/Project-HAMi/k8s-dra-driver/pkg/version.nvversion=25.12.0 -X github.com/Project-HAMi/k8s-dra-driver/pkg/version.version=v0.1.1' \
+    -o /hami-kubelet-plugin ./cmd/hami-kubelet-plugin
+FROM docker.io/projecthami/k8s-dra-driver@sha256:ae7e844acbd099a109bfa84296905ea941eed292a7991c06e2eeee443457ede3
+RUN ["/bin/bash", "-c", "mv /usr/bin/vgpu-init.sh /usr/bin/vgpu-init.upstream.sh"]
+COPY runtime/hami-dra/install-core.sh /usr/bin/vgpu-init.sh
+COPY --from=builder /hami-kubelet-plugin /usr/bin/hami-kubelet-plugin
+COPY --from=builder /src/hack/kubelet-plugin-prestart.sh /usr/bin/kubelet-plugin-prestart.sh
+COPY --from=core /k8s-vgpu/lib/nvidia/libvgpu.so.v2.10.0 /usr/local/lib/hami/libvgpu.so
+LABEL vmweave.io/dra-revision="300224ac789ad40ced1ea2d9b47f6ba4a7cb5c69" \
+      vmweave.io/core-limiter="linear-sm-idle-reset-v1"

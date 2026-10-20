@@ -75,6 +75,13 @@ class PreflightTests(unittest.TestCase):
     def test_unready_and_missing_gpu_are_not_success(self):
         self.assertTrue(self.module.evaluate_node({}))
 
+    def test_dra_does_not_require_classic_extended_resources(self):
+        node = {"status": {"conditions": [{"type": "Ready", "status": "True"}]}}
+        self.assertEqual(self.module.evaluate_node(node, "hami-dra"), [])
+        self.assertTrue(self.module.evaluate_node(node, "hami"))
+        node["status"]["conditions"].append({"type": "DiskPressure", "status": "True"})
+        self.assertIn("DiskPressure", self.module.evaluate_node(node, "hami-dra"))
+
     def test_hami_resources_and_ready(self):
         node = {"status": {"conditions": [{"type": "Ready", "status": "True"}],
                            "allocatable": {"nvidia.com/gpu": "1", "nvidia.com/gpumem": "8192",

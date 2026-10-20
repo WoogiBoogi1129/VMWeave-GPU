@@ -87,7 +87,7 @@ func (a API) FinishStop(c *Obj) error {
 			}
 		}
 	}
-	return a.Status(c, Map{"phase": "Stopped", "reason": "RuntimeReclaimed", "allocation": "", "generation": "", "resourcePrefix": "", "vmiUID": "", "workerPodUID": "", "everBound": false, "sessions": []interface{}{}})
+	return a.Status(c, Map{"phase": "Stopped", "claimName": "", "claimUID": "", "backend": "", "reason": "RuntimeReclaimed", "allocation": "", "generation": "", "resourcePrefix": "", "vmiUID": "", "workerPodUID": "", "everBound": false, "sessions": []interface{}{}})
 }
 
 // Match provision.py's little-endian layout. cloud-init comments are available

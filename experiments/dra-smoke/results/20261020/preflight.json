@@ -1,0 +1,71 @@
+{
+  "status": "API_CHECKS_PASS",
+  "checks": [
+    {
+      "check": "kubectl",
+      "status": "PASS"
+    },
+    {
+      "check": "helm",
+      "status": "PASS"
+    },
+    {
+      "check": "python3",
+      "status": "PASS"
+    },
+    {
+      "check": "KubeVirt CRD",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "KubeVirt Available",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "runtime class",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "cert-manager CRD",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "namespace vmweave-dra-test",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "GPU node gpu-4",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "DRA DeviceClass",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "DRA Claim API",
+      "status": "PASS",
+      "details": []
+    },
+    {
+      "check": "DRA GPU inventory",
+      "status": "PASS",
+      "details": []
+    }
+  ],
+  "unverified": [
+    "Confirm driver/CUDA compatibility and GPU UUID on each host.",
+    "Confirm supported KubeVirt sidecar hook configuration and matching shim image.",
+    "Confirm DRA-capable scheduler, Consumable Capacity, CDI and patched HAMi-core in a fresh Worker.",
+    "Confirm local backing directory, filesystem, free space and QEMU UID/GID permissions.",
+    "Confirm images and same-namespace pull secrets for Operator, Worker/helper and VM/hook.",
+    "Confirm TLS issuer or Secret/CA, admission permissions and workload Pod security policy.",
+    "Run GPU smoke: these API checks do not establish GPU functionality or full install readiness."
+  ]
+}

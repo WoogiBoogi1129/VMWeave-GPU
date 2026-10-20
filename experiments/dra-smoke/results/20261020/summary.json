@@ -1,0 +1,16 @@
+{
+  "driverSource": "300224ac789ad40ced1ea2d9b47f6ba4a7cb5c69",
+  "driverImage": "localhost/vmweave-hami-dra@sha256:6a3c653a334fafff3ecb1e491cddca7e4da348bb8b2d6e6be55514963a1e9900",
+  "operatorImage": "localhost/vmweave-operator@sha256:da7b861f39fa676310867df79f67178b37bbec01f5d27ac930cb4329494806b2",
+  "chartVersion": "0.4.0-dev.1",
+  "kubernetes": "v1.37.0",
+  "runtime": "cri-o://1.37.0",
+  "gpuUUID": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",
+  "status": "PASS",
+  "limitations": [
+    "single-node NVIDIA validation",
+    "no node power-loss test",
+    "no precision compute-share guarantee",
+    "no public release publication"
+  ]
+}

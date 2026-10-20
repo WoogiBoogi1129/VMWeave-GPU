@@ -38,16 +38,18 @@ type ChannelAttachmentList struct {
 	Items           []ChannelAttachment `json:"items"`
 }
 type GPUProfileSpec struct {
-	Approved      bool   `json:"approved,omitempty"`
-	NodeName      string `json:"nodeName"`
-	GPUUUID       string `json:"gpuUUID"`
-	Cores         int64  `json:"cores"`
-	MemoryMiB     int64  `json:"memoryMiB"`
-	MaxClients    int64  `json:"maxClients,omitempty"`
-	WorkerImage   string `json:"workerImage"`
-	RuntimeClass  string `json:"runtimeClass,omitempty"`
-	HamiNamespace string `json:"hamiNamespace"`
-	SchedulerName string `json:"schedulerName,omitempty"`
+	Approved       bool   `json:"approved,omitempty"`
+	NodeName       string `json:"nodeName"`
+	GPUUUID        string `json:"gpuUUID"`
+	Cores          int64  `json:"cores"`
+	MemoryMiB      int64  `json:"memoryMiB"`
+	MaxClients     int64  `json:"maxClients,omitempty"`
+	WorkerImage    string `json:"workerImage"`
+	RuntimeClass   string `json:"runtimeClass,omitempty"`
+	HamiNamespace  string `json:"hamiNamespace"`
+	SchedulerName  string `json:"schedulerName,omitempty"`
+	Backend        string `json:"backend,omitempty"`
+	DraDeviceClass string `json:"draDeviceClass,omitempty"`
 }
 type GPUProfileStatusConditionsItem struct {
 	Type               string `json:"type"`
@@ -211,6 +213,9 @@ type SharedMemoryChannelStatus struct {
 	Sessions           []string                                  `json:"sessions,omitempty"`
 	Conditions         []SharedMemoryChannelStatusConditionsItem `json:"conditions,omitempty"`
 	ResourcePrefix     string                                    `json:"resourcePrefix,omitempty"`
+	Backend            string                                    `json:"backend,omitempty"`
+	ClaimName          string                                    `json:"claimName,omitempty"`
+	ClaimUID           string                                    `json:"claimUID,omitempty"`
 }
 
 // +kubebuilder:object:root=true

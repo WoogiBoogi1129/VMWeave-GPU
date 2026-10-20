@@ -10,6 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/apimachinery/pkg/util/managedfields"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/client/fake"
 )
@@ -24,7 +25,7 @@ func obj(k, ns, n, uid string) *Obj {
 }
 func fakeAPI(ns string, objects ...client.Object) API {
 	s := runtime.NewScheme()
-	f := fake.NewClientBuilder().WithScheme(s).WithObjects(objects...).WithStatusSubresource(New("channels"), New("attachments"), New("pods")).Build()
+	f := fake.NewClientBuilder().WithTypeConverters(managedfields.NewDeducedTypeConverter()).WithScheme(s).WithObjects(objects...).WithStatusSubresource(New("channels"), New("attachments"), New("pods")).Build()
 	return API{f, f, ns, context.Background()}
 }
 func channel(ns string) *Obj {

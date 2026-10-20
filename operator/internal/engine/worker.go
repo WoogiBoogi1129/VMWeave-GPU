@@ -4,6 +4,11 @@ import "fmt"
 
 func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 	name := ResourceName(c, "worker")
+	if backend(p) == "hami-dra" {
+		if _, err := a.ensureDRAClaim(c, p); err != nil {
+			return nil, err
+		}
+	}
 	if uid := S(c, "status", "workerPodUID"); uid != "" {
 		w, e := a.Get("pods", name)
 		if e != nil {
@@ -54,6 +59,11 @@ func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 	container["env"] = env
 	quota := Map{"nvidia.com/gpu": int64(1), "nvidia.com/gpumem": N(c, "status", "memoryMiB"), "nvidia.com/gpucores": N(c, "status", "compute")}
 	container["resources"] = Map{"requests": quota, "limits": quota}
+	if backend(p) == "hami-dra" {
+		w.SetAnnotations(map[string]string{DetachChannel: string(c.GetUID())})
+		Set(w, []interface{}{Map{"name": "gpu", "resourceClaimName": S(c, "status", "claimName")}}, "spec", "resourceClaims")
+		container["resources"] = Map{"claims": []interface{}{Map{"name": "gpu"}}}
+	}
 	container["readinessProbe"] = Map{"exec": Map{"command": cmds("test", "-f", "/tmp/flyt-worker-ready")}, "periodSeconds": int64(2)}
 	return a.Ensure(w, c)
 }
@@ -144,6 +154,9 @@ func (a API) Drain(c *Obj, opts Options) error {
 	}
 	if S(cleanup, "status", "phase") != "Succeeded" {
 		return a.Status(c, Map{"phase": "Draining", "reason": "ReclamationPending"})
+	}
+	if err := a.releaseDRA(c); err != nil {
+		return err
 	}
 	if persistent(c) && c.GetDeletionTimestamp() == nil && !B(c, "spec", "drain") {
 		return a.Status(c, Map{"phase": "Reclaimed", "reason": "BackingReclaimed"})

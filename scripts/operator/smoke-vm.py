@@ -3,6 +3,7 @@
 import argparse
 import ipaddress
 import json
+import shlex
 from pathlib import Path
 import subprocess
 import time
@@ -13,6 +14,7 @@ def main():
     p.add_argument("--namespace", required=True)
     p.add_argument("--vm", required=True)
     p.add_argument("--key", type=Path, required=True)
+    p.add_argument("--virtctl", type=Path, help="Tunnel SSH through virtctl when Pod IPs are not reachable")
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--cycle-disposable-vm", action="store_true",
                    help="Halt/restart this dedicated VM and finally leave it Halted")
@@ -78,6 +80,10 @@ def main():
                "-o", "ConnectTimeout=5", "-o", "StrictHostKeyChecking=accept-new",
                "-o", "UserKnownHostsFile=" + str((a.output / (label + "-known-hosts")).resolve()),
                "ubuntu@" + address]
+        if a.virtctl:
+            proxy = shlex.join([str(a.virtctl.resolve()), "-n", a.namespace,
+                               "port-forward", "--stdio=true", "vmi/" + a.vm, "22"])
+            ssh[1:1] = ["-o", "ProxyCommand=" + proxy]
         wait(lambda: subprocess.run(ssh + ["true"], capture_output=True, timeout=10).returncode == 0)
         command = ("env FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock "
                    "LD_LIBRARY_PATH=/opt/flyt/lib /opt/flyt/bin/guest-gpu-smoke 23 2")

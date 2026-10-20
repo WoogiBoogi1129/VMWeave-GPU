@@ -57,6 +57,9 @@ func (a API) deps(c *Obj) (vm, q, p, pvc *Obj, err error) {
 	if p, err = a.Require("profiles", Get(q, "spec", "profileRef")); err != nil {
 		return
 	}
+	if err = validateBackend(p); err != nil {
+		return
+	}
 	if pvc, err = a.Require("pvcs", Get(c, "spec", "pvcRef")); err != nil {
 		return
 	}
@@ -152,6 +155,9 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 		return e
 	}
 	if S(c, "status", "allocation") == "" {
+		if err := a.checkDRAProfile(p); err != nil {
+			return err
+		}
 		ns, e := a.Get("namespaces", a.Namespace)
 		if e != nil {
 			return e
@@ -179,7 +185,7 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 			}
 			prefix += "-" + aid[:8]
 		}
-		return a.Status(c, Map{"phase": "Reserved", "allocation": aid, "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": prefix})
+		return a.Status(c, Map{"phase": "Reserved", "backend": backend(p), "allocation": aid, "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": prefix})
 	}
 	if N(c, "status", "requestGeneration") != q.GetGeneration() || N(c, "status", "profileGeneration") != p.GetGeneration() {
 		return invalid("frozen request/profile changed")
@@ -244,6 +250,9 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 			if _, err = a.Ensure(att, c); err != nil {
 				return err
 			}
+			if err := a.checkDRA(c, w); err != nil {
+				return err
+			}
 			if !podReady(w) {
 				return a.Status(c, Map{"phase": "Preparing", "reason": "WorkerStarting", "workerPodUID": string(w.GetUID())})
 			}
@@ -293,6 +302,9 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 			return a.Status(c, Map{"phase": "Unavailable", "reason": "WorkerEnded", "workerPodUID": string(w.GetUID())})
 		}
 		return a.Status(c, Map{"phase": "Draining", "reason": "WorkerEnded", "workerPodUID": string(w.GetUID())})
+	}
+	if err := a.checkDRA(c, w); err != nil {
+		return err
 	}
 	ready := false
 	cs, _ := Get(w, "status", "conditions").([]interface{})

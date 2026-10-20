@@ -1,0 +1,16 @@
+diff --git a/cmd/hami-kubelet-plugin/nvlib.go b/cmd/hami-kubelet-plugin/nvlib.go
+index 2ad49b4..c0ecbb0 100644
+--- a/cmd/hami-kubelet-plugin/nvlib.go
++++ b/cmd/hami-kubelet-plugin/nvlib.go
+@@ -245,6 +245,11 @@ func (l deviceLib) GetPerGpuAllocatableDevices(indices ...int) (PerGPUMinorAlloc
+ 			return fmt.Errorf("error getting info for GPU %v: %w", i, err)
+ 		}
+ 
++        // VMWeave: keep this driver's advertised GPUs disjoint from other allocators.
++        if allow := os.Getenv("VMWEAVE_DRA_GPU_UUIDS"); allow != "" && !slices.Contains(strings.Split(allow, ","), gpuInfo.UUID) {
++            return nil
++        }
++
+ 		parentdev := &AllocatableDevice{
+ 			Gpu: gpuInfo,
+ 		}

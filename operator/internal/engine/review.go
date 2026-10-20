@@ -14,12 +14,15 @@ func (a API) Review(c *Obj) error {
 	if err == nil {
 		err = a.checkPV(pvc, S(p, "spec", "nodeName"))
 	}
-	if err == nil {
+	if err == nil && backend(p) == "hami" {
 		n, e := a.Get("nodes", S(p, "spec", "nodeName"))
 		err = e
 		if e == nil && (n == nil || S(n, "status", "allocatable", "nvidia.com/gpu") == "" || S(n, "status", "allocatable", "nvidia.com/gpu") == "0") {
 			err = WaitError{"GPUUnavailable"}
 		}
+	}
+	if err == nil {
+		err = a.checkDRAProfile(p)
 	}
 	if err != nil {
 		var wait WaitError

@@ -1,0 +1,117 @@
+[
+  {
+    "utc": 1792501400.9733343,
+    "event": "first",
+    "channel_uid": "8febe937-74d7-462c-a873-31aa494d40d4",
+    "allocation": "88c53610d051524266852229fbdeabe6",
+    "worker_uid": "ba9a2493-9ad2-41d1-8376-eb347f3ba46d",
+    "result": {
+      "status": "PASS",
+      "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+      "seed": 23,
+      "kernel_repeats": 1079,
+      "copy_bytes": 4096,
+      "active_seconds": 2.000112
+    }
+  },
+  {
+    "utc": 1792501405.0906496,
+    "event": "second",
+    "channel_uid": "8febe937-74d7-462c-a873-31aa494d40d4",
+    "allocation": "88c53610d051524266852229fbdeabe6",
+    "worker_uid": "ba9a2493-9ad2-41d1-8376-eb347f3ba46d",
+    "result": {
+      "status": "PASS",
+      "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+      "seed": 23,
+      "kernel_repeats": 1159,
+      "copy_bytes": 4096,
+      "active_seconds": 2.001925
+    }
+  },
+  {
+    "utc": 1792501406.0807934,
+    "event": "runStrategy",
+    "value": "Halted"
+  },
+  {
+    "utc": 1792501429.786987,
+    "event": "stopped",
+    "worker_uid": "ba9a2493-9ad2-41d1-8376-eb347f3ba46d",
+    "channel_status": {
+      "allocation": "",
+      "backend": "",
+      "claimName": "",
+      "claimUID": "",
+      "compute": 50,
+      "everBound": false,
+      "generation": "",
+      "gpuUUID": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Stopped",
+      "profileGeneration": 1,
+      "reason": "RuntimeReclaimed",
+      "requestGeneration": 1,
+      "resourcePrefix": "",
+      "sessions": [],
+      "vmiUID": "",
+      "workerPodUID": ""
+    }
+  },
+  {
+    "utc": 1792501430.2272787,
+    "event": "runStrategy",
+    "value": "Always"
+  },
+  {
+    "utc": 1792501475.3656163,
+    "event": "restarted",
+    "channel_uid": "8febe937-74d7-462c-a873-31aa494d40d4",
+    "allocation": "0cc5a8a853358074213f394987621018",
+    "worker_uid": "c11cb6c4-7fc4-4f21-abd2-6fed57f32b39",
+    "result": {
+      "status": "PASS",
+      "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+      "seed": 23,
+      "kernel_repeats": 1297,
+      "copy_bytes": 4096,
+      "active_seconds": 2.000652
+    }
+  },
+  {
+    "utc": 1792501476.0744812,
+    "event": "runStrategy",
+    "value": "Halted"
+  },
+  {
+    "utc": 1792501499.7292502,
+    "event": "stopped",
+    "worker_uid": "c11cb6c4-7fc4-4f21-abd2-6fed57f32b39",
+    "channel_status": {
+      "allocation": "",
+      "backend": "",
+      "claimName": "",
+      "claimUID": "",
+      "compute": 50,
+      "everBound": false,
+      "generation": "",
+      "gpuUUID": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Stopped",
+      "profileGeneration": 1,
+      "reason": "RuntimeReclaimed",
+      "requestGeneration": 1,
+      "resourcePrefix": "",
+      "sessions": [],
+      "vmiUID": "",
+      "workerPodUID": ""
+    }
+  },
+  {
+    "utc": 1792501499.7302372,
+    "event": "PASS",
+    "scope": "GPU sessions and optional VM lifecycle; not performance or HA"
+  }
+]

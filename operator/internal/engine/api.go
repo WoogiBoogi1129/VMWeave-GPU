@@ -23,7 +23,9 @@ type Obj = unstructured.Unstructured
 type Map = map[string]interface{}
 
 var kinds = map[string]schema.GroupVersionKind{
-	"channels": {Group: Group, Version: "v1alpha1", Kind: "SharedMemoryChannel"}, "attachments": {Group: Group, Version: "v1alpha1", Kind: "ChannelAttachment"},
+	"deviceclasses": {Group: "resource.k8s.io", Version: "v1", Kind: "DeviceClass"},
+	"claims":        {Group: "resource.k8s.io", Version: "v1", Kind: "ResourceClaim"},
+	"channels":      {Group: Group, Version: "v1alpha1", Kind: "SharedMemoryChannel"}, "attachments": {Group: Group, Version: "v1alpha1", Kind: "ChannelAttachment"},
 	"requests": {Group: Group, Version: "v1alpha1", Kind: "GPURequest"}, "profiles": {Group: Group, Version: "v1alpha1", Kind: "GPUProfile"},
 	"vms": {Group: "kubevirt.io", Version: "v1", Kind: "VirtualMachine"}, "vmis": {Group: "kubevirt.io", Version: "v1", Kind: "VirtualMachineInstance"},
 	"pods": {Group: "", Version: "v1", Kind: "Pod"}, "pvcs": {Group: "", Version: "v1", Kind: "PersistentVolumeClaim"}, "pvs": {Group: "", Version: "v1", Kind: "PersistentVolume"},
@@ -96,7 +98,7 @@ type API struct {
 func (a API) Get(k, n string) (*Obj, error) {
 	o := New(k)
 	ns := a.Namespace
-	if k == "pvs" || k == "nodes" || k == "namespaces" {
+	if k == "pvs" || k == "nodes" || k == "namespaces" || k == "deviceclasses" {
 		ns = ""
 	}
 	err := a.R.Get(a.Context, types.NamespacedName{Namespace: ns, Name: n}, o)

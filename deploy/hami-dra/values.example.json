@@ -1,0 +1,24 @@
+{
+  "nvidiaDriverRoot": "/",
+  "nvidiaCDIHookPath": "",
+  "gpuResourcesEnabled": false,
+  "resources": {"gpus": {"enabled": false}},
+  "gpuResourcesEnabledOverride": false,
+  "image": {
+    "repository": "REQUIRED_DRA_IMAGE_REPOSITORY",
+    "tag": "REQUIRED_IMMUTABLE_TAG",
+    "pullPolicy": "IfNotPresent"
+  },
+  "driver": {"hostHookPath": "/var/lib/vmweave-hami-dra", "cdiRoot": "/var/run/cdi"},
+  "featureGates": {
+    "HAMiCoreSupport": true,
+    "DynamicMIG": false,
+    "PassthroughSupport": false,
+    "MPSSupport": false,
+    "TimeSlicingSettings": false
+  },
+  "kubeletPlugin": {
+    "nodeSelector": {"kubernetes.io/hostname": "REQUIRED_GPU_NODE"},
+    "containers": {"gpus": {"env": [{"name": "VMWEAVE_DRA_GPU_UUIDS", "value": "REQUIRED_GPU_UUID"}]}}
+  }
+}

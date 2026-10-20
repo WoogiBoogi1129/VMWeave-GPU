@@ -1,0 +1,16 @@
+{
+  "apiVersion": "resource.k8s.io/v1",
+  "kind": "DeviceClass",
+  "metadata": {
+    "name": "vmweave-hami-dra"
+  },
+  "spec": {
+    "selectors": [
+      {
+        "cel": {
+          "expression": "device.driver == \"hami-core-gpu.project-hami.io\" && device.attributes[\"hami-core-gpu.project-hami.io\"].type == \"hami-gpu\""
+        }
+      }
+    ]
+  }
+}
