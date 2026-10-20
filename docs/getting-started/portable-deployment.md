@@ -1,5 +1,7 @@
 # 다른 클러스터에 배포
 
+한국어 | [English](portable-deployment.en.md)
+
 이 절차의 목표는 PyTorch 없이 VM에서 작은 CUDA 프로그램을 실행하고 회수하는 것입니다.
 Kubernetes·KubeVirt·NVIDIA 드라이버·컨테이너 런타임은 관리자가 준비합니다.
 별도 시스템에서의 신규 GPU 설치 검증은 아직 NOT_RUN입니다. 아래 지원 기준은
