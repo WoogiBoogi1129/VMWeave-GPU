@@ -35,6 +35,9 @@ jobs:
           file: images/hami/Containerfile
           load: true
           tags: ${{ steps.image.outputs.name }}
+          labels: |
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Verify installed library and atomic replacement

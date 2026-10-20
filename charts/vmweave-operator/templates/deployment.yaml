@@ -36,6 +36,8 @@ spec:
         - --controller-service-account={{ $.Release.Name }}-controller
         - --leader-elect={{ $.Values.controller.leaderElection }}
         env:
+        - name: VMWEAVE_WORKLOAD_IMAGE_PULL_SECRETS
+          value: {{ $.Values.workloads.imagePullSecrets | toJson | quote }}
         - name: VMWEAVE_WORKLOAD_TOLERATIONS
           value: {{ $.Values.workloads.tolerations | toJson | quote }}
         securityContext: {allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: {drop: [ALL]}}

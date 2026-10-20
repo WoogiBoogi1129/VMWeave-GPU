@@ -1,47 +1,38 @@
-name: runtime-images
-
+name: deployment-images
 on:
   pull_request:
-    paths:
-      - images/**
-      - runtime/shm/**
-      - versions.lock.yaml
-      - .dockerignore
-      - .github/workflows/images.yml
+    paths: ['images/**', 'runtime/shm/**', 'operator/**', 'experiments/evidence/guest_gpu_smoke.c', '.dockerignore', '.github/workflows/images.yml']
   push:
     branches: [main]
-    tags: ["v*"]
-    paths:
-      - images/**
-      - runtime/shm/**
-      - versions.lock.yaml
-      - .dockerignore
-      - .github/workflows/images.yml
-
+    tags: ['v*']
+    paths: ['images/**', 'runtime/shm/**', 'operator/**', 'experiments/evidence/guest_gpu_smoke.c', '.dockerignore', '.github/workflows/images.yml']
+  workflow_dispatch:
 permissions:
   contents: read
   packages: write
-
 jobs:
   build:
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        target: [control-plane, worker, guest-artifacts]
+        include:
+        - {name: operator, file: Operator.Containerfile, target: ''}
+        - {name: helper, file: Helper.Containerfile, target: ''}
+        - {name: worker, file: Runtime.Containerfile, target: worker}
+        - {name: guest-artifacts, file: Runtime.Containerfile, target: guest-artifacts}
+        - {name: hook, file: Hook.Containerfile, target: ''}
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v3
-      - name: Normalize image name and choose an immutable build tag
+      - name: Image reference
         id: image
         shell: bash
         run: |
-          image_owner="${GITHUB_REPOSITORY_OWNER,,}"
-          image_tag="$GITHUB_SHA"
-          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-            image_tag="$GITHUB_REF_NAME"
-          fi
-          echo "name=ghcr.io/${image_owner}/flyt-${{ matrix.target }}:${image_tag}" >> "$GITHUB_OUTPUT"
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          tag="$GITHUB_SHA"
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then tag="$GITHUB_REF_NAME"; fi
+          echo "name=ghcr.io/${owner}/vmweave-${{ matrix.name }}:${tag}" >> "$GITHUB_OUTPUT"
       - uses: docker/login-action@v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
@@ -51,11 +42,27 @@ jobs:
       - uses: docker/build-push-action@v6
         with:
           context: .
-          file: images/flyt/Containerfile
+          file: images/vmweave/${{ matrix.file }}
           target: ${{ matrix.target }}
-          push: ${{ startsWith(github.ref, 'refs/tags/') }}
+          load: true
           tags: ${{ steps.image.outputs.name }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          provenance: mode=max
-          sbom: true
+          labels: |
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+          build-args: |
+            SOURCE_REVISION=${{ github.sha }}
+            VCS_REF=${{ github.sha }}
+            KUBEVIRT_SHIM_IMAGE=quay.io/kubevirt/sidecar-shim:v1.9.0@sha256:8eb25c016c09366ea4b2bbd524dfbb4872184a9aea67cc34c60ff78a11cb2661
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+      - name: Verify Guest package
+        if: matrix.name == 'guest-artifacts'
+        run: |
+          docker run --rm '${{ steps.image.outputs.name }}' sh -ec 'cd /opt/flyt/guest; sha256sum -c SHA256SUMS; test -x guest-gpu-smoke; test -f guest_bootstrap.py; test -f install_guest_broker.sh'
+      - name: Verify Worker package
+        if: matrix.name == 'worker'
+        run: |
+          docker run --rm --entrypoint sh '${{ steps.image.outputs.name }}' -ec 'test -x /opt/flyt/bin/flyt-shm-session-worker; test -x /opt/flyt/bin/flyt-shm-worker; test "$VMWEAVE_API_GROUP" = vmweave.io'
+      - name: Publish verified image
+        if: startsWith(github.ref, 'refs/tags/')
+        run: docker push '${{ steps.image.outputs.name }}'

@@ -10,6 +10,9 @@ image:
   pullPolicy: IfNotPresent
 imagePullSecrets: []
 tls:
+  mode: existingSecret
+  certManager:
+    issuerRef: {name: "", kind: ClusterIssuer, group: cert-manager.io}
   existingSecret: vmweave-webhook-tls
   caBundle: ''
 webhook:
@@ -23,4 +26,5 @@ resources:
 nodeSelector: {}
 tolerations: []
 workloads:
+  imagePullSecrets: []
   tolerations: []

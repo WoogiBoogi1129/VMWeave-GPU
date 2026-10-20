@@ -1,0 +1,13 @@
+{
+  "mode": "active",
+  "activeModeAcknowledged": true,
+  "management": {"namespaces": ["team-a"]},
+  "image": {"repository": "YOUR_REGISTRY/vmweave-operator", "digest": "REPLACE_WITH_PUBLISHED_SHA256"},
+  "imagePullSecrets": [],
+  "workloads": {"imagePullSecrets": [], "tolerations": []},
+  "tls": {
+    "mode": "certManager",
+    "existingSecret": "vmweave-webhook-tls",
+    "certManager": {"issuerRef": {"name": "YOUR_CA_ISSUER", "kind": "ClusterIssuer", "group": "cert-manager.io"}}
+  }
+}

@@ -61,6 +61,88 @@
           "type": "boolean"
         }
       }
+    },
+    "tls": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "existingSecret",
+            "certManager"
+          ]
+        },
+        "existingSecret": {
+          "type": "string",
+          "minLength": 1
+        },
+        "certManager": {
+          "type": "object",
+          "properties": {
+            "issuerRef": {
+              "type": "object",
+              "required": [
+                "name",
+                "kind",
+                "group"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "Issuer",
+                    "ClusterIssuer"
+                  ]
+                },
+                "group": {
+                  "const": "cert-manager.io"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "imagePullSecrets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "workloads": {
+      "type": "object",
+      "properties": {
+        "imagePullSecrets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "tolerations": {
+          "type": "array"
+        }
+      }
     }
   },
   "required": [

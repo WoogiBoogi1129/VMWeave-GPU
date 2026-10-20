@@ -2,7 +2,7 @@
 """Install/upgrade the central VMWeave chart; preserve old APIs and workload data."""
 import argparse,pathlib,subprocess,json,tempfile,base64
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-p=argparse.ArgumentParser();p.add_argument('--namespace',default='vmweave-system');p.add_argument('--release',default='vmweave');p.add_argument('--values',type=pathlib.Path,required=True);p.add_argument('--ca',type=pathlib.Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--namespace',default='vmweave-system');p.add_argument('--release',default='vmweave');p.add_argument('--values',type=pathlib.Path,required=True);p.add_argument('--ca',type=pathlib.Path,help='CA PEM required for existingSecret mode');a=p.parse_args()
 def run(*xs,**kw):return subprocess.check_output(list(xs),text=True,**kw)
 # Helm performs schema validation. Values are JSON to keep installation dependencies explicit.
 v=json.loads(a.values.read_text());names=v.get('management',{}).get('namespaces',[])
@@ -26,13 +26,28 @@ for n in removed:
 # Config changes that alter admission scope/mode require an explicit maintenance procedure.
 if old and (set(names)!=set(old.get('management',{}).get('namespaces',[])) or v.get('mode','review')!=old.get('mode','review')):
  raise SystemExit('scope/mode change requires staged maintenance; see docs/guides/upgrade-uninstall.md')
-v.setdefault('tls',{})['caBundle']=base64.b64encode(a.ca.read_bytes()).decode()
+tls=v.setdefault('tls',{})
+cert_manager=tls.get('mode','existingSecret')=='certManager'
+if cert_manager:
+ run('kubectl','get','crd','certificates.cert-manager.io')
+else:
+ if not a.ca:raise SystemExit('--ca required for existingSecret TLS mode')
+ tls['caBundle']=base64.b64encode(a.ca.read_bytes()).decode()
 with tempfile.TemporaryDirectory() as td:
  f=pathlib.Path(td)/'values.json';f.write_text(json.dumps(v))
  run('helm','template',a.release,str(ROOT/'charts/vmweave-operator'),'-n',a.namespace,'-f',str(f))
- run('kubectl','get','secret',v['tls'].get('existingSecret','vmweave-webhook-tls'),'-n',a.namespace)
+ if not cert_manager:run('kubectl','get','secret',v['tls'].get('existingSecret','vmweave-webhook-tls'),'-n',a.namespace)
  for crd in sorted((ROOT/'operator/config/crd/bases').glob('*.json')):run('kubectl','apply','--dry-run=server','-f',str(crd))
  for crd in sorted((ROOT/'operator/config/crd/bases').glob('*.json')):print(run('kubectl','apply','-f',str(crd)))
  cmd=['helm','upgrade','--install',a.release,str(ROOT/'charts/vmweave-operator'),'-n',a.namespace,'--skip-crds','--wait','--timeout','180s','-f',str(f)]
  if not old or not old.get('webhook',{}).get('registrationEnabled',True):print(run(*cmd,'--set','webhook.registrationEnabled=false'))
  print(run(*cmd,'--set','webhook.registrationEnabled=true'))
+
+if cert_manager:
+ run('kubectl','wait','certificate/'+a.release+'-webhook','-n',a.namespace,'--for=condition=Ready','--timeout=180s')
+ import time
+ for attempt in range(90):
+  obj=json.loads(run('kubectl','get','validatingwebhookconfiguration',a.namespace+'-'+a.release,'-o','json'))
+  if all(w.get('clientConfig',{}).get('caBundle') for w in obj['webhooks']):break
+  time.sleep(2)
+ else:raise SystemExit('Webhook CA injection did not complete; inspect cert-manager cainjector')

@@ -71,7 +71,13 @@ func main() {
 				panic(e)
 			}
 		}
-		r := &engine.Reconciler{Client: mgr.GetClient(), Reader: mgr.GetAPIReader(), Namespaces: scopes, Options: engine.Options{Mode: *mode, Tolerations: tol}}
+		pullSecrets := []interface{}{}
+		if raw := os.Getenv("VMWEAVE_WORKLOAD_IMAGE_PULL_SECRETS"); raw != "" {
+			if e = json.Unmarshal([]byte(raw), &pullSecrets); e != nil {
+				panic(e)
+			}
+		}
+		r := &engine.Reconciler{Client: mgr.GetClient(), Reader: mgr.GetAPIReader(), Namespaces: scopes, Options: engine.Options{Mode: *mode, Tolerations: tol, ImagePullSecrets: pullSecrets}}
 		if e = r.Setup(mgr); e != nil {
 			panic(e)
 		}

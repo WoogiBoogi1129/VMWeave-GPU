@@ -35,3 +35,10 @@ operator:
   testedKubernetes: v1.37.0
   testedKubeVirt: v1.9.0
   installationChart: charts/vmweave-operator
+
+deployment:
+  chartVersion: 0.3.0
+  architecture: linux/amd64
+  guestOS: Ubuntu 22.04
+  kubevirtShim: quay.io/kubevirt/sidecar-shim:v1.9.0@sha256:8eb25c016c09366ea4b2bbd524dfbb4872184a9aea67cc34c60ff78a11cb2661
+  cleanClusterValidation: NOT_RUN

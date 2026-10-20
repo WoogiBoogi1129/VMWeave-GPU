@@ -1,0 +1,9 @@
+{
+  "mode": "active",
+  "activeModeAcknowledged": true,
+  "management": {"namespaces": ["team-a"]},
+  "image": {"repository": "YOUR_REGISTRY/vmweave-operator", "digest": "REPLACE_WITH_PUBLISHED_SHA256"},
+  "imagePullSecrets": [],
+  "workloads": {"imagePullSecrets": [], "tolerations": []},
+  "tls": {"mode": "existingSecret", "existingSecret": "vmweave-webhook-tls"}
+}

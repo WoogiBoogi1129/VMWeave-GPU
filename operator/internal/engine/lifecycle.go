@@ -10,8 +10,9 @@ import (
 )
 
 type Options struct {
-	Mode        string
-	Tolerations []interface{}
+	Mode             string
+	Tolerations      []interface{}
+	ImagePullSecrets []interface{}
 }
 
 func randomID() string {
@@ -23,7 +24,7 @@ func randomID() string {
 }
 func Pod(c *Obj, name, image string, command []interface{}, opts Options) *Obj {
 	o := Child("pods", name, c)
-	Set(o, Map{"restartPolicy": "Never", "automountServiceAccountToken": false, "tolerations": opts.Tolerations, "nodeSelector": Map{"kubernetes.io/hostname": S(c, "status", "nodeName")}, "securityContext": Map{"runAsUser": N(c, "spec", "uid"), "runAsGroup": N(c, "spec", "gid"), "fsGroup": N(c, "spec", "gid")}, "containers": []interface{}{Map{"name": "main", "image": image, "command": command, "volumeMounts": []interface{}{Map{"name": "channel", "mountPath": "/flyt-channel"}}}}, "volumes": []interface{}{Map{"name": "channel", "persistentVolumeClaim": Map{"claimName": S(c, "spec", "pvcRef", "name")}}}}, "spec")
+	Set(o, Map{"imagePullSecrets": opts.ImagePullSecrets, "restartPolicy": "Never", "automountServiceAccountToken": false, "tolerations": opts.Tolerations, "nodeSelector": Map{"kubernetes.io/hostname": S(c, "status", "nodeName")}, "securityContext": Map{"runAsUser": N(c, "spec", "uid"), "runAsGroup": N(c, "spec", "gid"), "fsGroup": N(c, "spec", "gid")}, "containers": []interface{}{Map{"name": "main", "image": image, "command": command, "volumeMounts": []interface{}{Map{"name": "channel", "mountPath": "/flyt-channel"}}}}, "volumes": []interface{}{Map{"name": "channel", "persistentVolumeClaim": Map{"claimName": S(c, "spec", "pvcRef", "name")}}}}, "spec")
 	return o
 }
 func cmds(xs ...string) []interface{} {
