@@ -4,6 +4,19 @@
 기존 Webhook 등록은 유지합니다. Recreate 전략은 일시적인 admission 중단을 수반하므로 유지보수 시간에 수행합니다.
 인증서 교체는 CA 신뢰 기간 중첩과 새 인증서 연결을 먼저 검증합니다.
 
+## v0.4.0 및 DRA 업데이트
+
+[릴리스 가이드](../getting-started/release-v0.4.0.md)의 Operator digest와 차트를 사용합니다.
+이전 values·CRD·사용자 리소스를 백업하고, 활성 GPU 세션을 회수한 뒤
+새 CRD를 server-side dry-run으로 검증·적용합니다. Helm upgrade만으로는 CRD가 갱신되지 않습니다.
+기존 namespace·TLS·노드 설정을 유지한 values로 Operator와 RBAC를 함께 업데이트합니다.
+Controller·Webhook Ready, admission 연결, 새 할당 smoke를 확인합니다.
+
+업데이트해도 기존 HAMi Profile이 DRA로 자동 변환되지는 않습니다.
+DRA Driver와 DeviceClass를 먼저 준비하고 [DRA 가이드](../getting-started/hami-dra.md)에 따라
+새 Profile을 생성합니다. backend와 DeviceClass는 변경 불가 필드입니다.
+DRA 할당이 남아 있는 상태에서 DRA 미지원 Operator로 롤백하지 않습니다.
+
 ## 관리 목록 또는 모드 변경
 
 설치 도구는 scope/mode 변경을 거부합니다. chart 0.2.1부터 `maintenance.enabled=true`로
@@ -94,3 +107,7 @@ helm uninstall vmweave -n vmweave-system --wait --timeout=180s
 CRD, 사용자 VM/PVC, system namespace 및 수동 생성 TLS Secret은 별도입니다.
 구 `flyt.dev`와 신 `vmweave.io` CRD 삭제는 모든 해당 CR을 삭제하므로 전체 namespace의 의존성·백업을 먼저 확인합니다.
 namespace가 이미 Terminating이면 신규 reclaim Pod를 만들 수 없으므로 사전에 회수를 완료해야 합니다.
+
+DRA 사용 시에는 Worker 제거와 해당 ResourceClaim 삭제까지 확인한 후 Operator를 제거합니다.
+HAMi DRA Driver는 별도 Helm release이므로 재사용할 경우 그대로 유지합니다.
+이때 DeviceClass, 전용 host hook 디렉터리와 일반 HAMi의 GPU 제외 설정도 유지합니다.

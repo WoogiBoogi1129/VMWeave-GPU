@@ -18,7 +18,7 @@ has a UUID allowlist patch, and classic HAMi's `filterdevices.uuid` excludes tho
 UUIDs. Existing consumers must finish before transferring ownership. Never
 advertise an in-use GPU through a second independent allocator.
 
-## Build and install the driver
+## Install the released driver
 
 Use the published `ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.4.0` image;
 the [release lock](../../deploy/releases/v0.4.0.json) records its immutable digest.
@@ -30,9 +30,25 @@ Fetch upstream commit `300224ac789ad40ced1ea2d9b47f6ba4a7cb5c69` from
 the node, allowed GPU UUIDs, image and host driver/runtime paths. Keep the
 extended-resource DeviceClass disabled: this deployment uses explicit Claims.
 
+The Operator OCI chart does not install this driver. In a fresh directory, fetch
+its pinned upstream chart separately:
+
 ```sh
-helm upgrade --install vmweave-dra /path/to/pinned-driver/chart/hami-dra-driver \
-  --namespace vmweave-dra-driver --create-namespace -f driver-values.json
+git clone https://github.com/Project-HAMi/k8s-dra-driver.git .local/hami-dra-driver
+git -C .local/hami-dra-driver checkout 300224ac789ad40ced1ea2d9b47f6ba4a7cb5c69
+cp deploy/hami-dra/values.example.json .local/dra-values.json
+```
+
+Edit `.local/dra-values.json` before installing: set `image.repository` to
+`ghcr.io/woogiboogi1129/vmweave-hami-dra`, `image.tag` to `v0.4.0`, the node
+selector and GPU UUID allowlist to the target GPU, and `nvidiaCDIHookPath` to
+the actual host hook executable. Verify the image digest against the release
+lock. The driver chart version remains upstream 0.1.1; it is separate from the
+VMWeave Operator chart version 0.4.0.
+
+```sh
+helm upgrade --install vmweave-dra .local/hami-dra-driver/chart/hami-dra-driver \
+  --namespace vmweave-dra-driver --create-namespace -f .local/dra-values.json --wait --timeout 5m
 kubectl apply -f deploy/hami-dra/deviceclass.json
 ```
 
@@ -61,6 +77,19 @@ python3 scripts/operator/preflight.py \
   --backend hami-dra --device-class vmweave-hami-dra --gpu-uuid YOUR_GPU_UUID \
   --output preflight.json
 ```
+
+Before requesting a GPU, verify the driver rollout and inventory:
+
+```sh
+kubectl -n vmweave-dra-driver get daemonsets,pods
+kubectl get deviceclass vmweave-hami-dra -o yaml
+kubectl get resourceslices -o yaml
+```
+
+ResourceSlices must advertise the profile's node and GPU UUID under
+`hami-core-gpu.project-hami.io`. A Ready driver with no ResourceClaims is idle;
+it does not mean a VM has already obtained a GPU. Run the VM GPU smoke in the
+[portable deployment guide](portable-deployment.md) after creating the workload.
 
 ## Lifecycle and diagnostics
 

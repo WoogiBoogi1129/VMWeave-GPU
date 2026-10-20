@@ -36,6 +36,8 @@ python3 -m venv .local/docs-venv
 .local/docs-venv/bin/mkdocs serve
 ```
 
+- 최신 공개 릴리스: [v0.4.0 이미지·Helm 차트](docs/getting-started/release-v0.4.0.md)
+- HAMi DRA 배포: [Driver·DeviceClass·GPUProfile 설정](docs/getting-started/hami-dra.md)
 - 다른 클러스터 배포: [배포 패키지·Helm·Guest·검증 절차](docs/getting-started/portable-deployment.md)
 - 중앙 설치: [관리자 설치](docs/getting-started/install.md) → [namespace 등록](docs/getting-started/namespaces.md) → [첫 VM](docs/getting-started/first-vm.md)
 - 기존 배포: [새 API 이전](docs/guides/migrate-to-vmweave-api.md)

@@ -6,7 +6,8 @@ CUDA 실행 성공과 성능 검증을 각각 확인해야 합니다.
 ## 요구 조건
 
 - CUDA 12.8 계열과 현재 런타임이 사용하는 cuDNN 9 개발/실행 라이브러리.
-- GPU 자원을 등록하고 Worker에 정책을 적용하는 HAMi.
+- GPU 할당 backend는 일반 HAMi 또는 [HAMi DRA](hami-dra.md)를 선택합니다.
+  일반 HAMi를 선택한 경우:
   Core 제한 보정이 포함된 [배포용 HAMi 이미지](../../runtime/hami/README.md)를 사용합니다.
   upstream HAMi 이미지만 설치하면 VMWeave의 Core 제한 수정은 적용되지 않습니다.
 - Sidecar hook 및 ivshmem을 지원하는 KubeVirt/QEMU 구성.
@@ -20,7 +21,8 @@ CUDA 실행 성공과 성능 검증을 각각 확인해야 합니다.
 
 1. 새 설치에서 active 또는 선택 진단용 [CPU review](cpu-control-plane.md)를 고릅니다.
    review를 먼저 설치할 필요는 없습니다. 기존 review에서 active로 바꾸려면 [유지보수 절차](../guides/upgrade-uninstall.md)를 따릅니다.
-2. [런타임 빌드](../development/index.md) 후 Worker·Guest·hook 산출물의 digest/해시를 기록합니다.
+2. [공개 v0.4.0 산출물](release-v0.4.0.md)을 확보하고 Worker·Guest·Hook digest를 기록합니다.
+   직접 빌드하는 경우 [런타임 빌드](../development/index.md)를 따릅니다.
 3. [중앙 설치](install.md)의 active 설정에 사용자 namespace를 등록합니다.
 4. 승인 Profile, 정지 VM, Request, Channel과 로컬 PVC를 준비합니다.
 5. [첫 VM 실행](first-vm.md)에 따라 새 API의 매핑과 GPU smoke를 확인합니다. 과거 실험 재현 문서는 구API 기록입니다.

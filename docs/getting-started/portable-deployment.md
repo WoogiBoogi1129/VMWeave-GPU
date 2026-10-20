@@ -28,33 +28,39 @@ sm_70을 사용하므로 대상 GPU·드라이버에서 이 PTX를 지원하는�
 게시된 최신 버전: [v0.4.0 산출물·다운로드·검증 기록](release-v0.4.0.md).
 이전 버전: [v0.3.0](release-v0.3.0.md).
 
-`vmweave-operator`, `vmweave-helper`, `vmweave-worker`, `vmweave-hook`,
-`vmweave-guest-artifacts`, `vmweave-hami`를 같은 소스 릴리스로 준비합니다.
-현재 변경의 registry 게시 여부는 릴리스 기록을 확인하세요. 과거 `v1.0.0` 이미지를
-현재 배포판으로 사용하지 않습니다. 게시 전에는 [소스 빌드](install.md)를 사용합니다.
+공개 이미지 7종과 digest는 [v0.4.0 release lock](../../deploy/releases/v0.4.0.json)에 있습니다.
+일반 HAMi는 `vmweave-hami`, DRA는 `vmweave-hami-dra`를 사용합니다.
+나머지 Operator·Helper·Worker·Hook·Guest artifacts는 공통입니다.
+과거 Flyt `v1.0.0` 이미지를 현재 배포판으로 사용하지 않습니다.
 
-게시 완료 후 아래 명령은 여섯 이미지가 모두 존재하는지 확인하고 digest lock을 만듭니다.
-`RELEASE_TAG`, `RELEASE_COMMIT`은 실제 릴리스 값으로 설정합니다. 레지스트리 인증이
-필요하면 먼저 skopeo login을 실행합니다. 이 도구는 모든 이미지의 revision label도 비교하지만 암호학적 소스 provenance까지 검증하지 않습니다.
+전용 작업 디렉터리에 릴리스 소스를 확보합니다. 아래 설치 도구와 CRD는 이 소스에서 실행합니다.
 
 ```sh
+git clone --branch v0.4.0 --depth 1 https://github.com/WoogiBoogi1129/VMWeave-GPU.git vmweave-v0.4.0
+cd vmweave-v0.4.0
+mkdir -p .local
+helm pull oci://ghcr.io/woogiboogi1129/charts/vmweave-operator --version 0.4.0 --destination .local
 python3 scripts/operator/release-manifest.py \
-  --repository ghcr.io/YOUR_OWNER --tag "$RELEASE_TAG" \
-  --source-revision "$RELEASE_COMMIT" --output .local/release-images.json
+  --repository ghcr.io/woogiboogi1129 --tag v0.4.0 \
+  --source-revision 804ed96860bf68138ffbd3bcde5df20bd74bc6c4 \
+  --include-dra --output .local/release-images.json
 ```
 
-차트 OCI 게시 경로는 `oci://ghcr.io/YOUR_OWNER/charts/vmweave-operator`입니다.
-배포 소스와 차트 버전을 함께 고정합니다. `Chart.yaml`의 버전은 매 릴리스에서 올립니다.
-이미지 CI와 HAMi CI, 차트 CI가 모두 성공한 릴리스만 사용합니다.
-이미지·차트 패키지가 private이면 사용자에게 pull 권한을 제공하거나 public으로 게시합니다.
+이미지와 차트는 로그인 없이 조회·다운로드할 수 있습니다. lock 생성 도구는
+7종 이미지의 revision label을 확인하지만 암호학적 provenance를 검증하지는 않습니다.
+릴리스 기록과 digest 고정 values 파일은 태그 게시 후 main에 추가되었으므로
+위 링크에서 확인합니다. 태그 checkout에는 이 파일들이 없으며, 다음 단계에서는
+태그에 포함된 일반 values 예제와 생성한 `.local/release-images.json`을 사용합니다.
 
 ## 2. 기반 환경과 namespace 준비
 
 - KubeVirt sidecar hook 설정과 ivshmem 지원 QEMU를 확인합니다.
-- [HAMi 수정 이미지 절차](../../runtime/hami/README.md)에 따라 신규 설치하거나 기존 HAMi에 overlay를 적용합니다.
+- **일반 HAMi 선택 시:** [HAMi 수정 이미지 절차](../../runtime/hami/README.md)에 따라 신규 설치하거나 기존 HAMi에 overlay를 적용합니다.
   신규 설치는 기존 HAMi chart v2.10.0의 클러스터별 values와 이 저장소의 overlay를 함께 사용합니다.
   기존 release에 `--reuse-values`를 적용하는 명령을 신규 설치에 그대로 쓰지 않습니다.
-- GPU UUID, runtimeClass, HAMi scheduler 이름을 확인합니다.
+- **DRA 선택 시:** [DRA 설치 절차](hami-dra.md)에 따라 Driver·DeviceClass·CDI를 준비합니다.
+  일반 HAMi scheduler/device-plugin은 DRA 전용 GPU에 필수가 아닙니다. 두 방식을 함께 쓰면 GPU UUID를 분리합니다.
+- GPU UUID, runtimeClass와 선택한 backend의 scheduler 이름을 확인합니다.
 - namespace를 준비하고 필요한 registry Secret을 각 namespace에 배치합니다.
 
 ```sh
@@ -63,6 +69,9 @@ kubectl create namespace team-a
 python3 scripts/operator/preflight.py --namespace team-a --node YOUR_GPU_NODE \
   --runtime-class nvidia --output .local/preflight.json
 ```
+
+위 preflight는 일반 HAMi용입니다. DRA는 명령에
+`--backend hami-dra --device-class vmweave-hami-dra --gpu-uuid YOUR_GPU_UUID`를 추가합니다.
 
 이 도구는 클러스터를 변경하지 않습니다. `API_CHECKS_PASS`는 API 조회 항목의 성공이며,
 출력의 `unverified` 항목을 포함한 호스트 권한·드라이버·이미지 pull·GPU 동작은 별도 확인합니다.
@@ -133,6 +142,9 @@ kubectl -n vmweave-system wait certificate/vmweave-webhook --for=condition=Ready
 [첫 VM](first-vm.md)의 관리자·사용자 예제를 복사합니다.
 
 - nodeName, GPU UUID, Worker digest, runtimeClass와 schedulerName을 입력합니다.
+- 일반 HAMi는 `backend: hami`(생략 시 기본값)와 HAMi scheduler를 사용합니다.
+  DRA는 `backend: hami-dra`, `draDeviceClass: vmweave-hami-dra`,
+  `schedulerName: default-scheduler`를 지정합니다. 전체 설정은 [DRA 가이드](hami-dra.md)를 따릅니다.
 - local PV directory는 관리자가 생성하고 실제 QEMU UID/GID에 맞춥니다.
 - Channel 생성의 `--uid`/`--gid`도 같은 값으로 지정합니다. 기본 107:107은 연구 환경 값입니다.
 - PV 용량, 디스크 여유, namespace의 Pod 보안 정책과 node taint/toleration을 확인합니다.
@@ -176,7 +188,8 @@ FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/flyt/lib \
 
 ## 6. 설치 검증과 회수
 
-실행 호스트에서 VM Pod IP로 SSH가 가능해야 합니다. 비밀키는 결과에 저장하지 않습니다.
+실행 호스트에서 VM Pod IP로 SSH가 가능해야 합니다. 직접 라우팅이 없으면
+아래 smoke 명령에 `--virtctl /path/to/virtctl`을 추가해 KubeVirt 터널을 사용합니다. 비밀키는 결과에 저장하지 않습니다.
 현재 자동 smoke의 Guest 계정은 `ubuntu`입니다. 전용 시험 VM의 Channel이 Ready인 상태에서:
 
 ```sh
