@@ -13,6 +13,7 @@ def main():
     p.add_argument("--tag", required=True)
     p.add_argument("--source-revision", required=True, help="Full release source commit")
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--include-dra", action="store_true", help="Include HAMi DRA driver image")
     a = p.parse_args()
     if not re.fullmatch(r"[a-f0-9]{40}", a.source_revision):
         p.error("full source revision required")
@@ -21,7 +22,10 @@ def main():
     if a.output.exists():
         p.error("output exists")
     images = {}
-    for component in ("operator", "helper", "worker", "hook", "guest-artifacts", "hami"):
+    components = ["operator", "helper", "worker", "hook", "guest-artifacts", "hami"]
+    if a.include_dra:
+        components.append("hami-dra")
+    for component in components:
         repo = a.repository.rstrip("/") + "/vmweave-" + component
         metadata = json.loads(subprocess.check_output(
             ["skopeo", "inspect", "docker://" + repo + ":" + a.tag],
