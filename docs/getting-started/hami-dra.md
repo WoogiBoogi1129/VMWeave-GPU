@@ -20,9 +20,9 @@ advertise an in-use GPU through a second independent allocator.
 
 ## Build and install the driver
 
-Build `images/hami-dra/Containerfile` from the repository root and distribute the
-result to the target node/registry. No DRA image release is implied by this source
-change. Use an immutable tag or a digest supported by your image distribution.
+Use the published `ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.4.0` image;
+the [release lock](../../deploy/releases/v0.4.0.json) records its immutable digest.
+To build it yourself, use `images/hami-dra/Containerfile` from the repository root.
 
 Fetch upstream commit `300224ac789ad40ced1ea2d9b47f6ba4a7cb5c69` from
 `https://github.com/Project-HAMi/k8s-dra-driver.git`. Its chart is at
@@ -37,7 +37,7 @@ kubectl apply -f deploy/hami-dra/deviceclass.json
 ```
 
 Install the VMWeave chart using the portable installation procedure and an
-Operator built from this change. Helm does not upgrade CRDs automatically: apply
+Operator from release v0.4.0 or newer. Helm does not upgrade CRDs automatically: apply
 the matching canonical CRDs before upgrading the Operator. Existing classic
 profiles keep their default behavior. Create a new profile for a new backend;
 backend and DeviceClass are immutable.

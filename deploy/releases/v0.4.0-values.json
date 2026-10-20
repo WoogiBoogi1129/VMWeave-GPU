@@ -1,0 +1,22 @@
+{
+  "mode": "active",
+  "activeModeAcknowledged": true,
+  "management": {
+    "namespaces": [
+      "team-a"
+    ]
+  },
+  "image": {
+    "repository": "ghcr.io/woogiboogi1129/vmweave-operator",
+    "digest": "sha256:057c762089fd9713e70e0d7a4c5dc89a2517cf0be4b0dcc18da13013ad85276f"
+  },
+  "imagePullSecrets": [],
+  "workloads": {
+    "imagePullSecrets": [],
+    "tolerations": []
+  },
+  "tls": {
+    "mode": "existingSecret",
+    "existingSecret": "vmweave-webhook-tls"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "sourceRevision": "804ed96860bf68138ffbd3bcde5df20bd74bc6c4",
+  "tag": "v0.4.0",
+  "publishedDateKST": "2026-10-21",
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:057c762089fd9713e70e0d7a4c5dc89a2517cf0be4b0dcc18da13013ad85276f",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:fbe27751c7656220e0342ff19d659eb54003594041628e148079b114751dbbba",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:9439f2d43776be86eadec4632388e4efb85842807497fbc7825392e0425a3a84",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:51b03bf2605f25388f1f9ba2bbc5985ab424afa9594c291f9a3933f5b61df30d",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:4a5739dc0dbb6c89f348eed72c422bd8d11ef8539a0e73c67bd32a70ae2cc7aa",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:1ef60518ebf2d01ecfe8ce044fed2f13432759ce05053aa10ddf14e1c2217e63",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:7b6c701ac9bf2e0994e5cbfbd9f7ea85c6cc2635f08094f6f3fe0bc13f3406d1"
+  },
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.4.0",
+    "digest": "sha256:42b4873d1fb63aaf288c0839d10d6291ba7f7776b32301a290bdd4b74b1bf8df"
+  },
+  "verification": {
+    "anonymousImageMetadata": "PASS",
+    "imageRevisionLabels": "PASS",
+    "anonymousChartDownload": "PASS",
+    "chartSourceContentComparison": "PASS",
+    "releaseImagesGPUExecution": "NOT_RUN",
+    "anonymousGuestDownloadAndChecksums": "PASS",
+    "anonymousDRADownloadAndPackageTest": "PASS"
+  },
+  "scope": "GPU validation used locally built images before release. Published image metadata and chart verified separately; revision labels are not cryptographic provenance.",
+  "workflows": {
+    "images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39455635975",
+    "hami": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39455636144",
+    "hami-dra": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39455636056",
+    "chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39455635901"
+  }
+}
