@@ -1,0 +1,64 @@
+{
+  "vmweave-system/vmweave-controller-85454c7487-6hzbg": {
+    "containers": [
+      {
+        "name": "controller",
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator:v0.5.1",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:c188cb72b18d10bd7275e0b71d3ed294adeed9ec00d7e8be7f3e0f955ab5c206",
+        "ready": true,
+        "restartCount": 0
+      }
+    ]
+  },
+  "vmweave-system/vmweave-webhook-fd46cc4cd-dmfn8": {
+    "containers": [
+      {
+        "name": "webhook",
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator:v0.5.1",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:c188cb72b18d10bd7275e0b71d3ed294adeed9ec00d7e8be7f3e0f955ab5c206",
+        "ready": true,
+        "restartCount": 0
+      }
+    ]
+  },
+  "vmweave-dra-driver/hami-dra-driver-kubelet-plugin-w5p8l": {
+    "containers": [
+      {
+        "name": "gpus",
+        "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.1",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:0050c6c1408586b402c24d46b9241cc8ff8d4833bbb4a3b96df2f617b87943ab",
+        "ready": true,
+        "restartCount": 0
+      }
+    ]
+  },
+  "worker/vmweave-k8s-01-5739668e1554-848eea2c-worker": {
+    "containers": [
+      {
+        "name": "main",
+        "image": "ghcr.io/woogiboogi1129/vmweave-worker:v0.5.1",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:28cbbf63ce65cc925c1674ecf92b590c19164fa3a16a213931e065ec724f56d7",
+        "ready": true,
+        "restartCount": 0
+      }
+    ]
+  },
+  "launcher/virt-launcher-vmweave-k8s-01-fml9z": {
+    "containers": [
+      {
+        "name": "compute",
+        "image": "localhost/flyt-virt-launcher:ivshmem-v2-20260922",
+        "imageID": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+        "ready": true,
+        "restartCount": 0
+      },
+      {
+        "name": "hook-sidecar-0",
+        "image": "ghcr.io/woogiboogi1129/vmweave-hook:v0.5.1",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:131ed77f3f502ba2f3ec12fb96cbee6612b6459239dc47bb2254fde6c2ea54bd",
+        "ready": true,
+        "restartCount": 0
+      }
+    ]
+  }
+}

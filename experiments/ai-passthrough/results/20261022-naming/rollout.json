@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "release": "v0.5.1",
+  "operatorHelm": {
+    "chart": "vmweave-operator-0.5.1",
+    "revision": 9,
+    "previousRevision": 8
+  },
+  "draHelm": {
+    "chart": "hami-dra-driver-0.1.1",
+    "revision": 4,
+    "previousRevision": 3
+  },
+  "profile": "persistent-50-2048-v051",
+  "request": "vmweave-k8s-01-v051",
+  "channel": "vmweave-k8s-01",
+  "vmIdentityAndRootPVC": "unchanged",
+  "channelRecreatedAfterReclamation": true,
+  "draGPU": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a",
+  "classicHAMi": "upstream 2.10.0 unchanged",
+  "temporaryAdminPod": "deleted",
+  "guestRollbackDirectory": "/opt/flyt.pre-vmweave"
+}

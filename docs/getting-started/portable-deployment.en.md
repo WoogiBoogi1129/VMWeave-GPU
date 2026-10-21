@@ -31,10 +31,10 @@ driver to verify compatibility.
 
 ## 1. Obtain release artifacts
 
-Latest published version: [v0.4.0 artifacts and verification record](release-v0.4.0.md).
-Previous version: [v0.3.0](release-v0.3.0.md).
+Latest published version: [v0.5.1 artifacts and verification record](release-v0.5.1.md).
+Previous version: [v0.4.0](release-v0.4.0.md).
 
-The [v0.4.0 release lock](../../deploy/releases/v0.4.0.json) lists seven public images
+The [v0.5.1 release lock](../../deploy/releases/v0.5.1.json) lists seven public images
 and their digests. Classic HAMi uses `vmweave-hami`; DRA uses `vmweave-hami-dra`.
 Operator, Helper, Worker, Hook, and Guest artifacts are shared by both backends.
 Do not use the historical Flyt `v1.0.0` images for this deployment.
@@ -43,13 +43,13 @@ Obtain the release source in a dedicated directory. Run the following installati
 tools and use the CRDs from this checkout:
 
 ```sh
-git clone --branch v0.4.0 --depth 1 https://github.com/WoogiBoogi1129/VMWeave-GPU.git vmweave-v0.4.0
-cd vmweave-v0.4.0
+git clone --branch v0.5.1 --depth 1 https://github.com/WoogiBoogi1129/VMWeave-GPU.git vmweave-v0.5.1
+cd vmweave-v0.5.1
 mkdir -p .local
-helm pull oci://ghcr.io/woogiboogi1129/charts/vmweave-operator --version 0.4.0 --destination .local
+helm pull oci://ghcr.io/woogiboogi1129/charts/vmweave-operator --version 0.5.1 --destination .local
 python3 scripts/operator/release-manifest.py \
-  --repository ghcr.io/woogiboogi1129 --tag v0.4.0 \
-  --source-revision 804ed96860bf68138ffbd3bcde5df20bd74bc6c4 \
+  --repository ghcr.io/woogiboogi1129 --tag v0.5.1 \
+  --source-revision b9767652292179bef82f47be20b633a205d19824 \
   --include-dra --output .local/release-images.json
 ```
 
