@@ -1,4 +1,5 @@
 """Small namespaced Kubernetes REST client; projected token reread per request."""
+import vmweave_env as env
 import json
 import os
 from pathlib import Path
@@ -16,11 +17,11 @@ class DependencyNotReady(Exception):
 class API:
     def __init__(self):
         self.namespace=namespace()
-        self.group=os.getenv('VMWEAVE_API_GROUP','flyt.dev')
+        self.group=env.get('VMWEAVE_API_GROUP','flyt.dev')
         if self.group not in ('flyt.dev','vmweave.io'):
             raise ValueError('unsupported VMWeave API group')
-        self.base=os.getenv('FLYT_API_URL','https://kubernetes.default.svc').rstrip('/')
-        self.timeout=positive_float('FLYT_API_TIMEOUT_SECONDS',10)
+        self.base=env.get('VMWEAVE_API_URL','https://kubernetes.default.svc').rstrip('/')
+        self.timeout=positive_float('VMWEAVE_API_TIMEOUT_SECONDS',10)
         self.tls=ssl.create_default_context(cafile='/var/run/secrets/kubernetes.io/serviceaccount/ca.crt')
     def path(self,kind,name=''):
         groups={'channels':('flyt.dev/v1alpha1','flytsharedmemorychannels'),

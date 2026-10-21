@@ -190,7 +190,7 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 	if N(c, "status", "requestGeneration") != q.GetGeneration() || N(c, "status", "profileGeneration") != p.GetGeneration() {
 		return invalid("frozen request/profile changed")
 	}
-	command := cmds("python3", "/opt/flyt/control/provision.py", "--root", "/flyt-channel", "--allocation", S(c, "status", "allocation"), "--generation", S(c, "status", "generation"), "--uid", fmt.Sprint(N(c, "spec", "uid")), "--gid", fmt.Sprint(N(c, "spec", "gid")))
+	command := controlCommand("provision.py", "--root", "/flyt-channel", "--allocation", S(c, "status", "allocation"), "--generation", S(c, "status", "generation"), "--uid", fmt.Sprint(N(c, "spec", "uid")), "--gid", fmt.Sprint(N(c, "spec", "gid")))
 	ss, _ := Get(c, "status", "sessions").([]interface{})
 	for _, s := range ss {
 		command = append(command, "--session", s)
@@ -331,4 +331,14 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 }
 func Hook(c *Obj) []interface{} {
 	return []interface{}{Map{"image": S(c, "spec", "hookImage"), "args": cmds("--version", "v1alpha2"), "pvc": Map{"name": S(c, "spec", "pvcRef", "name"), "volumePath": "/flyt-channel", "sharedComputePath": "/var/run/flyt-channel"}}}
+}
+
+// controlCommand supports profiles pinned to pre-rename images during rollout.
+func controlCommand(script string, args ...string) []interface{} {
+	canonical := "/opt/vmweave/control/" + script
+	legacy := "/opt/flyt/control/" + script
+	command := "if test -f " + canonical + "; then exec python3 " + canonical + " \"$@\"; else exec python3 " + legacy + " \"$@\"; fi"
+	values := []string{"sh", "-ec", command, "vmweave-control"}
+	values = append(values, args...)
+	return cmds(values...)
 }

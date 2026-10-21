@@ -1,4 +1,5 @@
 """Fail-closed VMI start/migration validation for a dedicated SHM namespace."""
+import vmweave_env as env
 import json
 import os
 import ssl
@@ -30,7 +31,7 @@ def validate(api,request):
         if not c or c['metadata']['uid']!=spec['channelRef']['uid'] or c.get('status',{}).get('generation')!=spec['generation']:
             raise ValueError('stale attachment')
         actor=request['userInfo']['username'];prefix='system:serviceaccount:'+api.namespace+':'
-        if actor==prefix+os.getenv('FLYT_CONTROLLER_SERVICE_ACCOUNT','flyt-shm-controller'):return
+        if actor==prefix+env.get('VMWEAVE_CONTROLLER_SERVICE_ACCOUNT','vmweave-shm-controller'):return
         if actor!=prefix+c['metadata']['name']+'-worker':raise ValueError('unauthorized attachment reporter')
         pod=api.get('pods',c['metadata']['name']+'-worker')
         if not pod or pod['metadata']['uid']!=status.get('reporterPodUID'):raise ValueError('stale reporter Pod')
@@ -85,11 +86,11 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
 def main():
     mode()  # Validate configuration even though the chart selects webhook rules.
-    health=Health(positive_float('FLYT_READY_STALE_SECONDS',60));stop=threading.Event()
-    health_server=health.serve(int(os.getenv('FLYT_HEALTH_PORT','8080')))
-    server=ThreadingHTTPServer(('0.0.0.0',int(os.getenv('FLYT_WEBHOOK_PORT','8443'))),Handler)
+    health=Health(positive_float('VMWEAVE_READY_STALE_SECONDS',60));stop=threading.Event()
+    health_server=health.serve(int(env.get('VMWEAVE_HEALTH_PORT','8080')))
+    server=ThreadingHTTPServer(('0.0.0.0',int(env.get('VMWEAVE_WEBHOOK_PORT','8443'))),Handler)
     tls=ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    cert=os.getenv('FLYT_TLS_CERT','/tls/tls.crt');key=os.getenv('FLYT_TLS_KEY','/tls/tls.key')
+    cert=env.get('VMWEAVE_TLS_CERT','/tls/tls.crt');key=env.get('VMWEAVE_TLS_KEY','/tls/tls.key')
     tls.load_cert_chain(cert,key)
     server.socket=tls.wrap_socket(server.socket,server_side=True)
     def monitor():

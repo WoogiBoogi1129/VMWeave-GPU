@@ -67,7 +67,7 @@ arena보다 큰 payload는 명시적인 크기 오류로 거절한다. 큰 memcp
 
 ## Descriptor와 API 처리
 
-128-byte descriptor의 정확한 offset은 `include/flyt_shm_contract.h`를 기준으로 한다.
+128-byte descriptor의 정확한 offset은 `include/vmweave_shm_contract.h`를 기준으로 한다.
 정수는 little-endian으로 개별 encode/decode한다. 구조체 padding·native enum·주소값을
 그대로 공유하지 않는다. magic/version, kind, zero flags/reserved, channel generation,
 session ID, request ID, API ID와 payload schema를 모두 검사한다.
@@ -104,7 +104,7 @@ VM 장치 알림은 10-04에서 추가한다. 알림은 힌트이며 Queue 인�
 
 ## 제어 endpoint
 
-새 Guest/Manager/Worker 제어 버전은 `flyt-shm-control-v1`로 구분한다. 7단계 JSON 세션 프로토콜을
+새 Guest/Manager/Worker 제어 버전은 `vmweave-shm-control-v1`로 구분한다. 7단계 JSON 세션 프로토콜을
 조용히 재해석하지 않는다. 새로운 endpoint는 `schema/session.schema.json`에 따라 allocation,
 channel generation, session, Manager epoch, VMI/Worker/Pod identity와 Queue layout을 전달한다.
 RPC ID·RPC 주소 필드는 없다. UID들은 인증 비밀이 아니며 기존 접근 제어를 대신하지 않는다.

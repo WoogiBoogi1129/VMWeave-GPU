@@ -54,11 +54,11 @@ def mutate(vmi, domain):
     if os.stat('/flyt-channel/'+aid+'/channel').st_size!=size: raise ValueError('backing size mismatch')
     command=root.find('{'+NS+'}commandline')
     if command is None: command=ET.SubElement(root,'{'+NS+'}commandline')
-    if any('flyt-shm' in a.get('value','') for a in command): raise ValueError('duplicate SHM device')
+    if any(any(name in a.get('value','') for name in ('vmweave-shm','flyt-shm')) for a in command): raise ValueError('duplicate SHM device')
     bus,slot=pci_location(root)
-    values=['-object',json.dumps({'qom-type':'memory-backend-file','id':'flyt-shm-memory',
+    values=['-object',json.dumps({'qom-type':'memory-backend-file','id':'vmweave-shm-memory',
         'mem-path':'/var/run/flyt-channel/'+aid+'/channel','size':size,'share':True}),
-        '-device',f'ivshmem-plain,id=flyt-shm-device,memdev=flyt-shm-memory,bus={bus},addr=0x{slot:x}']
+        '-device',f'ivshmem-plain,id=vmweave-shm-device,memdev=vmweave-shm-memory,bus={bus},addr=0x{slot:x}']
     for value in values: ET.SubElement(command,'{'+NS+'}arg',{'value':value})
     return ET.tostring(root,encoding='unicode')
 if __name__=='__main__':

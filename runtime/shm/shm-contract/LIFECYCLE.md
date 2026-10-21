@@ -87,8 +87,8 @@ comment in each boot's config drive. The bootstrap reads that drive directly,
 so persistent root disks do not depend on cloud-init rerunning on every boot.
 Only slot 0 (one active application process) is supported by this mode.
 
-Applications use `/opt/flyt/lib/libflyt_guest.so` with
-`FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock`. Add authorized VM users to group
+Applications use `/opt/vmweave/lib/libvmweave_guest.so` with
+`VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock`. Add authorized VM users to group
 `vmweave` (new login required). Pods can mount `/run/vmweave` and the guest library
 read-only and use the numeric `vmweave` supplemental group. They do not need
 privileged mode, a PCI BAR mount, or a physical GPU device. This path is the

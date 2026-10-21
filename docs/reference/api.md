@@ -20,8 +20,8 @@ API export 여부만으로 전체 CUDA 또는 PyTorch 호환성을 판단하지 
 
 ## 진단 설정
 
-`FLYT_TRACE_REQUESTS=1`은 Guest/Worker 요청의 네 지점을 기록합니다.
+`VMWEAVE_TRACE_REQUESTS=1`은 Guest/Worker 요청의 네 지점을 기록합니다.
 성능 실험에서는 추적과 별도 로그 I/O의 조건을 명시해야 합니다.
-`FLYT_MIRROR_DEVICE_VA=1` 학습 경로의 제약과 환경변수는 API 지원 계약을 따릅니다.
+`VMWEAVE_MIRROR_DEVICE_VA=1` 학습 경로의 제약과 환경변수는 API 지원 계약을 따릅니다.
 
 현재 구현의 라이브러리·환경변수 이름은 기존 식별자를 유지합니다.

@@ -37,7 +37,7 @@ func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 	if _, e := a.Ensure(rb, c); e != nil {
 		return nil, e
 	}
-	w := Pod(c, name, S(c, "spec", "workerImage"), cmds("python3", "/opt/flyt/control/supervisor.py"), opts)
+	w := Pod(c, name, S(c, "spec", "workerImage"), controlCommand("supervisor.py"), opts)
 	w.SetFinalizers([]string{DetachFinalizer})
 	w.SetAnnotations(map[string]string{DetachChannel: string(c.GetUID()), "nvidia.com/use-gpuuuid": S(c, "status", "gpuUUID")})
 	Set(w, name, "spec", "serviceAccountName")
@@ -50,10 +50,15 @@ func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 	if persistent(c) {
 		env = append(env, Map{"name": "VMWEAVE_PERSISTENT", "value": "1"})
 	}
-	for k, v := range map[string]interface{}{"FLYT_ALLOCATION": S(c, "status", "allocation"), "FLYT_GPU_UUID": S(c, "status", "gpuUUID"), "FLYT_RESOURCE_BACKEND": "hami", "FLYT_MEMORY_BYTES": N(c, "status", "memoryMiB") * 1048576, "FLYT_SESSIONS": N(c, "spec", "sessions"), "FLYT_CHANNEL_NAME": c.GetName(), "FLYT_CHANNEL_UID": string(c.GetUID()), "FLYT_GENERATION": S(c, "status", "generation"), "FLYT_NAMESPACE": a.Namespace, "VMWEAVE_API_GROUP": Group} {
+	for k, v := range map[string]interface{}{"VMWEAVE_ALLOCATION": S(c, "status", "allocation"), "VMWEAVE_GPU_UUID": S(c, "status", "gpuUUID"), "VMWEAVE_RESOURCE_BACKEND": "hami", "VMWEAVE_MEMORY_BYTES": N(c, "status", "memoryMiB") * 1048576, "VMWEAVE_SESSIONS": N(c, "spec", "sessions"), "VMWEAVE_CHANNEL_NAME": c.GetName(), "VMWEAVE_CHANNEL_UID": string(c.GetUID()), "VMWEAVE_GENERATION": S(c, "status", "generation"), "VMWEAVE_NAMESPACE": a.Namespace, "VMWEAVE_API_GROUP": Group} {
 		env = append(env, Map{"name": k, "value": fmt.Sprint(v)})
+		if k != "VMWEAVE_API_GROUP" {
+			env = append(env, Map{"name": "FLYT_" + k[len("VMWEAVE_"):], "value": fmt.Sprint(v)})
+		}
 	}
-	env = append(env, Map{"name": "FLYT_POD_UID", "valueFrom": Map{"fieldRef": Map{"fieldPath": "metadata.uid"}}})
+	for _, name := range []string{"VMWEAVE_POD_UID", "FLYT_POD_UID"} {
+		env = append(env, Map{"name": name, "valueFrom": Map{"fieldRef": Map{"fieldPath": "metadata.uid"}}})
+	}
 	containers := Get(w, "spec", "containers").([]interface{})
 	container := containers[0].(map[string]interface{})
 	container["env"] = env
@@ -64,7 +69,7 @@ func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 		Set(w, []interface{}{Map{"name": "gpu", "resourceClaimName": S(c, "status", "claimName")}}, "spec", "resourceClaims")
 		container["resources"] = Map{"claims": []interface{}{Map{"name": "gpu"}}}
 	}
-	container["readinessProbe"] = Map{"exec": Map{"command": cmds("test", "-f", "/tmp/flyt-worker-ready")}, "periodSeconds": int64(2)}
+	container["readinessProbe"] = Map{"exec": Map{"command": cmds("sh", "-ec", "test -f /tmp/vmweave-worker-ready || test -f /tmp/flyt-worker-ready")}, "periodSeconds": int64(2)}
 	return a.Ensure(w, c)
 }
 func (a API) Drain(c *Obj, opts Options) error {
@@ -145,7 +150,7 @@ func (a API) Drain(c *Obj, opts Options) error {
 		if ns == nil || ns.GetDeletionTimestamp() != nil {
 			return a.Status(c, Map{"phase": "Draining", "reason": "NamespaceTerminatingReclaimBlocked"})
 		}
-		cleanup, e = a.Ensure(Pod(c, ResourceName(c, "reclaim"), S(c, "spec", "image"), cmds("python3", "/opt/flyt/control/reclaim.py", "--root", "/flyt-channel", "--allocation", S(c, "status", "allocation"), "--generation", S(c, "status", "generation")), opts), c)
+		cleanup, e = a.Ensure(Pod(c, ResourceName(c, "reclaim"), S(c, "spec", "image"), controlCommand("reclaim.py", "--root", "/flyt-channel", "--allocation", S(c, "status", "allocation"), "--generation", S(c, "status", "generation")), opts), c)
 		if e != nil {
 			return e
 		}

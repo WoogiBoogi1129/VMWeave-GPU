@@ -176,14 +176,14 @@ sudo usermod -aG vmweave ubuntu
 
 설치기는 SHA256SUMS를 확인하며 실행 중 broker 교체를 거부합니다. 새 버전 업그레이드도
 활성 세션을 종료하고 새 부팅에서 사용하도록 진행합니다. source revision은
-`/opt/flyt/source-revision.txt`에 기록합니다. 체크섬은 이미지 내부 무결성 검사이며 서명을 대신하지 않습니다.
+`/opt/vmweave/source-revision.txt`에 기록합니다. 체크섬은 이미지 내부 무결성 검사이며 서명을 대신하지 않습니다.
 
 VM을 Halted로 만든 후 [VM lifecycle 절차](first-vm.md)에 따라 같은 이름의 Channel을 생성합니다.
 새 부팅에서 bootstrap이 config drive의 layout을 읽습니다. 사용자 재로그인 후:
 
 ```sh
-FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/flyt/lib \
-  /opt/flyt/bin/guest-gpu-smoke 23 2
+VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/vmweave/lib \
+  /opt/vmweave/bin/guest-gpu-smoke 23 2
 ```
 
 이 프로그램은 GPU 메모리 복사·PTX 커널 결과를 검사합니다. PyTorch는 필요하지 않습니다.

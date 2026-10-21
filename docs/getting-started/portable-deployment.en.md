@@ -194,7 +194,7 @@ sudo usermod -aG vmweave ubuntu
 
 The installer verifies SHA256SUMS and refuses to replace a running broker. For
 upgrades, stop active sessions and use the new runtime after a fresh boot.
-The source revision is recorded at `/opt/flyt/source-revision.txt`. Checksums verify
+The source revision is recorded at `/opt/vmweave/source-revision.txt`. Checksums verify
 internal image integrity; they do not replace signatures.
 
 Halt the VM, then create a Channel with the same name following the
@@ -202,8 +202,8 @@ Halt the VM, then create a Channel with the same name following the
 from the config drive. After logging in again, run:
 
 ```sh
-FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/flyt/lib \
-  /opt/flyt/bin/guest-gpu-smoke 23 2
+VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/vmweave/lib \
+  /opt/vmweave/bin/guest-gpu-smoke 23 2
 ```
 
 This program checks GPU memory copies and PTX kernel results. PyTorch is not required.

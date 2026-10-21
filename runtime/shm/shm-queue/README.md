@@ -16,14 +16,14 @@
 | Descriptor | 128-byte little-endian encode/decode, reserved/status/kind 검사 |
 | Ring | SPSC request/response, release/acquire u64, private shadow counter |
 | Payload | private snapshot, arena 상대 offset/길이 검사, 결과 복사 후 slot 반환 |
-| Guest | `flyt_shm_submit`, `flyt_shm_receive` 본체와 nonblocking try_receive |
+| Guest | `vmweave_shm_submit`, `vmweave_shm_receive` 본체와 nonblocking try_receive |
 | Worker | take → 외부 실행 adapter → respond, request snapshot release |
 | Polling | CLOCK_MONOTONIC deadline, 1ms 간격 receive 대기, 명시적 abort |
 | 빌드 구성 | CUDA/RPC 없는 별도 C11 static library; CMake 작성만 수행 |
 
-코드는 [include/flyt_shm_queue.h](include/flyt_shm_queue.h)와
+코드는 [include/vmweave_shm_queue.h](include/vmweave_shm_queue.h)와
 [src/queue.c](src/queue.c)에 있다. wire 규격은 [10-01 PROTOCOL](../shm-contract/PROTOCOL.md)을
-따른다. 10-01의 `flyt_cuda_dispatch`는 아직 선언만 존재한다. 10-02 typed CUDA call로의
+따른다. 10-01의 `vmweave_cuda_dispatch`는 아직 선언만 존재한다. 10-02 typed CUDA call로의
 payload 변환과 API별 schema 검사는 10-06에 연결한다. Queue는 CUDA payload 의미를 해석하지 않는다.
 
 ## 제공자가 준비할 것

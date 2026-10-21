@@ -1,4 +1,5 @@
 """Attachment evidence helpers. Missing objects are NEVER detach evidence."""
+import vmweave_env as env
 import os
 from kube import ref
 
@@ -68,18 +69,18 @@ def node_ready(api,node):
     return bool(obj and any(x['type']=='Ready' and x['status']=='True' for x in obj.get('status',{}).get('conditions',[])))
 
 def report(api,role,phase):
-    name=os.environ['FLYT_CHANNEL_NAME'];c=api.get('channels',name)
-    if not c or c['metadata']['uid']!=os.environ['FLYT_CHANNEL_UID']:raise ValueError('channel replaced')
-    generation=os.environ['FLYT_GENERATION']
+    name=env.require('VMWEAVE_CHANNEL_NAME');c=api.get('channels',name)
+    if not c or c['metadata']['uid']!=env.require('VMWEAVE_CHANNEL_UID'):raise ValueError('channel replaced')
+    generation=env.require('VMWEAVE_GENERATION')
     if c.get('status',{}).get('generation')!=generation:raise ValueError('channel generation replaced')
     a=api.get('attachments',name+'-'+role)
     if not a or a['spec']['channelRef']!=ref(c) or a['spec']['generation']!=generation:raise ValueError('attachment unavailable')
-    if role=='worker' and a['spec']['holderUID']!=os.environ['FLYT_POD_UID']:raise ValueError('worker replaced')
+    if role=='worker' and a['spec']['holderUID']!=env.require('VMWEAVE_POD_UID'):raise ValueError('worker replaced')
     if role=='guest' and phase!='Mapped':raise ValueError('Worker cannot attest QEMU detach')
     old=a.get('status',{}).get('phase')
     if old=='Detached':raise ValueError('terminal attachment')
     a.setdefault('status',{}).update({'phase':phase,'observedGeneration':a['metadata']['generation'],
-        'reporterPodUID':os.environ['FLYT_POD_UID'],'evidence':'ChildProcessesReaped' if phase=='Detached' else 'QueueOpenAndGuard' if role=='worker' else 'GuestHELLOReceived'})
+        'reporterPodUID':env.require('VMWEAVE_POD_UID'),'evidence':'ChildProcessesReaped' if phase=='Detached' else 'QueueOpenAndGuard' if role=='worker' else 'GuestHELLOReceived'})
     api.replace('attachments',a,True)
 
 def observe_guest(api,c):

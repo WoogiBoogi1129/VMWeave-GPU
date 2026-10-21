@@ -85,8 +85,8 @@ def main():
                                "port-forward", "--stdio=true", "vmi/" + a.vm, "22"])
             ssh[1:1] = ["-o", "ProxyCommand=" + proxy]
         wait(lambda: subprocess.run(ssh + ["true"], capture_output=True, timeout=10).returncode == 0)
-        command = ("env FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock "
-                   "LD_LIBRARY_PATH=/opt/flyt/lib /opt/flyt/bin/guest-gpu-smoke 23 2")
+        command = ("env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock "
+                   "LD_LIBRARY_PATH=/opt/vmweave/lib /opt/vmweave/bin/guest-gpu-smoke 23 2")
         result = subprocess.run(ssh + [command], capture_output=True, text=True, timeout=a.timeout)
         (a.output / (label + ".stdout")).write_text(result.stdout)
         (a.output / (label + ".stderr")).write_text(result.stderr)

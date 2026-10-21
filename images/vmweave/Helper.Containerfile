@@ -3,8 +3,9 @@ FROM docker.io/library/python:3.11-slim-bookworm@sha256:528257d48c1da0dcecc2e725
 ARG VCS_REF=unknown
 LABEL org.opencontainers.image.source="https://github.com/WoogiBoogi1129/VMWeave-GPU" org.opencontainers.image.revision=$VCS_REF
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 VMWEAVE_API_GROUP=vmweave.io
-WORKDIR /opt/flyt/control
-COPY runtime/shm/control/ /opt/flyt/control/
+WORKDIR /opt/vmweave/control
+COPY runtime/shm/control/ /opt/vmweave/control/
+RUN ln -s vmweave /opt/flyt
 USER 65532:65532
-ENTRYPOINT ["python3", "/opt/flyt/control/provision.py"]
+ENTRYPOINT ["python3", "/opt/vmweave/control/provision.py"]
 CMD []

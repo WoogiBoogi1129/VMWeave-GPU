@@ -41,7 +41,7 @@
 표시 이름과 저장소 주소는 VMWeave-GPU로 정리했습니다.
 위 이동 통계는 `62951a7` 당시 기록입니다. 이후 Go Operator 전환으로 공개 API는
 `vmweave.io/v1alpha1`, 설치 chart는 `charts/vmweave-operator`로 변경했습니다.
-구 chart는 역사 재현용입니다. `FLYT_*`, `/opt/flyt`, `libflyt_guest.so`는 런타임 호환 계약으로 유지합니다.
+구 chart는 역사 재현용입니다. `VMWEAVE_*`, `/opt/vmweave`, `libvmweave_guest.so`는 런타임 호환 계약으로 유지합니다.
 이 정리에서 런타임 알고리즘이나 GPU 실험의 수치를 바꾸지 않습니다.
 
 문서 사이트에는 선택한 SVG 그림만 복사하고 원본과 SHA256을 연결합니다.

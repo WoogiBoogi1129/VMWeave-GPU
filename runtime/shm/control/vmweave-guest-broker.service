@@ -5,7 +5,7 @@ ConditionPathExists=/dev/disk/by-label/cidata
 [Service]
 Type=simple
 Group=vmweave
-ExecStart=/usr/bin/python3 /opt/flyt/control/guest_bootstrap.py
+ExecStart=/usr/bin/python3 /opt/vmweave/control/guest_bootstrap.py
 Restart=no
 UMask=0007
 TimeoutStopSec=25

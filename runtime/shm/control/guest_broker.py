@@ -4,12 +4,15 @@
 Clients never map BAR memory. Disconnect (including SIGKILL) closes their session.
 A busy slot is rejected, not shared. Broken transport requires a new VM runtime.
 """
+import vmweave_env as env
 import argparse
 import ctypes
 import fcntl
 import os
 from pathlib import Path
 import secrets
+import select
+import time
 import socket
 import struct
 import threading
@@ -18,7 +21,10 @@ MAGIC = 0x32574D56
 MAX_BYTES = 16 * 1024 * 1024 + 4096
 REQUEST = struct.Struct('<IIQQ')
 RESPONSE = struct.Struct('<IIQ')
-OPEN, CLOSE, CALL = 4, 5, 6
+OPEN, CLOSE, CALL, STATUS = 4, 5, 6, 7
+CACHE_OPEN, CACHE_STATUS = 0x7ff0, 0x7ff1
+CACHE_VERSION = 1
+HEALTH_INTERVAL = 0.010
 
 
 def receive(conn, count):
@@ -34,9 +40,11 @@ def receive(conn, count):
 class Transport:
     def __init__(self, library):
         # This process is the SHM owner, never a client of its own socket.
-        os.environ.pop('FLYT_BROKER_SOCKET', None)
+        env.pop('VMWEAVE_BROKER_SOCKET')
         self.lib = ctypes.CDLL(library)
-        self.call = self.lib.flyt_guest_exchange
+        self.call = getattr(self.lib, "vmweave_guest_exchange", None)
+        if self.call is None:  # Mixed-version upgrade with an older Guest library.
+            self.call = self.lib.flyt_guest_exchange
         self.call.argtypes = [ctypes.c_uint32, ctypes.c_void_p, ctypes.c_size_t,
                               ctypes.c_void_p, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
         self.call.restype = ctypes.c_int
@@ -68,7 +76,21 @@ class Transport:
                 conn.sendall(RESPONSE.pack(MAGIC, rc, 0))
                 return
             opened = True
+            cache_enabled = False
+            next_health = 0.0
             while True:
+                if cache_enabled:
+                    now = time.monotonic()
+                    if now >= next_health:
+                        rc, state = self.exchange(STATUS, epoch, 16)
+                        if rc or state != epoch:
+                            # EOF/HUP is the notification; never interleave packets
+                            # with a synchronous CUDA reply on this byte stream.
+                            conn.shutdown(socket.SHUT_RDWR)
+                            return
+                        next_health = time.monotonic() + HEALTH_INTERVAL
+                    if not select.select([conn], [], [], max(0, next_health-time.monotonic()))[0]:
+                        continue
                 magic, api, count, capacity = REQUEST.unpack(receive(conn, REQUEST.size))
                 if magic != MAGIC or count > MAX_BYTES or capacity > MAX_BYTES:
                     raise ValueError('invalid broker request')
@@ -80,6 +102,35 @@ class Transport:
                         self.failed = True
                     conn.sendall(RESPONSE.pack(MAGIC, rc, 0))
                     return
+                if api in (CACHE_OPEN, CACHE_STATUS):
+                    expected = 24 if api == CACHE_OPEN else 16
+                    if count or capacity != expected:
+                        conn.sendall(RESPONSE.pack(MAGIC, 1, 0))
+                        continue
+                    rc, state = self.exchange(STATUS, epoch, 16)
+                    if rc or state != epoch:
+                        if cache_enabled:
+                            conn.shutdown(socket.SHUT_RDWR)
+                            return
+                        # Old Worker does not implement STATUS: ordinary calls
+                        # continue, without caching or a change in CUDA state.
+                        conn.sendall(RESPONSE.pack(MAGIC, 801, 0))
+                        continue
+                    if api == CACHE_OPEN:
+                        rc, devices = self.exchange(CALL, epoch + struct.pack('<II', 0x1001, 0), 4)
+                        if rc or devices != struct.pack('<i', 1):
+                            conn.sendall(RESPONSE.pack(MAGIC, 801, 0))
+                            continue
+                        cache_enabled = True
+                        payload = struct.pack('<II', CACHE_VERSION, 1) + epoch
+                    else:
+                        if not cache_enabled:
+                            conn.sendall(RESPONSE.pack(MAGIC, 801, 0))
+                            continue
+                        payload = epoch
+                    next_health = time.monotonic() + HEALTH_INTERVAL
+                    conn.sendall(RESPONSE.pack(MAGIC, 0, len(payload)) + payload)
+                    continue
                 if api < 0x1000:
                     raise ValueError('client cannot send transport controls')
                 rc, out = self.exchange(CALL, epoch + struct.pack('<II', api, 0) + data, capacity)
@@ -103,7 +154,7 @@ class Transport:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--library', default='/opt/flyt/lib/libflyt_guest.so')
+    parser.add_argument('--library', default='/opt/vmweave/lib/libvmweave_guest.so')
     parser.add_argument('--socket', default='/run/vmweave/gpu.sock')
     args = parser.parse_args()
     path = Path(args.socket)

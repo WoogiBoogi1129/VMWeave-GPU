@@ -2,7 +2,7 @@
 """Build deterministic OCI operator/helper images without Docker or registry writes."""
 import argparse,gzip,hashlib,io,json,pathlib,tarfile
 p=argparse.ArgumentParser();p.add_argument('--kind',choices=['operator','helper','worker','hook','guest'],required=True);p.add_argument('--base',type=pathlib.Path);p.add_argument('--binary',type=pathlib.Path,default=pathlib.Path('.local/vmweave-operator/manager'));p.add_argument('--runtime-dir',type=pathlib.Path);p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--name',required=True);a=p.parse_args()
-if a.kind=='guest' and not a.runtime_dir:p.error('guest requires --runtime-dir')
+if a.kind in ('guest','worker') and not a.runtime_dir:p.error('guest/worker requires --runtime-dir')
 root=pathlib.Path(__file__).resolve().parents[2]
 def digest(data):return 'sha256:'+hashlib.sha256(data).hexdigest()
 def pack(v):return json.dumps(v,separators=(',',':'),sort_keys=True).encode()
@@ -18,15 +18,18 @@ with tarfile.open(fileobj=buf,mode='w') as t:
  files=[]
  if a.kind=='operator':files=[('manager',a.binary,0o755),('etc/ssl/certs/ca-certificates.crt',pathlib.Path('/etc/ssl/certs/ca-certificates.crt'),0o644)]
  elif a.kind=='guest':
-  files=[('opt/flyt/guest/libflyt_guest.so',a.runtime_dir/'lib/libflyt_guest.so',0o644)]
-  files += [('opt/flyt/guest/'+name,root/'runtime/shm/control'/name,0o644) for name in ['guest_broker.py','guest_bootstrap.py','vmweave-guest-broker.service','install_guest_broker.sh']]
+  files=[('opt/vmweave/guest/libvmweave_guest.so',a.runtime_dir/'lib/libvmweave_guest.so',0o644)]
+  files += [('opt/vmweave/guest/'+name,root/'runtime/shm/control'/name,0o644) for name in ['vmweave_env.py','guest_broker.py','guest_bootstrap.py','vmweave-guest-broker.service','install_guest_broker.sh']]
  else:
-  files=[('opt/flyt/control/'+f.name,f,0o644) for f in (root/'runtime/shm/control').glob('*.py')]
+  files=[('opt/vmweave/control/'+f.name,f,0o644) for f in (root/'runtime/shm/control').glob('*.py')]
   if a.kind=='hook':files.append(('usr/bin/onDefineDomain',root/'runtime/shm/control/domain_hook.py',0o755))
  if a.kind=='worker' and a.runtime_dir:
-  files += [('opt/flyt/bin/'+name,a.runtime_dir/'bin'/name,0o755) for name in ['flyt-shm-worker','flyt-shm-session-worker']]
+  files += [('opt/vmweave/bin/'+name,a.runtime_dir/'bin'/name,0o755) for name in ['vmweave-shm-worker','vmweave-shm-session-worker']]
  for name,f,mode in files:
   data=f.read_bytes();x=info(name,data);x.mode=mode;t.addfile(x,io.BytesIO(data))
+  if name.startswith('opt/vmweave/'):
+   old=name.replace('opt/vmweave/','opt/flyt/',1).replace('libvmweave_guest','libflyt_guest').replace('vmweave-shm','flyt-shm')
+   alias=tarfile.TarInfo(old);alias.type=tarfile.SYMTYPE;alias.linkname='/'+name;alias.mode=0o777;t.addfile(alias)
 layer=buf.getvalue();gz=gzip.compress(layer,mtime=0);ld=digest(gz);cfg['rootfs']['diff_ids'].append(digest(layer));manifest['layers'].append({'mediaType':'application/vnd.oci.image.layer.v1.tar+gzip','size':len(gz),'digest':ld})
 cfg['config'].setdefault('Labels',{}).update({'org.opencontainers.image.title':'VMWeave '+a.kind,'vmweave.io/api-group':'vmweave.io','vmweave.io/helper-contract':'1'})
 if a.kind=='operator':cfg['config'].update(Entrypoint=['/manager'],Cmd=[],User='65532:65532')

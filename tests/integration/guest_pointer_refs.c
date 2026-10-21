@@ -7,13 +7,13 @@ int main(void){
     assert(area!=MAP_FAILED);
     allocations[0].base=area;allocations[0].bytes=4096;allocations[0].handle=11;
     allocations[1].base=(char*)area+4096;allocations[1].bytes=4096;allocations[1].handle=22;
-    struct flyt_device_ref ref;
-    assert(!flyt_guest_ref((char*)area+4096,0,&ref)&&ref.handle==22&&ref.offset==0);
-    assert(!flyt_guest_ref((char*)area+4096,4096,&ref)&&ref.handle==22);
-    assert(!flyt_guest_ref((char*)area+4095,1,&ref)&&ref.handle==11&&ref.offset==4095);
-    assert(flyt_guest_ref((char*)area+4095,2,&ref));
-    assert(!flyt_guest_ref((char*)area+8192,0,&ref)&&ref.handle==22&&ref.offset==4096);
-    assert(flyt_guest_ref((char*)area+8192,1,&ref));
+    struct vmweave_device_ref ref;
+    assert(!vmweave_guest_ref((char*)area+4096,0,&ref)&&ref.handle==22&&ref.offset==0);
+    assert(!vmweave_guest_ref((char*)area+4096,4096,&ref)&&ref.handle==22);
+    assert(!vmweave_guest_ref((char*)area+4095,1,&ref)&&ref.handle==11&&ref.offset==4095);
+    assert(vmweave_guest_ref((char*)area+4095,2,&ref));
+    assert(!vmweave_guest_ref((char*)area+8192,0,&ref)&&ref.handle==22&&ref.offset==4096);
+    assert(vmweave_guest_ref((char*)area+8192,1,&ref));
     /* Collision must preserve the existing mapping and its contents. */
     *(volatile unsigned char*)area=0x5a;
     assert(reserve_device_va((uintptr_t)area,4096)==MAP_FAILED);

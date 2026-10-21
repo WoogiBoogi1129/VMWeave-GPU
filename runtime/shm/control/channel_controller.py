@@ -1,6 +1,7 @@
 """Separate SHM-only controller. One replica (Recreate); optimistic RV updates.
 No legacy Worker, Manager, RPC service or GPU mode mutation.
 """
+import vmweave_env as env
 import copy
 import json
 import os
@@ -30,7 +31,7 @@ def ensure_worker(api,worker,c):
 def pod(c,name,image,command):
     return {'apiVersion':'v1','kind':'Pod','metadata':meta(c,name),'spec':{
         'restartPolicy':'Never','automountServiceAccountToken':False,
-        'tolerations':json.loads(os.getenv('FLYT_WORKLOAD_TOLERATIONS','[]')),
+        'tolerations':json.loads(env.get('VMWEAVE_WORKLOAD_TOLERATIONS','[]')),
         'nodeSelector':{'kubernetes.io/hostname':c['status']['nodeName']},
         'securityContext':{'runAsUser':c['spec']['uid'],'runAsGroup':c['spec']['gid'],'fsGroup':c['spec']['gid']},
         'containers':[{'name':'main','image':image,'command':command,
@@ -63,7 +64,7 @@ def reconcile(api,c):
             a['spec']['generation']==s.get('generation') for a in attachments))
         # Even pre-bind failed allocation needs explicit backing detach evidence.
         if not complete:update(api,c,phase='Draining',reason='AwaitingDetachEvidence');return
-        cleanup=ensure(api,'pods',pod(c,name+'-reclaim',spec['image'],['python3','/opt/flyt/control/reclaim.py',
+        cleanup=ensure(api,'pods',pod(c,name+'-reclaim',spec['image'],['python3','/opt/vmweave/control/reclaim.py',
             '--root','/flyt-channel','--allocation',s['allocation'],'--generation',s['generation']]),c)
         if cleanup.get('status',{}).get('phase')!='Succeeded':
             update(api,c,phase='Draining',reason='ReclamationPending');return
@@ -92,7 +93,7 @@ def reconcile(api,c):
             requestGeneration=q['metadata']['generation'],profileGeneration=p['metadata']['generation']);return
     if s['requestGeneration']!=q['metadata']['generation'] or s['profileGeneration']!=p['metadata']['generation']:
         raise ValueError('frozen request/profile changed; drain allocation')
-    args=['python3','/opt/flyt/control/provision.py','--root','/flyt-channel','--allocation',s['allocation'],
+    args=['python3','/opt/vmweave/control/provision.py','--root','/flyt-channel','--allocation',s['allocation'],
           '--generation',s['generation'],'--uid',str(spec['uid']),'--gid',str(spec['gid'])]
     for sid in s['sessions']:args+=['--session',sid]
     prep=ensure(api,'pods',pod(c,name+'-prepare',spec['image'],args),c)
@@ -137,7 +138,7 @@ def reconcile(api,c):
     ensure(api,'rolebindings',{'apiVersion':'rbac.authorization.k8s.io/v1','kind':'RoleBinding','metadata':meta(c,name+'-worker'),
         'roleRef':{'apiGroup':'rbac.authorization.k8s.io','kind':'Role','name':name+'-worker'},
         'subjects':[{'kind':'ServiceAccount','name':service['metadata']['name'],'namespace':c['metadata']['namespace']}]},c)
-    worker=pod(c,name+'-worker',spec['workerImage'],['python3','/opt/flyt/control/supervisor.py'])
+    worker=pod(c,name+'-worker',spec['workerImage'],['python3','/opt/vmweave/control/supervisor.py'])
     worker['metadata']['finalizers']=[DETACH_FINALIZER]
     worker['metadata'].setdefault('annotations',{})[CHANNEL_ANNOTATION]=c['metadata']['uid']
     worker['spec']['serviceAccountName']=name+'-worker';worker['spec']['automountServiceAccountToken']=True
@@ -148,12 +149,12 @@ def reconcile(api,c):
     quota={'nvidia.com/gpu':1,'nvidia.com/gpumem':s['memoryMiB'],'nvidia.com/gpucores':s['compute']}
     container['resources']={'requests':quota,'limits':quota}
     container['env']=[{'name':k,'value':str(v)} for k,v in {
-        'FLYT_ALLOCATION':s['allocation'],'FLYT_GPU_UUID':s['gpuUUID'],'FLYT_RESOURCE_BACKEND':'hami',
-        'FLYT_MEMORY_BYTES':s['memoryMiB']*1048576,'FLYT_SESSIONS':len(s['sessions']),
-        'FLYT_CHANNEL_NAME':name,'FLYT_CHANNEL_UID':c['metadata']['uid'],'FLYT_GENERATION':s['generation'],
-        'FLYT_NAMESPACE':c['metadata']['namespace']}.items()]
-    container['env'].append({'name':'FLYT_POD_UID','valueFrom':{'fieldRef':{'fieldPath':'metadata.uid'}}})
-    container['readinessProbe']={'exec':{'command':['test','-f','/tmp/flyt-worker-ready']},'periodSeconds':2}
+        'VMWEAVE_ALLOCATION':s['allocation'],'VMWEAVE_GPU_UUID':s['gpuUUID'],'VMWEAVE_RESOURCE_BACKEND':'hami',
+        'VMWEAVE_MEMORY_BYTES':s['memoryMiB']*1048576,'VMWEAVE_SESSIONS':len(s['sessions']),
+        'VMWEAVE_CHANNEL_NAME':name,'VMWEAVE_CHANNEL_UID':c['metadata']['uid'],'VMWEAVE_GENERATION':s['generation'],
+        'VMWEAVE_NAMESPACE':c['metadata']['namespace']}.items()]
+    container['env'].append({'name':'VMWEAVE_POD_UID','valueFrom':{'fieldRef':{'fieldPath':'metadata.uid'}}})
+    container['readinessProbe']={'exec':{'command':['test','-f','/tmp/vmweave-worker-ready']},'periodSeconds':2}
     # Observation may remove the terminal Pod's finalizer above. Once bound,
     # its disappearance ends this allocation; never create a replacement.
     w=ensure_worker(api,worker,c)

@@ -1,10 +1,10 @@
 #define _POSIX_C_SOURCE 200809L
-#include "flyt_wire.h"
-#include "flyt_async.h"
-#include "flyt_compat.h"
-#include "flyt_torch.h"
-#include "flyt_trace.h"
-#include "flyt_perf.h"
+#include "vmweave_wire.h"
+#include "vmweave_async.h"
+#include "vmweave_compat.h"
+#include "vmweave_torch.h"
+#include "vmweave_trace.h"
+#include "vmweave_perf.h"
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,60 +14,60 @@
 static volatile sig_atomic_t stopping;
 static void stop(int x){(void)x;stopping=1;}
 int main(int argc,char **argv){
-    struct flyt_shm_layout layout;struct flyt_mapping mapping={0};struct flyt_shm_channel *channel=NULL;
-    struct flyt_cuda_runtime *runtime=NULL;struct flyt_cuda_session session={0};uint32_t error=0;
+    struct vmweave_shm_layout layout;struct vmweave_mapping mapping={0};struct vmweave_shm_channel *channel=NULL;
+    struct vmweave_cuda_runtime *runtime=NULL;struct vmweave_cuda_session session={0};uint32_t error=0;
     char layout_path[512],backing[512],ready[128];int exitcode=1,hello=0;unsigned slot;
     if(argc!=3)return 2;char *end;unsigned long parsed=strtoul(argv[2],&end,10);
     if(*end||parsed>=32)return 2;slot=(unsigned)parsed;
     if(snprintf(layout_path,sizeof(layout_path),"%s/layout.bin",argv[1])>=(int)sizeof(layout_path)||snprintf(backing,sizeof(backing),"%s/channel",argv[1])>=(int)sizeof(backing))return 2;
-    if(flyt_layout_read(layout_path,&layout)||slot>=layout.session_count||flyt_map_file(backing,&layout,&mapping))return 3;
-    if(flyt_shm_open(mapping.address,mapping.bytes,&layout,slot,FLYT_SHM_WORKER,30000,&channel))goto done;
-    if(flyt_cuda_runtime_open(&runtime,&error)||flyt_cuda_exec_create(flyt_cuda_runtime_backend(),runtime,&session.exec))goto done;
+    if(vmweave_layout_read(layout_path,&layout)||slot>=layout.session_count||vmweave_map_file(backing,&layout,&mapping))return 3;
+    if(vmweave_shm_open(mapping.address,mapping.bytes,&layout,slot,VMWEAVE_SHM_WORKER,30000,&channel))goto done;
+    if(vmweave_cuda_runtime_open(&runtime,&error)||vmweave_cuda_exec_create(vmweave_cuda_runtime_backend(),runtime,&session.exec))goto done;
     signal(SIGTERM,stop);signal(SIGINT,stop);
-    size_t capacity=flyt_shm_response_capacity(channel);uint8_t *output=malloc(capacity);
+    size_t capacity=vmweave_shm_response_capacity(channel);uint8_t *output=malloc(capacity);
     if(!output)goto done;
-    snprintf(ready,sizeof(ready),"/tmp/flyt-slot-%u-mapped",slot);FILE *f=fopen(ready,"wx");if(!f){free(output);goto done;}fclose(f);
+    snprintf(ready,sizeof(ready),"/tmp/vmweave-slot-%u-mapped",slot);FILE *f=fopen(ready,"wx");if(!f){free(output);goto done;}fclose(f);
     struct timespec last,now;clock_gettime(CLOCK_MONOTONIC,&last);
-    struct flyt_wait idle={0};
+    struct vmweave_wait idle={0};
     while(!stopping){
-        if(flyt_cuda_exec_check(session.exec)!=FLYT_SHM_OK)break;
+        if(vmweave_cuda_exec_check(session.exec)!=VMWEAVE_SHM_OK)break;
         clock_gettime(CLOCK_MONOTONIC,&now);
         if(now.tv_sec-last.tv_sec>(hello?60:600))break;
-        if(flyt_async_reap())break;
-        struct flyt_shm_request q={0};int rc=flyt_shm_worker_take(channel,&q);
-        if(rc==FLYT_SHM_AGAIN){if(flyt_wait_pause(&idle))break;continue;}
+        if(vmweave_async_reap())break;
+        struct vmweave_shm_request q={0};int rc=vmweave_shm_worker_take(channel,&q);
+        if(rc==VMWEAVE_SHM_AGAIN){if(vmweave_wait_pause(&idle))break;continue;}
         if(rc)break;
         memset(&idle,0,sizeof(idle));
-        uint64_t measured=flyt_perf_enabled()?flyt_perf_now():0;
-        flyt_trace("worker","take",layout.allocation_id,&q,NULL);
+        uint64_t measured=vmweave_perf_enabled()?vmweave_perf_now():0;
+        vmweave_trace("worker","take",layout.allocation_id,&q,NULL);
         clock_gettime(CLOCK_MONOTONIC,&last);
-        struct flyt_shm_response r={.output=output,.output_capacity=capacity};
-        if(q.api_id==FLYT_HELLO&&!hello&&q.payload_schema==1&&!q.input_bytes){hello=1;}
-        else if(!hello){r.transport_status=FLYT_SHM_CHANNEL_CLOSED;stopping=1;}
-        else if((q.api_id==FLYT_HEARTBEAT||q.api_id==FLYT_GOODBYE)&&q.payload_schema==1&&!q.input_bytes){
-            if(q.api_id==FLYT_GOODBYE){stopping=1;exitcode=0;}
-        }else if(q.api_id==FLYT_HELLO){r.transport_status=FLYT_SHM_BAD_DESCRIPTOR;stopping=1;}
-        else if((rc=flyt_cuda_exec_check(session.exec))!=FLYT_SHM_OK){r.transport_status=(uint32_t)rc;}
-        else if(q.api_id>=0x3000){if(flyt_compat_dispatch(&session,&q,&r)){flyt_shm_request_release(&q);break;}}
-        else if(q.api_id>=0x2100&&q.api_id!=FLYT_STREAM_PRIORITY_CREATE){if(flyt_torch_dispatch(&session,&q,&r)){flyt_shm_request_release(&q);break;}}
-        else if(q.api_id>=0x2000){if(flyt_async_dispatch(&session,&q,&r)){flyt_shm_request_release(&q);break;}}
-        else if(flyt_cuda_dispatch(&session,&q,&r)){flyt_shm_request_release(&q);break;}
-        flyt_perf_add(FLYT_PERF_DISPATCH,measured,q.input_bytes);
-        rc=flyt_shm_worker_respond(channel,&r);
-        if(!rc)flyt_trace("worker","respond",layout.allocation_id,&q,&r);
-        flyt_shm_request_release(&q);if(rc)break;
-        if(hello){char path[128];snprintf(path,sizeof(path),"/tmp/flyt-slot-%u-guest",slot);FILE *g=fopen(path,"a");if(g)fclose(g);}
+        struct vmweave_shm_response r={.output=output,.output_capacity=capacity};
+        if(q.api_id==VMWEAVE_HELLO&&!hello&&q.payload_schema==1&&!q.input_bytes){hello=1;}
+        else if(!hello){r.transport_status=VMWEAVE_SHM_CHANNEL_CLOSED;stopping=1;}
+        else if((q.api_id==VMWEAVE_HEARTBEAT||q.api_id==VMWEAVE_GOODBYE)&&q.payload_schema==1&&!q.input_bytes){
+            if(q.api_id==VMWEAVE_GOODBYE){stopping=1;exitcode=0;}
+        }else if(q.api_id==VMWEAVE_HELLO){r.transport_status=VMWEAVE_SHM_BAD_DESCRIPTOR;stopping=1;}
+        else if((rc=vmweave_cuda_exec_check(session.exec))!=VMWEAVE_SHM_OK){r.transport_status=(uint32_t)rc;}
+        else if(q.api_id>=0x3000){if(vmweave_compat_dispatch(&session,&q,&r)){vmweave_shm_request_release(&q);break;}}
+        else if(q.api_id>=0x2100&&q.api_id!=VMWEAVE_STREAM_PRIORITY_CREATE){if(vmweave_torch_dispatch(&session,&q,&r)){vmweave_shm_request_release(&q);break;}}
+        else if(q.api_id>=0x2000){if(vmweave_async_dispatch(&session,&q,&r)){vmweave_shm_request_release(&q);break;}}
+        else if(vmweave_cuda_dispatch(&session,&q,&r)){vmweave_shm_request_release(&q);break;}
+        vmweave_perf_add(VMWEAVE_PERF_DISPATCH,measured,q.input_bytes);
+        rc=vmweave_shm_worker_respond(channel,&r);
+        if(!rc)vmweave_trace("worker","respond",layout.allocation_id,&q,&r);
+        vmweave_shm_request_release(&q);if(rc)break;
+        if(hello){char path[128];snprintf(path,sizeof(path),"/tmp/vmweave-slot-%u-guest",slot);FILE *g=fopen(path,"a");if(g)fclose(g);}
     }
-    unlink(ready);char guest_marker[128];snprintf(guest_marker,sizeof(guest_marker),"/tmp/flyt-slot-%u-guest",slot);unlink(guest_marker);free(output);
+    unlink(ready);char guest_marker[128];snprintf(guest_marker,sizeof(guest_marker),"/tmp/vmweave-slot-%u-guest",slot);unlink(guest_marker);free(output);
 done:
     /* A poisoned execution context must not enter CUDA again through async
      * polling or resource destructors. Process exit owns uncertain GPU state. */
-    if(session.exec&&flyt_cuda_exec_check(session.exec)==FLYT_SHM_CHANNEL_CLOSED){
-        flyt_shm_close(channel);flyt_unmap(&mapping);return 1;
+    if(session.exec&&vmweave_cuda_exec_check(session.exec)==VMWEAVE_SHM_CHANNEL_CLOSED){
+        vmweave_shm_close(channel);vmweave_unmap(&mapping);return 1;
     }
-    if(session.exec&&flyt_compat_close())return 1;
-    if(session.exec&&flyt_async_close())return 1; /* process exit releases uncertain CUDA state */
-    if(session.exec&&flyt_cuda_exec_destroy(&session.exec,&error))exitcode=1;
-    if(!session.exec)flyt_cuda_runtime_close(runtime);
-    flyt_shm_close(channel);flyt_unmap(&mapping);return exitcode;
+    if(session.exec&&vmweave_compat_close())return 1;
+    if(session.exec&&vmweave_async_close())return 1; /* process exit releases uncertain CUDA state */
+    if(session.exec&&vmweave_cuda_exec_destroy(&session.exec,&error))exitcode=1;
+    if(!session.exec)vmweave_cuda_runtime_close(runtime);
+    vmweave_shm_close(channel);vmweave_unmap(&mapping);return exitcode;
 }

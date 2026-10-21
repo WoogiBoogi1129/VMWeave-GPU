@@ -47,7 +47,7 @@ CI, 현재 docs를 조사했다. `legacy/`와 저장된 실험 결과는 이력�
 
 | 영역 | 현재 확인 사항 | 필요한 변경 |
 |---|---|---|
-| `settings.py` | `FLYT_NAMESPACE` 하나만 검증 | 설치 namespace와 관리 namespace 목록 분리 |
+| `settings.py` | `VMWEAVE_NAMESPACE` 하나만 검증 | 설치 namespace와 관리 namespace 목록 분리 |
 | `kube.py` | 생성 시 namespace를 고정하고 모든 namespaced URL에 사용 | 명시적 namespace client/context 도입 |
 | `control_plane.py` | 단일 namespace Channel 목록을 순회, 실패 시 전체 루프 backoff | namespace별 처리 및 실패 격리, 이후 객체별 queue |
 | `channel_controller.py` | 자식 metadata는 Channel namespace를 사용하나 API URL은 전역 client에 의존 | Channel의 namespace와 client가 일치함을 보장 |
@@ -93,8 +93,8 @@ controller:
   먼저 만들고, 설치 도구가 존재 여부·권한·이전 controller 충돌을 확인한다.
 - 전역 `mode`는 초기에는 유지한다. review는 격리된 테스트 클러스터에서 검증하며,
   같은 namespace에 review/active release를 겹쳐 배포하지 않는다. namespace별 실행 모드는 후속 기능이다.
-- 기존 `FLYT_NAMESPACE`는 Worker의 workload namespace 계약으로 유지한다.
-  controller에는 `FLYT_CONTROL_PLANE_NAMESPACE`, `FLYT_MANAGED_NAMESPACES`를 분리 도입한다.
+- 기존 `VMWEAVE_NAMESPACE`는 Worker의 workload namespace 계약으로 유지한다.
+  controller에는 `VMWEAVE_CONTROL_PLANE_NAMESPACE`, `VMWEAVE_MANAGED_NAMESPACES`를 분리 도입한다.
 - 동적 label selector 및 전체 namespace 자동 관리는 후속 확장이다. label 선택은 RBAC 권한
   경계가 아니므로 selector만으로 권한 격리를 보장한다고 설명하지 않는다.
 

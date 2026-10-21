@@ -6,7 +6,7 @@
 
 ## 메모리 조회
 
-`FLYT_API_RUNTIME_MEM_GET_INFO = 0x1013`을 추가했다. 기존 opcode와 layout을 바꾸지 않은
+`VMWEAVE_API_RUNTIME_MEM_GET_INFO = 0x1013`을 추가했다. 기존 opcode와 layout을 바꾸지 않은
 추가 연산이며 CRD 변경은 없다. payload schema는 1, 요청 payload는 0 byte다.
 응답은 `free_bytes`와 `total_bytes`의 64-bit little-endian 정수 두 개, 총 16 byte다.
 
@@ -34,9 +34,9 @@ cudaMalloc의 일반 메모리 부족은 session의 치명적 오류가 아니�
 
 지원 대상은 고정된 `torch-2.11.0+flyt.cu128-cp310-cp310-linux_x86_64.whl`,
 CUDA 12.8, x86-64 little-endian Guest/Worker, 단일 CUDA context/장치다.
-`FLYT_MIRROR_DEVICE_VA=1`과 Guest `libflyt_guest.so` preload가 필요하다.
+`VMWEAVE_MIRROR_DEVICE_VA=1`과 Guest `libvmweave_guest.so` preload가 필요하다.
 PyTorch의 명시적 `dlopen("libcuda.so.1")`도 Guest 중계 라이브러리에 연결하도록 같은
-디렉터리에 `libcuda.so.1 -> libflyt_guest.so` 링크를 둔다.
+디렉터리에 `libcuda.so.1 -> libvmweave_guest.so` 링크를 둔다.
 
 - Runtime fatbinary/function 등록을 Guest에 저장하고 첫 커널 호출 때 해당 fatbinary를
   64 KiB chunk로 Worker에 보낸다. 하나의 미완료 업로드와 총 미완료 업로드는 512 MiB로 제한한다.
@@ -55,8 +55,8 @@ PyTorch의 명시적 `dlopen("libcuda.so.1")`도 Guest 중계 라이브러리에
   공통 학습 프로그램은 `DISABLE_ADDMM_CUDA_LT=1`, SGD `foreach=False`, `fused=False`를
   모든 비교군에 동일하게 적용한다. 이 결과는 cuBLASLt 기본 경로의 검증이 아니다.
 - DtoH async 복사는 결과를 반환하기 전에 stream 완료를 기다리는 보수적 구현이다.
-  `FLYT_TRACE_CALLS`는 개발 진단용이며 성능 실행에서는 제거한다.
-- 단일 CUDA 복사 요청은 `FLYT_EXEC_MAX_COPY_BYTES`에 따라 16 MiB까지다.
+  `VMWEAVE_TRACE_CALLS`는 개발 진단용이며 성능 실행에서는 제거한다.
+- 단일 CUDA 복사 요청은 `VMWEAVE_EXEC_MAX_COPY_BYTES`에 따라 16 MiB까지다.
   더 큰 요청을 자동 분할하지 않는다. 2026-10-16 실제 VM 검사에서 32 MiB
   가중치를 가진 MLP가 `model.cuda()` 단계의 `CUDA invalid value`로 실패했다.
   이는 VRAM OOM과 다른 호환성 제한이다.
@@ -78,8 +78,8 @@ NVIDIA Driver 라이브러리에서 대신 찾아 반환하지 않는다.
 
 ## 요청별 선택형 추적
 
-Guest와 Worker 프로세스에 각각 `FLYT_TRACE_REQUESTS=1`을 설정하면 stderr에
-`FLYT_TRACE {JSON}` 레코드를 남긴다. 기본값은 꺼짐이며 `1` 이외의 값도 꺼짐이다.
+Guest와 Worker 프로세스에 각각 `VMWEAVE_TRACE_REQUESTS=1`을 설정하면 stderr에
+`VMWEAVE_TRACE {JSON}` 레코드를 남긴다. 기본값은 꺼짐이며 `1` 이외의 값도 꺼짐이다.
 `allocation + generation + session_id + request_id`로 Guest submit/receive와
 Worker take/respond를 연결한다. submit/respond는 해당 큐 연산이 성공한 뒤에만 기록한다.
 응답 전 상태는 `null`이고, 응답의 transport 상태와 Runtime/Driver 반환값은 별도 필드다.

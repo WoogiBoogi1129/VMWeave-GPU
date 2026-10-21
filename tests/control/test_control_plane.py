@@ -130,8 +130,8 @@ class ReviewTests(unittest.TestCase):
         a = {'metadata': {'generation': 1}, 'spec': {'channelRef': {'name': 'example', 'uid': 'channel-uid'},
              'generation': 'gen'}, 'status': {'launcherPodUID': 'launcher'}}
         api.replace = lambda kind, obj, status: self.assertEqual(obj['status']['launcherPodUID'], 'launcher')
-        with patch.dict('os.environ', {'FLYT_CHANNEL_NAME': 'example', 'FLYT_CHANNEL_UID': 'channel-uid',
-                'FLYT_GENERATION': 'gen', 'FLYT_POD_UID': 'worker'}), \
+        with patch.dict('os.environ', {'VMWEAVE_CHANNEL_NAME': 'example', 'VMWEAVE_CHANNEL_UID': 'channel-uid',
+                'VMWEAVE_GENERATION': 'gen', 'VMWEAVE_POD_UID': 'worker'}), \
                 patch.object(api, 'get', side_effect=[c, a]):
             observe.report(api, 'guest', 'Mapped')
 

@@ -13,22 +13,22 @@ int main(void){
   assert(!memcmp(out+1,p+2*page-n,n)&&out[0]==0xcc&&out[n+1]==0xcc);
  }
  munmap(p,page*3);
- struct flyt_shm_layout l={.region_bytes=1048576,.session_count=1};memset(l.allocation_id,1,16);memset(l.channel_generation,2,16);memset(l.slots[0].session_id,3,16);
- l.slots[0].request_ring=(struct flyt_shm_ring_layout){4096,64};l.slots[0].response_ring=(struct flyt_shm_ring_layout){16384,64};
- l.slots[0].request_payload=(struct flyt_shm_arena){32768,4096};l.slots[0].response_payload=(struct flyt_shm_arena){36864,4096};
- p=mmap(NULL,l.region_bytes,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0);assert(p!=MAP_FAILED);assert(!flyt_shm_format(p,l.region_bytes,&l));
- struct flyt_shm_channel *g,*w;assert(!flyt_shm_open(p,l.region_bytes,&l,0,FLYT_SHM_GUEST,1000,&g));assert(!flyt_shm_open(p,l.region_bytes,&l,0,FLYT_SHM_WORKER,1000,&w));
+ struct vmweave_shm_layout l={.region_bytes=1048576,.session_count=1};memset(l.allocation_id,1,16);memset(l.channel_generation,2,16);memset(l.slots[0].session_id,3,16);
+ l.slots[0].request_ring=(struct vmweave_shm_ring_layout){4096,64};l.slots[0].response_ring=(struct vmweave_shm_ring_layout){16384,64};
+ l.slots[0].request_payload=(struct vmweave_shm_arena){32768,4096};l.slots[0].response_payload=(struct vmweave_shm_arena){36864,4096};
+ p=mmap(NULL,l.region_bytes,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0);assert(p!=MAP_FAILED);assert(!vmweave_shm_format(p,l.region_bytes,&l));
+ struct vmweave_shm_channel *g,*w;assert(!vmweave_shm_open(p,l.region_bytes,&l,0,VMWEAVE_SHM_GUEST,1000,&g));assert(!vmweave_shm_open(p,l.region_bytes,&l,0,VMWEAVE_SHM_WORKER,1000,&w));
  unsigned char input[65],output[65];memset(input,0x5a,65);
- struct flyt_shm_request q={.request_id=1,.api_id=1,.payload_schema=1,.input=input,.input_bytes=65},taken;
- q.identity=g->identity;assert(!flyt_shm_submit(g,&q));assert(flyt_shm_submit(g,&q)==FLYT_SHM_QUEUE_FULL);assert(!flyt_shm_worker_take(w,&taken));
+ struct vmweave_shm_request q={.request_id=1,.api_id=1,.payload_schema=1,.input=input,.input_bytes=65},taken;
+ q.identity=g->identity;assert(!vmweave_shm_submit(g,&q));assert(vmweave_shm_submit(g,&q)==VMWEAVE_SHM_QUEUE_FULL);assert(!vmweave_shm_worker_take(w,&taken));
  memset(p+32768,0x77,65);assert(!memcmp(taken.input,input,65));
- struct flyt_shm_response r={.output=(void*)taken.input,.output_capacity=65,.output_bytes=65};assert(!flyt_shm_worker_respond(w,&r));flyt_shm_request_release(&taken);
- r=(struct flyt_shm_response){.output=output,.output_capacity=64};assert(flyt_shm_try_receive(g,1,&r)==FLYT_SHM_BAD_DESCRIPTOR&&r.output_bytes==65);
- r.output_capacity=65;assert(!flyt_shm_try_receive(g,1,&r)&&!memcmp(input,output,65));
- q.request_id=2;assert(!flyt_shm_submit(g,&q));
+ struct vmweave_shm_response r={.output=(void*)taken.input,.output_capacity=65,.output_bytes=65};assert(!vmweave_shm_worker_respond(w,&r));vmweave_shm_request_release(&taken);
+ r=(struct vmweave_shm_response){.output=output,.output_capacity=64};assert(vmweave_shm_try_receive(g,1,&r)==VMWEAVE_SHM_BAD_DESCRIPTOR&&r.output_bytes==65);
+ r.output_capacity=65;assert(!vmweave_shm_try_receive(g,1,&r)&&!memcmp(input,output,65));
+ q.request_id=2;assert(!vmweave_shm_submit(g,&q));
  /* Corrupted peer payload offset must fail before touching a mapping. */
- put(p+4096+128+128+64,UINT64_MAX,8);assert(flyt_shm_worker_take(w,&taken)==FLYT_SHM_BAD_DESCRIPTOR);
- g->deadline_ns=1;assert(flyt_shm_receive(g,2,&r)==FLYT_SHM_EXECUTION_UNKNOWN);
- flyt_shm_close(g);flyt_shm_close(w);munmap(p,l.region_bytes);
+ put(p+4096+128+128+64,UINT64_MAX,8);assert(vmweave_shm_worker_take(w,&taken)==VMWEAVE_SHM_BAD_DESCRIPTOR);
+ g->deadline_ns=1;assert(vmweave_shm_receive(g,2,&r)==VMWEAVE_SHM_EXECUTION_UNKNOWN);
+ vmweave_shm_close(g);vmweave_shm_close(w);munmap(p,l.region_bytes);
  puts("PASS: guarded payload tails, private snapshot, single pending, receive retry, corrupted offset and timeout");
 }

@@ -68,7 +68,7 @@ for rep in range(1,a.repeat+1):
             pod=obj('pod',victim+'-channel-worker')
             if pod['metadata']['uid']!=channels[0]['status']['workerPodUID']:raise RuntimeError('worker UID changed')
             if a.mode=='worker-process':
-                code="import pathlib,os,signal\nmatches=[]\nfor p in pathlib.Path('/proc').iterdir():\n if not p.name.isdigit():continue\n try: command=(p/'cmdline').read_bytes().split(bytes([0]))[0]\n except (FileNotFoundError,ProcessLookupError):continue\n if command==b'/opt/flyt/bin/flyt-shm-worker':matches.append(int(p.name))\nassert len(matches)==1,matches\nos.kill(matches[0],signal.SIGKILL)\nprint(matches)"
+                code="import pathlib,os,signal\nmatches=[]\nfor p in pathlib.Path('/proc').iterdir():\n if not p.name.isdigit():continue\n try: command=(p/'cmdline').read_bytes().split(bytes([0]))[0]\n except (FileNotFoundError,ProcessLookupError):continue\n if command==b'/opt/vmweave/bin/vmweave-shm-worker':matches.append(int(p.name))\nassert len(matches)==1,matches\nos.kill(matches[0],signal.SIGKILL)\nprint(matches)"
                 cmd=['kubectl','exec','-n',NS,pod['metadata']['name'],'--','python3','-c',code]
             else:cmd=['kubectl','delete','pod',pod['metadata']['name'],'-n',NS,'--force','--grace-period=0','--wait=false']
         elif a.mode=='vmi-force':

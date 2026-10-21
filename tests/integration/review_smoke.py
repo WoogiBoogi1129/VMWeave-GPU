@@ -50,7 +50,7 @@ def passed(message):results.append(message);print('PASS',message,flush=True)
 try:
     deployment=get('deployment',a.release+'-flyt-controller')
     env={x['name']:x.get('value') for x in deployment['spec']['template']['spec']['containers'][0]['env']}
-    assert env['FLYT_MODE']=='review','test only runs in review mode'
+    assert env['VMWEAVE_MODE']=='review','test only runs in review mode'
     sa='system:serviceaccount:'+a.namespace+':'+deployment['spec']['template']['spec']['serviceAccountName']
     for verb,resource_name in [('create','pods'),('update','virtualmachines.kubevirt.io'),('create','flytchannelattachments.flyt.dev')]:
         r=kubectl('auth','can-i',verb,resource_name,'-n',a.namespace,'--as='+sa,check=False)

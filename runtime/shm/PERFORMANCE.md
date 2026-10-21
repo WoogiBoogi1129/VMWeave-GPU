@@ -7,19 +7,19 @@ memory, or transparent asynchronous return is introduced.
 
 | Environment | Values | Meaning |
 |---|---|---|
-| `FLYT_WAIT_MODE` | `legacy`, `bounded` | Existing 1ms sleep, or bounded polling followed by short sleeps |
-| `FLYT_SPIN_US` | 0–1000 | Initial active polling budget per wait episode; 0 disables active polling |
-| `FLYT_SLEEP_US` | 1–1000 | Short sleep request, default 50µs; actual OS sleep can be longer |
-| `FLYT_COPY_MODE` | `legacy`, `optimized` | Independent switch for private buffer reuse and payload-copy changes |
-| `FLYT_METRICS` | `0`, `1` | Per-thread accumulated stage timing, emitted to stderr on close |
+| `VMWEAVE_WAIT_MODE` | `legacy`, `bounded` | Existing 1ms sleep, or bounded polling followed by short sleeps |
+| `VMWEAVE_SPIN_US` | 0–1000 | Initial active polling budget per wait episode; 0 disables active polling |
+| `VMWEAVE_SLEEP_US` | 1–1000 | Short sleep request, default 50µs; actual OS sleep can be longer |
+| `VMWEAVE_COPY_MODE` | `legacy`, `optimized` | Independent switch for private buffer reuse and payload-copy changes |
+| `VMWEAVE_METRICS` | `0`, `1` | Per-thread accumulated stage timing, emitted to stderr on close |
 
-Defaults are `bounded`, `FLYT_SPIN_US=0`, `FLYT_SLEEP_US=50`, and `optimized`.
+Defaults are `bounded`, `VMWEAVE_SPIN_US=0`, `VMWEAVE_SLEEP_US=50`, and `optimized`.
 Telemetry is off by default. These defaults were selected after a four-way,
 five-repetition actual-VM campaign. Saturated CPU consumption increases as more
 requests complete; CPU time per operation decreases in the measured workloads.
 See the [results and limitations](../../experiments/evidence/results/2026-10-01-shm-first/README.md).
-To restore the prior wait/copy behavior, set `FLYT_WAIT_MODE=legacy` and
-`FLYT_COPY_MODE=legacy` in both Guest and Worker before starting fresh processes.
+To restore the prior wait/copy behavior, set `VMWEAVE_WAIT_MODE=legacy` and
+`VMWEAVE_COPY_MODE=legacy` in both Guest and Worker before starting fresh processes.
 Unset string settings select the defaults; unknown or empty mode strings select
 legacy behavior. Numeric defaults and limits are listed above.
 

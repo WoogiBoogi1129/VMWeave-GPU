@@ -40,7 +40,7 @@ Queue와 payload arena를 배정한다. HAMi는 실제 CUDA를 호출하는 Work
 
 | 파일 | 내용 |
 |---|---|
-| `include/flyt_shm_contract.h` | Descriptor offset·상태·API ID와 dispatcher/Queue 함수 선언 |
+| `include/vmweave_shm_contract.h` | Descriptor offset·상태·API ID와 dispatcher/Queue 함수 선언 |
 | `schema/channel.schema.json` | VMI 생성 전 allocation과 생성 후 binding 데이터 계약 |
 | `schema/session.schema.json` | RPC 필드가 없는 SHM 세션 endpoint 데이터 계약 |
 | [PROTOCOL.md](PROTOCOL.md) | Header/ring layout, 메모리 순서, 소유권, 오류·비동기 의미 |

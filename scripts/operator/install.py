@@ -15,7 +15,7 @@ for n in names:
  for x in d['items']:
   for c in x['spec']['template']['spec']['containers']:
    env={z['name']:z.get('value') for z in c.get('env',[])}
-   if env.get('FLYT_MODE')=='active' and x['spec'].get('replicas',1)>0:raise SystemExit('legacy active deployment must be stopped first: '+n+'/'+x['metadata']['name'])
+   if env.get('VMWEAVE_MODE')=='active' and x['spec'].get('replicas',1)>0:raise SystemExit('legacy active deployment must be stopped first: '+n+'/'+x['metadata']['name'])
 try:old=json.loads(run('helm','get','values',a.release,'-n',a.namespace,'-o','json')) or {}
 except subprocess.CalledProcessError:old={}
 if old.get('maintenance',{}).get('enabled'):raise SystemExit('finish staged maintenance before normal installation')

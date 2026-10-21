@@ -15,8 +15,8 @@ EVENTS = [('guest','submit'),('worker','take'),('worker','respond'),('guest','re
 def parse(text):
     records=[]
     for line in text.splitlines():
-        if line.startswith('FLYT_TRACE '):
-            records.append(json.loads(line[len('FLYT_TRACE '):]))
+        if line.startswith(('FLYT_TRACE ', 'VMWEAVE_TRACE ')):
+            records.append(json.loads(line.split(' ', 1)[1]))
     return records
 
 def correlate(guest, worker, binding):

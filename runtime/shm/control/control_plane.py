@@ -1,4 +1,5 @@
 """Stage-one entrypoint. Review mode cannot create or mutate workloads."""
+import vmweave_env as env
 import copy
 from datetime import datetime, timezone
 import os
@@ -122,16 +123,16 @@ def process(api, channel, execution_mode):
 
 def main():
     execution_mode = mode()
-    interval = positive_float('FLYT_RECONCILE_SECONDS', 2)
-    max_backoff = positive_float('FLYT_MAX_BACKOFF_SECONDS', 30)
-    health = Health(positive_float('FLYT_READY_STALE_SECONDS', 60))
+    interval = positive_float('VMWEAVE_RECONCILE_SECONDS', 2)
+    max_backoff = positive_float('VMWEAVE_MAX_BACKOFF_SECONDS', 30)
+    health = Health(positive_float('VMWEAVE_READY_STALE_SECONDS', 60))
     stop = threading.Event()
     def shutdown(*_):
         health.stopping = True
         stop.set()
     signal.signal(signal.SIGTERM, shutdown)
     signal.signal(signal.SIGINT, shutdown)
-    server = health.serve(int(os.getenv('FLYT_HEALTH_PORT', '8080')))
+    server = health.serve(int(env.get('VMWEAVE_HEALTH_PORT', '8080')))
     api = API()
     delay = interval
     log('controller_started', namespace=api.namespace, mode=execution_mode)

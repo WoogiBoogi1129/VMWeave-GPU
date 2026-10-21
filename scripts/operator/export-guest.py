@@ -18,7 +18,7 @@ def main():
     subprocess.run([a.engine, "pull", a.image], check=True)
     cid = subprocess.check_output([a.engine, "create", a.image, "/bin/true"], text=True).strip()
     try:
-        subprocess.run([a.engine, "cp", cid + ":/opt/flyt/guest/.", str(a.output.resolve())], check=True)
+        subprocess.run([a.engine, "cp", cid + ":/opt/vmweave/guest/.", str(a.output.resolve())], check=True)
     finally:
         subprocess.run([a.engine, "rm", cid], check=True)
     subprocess.run(["sha256sum", "-c", "SHA256SUMS"], cwd=a.output, check=True)

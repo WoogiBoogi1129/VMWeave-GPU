@@ -31,9 +31,9 @@ jobs:
       - name: CPU runtime regression tests
         run: |
           cc -O2 -Wall -Wextra -Werror -pthread -Iruntime/shm/shm-queue/include -Iruntime/shm/shm-contract/include tests/integration/queue_payload_bounds.c runtime/shm/shm-queue/src/perf.c -o .local/queue-payload-test
-          FLYT_COPY_MODE=legacy .local/queue-payload-test
-          FLYT_COPY_MODE=optimized FLYT_WAIT_MODE=bounded .local/queue-payload-test
-          cc -O2 -pthread -Iruntime/shm/cuda-dispatch/include -Iruntime/shm/shm-contract/include tests/integration/private_copy_buffers.c .local/dispatch-build/libflyt_cuda_exec.a -o .local/private-copy-test
+          VMWEAVE_COPY_MODE=legacy .local/queue-payload-test
+          VMWEAVE_COPY_MODE=optimized VMWEAVE_WAIT_MODE=bounded .local/queue-payload-test
+          cc -O2 -pthread -Iruntime/shm/cuda-dispatch/include -Iruntime/shm/shm-contract/include tests/integration/private_copy_buffers.c .local/dispatch-build/libvmweave_cuda_exec.a -o .local/private-copy-test
           .local/private-copy-test
           .local/private-copy-test fatal
       - run: helm lint charts/flyt-control-plane --set image.digest=sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --set tls.caBundle=dGVzdA==

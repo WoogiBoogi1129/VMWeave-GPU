@@ -1,4 +1,5 @@
-#include "flyt_cuda_exec.h"
+#include "vmweave_env.h"
+#include "vmweave_cuda_exec.h"
 #include <cuda_runtime_api.h>
 #include <pthread.h>
 #include <stdatomic.h>
@@ -8,12 +9,12 @@
 #include <errno.h>
 
 static int worker_guard(void) {
-    const char *backend=getenv("FLYT_RESOURCE_BACKEND"),*uuid=getenv("FLYT_GPU_UUID"),*quota=getenv("FLYT_MEMORY_BYTES");
+    const char *backend=vmweave_getenv("VMWEAVE_RESOURCE_BACKEND"),*uuid=vmweave_getenv("VMWEAVE_GPU_UUID"),*quota=vmweave_getenv("VMWEAVE_MEMORY_BYTES");
     char line[4096],actual[41],*end;int hami=0,client=0,count=0;size_t free_bytes=0,total=0;
-    if(!backend||strcmp(backend,"hami")||!uuid||!quota||getenv("CUDA_MPS_PIPE_DIRECTORY"))return -1;
+    if(!backend||strcmp(backend,"hami")||!uuid||!quota||vmweave_getenv("CUDA_MPS_PIPE_DIRECTORY"))return -1;
     errno=0;unsigned long long limit=strtoull(quota,&end,10);if(errno||*end||!limit)return -1;
     FILE *f=fopen("/proc/self/maps","r");if(!f)return -1;
-    while(fgets(line,sizeof(line),f)){if(strstr(line,"libvgpu.so"))hami=1;if(strstr(line,"cricket-client")||strstr(line,"libflyt_guest"))client=1;}fclose(f);
+    while(fgets(line,sizeof(line),f)){if(strstr(line,"libvgpu.so"))hami=1;if(strstr(line,"cricket-client")||strstr(line,"libvmweave_guest"))client=1;}fclose(f);
     if(!hami||client||cudaGetDeviceCount(&count)!=cudaSuccess||count!=1)return -1;
     struct cudaDeviceProp prop;memset(&prop,0,sizeof(prop));
     if(cudaGetDeviceProperties(&prop,0)!=cudaSuccess)return -1;
@@ -23,12 +24,12 @@ static int worker_guard(void) {
     return 0;
 }
 
-struct flyt_cuda_runtime { pthread_t owner; };
+struct vmweave_cuda_runtime { pthread_t owner; };
 static atomic_flag runtime_opened = ATOMIC_FLAG_INIT;
 
 static int owned(void *context)
 {
-    struct flyt_cuda_runtime *r = context;
+    struct vmweave_cuda_runtime *r = context;
     return r && pthread_equal(r->owner, pthread_self());
 }
 
@@ -74,9 +75,9 @@ static uint32_t copy(void *context, void *dst, const void *src, size_t bytes,
     enum cudaMemcpyKind kind;
     if (!owned(context)) return (uint32_t)cudaErrorInvalidResourceHandle;
     switch (direction) {
-    case FLYT_COPY_HTOD: kind = cudaMemcpyHostToDevice; break;
-    case FLYT_COPY_DTOH: kind = cudaMemcpyDeviceToHost; break;
-    case FLYT_COPY_DTOD: kind = cudaMemcpyDeviceToDevice; break;
+    case VMWEAVE_COPY_HTOD: kind = cudaMemcpyHostToDevice; break;
+    case VMWEAVE_COPY_DTOH: kind = cudaMemcpyDeviceToHost; break;
+    case VMWEAVE_COPY_DTOD: kind = cudaMemcpyDeviceToDevice; break;
     default: return (uint32_t)cudaErrorInvalidValue;
     }
     /* Only synchronous API with pageable host staging. No retained pinned
@@ -88,39 +89,44 @@ static uint32_t synchronize(void *context)
     if (!owned(context)) return (uint32_t)cudaErrorInvalidResourceHandle;
     return (uint32_t)cudaDeviceSynchronize();
 }
-static const struct flyt_cuda_backend backend = {
+static const struct vmweave_cuda_backend backend = {
     .get_count = get_count, .get_device = get_device, .set_device = set_device,
     .allocate = allocate, .release = release, .copy = copy,
     .synchronize = synchronize
 };
 
-int flyt_cuda_runtime_open(struct flyt_cuda_runtime **out, uint32_t *cuda_error)
+int vmweave_cuda_runtime_open(struct vmweave_cuda_runtime **out, uint32_t *cuda_error)
 {
-    struct flyt_cuda_runtime *r;
+    struct vmweave_cuda_runtime *r;
     int32_t count = 0;
-    if (!out || !cuda_error) return FLYT_SHM_BAD_DESCRIPTOR;
+    if (!out || !cuda_error) return VMWEAVE_SHM_BAD_DESCRIPTOR;
     *out = NULL;
     *cuda_error = 0;
     r = calloc(1, sizeof(*r));
-    if (!r) return FLYT_SHM_INTERNAL_ERROR;
+    if (!r) return VMWEAVE_SHM_INTERNAL_ERROR;
     if (atomic_flag_test_and_set(&runtime_opened)) {
         free(r);
-        return FLYT_SHM_CHANNEL_CLOSED;
+        return VMWEAVE_SHM_CHANNEL_CLOSED;
     }
     r->owner = pthread_self();
-    if(worker_guard()){free(r);return FLYT_SHM_INTERNAL_ERROR;}
+    if(worker_guard()){free(r);return VMWEAVE_SHM_INTERNAL_ERROR;}
     *cuda_error = get_count(r, &count);
     if (!*cuda_error) *cuda_error = set_device(r, 0);
     if (*cuda_error) {
         free(r);
-        return FLYT_SHM_INTERNAL_ERROR;
+        return VMWEAVE_SHM_INTERNAL_ERROR;
     }
     *out = r;
-    return FLYT_SHM_OK;
+    return VMWEAVE_SHM_OK;
 }
-const struct flyt_cuda_backend *flyt_cuda_runtime_backend(void) { return &backend; }
-void flyt_cuda_runtime_close(struct flyt_cuda_runtime *r)
+const struct vmweave_cuda_backend *vmweave_cuda_runtime_backend(void) { return &backend; }
+void vmweave_cuda_runtime_close(struct vmweave_cuda_runtime *r)
 {
     if (owned(r)) free(r);
     /* Never reset the physical GPU or allow this process to serve a new client. */
 }
+
+/* Legacy binary ABI: same implementation and address, no second state. */
+extern __typeof__(vmweave_cuda_runtime_backend) flyt_cuda_runtime_backend __attribute__((alias("vmweave_cuda_runtime_backend")));
+extern __typeof__(vmweave_cuda_runtime_close) flyt_cuda_runtime_close __attribute__((alias("vmweave_cuda_runtime_close")));
+extern __typeof__(vmweave_cuda_runtime_open) flyt_cuda_runtime_open __attribute__((alias("vmweave_cuda_runtime_open")));

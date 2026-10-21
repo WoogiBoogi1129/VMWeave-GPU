@@ -1,4 +1,5 @@
 """Process liveness, recent API readiness, and bounded-cardinality metrics."""
+import vmweave_env as env
 import json
 import threading
 import time
@@ -8,7 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 def log(event, level='INFO', **fields):
     levels={'DEBUG':10,'INFO':20,'WARNING':30,'ERROR':40}
-    configured=os.getenv('FLYT_LOG_LEVEL','INFO').upper()
+    configured=env.get('VMWEAVE_LOG_LEVEL','INFO').upper()
     if levels[level]>=levels.get(configured,20):
         print(json.dumps({'level':level,'event': event, **fields}, sort_keys=True), flush=True)
 
@@ -37,9 +38,9 @@ class Health:
 
             def do_GET(self):
                 if self.path == '/metrics':
-                    body = (f'flyt_reconcile_total {state.reconciles}\n'
-                            f'flyt_reconcile_errors_total {state.errors}\n'
-                            f'flyt_reconcile_duration_seconds_sum {state.duration}\n').encode()
+                    body = (f'vmweave_reconcile_total {state.reconciles}\n'
+                            f'vmweave_reconcile_errors_total {state.errors}\n'
+                            f'vmweave_reconcile_duration_seconds_sum {state.duration}\n').encode()
                     code = 200
                 elif self.path in ('/livez', '/readyz'):
                     ok = not state.stopping if self.path == '/livez' else state.ready()

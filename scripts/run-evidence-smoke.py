@@ -47,7 +47,7 @@ def wait_for(function,label,timeout=None):
 initial=get(channel_kind,channel)
 if not initial or initial.get('status',{}).get('phase') not in (('BackingReady','Bound','Ready') if a.resume else ('BackingReady',)) or initial.get('spec',{}).get('drain') or initial['metadata'].get('deletionTimestamp'):raise ValueError('live channel in permitted initial phase required')
 save('channel-before.json',initial)
-files=[ROOT/'scripts/run-evidence-smoke.py',ROOT/'experiments/evidence/guest_gpu_smoke.c',ROOT/'experiments/evidence/memory_probe.cu',a.artifacts/'libflyt_guest.so',a.artifacts/binary]
+files=[ROOT/'scripts/run-evidence-smoke.py',ROOT/'experiments/evidence/guest_gpu_smoke.c',ROOT/'experiments/evidence/memory_probe.cu',a.artifacts/'libvmweave_guest.so',a.artifacts/binary]
 if a.gpu_program=='compute':files.append(ROOT/'experiments/evidence/compute_probe.c')
 save('manifest.json',{'run_id':a.output.name,'phase':'development','namespace':ns,'channel_uid':initial['metadata']['uid'],
  'monotonic_origin_seconds':started,
@@ -79,15 +79,15 @@ try:
  bound=get(channel_kind,channel);save('channel-bound.json',bound)
  subprocess.run([sys.executable,str(ROOT/'scripts/export-shm-guest.py'),'--channel-json',str(a.output/'channel-bound.json'),
                  '--bdf',bdf,'--slot','0','--output',str(a.output/'guest-config')],check=True)
- subprocess.run(ssh+['mkdir -p /tmp/flyt-evidence-run'],check=True,timeout=10)
+ subprocess.run(ssh+['mkdir -p /tmp/vmweave-evidence-run'],check=True,timeout=10)
  scp=['scp','-i',str(a.key.resolve()),'-o','BatchMode=yes','-o','StrictHostKeyChecking=accept-new','-o','UserKnownHostsFile='+str((a.output/'known-hosts').resolve())]
- subprocess.run(scp+[str(a.artifacts/binary),str(a.artifacts/'libflyt_guest.so'),str(a.output/'guest-config/layout.bin'),'ubuntu@'+ip+':/tmp/flyt-evidence-run/'],check=True,timeout=30)
+ subprocess.run(scp+[str(a.artifacts/binary),str(a.artifacts/'libvmweave_guest.so'),str(a.output/'guest-config/layout.bin'),'ubuntu@'+ip+':/tmp/vmweave-evidence-run/'],check=True,timeout=30)
  if a.barrier:
   a.barrier.mkdir(parents=True,exist_ok=True);(a.barrier/(a.name+'.ready')).write_text(ip)
   event('BarrierReady');wait_for(lambda:(a.barrier/'start').exists(),'start barrier not released')
  arguments=str(a.seed)+' '+str(a.gpu_seconds) if a.probe=='gpu' else a.scenario+' '+str(a.bytes)
  save('guest-command.json',{'argv':arguments,'bdf':bdf,'binary':binary,'slot':0})
- command='sudo env FLYT_LAYOUT=/tmp/flyt-evidence-run/layout.bin FLYT_IVSHMEM_BDF='+bdf+' FLYT_SLOT=0 FLYT_PROBE_HOLD=10 LD_LIBRARY_PATH=/tmp/flyt-evidence-run /tmp/flyt-evidence-run/'+binary+' '+arguments
+ command='sudo env VMWEAVE_LAYOUT=/tmp/vmweave-evidence-run/layout.bin VMWEAVE_IVSHMEM_BDF='+bdf+' VMWEAVE_SLOT=0 VMWEAVE_PROBE_HOLD=10 LD_LIBRARY_PATH=/tmp/vmweave-evidence-run /tmp/vmweave-evidence-run/'+binary+' '+arguments
  with (a.output/'guest-stdout.txt').open('w') as stdout,(a.output/'guest-stderr.txt').open('w') as stderr:
   ssh_process=subprocess.Popen(ssh+[command],stdout=stdout,stderr=stderr)
   def mapped():

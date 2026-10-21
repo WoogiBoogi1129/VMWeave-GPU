@@ -30,9 +30,9 @@ with tarfile.open(layer, 'w') as tar:
         tar.addfile(info, io.BytesIO(data))
 subprocess.run([a.crane, 'mutate', '--platform', 'linux/amd64', base,
     '--append', str(layer), '--output', str(a.output),
-    '--entrypoint', 'python3,/opt/flyt/control/control_plane.py', '--cmd=',
-    '--user', '65532:65532', '--workdir', '/opt/flyt/control',
-    '--env', 'PYTHONDONTWRITEBYTECODE=1', '--env', 'PYTHONUNBUFFERED=1', '--env', 'FLYT_MODE=review',
+    '--entrypoint', 'python3,/opt/vmweave/control/control_plane.py', '--cmd=',
+    '--user', '65532:65532', '--workdir', '/opt/vmweave/control',
+    '--env', 'PYTHONDONTWRITEBYTECODE=1', '--env', 'PYTHONUNBUFFERED=1', '--env', 'VMWEAVE_MODE=review',
     '--exposed-ports', '8080/tcp,8443/tcp',
     '--label', 'org.opencontainers.image.source=https://github.com/WoogiBoogi1129/VMWeave-GPU',
     '--label', 'org.opencontainers.image.revision=' + revision], check=True)

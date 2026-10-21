@@ -1,11 +1,31 @@
-#ifndef FLYT_WIRE_H
-#define FLYT_WIRE_H
+/* Deprecated source compatibility; use vmweave_wire.h. */
+#ifndef VMWEAVE_LEGACY_FLYT_WIRE_H
+#define VMWEAVE_LEGACY_FLYT_WIRE_H
 #include "flyt_cuda_exec.h"
 #include "flyt_mapping.h"
-#define FLYT_HELLO 1u
-#define FLYT_GOODBYE 2u
-#define FLYT_HEARTBEAT 3u
-static inline uint64_t flyt_get(const uint8_t *p,unsigned n){uint64_t x=0;for(unsigned i=0;i<n;i++)x|=(uint64_t)p[i]<<(8*i);return x;}
-static inline void flyt_put(uint8_t *p,uint64_t x,unsigned n){for(unsigned i=0;i<n;i++)p[i]=(uint8_t)(x>>(8*i));}
-struct flyt_cuda_session { struct flyt_cuda_exec *exec; };
+#include "vmweave_wire.h"
+#ifndef FLYT_GOODBYE
+#define FLYT_GOODBYE VMWEAVE_GOODBYE
+#endif
+#ifndef FLYT_HEARTBEAT
+#define FLYT_HEARTBEAT VMWEAVE_HEARTBEAT
+#endif
+#ifndef FLYT_HELLO
+#define FLYT_HELLO VMWEAVE_HELLO
+#endif
+#ifndef flyt_cuda_exec
+#define flyt_cuda_exec vmweave_cuda_exec
+#endif
+#ifndef flyt_cuda_session
+#define flyt_cuda_session vmweave_cuda_session
+#endif
+#ifndef flyt_get
+#define flyt_get vmweave_get
+#endif
+#ifndef flyt_mapping
+#define flyt_mapping vmweave_mapping
+#endif
+#ifndef flyt_put
+#define flyt_put vmweave_put
+#endif
 #endif

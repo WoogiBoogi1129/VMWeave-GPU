@@ -1,11 +1,27 @@
-#ifndef FLYT_MAPPING_H
-#define FLYT_MAPPING_H
+/* Deprecated source compatibility; use vmweave_mapping.h. */
+#ifndef VMWEAVE_LEGACY_FLYT_MAPPING_H
+#define VMWEAVE_LEGACY_FLYT_MAPPING_H
 #include "flyt_shm_queue.h"
-struct flyt_mapping { void *address; size_t bytes; int fd; };
-/* layout.bin is a private provisioning artifact, never a native struct dump. */
-int flyt_layout_read(const char *path, struct flyt_shm_layout *out);
-int flyt_map_file(const char *path, const struct flyt_shm_layout *, struct flyt_mapping *);
-/* Explicit BDF only: no PCI scanning, driver binding, reset or enable writes. */
-int flyt_map_guest(const char *bdf, const struct flyt_shm_layout *, struct flyt_mapping *);
-void flyt_unmap(struct flyt_mapping *);
+#include "vmweave_mapping.h"
+#ifndef flyt_layout_read
+#define flyt_layout_read vmweave_layout_read
+#endif
+#ifndef flyt_map_file
+#define flyt_map_file vmweave_map_file
+#endif
+#ifndef flyt_map_guest
+#define flyt_map_guest vmweave_map_guest
+#endif
+#ifndef flyt_mapping
+#define flyt_mapping vmweave_mapping
+#endif
+#ifndef flyt_shm_layout
+#define flyt_shm_layout vmweave_shm_layout
+#endif
+#ifndef flyt_shm_queue
+#define flyt_shm_queue vmweave_shm_queue
+#endif
+#ifndef flyt_unmap
+#define flyt_unmap vmweave_unmap
+#endif
 #endif

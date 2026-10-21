@@ -1,4 +1,4 @@
-#include "flyt_cuda_exec.h"
+#include "vmweave_cuda_exec.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,40 +12,40 @@ static uint32_t alloc(void *c,void **p,size_t n){(void)c;*p=NULL;if(n==4097)retu
 static uint32_t release(void *c,void *p){(void)c;free(p);return 0;}
 static uint32_t copy(void *c,void *d,const void *s,size_t n,uint32_t k){(void)c;(void)k;memcpy(d,s,n);return 0;}
 static uint32_t sync_gpu(void *c){(void)c;return 0;}
-static void *wrong_thread(void *session){assert(flyt_cuda_exec_check(session)==FLYT_SHM_BAD_DESCRIPTOR);return NULL;}
+static void *wrong_thread(void *session){assert(vmweave_cuda_exec_check(session)==VMWEAVE_SHM_BAD_DESCRIPTOR);return NULL;}
 int main(int argc,char **argv){
     (void)argv;
-    struct flyt_cuda_backend backend={count,device,set,alloc,release,copy,sync_gpu};
-    struct flyt_cuda_exec *s=NULL;struct flyt_cuda_result result;
-    assert(!flyt_cuda_exec_create(&backend,NULL,&s));
-    assert(flyt_cuda_exec_check(s)==FLYT_SHM_OK);
+    struct vmweave_cuda_backend backend={count,device,set,alloc,release,copy,sync_gpu};
+    struct vmweave_cuda_exec *s=NULL;struct vmweave_cuda_result result;
+    assert(!vmweave_cuda_exec_create(&backend,NULL,&s));
+    assert(vmweave_cuda_exec_check(s)==VMWEAVE_SHM_OK);
     pthread_t thread;assert(!pthread_create(&thread,NULL,wrong_thread,s));assert(!pthread_join(thread,NULL));
-    struct flyt_cuda_call call={.api_id=FLYT_API_RUNTIME_MALLOC,.args.allocation_bytes=16};
-    assert(!flyt_cuda_exec_call(s,&call,&result)&&!result.api_result);
-    uint64_t retained=result.handle;flyt_cuda_result_release(&result);
+    struct vmweave_cuda_call call={.api_id=VMWEAVE_API_RUNTIME_MALLOC,.args.allocation_bytes=16};
+    assert(!vmweave_cuda_exec_call(s,&call,&result)&&!result.api_result);
+    uint64_t retained=result.handle;vmweave_cuda_result_release(&result);
     call.args.allocation_bytes=2048;
-    assert(!flyt_cuda_exec_call(s,&call,&result)&&result.api_result==2&&!result.handle);
-    assert(flyt_cuda_exec_check(s)==FLYT_SHM_OK);
-    flyt_cuda_result_release(&result);
+    assert(!vmweave_cuda_exec_call(s,&call,&result)&&result.api_result==2&&!result.handle);
+    assert(vmweave_cuda_exec_check(s)==VMWEAVE_SHM_OK);
+    vmweave_cuda_result_release(&result);
     void *pointer=NULL;
-    assert(flyt_cuda_exec_resolve(s,(struct flyt_device_ref){retained,0},16,&pointer));
+    assert(vmweave_cuda_exec_resolve(s,(struct vmweave_device_ref){retained,0},16,&pointer));
     assert(pointer);
-    call.api_id=FLYT_API_RUNTIME_FREE;call.args.free_handle=retained;
-    assert(!flyt_cuda_exec_call(s,&call,&result)&&!result.api_result);
-    flyt_cuda_result_release(&result);
-    call.api_id=FLYT_API_RUNTIME_MALLOC;call.args.allocation_bytes=1024;
-    assert(!flyt_cuda_exec_call(s,&call,&result)&&!result.api_result&&result.handle!=retained);
-    flyt_cuda_result_release(&result);
+    call.api_id=VMWEAVE_API_RUNTIME_FREE;call.args.free_handle=retained;
+    assert(!vmweave_cuda_exec_call(s,&call,&result)&&!result.api_result);
+    vmweave_cuda_result_release(&result);
+    call.api_id=VMWEAVE_API_RUNTIME_MALLOC;call.args.allocation_bytes=1024;
+    assert(!vmweave_cuda_exec_call(s,&call,&result)&&!result.api_result&&result.handle!=retained);
+    vmweave_cuda_result_release(&result);
     if(argc>1){
         call.args.allocation_bytes=4097;
-        assert(!flyt_cuda_exec_call(s,&call,&result)&&result.api_result==700);
-        flyt_cuda_result_release(&result);
-        assert(flyt_cuda_exec_check(s)==FLYT_SHM_CHANNEL_CLOSED);
-        uint32_t fatal=0;assert(flyt_cuda_exec_destroy(&s,&fatal)==FLYT_SHM_INTERNAL_ERROR&&fatal==700&&s);
+        assert(!vmweave_cuda_exec_call(s,&call,&result)&&result.api_result==700);
+        vmweave_cuda_result_release(&result);
+        assert(vmweave_cuda_exec_check(s)==VMWEAVE_SHM_CHANNEL_CLOSED);
+        uint32_t fatal=0;assert(vmweave_cuda_exec_destroy(&s,&fatal)==VMWEAVE_SHM_INTERNAL_ERROR&&fatal==700&&s);
         puts("PASS: non-OOM failure remains terminal and extensions reject the session");
         return 0; /* Supervisor process exit owns poisoned-context cleanup. */
     }
-    uint32_t error=0;assert(!flyt_cuda_exec_destroy(&s,&error)&&!error&&!s);
-    assert(flyt_cuda_exec_check(s)==FLYT_SHM_BAD_DESCRIPTOR);
+    uint32_t error=0;assert(!vmweave_cuda_exec_destroy(&s,&error)&&!error&&!s);
+    assert(vmweave_cuda_exec_check(s)==VMWEAVE_SHM_BAD_DESCRIPTOR);
     puts("PASS: OOM preserves existing allocation, free, retry and clean shutdown");
 }

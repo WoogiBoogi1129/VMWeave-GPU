@@ -5,7 +5,7 @@ VMWeave Operator 이미지는 VM의 OS 이미지가 아닙니다. 다음 세 가
 | 산출물 | 역할 |
 |---|---|
 | Guest OS containerDisk | KubeVirt가 부팅하는 QCOW2 디스크가 포함된 이미지 |
-| Guest artifact | `libflyt_guest.so`와 실행할 CUDA 프로그램 |
+| Guest artifact | `libvmweave_guest.so`와 실행할 CUDA 프로그램 |
 | Worker/helper/hook image | 사용자 namespace에서 GPU 실행·backing·domain XML 처리를 수행 |
 
 `images/vmweave/Runtime.Containerfile`의 `guest-artifacts` target은 라이브러리 묶음입니다.
@@ -70,11 +70,11 @@ docker build -f images/vmweave/Runtime.Containerfile --target build -t vmweave-r
 mkdir -p .local/guest-artifacts
 docker run --rm -v "$PWD:/repo:ro" -v "$PWD/.local/guest-artifacts:/out" \
   vmweave-runtime-build:local sh -ec '
-    cp /opt/flyt/lib/libflyt_guest.so /out/
+    cp /opt/vmweave/lib/libvmweave_guest.so /out/
     gcc -O2 -I/usr/local/cuda/include /repo/experiments/evidence/guest_gpu_smoke.c \
-      -L/opt/flyt/lib -Wl,-rpath,\$ORIGIN -lflyt_guest -o /out/guest-gpu-smoke
+      -L/opt/vmweave/lib -Wl,-rpath,\$ORIGIN -lvmweave_guest -o /out/guest-gpu-smoke
     gcc -x c -O2 -I/usr/local/cuda/include /repo/experiments/evidence/memory_probe.cu \
-      -L/opt/flyt/lib -Wl,-rpath,\$ORIGIN -lflyt_guest -o /out/memory-probe-guest
+      -L/opt/vmweave/lib -Wl,-rpath,\$ORIGIN -lvmweave_guest -o /out/memory-probe-guest
   '
 sha256sum .local/guest-artifacts/*
 ```

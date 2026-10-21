@@ -55,20 +55,20 @@ class Stage2Evidence(unittest.TestCase):
 class TraceOptIn(unittest.TestCase):
     def test_trace_is_explicit_opt_in_and_preserves_error_domains(self):
         source='''#define _POSIX_C_SOURCE 200809L
-#include "flyt_trace.h"
+#include "vmweave_trace.h"
 int main(void){
-uint8_t allocation[16]={1},payload[8]={0};flyt_put(payload,1048576,8);
-struct flyt_shm_request q={.request_id=7,.api_id=FLYT_API_RUNTIME_MALLOC,.input=payload,.input_bytes=8};
-struct flyt_shm_response r={.result_domain=FLYT_RESULT_CUDA_RUNTIME,.api_result=2};
-flyt_trace("guest","submit",allocation,&q,NULL);flyt_trace("guest","receive",allocation,&q,&r);return 0;}
+uint8_t allocation[16]={1},payload[8]={0};vmweave_put(payload,1048576,8);
+struct vmweave_shm_request q={.request_id=7,.api_id=VMWEAVE_API_RUNTIME_MALLOC,.input=payload,.input_bytes=8};
+struct vmweave_shm_response r={.result_domain=VMWEAVE_RESULT_CUDA_RUNTIME,.api_result=2};
+vmweave_trace("guest","submit",allocation,&q,NULL);vmweave_trace("guest","receive",allocation,&q,&r);return 0;}
 '''
         with tempfile.TemporaryDirectory() as directory:
             d=Path(directory);(d/'trace.c').write_text(source)
             includes=['runtime/shm/include','runtime/shm/cuda-dispatch/include','runtime/shm/shm-queue/include','runtime/shm/shm-contract/include']
             subprocess.run(['cc','-std=c11','-Wall','-Wextra','-Werror',*[f'-I{ROOT/p}' for p in includes],str(d/'trace.c'),'-o',str(d/'trace')],check=True)
-            env=os.environ.copy();env.pop('FLYT_TRACE_REQUESTS',None)
+            env=os.environ.copy();env.pop('VMWEAVE_TRACE_REQUESTS',None)
             for flag in [None,'0','true','1']:
-                if flag is not None:env['FLYT_TRACE_REQUESTS']=flag
+                if flag is not None:env['VMWEAVE_TRACE_REQUESTS']=flag
                 result=subprocess.run([str(d/'trace')],env=env,text=True,capture_output=True,check=True)
                 if flag!='1':self.assertEqual(result.stderr,'');continue
                 rows=parse(result.stderr);self.assertEqual(len(rows),2)

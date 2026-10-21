@@ -1,11 +1,14 @@
 cmake_minimum_required(VERSION 3.18)
-project(flyt_shm_queue LANGUAGES C)
+include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Compatibility.cmake)
+project(vmweave_shm_queue LANGUAGES C)
 # CPU-only queue library; no CUDA or RPC dependency.
 find_package(Threads REQUIRED)
-add_library(flyt_shm_queue STATIC src/queue.c src/perf.c)
-target_compile_features(flyt_shm_queue PUBLIC c_std_11)
-target_include_directories(flyt_shm_queue PUBLIC
+add_library(vmweave_shm_queue STATIC src/queue.c src/perf.c)
+target_compile_features(vmweave_shm_queue PUBLIC c_std_11)
+target_include_directories(vmweave_shm_queue PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
     "${CMAKE_CURRENT_SOURCE_DIR}/../shm-contract/include")
-target_link_libraries(flyt_shm_queue PUBLIC Threads::Threads)
-set_target_properties(flyt_shm_queue PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(vmweave_shm_queue PUBLIC Threads::Threads)
+set_target_properties(vmweave_shm_queue PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+vmweave_legacy_target(vmweave_shm_queue flyt_shm_queue)

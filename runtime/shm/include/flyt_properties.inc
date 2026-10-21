@@ -1,3 +1,4 @@
+/* Legacy source compatibility; canonical file is vmweave_properties.inc. */
 /* CUDA 12.8 property wire schema 1, explicit little-endian fields.
  * Generated from the pinned SDK field order, excluding reserved padding. */
 FLYT_PROP_BYTES(name,256)

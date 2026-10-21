@@ -61,12 +61,12 @@ kubectl -n team-a wait sharedmemorychannel/gpu-vm \
   --for=jsonpath='{.status.phase}'=Ready --timeout=180s
 ```
 
-Profile에는 `flyt-shm-session-worker`가 포함된 새 Worker digest를 지정합니다.
+Profile에는 `vmweave-shm-session-worker`가 포함된 새 Worker digest를 지정합니다.
 VM 부팅 시 Operator가 현재 layout을 config drive로 전달하므로 수동 layout 복사가
 필요 없습니다. Guest에서 새 로그인 후 아래 환경으로 지원되는 CUDA 프로그램을 실행합니다.
 
 ```sh
-FLYT_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/flyt/lib ./gpu-program
+VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/vmweave/lib ./gpu-program
 ```
 
 프로그램 종료와 SIGKILL은 해당 CUDA 세션만 정리합니다. 현재는 활성 프로그램 한 개를

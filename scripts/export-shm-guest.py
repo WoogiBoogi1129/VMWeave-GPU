@@ -20,7 +20,7 @@ if __name__=='__main__':
     layout,_=make_layout(s['allocation'],s['generation'],s['sessions']);a.output.mkdir(mode=0o700)
     files={'layout.bin':layout,'binding.json':json.dumps({'channelUID':c['metadata']['uid'],'generation':s['generation'],
         'vmiUID':s['vmiUID'],'workerPodUID':s['workerPodUID'],'slot':a.slot},indent=2).encode(),
-        'guest.env':('FLYT_LAYOUT=/etc/flyt/layout.bin\nFLYT_IVSHMEM_BDF='+a.bdf+'\nFLYT_SLOT='+str(a.slot)+'\nLD_PRELOAD=/opt/flyt/guest/libflyt_guest.so\n').encode()}
+        'guest.env':('VMWEAVE_LAYOUT=/etc/flyt/layout.bin\nVMWEAVE_IVSHMEM_BDF='+a.bdf+'\nVMWEAVE_SLOT='+str(a.slot)+'\nLD_PRELOAD=/opt/vmweave/guest/libvmweave_guest.so\n').encode()}
     for name,data in files.items():
         fd=os.open(a.output/name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
         with os.fdopen(fd,'wb') as f:f.write(data)

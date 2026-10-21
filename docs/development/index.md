@@ -32,7 +32,7 @@ bash scripts/test-shm-training.sh "$PWD/.local/shm-build"
 ```
 
 회귀 스크립트는 CUDA 헤더/라이브러리를 사용하지만 실제 GPU 실행을 대체하지 않습니다.
-Go Operator는 별도 이미지로 빌드합니다. 런타임 내부 설치 경로는 ABI 호환을 위해 유지합니다.
+Go Operator는 별도 이미지로 빌드합니다. 런타임은 `/opt/vmweave`를 사용하며 기존 `/opt/flyt` 경로는 호환 alias로 제공합니다.
 
 ```sh
 docker build -f images/vmweave/Operator.Containerfile -t vmweave-operator:test .

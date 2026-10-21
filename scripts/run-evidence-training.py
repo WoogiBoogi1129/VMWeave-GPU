@@ -20,13 +20,13 @@ ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--name',required=True);p.add_argument('--key',required=True,type=Path)
 p.add_argument('--bundle',required=True,type=Path,help='tar.gz with opt/torch-venv and opt/flyt-cuda-libs')
-p.add_argument('--artifacts',required=True,type=Path,help='libflyt_guest.so, libnuma.so.1, libgomp.so.1')
+p.add_argument('--artifacts',required=True,type=Path,help='libvmweave_guest.so, libnuma.so.1, libgomp.so.1')
 p.add_argument('--fixture',required=True,type=Path);p.add_argument('--output',required=True,type=Path)
 p.add_argument('--barrier',type=Path);p.add_argument('--timeout',type=int,default=600)
 a=p.parse_args()
 if not re.fullmatch(r'evidence-[a-z0-9-]+',a.name):p.error('evidence VM name required')
 a.output.mkdir(parents=True,exist_ok=False);ns='flyt-evidence';channel=a.name+'-channel'
-remote='/opt/flyt-evidence';start=time.monotonic();timeline=[];process=None
+remote='/opt/vmweave-evidence';start=time.monotonic();timeline=[];process=None
 def save(name,value):(a.output/name).write_text(json.dumps(value,indent=2))
 def event(state,**values):
     timeline.append({'state':state,'seconds':time.monotonic()-start,**values});save('timeline.json',timeline)
@@ -46,7 +46,7 @@ initial=get('flytsharedmemorychannel',channel)
 if not initial or initial['status']['phase']!='BackingReady' or initial['spec']['sessions']!=1:
     raise ValueError('fresh BackingReady single-session allocation required')
 save('channel-before.json',initial)
-files=[a.bundle,a.fixture,a.artifacts/'libflyt_guest.so',a.artifacts/'libnuma.so.1',a.artifacts/'libgomp.so.1',
+files=[a.bundle,a.fixture,a.artifacts/'libvmweave_guest.so',a.artifacts/'libnuma.so.1',a.artifacts/'libgomp.so.1',
        ROOT/'experiments/evidence/train.py',ROOT/'experiments/evidence/guest_training_suite.py',Path(__file__)]
 save('manifest.json',{'phase':'development','formal_result':False,'name':a.name,
     'channel_uid':initial['metadata']['uid'],'channel_spec':initial['spec'],
@@ -73,10 +73,10 @@ try:
     command('test ! -e /opt/torch-venv && sudo mkdir -p '+remote+' && sudo chown ubuntu:ubuntu '+remote,check=True,timeout=15)
     with a.bundle.open('rb') as bundle,(a.output/'bootstrap.log').open('w') as log:
         command('sudo tar -xz -C / opt/torch-venv opt/flyt-cuda-libs',stdin=bundle,stdout=log,stderr=log,check=True,timeout=300)
-    transfer=[a.artifacts/'libflyt_guest.so',a.artifacts/'libnuma.so.1',a.artifacts/'libgomp.so.1',a.fixture,
+    transfer=[a.artifacts/'libvmweave_guest.so',a.artifacts/'libnuma.so.1',a.artifacts/'libgomp.so.1',a.fixture,
               *(ROOT/'experiments/evidence'/f for f in ['train.py','evidence.py','config.json','guest_training_suite.py'])]
     subprocess.run(scp+[str(f) for f in transfer]+['ubuntu@'+ip+':'+remote+'/'],check=True,timeout=120)
-    command('ln -s libflyt_guest.so '+remote+'/libcuda.so.1',check=True,timeout=10)
+    command('ln -s libvmweave_guest.so '+remote+'/libcuda.so.1',check=True,timeout=10)
     discovery="from pathlib import Path; print(chr(10).join(p.name for p in Path('/sys/bus/pci/devices').iterdir() if (p/'vendor').read_text().strip()=='0x1af4' and (p/'device').read_text().strip()=='0x1110'))"
     bdf=subprocess.check_output(ssh+['python3 -c '+shlex.quote(discovery)],text=True,timeout=10).strip()
     if not re.fullmatch(r'[0-9a-f]{4}:[0-9a-f]{2}:[0-9a-f]{2}\.[0-7]',bdf):raise ValueError('One ivshmem device required')
@@ -90,7 +90,7 @@ try:
     if a.barrier:
         a.barrier.mkdir(parents=True,exist_ok=True);(a.barrier/(a.name+'.ready')).write_text(ip);event('BarrierReady')
         wait(lambda:(a.barrier/'start').exists(),'start barrier',300)
-    env=f'FLYT_LAYOUT={remote}/layout.bin FLYT_IVSHMEM_BDF={bdf} FLYT_SLOT=0 FLYT_MIRROR_DEVICE_VA=1 LD_LIBRARY_PATH={remote}:/opt/flyt-cuda-libs LD_PRELOAD={remote}/libflyt_guest.so'
+    env=f'VMWEAVE_LAYOUT={remote}/layout.bin VMWEAVE_IVSHMEM_BDF={bdf} VMWEAVE_SLOT=0 VMWEAVE_MIRROR_DEVICE_VA=1 LD_LIBRARY_PATH={remote}:/opt/vmweave-cuda-libs LD_PRELOAD={remote}/libvmweave_guest.so'
     cmd=f'sudo env {env} /opt/torch-venv/bin/python {remote}/guest_training_suite.py --spec {remote}/suite-spec.json --out {remote}/results --hold-seconds 180'
     with (a.output/'guest-stdout.txt').open('w') as stdout,(a.output/'guest-stderr.txt').open('w') as stderr:
         process=subprocess.Popen(ssh+[cmd],stdout=stdout,stderr=stderr);event('TrainingStarted')

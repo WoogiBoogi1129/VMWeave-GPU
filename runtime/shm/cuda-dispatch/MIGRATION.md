@@ -1,6 +1,6 @@
 # 기존 handler에서 새 실행 경계로의 이관
 
-소스 확인 대상은 인접한 `flyt_custom_for_k8s/cpu`의 runtime/client/resource-map 구현과
+소스 확인 대상은 인접한 `vmweave_custom_for_k8s/cpu`의 runtime/client/resource-map 구현과
 이 저장소의 단계별 패치다. 외부 소스 checkout은 수정하지 않았다. 재현용 원본 SHA는
 루트 `versions.lock.yaml`의 `596a86939bae125d127a9ed6f70d92c332f47644`이며,
 기존 patch series 및 2·3·5·7단계 변경은 보존된다. 새 모듈은 별도 소스다.
@@ -21,14 +21,14 @@
 변환해야 한다. 이 변환 전에 기존 `ptr_result` 값을 새 handle로 단순 대체하면 안 된다.
 kernel 인자에 든 device pointer와 라이브러리 opaque handle도 API별로 변환해야 한다.
 
-10-01의 `flyt_cuda_dispatch` 구현은 다음 순서로 연결한다.
+10-01의 `vmweave_cuda_dispatch` 구현은 다음 순서로 연결한다.
 
 1. 채널/세션 generation, session ID 및 단조 증가 request ID를 검증한다.
 2. descriptor와 payload를 Host-private 영역으로 snapshot하고 전체 범위/버전/길이를 검사한다.
-3. 지원 API와 payload schema를 확인한 뒤 typed `flyt_cuda_call`로 decode한다.
+3. 지원 API와 payload schema를 확인한 뒤 typed `vmweave_cuda_call`로 decode한다.
 4. 응답 영역과 필요한 출력 용량을 CUDA 부작용 **전에** 확보한다. Malloc 실행 후 응답 공간이
    없다는 이유로 요청을 다시 실행하지 않는다. timeout 이후도 재실행하지 않는다.
-5. `flyt_cuda_exec_call`을 호출하고 status/domain/API 결과와 output을 encode한다.
+5. `vmweave_cuda_exec_call`을 호출하고 status/domain/API 결과와 output을 encode한다.
 6. response publication을 완료한 뒤 result 버퍼를 release한다. publication 실패 시 세션을
    실패 처리하고 실행 결과가 불명확함을 표시한다. 새 request ID로 재시도하지 않는다.
 

@@ -19,7 +19,7 @@ Guest interception과 payload 변환은 10-06, async/Graph/라이브러리는 10
 
 | 파일 | 책임 |
 |---|---|
-| `include/flyt_cuda_exec.h` | Host-private typed call/result, backend 함수 표, 세션 API |
+| `include/vmweave_cuda_exec.h` | Host-private typed call/result, backend 함수 표, 세션 API |
 | `src/exec.c` | API dispatch, 세션별 allocation handle, 범위 검사, 결과 버퍼 소유권, 종료 |
 | `src/runtime.c` | RPC 호출 없이 CUDA Runtime API를 직접 호출하는 backend |
 | `CMakeLists.txt` | CPU core와 선택적 CUDA backend의 별도 static library 구성 |
@@ -28,8 +28,8 @@ Guest interception과 payload 변환은 10-06, async/Graph/라이브러리는 10
 
 `svc_req`, RPC socket fd, XDR union, rpcgen stub은 실행 모듈의 입력이 아니다.
 10-01의 API ID·오류 상수는 재사용하지만 native C struct는 wire ABI가 아니다.
-`flyt_cuda_exec_call`은 이미 decode된 Host-private 호출을 받는다.
-10-01의 `flyt_cuda_dispatch`, `flyt_shm_submit`, `flyt_shm_receive`는 아직 선언만 존재한다.
+`vmweave_cuda_exec_call`은 이미 decode된 Host-private 호출을 받는다.
+10-01의 `vmweave_cuda_dispatch`, `vmweave_shm_submit`, `vmweave_shm_receive`는 아직 선언만 존재한다.
 SHM payload decoder를 임의로 완성된 것으로 처리하지 않는다.
 
 ## 구현된 실행 범위
@@ -41,7 +41,7 @@ SHM payload decoder를 임의로 완성된 것으로 처리하지 않는다.
 | Malloc / Free | 실제 CUDA 호출, Host 주소 대신 세션별 단조 증가 handle 반환 |
 | Memcpy | HtoD / DtoH / DtoD, handle + offset + bytes 검사 |
 | DeviceSynchronize | 세션 전용 프로세스의 CUDA 동기화 |
-| 나머지 API ID | backend 호출 없이 `FLYT_SHM_UNSUPPORTED_API` |
+| 나머지 API ID | backend 호출 없이 `VMWEAVE_SHM_UNSUPPORTED_API` |
 
 Driver API, kernel/module/function, stream/event, Graph, pinned/managed/async allocation,
 cuBLAS/cuDNN 등은 아직 지원하지 않는다. PyTorch를 실행할 수 있다는 의미가 아니다.
@@ -61,9 +61,9 @@ HAMi 메모리 quota를 별도 allocation 합계로 다시 제한하지 않으�
 - 한 copy는 최대 16 MiB다. 초과 요청과 알 수 없는 handle은 transport 오류다.
   0-byte copy도 유효한 device handle을 요구한다. 이 초기 제한을 CUDA 전체 호환성으로 보지 않는다.
 - HtoD는 Host-private snapshot을 사용하고 DtoH 결과는 모듈 소유 버퍼에 받는다.
-  adapter는 결과를 response 영역에 복사한 후 `flyt_cuda_result_release`를 호출한다.
+  adapter는 결과를 response 영역에 복사한 후 `vmweave_cuda_result_release`를 호출한다.
   결과 구조체 재사용 전에도 release가 필요하다. 공유 영역 포인터를 직접 넘기면 안 된다.
-- transport 성공과 CUDA 성공은 다르다. `status == FLYT_SHM_OK`일 때만 Runtime domain의
+- transport 성공과 CUDA 성공은 다르다. `status == VMWEAVE_SHM_OK`일 때만 Runtime domain의
   `api_result`를 해석한다. CUDA 오류에는 결과 payload/handle을 반환하지 않는다.
 - allocation의 OOM(CUDA Runtime error 2)은 원래 오류를 반환하고 기존 할당의 해제·작은 요청
   재시도를 허용한다. 2026-09-22 실제 VM 시험에서 OOM 후 세션 종료가 잘못된 동작임을
@@ -89,7 +89,7 @@ generation 확인 **이후** 호출해야 한다. open 자체는 device count/or
 ## 빌드 구성과 검증 상태
 
 CMake는 기본적으로 CUDA SDK 없는 CPU core만 대상으로 하고, 명시적으로
-`FLYT_BUILD_CUDA_RUNTIME=ON`을 지정하면 CUDA 12.8 이상 Toolkit의 shared cudart에 연결하도록
+`VMWEAVE_BUILD_CUDA_RUNTIME=ON`을 지정하면 CUDA 12.8 이상 Toolkit의 shared cudart에 연결하도록
 작성했다. static library 형태이며 자동 실행, 이미지 제작, 배포, CI는 추가하지 않았다.
 기존 이미지가 새 코드를 자동으로 포함하지 않는다. shared cudart 사용만으로 HAMi interception이
 검증되는 것은 아니며, 후속 이미지 통합 시 preload와 실제 진입 경로 검증이 필요하다.

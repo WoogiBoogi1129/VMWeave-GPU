@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run with FLYT_GUEST_LIBRARY pointing to a freshly built guest library.
+"""Run with VMWEAVE_GUEST_LIBRARY pointing to a freshly built guest library.
 
 Exercises the shared layout reader used by both Guest and Worker, including
 the actual fsGroup permission change observed on a Kubernetes local PVC.
@@ -18,9 +18,9 @@ from provision import make_layout
 class LayoutPermissions(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.library = ctypes.CDLL(os.environ['FLYT_GUEST_LIBRARY'])
-        cls.library.flyt_layout_read.argtypes = [ctypes.c_char_p, ctypes.c_void_p]
-        cls.library.flyt_layout_read.restype = ctypes.c_int
+        cls.library = ctypes.CDLL(os.environ['VMWEAVE_GUEST_LIBRARY'])
+        cls.library.vmweave_layout_read.argtypes = [ctypes.c_char_p, ctypes.c_void_p]
+        cls.library.vmweave_layout_read.restype = ctypes.c_int
 
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
@@ -31,7 +31,7 @@ class LayoutPermissions(unittest.TestCase):
 
     def read(self, mode):
         self.path.chmod(mode)
-        return self.library.flyt_layout_read(os.fsencode(self.path), ctypes.create_string_buffer(4096))
+        return self.library.vmweave_layout_read(os.fsencode(self.path), ctypes.create_string_buffer(4096))
 
     def test_original_private_group_readable_layout(self):
         self.assertEqual(self.read(0o640), 0)
