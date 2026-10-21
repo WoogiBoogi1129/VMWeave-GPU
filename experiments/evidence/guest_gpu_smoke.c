@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <time.h>
 
-extern int flytRegisterKernelABI(CUfunction,unsigned,const unsigned char*,const unsigned char*);
+extern int vmweaveRegisterKernelABI(CUfunction,unsigned,const unsigned char*,const unsigned char*);
 #define CHECK(x) do { int e=(int)(x); if(e){fprintf(stderr,"%s failed: %d\n",#x,e);return 1;} } while(0)
 static const char ptx[]=
     ".version 7.0\n.target sm_70\n.address_size 64\n"
@@ -27,7 +27,7 @@ int main(int argc,char **argv){
     if(memcmp(src,dst,sizeof(src)))return 3;
     CUmodule module;CUfunction function;CHECK(cuModuleLoadData(&module,ptx));
     CHECK(cuModuleGetFunction(&function,module,"write_value"));
-    const unsigned char sizes[]={8,4},pointers[]={1,0};CHECK(flytRegisterKernelABI(function,2,sizes,pointers));
+    const unsigned char sizes[]={8,4},pointers[]={1,0};CHECK(vmweaveRegisterKernelABI(function,2,sizes,pointers));
     CUdeviceptr ptr=(CUdeviceptr)(uintptr_t)memory;
     struct timespec started,now;clock_gettime(CLOCK_MONOTONIC,&started);
     unsigned repeats=0;

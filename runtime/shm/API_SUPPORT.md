@@ -26,7 +26,7 @@ cudaMalloc의 일반 메모리 부족은 session의 치명적 오류가 아니�
 작은 요청을 재시도할 수 있어야 한다. 나머지 불확실한 CUDA 오류의 보수적 종료는 유지한다.
 `allocation_oom_recovery.c`와 실제 VM의 OOM 후 재할당으로 이 구분을 검증했다.
 
-기존 GPU smoke는 text PTX module과 `flytRegisterKernelABI`로 명시한 인자를 사용한다.
+기존 GPU smoke는 text PTX module과 `vmweaveRegisterKernelABI`로 명시한 인자를 사용한다.
 이 경로와 기존 opcode는 유지한다. 새 학습 경로는 아래의 명시적 opt-in을 사용한다.
 `scripts/audit-pytorch-shm-abi.py`는 정적 import coverage이며 실제 실행의 증거가 아니다.
 

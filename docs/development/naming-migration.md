@@ -1,4 +1,4 @@
-# VMWeave 명칭 전환 (v0.5.0)
+# VMWeave 명칭 전환 (v0.5.1)
 
 현재 실행 코드와 설정의 기본 이름을 `VMWEAVE_*`, `vmweave_*`,
 `vmweave-shm-*`, `/opt/vmweave`로 통일합니다. 상태 캐시는
@@ -10,6 +10,7 @@
 |---|---|---|
 | 환경변수 | `VMWEAVE_*` | 새 변수가 없을 때만 `FLYT_*` fallback; `0`과 빈 문자열도 새 값 우선 |
 | C API | `vmweave_*` | 공개 `flyt_*` 심볼은 동일 주소의 ABI alias |
+| CUDA 확장 | `vmweaveRegisterKernelABI` | `flytRegisterKernelABI`는 동일 주소의 ABI alias |
 | 헤더 | `vmweave_*.h` | `flyt_*.h`는 canonical 헤더와 식별자 매핑을 제공하는 deprecated wrapper |
 | 라이브러리 | `libvmweave_guest.so` | `libflyt_guest.so` symlink |
 | 실행 파일 | `vmweave-shm-worker`, `vmweave-shm-session-worker` | 기존 실행 파일명 symlink |

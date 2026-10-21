@@ -40,6 +40,8 @@ class EnvironmentTests(unittest.TestCase):
     @unittest.skipUnless(os.getenv('VMWEAVE_TEST_GUEST_LIBRARY'),'requires built Guest library')
     def test_abi_aliases_have_identical_addresses(self):
         lib=ctypes.CDLL(os.environ['VMWEAVE_TEST_GUEST_LIBRARY'])
+        self.assertEqual(ctypes.cast(lib.flytRegisterKernelABI,ctypes.c_void_p).value,
+                         ctypes.cast(lib.vmweaveRegisterKernelABI,ctypes.c_void_p).value)
         for name in ('guest_exchange','broker_exchange','broker_close','broker_cache_stats','guest_lock','shm_open'):
             old=ctypes.cast(getattr(lib,'flyt_'+name),ctypes.c_void_p).value
             new=ctypes.cast(getattr(lib,'vmweave_'+name),ctypes.c_void_p).value

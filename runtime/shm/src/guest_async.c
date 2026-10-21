@@ -63,7 +63,7 @@ CUresult cuModuleGetFunction(CUfunction *f,CUmodule m,const char *name){
  * device-pointer parameters must be 8 bytes. No automatic PyTorch registration.
  */
 static struct {CUfunction function;unsigned count;unsigned char sizes[64],pointers[64];} signatures[4096];
-int flytRegisterKernelABI(CUfunction f,unsigned count,const unsigned char *sizes,const unsigned char *pointers){
+int vmweaveRegisterKernelABI(CUfunction f,unsigned count,const unsigned char *sizes,const unsigned char *pointers){
     if(!f||count>64||(count&&(!sizes||!pointers)))return 1;
     for(unsigned j=0;j<count;j++)if(!sizes[j]||sizes[j]>16||pointers[j]>1||(pointers[j]&&sizes[j]!=8))return 1;
     pthread_mutex_lock(&vmweave_guest_lock);unsigned i;for(i=0;i<4096;i++)if(!signatures[i].function||signatures[i].function==f)break;
@@ -86,3 +86,6 @@ CUresult cuLaunchKernel(CUfunction f,unsigned gx,unsigned gy,unsigned gz,unsigne
     e=vmweave_guest_exchange(VMWEAVE_KERNEL_LAUNCH,in,48+24*count,NULL,0,&got);
 done:pthread_mutex_unlock(&vmweave_guest_lock);return (CUresult)e;
 }
+
+/* Legacy extension ABI shares the canonical registration table and lock. */
+extern __typeof__(vmweaveRegisterKernelABI) flytRegisterKernelABI __attribute__((alias("vmweaveRegisterKernelABI")));
