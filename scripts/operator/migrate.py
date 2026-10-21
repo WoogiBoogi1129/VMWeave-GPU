@@ -27,7 +27,7 @@ if blocked:raise SystemExit('unreleased legacy allocations block migration; see 
 for d in items('deployments'):
  for c in d['spec']['template']['spec']['containers']:
   env={x['name']:x.get('value') for x in c.get('env',[])}
-  if env.get('VMWEAVE_MODE')=='active' and d['spec'].get('replicas',1)>0:raise SystemExit('stop legacy deployment first: '+d['metadata']['name'])
+  if ('active' in (env.get('VMWEAVE_MODE'),env.get('FLYT_MODE'))) and d['spec'].get('replicas',1)>0:raise SystemExit('stop legacy deployment first: '+d['metadata']['name'])
 if items('virtualmachineinstances.kubevirt.io'):raise SystemExit('VMI still running; stop before migration')
 # Validate every dependency before creating any new object.
 profile_uids={x['metadata']['uid'] for x in old['gpuprofiles']}

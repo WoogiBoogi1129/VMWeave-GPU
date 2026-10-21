@@ -25,14 +25,17 @@ layer = a.output.parent / 'control-plane-layer.tar'
 with tarfile.open(layer, 'w') as tar:
     for source in sorted((root / 'runtime/shm/control').glob('*.py')):
         data = source.read_bytes()
-        info = tarfile.TarInfo('opt/flyt/control/' + source.name)
+        info = tarfile.TarInfo('opt/vmweave/control/' + source.name)
         info.size, info.mode, info.mtime = len(data), 0o644, 0
         tar.addfile(info, io.BytesIO(data))
+        alias = tarfile.TarInfo('opt/flyt/control/' + source.name)
+        alias.type, alias.linkname = tarfile.SYMTYPE, '/opt/vmweave/control/' + source.name
+        tar.addfile(alias)
 subprocess.run([a.crane, 'mutate', '--platform', 'linux/amd64', base,
     '--append', str(layer), '--output', str(a.output),
     '--entrypoint', 'python3,/opt/vmweave/control/control_plane.py', '--cmd=',
     '--user', '65532:65532', '--workdir', '/opt/vmweave/control',
-    '--env', 'PYTHONDONTWRITEBYTECODE=1', '--env', 'PYTHONUNBUFFERED=1', '--env', 'VMWEAVE_MODE=review',
+    '--env', 'PYTHONDONTWRITEBYTECODE=1', '--env', 'PYTHONUNBUFFERED=1',
     '--exposed-ports', '8080/tcp,8443/tcp',
     '--label', 'org.opencontainers.image.source=https://github.com/WoogiBoogi1129/VMWeave-GPU',
     '--label', 'org.opencontainers.image.revision=' + revision], check=True)
