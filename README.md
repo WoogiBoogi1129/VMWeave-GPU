@@ -36,7 +36,7 @@ python3 -m venv .local/docs-venv
 .local/docs-venv/bin/mkdocs serve
 ```
 
-- 최신 공개 릴리스: [v0.4.0 이미지·Helm 차트](docs/getting-started/release-v0.4.0.md)
+- 최신 공개 릴리스: [v0.5.2 이미지·Helm 차트](docs/getting-started/release-v0.5.2.md)
 - HAMi DRA 배포: [Driver·DeviceClass·GPUProfile 설정](docs/getting-started/hami-dra.md)
 - Deployment guide (English): [Deploying to another cluster](docs/getting-started/portable-deployment.en.md)
 - 다른 클러스터 배포: [배포 패키지·Helm·Guest·검증 절차](docs/getting-started/portable-deployment.md)

@@ -1,0 +1,40 @@
+{
+  "sourceRevision": "4f2ad748aa9fb9892e3e72ab18e559d6d8f81800",
+  "tag": "v0.5.2",
+  "scope": "Published images/chart and live GPU/math-cache API verification on gpu-4. Classic upstream HAMi 2.10.0 retained; vmweave-hami published separately. Image revision labels are not cryptographic provenance.",
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:9152aaea2323e7d779faa9851ac5d69f19d64cfdaa8a16371b19955956bc2d05",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:650c56233043dc4bae61bbd4e3793cc46f9ddf759034972e3d8d3492a72b0192",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:49b2dc7ba08a1ad69bbf69de64ececcb30a31e69ce72d84a5604155090b769d4",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:252bcd842770f35f2ae6c611fb6b8a508f10f3131daaaaeb43a026d92c26a764",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:ce860652ce5cd252731b2bd861a4fbd62c0bec3fe4de636fecb633aeb0299273",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+  },
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.5.2",
+    "digest": "sha256:3c287a5ef9241c812060ac12a0794fd8fcb9e93cb89d9f04162ce560fea7a895"
+  },
+  "workflows": {
+    "v0.5.2:hami-dra-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864830",
+    "v0.5.2:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864770",
+    "v0.5.2:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864765",
+    "v0.5.2:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864764",
+    "v0.5.2:hami-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864732",
+    "main:Documentation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861433",
+    "main:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861430",
+    "main:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861406",
+    "main:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861402",
+    "main:CPU control plane": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861391"
+  },
+  "verification": {
+    "imageMetadataAndRevision": "PASS",
+    "chartDownloadAndContent": "PASS",
+    "guestDownloadAndChecksums": "PASS",
+    "publishedGuestRegression": "PASS: math 16, state 20",
+    "clusterExecution": "PASS: published Guest/Worker copy/PTX kernel with default and enabled cache; BLAS modes, duplicate hits, dlsym, handles, threads, invalid enum and create/destroy. No production fault injection.",
+    "draDriverRollout": "PASS: ready, prior device-selection configuration preserved; allocation workload not rerun."
+  },
+  "publishedDateKST": "2026-10-22"
+}

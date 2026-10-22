@@ -21,7 +21,7 @@ CUDA 실행 성공과 성능 검증을 각각 확인해야 합니다.
 
 1. 새 설치에서 active 또는 선택 진단용 [CPU review](cpu-control-plane.md)를 고릅니다.
    review를 먼저 설치할 필요는 없습니다. 기존 review에서 active로 바꾸려면 [유지보수 절차](../guides/upgrade-uninstall.md)를 따릅니다.
-2. [공개 v0.5.1 산출물](release-v0.5.1.md)을 확보하고 Worker·Guest·Hook digest를 기록합니다.
+2. [공개 v0.5.2 산출물](release-v0.5.2.md)을 확보하고 Worker·Guest·Hook digest를 기록합니다.
    직접 빌드하는 경우 [런타임 빌드](../development/index.md)를 따릅니다.
 3. [중앙 설치](install.md)의 active 설정에 사용자 namespace를 등록합니다.
 4. 승인 Profile, 정지 VM, Request, Channel과 로컬 PVC를 준비합니다.

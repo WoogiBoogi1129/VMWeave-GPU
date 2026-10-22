@@ -6,7 +6,7 @@
 
 ## v0.4.0 및 DRA 업데이트
 
-[릴리스 가이드](../getting-started/release-v0.4.0.md)의 Operator digest와 차트를 사용합니다.
+[릴리스 가이드](../getting-started/release-v0.5.2.md)의 Operator digest와 차트를 사용합니다.
 이전 values·CRD·사용자 리소스를 백업하고, 활성 GPU 세션을 회수한 뒤
 새 CRD를 server-side dry-run으로 검증·적용합니다. Helm upgrade만으로는 CRD가 갱신되지 않습니다.
 기존 namespace·TLS·노드 설정을 유지한 values로 Operator와 RBAC를 함께 업데이트합니다.

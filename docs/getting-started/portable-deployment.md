@@ -27,10 +27,10 @@ sm_70을 사용하므로 대상 GPU·드라이버에서 이 PTX를 지원하는�
 
 ## 1. 릴리스 산출물 확보
 
-게시된 최신 버전: [v0.5.1 산출물·다운로드·검증 기록](release-v0.5.1.md).
+게시된 최신 버전: [v0.5.2 산출물·다운로드·검증 기록](release-v0.5.2.md).
 이전 버전: [v0.3.0](release-v0.3.0.md).
 
-공개 이미지 7종과 digest는 [v0.5.1 release lock](../../deploy/releases/v0.5.1.json)에 있습니다.
+공개 이미지 7종과 digest는 [v0.5.2 release lock](../../deploy/releases/v0.5.2.json)에 있습니다.
 일반 HAMi는 `vmweave-hami`, DRA는 `vmweave-hami-dra`를 사용합니다.
 나머지 Operator·Helper·Worker·Hook·Guest artifacts는 공통입니다.
 과거 Flyt `v1.0.0` 이미지를 현재 배포판으로 사용하지 않습니다.
@@ -38,12 +38,12 @@ sm_70을 사용하므로 대상 GPU·드라이버에서 이 PTX를 지원하는�
 전용 작업 디렉터리에 릴리스 소스를 확보합니다. 아래 설치 도구와 CRD는 이 소스에서 실행합니다.
 
 ```sh
-git clone --branch v0.5.1 --depth 1 https://github.com/WoogiBoogi1129/VMWeave-GPU.git vmweave-v0.5.1
-cd vmweave-v0.5.1
+git clone --branch v0.5.2 --depth 1 https://github.com/WoogiBoogi1129/VMWeave-GPU.git vmweave-v0.5.2
+cd vmweave-v0.5.2
 mkdir -p .local
 helm pull oci://ghcr.io/woogiboogi1129/charts/vmweave-operator --version 0.5.1 --destination .local
 python3 scripts/operator/release-manifest.py \
-  --repository ghcr.io/woogiboogi1129 --tag v0.5.1 \
+  --repository ghcr.io/woogiboogi1129 --tag v0.5.2 \
   --source-revision b9767652292179bef82f47be20b633a205d19824 \
   --include-dra --output .local/release-images.json
 ```

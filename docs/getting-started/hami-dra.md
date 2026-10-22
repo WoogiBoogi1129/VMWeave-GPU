@@ -20,8 +20,8 @@ advertise an in-use GPU through a second independent allocator.
 
 ## Install the released driver
 
-Use the published `ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.1` image;
-the [release lock](../../deploy/releases/v0.5.1.json) records its immutable digest.
+Use the published `ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2` image;
+the [release lock](../../deploy/releases/v0.5.2.json) records its immutable digest.
 To build it yourself, use `images/hami-dra/Containerfile` from the repository root.
 
 Fetch upstream commit `300224ac789ad40ced1ea2d9b47f6ba4a7cb5c69` from
@@ -40,7 +40,7 @@ cp deploy/hami-dra/values.example.json .local/dra-values.json
 ```
 
 Edit `.local/dra-values.json` before installing: set `image.repository` to
-`ghcr.io/woogiboogi1129/vmweave-hami-dra`, `image.tag` to `v0.5.1`, the node
+`ghcr.io/woogiboogi1129/vmweave-hami-dra`, `image.tag` to `v0.5.2`, the node
 selector and GPU UUID allowlist to the target GPU, and `nvidiaCDIHookPath` to
 the actual host hook executable. Verify the image digest against the release
 lock. The driver chart version remains upstream 0.1.1; it is separate from the
