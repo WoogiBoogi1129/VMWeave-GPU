@@ -1,0 +1,271 @@
+{
+  "status": "PASS",
+  "workload": "small/batch1024/resident/FP32",
+  "warmup_steps": 30,
+  "measured_steps": 200,
+  "means_samples_per_second": {
+    "baseline": 19021.33928934574,
+    "candidate": 22565.21314832061,
+    "restored": 19241.132122091778
+  },
+  "paired_ratios": [
+    {
+      "block": 1,
+      "candidate_over_baseline": 1.381811272924224,
+      "candidate_over_restored": 1.347692319170672
+    },
+    {
+      "block": 2,
+      "candidate_over_baseline": 1.0704153019088984,
+      "candidate_over_restored": 1.0792803558666926
+    },
+    {
+      "block": 3,
+      "candidate_over_baseline": 1.1025091523441815,
+      "candidate_over_restored": 1.0836142870111323
+    }
+  ],
+  "geomean_candidate_over_baseline": 1.1770486526515966,
+  "geomean_candidate_over_restored": 1.1637684593616926,
+  "profiles": {
+    "profile-baseline": {
+      "elapsed_seconds": 10.90287997,
+      "samples_per_second": 18784.02775812637,
+      "api_total_seconds": 7.374521638,
+      "outside_api_boundary_seconds": 3.5283583320000007,
+      "setters_seconds": 2.3675256510000002,
+      "setters_zero_cost_counterfactual_speedup": 1.2773787194434103,
+      "apis": [
+        {
+          "api": "0x1002",
+          "name": "device query (mostly cache hits)",
+          "calls": 33803,
+          "calls_per_step": 169.015,
+          "caller_wall_seconds": 0.161065505,
+          "caller_thread_cpu_seconds": 0.139460366,
+          "caller_wall_percent": 1.4772748617171099,
+          "broker_calls": 0,
+          "broker_exchange_seconds": 0.0,
+          "broker_thread_cpu_seconds": 0.0
+        },
+        {
+          "api": "0x1020",
+          "name": "device synchronize",
+          "calls": 1,
+          "calls_per_step": 0.005,
+          "caller_wall_seconds": 0.000680653,
+          "caller_thread_cpu_seconds": 4.68e-05,
+          "caller_wall_percent": 0.006242873459791009,
+          "broker_calls": 1,
+          "broker_exchange_seconds": 0.000507364,
+          "broker_thread_cpu_seconds": 9.1384e-05
+        },
+        {
+          "api": "0x2044",
+          "name": "CUDA kernel launch",
+          "calls": 3600,
+          "calls_per_step": 18.0,
+          "caller_wall_seconds": 3.793107439,
+          "caller_thread_cpu_seconds": 0.252923737,
+          "caller_wall_percent": 34.78995870299396,
+          "broker_calls": 3600,
+          "broker_exchange_seconds": 2.521694451,
+          "broker_thread_cpu_seconds": 0.356365914
+        },
+        {
+          "api": "0x2107",
+          "name": "primary context query (mostly cache hits)",
+          "calls": 11600,
+          "calls_per_step": 58.0,
+          "caller_wall_seconds": 0.118999562,
+          "caller_thread_cpu_seconds": 0.068909311,
+          "caller_wall_percent": 1.0914507206117576,
+          "broker_calls": 0,
+          "broker_exchange_seconds": 0.0,
+          "broker_thread_cpu_seconds": 0.0
+        },
+        {
+          "api": "0x3103",
+          "name": "BLAS GEMM",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.933142828,
+          "caller_thread_cpu_seconds": 0.057451205,
+          "caller_wall_percent": 8.558682023168233,
+          "broker_calls": 1000,
+          "broker_exchange_seconds": 0.67332635,
+          "broker_thread_cpu_seconds": 0.081191262
+        },
+        {
+          "api": "0x3104",
+          "name": "BLAS stream set",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.809648084,
+          "caller_thread_cpu_seconds": 0.05270115,
+          "caller_wall_percent": 7.426001994223549,
+          "broker_calls": 1000,
+          "broker_exchange_seconds": 0.555420578,
+          "broker_thread_cpu_seconds": 0.084174386
+        },
+        {
+          "api": "0x3105",
+          "name": "BLAS math set",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.772717729,
+          "caller_thread_cpu_seconds": 0.054293813,
+          "caller_wall_percent": 7.08728089391229,
+          "broker_calls": 1000,
+          "broker_exchange_seconds": 0.518737926,
+          "broker_thread_cpu_seconds": 0.075841446
+        },
+        {
+          "api": "0x3109",
+          "name": "BLAS workspace set",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.785159838,
+          "caller_thread_cpu_seconds": 0.050848301,
+          "caller_wall_percent": 7.201398531034181,
+          "broker_calls": 1000,
+          "broker_exchange_seconds": 0.542106357,
+          "broker_thread_cpu_seconds": 0.077850675
+        }
+      ],
+      "health": [
+        1081,
+        437177363,
+        90207654,
+        17296,
+        16
+      ]
+    },
+    "profile-candidate": {
+      "elapsed_seconds": 10.277806096999996,
+      "samples_per_second": 19926.431581520046,
+      "api_total_seconds": 6.738471933,
+      "outside_api_boundary_seconds": 3.539334163999996,
+      "setters_seconds": 1.630610862,
+      "setters_zero_cost_counterfactual_speedup": 1.1885710704668737,
+      "apis": [
+        {
+          "api": "0x1002",
+          "name": "device query (mostly cache hits)",
+          "calls": 33803,
+          "calls_per_step": 169.015,
+          "caller_wall_seconds": 0.166801058,
+          "caller_thread_cpu_seconds": 0.141557058,
+          "caller_wall_percent": 1.6229247411924594,
+          "broker_calls": 0,
+          "broker_exchange_seconds": 0.0,
+          "broker_thread_cpu_seconds": 0.0
+        },
+        {
+          "api": "0x1020",
+          "name": "device synchronize",
+          "calls": 1,
+          "calls_per_step": 0.005,
+          "caller_wall_seconds": 0.000479279,
+          "caller_thread_cpu_seconds": 3.3877e-05,
+          "caller_wall_percent": 0.004663242286112962,
+          "broker_calls": 1,
+          "broker_exchange_seconds": 0.000362032,
+          "broker_thread_cpu_seconds": 5.5461e-05
+        },
+        {
+          "api": "0x2044",
+          "name": "CUDA kernel launch",
+          "calls": 3600,
+          "calls_per_step": 18.0,
+          "caller_wall_seconds": 3.874627516,
+          "caller_thread_cpu_seconds": 0.265664636,
+          "caller_wall_percent": 37.69897465891063,
+          "broker_calls": 3600,
+          "broker_exchange_seconds": 2.562763987,
+          "broker_thread_cpu_seconds": 0.363426186
+        },
+        {
+          "api": "0x2107",
+          "name": "primary context query (mostly cache hits)",
+          "calls": 11600,
+          "calls_per_step": 58.0,
+          "caller_wall_seconds": 0.115496826,
+          "caller_thread_cpu_seconds": 0.071275242,
+          "caller_wall_percent": 1.1237498052596318,
+          "broker_calls": 0,
+          "broker_exchange_seconds": 0.0,
+          "broker_thread_cpu_seconds": 0.0
+        },
+        {
+          "api": "0x3103",
+          "name": "BLAS GEMM",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.950456392,
+          "caller_thread_cpu_seconds": 0.057320116,
+          "caller_wall_percent": 9.24765833320625,
+          "broker_calls": 1000,
+          "broker_exchange_seconds": 0.688445821,
+          "broker_thread_cpu_seconds": 0.082895194
+        },
+        {
+          "api": "0x3104",
+          "name": "BLAS stream set",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.82266668,
+          "caller_thread_cpu_seconds": 0.054902762,
+          "caller_wall_percent": 8.004302399129026,
+          "broker_calls": 1000,
+          "broker_exchange_seconds": 0.556464198,
+          "broker_thread_cpu_seconds": 0.083874389
+        },
+        {
+          "api": "0x3105",
+          "name": "BLAS math set",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.01821279,
+          "caller_thread_cpu_seconds": 0.008611506,
+          "caller_wall_percent": 0.17720503605644164,
+          "broker_calls": 0,
+          "broker_exchange_seconds": 0.0,
+          "broker_thread_cpu_seconds": 0.0
+        },
+        {
+          "api": "0x3109",
+          "name": "BLAS workspace set",
+          "calls": 1000,
+          "calls_per_step": 5.0,
+          "caller_wall_seconds": 0.789731392,
+          "caller_thread_cpu_seconds": 0.052584348,
+          "caller_wall_percent": 7.683851831282514,
+          "broker_calls": 1000,
+          "broker_exchange_seconds": 0.540911826,
+          "broker_thread_cpu_seconds": 0.077518183
+        }
+      ],
+      "health": [
+        1019,
+        400530151,
+        86845380,
+        16304,
+        16
+      ]
+    }
+  },
+  "profile_throughput_ratio_to_unprofiled_mean": {
+    "baseline": 0.987523931537655,
+    "candidate": 0.8830597544345841
+  },
+  "limitations": [
+    "One workload, one host, three sequential baseline/candidate/restored blocks; not an upper performance limit.",
+    "Nested caller/broker times must not be summed. Wall minus thread CPU includes blocking/descheduling; it is not isolated scheduler or GPU time.",
+    "Setter zero-cost counterfactual is accounting only; stream resets workspace and cannot be skipped independently.",
+    "The profiler state_cache=false field refers to its disabled diagnostic shim; real state cache is enabled in result cache_before/cache_after.",
+    "No new passthrough measurements.",
+    "Block 1 candidate has unusually low elapsed AND Guest CPU time; all results retained. The cause is not isolated; do not generalize the geometric mean."
+  ],
+  "median_candidate_over_baseline": 1.1025091523441815
+}

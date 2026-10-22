@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "workload": "small/batch1024/resident/FP32",
+  "warmup_steps": 30,
+  "measured_steps": 200,
+  "means_samples_per_second": {
+    "baseline": 19021.33928934574,
+    "candidate": 22565.21314832061,
+    "restored": 19241.132122091778
+  },
+  "paired_ratios": [
+    {
+      "block": 1,
+      "candidate_over_baseline": 1.381811272924224,
+      "candidate_over_restored": 1.347692319170672
+    },
+    {
+      "block": 2,
+      "candidate_over_baseline": 1.0704153019088984,
+      "candidate_over_restored": 1.0792803558666926
+    },
+    {
+      "block": 3,
+      "candidate_over_baseline": 1.1025091523441815,
+      "candidate_over_restored": 1.0836142870111323
+    }
+  ],
+  "geomean_candidate_over_baseline": 1.1770486526515966,
+  "geomean_candidate_over_restored": 1.1637684593616926,
+  "profile_throughput_ratio_to_unprofiled_mean": {
+    "baseline": 0.987523931537655,
+    "candidate": 0.8830597544345841
+  },
+  "limitations": [
+    "One workload, one host, three sequential baseline/candidate/restored blocks; not an upper performance limit.",
+    "Nested caller/broker times must not be summed. Wall minus thread CPU includes blocking/descheduling; it is not isolated scheduler or GPU time.",
+    "Setter zero-cost counterfactual is accounting only; stream resets workspace and cannot be skipped independently.",
+    "The profiler state_cache=false field refers to its disabled diagnostic shim; real state cache is enabled in result cache_before/cache_after.",
+    "No new passthrough measurements."
+  ]
+}

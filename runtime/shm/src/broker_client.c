@@ -16,6 +16,10 @@
 #define GET_DEVICE 0x1002u
 #define SET_DEVICE 0x1003u
 #define PRIMARY_STATE 0x2107u
+#define BLAS_CREATE 0x3101u
+#define BLAS_DESTROY 0x3102u
+#define BLAS_MATH_SET 0x3105u
+#define MATH_CACHE_CAPACITY 64
 /* Lease is a maximum local reuse window, not an instantaneous remote check.
  * An expired lease requires a synchronous STATUS, even if broker is stalled. */
 #define LEASE_NS 50000000ull
@@ -24,9 +28,31 @@ static _Atomic pid_t owner;
 static pthread_mutex_t lock=PTHREAD_MUTEX_INITIALIZER;
 static unsigned char epoch[16],device[4],primary[8];
 static int have_device,have_primary;
+/* Serialized with the exchange itself: a hit cannot race a setting mutation.
+ * Keys use wire bytes to avoid alignment and host endianness assumptions. */
+static struct { unsigned char key[12]; int valid; } math_cache[MATH_CACHE_CAPACITY];
+static int math_cache_enabled;
+static uint64_t math_hits,math_misses,math_invalidations,math_full;
+static void invalidate_math(void){
+ memset(math_cache,0,sizeof(math_cache));++math_invalidations;
+}
+static int math_match(const void *key){
+ for(int i=0;i<MATH_CACHE_CAPACITY;i++)
+  if(math_cache[i].valid&&!memcmp(math_cache[i].key,key,12))return 1;
+ return 0;
+}
+static void remember_math(const void *key){
+ int slot=-1;
+ for(int i=0;i<MATH_CACHE_CAPACITY;i++)
+  if(math_cache[i].valid&&!memcmp(math_cache[i].key,key,8)){slot=i;break;}
+ if(slot<0)for(int i=0;i<MATH_CACHE_CAPACITY;i++)
+  if(!math_cache[i].valid){slot=i;break;}
+ if(slot<0){++math_full;return;}
+ memcpy(math_cache[slot].key,key,12);math_cache[slot].valid=1;
+}
 static uint64_t lease,device_hits,primary_hits,wire_calls,health_checks,invalidations;
 static uint64_t now(void){struct timespec t;if(clock_gettime(CLOCK_MONOTONIC,&t))return 0;return (uint64_t)t.tv_sec*1000000000ull+t.tv_nsec;}
-static void invalidate(void){have_device=have_primary=0;++invalidations;}
+static void invalidate(void){have_device=have_primary=0;invalidate_math();++invalidations;}
 static void fail(void){invalidate();failed=1;cache_enabled=0;if(fd>=0){close(fd);fd=-1;}}
 static int io(void *p,size_t n,int writing){
  while(n){ssize_t k=writing?send(fd,p,n,MSG_NOSIGNAL):recv(fd,p,n,0);
@@ -52,7 +78,10 @@ static int connected(void){
  return connect(fd,(struct sockaddr*)&addr,sizeof(addr));
 }
 static void negotiate(void){
- negotiated=1;const char *enabled=vmweave_getenv("VMWEAVE_STATE_CACHE");
+ negotiated=1;
+ const char *math=getenv("VMWEAVE_BLAS_MATH_CACHE");
+ math_cache_enabled=math&&!strcmp(math,"1");
+ const char *enabled=vmweave_getenv("VMWEAVE_STATE_CACHE");
  if(!enabled||strcmp(enabled,"1"))return;
  unsigned char reply[24];size_t got;uint64_t start=now();
  int rc=request(VMWEAVE_BROKER_CACHE_OPEN,NULL,0,reply,sizeof(reply),&got);
@@ -90,6 +119,15 @@ int vmweave_broker_exchange(uint32_t api,const void *in,size_t n,void *out,size_
  if(!negotiated)negotiate();
  if(failed)goto done;
  if(cache_enabled&&!healthy())goto done;
+ /* Never bypass session health or the inherited-process fence. A peer without
+  * the existing state-cache lease capability always receives every setter. */
+ int math_request=cache_enabled&&math_cache_enabled&&api==BLAS_MATH_SET&&n==12;
+ if(math_request){
+  if(math_match(in)){++math_hits;result=0;goto done;}
+  ++math_misses;
+ }
+ /* Conservatively clear all entries even if create/destroy subsequently fails. */
+ if(api==BLAS_CREATE||api==BLAS_DESTROY)invalidate_math();
  if(cache_enabled&&!n){
   if(api==GET_DEVICE&&have_device&&cap>=4){memcpy(out,device,4);*got=4;++device_hits;result=0;goto done;}
   if(api==PRIMARY_STATE&&have_primary&&cap>=8){memcpy(out,primary,8);*got=8;++primary_hits;result=0;goto done;}
@@ -103,6 +141,7 @@ int vmweave_broker_exchange(uint32_t api,const void *in,size_t n,void *out,size_
    if(active==1){memcpy(primary,out,8);have_primary=1;}
   }
  }
+ if(math_request&&*got==0)remember_math(in);
  if(api==2)fail();
  done:pthread_mutex_unlock(&lock);return result;
 }
@@ -127,3 +166,15 @@ void vmweave_broker_cache_stats(uint64_t out[6]){
 extern __typeof__(vmweave_broker_cache_stats) flyt_broker_cache_stats __attribute__((alias("vmweave_broker_cache_stats")));
 extern __typeof__(vmweave_broker_close) flyt_broker_close __attribute__((alias("vmweave_broker_close")));
 extern __typeof__(vmweave_broker_exchange) flyt_broker_exchange __attribute__((alias("vmweave_broker_exchange")));
+
+/* Separate diagnostic ABI preserves the existing six state-cache counters.
+ * enabled, hits, misses (forwarded eligible setters), invalidations, full. */
+void vmweave_broker_math_cache_stats(uint64_t out[5]){
+ if(!out)return;
+ pid_t unset=0;atomic_compare_exchange_strong(&owner,&unset,getpid());
+ if(owner!=getpid()){memset(out,0,5*sizeof(*out));return;}
+ pthread_mutex_lock(&lock);
+ out[0]=cache_enabled&&math_cache_enabled;out[1]=math_hits;out[2]=math_misses;
+ out[3]=math_invalidations;out[4]=math_full;
+ pthread_mutex_unlock(&lock);
+}

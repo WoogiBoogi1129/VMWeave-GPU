@@ -1,0 +1,108 @@
+python3 -m unittest discover -s tests/control -v
+test_chunks_exclude_crossing_boundaries_and_reset_warmup (test_campaign_analysis.CampaignWindows.test_chunks_exclude_crossing_boundaries_and_reset_warmup) ... ok
+test_missing_sample_gap_is_not_filled (test_campaign_analysis.CampaignWindows.test_missing_sample_gap_is_not_filled) ... ok
+test_no_coverage_is_missing_not_zero_utilization (test_campaign_analysis.CampaignWindows.test_no_coverage_is_missing_not_zero_utilization) ... ok
+test_weights_irregular_samples_and_clips_window (test_campaign_analysis.CampaignWindows.test_weights_irregular_samples_and_clips_window) ... ok
+test_private_preparation_and_auth_are_excluded (test_campaign_export.CampaignPublication.test_private_preparation_and_auth_are_excluded) ... ok
+test_public_compressed_samples_are_readable (test_campaign_export.CampaignPublication.test_public_compressed_samples_are_readable) ... ok
+test_active_allocation_is_not_relabelled_or_cleared (test_control_plane.ReviewTests.test_active_allocation_is_not_relabelled_or_cleared) ... {"event": "channel_review", "level": "INFO", "message": "vms vm is unavailable", "name": "example", "namespace": "review", "reason": "DependencyNotReady", "uid": "channel-uid"}
+ok
+test_active_api_errors_do_not_trigger_failed_status (test_control_plane.ReviewTests.test_active_api_errors_do_not_trigger_failed_status) ... ok
+test_active_missing_dependency_does_not_fail_session (test_control_plane.ReviewTests.test_active_missing_dependency_does_not_fail_session) ... {"event": "dependency_wait", "level": "INFO", "message": "PVC pending", "name": "example"}
+ok
+test_api_conflict_is_not_reported_as_invalid_configuration (test_control_plane.ReviewTests.test_api_conflict_is_not_reported_as_invalid_configuration) ... ok
+test_guest_report_preserves_controller_evidence (test_control_plane.ReviewTests.test_guest_report_preserves_controller_evidence) ... ok
+test_health_api_failure_affects_readiness_not_process_liveness (test_control_plane.ReviewTests.test_health_api_failure_affects_readiness_not_process_liveness) ... ok
+test_missing_dependency_reports_wait_without_finalizer_or_workload (test_control_plane.ReviewTests.test_missing_dependency_reports_wait_without_finalizer_or_workload) ... {"event": "channel_review", "level": "INFO", "message": "vms vm is unavailable", "name": "example", "namespace": "review", "reason": "DependencyNotReady", "uid": "channel-uid"}
+ok
+test_no_repeated_status_or_events_when_nothing_changes (test_control_plane.ReviewTests.test_no_repeated_status_or_events_when_nothing_changes) ... {"event": "channel_review", "level": "INFO", "message": "vms vm is unavailable", "name": "example", "namespace": "review", "reason": "DependencyNotReady", "uid": "channel-uid"}
+ok
+test_ready_is_false_even_with_dependencies (test_control_plane.ReviewTests.test_ready_is_false_even_with_dependencies) ... {"event": "channel_review", "level": "INFO", "message": "Declared dependencies are present; execution remains disabled", "name": "example", "namespace": "review", "reason": "DependenciesPresent", "uid": "channel-uid"}
+ok
+test_removed_bound_worker_is_not_recreated (test_control_plane.ReviewTests.test_removed_bound_worker_is_not_recreated) ... ok
+test_same_name_replacement_cannot_enter_old_allocation (test_control_plane.ReviewTests.test_same_name_replacement_cannot_enter_old_allocation) ... ok
+test_webhook_rejects_request_vm_mismatch (test_control_plane.ReviewTests.test_webhook_rejects_request_vm_mismatch) ... ok
+test_api_failure_preserves_protection (test_detach_observation.DetachTests.test_api_failure_preserves_protection) ... ok
+test_cancelled_init_failure_persists_proof_before_release (test_detach_observation.DetachTests.test_cancelled_init_failure_persists_proof_before_release) ... ok
+test_cannot_protect_already_deleting_pod (test_detach_observation.DetachTests.test_cannot_protect_already_deleting_pod) ... ok
+test_incomplete_container_status_not_detached (test_detach_observation.DetachTests.test_incomplete_container_status_not_detached) ... ok
+test_missing_pod_not_detached (test_detach_observation.DetachTests.test_missing_pod_not_detached) ... ok
+test_node_unreachable_not_detached (test_detach_observation.DetachTests.test_node_unreachable_not_detached) ... ok
+test_protect_before_ready_then_persist_evidence_before_unpin (test_detach_observation.DetachTests.test_protect_before_ready_then_persist_evidence_before_unpin) ... ok
+test_restart_after_evidence_write_retries_finalizer_removal (test_detach_observation.DetachTests.test_restart_after_evidence_write_retries_finalizer_removal) ... ok
+test_stale_generation_is_not_mutated (test_detach_observation.DetachTests.test_stale_generation_is_not_mutated) ... ok
+test_unstarted_does_not_override_prior_mapping_or_unready_node (test_detach_observation.DetachTests.test_unstarted_does_not_override_prior_mapping_or_unready_node) ... ok
+test_unstarted_rejects_uncertain_or_live_container (test_detach_observation.DetachTests.test_unstarted_rejects_uncertain_or_live_container) ... ok
+test_worker_report_releases_only_its_pod (test_detach_observation.DetachTests.test_worker_report_releases_only_its_pod) ... ok
+test_avoids_vga_and_all_declared_root_devices (test_domain_pci.PCITests.test_avoids_vga_and_all_declared_root_devices) ... ok
+test_child_bus_slot_does_not_conflict (test_domain_pci.PCITests.test_child_bus_slot_does_not_conflict) ... ok
+test_full_bus_is_rejected (test_domain_pci.PCITests.test_full_bus_is_rejected) ... ok
+test_kubevirt_pre_libvirt_implicit_root (test_domain_pci.PCITests.test_kubevirt_pre_libvirt_implicit_root) ... ok
+test_unknown_implicit_root_rejected (test_domain_pci.PCITests.test_unknown_implicit_root_rejected) ... ok
+test_unsupported_root_is_rejected (test_domain_pci.PCITests.test_unsupported_root_is_rejected) ... ok
+test_busy_client_cannot_close_owner (test_guest_broker.BrokerTests.test_busy_client_cannot_close_owner) ... ok
+test_failed_close_fences_future_clients_and_unlocks (test_guest_broker.BrokerTests.test_failed_close_fences_future_clients_and_unlocks) ... client disconnected: EOFError
+ok
+test_sequential_and_killed_clients_get_new_epochs (test_guest_broker.BrokerTests.test_sequential_and_killed_clients_get_new_epochs) ... client disconnected: EOFError
+ok
+test_broker_death (test_math_cache.MathCacheTests.test_broker_death) ... ok
+test_capacity (test_math_cache.MathCacheTests.test_capacity) ... ok
+test_create (test_math_cache.MathCacheTests.test_create) ... ok
+test_default (test_math_cache.MathCacheTests.test_default) ... ok
+test_destroy (test_math_cache.MathCacheTests.test_destroy) ... ok
+test_device (test_math_cache.MathCacheTests.test_device) ... ok
+test_disabled (test_math_cache.MathCacheTests.test_disabled) ... ok
+test_epoch (test_math_cache.MathCacheTests.test_epoch) ... ok
+test_errors (test_math_cache.MathCacheTests.test_errors) ... ok
+test_fork (test_math_cache.MathCacheTests.test_fork) ... ok
+test_legacy (test_math_cache.MathCacheTests.test_legacy) ... ok
+test_mutation (test_math_cache.MathCacheTests.test_mutation) ... ok
+test_state_off (test_math_cache.MathCacheTests.test_state_off) ... ok
+test_threads (test_math_cache.MathCacheTests.test_threads) ... ok
+test_worker_death (test_math_cache.MathCacheTests.test_worker_death) ... ok
+test_abi_aliases_have_identical_addresses (test_naming_compatibility.EnvironmentTests.test_abi_aliases_have_identical_addresses) ... skipped 'requires built Guest library'
+test_c_precedence (test_naming_compatibility.EnvironmentTests.test_c_precedence) ... ok
+test_legacy_header_and_wire_magic (test_naming_compatibility.EnvironmentTests.test_legacy_header_and_wire_magic) ... ok
+test_python_precedence_and_pop (test_naming_compatibility.EnvironmentTests.test_python_precedence_and_pop) ... ok
+test_maintenance_stops_only_controller_and_keeps_admission_scope (test_operator_maintenance.MaintenanceChart.test_maintenance_stops_only_controller_and_keeps_admission_scope) ... ok
+test_normal_replica_and_flag_schema_are_still_enforced (test_operator_maintenance.MaintenanceChart.test_normal_replica_and_flag_schema_are_still_enforced) ... ok
+test_released_deletion_keeps_finalizer_reconciliation (test_released_idle.ReleasedIdle.test_released_deletion_keeps_finalizer_reconciliation) ... ok
+test_released_history_does_not_reconcile (test_released_idle.ReleasedIdle.test_released_history_does_not_reconcile) ... ok
+test_actual_observation_passes (test_stage1_evidence.Stage1Evidence.test_actual_observation_passes) ... ok
+test_applied_quota_mismatch_is_not_request_success (test_stage1_evidence.Stage1Evidence.test_applied_quota_mismatch_is_not_request_success) ... ok
+test_bound_is_not_ready (test_stage1_evidence.Stage1Evidence.test_bound_is_not_ready) ... ok
+test_same_path_with_different_inode_is_not_shared_backing (test_stage1_evidence.Stage1Evidence.test_same_path_with_different_inode_is_not_shared_backing) ... ok
+test_unrelated_gpu_pid_is_not_worker_execution (test_stage1_evidence.Stage1Evidence.test_unrelated_gpu_pid_is_not_worker_execution) ... ok
+test_all_three_actual_results (test_stage2_evidence.Stage2Evidence.test_all_three_actual_results) ... ok
+test_duplicate_event_is_rejected (test_stage2_evidence.Stage2Evidence.test_duplicate_event_is_rejected) ... ok
+test_gpu_and_guest_clocks_are_not_compared (test_stage2_evidence.Stage2Evidence.test_gpu_and_guest_clocks_are_not_compared) ... ok
+test_missing_response_is_rejected (test_stage2_evidence.Stage2Evidence.test_missing_response_is_rejected) ... ok
+test_response_length_mismatch_is_rejected (test_stage2_evidence.Stage2Evidence.test_response_length_mismatch_is_rejected) ... ok
+test_transport_ok_is_not_cuda_success (test_stage2_evidence.Stage2Evidence.test_transport_ok_is_not_cuda_success) ... ok
+test_wrong_allocation_is_rejected (test_stage2_evidence.Stage2Evidence.test_wrong_allocation_is_rejected) ... ok
+test_wrong_session_is_not_same_request (test_stage2_evidence.Stage2Evidence.test_wrong_session_is_not_same_request) ... ok
+test_trace_is_explicit_opt_in_and_preserves_error_domains (test_stage2_evidence.TraceOptIn.test_trace_is_explicit_opt_in_and_preserves_error_domains) ... ok
+test_bad_arguments (test_state_cache.StateCacheTests.test_bad_arguments) ... ok
+test_broker_death (test_state_cache.StateCacheTests.test_broker_death) ... ok
+test_close_race (test_state_cache.StateCacheTests.test_close_race) ... ok
+test_disabled (test_state_cache.StateCacheTests.test_disabled) ... ok
+test_disabled_error (test_state_cache.StateCacheTests.test_disabled_error) ... ok
+test_epoch_change (test_state_cache.StateCacheTests.test_epoch_change) ... ok
+test_fatal_error (test_state_cache.StateCacheTests.test_fatal_error) ... ok
+test_fork (test_state_cache.StateCacheTests.test_fork) ... ok
+test_fresh_flags (test_state_cache.StateCacheTests.test_fresh_flags) ... ok
+test_inactive (test_state_cache.StateCacheTests.test_inactive) ... ok
+test_lease (test_state_cache.StateCacheTests.test_lease) ... ok
+test_malformed_capability (test_state_cache.StateCacheTests.test_malformed_capability) ... ok
+test_multi_gpu (test_state_cache.StateCacheTests.test_multi_gpu) ... ok
+test_nonfatal_error (test_state_cache.StateCacheTests.test_nonfatal_error) ... ok
+test_old_broker (test_state_cache.StateCacheTests.test_old_broker) ... ok
+test_old_worker (test_state_cache.StateCacheTests.test_old_worker) ... ok
+test_state_change (test_state_cache.StateCacheTests.test_state_change) ... ok
+test_threads (test_state_cache.StateCacheTests.test_threads) ... ok
+test_worker_death (test_state_cache.StateCacheTests.test_worker_death) ... ok
+
+----------------------------------------------------------------------
+Ran 95 tests in 4.419s
+
+OK (skipped=1)

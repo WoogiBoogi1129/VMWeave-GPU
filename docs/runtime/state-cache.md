@@ -106,3 +106,50 @@ For full rollback, restore the pinned Guest library, broker source and Worker
 image together and create a new session. Do not try to revive a fenced client.
 BLAS setter elimination, asynchronous submission and broker replacement are not
 part of this change.
+
+## Optional BLAS math-mode setter cache
+
+`VMWEAVE_BLAS_MATH_CACHE=1` additionally skips a repeated successful
+`cublasSetMathMode` on the same handle. It is **off by default**, requires
+`VMWEAVE_STATE_CACHE=1`, and is effective only after the existing broker/Worker
+single-device epoch/health negotiation succeeds. Legacy peers and direct SHM
+clients keep forwarding setters. No protocol, stream, workspace, GEMM, or kernel
+submission behavior is changed.
+
+The common broker exchange owns a bounded 64-entry table under its existing
+mutex. Each entry stores the 8-byte wire handle and last successful 4-byte mode.
+Only an exact 12-byte setter request with a successful empty response is recorded.
+A new mode goes to the Worker; a full table forwards unrecorded handles every
+time, while existing handles can still update. Errors are never installed.
+All BLAS create/destroy requests conservatively clear the entire table. Device
+changes, any observed API error, connection failure, epoch mismatch, and close
+also clear it. Forked children fail before acquiring the inherited mutex.
+There is no same-process reconnect; a new process starts with an empty table.
+
+The current Worker changes math mode only in `VMWEAVE_BLAS_MATH_SET`; handle
+creation/destruction is also intercepted. A future API that mutates or replaces
+BLAS state must add invalidation before enabling it. Sharing opaque handles with
+another broker session is unsupported; handles belong to the session child.
+
+A hit occurs only after the existing health checks. The 50 ms lease is **not an
+instantaneous remote liveness guarantee**. Native errors that would only be
+observed by repeating a remote setter may be observed by a subsequent forwarded
+operation instead. Applications requiring every setter to consult native cuBLAS
+must leave this option disabled. Known session faults never return cached success.
+
+`vmweave_broker_math_cache_stats(uint64_t out[5])` exports cumulative process
+counters: effective enabled flag, hits, eligible forwarded misses, invalidation
+operations, and successful setters not recorded because the table was full.
+Invalidations count clearing operations even if the table was already empty.
+The existing six-element state-cache statistics ABI is unchanged. Stats are
+serialized by the same mutex and return zeroes in a forked child. The new option
+has no legacy FLYT alias because it did not exist before this implementation.
+
+Disable `VMWEAVE_BLAS_MATH_CACHE` (unset or `0`) and restart the application to
+restore forwarding. Environment options are read once when the process connects;
+changing its environment after negotiation does not change behavior. No Worker
+image or Helm setting is needed for this application-process option.
+
+Validation: `python3 tests/control/test_math_cache.py`; set
+`VMWEAVE_TEST_GUEST_LIBRARY` to the full Guest library to include entry-point and
+`dlsym` checks. Also run `tests/control/test_state_cache.py` against the same ELF.

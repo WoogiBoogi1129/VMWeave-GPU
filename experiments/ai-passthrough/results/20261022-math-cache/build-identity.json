@@ -1,0 +1,46 @@
+{
+  "base_git_head": "bb2dc1f69317cd3a7cf0c59bc555040f464cd9ea",
+  "release": {
+    "sourceRevision": "b9767652292179bef82f47be20b633a205d19824",
+    "tag": "v0.5.1",
+    "scope": "Local naming workload comparison plus published-image live GPU/fault/recovery verification on gpu-4. Classic upstream HAMi 2.10.0 retained; vmweave-hami is published but not substituted into that dependency. Image revision labels are not cryptographic provenance.",
+    "images": {
+      "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:c188cb72b18d10bd7275e0b71d3ed294adeed9ec00d7e8be7f3e0f955ab5c206",
+      "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:49d01c5b76986e9d3fecf656fb9d918f2b40e8529341e513af340d50c5f0084d",
+      "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:28cbbf63ce65cc925c1674ecf92b590c19164fa3a16a213931e065ec724f56d7",
+      "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:131ed77f3f502ba2f3ec12fb96cbee6612b6459239dc47bb2254fde6c2ea54bd",
+      "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:bf68572aca45af2d729d091335119d365b951112451e97d1f8804fd4493ab210",
+      "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:b893fb4112b56a46aebda6ad95ede50548b1880a467cca6891b2b39b8a31b9b9",
+      "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:0050c6c1408586b402c24d46b9241cc8ff8d4833bbb4a3b96df2f617b87943ab"
+    },
+    "chart": {
+      "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+      "version": "0.5.1",
+      "digest": "sha256:827b3c430aef8820a43d1bd55792fbcad707ad8d2a3676bb22e14733232649b4"
+    },
+    "workflows": {
+      "images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39630139009",
+      "chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39630139200",
+      "hami": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39630139194",
+      "hami-dra": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39630139020",
+      "control": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39630132480",
+      "docs": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39630132469",
+      "static": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39630139093"
+    },
+    "verification": {
+      "imageMetadataAndRevision": "PASS",
+      "chartDownloadAndContent": "PASS",
+      "guestDownloadAndChecksums": "PASS",
+      "clusterExecution": "PASS: published Guest/Worker GPU copy and PTX kernel, cached Worker death error 999, fresh legacy-name session",
+      "draDriverRollout": "PASS: ready, original GPU UUID selection preserved; DRA allocation workload not rerun"
+    },
+    "publishedDateKST": "2026-10-22"
+  },
+  "sha256": {
+    "runtime/shm/src/broker_client.c": "dfbe8bd8e54756567ad0476d19869bb9e8fdc27f021dd1c2234b94bbe1e33447",
+    "tests/control/test_math_cache.py": "1862412c69a92d48bddedaee7af12206fee9d5a29f2f764cc45a43c7bca7c657",
+    "docs/runtime/state-cache.md": "8103dfd28ab5d9aa5b73884013ee859a88e850bcc8a3c988939ac80aa0c2bfe3",
+    ".local/math-cache-20261022/build/libvmweave_guest.so": "984b75265deff2151262f9a42b94ea8a04322c3c651c4fcd24ffbb1459bcc171",
+    ".local/math-cache-20261022/build/libflyt_guest.so": "65c31a4f063c85216c86a69d30259b2b42ce0c18ab80e71484fce5bc52ce5dcc"
+  }
+}
