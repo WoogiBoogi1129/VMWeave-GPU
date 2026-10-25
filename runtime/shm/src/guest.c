@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include "vmweave_env.h"
 #include "vmweave_guest.h"
+#include "vmweave_async.h"
 #include "vmweave_torch.h"
 #include "vmweave_trace.h"
 #include "vmweave_perf.h"
@@ -23,11 +24,14 @@ static pthread_mutex_t io_lock=PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t io_cond=PTHREAD_COND_INITIALIZER;
 static pthread_t io_thread;
 static int started,initialized,work,finished;
+static size_t transport_request_bytes,transport_response_bytes;
 static atomic_int broken;
 static pid_t owner_pid;
 static uint8_t trace_allocation[16]; /* Written and read only by the I/O thread. */
 static struct {uint32_t api;const void *input;size_t bytes;void *output;size_t capacity,received;int result;} job;
 static struct {void *base;size_t bytes,mapped;uint64_t handle;} allocations[4096];
+/* One past the last live slot; protected by vmweave_guest_lock. */
+static unsigned allocation_span;
 static _Thread_local cudaError_t last_error;
 int vmweave_guest_mirror_enabled(void){const char *v=vmweave_getenv("VMWEAVE_MIRROR_DEVICE_VA");return v&&!strcmp(v,"1");}
 static void before_fork(void){pthread_mutex_lock(&vmweave_guest_lock);pthread_mutex_lock(&io_lock);}
@@ -60,7 +64,11 @@ static void *io_main(void *unused){
     if(slotenv){slot=strtoul(slotenv,&end,10);if(*end||slot>=32)broken=1;}
     if(!path||!bdf||broken||vmweave_layout_read(path,&l)||slot>=l.session_count||vmweave_map_guest(bdf,&l,&m)||
        vmweave_shm_open(m.address,m.bytes,&l,(uint32_t)slot,VMWEAVE_SHM_GUEST,30000,&c))broken=1;
-    if(!broken){memcpy(trace_allocation,l.allocation_id,16);memcpy(identity.channel_generation,l.channel_generation,16);memcpy(identity.session_id,l.slots[slot].session_id,16);
+    if(!broken){
+        transport_request_bytes=l.slots[slot].request_payload.bytes;
+        if(transport_request_bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES)transport_request_bytes=VMWEAVE_SHM_MAX_MESSAGE_BYTES;
+        transport_response_bytes=vmweave_shm_response_capacity(c);
+        memcpy(trace_allocation,l.allocation_id,16);memcpy(identity.channel_generation,l.channel_generation,16);memcpy(identity.session_id,l.slots[slot].session_id,16);
         if(exchange(c,identity,&id,VMWEAVE_HELLO,NULL,0,NULL,0,&got))broken=1;}
     pthread_mutex_lock(&io_lock);initialized=1;pthread_cond_broadcast(&io_cond);
     while(!broken){
@@ -156,7 +164,7 @@ cudaError_t cudaMalloc(void **out,size_t n){
     }
     void *p=wanted?reserve_device_va((uintptr_t)wanted,mapped):mmap(NULL,mapped,PROT_NONE,flags,-1,0);
     if(p==MAP_FAILED){vmweave_put(in,handle,8);vmweave_guest_exchange(VMWEAVE_API_RUNTIME_FREE,in,8,NULL,0,&got);e=2;goto done;}
-    allocations[i].base=p;allocations[i].bytes=n;allocations[i].mapped=mapped;allocations[i].handle=handle;*out=p;
+    allocations[i].base=p;allocations[i].bytes=n;allocations[i].mapped=mapped;allocations[i].handle=handle;if(i>=allocation_span)allocation_span=i+1;*out=p;
 done:pthread_mutex_unlock(&vmweave_guest_lock);return finish(e);
 }
 cudaError_t cudaFree(void *p){
@@ -164,31 +172,100 @@ cudaError_t cudaFree(void *p){
     for(i=0;i<4096;i++)if(allocations[i].base==p&&p){handle=allocations[i].handle;break;}
     if(p&&!handle)e=1;
     else{vmweave_put(in,handle,8);e=vmweave_guest_exchange(VMWEAVE_API_RUNTIME_FREE,in,8,NULL,0,&got);
-        if(!e&&p){munmap(p,allocations[i].mapped);memset(&allocations[i],0,sizeof(allocations[i]));}}
+        if(!e&&p){munmap(p,allocations[i].mapped);memset(&allocations[i],0,sizeof(allocations[i]));
+            while(allocation_span&&!allocations[allocation_span-1].base)--allocation_span;}}
     pthread_mutex_unlock(&vmweave_guest_lock);return finish(e);
 }
-cudaError_t cudaMemcpy(void *dst,const void *src,size_t n,enum cudaMemcpyKind kind){
-    pthread_mutex_lock(&vmweave_guest_lock);int e=0;struct vmweave_device_ref d={0},s={0};size_t got=0;
-    if(n>VMWEAVE_EXEC_MAX_COPY_BYTES){e=1;goto done;}
-    if(kind==cudaMemcpyDefault){int dh=!vmweave_guest_ref(dst,n,&d),sh=!vmweave_guest_ref(src,n,&s);
-        kind=dh?(sh?cudaMemcpyDeviceToDevice:cudaMemcpyHostToDevice):(sh?cudaMemcpyDeviceToHost:cudaMemcpyHostToHost);}
-    if(kind==cudaMemcpyHostToHost){if(n&&(!dst||!src)){e=1;goto done;}if(n)memmove(dst,src,n);goto done;}
-    if(kind!=cudaMemcpyHostToDevice&&kind!=cudaMemcpyDeviceToHost&&kind!=cudaMemcpyDeviceToDevice){e=1;goto done;}
-    if(kind!=cudaMemcpyDeviceToHost&&vmweave_guest_ref(dst,n,&d)){e=1;goto done;}
-    if(kind!=cudaMemcpyHostToDevice&&vmweave_guest_ref(src,n,&s)){e=1;goto done;}
-    if(n&&((kind==cudaMemcpyHostToDevice&&!src)||(kind==cudaMemcpyDeviceToHost&&!dst))){e=1;goto done;}
-    size_t bytes=48+(kind==cudaMemcpyHostToDevice?n:0);uint8_t *in;
-    int optimized=vmweave_copy_optimized();
+/* Called after transport initialization. Broker uses this to account for the
+ * actual slot arenas and its session envelope, not a guessed global maximum. */
+int vmweave_guest_transport_limits(size_t *request,size_t *response){
+    if(!request||!response)return 1;
+    pthread_mutex_lock(&io_lock);
+    int e=!initialized||broken||!transport_request_bytes||!transport_response_bytes;
+    if(!e){*request=transport_request_bytes;*response=transport_response_bytes;}
+    pthread_mutex_unlock(&io_lock);return e?999:0;
+}
+static int copy_limits_known;
+static size_t copy_h2d_limit,copy_d2h_limit;
+static int copy_large;
+static int copy_limits(void){
+    if(copy_limits_known)return 0;
+    uint8_t out[24];size_t got=0;
+    int e=vmweave_guest_exchange(VMWEAVE_COPY_LIMITS,NULL,0,out,sizeof(out),&got);
+    if(e==801){ /* Old peers retain their existing small-copy protocol. */
+        copy_h2d_limit=copy_d2h_limit=VMWEAVE_COPY_CHUNK_BYTES;
+    }else{
+        if(e)return e;
+        if(got!=24||vmweave_get(out,4)!=1)return 801;
+        unsigned flags=(unsigned)vmweave_get(out+4,4);
+        uint64_t h=vmweave_get(out+8,8),d=vmweave_get(out+16,8);
+        if(!h||!d||h>VMWEAVE_COPY_CHUNK_BYTES||d>VMWEAVE_COPY_CHUNK_BYTES)return 801;
+        copy_h2d_limit=(size_t)h;copy_d2h_limit=(size_t)d;
+        copy_large=(flags&1)&&(!vmweave_getenv("VMWEAVE_BROKER_SOCKET")||(flags&2));
+    }
+    if(!vmweave_getenv("VMWEAVE_BROKER_SOCKET")){
+        size_t request,response;e=vmweave_guest_transport_limits(&request,&response);if(e)return e;
+        if(request<=56||!response)return 801;
+        if(copy_h2d_limit>request-56)copy_h2d_limit=request-56;
+        if(copy_d2h_limit>response)copy_d2h_limit=response;
+    }
+    copy_limits_known=1;return 0;
+}
+/* Serialized by the public entry points. Validate the WHOLE operation before
+ * sending chunk one. An error after a successful chunk is not rolled back. */
+static int device_address(const void *pointer){
+    uintptr_t p=(uintptr_t)pointer;
+    for(unsigned i=0;i<allocation_span;i++)if(allocations[i].base){
+        uintptr_t b=(uintptr_t)allocations[i].base;
+        if(p>=b&&(p-b<allocations[i].mapped||p-b==allocations[i].bytes))return 1;
+    }
+    return 0;
+}
+int vmweave_guest_copy(void *dst,const void *src,size_t n,int kind,uint64_t stream,int async){
+    struct vmweave_device_ref d={0},s={0};
+    if(n&&(!dst||!src||n>UINTPTR_MAX-(uintptr_t)dst||n>UINTPTR_MAX-(uintptr_t)src))return 1;
+    int dh=device_address(dst),sh=device_address(src);
+    if(kind==cudaMemcpyDefault)kind=dh?(sh?cudaMemcpyDeviceToDevice:cudaMemcpyHostToDevice):(sh?cudaMemcpyDeviceToHost:cudaMemcpyHostToHost);
+    if(kind==cudaMemcpyHostToHost){if(dh||sh)return 1;if(n)memmove(dst,src,n);return 0;}
+    if(kind<cudaMemcpyHostToDevice||kind>cudaMemcpyDeviceToDevice)return 1;
+    if(kind!=cudaMemcpyDeviceToHost&&vmweave_guest_ref(dst,n,&d))return 1;
+    if(kind!=cudaMemcpyHostToDevice&&vmweave_guest_ref(src,n,&s))return 1;
+    if((kind==cudaMemcpyHostToDevice&&sh)||(kind==cudaMemcpyDeviceToHost&&dh))return 1;
+    if(kind==cudaMemcpyDeviceToDevice&&n&&d.handle==s.handle&&
+       (d.offset>=s.offset?d.offset-s.offset:s.offset-d.offset)<n)return 1;
+    int e=copy_limits();if(e)return e;
+    if(n>VMWEAVE_COPY_CHUNK_BYTES&&!copy_large)return 801;
+    size_t limit=kind==cudaMemcpyHostToDevice?copy_h2d_limit:copy_d2h_limit;
+    if(kind==cudaMemcpyDeviceToDevice)limit=n;
+    size_t chunk=n<limit?n:limit,header=async?56:48;
+    size_t capacity=header+(kind==cudaMemcpyHostToDevice?chunk:0);
+    int optimized=vmweave_copy_optimized();uint8_t *in;
     if(optimized){
-        if(bytes>copy_capacity){void *p=realloc(copy_buffer,bytes);if(!p){e=2;goto done;}copy_buffer=p;copy_capacity=bytes;}
-        in=copy_buffer;memset(in,0,48);
-    }else{in=calloc(1,bytes);if(!in){e=2;goto done;}}
-    vmweave_put(in,kind==cudaMemcpyHostToDevice?1:kind==cudaMemcpyDeviceToHost?2:3,4);
-    vmweave_put(in+8,d.handle,8);vmweave_put(in+16,d.offset,8);vmweave_put(in+24,s.handle,8);vmweave_put(in+32,s.offset,8);vmweave_put(in+40,n,8);
-    if(kind==cudaMemcpyHostToDevice&&n)memcpy(in+48,src,n);
-    e=vmweave_guest_exchange(VMWEAVE_API_RUNTIME_MEMCPY,in,bytes,kind==cudaMemcpyDeviceToHost?dst:NULL,kind==cudaMemcpyDeviceToHost?n:0,&got);
-    if(!e&&got!=(kind==cudaMemcpyDeviceToHost?n:0))e=999;if(!optimized)free(in);
-done:pthread_mutex_unlock(&vmweave_guest_lock);return finish(e);
+        if(capacity>copy_capacity){void *p=realloc(copy_buffer,capacity);if(!p)return 2;copy_buffer=p;copy_capacity=capacity;}
+        in=copy_buffer;
+    }else{in=malloc(capacity);if(!in)return 2;}
+    size_t offset=0;
+    do{
+        size_t bytes=n-offset;if(bytes>limit)bytes=limit;
+        memset(in,0,header);uint8_t *p=in;
+        if(async){vmweave_put(in,stream,8);p+=8;}
+        vmweave_put(p,kind==cudaMemcpyHostToDevice?1:kind==cudaMemcpyDeviceToHost?2:3,4);
+        vmweave_put(p+8,d.handle,8);vmweave_put(p+16,d.handle?d.offset+offset:0,8);
+        vmweave_put(p+24,s.handle,8);vmweave_put(p+32,s.handle?s.offset+offset:0,8);vmweave_put(p+40,bytes,8);
+        if(kind==cudaMemcpyHostToDevice&&bytes)memcpy(in+header,(const uint8_t*)src+offset,bytes);
+        size_t got=0;void *output=kind==cudaMemcpyDeviceToHost&&bytes?(uint8_t*)dst+offset:NULL;
+        e=vmweave_guest_exchange(async?VMWEAVE_ASYNC_COPY:VMWEAVE_API_RUNTIME_MEMCPY,in,
+            header+(kind==cudaMemcpyHostToDevice?bytes:0),output,kind==cudaMemcpyDeviceToHost?bytes:0,&got);
+        if(!e&&got!=(kind==cudaMemcpyDeviceToHost?bytes:0))e=999;
+        if(e)break;
+        offset+=bytes;
+    }while(offset<n);
+    if(!optimized)free(in);return e;
+}
+cudaError_t cudaMemcpy(void *dst,const void *src,size_t n,enum cudaMemcpyKind kind){
+    pthread_mutex_lock(&vmweave_guest_lock);
+    int e=vmweave_guest_copy(dst,src,n,kind,0,0);
+    pthread_mutex_unlock(&vmweave_guest_lock);return finish(e);
 }
 static cudaError_t scalar(uint32_t api,int *out,int input){
     uint8_t in[4],result[4];size_t got;vmweave_put(in,(uint32_t)input,4);

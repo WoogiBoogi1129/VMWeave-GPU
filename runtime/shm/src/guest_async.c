@@ -24,27 +24,28 @@ cudaError_t cudaEventRecord(cudaEvent_t e,cudaStream_t s){return (cudaError_t)ha
 cudaError_t cudaEventSynchronize(cudaEvent_t e){return (cudaError_t)handle_call(VMWEAVE_EVENT_SYNC,(uintptr_t)e,0,NULL);}
 cudaError_t cudaEventQuery(cudaEvent_t e){return (cudaError_t)handle_call(VMWEAVE_EVENT_QUERY,(uintptr_t)e,0,NULL);}
 cudaError_t cudaMemcpyAsync(void *dst,const void *src,size_t n,enum cudaMemcpyKind kind,cudaStream_t st){
-    if(n>VMWEAVE_EXEC_MAX_COPY_BYTES)return cudaErrorInvalidValue;
-    pthread_mutex_lock(&vmweave_guest_lock);struct vmweave_device_ref d={0},s={0};int e=1;size_t got;
-    if(kind==cudaMemcpyDefault){int dh=!vmweave_guest_ref(dst,n,&d),sh=!vmweave_guest_ref(src,n,&s);kind=dh?(sh?cudaMemcpyDeviceToDevice:cudaMemcpyHostToDevice):(sh?cudaMemcpyDeviceToHost:cudaMemcpyHostToHost);}
-    if(kind==cudaMemcpyHostToHost){if(n&&(!dst||!src))goto done;if(n)memmove(dst,src,n);e=0;goto done;}
-    if(kind<cudaMemcpyHostToDevice||kind>cudaMemcpyDeviceToDevice)goto done;
-    if(kind!=cudaMemcpyDeviceToHost&&vmweave_guest_ref(dst,n,&d))goto done;
-    if(kind!=cudaMemcpyHostToDevice&&vmweave_guest_ref(src,n,&s))goto done;
-    if(n&&((kind==cudaMemcpyHostToDevice&&!src)||(kind==cudaMemcpyDeviceToHost&&!dst)))goto done;
-    size_t bytes=56+(kind==cudaMemcpyHostToDevice?n:0);uint8_t *in=calloc(1,bytes);if(!in){e=2;goto done;}
-    vmweave_put(in,(uintptr_t)st,8);vmweave_put(in+8,kind==cudaMemcpyHostToDevice?1:kind==cudaMemcpyDeviceToHost?2:3,4);
-    vmweave_put(in+16,d.handle,8);vmweave_put(in+24,d.offset,8);vmweave_put(in+32,s.handle,8);vmweave_put(in+40,s.offset,8);vmweave_put(in+48,n,8);
-    if(kind==cudaMemcpyHostToDevice&&n)memcpy(in+56,src,n);
-    e=vmweave_guest_exchange(VMWEAVE_ASYNC_COPY,in,bytes,kind==cudaMemcpyDeviceToHost?dst:NULL,kind==cudaMemcpyDeviceToHost?n:0,&got);
-    if(!e&&got!=(kind==cudaMemcpyDeviceToHost?n:0))e=999;free(in);
-done:pthread_mutex_unlock(&vmweave_guest_lock);return (cudaError_t)e;
+    pthread_mutex_lock(&vmweave_guest_lock);
+    int e=vmweave_guest_copy(dst,src,n,kind,(uintptr_t)st,1);
+    pthread_mutex_unlock(&vmweave_guest_lock);return (cudaError_t)e;
+}
+static CUresult copy_driver_result(cudaError_t e){
+    return e==cudaSuccess?CUDA_SUCCESS:e==cudaErrorInvalidValue?CUDA_ERROR_INVALID_VALUE:
+        e==cudaErrorMemoryAllocation?CUDA_ERROR_OUT_OF_MEMORY:e==cudaErrorNotSupported?CUDA_ERROR_NOT_SUPPORTED:CUDA_ERROR_UNKNOWN;
+}
+CUresult cuMemcpyHtoDAsync_v2(CUdeviceptr d,const void *s,size_t n,CUstream st){
+    return copy_driver_result(cudaMemcpyAsync((void*)(uintptr_t)d,s,n,cudaMemcpyHostToDevice,(cudaStream_t)st));
+}
+CUresult cuMemcpyDtoHAsync_v2(void *d,CUdeviceptr s,size_t n,CUstream st){
+    return copy_driver_result(cudaMemcpyAsync(d,(void*)(uintptr_t)s,n,cudaMemcpyDeviceToHost,(cudaStream_t)st));
+}
+CUresult cuMemcpyDtoDAsync_v2(CUdeviceptr d,CUdeviceptr s,size_t n,CUstream st){
+    return copy_driver_result(cudaMemcpyAsync((void*)(uintptr_t)d,(void*)(uintptr_t)s,n,cudaMemcpyDeviceToDevice,(cudaStream_t)st));
 }
 CUresult cuModuleLoadData(CUmodule *m,const void *image){
     if(!m||!image)return CUDA_ERROR_INVALID_VALUE;
     /* Text PTX only. Never guess ELF/fatbin extent from an unbounded pointer. */
     const char *text=image;if(text[0]!='/'&&text[0]!='.'&&text[0]!='\n')return CUDA_ERROR_NOT_SUPPORTED;
-    size_t n=strnlen(text,VMWEAVE_EXEC_MAX_COPY_BYTES);if(n==VMWEAVE_EXEC_MAX_COPY_BYTES)return CUDA_ERROR_INVALID_VALUE;
+    size_t n=strnlen(text,VMWEAVE_PTX_MAX_BYTES);if(n==VMWEAVE_PTX_MAX_BYTES)return CUDA_ERROR_INVALID_VALUE;
     uint8_t out[8];size_t got;pthread_mutex_lock(&vmweave_guest_lock);
     int e=vmweave_guest_exchange(VMWEAVE_MODULE_LOAD,image,n+1,out,8,&got);
     if(!e){if(got!=8)e=CUDA_ERROR_UNKNOWN;else *m=(CUmodule)(uintptr_t)vmweave_get(out,8);}

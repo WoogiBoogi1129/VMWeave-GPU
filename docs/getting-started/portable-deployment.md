@@ -19,7 +19,7 @@ Kubernetes·KubeVirt·NVIDIA 드라이버·컨테이너 런타임은 관리자�
 | CUDA / Guest OS | CUDA 12.8.1·cuDNN 9 / Ubuntu 22.04 |
 | HAMi | v2.10.0 + 이 저장소의 수정 라이브러리 |
 | GPU 실행 | VM과 Worker가 같은 GPU 노드, local filesystem backing |
-| 현재 제약 | VM별 동시 활성 프로그램 1개, 단일 CUDA 복사 16MiB |
+| 공개 v0.5.2 제약 | VM별 동시 활성 프로그램 1개, 단일 CUDA 복사 16MiB ([큰 복사 구현 후보](../runtime/large-copies.md)) |
 
 운영자가 GPU 노드별 Profile과 local PV를 준비합니다. 시스템 차트는 호스트 디렉터리를
 만들거나 드라이버·KubeVirt·HAMi를 자동 교체하지 않습니다. 기본 GPU smoke의 PTX는

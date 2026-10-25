@@ -9,7 +9,8 @@ enum {STREAM=1,EVENT,MODULE,FUNCTION,UPLOAD};
 struct object {uint64_t id,parent;int kind;void *pointer;size_t bytes,received;};
 static struct object objects[4096];static uint64_t next=1;
 static size_t upload_bytes;
-struct stage {void *host;cudaEvent_t done;};static struct stage stages[128];
+struct stage {void *host;cudaEvent_t done;size_t bytes;};
+static size_t staged_bytes;static struct stage stages[128];
 static struct object *find(uint64_t id,int kind){for(int i=0;i<4096;i++)if(objects[i].id==id&&id&&objects[i].kind==kind)return &objects[i];return NULL;}
 static struct object *reserve(void){if(next==UINT64_MAX)return NULL;for(int i=0;i<4096;i++)if(!objects[i].id)return &objects[i];return NULL;}
 static int stream(uint64_t id,cudaStream_t *out){struct object *o;if(!id){*out=0;return 1;}o=find(id,STREAM);if(!o)return 0;*out=(cudaStream_t)o->pointer;return 1;}
@@ -18,7 +19,7 @@ int vmweave_async_reap(void){
     for(int i=0;i<128;i++)if(stages[i].host){cudaError_t e=cudaEventQuery(stages[i].done);
         if(e==cudaErrorNotReady)continue;if(e!=cudaSuccess)return -1;
         if(cudaEventDestroy(stages[i].done)!=cudaSuccess||cudaFreeHost(stages[i].host)!=cudaSuccess)return -1;
-        memset(&stages[i],0,sizeof(stages[i]));}return 0;
+        staged_bytes-=stages[i].bytes;memset(&stages[i],0,sizeof(stages[i]));}return 0;
 }
 int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_shm_request *q,struct vmweave_shm_response *r){
     const uint8_t *p=q->input;size_t n=q->input_bytes;struct object *o=NULL;cudaStream_t st=0;uint64_t id=0;
@@ -105,13 +106,23 @@ int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_s
         if(n<56||vmweave_get(p+12,4)||!stream(vmweave_get(p,8),&st))goto invalid;
         unsigned k=(unsigned)vmweave_get(p+8,4);uint64_t bytes=vmweave_get(p+48,8);void *dst=NULL,*src=NULL;
         struct vmweave_device_ref d={vmweave_get(p+16,8),vmweave_get(p+24,8)},a={vmweave_get(p+32,8),vmweave_get(p+40,8)};
-        if(k<1||k>3||bytes>VMWEAVE_EXEC_MAX_COPY_BYTES||n!=56+(k==1?(size_t)bytes:0))goto invalid;
+        if(k<1||k>3||bytes>SIZE_MAX||(k!=3&&bytes>VMWEAVE_COPY_CHUNK_BYTES)||n!=56+(k==1?(size_t)bytes:0))goto invalid;
         if(k!=2&&!vmweave_cuda_exec_resolve(s->exec,d,(size_t)bytes,&dst))goto invalid;
         if(k!=1&&!vmweave_cuda_exec_resolve(s->exec,a,(size_t)bytes,&src))goto invalid;
         if(k==3&&bytes&&d.handle==a.handle&&(d.offset>=a.offset?d.offset-a.offset:a.offset-d.offset)<bytes)goto invalid;
         if(k==2&&(bytes>r->output_capacity||(bytes&&!r->output)))goto invalid;
         if(!bytes)break;
-        if(k==1){int i;for(i=0;i<128&&stages[i].host;i++);if(i==128)goto internal;
+        if(k==1){
+            /* Backpressure owns staging until the completion event, including
+             * across streams. Never free a buffer merely because enqueue returned. */
+            int i;
+            for(;;){
+                if(vmweave_async_reap())return -1;
+                for(i=0;i<128&&stages[i].host;i++);
+                if(i<128&&bytes<=VMWEAVE_ASYNC_STAGING_BYTES-staged_bytes)break;
+                int pending;for(pending=0;pending<128&&!stages[pending].host;pending++);
+                if(pending==128||cudaEventSynchronize(stages[pending].done)!=cudaSuccess)return -1;
+            }
             void *host=NULL;cudaEvent_t event=NULL;
             r->api_result=cudaHostAlloc(&host,(size_t)bytes,cudaHostAllocDefault);if(r->api_result)break;
             r->api_result=cudaEventCreateWithFlags(&event,cudaEventDisableTiming);
@@ -120,7 +131,7 @@ int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_s
             r->api_result=cudaMemcpyAsync(dst,host,(size_t)bytes,cudaMemcpyHostToDevice,st);
             if(!r->api_result)r->api_result=cudaEventRecord(event,st);
             if(r->api_result){/* Cannot free potentially in-flight staging. Exit this process. */return -1;}
-            stages[i].host=host;stages[i].done=event;
+            stages[i].host=host;stages[i].done=event;stages[i].bytes=(size_t)bytes;staged_bytes+=(size_t)bytes;
         }else if(k==2){
             /* Conservative completion: this initial DtoH path blocks until stream
              * work completes and bytes can be returned, never returns stale data. */
@@ -131,7 +142,7 @@ int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_s
         break;}
     case VMWEAVE_MODULE_LOAD:{
         r->result_domain=VMWEAVE_RESULT_CUDA_DRIVER;
-        if(!n||n>VMWEAVE_EXEC_MAX_COPY_BYTES||p[n-1]||memchr(p,0,n-1)||r->output_capacity<8||!r->output)goto invalid;
+        if(!n||n>VMWEAVE_PTX_MAX_BYTES||p[n-1]||memchr(p,0,n-1)||r->output_capacity<8||!r->output)goto invalid;
         o=reserve();if(!o)goto internal;CUmodule m=NULL;r->api_result=cuModuleLoadData(&m,p);
         if(!r->api_result){o->kind=MODULE;o->pointer=m;o->id=next++;vmweave_put(r->output,o->id,8);r->output_bytes=8;}break;}
     case VMWEAVE_MODULE_UNLOAD:

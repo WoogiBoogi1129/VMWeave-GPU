@@ -2,6 +2,9 @@
 #define VMWEAVE_WIRE_H
 #include "vmweave_cuda_exec.h"
 #include "vmweave_mapping.h"
+/* v1 reply: u32 version, u32 flags (1=large D2D, 2=broker bounded),
+ * u64 H2D chunk, u64 D2H chunk. Unknown peers return NotSupported. */
+#define VMWEAVE_COPY_LIMITS 0x1014u
 #define VMWEAVE_HELLO 1u
 #define VMWEAVE_GOODBYE 2u
 #define VMWEAVE_HEARTBEAT 3u

@@ -12,10 +12,22 @@ cc -O2 "${includes[@]}" tests/integration/guest_pointer_refs.c runtime/shm/src/b
   "$build/libvmweave_mapping.a" "$build/queue/libvmweave_shm_queue.a" \
   -lpthread -o "$build/guest-pointer-refs-test"
 "$build/guest-pointer-refs-test"
+cc -O2 "${includes[@]}" tests/integration/large_copy_guest.c \
+  "$build/libvmweave_mapping.a" "$build/queue/libvmweave_shm_queue.a" \
+  -lpthread -o "$build/large-copy-guest-test"
+VMWEAVE_COPY_MODE=legacy "$build/large-copy-guest-test"
+VMWEAVE_COPY_MODE=optimized "$build/large-copy-guest-test"
 cc -O2 "${includes[@]}" tests/integration/kernel_wire_validation.c \
   -L"$cuda_root/lib64" -Wl,-rpath,"$cuda_root/lib64" \
   -L"$cuda_root/lib64/stubs" -lcudart -lcuda -o "$build/kernel-wire-test"
 "$build/kernel-wire-test"
+cc -O2 "${includes[@]}" tests/integration/large_copy_async.c \
+  -L"$cuda_root/lib64" -Wl,-rpath,"$cuda_root/lib64" \
+  -L"$cuda_root/lib64/stubs" -lcudart -lcuda -o "$build/large-copy-async-test"
+"$build/large-copy-async-test"
+"$build/large-copy-async-test" enqueue
+"$build/large-copy-async-test" record
+"$build/large-copy-async-test" wait
 cc -O2 "${includes[@]}" tests/integration/memory_info_dispatch.c \
   "$build/libvmweave_dispatch.a" "$build/queue/libvmweave_shm_queue.a" -lpthread -o "$build/memory-info-test"
 "$build/memory-info-test"

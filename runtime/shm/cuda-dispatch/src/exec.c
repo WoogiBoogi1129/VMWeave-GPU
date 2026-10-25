@@ -81,7 +81,7 @@ static int copy_call(struct vmweave_cuda_exec *s, const struct vmweave_cuda_call
     void *dst = NULL, *src = NULL, *host = NULL;
     uint64_t n = c->args.copy.bytes;
     uint32_t kind = c->args.copy.direction;
-    if (n > SIZE_MAX || n > VMWEAVE_EXEC_MAX_COPY_BYTES ||
+    if (n > SIZE_MAX || (kind != VMWEAVE_COPY_DTOD && n > VMWEAVE_COPY_CHUNK_BYTES) ||
         kind < VMWEAVE_COPY_HTOD || kind > VMWEAVE_COPY_DTOD)
         return status(r, VMWEAVE_SHM_BAD_DESCRIPTOR);
     if (kind != VMWEAVE_COPY_DTOH && !resolve(s, c->args.copy.dst, (size_t)n, &dst))

@@ -58,8 +58,10 @@ HAMi 메모리 quota를 별도 allocation 합계로 다시 제한하지 않으�
   handle 번호는 재사용하지 않는다. handle overflow 전에 거절한다.
 - 범위는 `offset <= allocation_bytes`, `bytes <= allocation_bytes - offset`으로 검사한다.
   Host 주소를 Guest 값으로 cast하지 않는다. DtoD의 동일 allocation 내 겹치는 복사는 거절한다.
-- 한 copy는 최대 16 MiB다. 초과 요청과 알 수 없는 handle은 transport 오류다.
-  0-byte copy도 유효한 device handle을 요구한다. 이 초기 제한을 CUDA 전체 호환성으로 보지 않는다.
+- host payload를 가진 한 내부 copy는 최대 16MiB다. Guest가 큰 논리적 복사를 분할한다.
+  DtoD는 크기 상한 대신 전체 allocation 범위를 검사하며 제어 요청 하나로 실행한다.
+  알 수 없는 handle과 범위 초과는 transport 오류다. 0-byte copy도 유효한 device handle을 요구한다.
+  [후보 기능과 호환성](../../../docs/runtime/large-copies.md)을 따른다.
 - HtoD는 Host-private snapshot을 사용하고 DtoH 결과는 모듈 소유 버퍼에 받는다.
   adapter는 결과를 response 영역에 복사한 후 `vmweave_cuda_result_release`를 호출한다.
   결과 구조체 재사용 전에도 release가 필요하다. 공유 영역 포인터를 직접 넘기면 안 된다.

@@ -56,11 +56,11 @@ PyTorch의 명시적 `dlopen("libcuda.so.1")`도 Guest 중계 라이브러리에
   모든 비교군에 동일하게 적용한다. 이 결과는 cuBLASLt 기본 경로의 검증이 아니다.
 - DtoH async 복사는 결과를 반환하기 전에 stream 완료를 기다리는 보수적 구현이다.
   `VMWEAVE_TRACE_CALLS`는 개발 진단용이며 성능 실행에서는 제거한다.
-- 단일 CUDA 복사 요청은 `VMWEAVE_EXEC_MAX_COPY_BYTES`에 따라 16 MiB까지다.
-  더 큰 요청을 자동 분할하지 않는다. 2026-10-16 실제 VM 검사에서 32 MiB
-  가중치를 가진 MLP가 `model.cuda()` 단계의 `CUDA invalid value`로 실패했다.
-  이는 VRAM OOM과 다른 호환성 제한이다.
-  [동일 GPU의 passthrough 대조와 실행 증거](../../experiments/ai-passthrough/README.md).
+- 2026-10-23 구현 후보는 큰 CPU↔GPU 복사를 최대 16MiB 청크로 자동 분할하고,
+  큰 GPU↔GPU 복사는 제어 요청 하나로 실행한다. staging은 세션별 64MiB로 제한한다.
+  [동작·오류·구버전 호환성](../../docs/runtime/large-copies.md)을 따른다.
+  공개 v0.5.2에는 여전히 논리적 복사 16MiB 제한이 있으므로 후보와 구분한다.
+  2026-10-16의 큰 MLP `model.cuda()` 실패는 이 구버전 제한의 기록이며 VRAM OOM이 아니다.
 
 새 schema-1 opcode: 0x2040..0x2044는 바이너리 업로드·커널 layout·packed launch,
 0x2100..0x2107은 장치 속성·attribute·버전·device VA·memset·stream 우선순위·context 조회다.

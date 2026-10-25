@@ -8,6 +8,15 @@ int vmweave_cuda_dispatch(struct vmweave_cuda_session *s,const struct vmweave_sh
     r->output_bytes=0;r->transport_status=0;r->result_domain=0;r->api_result=0;
     if(q->payload_schema!=1){r->transport_status=VMWEAVE_SHM_UNSUPPORTED_API;return 0;}
     c.api_id=q->api_id;
+    if(c.api_id==VMWEAVE_COPY_LIMITS){
+        if(!s->exec||q->input_bytes||r->output_capacity<24||!r->output)goto invalid;
+        int state=vmweave_cuda_exec_check(s->exec);
+        if(state){r->transport_status=(uint32_t)state;return 0;}
+        vmweave_put(r->output,1,4);vmweave_put(r->output+4,1,4);
+        vmweave_put(r->output+8,VMWEAVE_COPY_CHUNK_BYTES,8);
+        vmweave_put(r->output+16,VMWEAVE_COPY_CHUNK_BYTES,8);
+        r->output_bytes=24;r->result_domain=VMWEAVE_RESULT_CUDA_RUNTIME;return 0;
+    }
     if(c.api_id==VMWEAVE_API_RUNTIME_MEM_GET_INFO){
         if(!s->exec||q->input_bytes||r->output_capacity<16||!r->output)goto invalid;
         int state=vmweave_cuda_exec_check(s->exec);
@@ -34,7 +43,7 @@ int vmweave_cuda_dispatch(struct vmweave_cuda_session *s,const struct vmweave_sh
     case VMWEAVE_API_RUNTIME_MEMCPY:{
         if(q->input_bytes<48||vmweave_get(q->input+4,4))goto invalid;
         uint64_t n=vmweave_get(q->input+40,8);uint32_t k=(uint32_t)vmweave_get(q->input,4);
-        if(n>VMWEAVE_EXEC_MAX_COPY_BYTES||k<1||k>3)goto invalid;
+        if(n>SIZE_MAX||(k!=3&&n>VMWEAVE_COPY_CHUNK_BYTES)||k<1||k>3)goto invalid;
         if(q->input_bytes!=48+(k==VMWEAVE_COPY_HTOD?(size_t)n:0))goto invalid;
         c.args.copy.direction=k;c.args.copy.dst.handle=vmweave_get(q->input+8,8);c.args.copy.dst.offset=vmweave_get(q->input+16,8);
         c.args.copy.src.handle=vmweave_get(q->input+24,8);c.args.copy.src.offset=vmweave_get(q->input+32,8);c.args.copy.bytes=n;

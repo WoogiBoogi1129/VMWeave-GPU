@@ -35,5 +35,23 @@ int main(int argc,char**argv){
  }
  assert(!r.api_result&&r.data_borrowed&&r.data==output+1&&r.data_bytes==64);vmweave_cuda_result_release(&r);
  assert(!memcmp(input,output+1,64)&&output[0]==0xcc&&output[65]==0xcc);
+ /* Large D2D is a control-only call; host payloads stay bounded. */
+ size_t large=VMWEAVE_COPY_CHUNK_BYTES+16388;uint64_t handles[2];
+ for(int i=0;i<2;i++){
+  c=(struct vmweave_cuda_call){.api_id=VMWEAVE_API_RUNTIME_MALLOC,.args.allocation_bytes=large+32};
+  assert(!vmweave_cuda_exec_call(s,&c,&r));handles[i]=r.handle;vmweave_cuda_result_release(&r);
+ }
+ void *source,*dest;
+ assert(vmweave_cuda_exec_resolve(s,(struct vmweave_device_ref){handles[0],17},large,&source));
+ assert(vmweave_cuda_exec_resolve(s,(struct vmweave_device_ref){handles[1],23},large,&dest));
+ memset(source,0x5a,large);memset(dest,0,large);
+ c=(struct vmweave_cuda_call){.api_id=VMWEAVE_API_RUNTIME_MEMCPY,.args.copy={.direction=VMWEAVE_COPY_DTOD,.src={handles[0],17},.dst={handles[1],23},.bytes=large}};
+ assert(!vmweave_cuda_exec_call(s,&c,&r)&&!r.api_result&&!memcmp(source,dest,large));vmweave_cuda_result_release(&r);
+ unsigned before=copies;c.args.copy.bytes=large+33;
+ assert(vmweave_cuda_exec_call(s,&c,&r)==VMWEAVE_SHM_BAD_DESCRIPTOR&&copies==before);vmweave_cuda_result_release(&r);
+ c.args.copy.bytes=large;c.args.copy.src=c.args.copy.dst;
+ assert(vmweave_cuda_exec_call(s,&c,&r)==VMWEAVE_SHM_BAD_DESCRIPTOR&&copies==before);vmweave_cuda_result_release(&r);
+ c.args.copy.direction=VMWEAVE_COPY_DTOH;
+ assert(vmweave_cuda_exec_call(s,&c,&r)==VMWEAVE_SHM_BAD_DESCRIPTOR&&copies==before);vmweave_cuda_result_release(&r);
  uint32_t e;assert(!vmweave_cuda_exec_destroy(&s,&e));puts("PASS: private input/output borrowing, capacity preflight, ownership and bounds");
 }

@@ -13,7 +13,7 @@ void vmweave_cuda_result_release(struct vmweave_cuda_result *r){(void)r;abort();
 int main(void){
     struct vmweave_cuda_session session={.exec=(struct vmweave_cuda_exec *)1};
     struct vmweave_shm_request q={.api_id=VMWEAVE_API_RUNTIME_MEM_GET_INFO,.payload_schema=1};
-    uint8_t output[16];struct vmweave_shm_response r={.output=output,.output_capacity=16};
+    uint8_t output[24];struct vmweave_shm_response r={.output=output,.output_capacity=16};
     assert(!vmweave_cuda_dispatch(&session,&q,&r));assert(calls==1&&r.output_bytes==16&&!r.api_result);
     assert(vmweave_get(output,8)==123&&vmweave_get(output+8,8)==456);
     r.output_capacity=15;assert(!vmweave_cuda_dispatch(&session,&q,&r));assert(calls==1&&r.transport_status==VMWEAVE_SHM_BAD_DESCRIPTOR);
@@ -24,6 +24,12 @@ int main(void){
     assert(!vmweave_cuda_dispatch(&session,&q,&r));assert(calls==previous&&r.transport_status==VMWEAVE_SHM_CHANNEL_CLOSED);
     state=VMWEAVE_SHM_BAD_DESCRIPTOR;
     assert(!vmweave_cuda_dispatch(&session,&q,&r));assert(calls==previous&&r.transport_status==VMWEAVE_SHM_BAD_DESCRIPTOR);
+    state=0;q.api_id=VMWEAVE_COPY_LIMITS;r.output_capacity=24;
+    assert(!vmweave_cuda_dispatch(&session,&q,&r)&&!r.transport_status&&r.output_bytes==24);
+    assert(vmweave_get(output,4)==1&&vmweave_get(output+4,4)==1&&vmweave_get(output+8,8)==VMWEAVE_COPY_CHUNK_BYTES&&vmweave_get(output+16,8)==VMWEAVE_COPY_CHUNK_BYTES);
+    r.output_capacity=23;assert(!vmweave_cuda_dispatch(&session,&q,&r)&&r.transport_status==VMWEAVE_SHM_BAD_DESCRIPTOR);
+    r.output_capacity=24;state=VMWEAVE_SHM_CHANNEL_CLOSED;
+    assert(!vmweave_cuda_dispatch(&session,&q,&r)&&r.transport_status==VMWEAVE_SHM_CHANNEL_CLOSED);
     puts("PASS: memory-info encoding, bounds, CUDA errors, inconsistent observations and closed/wrong-thread guards");
     return 0;
 }

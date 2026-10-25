@@ -81,12 +81,16 @@ CUresult cuGetProcAddress(const char *symbol,void **pfn,int version,cuuint64_t f
         if(!strcmp(symbol,"cuMemcpyHtoD")){*pfn=(void *)&cuMemcpyHtoD_v2;return CUDA_SUCCESS;}
         if(!strcmp(symbol,"cuMemcpyDtoH")){*pfn=(void *)&cuMemcpyDtoH_v2;return CUDA_SUCCESS;}
         if(!strcmp(symbol,"cuMemcpyDtoD")){*pfn=(void *)&cuMemcpyDtoD_v2;return CUDA_SUCCESS;}
+        if(!strcmp(symbol,"cuMemcpyHtoDAsync")){*pfn=(void *)&cuMemcpyHtoDAsync_v2;return CUDA_SUCCESS;}
+        if(!strcmp(symbol,"cuMemcpyDtoHAsync")){*pfn=(void *)&cuMemcpyDtoHAsync_v2;return CUDA_SUCCESS;}
+        if(!strcmp(symbol,"cuMemcpyDtoDAsync")){*pfn=(void *)&cuMemcpyDtoDAsync_v2;return CUDA_SUCCESS;}
     }
 #define SYMBOL(name) if(!strcmp(symbol,#name)){*pfn=(void *)&name;return CUDA_SUCCESS;}
     SYMBOL(cuInit) SYMBOL(cuDeviceGet) SYMBOL(cuDeviceGetCount)
     SYMBOL(cuDevicePrimaryCtxGetState)
     SYMBOL(cuCtxGetCurrent) SYMBOL(cuCtxSetCurrent) SYMBOL(cuCtxGetDevice) SYMBOL(cuDeviceGetAttribute) SYMBOL(cuGetErrorString)
     SYMBOL(cuMemAlloc_v2) SYMBOL(cuMemFree_v2) SYMBOL(cuMemcpyHtoD_v2) SYMBOL(cuMemcpyDtoH_v2) SYMBOL(cuMemcpyDtoD_v2)
+    SYMBOL(cuMemcpyHtoDAsync_v2) SYMBOL(cuMemcpyDtoHAsync_v2) SYMBOL(cuMemcpyDtoDAsync_v2)
     SYMBOL(cuMemGetInfo_v2)
     SYMBOL(cuCtxSynchronize) SYMBOL(cuModuleLoadData) SYMBOL(cuModuleUnload) SYMBOL(cuModuleGetFunction) SYMBOL(cuLaunchKernel)
 #undef SYMBOL

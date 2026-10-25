@@ -13,7 +13,11 @@ extern "C" {
  * All calls, including create/destroy, run on one dedicated session thread.
  */
 #define VMWEAVE_EXEC_MAX_ALLOCATIONS 4096u
-#define VMWEAVE_EXEC_MAX_COPY_BYTES (16u * 1024u * 1024u)
+/* Per-message host payload, not the size of a logical CUDA copy. */
+#define VMWEAVE_COPY_CHUNK_BYTES (16u * 1024u * 1024u)
+#define VMWEAVE_ASYNC_STAGING_BYTES (64u * 1024u * 1024u)
+#define VMWEAVE_PTX_MAX_BYTES (16u * 1024u * 1024u)
+#define VMWEAVE_EXEC_MAX_COPY_BYTES VMWEAVE_COPY_CHUNK_BYTES
 enum vmweave_copy_direction { VMWEAVE_COPY_HTOD = 1, VMWEAVE_COPY_DTOH = 2, VMWEAVE_COPY_DTOD = 3 };
 struct vmweave_device_ref { uint64_t handle; uint64_t offset; };
 struct vmweave_cuda_call {

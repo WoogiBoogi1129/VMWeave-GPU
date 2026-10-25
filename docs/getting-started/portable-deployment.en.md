@@ -22,7 +22,7 @@ the [HAMi DRA guide](hami-dra.md) is in English.
 | CUDA / Guest OS | CUDA 12.8.1, cuDNN 9 / Ubuntu 22.04 |
 | Classic HAMi | v2.10.0 with this repository's patched library |
 | GPU execution | VM and Worker on the same GPU node, local filesystem backing |
-| Current limits | One active program per VM; 16 MiB per CUDA copy request |
+| Published v0.5.2 limits | One active program per VM; 16 MiB per CUDA copy request ([large-copy candidate](../runtime/large-copies.md)) |
 
 Administrators provision a GPUProfile and local PV for each GPU node. The system
 chart does not create host directories or automatically replace drivers, KubeVirt,

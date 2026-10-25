@@ -79,7 +79,8 @@ Guest는 private 출력 버퍼를 준비해 receive/try_receive를 호출한다.
   shared descriptor snapshot 이후에만 주소/길이를 사용한다. Guest의 payload 내용 변경 자체나
   동일 VM 안의 악성 프로세스를 하드웨어로 격리하지는 않는다.
 - 메시지는 arena 용량과 64 MiB 중 작은 값까지다. backing은 1 MiB..4 GiB다. 64 MiB는 snapshot
-  할당 상한이며 10-02 CUDA memcpy의 16 MiB 제한을 확대하지 않는다. chunking/async는 후속 작업이다.
+  할당 상한이다. CUDA 복사 계층은 이 한도와 실제 arena를 반영하여 최대 16MiB 청크를 사용한다.
+  큰 논리적 복사는 Guest에서 나누며 queue의 메시지 한도를 늘리지 않는다.
 - submit의 QUEUE_FULL은 해당 호출이 미게시임을 뜻한다. 이미 pending인 요청의 재실행 허가는 아니다.
   Worker take의 메모리 부족은 미소비·미실행이므로 take만 다시 시도할 수 있다.
 - deadline은 submit에서 시작하는 CLOCK_MONOTONIC 기준 1..60000ms다. timeout은

@@ -24,6 +24,7 @@ RESPONSE = struct.Struct('<IIQ')
 OPEN, CLOSE, CALL, STATUS = 4, 5, 6, 7
 CACHE_OPEN, CACHE_STATUS = 0x7ff0, 0x7ff1
 CACHE_VERSION = 1
+COPY_LIMITS = 0x1014
 HEALTH_INTERVAL = 0.010
 
 
@@ -134,6 +135,20 @@ class Transport:
                 if api < 0x1000:
                     raise ValueError('client cannot send transport controls')
                 rc, out = self.exchange(CALL, epoch + struct.pack('<II', api, 0) + data, capacity)
+                if api == COPY_LIMITS and not rc:
+                    limits = getattr(self.lib, 'vmweave_guest_transport_limits', None)
+                    request, response = ctypes.c_size_t(), ctypes.c_size_t()
+                    if len(out) != 24 or limits is None or limits(ctypes.byref(request), ctypes.byref(response)):
+                        rc, out = 801, b''
+                    else:
+                        version, flags, upload, download = struct.unpack('<IIQQ', out)
+                        # Reserve the 24-byte session envelope and largest copy header.
+                        upload = min(upload, MAX_BYTES - 56, request.value - 24 - 56)
+                        download = min(download, MAX_BYTES, response.value)
+                        if version != 1 or upload <= 0 or download <= 0:
+                            rc, out = 801, b''
+                        else:
+                            out = struct.pack('<IIQQ', version, flags | 2, upload, download)
                 conn.sendall(RESPONSE.pack(MAGIC, rc, len(out)) + out)
         except (EOFError, OSError, ValueError, RuntimeError) as error:
             print(f'client disconnected: {type(error).__name__}', flush=True)
