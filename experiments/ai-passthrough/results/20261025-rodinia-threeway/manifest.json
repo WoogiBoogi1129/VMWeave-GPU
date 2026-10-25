@@ -1,0 +1,126 @@
+{
+  "status": "COMPLETE",
+  "formal_runs": 18,
+  "comparators": [
+    "Passthrough",
+    "Flyt SHM",
+    "VMWeave v0.5.3"
+  ],
+  "workloads": {
+    "NW": [
+      "2048",
+      "10"
+    ],
+    "LU": [
+      "-s",
+      "2064"
+    ]
+  },
+  "planned_runs": 18,
+  "flyt": {
+    "guest": "f46f604b887d219847868d2857b30ad83e0177f2",
+    "host": "06af9de1e9fcf3ddeea28a2c3bd64284dde1bd30"
+  },
+  "vmweave": {
+    "sourceRevision": "47e3b98ce1f4fd4e06005f440d12211fad376b2a",
+    "tag": "v0.5.3",
+    "scope": "Published v0.5.3 images/chart; production Guest, Worker, helper, hook and operator deployed and verified. Existing upstream HAMi and DRA deployment retained. Revision labels are not cryptographic provenance.",
+    "images": {
+      "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:e20b7b22d1edcbd35b3b2e0b392417447b78235dc11949242373199aa21030e5",
+      "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:5fda1df0dc3fc672778ca4c05a473355231e913ba2889bb159c82a0e477d8063",
+      "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7483295dfa974626a62c124caa6e2660a5664981868ac1dafb50e20499b88acb",
+      "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:486ca081e7685560c78d9f56409904a3d778decb6770855e6f8949b89df2f3a8",
+      "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:b9c343d1c220449999527adaf660bae9f823137fc9ae105c8965f656fa5e3f75",
+      "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:5519823bb962a831a2a162f8fa98be715511ff23d7115b29f25d5468e4f7ba29",
+      "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:d6ee15ba093f76c442fefc0e72b24a2efb754c6a45805d11a843e672b56d547b"
+    },
+    "chart": {
+      "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+      "version": "0.5.3",
+      "digest": "sha256:ba3b9571d4ff8137d2aac38ae7185ff1eafb1b7ea99743a47e3397b1dc1ac19d"
+    },
+    "workflows": {
+      "v0.5.3:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232212",
+      "v0.5.3:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232242",
+      "v0.5.3:hami-dra-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232441",
+      "v0.5.3:hami-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232247",
+      "v0.5.3:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232228",
+      "main:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229773",
+      "main:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229772",
+      "main:Documentation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229777",
+      "main:CPU control plane": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229806",
+      "main:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229781"
+    },
+    "verification": {
+      "publicArtifacts": "PASS: 7 image revision labels; chart matches candidate; Guest checksums and 4 ABI tests; Guest and Worker payloads match tested candidate",
+      "canary": "PASS: published Guest/Worker, standard installer/systemd/config-drive, 50%/2048MiB, PTX smoke and 18 copy cases. Public chart isolated install passed; GPU canary used existing operator after node Pod limit prevented duplicate operator plus VM.",
+      "production": "PASS: default/enabled-cache GPU smoke, math cache API checks, 18 synchronous/asynchronous copy cases through 128MiB+1, NW 2048 and LU 256/2064 output hashes match native reference. No production fault injection.",
+      "preservation": {
+        "status": "PASS",
+        "workerCPUAllowedList": "0-127",
+        "vmAndPVCsPreserved": true,
+        "cores": 50,
+        "memoryMiB": 2048,
+        "draHelmRevision": 5,
+        "draUnchanged": true
+      },
+      "performance": "Previous full comparison: 6 PASS / 6 INCONCLUSIVE. No universal <=5% regression or training-throughput improvement claim."
+    },
+    "deployment": {
+      "helmRevision": 11,
+      "updatedComponents": [
+        "operator",
+        "helper",
+        "hook",
+        "worker",
+        "guest-artifacts"
+      ],
+      "retainedComponents": [
+        "upstream HAMi 2.10.0",
+        "DRA Helm revision 5"
+      ],
+      "rollback": "v0.5.2 Guest backup, Helm revision 10, retained v052 Profile/Request; restore matched Guest/broker/Worker set while VM stopped"
+    },
+    "publishedDateKST": "2026-10-25"
+  },
+  "mutation_scope": "Isolated test resources; temporary GPU0 VFIO transitions and monitor scheduling changes restored per transition; production VM/quotas unchanged",
+  "build": {
+    "cuda": "12.8.93",
+    "guest_libtirpc_requested": "9ca5abfb0257fc93a94f26c028ad66e2aba9f1f1",
+    "guest_libtirpc_fetch": "upstream not our ref",
+    "guest_and_host_libtirpc_actual": "2894e5c0598160aaaf78b56c3d7cd2275594798c",
+    "guest_patch": "Exclude 12 obsolete cuDNN algorithm descriptor/performance wrappers when CUDNN_MAJOR >= 9; NW/LU do not use cuDNN",
+    "host": "built; ldd -r passed with host CUDA/NVML driver libraries mounted (no GPU execution)",
+    "guest": "built; ldd -r passed",
+    "sha256": {
+      "guest": "4cd408e1382680e5766077c3a5499b72375a55c88757d3e0673c3bee667e3d1f",
+      "host": "031ec9c4aa6fab72c094e5274cb4e604fd8282add37be4b499bf72d8014220f7"
+    },
+    "managers": "PASS: client/node/cluster managers built with Rust 1.90.0; manager source Guest revision (host node-manager differences are comments only)",
+    "fatbinParsing": "PASS: all NW and LU fatbinary records parsed; NW 2 kernels, LU 3 kernels",
+    "cargoLockRecorded": true,
+    "ipc_rs": {
+      "commit": "fc62adcac5d25dfb333049e39449e69553cbf9fa",
+      "patch": "CString termination for ftok path; native-key interoperability probe PASS; original poisoned-string probe FAIL",
+      "patch_file": "ipc-rs-ftok.patch"
+    }
+  },
+  "mps": "GPU0 SM-count affinity query: unsupported without MPS, supported with isolated MPS; temporary host MPS stopped before Pod setup",
+  "qualification": {
+    "flyt": "PASS both full-output hashes; SHM PCI mapping and copy counters",
+    "passthrough": "PASS both full-output hashes; VM GPU UUID validated",
+    "vmweave": "PASS both full-output hashes; public v0.5.3 Guest/Worker; dedicated 100%/8192MiB allocation"
+  },
+  "cleanup": {
+    "hami-device-plugin": true,
+    "nvidia-dcgm-exporter": true,
+    "kubevirt_spec_restored": true,
+    "gpu0_driver": "nvidia",
+    "temporary_affinity_units_removed": true,
+    "production_vm_channel_spec_and_uid_preserved": true,
+    "production_channel": "Ready",
+    "gpu0_no_compute_processes": true,
+    "test_resources_removed": true,
+    "pciRebindPerformed": true
+  }
+}

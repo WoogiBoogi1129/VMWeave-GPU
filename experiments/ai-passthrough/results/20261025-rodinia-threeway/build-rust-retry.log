@@ -1,0 +1,113 @@
+STEP 1/4: FROM localhost/flyt-threeway-build:20261025-full
+STEP 2/4: RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates && rm -rf /var/lib/apt/lists/*
+Get:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  InRelease [1578 B]
+Get:2 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  Packages [3137 kB]
+Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [7955 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [4430 kB]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [96.8 kB]
+Get:13 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1325 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [8243 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1628 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [104 kB]
+Get:18 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [4759 kB]
+Get:19 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [35.6 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [82.9 kB]
+Fetched 52.1 MB in 27s (1943 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  curl
+The following packages will be upgraded:
+  ca-certificates libcurl4
+2 upgraded, 1 newly installed, 0 to remove and 111 not upgraded.
+Need to get 627 kB of archives.
+After this operation, 400 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ca-certificates all 20260816ubuntu0.22.04.1 [140 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.30 [293 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.30 [194 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 627 kB in 3s (250 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 20612 files and directories currently installed.)
+Preparing to unpack .../ca-certificates_20260816ubuntu0.22.04.1_all.deb ...
+Unpacking ca-certificates (20260816ubuntu0.22.04.1) over (20240203~22.04.1) ...
+Preparing to unpack .../libcurl4_7.81.0-1ubuntu1.30_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.30) over (7.81.0-1ubuntu1.27) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.81.0-1ubuntu1.30_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.30) ...
+Setting up ca-certificates (20260816ubuntu0.22.04.1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+Updating certificates in /etc/ssl/certs...
+rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+17 added, 43 removed; done.
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.30) ...
+Setting up curl (7.81.0-1ubuntu1.30) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+Processing triggers for ca-certificates (20260816ubuntu0.22.04.1) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+--> 03d25e2d6848
+STEP 3/4: RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh && sh /tmp/rustup.sh -y --profile minimal --default-toolchain 1.90.0 && rm /tmp/rustup.sh
+info: downloading installer
+info: profile set to minimal
+info: default host tuple is x86_64-unknown-linux-gnu
+info: syncing channel updates for 1.90.0-x86_64-unknown-linux-gnu
+info: latest update on 2025-09-18 for version 1.90.0 (1159e78c4 2025-09-14)
+info: downloading 3 components
+
+info: default toolchain set to 1.90.0-x86_64-unknown-linux-gnu
+  1.90.0-x86_64-unknown-linux-gnu installed - rustc 1.90.0 (1159e78c4 2025-09-14)
+
+
+Rust is installed now. Great!
+
+To get started you may need to restart your current shell.
+This would reload your PATH environment variable to include
+Cargo's bin directory ($HOME/.cargo/bin).
+
+To configure your current shell, you need to source the
+corresponding env file under $HOME/.cargo.
+
+Consider running the right command for your shell (note the leading DOT):
+. "$HOME/.cargo/env" # For sh/ash/dash/pdksh/bash
+cargo:rerun-if-env-changed=CC_x86_64-unknown-linux-gnu
+CC_x86_64-unknown-linux-gnu = None
+cargo:rerun-if-env-changed=CC_x86_64_unknown_linux_gnu
+CC_x86_64_unknown_linux_gnu = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64_unknown_linux_gnu
+CFLAGS_x86_64_unknown_linux_gnu = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64-unknown-linux-gnu
+CFLAGS_x86_64-unknown-linux-gnu = None
+--> 0ec95085038e
+STEP 4/4: ENV PATH=/root/.cargo/bin:$PATH
+COMMIT localhost/flyt-threeway-build:20261025-rust
+--> 34ece2bb7ebe
+Successfully tagged localhost/flyt-threeway-build:20261025-rust
+34ece2bb7ebe50b2297b34c30544a58add75641230ae4d37321572a81b8cebb2

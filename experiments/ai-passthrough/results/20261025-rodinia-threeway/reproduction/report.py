@@ -1,0 +1,45 @@
+import json,csv,statistics,shutil
+from pathlib import Path
+import rodinia_campaign as h
+stats=json.loads((h.O/'comparison.json').read_text());diag=[]
+for p in sorted((h.O/'diagnostic').glob('r3/*/result.json')):
+ for r in json.loads(p.read_text()):
+  d=r['diagnostic'];t=r['timing'];d['startup_seconds']=t['startup_seconds'];d['total_seconds']=t['seconds'];d['launch_loop_and_other_host_seconds']=t['gpu_phase_seconds']-sum(d[k] for k in ['allocation_and_lazy_initialization_seconds','h2d_seconds','d2h_after_compute_seconds','final_sync_seconds','compute_barrier_seconds']);d['workload']=r['workload'];d['mode']=r['mode'];d['correct']=r['correct'];d['post_allocation_seconds']=t['gpu_phase_seconds']-d['allocation_and_lazy_initialization_seconds'];diag.append(d)
+assert len(diag)==6 and all(x['correct'] for x in diag)
+for x in diag:
+ baseline=next(y['post_allocation_seconds'] for y in diag if y['workload']==x['workload'] and y['mode']=='passthrough');x['post_allocation_relative_percent']=baseline/x['post_allocation_seconds']*100
+h.save(h.O/'diagnostic-comparison.json',diag)
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+fig,axes=plt.subplots(1,2,figsize=(10,4.5),layout='constrained');colors=['#6b7280','#e9a23b','#1976b9']
+for ax,work in zip(axes,['nw','lud2064']):
+ data=[x for x in stats if x['workload']==work];values=[x['throughput_relative_to_passthrough_percent'] for x in data];baseline=next(x['median_seconds'] for x in data if x['mode']=='passthrough');low=[baseline/x['max_seconds']*100 for x in data];high=[baseline/x['min_seconds']*100 for x in data];bars=ax.bar(['Passthrough','Flyt SHM','VMWeave'],values,color=colors,yerr=[[v-l for v,l in zip(values,low)],[u-v for u,v in zip(high,values)]],capsize=4)
+ for b,v in zip(bars,values):ax.text(b.get_x()+b.get_width()/2,v,f'{v:.1f}%',ha='center',va='bottom')
+ ax.axhline(100,color='#555',linestyle='--',linewidth=.8);ax.set_title('NW 2048' if work=='nw' else 'LU 2064');ax.set_ylabel('Relative invocation throughput (%)');ax.set_ylim(0,max(high)*1.18);ax.spines[['top','right']].set_visible(False)
+fig.suptitle('Fresh-process GPU phase incl. initialization — n=3, whiskers: observed range');fig.savefig(h.O/'comparison.png',dpi=180);fig.savefig(h.O/'comparison.svg');plt.close(fig)
+fig,axes=plt.subplots(1,2,figsize=(11,5),layout='constrained')
+components=[('startup_seconds','Pre-main init'),('allocation_and_lazy_initialization_seconds','Allocation / lazy init'),('h2d_seconds','H2D'),('launch_loop_and_other_host_seconds','Launch loop / host'),('compute_barrier_seconds','Compute wait'),('d2h_after_compute_seconds','D2H'),('final_sync_seconds','Final sync')]
+for ax,work in zip(axes,['nw','lud2064']):
+ data=[next(x for x in diag if x['workload']==work and x['mode']==m) for m in ['passthrough','flyt','vmweave']];bottom=[0.,0.,0.]
+ for key,title in components:
+  values=[x[key] for x in data];ax.bar(['Passthrough','Flyt SHM','VMWeave'],values,bottom=bottom,label=title);bottom=[a+b for a,b in zip(bottom,values)]
+ ax.set_title('NW 2048' if work=='nw' else 'LU 2064');ax.set_ylabel('Host wall time (seconds)');ax.spines[['top','right']].set_visible(False)
+axes[1].legend(fontsize=8,loc='upper left',bbox_to_anchor=(1,1));fig.suptitle('Separate diagnostic: one invocation, with added compute barrier');fig.savefig(h.O/'diagnostic-breakdown.png',dpi=180);fig.savefig(h.O/'diagnostic-breakdown.svg');plt.close(fig)
+variation=[]
+for label in ['r3','r3-repeat2','r3-repeat3']:
+ row=next(x for x in json.loads((h.O/'diagnostic'/label/'flyt/result.json').read_text()) if x['workload']=='nw');components=row['diagnostic'];residual=row['timing']['gpu_phase_seconds']-sum(components[k] for k in ['allocation_and_lazy_initialization_seconds','h2d_seconds','d2h_after_compute_seconds','final_sync_seconds','compute_barrier_seconds']);variation.append({'label':label,'timing':row['timing'],'components':components,'launch_loop_and_other_host_seconds':residual,'correct':row['correct']})
+assert all(x['correct'] for x in variation);h.save(h.O/'flyt-nw-variation.json',variation)
+lines=['Rodinia abbreviated three-way comparison','', 'Scope: NW 2048 10 and LU -s 2064, seed7; not training samples/s or an exact Flyt paper reproduction.','Formal: 3 order-balanced rounds, 18 samples; each result matches full native-reference output hash.','Time: ELF preinit-to-main + first allocation-to-final-sync; CPU input preparation, output validation and file writes excluded.','Original Rodinia printed timers are not the primary metric; timing.json-derived raw.csv is authoritative.','Source-derived kernel launches: NW255; LU385; full-process Flyt counters263/390 corroborate the call structure.','Preparation runs excluded. Shared backends persist within a visit; each measured application process is fresh.','', 'Median runtime and reciprocal-runtime throughput (Passthrough=100%):']
+for x in stats:lines.append(f"{x['workload']:8} {x['mode']:12} {x['median_seconds']:.6f} s [range {x['min_seconds']:.6f}–{x['max_seconds']:.6f}], {x['throughput_relative_to_passthrough_percent']:.2f}%, CV {x['sample_cv']*100:.2f}%")
+lines+=['','Diagnostics: one separate run per workload/mode, after its round3 formal measurements.','An extra compute-completion synchronization was inserted before D2H to separate pending compute from the copy. Diagnostic timings are not formal samples; the barrier itself adds overhead.','Allocation includes lazy initialization/session setup. The launch-loop residual is host wall time and must not be interpreted as pure GPU kernel duration.']
+for x in diag:lines.append(f"{x['workload']} {x['mode']}: startup {x['startup_seconds']:.6f}, allocation/init {x['allocation_and_lazy_initialization_seconds']:.6f}, H2D {x['h2d_seconds']:.6f}, launch/other {x['launch_loop_and_other_host_seconds']:.6f}, compute wait {x['compute_barrier_seconds']:.6f}, D2H {x['d2h_after_compute_seconds']:.6f}, final sync {x['final_sync_seconds']:.6f} seconds")
+lines+=['','Post-allocation diagnostic ONLY (single sample, includes added barrier; not formal throughput):']
+for x in diag:lines.append(f"{x['workload']} {x['mode']}: {x['post_allocation_seconds']:.6f} s, relative {x['post_allocation_relative_percent']:.2f}%")
+lines+=['',f"Flyt NW diagnostic variation: launch-loop/other-host residual spans {min(x['launch_loop_and_other_host_seconds'] for x in variation):.6f}–{max(x['launch_loop_and_other_host_seconds'] for x in variation):.6f} seconds. The largest observed variation is in this residual, while transfer/initialization/barrier timings are steadier. This does not isolate RPC, OS scheduling, or server-side contributions, or establish the cause of all between-round variation.",'Interpretation: the fresh-process ranking is dominated by different allocation/initialization costs. Passthrough allocation/init is about1.6s, VMWeave about0.66–0.67s, and the reused Flyt backend incurs only milliseconds in application allocation plus about0.05s pre-main startup. This is not evidence that remoting accelerates GPU kernels. The post-allocation diagnostic has much larger remoting overhead.','Context lifecycle source evidence: Flyt returns an existing virtual server for the VM; VMWeave spawns a fresh session worker and opens its CUDA context. MPS is present for Flyt SM-affinity. Their individual causal effects are not isolated by this experiment.']
+lines+=['','Conditions: same physical GPU GPU-772181af-05a4-0c24-de59-8487bd37c142, driver580.173.02, CUDA12.8.93; same measured binaries; VM8vCPU16GiB; QEMU CPUs32–39, remoting backend CPUs40–43; remoting allocations100%/8192MiB.','Flyt requires an MPS backend for its SM-affinity path. VMWeave uses its published v0.5.3 worker path. This is a comparison of the deployed execution paths, including different initialization/context lifecycles.','Flyt data transport is SHM; control RPC remains. Both remoting backends run within the standard HAMi allocation environment.','Flyt source: pinned development branches, recorded cuDNN9 build-compatibility exclusion, available Host libtirpc commit used for Guest, and ipc-rs ftok CString fix. NW/LU do not exercise cuDNN. This baseline is qualified for these two workloads, not all CUDA applications.','Three samples cannot establish small statistically significant differences; no universal performance or training-throughput claim.','Production VM UID/configuration and50%/2048MiB quota preserved; cleanup.json records restoration.','See raw.csv, comparison.json, diagnostic-comparison.json, per-run logs and reproduction/.']
+(h.O/'REPORT.txt').write_text('\n'.join(lines)+'\n')
+for p in h.B.glob('*.py'):shutil.copy(p,h.O/'reproduction'/p.name)
+shutil.copytree(h.B/'diagnostic-src',h.O/'diagnostic-src',dirs_exist_ok=True)
+base=json.loads((h.O/'qualification-manifest.json').read_text());latest=json.loads((h.O/'manifest.json').read_text());base.update({k:latest[k] for k in ['status','formal_runs']});base['status']='COMPLETE';base['cleanup']=json.loads((h.O/'cleanup.json').read_text());h.save(h.O/'manifest.json',base)
+print('Reports and plot written')

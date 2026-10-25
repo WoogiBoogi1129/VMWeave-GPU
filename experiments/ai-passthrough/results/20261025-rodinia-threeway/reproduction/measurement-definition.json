@@ -1,0 +1,20 @@
+{
+  "primary": "(main entry - ELF preinit entry) + (last explicit CUDA synchronization completion - first cudaMalloc entry)",
+  "startup": "ELF preinit-to-main: captures library constructors including Flyt session and fatbinary registration",
+  "gpu_phase": "allocation, CUDA lazy init, H2D, kernels, D2H, final synchronization",
+  "excluded": "CPU input generation, CPU output validation, file writes, process teardown/cudaFree",
+  "interpretation": "Whole application GPU-work phase incl initialization; not pure kernel time or training samples/s",
+  "caveat": "Warm backend workers/MPS persist while each application process is fresh; report startup separately and diagnose cold-context effects",
+  "formal_runs": 18,
+  "order": [
+    "P/F/V",
+    "F/V/P",
+    "V/P/F"
+  ],
+  "rounds": 3,
+  "cpu_affinity": {
+    "guest_qemu": "32-39",
+    "backend": "40-43"
+  },
+  "memory": "VM8vCPU16GiB; remoting quota100%8192MiB; passthrough dedicated full device"
+}

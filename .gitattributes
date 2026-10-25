@@ -17,3 +17,8 @@ experiments/sm-core-limit/evidence/deployment-20261016/** -text -whitespace
 runtime/hami/patches/*.patch -whitespace
 # Concurrent VM campaign: preserve hashed sensor and terminal captures verbatim.
 experiments/sm-core-limit/evidence/pairs-20261016/** -text -whitespace
+
+# Rodinia experiment: preserve checksummed source, patches and captures verbatim.
+experiments/ai-passthrough/results/20261025-rodinia-threeway/** -text -whitespace
+experiments/ai-passthrough/results/20261025-rodinia-threeway/README.md whitespace
+experiments/ai-passthrough/results/20261025-rodinia-threeway/verify_results.py whitespace

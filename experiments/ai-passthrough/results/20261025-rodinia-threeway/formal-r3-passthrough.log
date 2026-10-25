@@ -1,0 +1,10 @@
+{"bdf": "0000:40:00.0", "before": "nvidia", "after": "vfio-pci"}
+
+warmup r3 passthrough nw {'startup_seconds': 0.00013156, 'gpu_phase_seconds': 1.625030112, 'seconds': 1.625161672}
+warmup r3 passthrough lud2064 {'startup_seconds': 0.000154588, 'gpu_phase_seconds': 1.612340052, 'seconds': 1.61249464}
+formal r3 passthrough nw {'startup_seconds': 0.000133668, 'gpu_phase_seconds': 1.626261692, 'seconds': 1.62639536}
+formal r3 passthrough lud2064 {'startup_seconds': 0.000147073, 'gpu_phase_seconds': 1.611774553, 'seconds': 1.611921626}
+diagnostic r3 passthrough nw {'startup_seconds': 0.000132144, 'gpu_phase_seconds': 1.63150025, 'seconds': 1.631632394}
+diagnostic r3 passthrough lud2064 {'startup_seconds': 0.000142228, 'gpu_phase_seconds': 1.603115776, 'seconds': 1.603258004}
+{"bdf": "0000:40:00.0", "before": "vfio-pci", "after": "nvidia"}
+

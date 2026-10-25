@@ -1,0 +1,29 @@
+[
+  {
+    "mode": "flyt",
+    "workload": "nw",
+    "stage": "diagnostic",
+    "label": "r3-repeat3",
+    "returncode": 0,
+    "process_wall_seconds": 1.0547585487365723,
+    "utc": 1792930794.255557,
+    "sha256": "44d122ee5af293dc18642c772e793053a3aff7fcd95660941364b9eae57d4531",
+    "correct": true,
+    "timing": {
+      "startup_seconds": 0.052702817,
+      "gpu_phase_seconds": 0.396664992,
+      "seconds": 0.449367809
+    },
+    "diagnostic": {
+      "allocation_and_lazy_initialization_seconds": 0.005578937,
+      "h2d_seconds": 0.059171777,
+      "d2h_after_compute_seconds": 0.094503958,
+      "final_sync_seconds": 0.000934232,
+      "compute_barrier_seconds": 0.00087886,
+      "allocation_calls": 2,
+      "h2d_calls": 2,
+      "d2h_calls": 1,
+      "sync_calls": 1
+    }
+  }
+]

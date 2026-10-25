@@ -1,0 +1,137 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+-e [36m----> Building libtirpc[0m
+make -C submodules libtirpc/install
+make[1]: Entering directory '/src/submodules'
+make[1]: 'libtirpc/install' is up to date.
+make[1]: Leaving directory '/src/submodules'
+make: Entering directory '/src/cpu'
+rm -f cpu_rpc_prot_xdr.c && rpcgen -C -M -N -c -o cpu_rpc_prot_xdr.c cpu_rpc_prot.x
+rm -f cpu_rpc_prot.h && rpcgen -C -M -N -h -o cpu_rpc_prot.h cpu_rpc_prot.x
+rm -f cpu_rpc_prot_svc.c && rpcgen -C -M -N -m -o cpu_rpc_prot_svc.c cpu_rpc_prot.x
+./generate_dispatch.sh
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server.o cpu-server.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-utils.o cpu-utils.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-runtime.o cpu-server-runtime.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-driver.o cpu-server-driver.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+cpu-utils.c: In function 'cpu_utils_read_pars':
+cpu-utils.c:164:33: warning: use of assignment suppression and length modifier together in gnu_scanf format [-Wformat=]
+  164 |                 if (sscanf(val, "Index : 0x%*hx Ordinal : 0x%hx Offset : 0x%hx Size : 0x%hx\n", &ordinal, &offset, &size) != 3 ) {
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-server-runtime.c: In function 'cuda_device_get_shared_mem_config_1_svc':
+cpu-server-runtime.c:283:5: warning: 'cudaDeviceGetSharedMemConfig' is deprecated [-Wdeprecated-declarations]
+  283 |     result->err = cudaDeviceGetSharedMemConfig((enum cudaSharedMemConfig*)&result->int_result_u.data);
+      |     ^~~~~~
+In file included from cpu-server-runtime.c:2:
+/usr/local/cuda/include/cuda_runtime_api.h:1059:76: note: declared here
+ 1059 | extern __CUDA_DEPRECATED __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetSharedMemConfig(enum cudaSharedMemConfig *pConfig);
+      |                                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-server-runtime.c: In function 'cuda_device_set_shared_mem_config_1_svc':
+cpu-server-runtime.c:360:5: warning: 'cudaDeviceSetSharedMemConfig' is deprecated [-Wdeprecated-declarations]
+  360 |     *result = cudaDeviceSetSharedMemConfig(config);
+      |     ^
+In file included from cpu-server-runtime.c:2:
+/usr/local/cuda/include/cuda_runtime_api.h:1105:57: note: declared here
+ 1105 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaDeviceSetSharedMemConfig(enum cudaSharedMemConfig config);
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-server-driver.c: In function 'rpc_cudevicegetproperties_1_svc':
+cpu-server-driver.c:855:5: warning: 'cuDeviceGetProperties' is deprecated [-Wdeprecated-declarations]
+  855 |     result->err = cuDeviceGetProperties((CUdevprop*)result->mem_result_u.data.mem_data_val, dev);
+      |     ^~~~~~
+In file included from cpu-server-driver.c:4:
+/usr/local/cuda/include/cuda.h:5821:36: note: declared here
+ 5821 | __CUDA_DEPRECATED CUresult CUDAAPI cuDeviceGetProperties(CUdevprop *prop, CUdevice dev);
+      |                                    ^~~~~~~~~~~~~~~~~~~~~
+cpu-server-driver.c: In function 'rpc_cudevicecomputecapability_1_svc':
+cpu-server-driver.c:865:5: warning: 'cuDeviceComputeCapability' is deprecated [-Wdeprecated-declarations]
+  865 |     result->err = cuDeviceComputeCapability(&(result->dint_result_u.data.i1),
+      |     ^~~~~~
+In file included from cpu-server-driver.c:4:
+/usr/local/cuda/include/cuda.h:5855:36: note: declared here
+ 5855 | __CUDA_DEPRECATED CUresult CUDAAPI cuDeviceComputeCapability(int *major, int *minor, CUdevice dev);
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-server-runtime.c: In function 'cuda_func_set_shared_mem_config_1_svc':
+cpu-server-runtime.c:1134:5: warning: 'cudaFuncSetSharedMemConfig' is deprecated [-Wdeprecated-declarations]
+ 1134 |     *result = cudaFuncSetSharedMemConfig((void*)func, config);
+      |     ^
+In file included from cpu-server-runtime.c:2:
+/usr/local/cuda/include/cuda_runtime_api.h:5114:57: note: declared here
+ 5114 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaFuncSetSharedMemConfig(const void *func, enum cudaSharedMemConfig config);
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-driver-hidden.o cpu-server-driver-hidden.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o log.o log.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-libwrap.o cpu-libwrap.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-cusolver.o cpu-server-cusolver.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-cublas.o cpu-server-cublas.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o list.o list.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o api-recorder.o api-recorder.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o resource-mg.o resource-mg.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cr.o cr.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o gsched_none.o gsched_none.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o oob.o oob.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-mt-memcpy.o cpu-server-mt-memcpy.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-elf2.o cpu-elf2.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+cpu-elf2.c: In function 'get_parm_for_kernel':
+cpu-elf2.c:666:5: note: offset of packed bit-field 'cbank' has changed in GCC 4.4
+  666 |     };
+      |     ^
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-nvml.o cpu-server-nvml.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-cudnn.o cpu-server-cudnn.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-cublaslt.o cpu-server-cublaslt.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-mgr-listener.o cpu-server-mgr-listener.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+cpu-server-mgr-listener.c: In function 'send_initialised_msg':
+cpu-server-mgr-listener.c:120:34: warning: format '%d' expects argument of type 'int', but argument 3 has type 'long int' [-Wformat=]
+  120 |     printf("mqueue_id = %d type %d data %d\n", snode_mqueue_id, msg.mtype, msg.data);
+      |                                 ~^                              ~~~~~~~~~
+      |                                  |                                 |
+      |                                  int                               long int
+      |                                 %ld
+cpu-server-mgr-listener.c: In function 'init_listener':
+cpu-server-mgr-listener.c:132:27: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+  132 |     printf("send_type -= %d\n", send_type);
+      |                          ~^     ~~~~~~~~~
+      |                           |     |
+      |                           int   uint64_t {aka long unsigned int}
+      |                          %ld
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-resource-controller.o cpu-server-resource-controller.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o gsched_fixed.o gsched_fixed.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o device-management.o device-management.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o resource-map.o resource-map.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-client-mgr.o cpu-server-client-mgr.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-server-ivshmem.o cpu-server-ivshmem.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o flyt-cr.o flyt-cr.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o server-exe.o server-exe.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+server-exe.c: In function 'main':
+server-exe.c:46:29: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+   46 |     printf("prg %d cricker %d gpu %d sm %d mem %d mode %d\n", RPC_CD_PROG, vers, gpu_id, num_sm_cores, memory, thread_mode);
+      |                            ~^                                              ~~~~
+      |                             |                                              |
+      |                             int                                            uint64_t {aka long unsigned int}
+      |                            %ld
+server-exe.c:46:49: warning: format '%d' expects argument of type 'int', but argument 6 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+   46 |     printf("prg %d cricker %d gpu %d sm %d mem %d mode %d\n", RPC_CD_PROG, vers, gpu_id, num_sm_cores, memory, thread_mode);
+      |                                                ~^                                                      ~~~~~~
+      |                                                 |                                                      |
+      |                                                 int                                                    uint64_t {aka long unsigned int}
+      |                                                %ld
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu_rpc_prot_xdr.o cpu_rpc_prot_xdr.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu_rpc_prot_svc_mod.o cpu_rpc_prot_svc_mod.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -o cricket-rpc-server cpu_rpc_prot_xdr.o cpu_rpc_prot_svc_mod.o cpu-server.o cpu-utils.o cpu-server-runtime.o cpu-server-driver.o cpu-server-driver-hidden.o log.o cpu-libwrap.o cpu-server-cusolver.o cpu-server-cublas.o list.o api-recorder.o resource-mg.o cr.o gsched_none.o oob.o cpu-server-mt-memcpy.o cpu-elf2.o cpu-server-nvml.o cpu-server-cudnn.o cpu-server-cublaslt.o cpu-server-mgr-listener.o cpu-server-resource-controller.o gsched_fixed.o device-management.o resource-map.o cpu-server-client-mgr.o cpu-server-ivshmem.o flyt-cr.o server-exe.o -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  -lcudart -lcusolver -lcuda -lcublas -lrt -lpthread -lnvidia-ml -lcudnn -lcublasLt -Wl,--unresolved-symbols=ignore-in-object-files
+make: Leaving directory '/src/cpu'

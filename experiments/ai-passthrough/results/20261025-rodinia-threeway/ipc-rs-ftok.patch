@@ -1,0 +1,16 @@
+diff --git a/src/lib.rs b/src/lib.rs
+index 03d1cc5..af16b09 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -433,7 +433,10 @@ impl MessageQueue {
+ 		let q_key = match key {
+ 			MessageQueueKey::IntKey(x) => x,
+ 			MessageQueueKey::PathKey(k) => {
+-				unsafe { libc::ftok(k.path.as_ptr() as *const i8, k.project) }
++				let path = std::ffi::CString::new(k.path).expect("IPC path contains NUL");
++                let key = unsafe { libc::ftok(path.as_ptr(), k.project) };
++                assert!(key != -1, "ftok failed: {}", Errno::last());
++                key
+ 			}
+ 		};
+ 

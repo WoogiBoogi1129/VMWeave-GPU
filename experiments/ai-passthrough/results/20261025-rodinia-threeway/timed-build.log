@@ -1,0 +1,26 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+timed-src/lud/common/common.c: In function 'create_matrix_from_file':
+timed-src/lud/common/common.c:51:3: warning: ignoring return value of 'fscanf' declared with attribute 'warn_unused_result' [-Wunused-result]
+   51 |   fscanf(fp, "%d\n", &size);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~
+timed-src/lud/common/common.c:61:11: warning: ignoring return value of 'fscanf' declared with attribute 'warn_unused_result' [-Wunused-result]
+   61 |           fscanf(fp, "%f ", m+i*size+j);
+      |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~

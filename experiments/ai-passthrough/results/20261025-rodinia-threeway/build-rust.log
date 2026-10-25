@@ -1,0 +1,4 @@
+STEP 1/3: FROM localhost/flyt-threeway-build:20261025-full
+STEP 2/3: RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh && sh /tmp/rustup.sh -y --profile minimal --default-toolchain 1.85.0 && rm /tmp/rustup.sh
+/bin/sh: 1: curl: not found
+Error: building at STEP "RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh && sh /tmp/rustup.sh -y --profile minimal --default-toolchain 1.85.0 && rm /tmp/rustup.sh": while running runtime: exit status 127

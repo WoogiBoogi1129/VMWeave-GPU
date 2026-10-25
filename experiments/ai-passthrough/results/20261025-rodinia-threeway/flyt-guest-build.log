@@ -1,0 +1,45 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+-e [36m----> Building libtirpc[0m
+make -C submodules libtirpc/install
+make[1]: Entering directory '/src/submodules'
+make[1]: 'libtirpc/install' is up to date.
+make[1]: Leaving directory '/src/submodules'
+make: Entering directory '/src/cpu'
+rm -f cpu_rpc_prot_xdr.c && rpcgen -C -M -N -c -o cpu_rpc_prot_xdr.c cpu_rpc_prot.x
+rm -f cpu_rpc_prot.h && rpcgen -C -M -N -h -o cpu_rpc_prot.h cpu_rpc_prot.x
+rm -f cpu_rpc_prot_clnt.c && rpcgen -C -M -N -l -o cpu_rpc_prot_clnt.c cpu_rpc_prot.x
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu_rpc_prot_xdr.o cpu_rpc_prot_xdr.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client.o cpu-client.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-utils.o cpu-utils.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-runtime.o cpu-client-runtime.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+cpu-utils.c: In function 'cpu_utils_read_pars':
+cpu-utils.c:164:33: warning: use of assignment suppression and length modifier together in gnu_scanf format [-Wformat=]
+  164 |                 if (sscanf(val, "Index : 0x%*hx Ordinal : 0x%hx Offset : 0x%hx Size : 0x%hx\n", &ordinal, &offset, &size) != 3 ) {
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-driver.o cpu-client-driver.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+In file included from cpu-client-driver.c:5:
+/usr/local/cuda/include/cudaGL.h:54:10: fatal error: GL/gl.h: No such file or directory
+   54 | #include <GL/gl.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:163: cpu-client-driver.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: Leaving directory '/src/cpu'

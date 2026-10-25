@@ -1,0 +1,50 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+make: Entering directory '/src/cpu'
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-cudnn.o cpu-client-cudnn.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-cublas.o cpu-client-cublas.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-cublaslt.o cpu-client-cublaslt.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-mgr-handler.o cpu-client-mgr-handler.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+cpu-client-mgr-handler.c: In function 'init_client_mgr':
+cpu-client-mgr-handler.c:197:28: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+  197 |     printf("here, send_id=%d\n", send_id);
+      |                           ~^     ~~~~~~~
+      |                            |     |
+      |                            int   uint64_t {aka long unsigned int}
+      |                           %ld
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-ivshmem.o cpu-client-ivshmem.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+cpu-client-ivshmem.c: In function 'init_ivshmem_clnt':
+cpu-client-ivshmem.c:35:28: warning: format '%d' expects argument of type 'int', but argument 2 has type 'size_t' {aka 'long unsigned int'} [-Wformat=]
+   35 |     printf("len shm path: %d\n", strlen(shm_be_path));
+      |                           ~^     ~~~~~~~~~~~~~~~~~~~
+      |                            |     |
+      |                            int   size_t {aka long unsigned int}
+      |                           %ld
+cpu-client-ivshmem.c: In function '_clnt_mgr_get_shm':
+cpu-client-ivshmem.c:204:37: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint64_t' {aka 'long unsigned int'} [-Wformat=]
+  204 |     printf("proc_be_off from cmgr: %d\n", _desc->proc_be_off);
+      |                                    ~^     ~~~~~~~~~~~~~~~~~~
+      |                                     |          |
+      |                                     int        uint64_t {aka long unsigned int}
+      |                                    %ld
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o resource-mg.o resource-mg.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o msg-handler.o msg-handler.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -shared -o cricket-client.so cpu_rpc_prot_xdr.o cpu_rpc_prot_clnt.o cpu-client.o cpu-utils.o cpu-client-runtime.o cpu-client-driver.o list.o log.o cpu-libwrap.o cpu-client-cusolver.o oob.o cpu-client-mt-memcpy.o cpu-elf2.o cpu-client-nvml.o cpu-client-cudnn.o cpu-client-cublas.o cpu-client-cublaslt.o cpu-client-mgr-handler.o cpu-client-ivshmem.o resource-mg.o msg-handler.o -Wl,-soname,libcudart.so.12 -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  -lrt
+make: Leaving directory '/src/cpu'

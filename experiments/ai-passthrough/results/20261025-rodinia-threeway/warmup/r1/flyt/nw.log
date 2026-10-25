@@ -1,0 +1,31 @@
+here, pid=1967
+here, send_id=0
+here, htonl pid=-1358495744
+here2
+From Control Plane: 10.85.0.108,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.108
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 0
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 0
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7f6656f93000
+clnttcp_create done.
+WG size of kernel = 16 
+Start Needleman-Wunsch
+Processing top-left matrix
+Processing bottom-right matrix
+NW CPU reference PASS, bytes=16793604
+api-call-cnt: 263
+memcpy-api-calls: 3
+Non-memcpy-api-calls: 260
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 50380812
+/tmp/flyt-test/needle-timed: /tmp/flyt-test/libcudart.so.12: no version information available (required by /tmp/flyt-test/needle-timed)

@@ -1,0 +1,33 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+   Compiling cfg_aliases v0.1.1
+   Compiling libc v0.2.191
+   Compiling crossbeam-utils v0.8.23
+   Compiling bitflags v2.13.2
+   Compiling cfg-if v1.0.5
+   Compiling nix v0.28.0
+   Compiling ipc-rs v0.4.4 (/ipc-rs)
+   Compiling flyt-ipc-path-probe v0.1.0 (/probe)
+    Finished `release` profile [optimized] target(s) in 3.25s
+     Running `target-original/release/flyt-ipc-path-probe`
+
+thread 'main' panicked at src/main.rs:7:63:
+called `Result::unwrap()` on an `Err` value: QueueDoesntExist
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

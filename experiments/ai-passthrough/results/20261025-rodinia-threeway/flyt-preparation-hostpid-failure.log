@@ -1,0 +1,49 @@
+
+Failed to connect to bus: No data available
+command terminated with exit code 1
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/prepare.py", line 33, in <module>
+    h.arm_affinity('flyt-'+__import__('os').environ['RODINIA_LABEL'],lambda args:k('exec','-n',NS,ADMIN,'--','chroot','/host',*args))
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/rodinia_campaign.py", line 28, in arm_affinity
+    if executor:executor(args)
+                ^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/prepare.py", line 33, in <lambda>
+    h.arm_affinity('flyt-'+__import__('os').environ['RODINIA_LABEL'],lambda args:k('exec','-n',NS,ADMIN,'--','chroot','/host',*args))
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/prepare.py", line 4, in k
+    def k(*a,**kw):return subprocess.check_output(['kubectl',*map(str,a)],text=True,**kw)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['kubectl', 'exec', '-n', 'rodinia-flyt-1025', 'rodinia-admin-1025', '--', 'chroot', '/host', 'systemd-run', '--unit=rodinia-affinity-flyt-r1', '--collect', '--property=RuntimeMaxSec=420', 'python3', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/affinity-once.py', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/affinity-flyt-r1.json', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/affinity-flyt-r1-done.json']' returned non-zero exit status 1.
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/cleanup.py", line 9, in <module>
+    assert v['metadata']['uid']==s['vmUID']
+                                 ~^^^^^^^^^
+KeyError: 'vmUID'
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/flyt-run.py", line 6, in <module>
+    run('prepare.py');run('server-pod.py');run('start-stack.py')
+    ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/flyt-run.py", line 4, in run
+    def run(file):subprocess.run([sys.executable,str(h.B/file)],check=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/python3', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/prepare.py']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/flyt-run.py", line 20, in <module>
+    if h.get('namespace','rodinia-flyt-1025'):run('cleanup.py')
+                                              ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/flyt-run.py", line 4, in run
+    def run(file):subprocess.run([sys.executable,str(h.B/file)],check=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/python3', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/cleanup.py']' returned non-zero exit status 1.

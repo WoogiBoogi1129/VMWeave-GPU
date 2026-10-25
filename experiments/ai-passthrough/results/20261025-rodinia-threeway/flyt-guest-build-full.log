@@ -1,0 +1,265 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+make: Entering directory '/src/cpu'
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-driver.o cpu-client-driver.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-elf2.o cpu-elf2.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-nvml.o cpu-client-nvml.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-cudnn.o cpu-client-cudnn.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+cpu-elf2.c: In function 'get_parm_for_kernel':
+cpu-elf2.c:666:5: note: offset of packed bit-field 'cbank' has changed in GCC 4.4
+  666 |     };
+      |     ^
+In file included from cpu-client-cudnn.c:5:
+cpu-client-cudnn.c:1447:55: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1447 | DEF_FN(cudnnStatus_t, cudnnCreateAlgorithmDescriptor, cudnnAlgorithmDescriptor_t *, algoDesc)
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:227:21: note: in expansion of macro 'DEF_FN_1'
+  227 |                     DEF_FN_1 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1447:1: note: in expansion of macro 'DEF_FN'
+ 1447 | DEF_FN(cudnnStatus_t, cudnnCreateAlgorithmDescriptor, cudnnAlgorithmDescriptor_t *, algoDesc)
+      | ^~~~~~
+cpu-client-cudnn.c:1448:52: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1448 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmDescriptor, cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t, algorithm)
+      |                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1448:1: note: in expansion of macro 'DEF_FN'
+ 1448 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmDescriptor, cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t, algorithm)
+      | ^~~~~~
+cpu-client-cudnn.c:1448:90: error: unknown type name 'cudnnAlgorithm_t'
+ 1448 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmDescriptor, cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t, algorithm)
+      |                                                                                          ^~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1448:1: note: in expansion of macro 'DEF_FN'
+ 1448 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmDescriptor, cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t, algorithm)
+      | ^~~~~~
+cpu-client-cudnn.c:1449:58: error: unknown type name 'cudnnAlgorithmDescriptor_t'
+ 1449 | DEF_FN(cudnnStatus_t, cudnnGetAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t *, algorithm)
+      |                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1449:1: note: in expansion of macro 'DEF_FN'
+ 1449 | DEF_FN(cudnnStatus_t, cudnnGetAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t *, algorithm)
+      | ^~~~~~
+cpu-client-cudnn.c:1449:96: error: unknown type name 'cudnnAlgorithm_t'
+ 1449 | DEF_FN(cudnnStatus_t, cudnnGetAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t *, algorithm)
+      |                                                                                                ^~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1449:1: note: in expansion of macro 'DEF_FN'
+ 1449 | DEF_FN(cudnnStatus_t, cudnnGetAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, algoDesc, cudnnAlgorithm_t *, algorithm)
+      | ^~~~~~
+cpu-client-cudnn.c:1450:59: error: unknown type name 'cudnnAlgorithmDescriptor_t'
+ 1450 | DEF_FN(cudnnStatus_t, cudnnCopyAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, src, cudnnAlgorithmDescriptor_t, dest)
+      |                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1450:1: note: in expansion of macro 'DEF_FN'
+ 1450 | DEF_FN(cudnnStatus_t, cudnnCopyAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, src, cudnnAlgorithmDescriptor_t, dest)
+      | ^~~~~~
+cpu-client-cudnn.c:1450:92: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1450 | DEF_FN(cudnnStatus_t, cudnnCopyAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, src, cudnnAlgorithmDescriptor_t, dest)
+      |                                                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1450:1: note: in expansion of macro 'DEF_FN'
+ 1450 | DEF_FN(cudnnStatus_t, cudnnCopyAlgorithmDescriptor, const cudnnAlgorithmDescriptor_t, src, cudnnAlgorithmDescriptor_t, dest)
+      | ^~~~~~
+cpu-client-cudnn.c:1451:56: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1451 | DEF_FN(cudnnStatus_t, cudnnDestroyAlgorithmDescriptor, cudnnAlgorithmDescriptor_t, algoDesc)
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:227:21: note: in expansion of macro 'DEF_FN_1'
+  227 |                     DEF_FN_1 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1451:1: note: in expansion of macro 'DEF_FN'
+ 1451 | DEF_FN(cudnnStatus_t, cudnnDestroyAlgorithmDescriptor, cudnnAlgorithmDescriptor_t, algoDesc)
+      | ^~~~~~
+cpu-client-cudnn.c:1452:56: error: unknown type name 'cudnnAlgorithmPerformance_t'
+ 1452 | DEF_FN(cudnnStatus_t, cudnnCreateAlgorithmPerformance, cudnnAlgorithmPerformance_t *, algoPerf, int, numberToCreate)
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1452:1: note: in expansion of macro 'DEF_FN'
+ 1452 | DEF_FN(cudnnStatus_t, cudnnCreateAlgorithmPerformance, cudnnAlgorithmPerformance_t *, algoPerf, int, numberToCreate)
+      | ^~~~~~
+cpu-client-cudnn.c:1453:53: error: unknown type name 'cudnnAlgorithmPerformance_t'
+ 1453 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmPerformance, cudnnAlgorithmPerformance_t, algoPerf, cudnnAlgorithmDescriptor_t, algoDesc, cudnnStatus_t, status, float, time, size_t, memory)
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:223:21: note: in expansion of macro 'DEF_FN_5'
+  223 |                     DEF_FN_5 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1453:1: note: in expansion of macro 'DEF_FN'
+ 1453 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmPerformance, cudnnAlgorithmPerformance_t, algoPerf, cudnnAlgorithmDescriptor_t, algoDesc, cudnnStatus_t, status, float, time, size_t, memory)
+      | ^~~~~~
+cpu-client-cudnn.c:1453:92: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1453 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmPerformance, cudnnAlgorithmPerformance_t, algoPerf, cudnnAlgorithmDescriptor_t, algoDesc, cudnnStatus_t, status, float, time, size_t, memory)
+      |                                                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:223:21: note: in expansion of macro 'DEF_FN_5'
+  223 |                     DEF_FN_5 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1453:1: note: in expansion of macro 'DEF_FN'
+ 1453 | DEF_FN(cudnnStatus_t, cudnnSetAlgorithmPerformance, cudnnAlgorithmPerformance_t, algoPerf, cudnnAlgorithmDescriptor_t, algoDesc, cudnnStatus_t, status, float, time, size_t, memory)
+      | ^~~~~~
+cpu-client-driver.c: In function 'cuDeviceTotalMem':
+cpu-client-driver.c:37:36: warning: format '%u' expects argument of type 'unsigned int', but argument 4 has type 'u_quad_t' {aka 'long unsigned int'} [-Wformat=]
+   37 |     printf("[rpc] %s = %d, result %u\n", __FUNCTION__, result.err,
+      |                                   ~^
+      |                                    |
+      |                                    unsigned int
+      |                                   %lu
+   38 |                                         result.u64_result_u.u64);
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                            |
+      |                                                            u_quad_t {aka long unsigned int}
+cpu-client-cudnn.c:1455:57: error: unknown type name 'cudnnAlgorithmPerformance_t'
+ 1455 | DEF_FN(cudnnStatus_t, cudnnDestroyAlgorithmPerformance, cudnnAlgorithmPerformance_t *, algoPerf, int, numberToDestroy)
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:226:21: note: in expansion of macro 'DEF_FN_2'
+  226 |                     DEF_FN_2 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1455:1: note: in expansion of macro 'DEF_FN'
+ 1455 | DEF_FN(cudnnStatus_t, cudnnDestroyAlgorithmPerformance, cudnnAlgorithmPerformance_t *, algoPerf, int, numberToDestroy)
+      | ^~~~~~
+cpu-client-driver.c: In function 'cuMemAlloc':
+cpu-client-driver.c:69:41: warning: format '%p' expects argument of type 'void *', but argument 5 has type 'ptr' {aka 'long unsigned int'} [-Wformat=]
+   69 |     printf("[rpc] %s(%lu) = %d, result %p\n", __FUNCTION__, bytesize, result.err, result.ptr_result_u.ptr);
+      |                                        ~^                                         ~~~~~~~~~~~~~~~~~~~~~~~
+      |                                         |                                                            |
+      |                                         void *                                                       ptr {aka long unsigned int}
+      |                                        %ld
+cpu-client-cudnn.c:1456:74: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1456 | DEF_FN(cudnnStatus_t, cudnnGetAlgorithmSpaceSize, cudnnHandle_t, handle, cudnnAlgorithmDescriptor_t, algoDesc, size_t *, algoSpaceSizeInBytes)
+      |                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:225:21: note: in expansion of macro 'DEF_FN_3'
+  225 |                     DEF_FN_3 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1456:1: note: in expansion of macro 'DEF_FN'
+ 1456 | DEF_FN(cudnnStatus_t, cudnnGetAlgorithmSpaceSize, cudnnHandle_t, handle, cudnnAlgorithmDescriptor_t, algoDesc, size_t *, algoSpaceSizeInBytes)
+      | ^~~~~~
+cpu-client-driver.c: In function 'cuDevicePrimaryCtxRetain':
+cpu-client-cudnn.c:1457:66: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1457 | DEF_FN(cudnnStatus_t, cudnnSaveAlgorithm, cudnnHandle_t, handle, cudnnAlgorithmDescriptor_t, algoDesc, void *, algoSpace, size_t, algoSpaceSizeInBytes)
+      |                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:224:21: note: in expansion of macro 'DEF_FN_4'
+  224 |                     DEF_FN_4 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1457:1: note: in expansion of macro 'DEF_FN'
+ 1457 | DEF_FN(cudnnStatus_t, cudnnSaveAlgorithm, cudnnHandle_t, handle, cudnnAlgorithmDescriptor_t, algoDesc, void *, algoSpace, size_t, algoSpaceSizeInBytes)
+      | ^~~~~~
+cpu-client-driver.c:329:36: warning: format '%p' expects argument of type 'void *', but argument 4 has type 'ptr' {aka 'long unsigned int'} [-Wformat=]
+  329 |     printf("[rpc] %s = %d, result %p\n", __FUNCTION__, result.err,
+      |                                   ~^
+      |                                    |
+      |                                    void *
+      |                                   %ld
+  330 |                                         result.ptr_result_u.ptr);
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                            |
+      |                                                            ptr {aka long unsigned int}
+cpu-client-driver.c: In function 'cuCtxSetCurrent':
+cpu-client-driver.c:371:36: warning: format '%d' expects a matching 'int' argument [-Wformat=]
+  371 |     printf("[rpc] %s = %d, result %d\n", __FUNCTION__, result);
+      |                                   ~^
+      |                                    |
+      |                                    int
+cpu-client-driver.c: In function 'cuCtxGetCurrent':
+cpu-client-driver.c:384:40: warning: format '%p' expects argument of type 'void *', but argument 5 has type 'ptr' {aka 'long unsigned int'} [-Wformat=]
+  384 |     printf("[rpc] %s(%p) = %d, result %p\n", __FUNCTION__, pctx, result.err,
+      |                                       ~^
+      |                                        |
+      |                                        void *
+      |                                       %ld
+  385 |                                         result.ptr_result_u.ptr);
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                            |
+      |                                                            ptr {aka long unsigned int}
+cpu-client-driver.c: In function 'cuModuleGetFunction':
+cpu-client-driver.c:508:44: warning: format '%p' expects argument of type 'void *', but argument 6 has type 'ptr' {aka 'long unsigned int'} [-Wformat=]
+  508 |     printf("[rpc] %s(%p, %s) = %d, result %p\n", __FUNCTION__, hmod, name, result.err, result.ptr_result_u.ptr);
+      |                                           ~^                                           ~~~~~~~~~~~~~~~~~~~~~~~
+      |                                            |                                                              |
+      |                                            void *                                                         ptr {aka long unsigned int}
+      |                                           %ld
+cpu-client-cudnn.c:1458:118: error: unknown type name 'cudnnAlgorithmDescriptor_t'; did you mean 'cudnnAttnDescriptor_t'?
+ 1458 | DEF_FN(cudnnStatus_t, cudnnRestoreAlgorithm, cudnnHandle_t, handle, void *, algoSpace, size_t, algoSpaceSizeInBytes, cudnnAlgorithmDescriptor_t, algoDesc)
+      |                                                                                                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+cpu-libwrap.h:202:485: note: in definition of macro 'DEF_FN_X'
+  202 | #define DEF_FN_X(x, RET, NAME, P1_TYPE, P1_NAME, P2_TYPE, P2_NAME, P3_TYPE, P3_NAME, P4_TYPE, P4_NAME, P5_TYPE, P5_NAME, P6_TYPE, P6_NAME, P7_TYPE, P7_NAME, P8_TYPE, P8_NAME, P9_TYPE, P9_NAME, P10_TYPE, P10_NAME, P11_TYPE, P11_NAME, P12_TYPE, P12_NAME, P13_TYPE, P13_NAME, P14_TYPE, P14_NAME, P15_TYPE, P15_NAME, P16_TYPE, P16_NAME, P17_TYPE, P17_NAME, P18_TYPE, P18_NAME, P19_TYPE, P19_NAME, P20_TYPE, P20_NAME, P21_TYPE, P21_NAME, P22_TYPE, P22_NAME, P23_TYPE, P23_NAME, FUNC, ...) FUNC
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ^~~~
+cpu-libwrap.h:224:21: note: in expansion of macro 'DEF_FN_4'
+  224 |                     DEF_FN_4 (__VA_ARGS__),,\
+      |                     ^~~~~~~~
+cpu-client-cudnn.c:1458:1: note: in expansion of macro 'DEF_FN'
+ 1458 | DEF_FN(cudnnStatus_t, cudnnRestoreAlgorithm, cudnnHandle_t, handle, void *, algoSpace, size_t, algoSpaceSizeInBytes, cudnnAlgorithmDescriptor_t, algoDesc)
+      | ^~~~~~
+make: *** [Makefile:163: cpu-client-cudnn.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: Leaving directory '/src/cpu'

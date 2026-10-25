@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/start-stack.py", line 12, in <module>
+    p=wait(lambda:x if (x:=json.loads(k('get','pod',POD,'-n',NS,'-o','json')))['status'].get('phase')=='Running' and all(c['ready'] for c in x['status'].get('containerStatuses',[])) else None)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/start-stack.py", line 11, in wait
+    raise TimeoutError('stack wait')
+TimeoutError: stack wait

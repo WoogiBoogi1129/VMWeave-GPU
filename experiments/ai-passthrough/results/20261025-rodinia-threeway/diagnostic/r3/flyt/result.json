@@ -1,0 +1,56 @@
+[
+  {
+    "mode": "flyt",
+    "workload": "nw",
+    "stage": "diagnostic",
+    "label": "r3",
+    "returncode": 0,
+    "process_wall_seconds": 0.9022877216339111,
+    "utc": 1792930786.0990212,
+    "sha256": "44d122ee5af293dc18642c772e793053a3aff7fcd95660941364b9eae57d4531",
+    "correct": true,
+    "timing": {
+      "startup_seconds": 0.054422053,
+      "gpu_phase_seconds": 0.289235023,
+      "seconds": 0.343657076
+    },
+    "diagnostic": {
+      "allocation_and_lazy_initialization_seconds": 0.004086658,
+      "h2d_seconds": 0.061523477,
+      "d2h_after_compute_seconds": 0.084439621,
+      "final_sync_seconds": 0.001294442,
+      "compute_barrier_seconds": 0.00086443,
+      "allocation_calls": 2,
+      "h2d_calls": 2,
+      "d2h_calls": 1,
+      "sync_calls": 1
+    }
+  },
+  {
+    "mode": "flyt",
+    "workload": "lud2064",
+    "stage": "diagnostic",
+    "label": "r3",
+    "returncode": 0,
+    "process_wall_seconds": 0.9015462398529053,
+    "utc": 1792930788.467037,
+    "sha256": "a4c841341d8112776f98b5b216032a8e2cd3b7c59d09babbde40ccc7d143e1be",
+    "correct": true,
+    "timing": {
+      "startup_seconds": 0.052894754,
+      "gpu_phase_seconds": 0.302193142,
+      "seconds": 0.355087896
+    },
+    "diagnostic": {
+      "allocation_and_lazy_initialization_seconds": 0.001866438,
+      "h2d_seconds": 0.061243281,
+      "d2h_after_compute_seconds": 0.068657956,
+      "final_sync_seconds": 0.00097222,
+      "compute_barrier_seconds": 0.000148095,
+      "allocation_calls": 1,
+      "h2d_calls": 1,
+      "d2h_calls": 1,
+      "sync_calls": 1
+    }
+  }
+]

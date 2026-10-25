@@ -1,0 +1,9 @@
+PRESERVE COMPLETED r1 passthrough
+START r1 flyt
+DONE 4 /18
+START r1 vmweave
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-threeway-20261025/formal.py", line 15, in <module>
+    manifest['status']='FORMAL_FAILED';manifest['failed_stage']=[label,mode];h.save(h.O/'manifest.json',manifest);raise RuntimeError(str(log))
+                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: /home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/ai-passthrough/results/20261025-rodinia-threeway/formal-r1-vmweave.log

@@ -1,5 +1,7 @@
 # 최신 VMWeave와 GPU passthrough VM의 FP32 학습 비교
 
+최신 후속: [2026-10-25 Rodinia 3개 비교군 실험](results/20261025-rodinia-threeway/README.md) — Passthrough / Flyt SHM / VMWeave v0.5.3. 초기화 포함 결과와 별도 구간 진단을 구분한다.
+
 2026-10-16~17(KST) 실험. 결과 디렉터리 날짜는 시작일 기준이다. 주 비교 80회와 총 CPU 예산 보조 비교 12회를 완료했다. 정확성 통과와 성능 결과, 지원하지 못한 조건을 구분해 기록한다.
 
 동일 물리 GPU를 순차 전환하여 현재 main에서 새로 빌드한 VMWeave와 일반 KubeVirt GPU passthrough VM에서 같은 PyTorch 학습을 실행한다. [실행 전 프로토콜과 사전 검사에 따른 변경 기록](protocol.md)을 함께 보존한다.

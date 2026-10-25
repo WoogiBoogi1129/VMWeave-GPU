@@ -1,0 +1,32 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+make: Entering directory '/src/cpu'
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu_rpc_prot_clnt.o cpu_rpc_prot_clnt.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o cpu-client-driver.o cpu-client-driver.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o list.o list.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+gcc -std=gnu11 -I../submodules/libtirpc/install/include/tirpc -I/usr/local/cuda/include -fcommon -O3 -c -fpic -o log.o log.c -L../submodules/libtirpc/install/lib -L/usr/local/cuda/lib64 -L/usr/local/cuda/lib64/stubs -ltirpc -ldl -lcrypto -lelf  
+In file included from cpu-client-driver.c:6:
+/usr/local/cuda/include/cudaEGL.h:54:10: fatal error: EGL/egl.h: No such file or directory
+   54 | #include "EGL/egl.h"
+      |          ^~~~~~~~~~~
+compilation terminated.
+make: *** [Makefile:163: cpu-client-driver.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: Leaving directory '/src/cpu'

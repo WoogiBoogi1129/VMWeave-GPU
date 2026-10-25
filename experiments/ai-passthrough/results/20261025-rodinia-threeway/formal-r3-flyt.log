@@ -1,0 +1,16 @@
+
+Running as unit: rodinia-affinity-flyt-r3.service; invocation ID: bd3abf499db24888bec258f6d4d7638f
+Flyt isolated VM running
+pod/flyt-server created
+Flyt stack started
+nw 0
+lud2064 0
+Flyt NW/LU correctness PASS
+nw 0
+lud2064 0
+Flyt NW/LU correctness PASS
+diagnostic r3 flyt nw {'startup_seconds': 0.054422053, 'gpu_phase_seconds': 0.289235023, 'seconds': 0.343657076}
+diagnostic r3 flyt lud2064 {'startup_seconds': 0.052894754, 'gpu_phase_seconds': 0.302193142, 'seconds': 0.355087896}
+diagnostic r3-repeat2 flyt nw {'startup_seconds': 0.05085498, 'gpu_phase_seconds': 0.270462325, 'seconds': 0.321317305}
+diagnostic r3-repeat3 flyt nw {'startup_seconds': 0.052702817, 'gpu_phase_seconds': 0.396664992, 'seconds': 0.449367809}
+Test cleanup complete; production Ready

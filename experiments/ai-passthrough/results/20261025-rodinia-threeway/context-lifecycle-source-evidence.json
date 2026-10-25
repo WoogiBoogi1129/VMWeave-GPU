@@ -1,0 +1,38 @@
+[
+  {
+    "source": ".local/rodinia-threeway-20261023/flyt-guest/control-managers/src/cluster-manager/client_handler.rs",
+    "lines": [
+      280,
+      320
+    ],
+    "observation": "Existing VM client with allocated virtual server receives existing server IP/RPC ID",
+    "excerpt": "            FlytApiCommand::CLIENTD_RMGR_CONNECT => {\n                log::info!(\"CLIENTD_RMGR_CONNECT command received from client {}\", client_ip);\n\n                if self.exists(&client_ip) && self.get_client(&client_ip).unwrap().virt_server.is_some() {\n                    self.set_client_status(&client_ip, true);\n                    let client = self.get_client(&client_ip).unwrap();\n                    let virt_server = client.virt_server.as_ref().unwrap().read().unwrap();\n                    match stream.write_all(format!(\"200\\n{},{}\\n\", virt_server.ipaddr, virt_server.rpc_id).as_bytes()) {\n                        Ok(_) => {\n                            self.update_stream(&client_ip, stream, reader);                  \n                        }\n                        Err(e) => {\n                            log::error!(\"Error writing to stream: {}\", e);\n                        }\n                    }\n                }\n                else {\n                    let virt_server = self.server_nodes_manager.allocate_vm_resources(&client_ip);\n                    if virt_server.is_ok() {\n                        let virt_server = virt_server.unwrap();\n                        let client = FlytClientNode {\n                            ipaddr: client_ip.clone(),\n                            stream: Arc::new(RwLock::new(Some(StreamEnds{writer: stream, reader}))),\n                            virt_server: Some(virt_server.clone()),\n                            is_active: RwLock::new(true),\n                        };\n                        let client_stream_clone = client.stream.clone();\n                        let mut client_stream_clone_writer = client_stream_clone.write().unwrap();\n                        match client_stream_clone_writer.as_mut().unwrap().writer.write_all(format!(\"200\\n{},{}\\n\", virt_server.read().unwrap().ipaddr, virt_server.read().unwrap().rpc_id).as_bytes()) {\n                            Ok(_) => {\n                                log::info!(\"Adding new client {}\", client_ip);\n                                self.add_client(client);\n                            }\n                            Err(e) => {\n                                log::error!(\"Error writing to stream: {}\", e);\n                            }\n                        }\n                    }\n                    else {\n                        let _ = stream.write_all(format!(\"500\\n{}\\n\", virt_server.unwrap_err()).as_bytes());\n                    }"
+  },
+  {
+    "source": "runtime/shm/src/worker_sessions.c",
+    "lines": [
+      27,
+      33
+    ],
+    "observation": "Each executed session opens CUDA runtime and execution context",
+    "excerpt": "static int execute_session(int fd){\n struct vmweave_cuda_runtime *runtime=NULL;struct vmweave_cuda_session session={0};uint32_t error=0;\n if(vmweave_cuda_runtime_open(&runtime,&error)||vmweave_cuda_exec_create(vmweave_cuda_runtime_backend(),runtime,&session.exec))return 1;\n unsigned char *in=malloc(VMWEAVE_SESSION_MAX_BYTES),*out=malloc(VMWEAVE_SESSION_MAX_BYTES);if(!in||!out)return 1;\n struct message m;\n while(1){\n  if(vmweave_async_reap())break;"
+  },
+  {
+    "source": "runtime/shm/src/worker_sessions.c",
+    "lines": [
+      54,
+      64
+    ],
+    "observation": "SESSION_OPEN spawns and execs a new session worker",
+    "excerpt": "}\nstatic int spawn(pid_t *pid,int *fd){\n int fds[2];if(socketpair(AF_UNIX,SOCK_STREAM,0,fds))return -1;\n *pid=fork();if(*pid<0){close(fds[0]);close(fds[1]);return -1;}\n if(!*pid){\n  close(fds[0]);prctl(PR_SET_PDEATHSIG,SIGKILL);if(getppid()==1)_exit(1);\n  char number[24];snprintf(number,sizeof(number),\"%d\",fds[1]);\n  for(int i=3;i<1024;i++)if(i!=fds[1])close(i);\n  execl(\"/proc/self/exe\",\"vmweave-shm-session-worker\",\"--session\",number,NULL);_exit(1);\n }\n close(fds[1]);*fd=fds[0];struct timeval timeout={.tv_sec=20};"
+  },
+  {
+    "source": ".local/rodinia-threeway-20261023/flyt-host/cpu/cpu-server-runtime.c",
+    "lines": [
+      80,
+      112
+    ],
+    "observation": "Flyt initializes CUDA device in virtual server startup",
+    "excerpt": "    if (!restore) {\n        ret &= resource_mg_init(&rm_events, 1); // res mgr for events. Stores a list of client addr, cuda addr.\n        ret &= resource_mg_init(&rm_arrays, 1);\n        ret &= cusolver_init(1, NULL, NULL);\n        ret &= cublas_init(1, NULL);\n\t    ret &= cublaslt_init(1, NULL);\n    } else {\n        ret &= resource_mg_init(&rm_events, 0);\n        ret &= resource_mg_init(&rm_arrays, 0);\n        ret &= resource_mg_init(&rm_kernels, 0);\n        ret &= cusolver_init(0, NULL, NULL);\n        ret &= cublas_init(0, NULL);\n\t    ret &= cublaslt_init(0, NULL);\n    }\n    \n    // Make sure runtime API is initialized\n    // If we don't do this and use the driver API, it might be unintialized\n    cudaError_t cres;\n    if ((cres = cudaSetDevice(gpu_id)) != cudaSuccess) {\n        LOG(LOG_ERROR, \"cudaSetDevice failed: %d\", cres);\n        ret = 1;\n    }\n    cudaDeviceSynchronize();\n\n    return ret;\n}\n\nint server_runtime_deinit(void)\n{\n    resource_mg_free(&rm_events);\n    resource_mg_free(&rm_arrays);\n    resource_mg_free(&rm_kernels);\n    cusolver_deinit();"
+  }
+]

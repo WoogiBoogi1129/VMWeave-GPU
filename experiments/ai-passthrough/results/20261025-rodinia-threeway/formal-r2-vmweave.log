@@ -1,0 +1,16 @@
+{
+  "request": {
+    "name": "rodinia-w-1025-r2",
+    "uid": "6fd55c86-0ff0-4cf6-9ee6-2c684b308a3b"
+  },
+  "channel": {
+    "name": "rodinia-w-1025-r2",
+    "uid": "a40980c4-0b08-40d2-b990-8c50fbc447ce"
+  }
+}
+Running as unit: rodinia-affinity-rodinia-w-1025-r2.service; invocation ID: d319c9bdf5eb403290d2b079a40b2c05
+Created symlink /etc/systemd/system/multi-user.target.wants/vmweave-guest-broker.service → /etc/systemd/system/vmweave-guest-broker.service.
+warmup r2 vmweave nw {'startup_seconds': 0.00023464, 'gpu_phase_seconds': 1.427845278, 'seconds': 1.428079918}
+warmup r2 vmweave lud2064 {'startup_seconds': 0.00018254, 'gpu_phase_seconds': 1.206337528, 'seconds': 1.206520068}
+formal r2 vmweave nw {'startup_seconds': 0.000168124, 'gpu_phase_seconds': 1.396061944, 'seconds': 1.396230068}
+formal r2 vmweave lud2064 {'startup_seconds': 0.000182292, 'gpu_phase_seconds': 1.21863612, 'seconds': 1.218818412}

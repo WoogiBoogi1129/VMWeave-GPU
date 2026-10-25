@@ -1,0 +1,21 @@
+prg 99 cricker 641026 gpu 0 sm 188 mem 0 mode 0
+welcome to cricket!
+send_type -= 0
++11:20:49.078697 [1m[31mERROR[0m: accessing list out of bounds	in [4mlist.c:209[0m
++11:20:49.078728 [1m[31mERROR[0m: accessing list out of bounds	in [4mlist.c:209[0m
+mqueue_id = 1 type 0 data -939524096
+set mode = 50
+eventfd created 66
+get mode = 50
+Error: signal 2:
+/opt/flyt-test/libtirpc.so.3(+0x18c39)[0x7ea0d6aa1c39]
+/lib/x86_64-linux-gnu/libc.so.6(+0x42520)[0x7ea087019520]
+/lib/x86_64-linux-gnu/libc.so.6(__poll+0x4f)[0x7ea0870efbcf]
+/opt/flyt-test/libtirpc.so.3(svc_run+0x397)[0x7ea0d6aa2777]
+/opt/flyt-test/cricket-rpc-server(+0x13d29)[0x5f434e6d7d29]
+/opt/flyt-test/cricket-rpc-server(+0x9eb3)[0x5f434e6cdeb3]
+/lib/x86_64-linux-gnu/libc.so.6(+0x29d90)[0x7ea087000d90]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80)[0x7ea087000e40]
+/opt/flyt-test/cricket-rpc-server(+0x9ee5)[0x5f434e6cdee5]
+Received signal 2
+command terminated with exit code 124

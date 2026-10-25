@@ -1,0 +1,46 @@
+Rodinia abbreviated three-way comparison
+
+Scope: NW 2048 10 and LU -s 2064, seed7; not training samples/s or an exact Flyt paper reproduction.
+Formal: 3 order-balanced rounds, 18 samples; each result matches full native-reference output hash.
+Time: ELF preinit-to-main + first allocation-to-final-sync; CPU input preparation, output validation and file writes excluded.
+Original Rodinia printed timers are not the primary metric; timing.json-derived raw.csv is authoritative.
+Source-derived kernel launches: NW255; LU385; full-process Flyt counters263/390 corroborate the call structure.
+Preparation runs excluded. Shared backends persist within a visit; each measured application process is fresh.
+
+Median runtime and reciprocal-runtime throughput (Passthrough=100%):
+nw       passthrough  1.624538 s [range 1.615430–1.626395], 100.00%, CV 0.36%
+nw       flyt         0.377979 s [range 0.247370–0.420960], 429.80%, CV 25.92%
+nw       vmweave      1.359958 s [range 1.229224–1.396230], 119.46%, CV 6.61%
+lud2064  passthrough  1.615478 s [range 1.611922–1.617281], 100.00%, CV 0.17%
+lud2064  flyt         0.489624 s [range 0.482316–0.529459], 329.94%, CV 5.07%
+lud2064  vmweave      1.218818 s [range 1.217440–1.229265], 132.54%, CV 0.53%
+
+Diagnostics: one separate run per workload/mode, after its round3 formal measurements.
+An extra compute-completion synchronization was inserted before D2H to separate pending compute from the copy. Diagnostic timings are not formal samples; the barrier itself adds overhead.
+Allocation includes lazy initialization/session setup. The launch-loop residual is host wall time and must not be interpreted as pure GPU kernel duration.
+nw flyt: startup 0.054422, allocation/init 0.004087, H2D 0.061523, launch/other 0.137026, compute wait 0.000864, D2H 0.084440, final sync 0.001294 seconds
+lud2064 flyt: startup 0.052895, allocation/init 0.001866, H2D 0.061243, launch/other 0.169305, compute wait 0.000148, D2H 0.068658, final sync 0.000972 seconds
+nw passthrough: startup 0.000132, allocation/init 1.606618, H2D 0.006337, launch/other 0.001786, compute wait 0.000023, D2H 0.016728, final sync 0.000008 seconds
+lud2064 passthrough: startup 0.000142, allocation/init 1.592483, H2D 0.003388, launch/other 0.002580, compute wait 0.001821, D2H 0.002838, final sync 0.000006 seconds
+nw vmweave: startup 0.000173, allocation/init 0.655317, H2D 0.263360, launch/other 0.142135, compute wait 0.000838, D2H 0.166538, final sync 0.000793 seconds
+lud2064 vmweave: startup 0.000182, allocation/init 0.671023, H2D 0.172808, launch/other 0.301681, compute wait 0.000890, D2H 0.146292, final sync 0.000662 seconds
+
+Post-allocation diagnostic ONLY (single sample, includes added barrier; not formal throughput):
+nw flyt: 0.285148 s, relative 8.73%
+lud2064 flyt: 0.300327 s, relative 3.54%
+nw passthrough: 0.024882 s, relative 100.00%
+lud2064 passthrough: 0.010633 s, relative 100.00%
+nw vmweave: 0.573664 s, relative 4.34%
+lud2064 vmweave: 0.622333 s, relative 1.71%
+
+Flyt NW diagnostic variation: launch-loop/other-host residual spans 0.117726–0.235597 seconds. The largest observed variation is in this residual, while transfer/initialization/barrier timings are steadier. This does not isolate RPC, OS scheduling, or server-side contributions, or establish the cause of all between-round variation.
+Interpretation: the fresh-process ranking is dominated by different allocation/initialization costs. Passthrough allocation/init is about1.6s, VMWeave about0.66–0.67s, and the reused Flyt backend incurs only milliseconds in application allocation plus about0.05s pre-main startup. This is not evidence that remoting accelerates GPU kernels. The post-allocation diagnostic has much larger remoting overhead.
+Context lifecycle source evidence: Flyt returns an existing virtual server for the VM; VMWeave spawns a fresh session worker and opens its CUDA context. MPS is present for Flyt SM-affinity. Their individual causal effects are not isolated by this experiment.
+
+Conditions: same physical GPU GPU-772181af-05a4-0c24-de59-8487bd37c142, driver580.173.02, CUDA12.8.93; same measured binaries; VM8vCPU16GiB; QEMU CPUs32–39, remoting backend CPUs40–43; remoting allocations100%/8192MiB.
+Flyt requires an MPS backend for its SM-affinity path. VMWeave uses its published v0.5.3 worker path. This is a comparison of the deployed execution paths, including different initialization/context lifecycles.
+Flyt data transport is SHM; control RPC remains. Both remoting backends run within the standard HAMi allocation environment.
+Flyt source: pinned development branches, recorded cuDNN9 build-compatibility exclusion, available Host libtirpc commit used for Guest, and ipc-rs ftok CString fix. NW/LU do not exercise cuDNN. This baseline is qualified for these two workloads, not all CUDA applications.
+Three samples cannot establish small statistically significant differences; no universal performance or training-throughput claim.
+Production VM UID/configuration and50%/2048MiB quota preserved; cleanup.json records restoration.
+See raw.csv, comparison.json, diagnostic-comparison.json, per-run logs and reproduction/.
