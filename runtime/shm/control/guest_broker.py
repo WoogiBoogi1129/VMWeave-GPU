@@ -8,6 +8,8 @@ import vmweave_env as env
 import argparse
 import ctypes
 import fcntl
+import mmap
+import array
 import os
 from pathlib import Path
 import secrets
@@ -25,6 +27,8 @@ OPEN, CLOSE, CALL, STATUS = 4, 5, 6, 7
 CACHE_OPEN, CACHE_STATUS = 0x7ff0, 0x7ff1
 CACHE_VERSION = 1
 COPY_LIMITS = 0x1014
+BULK_OPEN, BULK_COPY = 0x7ff2, 0x7ff3
+BULK_BYTES = 16 * 1024 * 1024
 HEALTH_INTERVAL = 0.010
 
 
@@ -64,10 +68,38 @@ class Transport:
             raise RuntimeError('invalid transport output length')
         return rc, out.raw[:got.value]
 
+    def bulk_copy(self, epoch, data, capacity, arena):
+        # All routing metadata is a private socket snapshot, never client-writable.
+        if len(data) != 48:
+            raise ValueError('invalid bulk descriptor')
+        kind, reserved, dh, do, sh, so, size = struct.unpack('<IIQQQQQ', data)
+        if reserved or kind not in (1, 2) or not 0 < size <= BULK_BYTES:
+            raise ValueError('invalid bulk direction/size')
+        if capacity != (size if kind == 2 else 0):
+            raise ValueError('invalid bulk capacity')
+        prefix = epoch + struct.pack('<II', 0x1012, 0) + data
+        # Input data may change concurrently, like application memory in cudaMemcpy;
+        # only payload is shared. Copy to private storage before transport submission.
+        request = ctypes.create_string_buffer(len(prefix) + (size if kind == 1 else 0))
+        ctypes.memmove(request, prefix, len(prefix))
+        region = (ctypes.c_char * (2 * BULK_BYTES)).from_buffer(arena)
+        try:
+            if kind == 1:
+                ctypes.memmove(ctypes.addressof(request) + len(prefix), ctypes.addressof(region), size)
+            output = ctypes.c_void_p(ctypes.addressof(region) + BULK_BYTES)
+            got = ctypes.c_size_t()
+            rc = self.call(CALL, request, ctypes.sizeof(request), output, capacity, ctypes.byref(got))
+            if got.value > capacity or (not rc and got.value != capacity):
+                raise RuntimeError('invalid bulk output length')
+            return rc, got.value if not rc else 0
+        finally:
+            del region
+
     def serve(self, conn):
         owned = self.lock.acquire(blocking=False)
         epoch = secrets.token_bytes(16)
         opened = False
+        arena = None
         try:
             if not owned or self.failed:
                 conn.sendall(RESPONSE.pack(MAGIC, 46, 0))
@@ -103,6 +135,32 @@ class Transport:
                         self.failed = True
                     conn.sendall(RESPONSE.pack(MAGIC, rc, 0))
                     return
+                if api == BULK_OPEN:
+                    if count or capacity or arena is not None:
+                        raise ValueError('invalid/repeated bulk negotiation')
+                    if os.environ.get('VMWEAVE_BULK_COPY') != '1':
+                        conn.sendall(RESPONSE.pack(MAGIC, 801, 0))
+                        continue
+                    descriptor = os.memfd_create('vmweave-session-copy', os.MFD_CLOEXEC | os.MFD_ALLOW_SEALING)
+                    try:
+                        os.ftruncate(descriptor, 2 * BULK_BYTES)
+                        fcntl.fcntl(descriptor, fcntl.F_ADD_SEALS,
+                                    fcntl.F_SEAL_GROW | fcntl.F_SEAL_SHRINK | fcntl.F_SEAL_SEAL)
+                        arena = mmap.mmap(descriptor, 2 * BULK_BYTES)
+                        packet = RESPONSE.pack(MAGIC, 0, 0)
+                        sent = conn.sendmsg([packet], [(socket.SOL_SOCKET, socket.SCM_RIGHTS, array.array('i', [descriptor]))])
+                        if sent < len(packet):
+                            conn.sendall(packet[sent:])
+                    finally:
+                        os.close(descriptor)
+                    continue
+                if api == BULK_COPY:
+                    if arena is None:
+                        raise ValueError('bulk copy without negotiation')
+                    rc, produced = self.bulk_copy(epoch, data, capacity, arena)
+                    # Output bytes live in the arena, not on the socket.
+                    conn.sendall(RESPONSE.pack(MAGIC, rc, produced))
+                    continue
                 if api in (CACHE_OPEN, CACHE_STATUS):
                     expected = 24 if api == CACHE_OPEN else 16
                     if count or capacity != expected:
@@ -162,6 +220,8 @@ class Transport:
                 self.failed = True
                 raise
             finally:
+                if arena is not None:
+                    arena.close()
                 conn.close()
                 if owned:
                     self.lock.release()

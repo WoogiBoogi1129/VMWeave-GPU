@@ -9,7 +9,12 @@ fi
 for command in python3 install systemctl groupadd sha256sum; do command -v "$command" >/dev/null; done
 (cd "$artifacts" && sha256sum -c SHA256SUMS)
 getent group vmweave >/dev/null || groupadd --system vmweave
-install -d /opt/vmweave/lib /opt/vmweave/control /opt/vmweave/bin
+install -d /opt/vmweave/lib /opt/vmweave/control /opt/vmweave/bin /etc/vmweave
+# Preserve explicit operator configuration across upgrades; new installs stay off.
+if [ ! -e /etc/vmweave/guest-broker.env ]; then
+    printf 'VMWEAVE_BULK_COPY=0\n' > /etc/vmweave/guest-broker.env
+    chmod 0644 /etc/vmweave/guest-broker.env
+fi
 install -m 0755 "$artifacts/guest-gpu-smoke" /opt/vmweave/bin/guest-gpu-smoke
 install -m 0644 "$artifacts/source-revision.txt" /opt/vmweave/source-revision.txt
 install -m 0644 "$artifacts/libvmweave_guest.so" /opt/vmweave/lib/libvmweave_guest.so.new

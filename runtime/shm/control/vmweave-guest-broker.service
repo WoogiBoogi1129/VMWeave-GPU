@@ -5,6 +5,7 @@ ConditionPathExists=/dev/disk/by-label/cidata
 [Service]
 Type=simple
 Group=vmweave
+EnvironmentFile=-/etc/vmweave/guest-broker.env
 ExecStart=/usr/bin/python3 /opt/vmweave/control/guest_bootstrap.py
 Restart=no
 UMask=0007

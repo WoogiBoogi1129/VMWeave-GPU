@@ -2,6 +2,9 @@
 #include "vmweave_env.h"
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <stdint.h>
 #include <string.h>
@@ -23,6 +26,12 @@
 /* Lease is a maximum local reuse window, not an instantaneous remote check.
  * An expired lease requires a synchronous STATUS, even if broker is stalled. */
 #define LEASE_NS 50000000ull
+#define BULK_OPEN 0x7ff2u
+#define BULK_COPY 0x7ff3u
+#define BULK_BYTES (16u*1024u*1024u)
+#define BULK_THRESHOLD (1024u*1024u)
+static unsigned char *bulk;
+static int bulk_probed;
 static int fd=-1,failed,negotiated,cache_enabled;
 static _Atomic pid_t owner;
 static pthread_mutex_t lock=PTHREAD_MUTEX_INITIALIZER;
@@ -53,7 +62,7 @@ static void remember_math(const void *key){
 static uint64_t lease,device_hits,primary_hits,wire_calls,health_checks,invalidations;
 static uint64_t now(void){struct timespec t;if(clock_gettime(CLOCK_MONOTONIC,&t))return 0;return (uint64_t)t.tv_sec*1000000000ull+t.tv_nsec;}
 static void invalidate(void){have_device=have_primary=0;invalidate_math();++invalidations;}
-static void fail(void){invalidate();failed=1;cache_enabled=0;if(fd>=0){close(fd);fd=-1;}}
+static void fail(void){if(bulk){munmap(bulk,2*BULK_BYTES);bulk=NULL;}invalidate();failed=1;cache_enabled=0;if(fd>=0){close(fd);fd=-1;}}
 static int io(void *p,size_t n,int writing){
  while(n){ssize_t k=writing?send(fd,p,n,MSG_NOSIGNAL):recv(fd,p,n,0);
   if(k<0&&errno==EINTR)continue;if(k<=0)return -1;p=(char*)p+k;n-=k;
@@ -68,6 +77,55 @@ static int request(uint32_t api,const void *in,size_t n,void *out,size_t cap,siz
   fail();return 999;
  }
  *got=r.bytes;return r.result;
+}
+/* Capability negotiation has no CUDA side effects; only an explicit unsupported
+ * result permits fallback. Ambiguous transport failures fence the session. */
+static void bulk_negotiate(void){
+ bulk_probed=1;
+ const char *enable=getenv("VMWEAVE_BULK_COPY");if(!enable||strcmp(enable,"1"))return;
+ struct {uint32_t magic,api;uint64_t bytes,capacity;} q={MAGIC,BULK_OPEN,0,0};
+ struct {uint32_t magic,result;uint64_t bytes;} r;
+ if(io(&q,sizeof(q),1)){fail();return;}
+ union {struct cmsghdr align;char bytes[CMSG_SPACE(sizeof(int)*4)];} control;
+ struct iovec iov={&r,sizeof(r)};
+ struct msghdr msg={0};msg.msg_iov=&iov;msg.msg_iovlen=1;msg.msg_control=control.bytes;msg.msg_controllen=sizeof(control);
+ ssize_t n;do{n=recvmsg(fd,&msg,MSG_WAITALL|MSG_CMSG_CLOEXEC);}while(n<0&&errno==EINTR);
+ int received=-1,count=0;
+ for(struct cmsghdr *c=CMSG_FIRSTHDR(&msg);n>0&&c;c=CMSG_NXTHDR(&msg,c)){
+  if(c->cmsg_level==SOL_SOCKET&&c->cmsg_type==SCM_RIGHTS){
+   size_t k=(c->cmsg_len-CMSG_LEN(0))/sizeof(int);int *fds=(int*)CMSG_DATA(c);
+   for(size_t i=0;i<k;i++){if(count++==0)received=fds[i];else close(fds[i]);}
+  }
+ }
+ if(n>0&&n<(ssize_t)sizeof(r)&&!io((char*)&r+n,sizeof(r)-(size_t)n,0))n=sizeof(r);
+ int valid=n==sizeof(r)&&!(msg.msg_flags&(MSG_CTRUNC|MSG_TRUNC))&&r.magic==MAGIC&&!r.bytes;
+ if(valid&&r.result==801&&count==0)return;
+ struct stat st;int seals=received<0?-1:fcntl(received,F_GET_SEALS);
+ if(!valid||r.result||count!=1||fstat(received,&st)||!S_ISREG(st.st_mode)||st.st_size!=2*BULK_BYTES||
+    seals<0||(seals&(F_SEAL_GROW|F_SEAL_SHRINK|F_SEAL_SEAL))!=(F_SEAL_GROW|F_SEAL_SHRINK|F_SEAL_SEAL)){
+  if(received>=0)close(received);fail();return;
+ }
+ void *mapped=mmap(NULL,2*BULK_BYTES,PROT_READ|PROT_WRITE,MAP_SHARED,received,0);close(received);
+ if(mapped==MAP_FAILED){fail();return;}bulk=mapped;
+}
+static int bulk_request(const void *in,size_t n,void *out,size_t cap,size_t *got){
+ uint32_t kind,reserved;uint64_t bytes;
+ if(n<48)return -1;
+ memcpy(&kind,in,4);memcpy(&reserved,(const char*)in+4,4);memcpy(&bytes,(const char*)in+40,8);
+ if(reserved||bytes<BULK_THRESHOLD||bytes>BULK_BYTES||
+    !((kind==1&&n==48+bytes&&!cap)||(kind==2&&n==48&&cap==bytes)))return -1;
+ if(!bulk_probed)bulk_negotiate();if(failed)return 999;if(!bulk)return -1;
+ if(kind==1)memcpy(bulk,(const char*)in+48,(size_t)bytes);
+ struct {uint32_t magic,api;uint64_t bytes,capacity;} q={MAGIC,BULK_COPY,48,cap};
+ struct {uint32_t magic,result;uint64_t bytes;} r;
+ ++wire_calls;
+ if(io(&q,sizeof(q),1)||io((void*)in,48,1)||io(&r,sizeof(r),0)||r.magic!=MAGIC||
+    r.bytes>cap||(!r.result&&r.bytes!=cap)||(r.result&&r.bytes)){
+  fail();return 999;
+ }
+ if(r.result){if(r.result==999)fail();return r.result;}
+ if(kind==2)memcpy(out,bulk+BULK_BYTES,(size_t)r.bytes);
+ *got=r.bytes;return 0;
 }
 static int connected(void){
  const char *path=vmweave_getenv("VMWEAVE_BROKER_SOCKET");struct sockaddr_un addr={.sun_family=AF_UNIX};
@@ -133,7 +191,8 @@ int vmweave_broker_exchange(uint32_t api,const void *in,size_t n,void *out,size_
   if(api==PRIMARY_STATE&&have_primary&&cap>=8){memcpy(out,primary,8);*got=8;++primary_hits;result=0;goto done;}
  }
  if(api==SET_DEVICE||api==2)invalidate();
- result=request(api,in,n,out,cap,got);
+ result=api==0x1012u?bulk_request(in,n,out,cap,got):-1;
+ if(result==-1)result=request(api,in,n,out,cap,got);
  if(result){invalidate();if(result==999&&cache_enabled)fail();goto done;}
  if(cache_enabled&&!n){
   if(api==GET_DEVICE&&*got==4&&!memcmp(out,(unsigned char[4]){0},4)){memcpy(device,out,4);have_device=1;}
