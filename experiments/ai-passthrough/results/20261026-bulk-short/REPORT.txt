@@ -1,0 +1,61 @@
+공유 버퍼 개선 축약 성능 비교 — Flyt / VMWeave OFF / VMWeave ON
+
+워밍업은 각 workload session에서 1회. NW/LU/SRAD는 3회차에 2+2+1개 측정 표본.
+StreamCluster는 1회차에만 워밍업1+측정1, 최소 정확성/실행 검증. 단일 표본의 우위/안정성 주장 금지.
+정식 표본 합계48개. Native/Passthrough 재측정 없음. 이번 Flyt는 동일 실행 파일로 재측정.
+OFF/ON은 같은 후보 Guest/Broker와 같은 Worker; VMWEAVE_BULK_COPY 활성 여부만 다름.
+새 VM/backend를 방식·회차마다 생성. GPU0, VM8vCPU16GiB, QEMU32–39, backend40–43, GPU100%/8192MiB.
+주 측정값은 초기화 이후 CPU 관측 작업 완료 시간; 순수 kernel time 또는 학습 throughput 아님.
+
+평균 작업 완료 시간(초), OFF 대비 ON 감소율, ON/Flyt 시간 비율:
+nw: Flyt 0.241155, OFF 0.470519, ON 0.333373; 감소 +29.15%; ON/Flyt 1.382배
+lu: Flyt 0.223902, OFF 0.444531, ON 0.370320; 감소 +16.69%; ON/Flyt 1.654배
+srad: Flyt 0.046258, OFF 0.322484, ON 0.144945; 감소 +55.05%; ON/Flyt 3.133배
+sc: Flyt 26.306486, OFF 41.180656, ON 37.641387; 감소 +8.59%; ON/Flyt 1.431배
+
+원시표본 raw.csv; 평균/중앙값/최소/최대/표준편차/회차별 평균 comparison.json.
+평균은 5개 표본 기준이며 회차별 표본수2/2/1이 다르다. 독립 단위는 VM session 3개다.
+표본 수가 작고 StreamCluster는 단일 표본이므로 통계적 유의성/보편적 우위를 주장하지 않는다.
+
+복사 회귀 검토 (OFF/ON 각1 session; 조건당 워밍업1+측정5, 중앙값):
+4096 bytes H2D: OFF 대비 시간 증가 -30.57%
+4096 bytes D2D: OFF 대비 시간 증가 -48.11%
+4096 bytes D2H: OFF 대비 시간 증가 -45.26%
+65536 bytes H2D: OFF 대비 시간 증가 +2.20%
+65536 bytes D2D: OFF 대비 시간 증가 +62.55%
+65536 bytes D2H: OFF 대비 시간 증가 +26.47%
+1048575 bytes H2D: OFF 대비 시간 증가 -5.54%
+1048575 bytes D2D: OFF 대비 시간 증가 +57.08%
+1048575 bytes D2H: OFF 대비 시간 증가 -4.75%
+1048576 bytes H2D: OFF 대비 시간 증가 -49.67%
+1048576 bytes D2D: OFF 대비 시간 증가 +22.57%
+1048576 bytes D2H: OFF 대비 시간 증가 -50.42%
+1048577 bytes H2D: OFF 대비 시간 증가 -46.02%
+1048577 bytes D2D: OFF 대비 시간 증가 +10.50%
+1048577 bytes D2H: OFF 대비 시간 증가 -53.94%
+16777216 bytes H2D: OFF 대비 시간 증가 -51.57%
+16777216 bytes D2D: OFF 대비 시간 증가 -21.81%
+16777216 bytes D2H: OFF 대비 시간 증가 -67.33%
+134217729 bytes H2D: OFF 대비 시간 증가 -32.52%
+134217729 bytes D2D: OFF 대비 시간 증가 +2.56%
+134217729 bytes D2H: OFF 대비 시간 증가 -44.50%
+5% 초과 증가 관측: 65536B/D2D, 65536B/D2H, 1048575B/D2D, 1048576B/D2D, 1048577B/D2D
+이는 회귀 의심 표시이며, 단일 세션의 표본5개로 통계적 회귀 또는 무회귀를 확정하지 않는다.
+
+별도 진단(16MiB H2D/D2H, 할당·동기화·해제 포함, 시간 통계에서 제외):
+off: {"sendto": {"calls": 20, "returned_bytes": 16777648}, "recvfrom": {"calls": 93, "returned_bytes": 16777464}, "sendmsg": {"calls": 0, "returned_bytes": 0}, "recvmsg": {"calls": 0, "returned_bytes": 0}}; SCM_RIGHTS=False
+on: {"sendto": {"calls": 21, "returned_bytes": 456}, "recvfrom": {"calls": 17, "returned_bytes": 248}, "sendmsg": {"calls": 0, "returned_bytes": 0}, "recvmsg": {"calls": 1, "returned_bytes": 16}}; SCM_RIGHTS=True
+ON의 FD 전달과 실제 소켓 반환 바이트 감소로 공유 버퍼 경로를 확인했다.
+syscall trace 시간은 계측 영향을 받으며 Guest/Broker/SHM/CUDA 전체의 배타적 구간 분해가 아니다.
+복사 probe의 CPU 시간은 Guest process 기준이다. Broker CPU/구간별 시간은 이번 축약 진단에서 수집하지 않았다.
+
+재현/해석 제한:
+모든 입력/seed/바이너리는 고정, 모든 출력은 Native reference hash와 대조.
+SC CUDATIME는 기존 실험처럼 비활성. 추가 memset 동기화 최적화는 적용하지 않았다.
+임계값1MiB 고정, async/D2D와 작은 요청은 기존 경로. 전체 zero-copy가 아니다.
+진단 도구 glibc 불일치와 초기 cleanup 경로 assertion은 setup-failures에 보존.
+OFF 복사 측정은 재사용하고 진단만 새 VM에서 재실행했다. 성능에 따른 표본 제외 없음.
+기본 활성화/운영 배포/이미지 Helm 교체 없음. main에는 결과 및 재현 자료만 반영.
+
+자료: raw.csv, comparison.json, copy-comparison.json, diagnostic-summary.json, runtime.png/svg,
+copy-latency.png/svg, manifest.json, cleanup.json, reproduction/, sources/.

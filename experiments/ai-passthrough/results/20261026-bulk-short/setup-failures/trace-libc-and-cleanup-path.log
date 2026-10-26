@@ -1,0 +1,31 @@
+{
+  "request": {
+    "name": "bulk-w-1026-copy-off",
+    "uid": "12106dc9-d546-431f-b044-46f5e25777c0"
+  },
+  "channel": {
+    "name": "bulk-w-1026-copy-off",
+    "uid": "78628445-2704-49a8-9b94-eaf16650c750"
+  }
+}
+Running as unit: rodinia-affinity-bulk-w-1026-copy-off.service; invocation ID: 6c542f7a395d4c9c8312169093308e24
+Created symlink /etc/systemd/system/multi-user.target.wants/vmweave-guest-broker.service → /etc/systemd/system/vmweave-guest-broker.service.
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/bulk-short-20261026/run_session.py", line 38, in <module>
+    command('sudo env LD_LIBRARY_PATH=/tmp/short/trace-libs /tmp/short/trace-libs/strace -qq -f -yy -s 1 -T -e trace=sendto,recvfrom,sendmsg,recvmsg,mmap,close -o /tmp/short/trace.log '+baseenv+' python3 /tmp/short/copy_probe.py --diagnostic --out /tmp/short/diag.json',h.O/'diagnostic'/f'{mode}.log')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/bulk-short-20261026/run_session.py", line 25, in command
+    p=subprocess.run(s['ssh']+[cmd],capture_output=True,text=True,timeout=timeout);output.parent.mkdir(parents=True,exist_ok=True);output.write_text(p.stdout+p.stderr);assert p.returncode==0,(cmd,p.stderr[-600:]);return p
+                                                                                                                                                                               ^^^^^^^^^^^^^^^
+AssertionError: ('sudo env LD_LIBRARY_PATH=/tmp/short/trace-libs /tmp/short/trace-libs/strace -qq -f -s 1 -T -e trace=sendto,recvfrom,sendmsg,recvmsg,mmap,close -o /tmp/short/trace.log env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 LD_LIBRARY_PATH=/opt/vmweave/lib:/tmp/short VMWEAVE_BULK_COPY=0 LD_PRELOAD=/opt/vmweave/lib/libvmweave_guest.so python3 /tmp/short/copy_probe.py --diagnostic --out /tmp/short/diag.json', "/tmp/short/trace-libs/strace: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found (required by /tmp/short/trace-libs/strace)\n")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/bulk-short-20261026/run_session.py", line 53, in <module>
+    elif s:h.cleanup_vmw(s)
+           ^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/bulk-short-20261026/rodinia_campaign.py", line 93, in cleanup_vmw
+    k('delete','pv',s['name'],'--wait=true','--timeout=90s');ensure_admin();assert s['directory'].startswith('/var/lib/vmweave/bulk-short-20261026/rodinia-w-');admin(['rm','-rf',s['directory']]);save(O/'identities'/s['name']/'cleanup.json',{'removed':True})
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

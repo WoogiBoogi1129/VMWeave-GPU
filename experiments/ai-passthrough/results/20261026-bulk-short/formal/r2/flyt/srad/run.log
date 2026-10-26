@@ -1,0 +1,42 @@
+here, pid=2434
+here, send_id=0
+here, htonl pid=-2113339392
+here2
+From Control Plane: 10.85.0.171,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.171
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 0
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 1073741824
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7fac63978000
+clnttcp_create done.
+WG size of kernel = 16 X 16
+Randomizing the input matrix
+Start the SRAD main loop
+Computation Done
+EXPERIMENT_SAMPLE {"iteration":0,"warmup":true,"seconds":0.134224733}
+WG size of kernel = 16 X 16
+Randomizing the input matrix
+Start the SRAD main loop
+Computation Done
+EXPERIMENT_SAMPLE {"iteration":1,"warmup":false,"seconds":0.045239009}
+WG size of kernel = 16 X 16
+Randomizing the input matrix
+Start the SRAD main loop
+Computation Done
+EXPERIMENT_SAMPLE {"iteration":2,"warmup":false,"seconds":0.045778926}
+api-call-cnt: 72
+memcpy-api-calls: 12
+Non-memcpy-api-calls: 60
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 201326592
+/tmp/short/srad: /tmp/flyt-test/libcudart.so.12: no version information available (required by /tmp/short/srad)
+EXPERIMENT_INIT 0.004683325

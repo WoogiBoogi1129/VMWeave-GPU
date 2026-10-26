@@ -139,3 +139,5 @@ passthrough의 준비·종료 구간에서 NVML이 5,000 MHz를 넘는 SM 클록
 | CPU 보충 3 | [화면](screenshots/equal-budget-b3-vmweave.png) | [화면](screenshots/equal-budget-b3-passthrough.png) |
 
 - [2026-10-26 Rodinia 정상 상태 4방식 비교](results/20261026-rodinia-steady/README.md): Native·Passthrough·Flyt·VMWeave, 160개 표본 및 API 진단·원인 분석.
+
+- [2026-10-26 공유 버퍼 축약 비교](results/20261026-bulk-short/README.md): Flyt·VMWeave OFF/ON, 48개 표본과 소켓 경로 진단.

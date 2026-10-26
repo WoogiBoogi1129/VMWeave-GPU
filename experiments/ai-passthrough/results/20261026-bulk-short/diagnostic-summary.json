@@ -1,0 +1,48 @@
+[
+  {
+    "mode": "off",
+    "socket_syscalls": {
+      "sendto": {
+        "calls": 20,
+        "returned_bytes": 16777648
+      },
+      "recvfrom": {
+        "calls": 93,
+        "returned_bytes": 16777464
+      },
+      "sendmsg": {
+        "calls": 0,
+        "returned_bytes": 0
+      },
+      "recvmsg": {
+        "calls": 0,
+        "returned_bytes": 0
+      }
+    },
+    "scope": "separate diagnostic process: allocations + 16MiB H2D/D2H + explicit sync + frees; syscall returned bytes, not formal timing",
+    "fd_transfer_observed": false
+  },
+  {
+    "mode": "on",
+    "socket_syscalls": {
+      "sendto": {
+        "calls": 21,
+        "returned_bytes": 456
+      },
+      "recvfrom": {
+        "calls": 17,
+        "returned_bytes": 248
+      },
+      "sendmsg": {
+        "calls": 0,
+        "returned_bytes": 0
+      },
+      "recvmsg": {
+        "calls": 1,
+        "returned_bytes": 16
+      }
+    },
+    "scope": "separate diagnostic process: allocations + 16MiB H2D/D2H + explicit sync + frees; syscall returned bytes, not formal timing",
+    "fd_transfer_observed": true
+  }
+]

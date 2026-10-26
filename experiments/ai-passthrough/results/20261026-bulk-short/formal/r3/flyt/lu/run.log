@@ -1,0 +1,37 @@
+here, pid=2331
+here, send_id=0
+here, htonl pid=453574656
+here2
+From Control Plane: 10.85.0.64,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.64
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 0
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 536870912
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7fd5598a9000
+clnttcp_create done.
+WG size of kernel = 16 X 16
+Generate input matrix internally, size =2064
+Creating matrix internally size=2064
+Time consumed(ms): 540.151000
+EXPERIMENT_SAMPLE {"iteration":0,"warmup":true,"seconds":0.513951820}
+WG size of kernel = 16 X 16
+Generate input matrix internally, size =2064
+Creating matrix internally size=2064
+Time consumed(ms): 243.785000
+EXPERIMENT_SAMPLE {"iteration":1,"warmup":false,"seconds":0.218743584}
+api-call-cnt: 787
+memcpy-api-calls: 4
+Non-memcpy-api-calls: 783
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 68161536
+/tmp/short/lu: /tmp/flyt-test/libcudart.so.12: no version information available (required by /tmp/short/lu)
+EXPERIMENT_INIT 0.003494206
