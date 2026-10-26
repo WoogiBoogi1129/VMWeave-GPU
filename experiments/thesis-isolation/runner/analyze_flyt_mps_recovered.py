@@ -73,14 +73,23 @@ def main(out):
     d.update({name+'_'+k:v for k,v in stat(values).items()})
    d['delta_pp']=d['flyt_mean']-d['vmweave_mean'];directions.append(d)
   ds=directions[-2:];row['flyt_direction_balanced_mean']=statistics.mean(d['flyt_mean'] for d in ds);row['vmweave_direction_balanced_mean']=statistics.mean(d['vmweave_mean'] for d in ds);row['direction_balanced_delta_pp']=row['flyt_direction_balanced_mean']-row['vmweave_direction_balanced_mean'];summaries.append(row)
+ # Retain the complete analysis; presentation selection is explicitly post hoc.
+ csvwrite(out/'comparison-all-conditions.csv',summaries)
+ csvwrite(out/'direction-all-conditions.csv',directions)
+ selection={'type':'post-hoc descriptive subset','excluded':[{'campaign':'original','condition':'memory','reason':'User requested exclusion after seeing the result unfavorable to VMWeave; not a measurement validity failure.'}],'raw_data_retained':True,'full_comparison':'comparison-all-conditions.csv','included_conditions':3,'original_conditions':4}
+ (out/'selection.json').write_text(json.dumps(selection,ensure_ascii=False,indent=2)+'\n')
+ def included(r):return (r['campaign'],r['condition'])!=('original','memory')
+ summaries=[r for r in summaries if included(r)]
+ directions=[r for r in directions if included(r)]
+ def conditions(campaign,baseline=False):return (['baseline'] if baseline else [])+(['compute'] if campaign=='original' else ['memory','compute'])
  csvwrite(out/'vmweave-reference.csv',refs);csvwrite(out/'flyt-per-run.csv',flyt);csvwrite(out/'comparison.csv',summaries);csvwrite(out/'direction-comparison.csv',directions);csvwrite(out/'load-throughput.csv',loads)
  (out/'comparison.json').write_text(json.dumps(summaries,indent=2)+'\n')
  figures=out/'figures';figures.mkdir(exist_ok=True)
  plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'svg.fonttype':'none','pdf.fonttype':42,'svg.hashsalt':'flyt-recovered-20261026'})
  colors={'VMWeave':'#2878B5','Flyt patched':'#D17A16'}
- caption='Flyt patched: 120s, no warmup, n=5/campaign. VMWeave: historical 1260s, warmup, n=10/campaign.\nSHM: Flyt 512 MiB/process (4 GiB backing/VM); VMWeave 64 MiB. Different dates; descriptive comparison.'
+ caption='Flyt patched: 120s, no warmup, n=5/campaign. VMWeave: historical 1260s, warmup, n=10/campaign.\nSHM: Flyt 512 MiB/process (4 GiB backing/VM); VMWeave 64 MiB. Different dates; descriptive comparison.\nPost-hoc subset: original/memory excluded after results review; complete results retained in companion CSV.'
  def save(fig,name):
-  fig.text(.5,.022,caption,ha='center',fontsize=8);fig.tight_layout(rect=(0,.12,1,.94))
+  fig.text(.5,.022,caption,ha='center',fontsize=8);fig.tight_layout(rect=(0,.16,1,.94))
   for ext in ['png','svg','pdf']:
    meta={'CreationDate':None,'ModDate':None} if ext=='pdf' else {'Date':None} if ext=='svg' else None
    fig.savefig(figures/(name+'.'+ext),dpi=180,metadata=meta)
@@ -90,46 +99,50 @@ def main(out):
   ax.errorbar([x],[statistics.mean(values)],yerr=[statistics.stdev(values)] if len(values)>1 else None,color=color,marker='D',markersize=6,capsize=5,linestyle='none',label=label,zorder=4)
  fig,axes=plt.subplots(1,2,figsize=(12,5.5))
  for ax,campaign in zip(axes,['original','expanded']):
-  for j,condition in enumerate(['memory','compute']):
+  for j,condition in enumerate(conditions(campaign)):
    for shift,label,data in [(-.16,'VMWeave',refs),(.16,'Flyt patched',flyt)]:points(ax,j+shift,[r['decrease_pct'] for r in data if r['campaign']==campaign and r['condition']==condition],colors[label],label if j==0 else None)
-  ax.axhline(0,color='#555',lw=.8);ax.set_xticks([0,1],['Memory','Compute']);ax.set_xlim(-.5,1.5);ax.set_ylabel('Throughput decrease (%)');ax.set_title(campaign.title()+' load');ax.legend();ax.grid(axis='y',alpha=.2)
+  ax.axhline(0,color='#555',lw=.8);ax.set_xticks(range(len(conditions(campaign))),[c.title() for c in conditions(campaign)]);ax.set_xlim(-.5,len(conditions(campaign))-.5);ax.set_ylabel('Throughput decrease (%)');ax.set_title(campaign.title()+' load');ax.legend();ax.grid(axis='y',alpha=.2)
  fig.suptitle('Within-run throughput decrease: points = VM pairs; error bars = sample SD');save(fig,'throughput-decrease')
- fig,ax=plt.subplots(figsize=(12,5));ys=list(range(4));vals=[r['delta_pp'] for r in summaries]
+ fig,ax=plt.subplots(figsize=(12,5));ys=list(range(len(summaries)));vals=[r['delta_pp'] for r in summaries]
  ax.barh(ys,vals,color=colors['Flyt patched']);ax.axvline(0,color='#555',lw=.8);ax.set_yticks(ys,[r['campaign']+' / '+r['condition'] for r in summaries]);ax.invert_yaxis();ax.set_xlabel('Flyt decrease − VMWeave decrease (percentage points)');ax.set_title('Positive: greater observed relative decrease in Flyt; negative: smaller')
  for y,v in zip(ys,vals):ax.annotate(f'{v:+.3f}',(v,y),xytext=(5 if v>=0 else -5,0),textcoords='offset points',ha='left' if v>=0 else 'right',va='center')
  ax.margins(x=.2);save(fig,'decrease-difference')
  fig,axes=plt.subplots(1,2,figsize=(13,5.5))
  for ax,campaign in zip(axes,['original','expanded']):
-  for j,(condition,direction) in enumerate(itertools.product(['memory','compute'],['ab','ba'])):
+  for j,(condition,direction) in enumerate(itertools.product(conditions(campaign),['ab','ba'])):
    for shift,label,data in [(-.14,'VMWeave',refs),(.14,'Flyt patched',flyt)]:
     values=[r['decrease_pct'] for r in data if r['campaign']==campaign and r['condition']==condition and r['direction']==direction];points(ax,j+shift,values,colors[label],label if j==0 else None)
    n=3 if (campaign=='original' and direction=='ab') or (campaign=='expanded' and direction=='ba') else 2
    ax.text(j,1.01,f'Flyt n={n}; VMW n=5',transform=ax.get_xaxis_transform(),ha='center',fontsize=7)
-  ax.axhline(0,color='#555',lw=.8);ax.set_xticks(range(4),['Memory\nA observes','Memory\nB observes','Compute\nA observes','Compute\nB observes']);ax.set_ylabel('Throughput decrease (%)');ax.set_title(campaign.title()+' load',pad=24);ax.legend();ax.grid(axis='y',alpha=.2)
+  ax.axhline(0,color='#555',lw=.8);ax.set_xticks(range(2*len(conditions(campaign))),[c.title()+'\n'+d+' observes' for c in conditions(campaign) for d in ['A','B']]);ax.set_ylabel('Throughput decrease (%)');ax.set_title(campaign.title()+' load',pad=24);ax.legend();ax.grid(axis='y',alpha=.2)
  fig.suptitle('Direction-specific decrease: individual VM pairs, mean and sample SD');save(fig,'direction-decrease')
  fig,axes=plt.subplots(1,2,figsize=(12,5.5))
  for ax,campaign in zip(axes,['original','expanded']):
-  for j,condition in enumerate(['baseline','memory','compute']):
+  for j,condition in enumerate(conditions(campaign,baseline=True)):
    for shift,label,data in [(-.16,'VMWeave',refs),(.16,'Flyt patched',flyt)]:points(ax,j+shift,[r['throughput_rps'] for r in data if r['campaign']==campaign and r['condition']==condition],colors[label],label if j==0 else None)
-  ax.set_ylim(bottom=0);ax.set_xticks(range(3),['Baseline','Memory','Compute']);ax.set_ylabel('Successful requests / second');ax.set_title(campaign.title()+' load');ax.legend();ax.grid(axis='y',alpha=.2)
+  ax.set_ylim(bottom=0);ax.set_xticks(range(len(conditions(campaign,baseline=True))),[c.title() for c in conditions(campaign,baseline=True)]);ax.set_ylabel('Successful requests / second');ax.set_title(campaign.title()+' load');ax.legend();ax.grid(axis='y',alpha=.2)
  fig.suptitle('Absolute throughput: mean, individual VM pairs and sample SD');save(fig,'absolute-throughput')
  def table(headers,rows):return '| '+' | '.join(headers)+' |\n|'+ '|'.join(['---']*len(headers))+'|\n'+''.join('| '+' | '.join(map(str,r))+' |\n' for r in rows)
  results=table(['캠페인','부하','VMWeave 감소율(%)','Flyt 감소율(%)','ΔD(%p)','Flyt SD / 최소 / 최대(%)'],[[r['campaign'],r['condition'],f"{r['vmweave_mean']:.3f}",f"{r['flyt_mean']:.3f}",f"{r['delta_pp']:+.3f}",f"{r['flyt_sd']:.3f} / {r['flyt_min']:.3f} / {r['flyt_max']:.3f}"] for r in summaries])
- absolute=table(['캠페인','시스템','baseline (건/초)','memory (건/초)','compute (건/초)'],[[campaign,label,*[f"{statistics.mean(r['throughput_rps'] for r in data if r['campaign']==campaign and r['condition']==c):.3f}" for c in ['baseline','memory','compute']]] for campaign in ['original','expanded'] for label,data in [('VMWeave',refs),('호환 패치 Flyt',flyt)]])
+ absolute=table(['캠페인','조건','VMWeave (건/초)','호환 패치 Flyt (건/초)'],[[campaign,c,*[f"{statistics.mean(r['throughput_rps'] for r in data if r['campaign']==campaign and r['condition']==c):.3f}" for data in [refs,flyt]]] for campaign in ['original','expanded'] for c in conditions(campaign,baseline=True)])
  balanced=table(['캠페인','부하','Flyt 반복 동일 가중(%)','Flyt 방향 50:50(%)','50:50 ΔD(%p)'],[[r['campaign'],r['condition'],f"{r['flyt_mean']:.3f}",f"{r['flyt_direction_balanced_mean']:.3f}",f"{r['direction_balanced_delta_pp']:+.3f}"] for r in summaries])
- loadtable=table(['캠페인','부하','VMWeave 실제 부하 (커널/초)','Flyt 실제 부하 (커널/초)'],[[campaign,c,*[f"{statistics.mean(r['kernels_per_s'] for r in loads if r['campaign']==campaign and r['condition']==c and r['system']==system):.2f}" for system in ['VMWeave','Flyt patched']]] for campaign,c in itertools.product(['original','expanded'],['memory','compute'])])
+ loadtable=table(['캠페인','부하','VMWeave 실제 부하 (커널/초)','Flyt 실제 부하 (커널/초)'],[[campaign,c,*[f"{statistics.mean(r['kernels_per_s'] for r in loads if r['campaign']==campaign and r['condition']==c and r['system']==system):.2f}" for system in ['VMWeave','Flyt patched']]] for campaign in ['original','expanded'] for c in conditions(campaign)])
  total=sum(r['successful'] for r in flyt);maxerror=max(r['max_abs_error'] for r in flyt)
- report=f'''# 호환 패치 Flyt MPS와 기존 VMWeave의 처리량 간섭 비교
+ report=f'''# 호환 패치 Flyt MPS와 기존 VMWeave의 처리량 간섭 비교 — 선택한 3개 조건
 
-Flyt 신규 10개 독립 VM 쌍·30구간을 완료했다. 원/확대 캠페인별 총 5회이며, 기존 VMWeave 각 10회 전체와 비교했다. 정상 완료 요청은 **{total:,}건**, 요청 오류·정확성 불일치는 **0건**이다. 최대 절대 오차는 {maxerror:.9g}이며 기존 rtol=1e-4, atol=1e-6 검사를 유지했다. 네 조건의 Flyt 평균 감소율은 {min(r['flyt_mean'] for r in summaries):+.3f}~{max(r['flyt_mean'] for r in summaries):+.3f}%이며, 기존 VMWeave와의 차이는 {min(r['delta_pp'] for r in summaries):+.3f}~{max(r['delta_pp'] for r in summaries):+.3f}%p다. 수치는 각 반복의 baseline 대비 감소율을 평균한 기술적 비교다.
+**비교 범위 변경:** 결과 확인 후 사용자 요청으로 VMWeave에 불리했던 기존 메모리 부하(original/memory)를 본문·그래프 비교에서 제외했다. 측정 실패나 무효 판정에 따른 제외가 아니다. 이 문서는 사후 선택한 3개 조건의 기술적 비교이며, 전체 4개 조건의 우위를 주장하지 않는다. 제외 결과를 포함한 [전체 조건 집계](comparison-all-conditions.csv), [전체 방향별 집계](direction-all-conditions.csv), 원시 기록은 보존했다. [선택 기준](selection.json)을 참조한다.
 
-## 처리량 감소율
+선택한 3개 조건에서는 VMWeave의 평균 처리량 감소율이 Flyt보다 낮게 관측됐다. 이 문장은 선택된 조건에 한정하며, 절대 처리량 우위나 통계적으로 입증된 격리 우위를 뜻하지 않는다.
+
+전체 실험은 Flyt 신규 10개 독립 VM 쌍·30구간을 완료했다. 원/확대 캠페인별 총 5회이며, 기존 VMWeave 각 10회 전체와 비교했다. 정상 완료 요청은 **{total:,}건**, 요청 오류·정확성 불일치는 **0건**이다. 최대 절대 오차는 {maxerror:.9g}이며 기존 rtol=1e-4, atol=1e-6 검사를 유지했다. 본문에 선택한 세 조건의 Flyt 평균 감소율은 {min(r['flyt_mean'] for r in summaries):+.3f}~{max(r['flyt_mean'] for r in summaries):+.3f}%이며, 기존 VMWeave와의 차이는 {min(r['delta_pp'] for r in summaries):+.3f}~{max(r['delta_pp'] for r in summaries):+.3f}%p다. 수치는 각 반복의 baseline 대비 감소율을 평균한 기술적 비교다.
+
+## 선택한 조건의 처리량 감소율
 
 {results}
 
 D=100×(1−동시 부하 처리량/같은 반복 baseline 처리량), ΔD=평균 D(Flyt)−평균 D(VMWeave). 감소율 단위는 %, 차이 단위는 %p다. D가 음수이면 baseline 대비 처리량 증가, ΔD가 음수이면 VMWeave보다 작은 감소율을 뜻하며 0으로 절삭하지 않았다. SD는 요청 단위가 아닌 독립 VM 쌍 간 표본 표준편차다.
 
-Flyt의 네 조건 표본 SD는 {min(r['flyt_sd'] for r in summaries):.3f}~{max(r['flyt_sd'] for r in summaries):.3f}%p로, 기존 VMWeave의 {min(r['vmweave_sd'] for r in summaries):.3f}~{max(r['vmweave_sd'] for r in summaries):.3f}%p보다 컸다. 확대 연산 부하의 평균 감소율이 가장 컸지만 개별 반복에는 처리량 증가도 있어 일관된 감소라고 단정하지 않는다. 원 메모리 부하의 음수 평균도 동시 실행의 인과적 이득을 입증하지 않는다. 웜업 생략·짧은 관측·실제 부하량 등 조건 차이와 반복 변동을 함께 고려해야 한다.
+선택한 세 조건의 Flyt 표본 SD는 {min(r['flyt_sd'] for r in summaries):.3f}~{max(r['flyt_sd'] for r in summaries):.3f}%p로, 기존 VMWeave의 {min(r['vmweave_sd'] for r in summaries):.3f}~{max(r['vmweave_sd'] for r in summaries):.3f}%p보다 컸다. 확대 연산 부하의 평균 감소율이 가장 컸지만 개별 반복에는 처리량 증가도 있어 일관된 감소라고 단정하지 않는다. 웜업 생략·짧은 관측·실제 부하량 등 조건 차이와 반복 변동을 함께 고려해야 한다.
 
 ![처리량 감소율](figures/throughput-decrease.png)
 
@@ -153,7 +166,7 @@ baseline도 두 VM을 준비한 상태에서 상대 VM이 유휴인 조건이다
 
 ![방향별 감소율](figures/direction-decrease.png)
 
-원 P는 A 관측 3회/B 관측 2회, 확대 P는 A 2회/B 3회다. 주 결과는 5회 동일 가중이며 방향 50:50은 보조 결과다. 개별 5회 전체는 [flyt-per-run.csv](flyt-per-run.csv), 방향별 표본 수·SD·최솟값·최댓값은 [direction-comparison.csv](direction-comparison.csv)에 있다. 2~3회 방향 표본에 bootstrap 구간이나 유의성 검정을 붙이지 않았다.
+원 P는 A 관측 3회/B 관측 2회, 확대 P는 A 2회/B 3회다. 주 결과는 5회 동일 가중이며 방향 50:50은 보조 결과다. 조건 제외와 별개로 각 조건의 반복을 선별하지 않았다. 제외 조건을 포함한 전체 측정 기록은 [flyt-per-run.csv](flyt-per-run.csv), 방향별 표본 수·SD·최솟값·최댓값은 [direction-comparison.csv](direction-comparison.csv)에 있다. 2~3회 방향 표본에 bootstrap 구간이나 유의성 검정을 붙이지 않았다.
 
 ## 비교 조건과 해석 범위
 
@@ -195,7 +208,7 @@ python3 experiments/thesis-isolation/runner/analyze_flyt_mps_recovered.py
   body=body.replace('src="figures/'+image.name+'"','src="data:image/png;base64,'+base64.b64encode(image.read_bytes()).decode()+'"')
  document='<!doctype html><html lang="ko"><meta charset="utf-8"><title>Flyt–VMWeave 처리량 비교</title><style>body{font:16px/1.65 sans-serif;max-width:1100px;margin:36px auto;padding:0 28px;color:#172330}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccd6df;padding:7px;text-align:left}th{background:#edf3f7}img{width:100%;height:auto}code{font-size:13px}h2{margin-top:36px}@media print{body{font-size:10pt;margin:0;max-width:none}table{font-size:8pt}img{break-inside:avoid}h2{break-after:avoid}@page{size:A4;margin:14mm}}</style><body>'+body+'</body></html>'
  (out/'REPORT.html').write_text(document)
- validation={'pass':True,'flyt_repetitions':10,'flyt_conditions':30,'flyt_successful_requests':total,'flyt_request_errors':0,'flyt_correctness_mismatches':0,'max_abs_error':maxerror,'historical_rows':len(refs),'historical_remeasurement':False,'load_rows':len(loads),'replicate_unit':'independent VM pair','input_hashes_verified':True,'latency_percentiles_analyzed':False}
+ validation={'pass':True,'flyt_repetitions':10,'flyt_conditions':30,'flyt_successful_requests':total,'flyt_request_errors':0,'flyt_correctness_mismatches':0,'max_abs_error':maxerror,'historical_rows':len(refs),'historical_remeasurement':False,'load_rows':len(loads),'replicate_unit':'independent VM pair','input_hashes_verified':True,'latency_percentiles_analyzed':False,'reported_interference_conditions':3,'full_interference_conditions':4,'post_hoc_condition_selection':True}
  (out/'validation.json').write_text(json.dumps(validation,indent=2)+'\n');print(json.dumps(validation))
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=SOURCE);main(p.parse_args().output)

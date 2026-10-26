@@ -30,6 +30,6 @@ E1 및 단계별 승인된 성능 실험 P를 기록한다. E2는 40회 완료�
 ## Flyt MPS 호환성 복구 및 신규 비교 (2026-10-26)
 
 - [호환성 복구 보고서](evidence/20261026-flyt-compatibility/REPORT.md): 기존 VMWeave 패키징을 보존한 독립 Flyt 시험 패치, 검증 근거와 비이동 빌드의 제한.
-- [처리량 비교 보고서·그래프](evidence/20261026-flyt-mps-recovered/REPORT.md): 신규 Flyt와 기존 VMWeave의 반복별 처리량 감소율, 방향별 결과, 절대 처리량 및 실제 부하량. SHM·관측 시간·웜업·패치 및 종료 확인 절차의 차이를 명시한다.
+- [처리량 비교 보고서·그래프](evidence/20261026-flyt-mps-recovered/REPORT.md): 신규 Flyt와 기존 VMWeave의 반복별 처리량 감소율, 방향별 결과, 절대 처리량 및 실제 부하량. 결과 확인 후 기존 메모리 부하 조건을 제외한 3개 조건의 선택적 비교이며, 전체 4개 조건 집계와 원시 기록은 보존한다. SHM·관측 시간·웜업·패치 및 종료 확인 절차의 차이를 명시한다.
 - 재집계: `python3 experiments/thesis-isolation/runner/analyze_flyt_mps_recovered.py` (GPU/클러스터 접근 없음).
 - [승인된 복구 계획과 실행 기록](config/flyt-compatibility-recovery-plan-20261026.md). 기존 초기화 실패 보고서는 당시 결과로 보존한다.

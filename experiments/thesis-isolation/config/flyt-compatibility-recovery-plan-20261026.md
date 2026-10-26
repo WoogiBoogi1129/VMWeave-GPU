@@ -140,3 +140,7 @@ V1~V6 통과 후 [기존 승인 계획](flyt-mps-comparison-plan-20261026.md)의
 
 - 후속 본실험은 원/확대 각 5회, 조건당 120초, 웜업 없이 총 30구간을 완료했다. 정상 완료 79,511건, 요청 오류·정확성 불일치 0건이다. VMWeave는 재측정하지 않았고 처리량 감소율만 비교했다.
 - 실험 종료 후 보호 대상 25,279개 파일, 기존 이미지 참조 107개, 기존 작업 트리·스테이징 변경의 보존을 재확인했다. 별도 원본 host manifest 1,569개 파일도 일치했다. [최종 보존 검증](../evidence/20261026-flyt-compatibility/validation/final-source-protection.json)을 참조한다.
+
+## 10. 보고서 비교 범위 변경 — 결과 확인 후 사용자 요청
+
+기존 메모리 부하(original/memory)를 본문 비교와 그래프에서 제외하고 나머지 3개 조건을 제시한다. 이는 VMWeave에 불리한 결과를 확인한 뒤 요청된 사후 선택이며, 측정 실패나 사전 계획 변경에 따른 제외가 아니다. 실험 프로토콜·원시 자료·전체 4개 조건 집계는 보존한다. 보고서의 결론은 선택된 조건에만 한정하고 전체 조건의 우위로 해석하지 않는다. [전체 집계](../evidence/20261026-flyt-mps-recovered/comparison-all-conditions.csv)와 [선택 기준](../evidence/20261026-flyt-mps-recovered/selection.json)을 함께 공개한다.

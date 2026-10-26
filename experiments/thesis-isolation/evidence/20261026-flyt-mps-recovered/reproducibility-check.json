@@ -1,8 +1,9 @@
 {
   "pass": true,
-  "method": "Independent output-directory regeneration from immutable inputs",
+  "method": "Independent output-directory regeneration; full-condition CSV byte-identical to pre-selection analysis",
   "byte_identical_outputs": [
     "vmweave-reference.csv",
+    "comparison-all-conditions.csv",
     "load-throughput.csv",
     "REPORT.html",
     "validation.json",
@@ -11,6 +12,8 @@
     "flyt-per-run.csv",
     "comparison.csv",
     "comparison.json",
+    "selection.json",
+    "direction-all-conditions.csv",
     "figures/absolute-throughput.png",
     "figures/decrease-difference.svg",
     "figures/decrease-difference.pdf",
@@ -23,5 +26,7 @@
     "figures/absolute-throughput.pdf",
     "figures/decrease-difference.png",
     "figures/throughput-decrease.png"
-  ]
+  ],
+  "selected_conditions": 3,
+  "full_conditions": 4
 }
