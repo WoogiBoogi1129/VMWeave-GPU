@@ -52,9 +52,9 @@ This is not GPU performance evidence. Existing cache/session tests remain requir
 GPU qualification must use a separate VM with the candidate library and Broker,
 checking large/chunked and asynchronous copies and unchanged Rodinia outputs.
 Compare feature off/on in alternating order; profile socket bytes separately
-from timed runs. Existing Flyt measurements provide context, not a matched new
-three-way experiment. Promotion requires independent sessions and no correctness,
-isolation or small-copy regression. Do not replace an active production Broker.
+from timed runs. The compact Flyt/OFF/ON campaign provides a matched workload comparison.
+Enabling the feature by default requires independent sessions and no correctness,
+isolation or small-copy regression; this release retains explicit opt-in. Do not replace an active production Broker.
 Rollback is disabling the feature for new application sessions; a deployed
 Broker/library replacement requires the ordinary stopped-VM lifecycle.
 

@@ -31,3 +31,12 @@ installed package, stop applications, restore the captured matching Guest/Broker
 package and previous Helm configuration using the stopped-VM lifecycle, then
 verify the new binding before resuming work. Keep VM and PVC identities and GPU
 quota unchanged. HAMi and DRA do not require changes for this feature.
+
+## Deployment record
+
+The release was published and deployed on 2026-10-26 (KST), Helm revision 12.
+Public-package equality, isolated chart installation, the 50%/2048 MiB GPU
+canary, and production copy/kernel/output checks passed. The production VM
+enables the feature in the Broker and new login sessions; sudo commands and
+service workloads must set the application flag explicitly. Release defaults
+remain disabled. See the [digest and validation record](https://github.com/WoogiBoogi1129/VMWeave-GPU/blob/main/deploy/releases/v0.5.4.json).

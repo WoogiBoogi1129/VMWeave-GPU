@@ -1,0 +1,72 @@
+{
+  "sourceRevision": "678c8e7f065b922562098b4c97955cbbbc0436bb",
+  "tag": "v0.5.4",
+  "scope": "Published v0.5.4 images/chart, isolated GPU canary and production validation passed. Labels are not cryptographic provenance.",
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:5b94b39a0dbc3e2c5e8d3b6184985d07f589e920eecb312d5016fd3907df4f78",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:48233ff5e849fbd265c9436da508a87ed9d87ba671daf13ba33b80c67cc6e23b",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:f4eebcffcaf23a3617a465931f6019fb2f75ea479c846fd53ff008c44fa5d945",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:c7477248b04daee854ebe5caa1cf5c331d529a18a023e69bd3956404cdc13bb7",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:256eecb54f494fe3c2888d12f985cc781cca9ffc3f11e4e3033ea6de70d68533",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:370f657d8e9f73ba57255bc6612a5db9859c201d6961bdd28a4b963f8f51b04e",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:94634c8fb1fbcffcbd964ae716d608b290f15deebdff90f9c36a3ae116fc37fd"
+  },
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.5.4",
+    "digest": "sha256:7375906aca83f832c28dd4bc67bbdd41eb6fb04d4409c63444b3a4a677ffc5aa"
+  },
+  "workflows": {
+    "v0.5.4:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320856480",
+    "v0.5.4:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320856340",
+    "v0.5.4:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320856399",
+    "v0.5.4:hami-dra-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320856328",
+    "v0.5.4:hami-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320856336",
+    "main:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320852268",
+    "main:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320852275",
+    "main:Documentation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320852320",
+    "main:CPU control plane": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320852203",
+    "main:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40320852204"
+  },
+  "verification": {
+    "control": "106 tests: 105 passed, 1 skipped",
+    "deployment": "16 passed",
+    "candidateGPU": "72 large sync/async copy correctness cases; two independent OFF/ON sessions",
+    "faults": {
+      "worker": {
+        "first": 999,
+        "second": 999,
+        "seconds": 1.303272161999999
+      },
+      "broker": {
+        "first": 999,
+        "second": 999,
+        "seconds": 1.3605053229999982
+      }
+    },
+    "canary": "Published library/package and Worker; standard installer/systemd; 50%/2048MiB; GPU smoke and 18 copy cases",
+    "production": "Published Guest/Broker/Worker smoke, cache and math-mode checks, 18 enabled-bulk copy cases, NW/LU output hashes; no production fault injection",
+    "performance": "Workload-specific improvements; small-copy/D2D variability remains. No universal no-regression claim."
+  },
+  "deployment": {
+    "helmRevision": 12,
+    "updatedComponents": [
+      "operator",
+      "helper",
+      "hook",
+      "worker",
+      "guest-artifacts"
+    ],
+    "retainedComponents": [
+      "HAMi 2.10.0",
+      "DRA Helm revision 5"
+    ],
+    "bulkDefault": "off",
+    "productionBulk": "Broker enabled; new login sessions export VMWEAVE_BULK_COPY=1; sudo and service workloads need explicit environment",
+    "cores": 50,
+    "memoryMiB": 2048,
+    "vmAndPVCsPreserved": true,
+    "rollback": "Captured v0.5.3 Guest/Broker, environment/profile, Helm revision 11 and previous GPUProfile/GPURequest; restore matched set before fresh VM binding"
+  },
+  "publishedDateKST": "2026-10-26"
+}

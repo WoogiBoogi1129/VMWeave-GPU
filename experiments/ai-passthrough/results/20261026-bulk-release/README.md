@@ -25,3 +25,27 @@ passed. Runtime image ABI/copy regressions, documentation and chart lint passed.
 The default chart intentionally needs deployment values; lint used captured
 production values. Validation image revision was `v054-validation`; published
 artifacts are qualified separately against the final source commit.
+
+## Published and deployed
+
+Release `v0.5.4`, source `678c8e7f065b922562098b4c97955cbbbc0436bb`, is
+published and deployed. Production Helm revision is 12. All nine package files
+(excluding revision/checksum metadata) match the locally qualified candidate.
+The public chart installed successfully in an isolated namespace. The published
+GPU canary passed smoke and 18 copy cases at 50%/2048 MiB.
+
+Production Guest/Broker, Operator, Helper, Hook and Worker are updated. GPU
+smoke, cache/math API checks, 18 enabled-bulk copy cases, and NW/LU reference
+hashes passed. VM/PVC identities, 50%/2048 MiB quota, HAMi and DRA are preserved.
+All test Pods and the isolated chart namespaces were removed.
+
+The release default remains OFF. On the production VM only, Broker configuration
+is ON and `/etc/profile.d/vmweave-bulk-copy.sh` exports the flag for new login
+sessions. Existing shells, sudo commands and service workloads need explicit
+`VMWEAVE_BULK_COPY=1`; this flag does not itself set CUDA library/preload paths.
+The running Broker environment and a new login shell were verified.
+
+Rollback uses the captured v0.5.3 Guest/Broker package, previous environment/profile,
+Helm revision 11 and previous binding references, with a fresh VM binding.
+Backups remain local; private VM identities/configuration are not published.
+Image/chart digests and workflow links are in `deploy/releases/v0.5.4.json`.
