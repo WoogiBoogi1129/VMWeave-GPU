@@ -1,0 +1,20 @@
+{
+  "guest_sha256": "131b6c02fb06eb251ae048c1b94577c78634576597cd060d3c4c2016906b390e",
+  "old_sc_event_references": [
+    "U cudaEventCreate@libcudart.so.12",
+    "U cudaEventDestroy@libcudart.so.12",
+    "U cudaEventElapsedTime@libcudart.so.12",
+    "U cudaEventRecord@libcudart.so.12",
+    "U cudaEventSynchronize@libcudart.so.12"
+  ],
+  "final_sc_event_references": [],
+  "guest_event_exports": [
+    "0000000000009790 T cudaEventCreate",
+    "0000000000009760 T cudaEventCreateWithFlags",
+    "00000000000097a0 T cudaEventDestroy",
+    "0000000000009800 T cudaEventQuery",
+    "00000000000097c0 T cudaEventRecord",
+    "00000000000097e0 T cudaEventSynchronize"
+  ],
+  "note": "Absence of Guest cudaEventElapsedTime export invalidated original SC compatibility gate. All final modes disable optional CUDATIME, including profiling-related event waits. This does not implement the missing product API."
+}

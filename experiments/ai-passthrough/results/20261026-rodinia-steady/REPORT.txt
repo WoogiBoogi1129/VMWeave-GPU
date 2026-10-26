@@ -1,0 +1,70 @@
+Rodinia 정상 상태 실행 시간 비교
+
+완료: Native / Passthrough / Flyt SHM / VMWeave, 4 workloads.
+각 조합 5개 독립 세션 x 측정2회 = 10개 표본. 합계160개 측정,160개 워밍업 제외.
+측정: CPU 단조 시계 기반 작업 완료 시간. CUDA 초기화/2회 워밍업/출력 검증은 제외.
+주 지표: 100*(대상 평균 실행 시간 / 기준 평균 실행 시간 - 1). 작을수록 좋음.
+학습 samples/s 또는 순수 GPU 커널 시간 아님. 원본 프로그램이 출력하는 타이머는 사용하지 않음.
+
+평균 실행 시간(초) ± 표준편차:
+LU2064: native 0.011276 ± 0.000322, passthrough 0.015459 ± 0.001414, flyt 0.254684 ± 0.111302, vmweave 0.484660 ± 0.036954
+StreamCluster: native 3.206517 ± 0.185333, passthrough 3.413203 ± 0.226111, flyt 24.991950 ± 1.484859, vmweave 40.508545 ± 0.232178
+SRAD2048: native 0.016449 ± 0.002727, passthrough 0.021784 ± 0.002751, flyt 0.048450 ± 0.006558, vmweave 0.265259 ± 0.057777
+NW2048: native 0.018512 ± 0.007612, passthrough 0.024887 ± 0.013288, flyt 0.255875 ± 0.047159, vmweave 0.540349 ± 0.035713
+
+평균 실행 시간 증가율:
+LU2064 flyt: Native 대비 +2158.57%, Passthrough 대비 +1547.51%
+LU2064 vmweave: Native 대비 +4198.02%, Passthrough 대비 +3035.18%
+StreamCluster flyt: Native 대비 +679.41%, Passthrough 대비 +632.21%
+StreamCluster vmweave: Native 대비 +1163.32%, Passthrough 대비 +1086.82%
+SRAD2048 flyt: Native 대비 +194.54%, Passthrough 대비 +122.41%
+SRAD2048 vmweave: Native 대비 +1512.57%, Passthrough 대비 +1117.66%
+NW2048 flyt: Native 대비 +1282.22%, Passthrough 대비 +928.13%
+NW2048 vmweave: Native 대비 +2818.93%, Passthrough 대비 +2071.18%
+
+해석/한계:
+이 결과는 동일한 물리 GPU에서 현재 실행 경로를 비교한다. 논문의 정확한 입력, 타이머 경계,
+워밍업 절차를 확인하지 못했고 GPU/소프트웨어 환경도 다르므로 논문 수치의 정확한 재현이 아니다.
+첫 Native 세션 이후 Pod 용량 부족으로 중단했다가 재개했다. 첫 표본은 보존했으며
+r2~r5의8개 표본만 사용한 민감도 분석은 resumed-only-comparison.json에 별도 제공한다.
+표준편차는 표본 분산을 나타낸다. 같은 세션 내2회 표본은 독립 세션10개를 의미하지 않는다.
+SRAD 경계 읽기, StreamCluster 반복 상태/이벤트 누수/구식 동기화 이름을 실험 소스에서 보완했다.
+StreamCluster CUDATIME 내부 계측(이벤트 동기화 포함)을 네 방식 모두 끄고 재검증/재측정했다.
+기존 내부 타이머 표본은 unsupported cudaEventElapsedTime 때문에 excluded/에 보존하고 평균에서 제외했다.
+같은 수정 소스/실행 파일을 네 방식 모두에 적용하고 출력 해시를 비교했다. 제품 코드는 변경하지 않았다.
+
+진단은 r5 뒤 별도 실행. API 카운터는 초기화+워밍업2회+측정1회를 포함하는 프로세스 전체 범위.
+API wall time은 대기 시간을 포함한다. kernel launch API 시간은 GPU 커널 실행 시간이 아니다.
+cudaMemcpy API 시간에도 앞선 GPU 작업 완료 대기가 포함될 수 있어 순수 전송 시간으로 해석하지 않는다.
+랩핑한 Runtime API만 집계하며 Driver API 전체를 포괄하지 않는다. 진단 표본은 정식 평균에 포함하지 않는다.
+
+자료: raw.csv, comparison.json, runtime.svg/png, normalized.svg/png, diagnostic-summary.json,
+resumed-only-comparison.json, manifest.json, cleanup.json, reproduction/, src/.
+
+최종 비교 및 원인 분석:
+네 워크로드 모두 Flyt보다 VMWeave 평균 실행 시간이 길다. 이 조건에서 속도 우위를 지지하지 않는다.
+nw: VMWeave/Flyt 시간 비율 2.1118배, 시간 증가 111.18%.
+lu: VMWeave/Flyt 시간 비율 1.9030배, 시간 증가 90.30%.
+srad: VMWeave/Flyt 시간 비율 5.4749배, 시간 증가 447.49%.
+sc: VMWeave/Flyt 시간 비율 1.6209배, 시간 증가 62.09%.
+
+진단 관측(별도 단일 프로세스, 초기화+워밍업2회+측정1회 전체 합계):
+nw: cudaMemcpy wall time Flyt 0.241284s, VMWeave 1.138385s.
+lu: cudaMemcpy wall time Flyt 0.163818s, VMWeave 0.817802s.
+srad: cudaMemcpy wall time Flyt 0.185908s, VMWeave 1.189252s.
+sc: cudaMemcpy wall time Flyt 27.185558s, VMWeave 70.139697s.
+관측된 복사 호출 대기 시간은 VMWeave의 주요 조사 대상으로 보인다. 순수 PCIe 전송 비용으로 단정할 수 없다.
+LU 진단 launch 합계는 Flyt 1.006s, VMWeave 1.021s로 비슷하다. 호출 횟수만으로 전체 차이를 설명할 수 없다.
+SC 동기화 호출은 Flyt 4,846회, VMWeave 14,512회로 9,666회 차이가 난다.
+SC 소스는 pgain당 cudaMemset 2회를 호출한다. VMWeave runtime/shm/src/guest_torch.c의 cudaMemset은
+cudaMemsetAsync 뒤 cudaDeviceSynchronize를 호출한다. 4,833 kernel launch x 2 = 9,666회로 관측 차이와 일치한다.
+이는 구현 유래 추가 동기화와 부합하는 근거이며, 동기화를 제거해도 안전하다는 뜻은 아니다.
+진단기는 cudaMemset을 래핑하지 않으므로 내부에서 호출된 동기화가 집계된다.
+따라서 API 카운터를 애플리케이션 최상위 호출만의 개수로 해석하면 안 된다.
+초기화 비용, 계측 영향, 세션 차이 때문에 진단 합계를 정식 시간에서 빼거나 원인 기여율로 사용하지 않는다.
+향후 개선 후보는 복사 경로의 구간별 비용 분리, memset 동기화 의미 검토, launch 전달 비용 순서다.
+이 실험은 제품 성능 개선 코드를 변경하지 않았으며 후보의 개선 효과도 검증하지 않았다.
+
+정리 완료: 시험 VM/Pod/PVC/PV 및 임시 CPU affinity 제거, GPU0 nvidia 복원, HAMi/DCGM/KubeVirt 설정 복원.
+운영 VM/channel UID·spec 보존 및 Ready 확인. cleanup.json 참조.
+원시 명령 감사 로그·VM 자격증명·대형 출력 바이너리는 공개에서 제외하며 출력 해시는 result.json에 제공한다.

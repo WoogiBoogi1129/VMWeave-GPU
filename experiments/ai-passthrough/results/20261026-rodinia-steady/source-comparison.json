@@ -1,0 +1,8 @@
+{
+  "candidate_repository": "https://github.com/OSU-STARLAB/UVM_benchmark",
+  "commit": "05588a9b98290332b862a9b65a6a8cbb6ca81bcc",
+  "candidate_path": "non_UVM_benchmarks/rodinia/streamcluster/streamcluster_cuda.cu",
+  "candidate_sha256": "55956ca8d348a9663d87c0f6bdb89ac73a16bd585cbe6d5366625361daffac06",
+  "observation": "Both sources enable CUDATIME. Candidate UVMBench source uses cudaMallocHost for coord_h; official Rodinia3.1 uses malloc. Exact source/commit/configuration used by Flyt paper is not established. This experiment uses the frozen adapted official Rodinia3.1 source for all modes.",
+  "paper_exact_source_verified": false
+}

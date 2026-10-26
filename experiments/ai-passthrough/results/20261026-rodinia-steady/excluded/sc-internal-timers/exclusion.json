@@ -1,0 +1,6 @@
+{
+  "reason": "Original optional CUDATIME code calls cudaEventElapsedTime, absent from VMWeave Guest exports. Output hashes alone are insufficient for API compatibility. Such StreamCluster observations must not enter the formal four-way comparison.",
+  "old_sc_sha256": "9508732a800fac91dc5899acfb6bde717f8eddb8e7184f24537c201bffd77b30",
+  "change": "Disable optional CUDATIME in all modes, retaining identical clustering algorithm, input, output and common wall timer. Requalify and rerun StreamCluster only. Other workloads unchanged.",
+  "discovered_unix": 1792982508.8115587
+}

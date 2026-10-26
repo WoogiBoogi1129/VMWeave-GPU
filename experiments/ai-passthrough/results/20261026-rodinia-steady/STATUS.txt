@@ -1,0 +1,57 @@
+IN PROGRESS — NOT FORMAL RESULTS
+Approved scope: Native/Passthrough/Flyt SHM/VMWeave; LU, StreamCluster,
+SRAD and NW control; ten measured samples per supported combination.
+Primary outcome: wall execution time; overhead=100*(mean_mode/mean_reference-1).
+Reference columns Native and Passthrough are separate.
+
+Paper: https://icpe2026.spec.org/preprint/FLYT_Transparent_and_Elastic_GPU_Provisioning_for_Multi-Tenant_Cloud_Services.pdf
+Section 4.2/Table4: mean/std,n=10, described as steady-state; exact inputs,
+timer boundaries, warmup protocol and Native deployment are not specified.
+No claim of exact reproduction or expected 15% result.
+Current source: official archived Rodinia3.1; published UVMBench repository
+05588a9b98290332b862a9b65a6a8cbb6ca81bcc also inspected; no verified link
+between its run scripts and exact Flyt paper inputs.
+
+Provisional inputs selected before cross-mode performance observation:
+NW2048/penalty10, LU2064 (prior correctness references), SRAD2048x2048,
+ROI0:127,lambda0.5,2iterations, StreamCluster10/20/256/65536/65536/1000.
+SRAD and StreamCluster use official Rodinia run script arguments.
+Same process: CUDA initialization, two complete warmups, two measured repeats.
+Five independent sessions planned; rotate mode order. Formal gate requires
+correct output across modes. Qualification samples never enter formal aggregate.
+
+Timed scope: NW/LU/SRAD prepared CPU input to GPU allocation/copies/computation
+and final synchronization. StreamCluster includes CPU clustering control flow,
+GPU work/allocations/transfers, excludes input read/generation and result file
+output; internal CPU clustering is real application work, not GPU-only time.
+Every repeat recreates algorithm input/state; fixed seeds. CUDA context persists.
+Initialization measured separately. No original printed timer used as primary.
+
+Native first attempt: NW/LU matched independent historical output hashes.
+StreamCluster completed four repeats; per-repeat output capture subsequently
+added. SRAD failed illegal-address: upstream kernel reads halo indices outside
+allocation before overwriting boundary cells. Guard those loads in experiment
+source only; qualification required before accepting this adapted workload.
+No VMWeave product change or production deployment change.
+
+Qualification findings: Flyt rejects cudaFree(NULL); common initialization now uses
+4096-byte allocation/free. Flyt lacks deprecated cudaThreadSynchronize symbol;
+StreamCluster uses cudaDeviceSynchronize in all modes. Original StreamCluster
+leaks two CUDA events per pgain call; experiment frees both events after last use.
+VMWeave first attempt failed after its first SC warmup; corrected version pending.
+SRAD CPU reference: 4,194,304 floats, max abs error4.76837158203125e-7,
+all elements pass rtol1e-5/atol1e-6. No product code changes.
+
+CURRENT BLOCKER: node Pod capacity110/110. Initial Running107 grew by3
+non-experiment service Pods. Experiment admin rejected OutOfpods.
+All16 workload/mode correctness gates passed. Formal r1/native only completed
+(8 measured samples,8 warmups). No final cross-mode performance claim.
+GPU0 rebound NVIDIA; HAMi/DCGM Ready and original specs preserved; production
+VM/channel UID/spec preserved and channelReady. Failed owned admin removed.
+Prepared stopped native disk/PVC retained for continuation. User choice pending.
+
+StreamCluster compatibility correction: optional CUDATIME disabled for all modes; prior SC formal/qualification sessions archived under excluded/sc-internal-timers; NW/LU/SRAD retained. gate4 SC requalification running.
+
+2026-10-26: User-authorized resume from gate4 VMWeave preparation. Detached controller started; 36 valid NW/LU/SRAD measured samples retained. Publication remains pending until final review.
+
+COMPLETE: 160 formal samples; 16 diagnostic combinations; output/statistical verification PASS; cleanup verified. Final report and graphs prepared; publication pending.

@@ -1,0 +1,47 @@
+here, pid=2176
+here, send_id=0
+here, htonl pid=-2146959360
+here2
+From Control Plane: 10.85.0.171,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.171
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 0
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 536870912
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7f65deca0000
+clnttcp_create done.
+WG size of kernel = 16 X 16
+Generate input matrix internally, size =2064
+Creating matrix internally size=2064
+Time consumed(ms): 335.891000
+EXPERIMENT_SAMPLE {"iteration":0,"warmup":true,"seconds":0.312901566}
+WG size of kernel = 16 X 16
+Generate input matrix internally, size =2064
+Creating matrix internally size=2064
+Time consumed(ms): 240.973000
+EXPERIMENT_SAMPLE {"iteration":1,"warmup":true,"seconds":0.213966942}
+WG size of kernel = 16 X 16
+Generate input matrix internally, size =2064
+Creating matrix internally size=2064
+Time consumed(ms): 87.195000
+EXPERIMENT_SAMPLE {"iteration":2,"warmup":false,"seconds":0.069171634}
+WG size of kernel = 16 X 16
+Generate input matrix internally, size =2064
+Creating matrix internally size=2064
+Time consumed(ms): 85.825000
+EXPERIMENT_SAMPLE {"iteration":3,"warmup":false,"seconds":0.067617832}
+api-call-cnt: 1571
+memcpy-api-calls: 8
+Non-memcpy-api-calls: 1563
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 136323072
+/tmp/steady/lu: /tmp/flyt-test/libcudart.so.12: no version information available (required by /tmp/steady/lu)
+EXPERIMENT_INIT 0.002544916

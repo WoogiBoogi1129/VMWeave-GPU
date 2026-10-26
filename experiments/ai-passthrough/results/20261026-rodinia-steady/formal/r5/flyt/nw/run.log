@@ -1,0 +1,47 @@
+here, pid=2021
+here, send_id=0
+here, htonl pid=-452526080
+here2
+From Control Plane: 10.85.0.150,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.150
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 0
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 0
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7f0ceca04000
+clnttcp_create done.
+WG size of kernel = 16 
+Start Needleman-Wunsch
+Processing top-left matrix
+Processing bottom-right matrix
+EXPERIMENT_SAMPLE {"iteration":0,"warmup":true,"seconds":0.362864270}
+WG size of kernel = 16 
+Start Needleman-Wunsch
+Processing top-left matrix
+Processing bottom-right matrix
+EXPERIMENT_SAMPLE {"iteration":1,"warmup":true,"seconds":0.243900187}
+WG size of kernel = 16 
+Start Needleman-Wunsch
+Processing top-left matrix
+Processing bottom-right matrix
+EXPERIMENT_SAMPLE {"iteration":2,"warmup":false,"seconds":0.214543465}
+WG size of kernel = 16 
+Start Needleman-Wunsch
+Processing top-left matrix
+Processing bottom-right matrix
+EXPERIMENT_SAMPLE {"iteration":3,"warmup":false,"seconds":0.271299365}
+api-call-cnt: 1063
+memcpy-api-calls: 12
+Non-memcpy-api-calls: 1051
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 201523248
+/tmp/steady/nw: /tmp/flyt-test/libcudart.so.12: no version information available (required by /tmp/steady/nw)
+EXPERIMENT_INIT 0.003087129

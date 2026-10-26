@@ -1,0 +1,40 @@
+{
+  "mode": "vmweave",
+  "workload": "srad",
+  "args": [
+    "2048",
+    "2048",
+    "0",
+    "127",
+    "0",
+    "127",
+    "0.5",
+    "2"
+  ],
+  "returncode": 0,
+  "correct": true,
+  "samples": [
+    {
+      "iteration": 0,
+      "warmup": true,
+      "seconds": 0.557438941
+    },
+    {
+      "iteration": 1,
+      "warmup": true,
+      "seconds": 0.320886392
+    },
+    {
+      "iteration": 2,
+      "warmup": false,
+      "seconds": 0.32850269
+    },
+    {
+      "iteration": 3,
+      "warmup": false,
+      "seconds": 0.328845981
+    }
+  ],
+  "hashes": "e9aeeb6b5cf213c50c4294ac54ffccec2d22092c902834f86819930c6568f8b2  /tmp/steady/gate-srad/output-00.bin\ne9aeeb6b5cf213c50c4294ac54ffccec2d22092c902834f86819930c6568f8b2  /tmp/steady/gate-srad/output-01.bin\ne9aeeb6b5cf213c50c4294ac54ffccec2d22092c902834f86819930c6568f8b2  /tmp/steady/gate-srad/output-02.bin\ne9aeeb6b5cf213c50c4294ac54ffccec2d22092c902834f86819930c6568f8b2  /tmp/steady/gate-srad/output-03.bin\n",
+  "binary_sha256": "21039ea9595facfdfca769a2c136c668c30188287941474b429a51b997e80b81  /tmp/steady/srad\n"
+}

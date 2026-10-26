@@ -1,0 +1,45 @@
+{
+  "mode": "native",
+  "workload": "sc",
+  "args": [
+    "10",
+    "20",
+    "256",
+    "65536",
+    "65536",
+    "1000",
+    "none",
+    "output.txt",
+    "1"
+  ],
+  "returncode": 0,
+  "correct": true,
+  "samples": [
+    {
+      "iteration": 0,
+      "warmup": true,
+      "seconds": 3.464014848
+    },
+    {
+      "iteration": 1,
+      "warmup": true,
+      "seconds": 3.427549966
+    },
+    {
+      "iteration": 2,
+      "warmup": false,
+      "seconds": 3.567260164
+    },
+    {
+      "iteration": 3,
+      "warmup": false,
+      "seconds": 3.556729184
+    }
+  ],
+  "hashes": {
+    "output-02.bin": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59",
+    "output-03.bin": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59",
+    "output-00.bin": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59",
+    "output-01.bin": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "status": "COMPLETE",
+  "repository_head": "f4b2e94e0edcdd3b360f290dae64fe66c338ee91",
+  "source_archive_sha256": "faebac7c11ed8f8fcf6bf2d7e85c3086fc2d11f72204d6dfc28dc5b2e8f2acfd",
+  "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02",
+  "modes": [
+    "native",
+    "passthrough",
+    "flyt",
+    "vmweave"
+  ],
+  "formal_repeats": 10,
+  "independent_sessions": 5,
+  "samples_per_session": 2,
+  "warmups_per_session": 2,
+  "inputs_locked_before_remote_qualification": true,
+  "binaries": {
+    "nw": "b57c0cdd1edbf8c9ff09be2f87c369bd790b5c9865734ef846f33f6b848bc01e",
+    "lu": "46b70eb92e7bd1a7a1a4818a0675a2d81eb08e4cc1c6ddc84a84db04eb39ea4a",
+    "srad": "eae8dcda155c66a1affd7041ea0f7d8bf80bc9884eda9bd1624a0db56cc26ee0",
+    "sc": "bca8afed930cb521648907ffd76dbc3f36f12565bf27268b3c38efc8492f783f"
+  },
+  "paper_exact_reproduction": false,
+  "srad_boundary_guard_applied": true,
+  "scope": "experiment only, no product/deployment version change",
+  "initial_candidate_binaries": {
+    "nw": "28143143ae55e6878775da0d1514013ab182304ae6cfd3d23b061fdd1250ace9",
+    "lu": "2618d3f2c1d904bc57cdf77a35e7fbae0db82032b594047b4109d5d533bf4977",
+    "srad": "21039ea9595facfdfca769a2c136c668c30188287941474b429a51b997e80b81",
+    "sc": "332108d2d56ffa88f320591de87216873b646a266a275add465f1a7cc8ba2453"
+  },
+  "adaptations": [
+    "SRAD guard invalid halo reads before boundary overwrite",
+    "StreamCluster reset static iteration after complete invocation",
+    "StreamCluster free original leaked CUDA events at end of pgain",
+    "All modes explicit small allocation/free for context initialization; Flyt rejects cudaFree(NULL)",
+    "StreamCluster deprecated cudaThreadSynchronize replaced by cudaDeviceSynchronize, unavailable old name in Flyt",
+    "StreamCluster optional CUDATIME internal CUDA-event profiler disabled identically in all modes: cudaEventElapsedTime not exported by current VMWeave Guest. Prior SC samples excluded, all SC requalified and recollected."
+  ],
+  "build_image_id": "cf8b34fb4907ff5d0ac298c4e1e344ee8a75d3719b94986572e5c59647860241",
+  "orders": [
+    [
+      "native",
+      "passthrough",
+      "flyt",
+      "vmweave"
+    ],
+    [
+      "passthrough",
+      "vmweave",
+      "native",
+      "flyt"
+    ],
+    [
+      "flyt",
+      "native",
+      "vmweave",
+      "passthrough"
+    ],
+    [
+      "vmweave",
+      "flyt",
+      "passthrough",
+      "native"
+    ],
+    [
+      "native",
+      "flyt",
+      "vmweave",
+      "passthrough"
+    ]
+  ],
+  "prior_blocker": {
+    "node_pod_limit": 110,
+    "running_pods_before": 107,
+    "running_pods_at_failure": 110,
+    "reason": "OutOfpods",
+    "completed_formal_sessions": [
+      "r1/native"
+    ],
+    "required_free_slots": 3
+  },
+  "resumed": true,
+  "sc_prior_binary_sha256": "9508732a800fac91dc5899acfb6bde717f8eddb8e7184f24537c201bffd77b30",
+  "completed_measured_samples": 160,
+  "completed_diagnostic_combinations": 16,
+  "cleanup_verified": true
+}

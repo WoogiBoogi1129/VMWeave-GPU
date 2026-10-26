@@ -1,0 +1,43 @@
+{
+  "started_unix": 1792988474.6106725,
+  "finished_unix": 1792988579.3731902,
+  "mode": "flyt",
+  "workload": "sc",
+  "args": [
+    "10",
+    "20",
+    "256",
+    "65536",
+    "65536",
+    "1000",
+    "none",
+    "output.txt",
+    "1"
+  ],
+  "returncode": 0,
+  "correct": true,
+  "samples": [
+    {
+      "iteration": 0,
+      "warmup": true,
+      "seconds": 26.180377457
+    },
+    {
+      "iteration": 1,
+      "warmup": true,
+      "seconds": 22.566045284
+    },
+    {
+      "iteration": 2,
+      "warmup": false,
+      "seconds": 26.908228005
+    },
+    {
+      "iteration": 3,
+      "warmup": false,
+      "seconds": 27.108848487
+    }
+  ],
+  "hashes": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r3-sc/output-00.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r3-sc/output-01.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r3-sc/output-02.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r3-sc/output-03.bin\n",
+  "binary_sha256": "bca8afed930cb521648907ffd76dbc3f36f12565bf27268b3c38efc8492f783f  /tmp/steady/sc\n"
+}

@@ -1,0 +1,116 @@
+{
+  "vmweave_release": {
+    "sourceRevision": "47e3b98ce1f4fd4e06005f440d12211fad376b2a",
+    "tag": "v0.5.3",
+    "scope": "Published v0.5.3 images/chart; production Guest, Worker, helper, hook and operator deployed and verified. Existing upstream HAMi and DRA deployment retained. Revision labels are not cryptographic provenance.",
+    "images": {
+      "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:e20b7b22d1edcbd35b3b2e0b392417447b78235dc11949242373199aa21030e5",
+      "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:5fda1df0dc3fc672778ca4c05a473355231e913ba2889bb159c82a0e477d8063",
+      "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7483295dfa974626a62c124caa6e2660a5664981868ac1dafb50e20499b88acb",
+      "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:486ca081e7685560c78d9f56409904a3d778decb6770855e6f8949b89df2f3a8",
+      "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:b9c343d1c220449999527adaf660bae9f823137fc9ae105c8965f656fa5e3f75",
+      "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:5519823bb962a831a2a162f8fa98be715511ff23d7115b29f25d5468e4f7ba29",
+      "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:d6ee15ba093f76c442fefc0e72b24a2efb754c6a45805d11a843e672b56d547b"
+    },
+    "chart": {
+      "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+      "version": "0.5.3",
+      "digest": "sha256:ba3b9571d4ff8137d2aac38ae7185ff1eafb1b7ea99743a47e3397b1dc1ac19d"
+    },
+    "workflows": {
+      "v0.5.3:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232212",
+      "v0.5.3:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232242",
+      "v0.5.3:hami-dra-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232441",
+      "v0.5.3:hami-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232247",
+      "v0.5.3:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179232228",
+      "main:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229773",
+      "main:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229772",
+      "main:Documentation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229777",
+      "main:CPU control plane": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229806",
+      "main:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40179229781"
+    },
+    "verification": {
+      "publicArtifacts": "PASS: 7 image revision labels; chart matches candidate; Guest checksums and 4 ABI tests; Guest and Worker payloads match tested candidate",
+      "canary": "PASS: published Guest/Worker, standard installer/systemd/config-drive, 50%/2048MiB, PTX smoke and 18 copy cases. Public chart isolated install passed; GPU canary used existing operator after node Pod limit prevented duplicate operator plus VM.",
+      "production": "PASS: default/enabled-cache GPU smoke, math cache API checks, 18 synchronous/asynchronous copy cases through 128MiB+1, NW 2048 and LU 256/2064 output hashes match native reference. No production fault injection.",
+      "preservation": {
+        "status": "PASS",
+        "workerCPUAllowedList": "0-127",
+        "vmAndPVCsPreserved": true,
+        "cores": 50,
+        "memoryMiB": 2048,
+        "draHelmRevision": 5,
+        "draUnchanged": true
+      },
+      "performance": "Previous full comparison: 6 PASS / 6 INCONCLUSIVE. No universal <=5% regression or training-throughput improvement claim."
+    },
+    "deployment": {
+      "helmRevision": 11,
+      "updatedComponents": [
+        "operator",
+        "helper",
+        "hook",
+        "worker",
+        "guest-artifacts"
+      ],
+      "retainedComponents": [
+        "upstream HAMi 2.10.0",
+        "DRA Helm revision 5"
+      ],
+      "rollback": "v0.5.2 Guest backup, Helm revision 10, retained v052 Profile/Request; restore matched Guest/broker/Worker set while VM stopped"
+    },
+    "publishedDateKST": "2026-10-25"
+  },
+  "flyt_sources": {
+    "flyt-guest": {
+      "commit": "f46f604b887d219847868d2857b30ad83e0177f2",
+      "dirty_paths": [
+        " M control-managers/Cargo.toml",
+        " M cpu/cpu-client-cudnn.c",
+        " M submodules/libtirpc"
+      ]
+    },
+    "flyt-host": {
+      "commit": "06af9de1e9fcf3ddeea28a2c3bd64284dde1bd30",
+      "dirty_paths": []
+    },
+    "ipc-rs": {
+      "commit": "fc62adcac5d25dfb333049e39449e69553cbf9fa",
+      "dirty_paths": [
+        " M src/lib.rs"
+      ]
+    }
+  },
+  "flyt_compatibility_evidence": "../20261025-rodinia-threeway/README.md",
+  "build_image_id": "cf8b34fb4907ff5d0ac298c4e1e344ee8a75d3719b94986572e5c59647860241",
+  "cuda_compiler": "12.8.93",
+  "gpu_uuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+  "gpu_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "gpu_bdf": "0000:40:00.0",
+  "driver": "580.173.02",
+  "vm_vcpus": 8,
+  "vm_memory_gib": 16,
+  "qemu_cpu_affinity": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "remoting_cpu_affinity": [
+    40,
+    41,
+    42,
+    43
+  ],
+  "remoting_gpu_compute_percent": 100,
+  "remoting_gpu_memory_mib": 8192,
+  "flyt_transport": "SHM data; control RPC remains",
+  "flyt_mps": true,
+  "remote_modes_use_hami": true,
+  "profile_sha256": "805ba21549c030f4d0ff2b6fbc603e8409728848fb725e7083029ebf1bc2bd1c",
+  "diagnostic_profile_sha256": "805ba21549c030f4d0ff2b6fbc603e8409728848fb725e7083029ebf1bc2bd1c"
+}

@@ -1,0 +1,38 @@
+{
+  "started_unix": 1792991181.5810165,
+  "finished_unix": 1792991198.0896702,
+  "mode": "passthrough",
+  "workload": "sc",
+  "args": [
+    "10",
+    "20",
+    "256",
+    "65536",
+    "65536",
+    "1000",
+    "none",
+    "output.txt",
+    "1"
+  ],
+  "returncode": 0,
+  "correct": true,
+  "samples": [
+    {
+      "iteration": 0,
+      "warmup": true,
+      "seconds": 3.594635874
+    },
+    {
+      "iteration": 1,
+      "warmup": true,
+      "seconds": 3.514057557
+    },
+    {
+      "iteration": 2,
+      "warmup": false,
+      "seconds": 3.531178196
+    }
+  ],
+  "hashes": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/diagnostic-r5-sc/output-00.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/diagnostic-r5-sc/output-01.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/diagnostic-r5-sc/output-02.bin\n",
+  "binary_sha256": "bca8afed930cb521648907ffd76dbc3f36f12565bf27268b3c38efc8492f783f  /tmp/steady/sc\n"
+}

@@ -1,0 +1,111 @@
+here, pid=2497
+here, send_id=0
+here, htonl pid=-1056374784
+here2
+From Control Plane: 10.85.0.68,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.68
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 0
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 1610612736
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7fb0bea19000
+clnttcp_create done.
+PARSEC Benchmark Suite
+time = 61.219544s
+time pgain = 0.000000s
+time pgain_dist = 0.000000s
+time pgain_init = 0.000000s
+time pselect = 0.000401s
+time pspeedy = 0.364100s
+time pshuffle = 0.003401s
+time localSearch = 60.961178s
+
+
+====CUDA Timing info (pgain)====
+time serial = 6.946207s
+time CPU to GPU memory copy = 8.453575s
+time GPU to CPU memory copy back = 4.900366s
+time GPU malloc = 3.499486s
+time GPU free = 2.759657s
+time kernel = 4.593750s
+EXPERIMENT_SAMPLE {"iteration":0,"warmup":true,"seconds":60.397911497}
+PARSEC Benchmark Suite
+time = 55.820036s
+time pgain = 0.000000s
+time pgain_dist = 0.000000s
+time pgain_init = 0.000000s
+time pselect = 0.000771s
+time pspeedy = 0.684614s
+time pshuffle = 0.006594s
+time localSearch = 116.562151s
+
+
+====CUDA Timing info (pgain)====
+time serial = 6.557642s
+time CPU to GPU memory copy = 7.861312s
+time GPU to CPU memory copy back = 4.513904s
+time GPU malloc = 3.243161s
+time GPU free = 2.548891s
+time kernel = 4.241252s
+EXPERIMENT_SAMPLE {"iteration":1,"warmup":true,"seconds":55.640048136}
+PARSEC Benchmark Suite
+time = 55.203574s
+time pgain = 0.000000s
+time pgain_dist = 0.000000s
+time pgain_init = 0.000000s
+time pselect = 0.001091s
+time pspeedy = 0.993392s
+time pshuffle = 0.009847s
+time localSearch = 171.545024s
+
+
+====CUDA Timing info (pgain)====
+time serial = 6.579069s
+time CPU to GPU memory copy = 7.846535s
+time GPU to CPU memory copy back = 4.475866s
+time GPU malloc = 3.230239s
+time GPU free = 2.493254s
+time kernel = 4.161201s
+EXPERIMENT_SAMPLE {"iteration":2,"warmup":false,"seconds":55.022587221}
+PARSEC Benchmark Suite
+time = 58.275280s
+time pgain = 0.000000s
+time pgain_dist = 0.000000s
+time pgain_init = 0.000000s
+time pselect = 0.001382s
+time pspeedy = 1.301937s
+time pshuffle = 0.012800s
+time localSearch = 229.595713s
+
+
+====CUDA Timing info (pgain)====
+time serial = 6.649627s
+time CPU to GPU memory copy = 8.186504s
+time GPU to CPU memory copy back = 4.703269s
+time GPU malloc = 3.411970s
+time GPU free = 2.660946s
+time kernel = 4.445907s
+EXPERIMENT_SAMPLE {"iteration":3,"warmup":false,"seconds":58.091260913}
+api-call-cnt: 277155
+memcpy-api-calls: 25780
+Non-memcpy-api-calls: 251375
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 24651893248
+/tmp/steady/sc: /tmp/flyt-test/libcudart.so.12: no version information available (required by /tmp/steady/sc)
+EXPERIMENT_INIT 0.003647464
+read 65536 points
+finish local search
+read 65536 points
+finish local search
+read 65536 points
+finish local search
+read 65536 points
+finish local search

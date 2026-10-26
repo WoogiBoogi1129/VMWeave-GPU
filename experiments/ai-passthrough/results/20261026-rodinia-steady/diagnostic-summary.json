@@ -1,0 +1,1746 @@
+[
+  {
+    "mode": "flyt",
+    "workload": "lu",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 8,
+        "wall_s": 0.013967532,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 6,
+        "wall_s": 0.16381764,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 1155,
+        "wall_s": 1.005881914,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 0.007131864,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 0.003462236,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4,
+        "wall_ns": 7630617,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4,
+        "wall_ns": 6336915,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 6,
+        "wall_ns": 163817640,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 1155,
+        "wall_ns": 1005881914,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 7131864,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 3462236,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      51121152,
+      51121152,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "flyt",
+    "workload": "nw",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 14,
+        "wall_s": 0.029375674,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 9,
+        "wall_s": 0.24128357,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 765,
+        "wall_s": 0.425144792,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 0.006491732,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 0.003348935,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 7,
+        "wall_ns": 14080917,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 7,
+        "wall_ns": 15294757,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 9,
+        "wall_ns": 241283570,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 765,
+        "wall_ns": 425144792,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 6491732,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 3348935,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100761624,
+      50380812,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "flyt",
+    "workload": "sc",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 9692,
+        "wall_s": 13.56638545,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 19335,
+        "wall_s": 27.1855584,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 4833,
+        "wall_s": 4.252861394,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 4846,
+        "wall_s": 3.935492299,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 4839,
+        "wall_s": 3.662706101,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4846,
+        "wall_ns": 7862457344,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4846,
+        "wall_ns": 5703928106,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 19335,
+        "wall_ns": 27185558400,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 4833,
+        "wall_ns": 4252861394,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 4846,
+        "wall_ns": 3935492299,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 4839,
+        "wall_ns": 3662706101,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      11603804160,
+      6885115776,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "flyt",
+    "workload": "srad",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 38,
+        "wall_s": 0.060051445,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 12,
+        "wall_s": 0.185908358,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 12,
+        "wall_s": 0.012760426,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 0.007361792,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 0.003678475,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 19,
+        "wall_ns": 36115812,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 19,
+        "wall_ns": 23935633,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 12,
+        "wall_ns": 185908358,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 12,
+        "wall_ns": 12760426,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 7361792,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 3678475,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100663296,
+      100663296,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "native",
+    "workload": "lu",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 8,
+        "wall_s": 0.293899797,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 6,
+        "wall_s": 0.027709567,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 1155,
+        "wall_s": 0.005844034,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 6.9077e-05,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 4.694e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4,
+        "wall_ns": 289361181,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4,
+        "wall_ns": 4538616,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 6,
+        "wall_ns": 27709567,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 1155,
+        "wall_ns": 5844034,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 69077,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 4694,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      51121152,
+      51121152,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "native",
+    "workload": "nw",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 14,
+        "wall_s": 0.298828428,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 9,
+        "wall_s": 0.070768663,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 765,
+        "wall_s": 0.004105153,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 7.1421e-05,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 4.496e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 7,
+        "wall_ns": 297445018,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 7,
+        "wall_ns": 1383410,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 9,
+        "wall_ns": 70768663,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 765,
+        "wall_ns": 4105153,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 71421,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 4496,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100761624,
+      50380812,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "native",
+    "workload": "sc",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 9692,
+        "wall_s": 1.125215532,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 19335,
+        "wall_s": 1.944959488,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 4833,
+        "wall_s": 0.02097844,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 4846,
+        "wall_s": 0.191568294,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 4839,
+        "wall_s": 0.001012849,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4846,
+        "wall_ns": 548339562,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4846,
+        "wall_ns": 576875970,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 19335,
+        "wall_ns": 1944959488,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 4833,
+        "wall_ns": 20978440,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 4846,
+        "wall_ns": 191568294,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 4839,
+        "wall_ns": 1012849,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      11603804160,
+      6885115776,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "native",
+    "workload": "srad",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 38,
+        "wall_s": 0.293250901,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 12,
+        "wall_s": 0.038158959,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 12,
+        "wall_s": 0.00059302,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 7.5003e-05,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 4.673e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 19,
+        "wall_ns": 287929731,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 19,
+        "wall_ns": 5321170,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 12,
+        "wall_ns": 38158959,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 12,
+        "wall_ns": 593020,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 75003,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 4673,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100663296,
+      100663296,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "passthrough",
+    "workload": "lu",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 8,
+        "wall_s": 1.695023722,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 6,
+        "wall_s": 0.03258216,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 1155,
+        "wall_s": 0.010274947,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 8.5986e-05,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 5.698e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4,
+        "wall_ns": 1693308566,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4,
+        "wall_ns": 1715156,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 6,
+        "wall_ns": 32582160,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 1155,
+        "wall_ns": 10274947,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 85986,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 5698,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      51121152,
+      51121152,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "passthrough",
+    "workload": "nw",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 14,
+        "wall_s": 1.69583392,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 9,
+        "wall_s": 0.10875676,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 765,
+        "wall_s": 0.007442912,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 9.0493e-05,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 5.858e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 7,
+        "wall_ns": 1694804300,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 7,
+        "wall_ns": 1029620,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 9,
+        "wall_ns": 108756760,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 765,
+        "wall_ns": 7442912,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 90493,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 5858,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100761624,
+      50380812,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "passthrough",
+    "workload": "sc",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 9692,
+        "wall_s": 2.041076943,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 19335,
+        "wall_s": 2.695578326,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 4833,
+        "wall_s": 0.044284373,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 4846,
+        "wall_s": 0.197417546,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 4839,
+        "wall_s": 0.00151588,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4846,
+        "wall_ns": 1864026993,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4846,
+        "wall_ns": 177049950,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 19335,
+        "wall_ns": 2695578326,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 4833,
+        "wall_ns": 44284373,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 4846,
+        "wall_ns": 197417546,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 4839,
+        "wall_ns": 1515880,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      11603804160,
+      6885115776,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "passthrough",
+    "workload": "srad",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 38,
+        "wall_s": 1.730748541,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 12,
+        "wall_s": 0.063061779,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 12,
+        "wall_s": 0.000699871,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 0.003109584,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 6.471e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 19,
+        "wall_ns": 1726463151,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 19,
+        "wall_ns": 4285390,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 12,
+        "wall_ns": 63061779,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 12,
+        "wall_ns": 699871,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 3109584,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 6471,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100663296,
+      100663296,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "vmweave",
+    "workload": "lu",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 8,
+        "wall_s": 0.699842322,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 6,
+        "wall_s": 0.817801997,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 1155,
+        "wall_s": 1.020585834,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 0.008726989,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 2.353e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4,
+        "wall_ns": 690605320,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4,
+        "wall_ns": 9237002,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 6,
+        "wall_ns": 817801997,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 1155,
+        "wall_ns": 1020585834,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 8726989,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 2353,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      51121152,
+      51121152,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "vmweave",
+    "workload": "nw",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 14,
+        "wall_s": 0.684214241,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 9,
+        "wall_s": 1.138384584,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 765,
+        "wall_s": 0.65729999,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 0.010315295,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 1.848e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 7,
+        "wall_ns": 671334610,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 7,
+        "wall_ns": 12879631,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 9,
+        "wall_ns": 1138384584,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 765,
+        "wall_ns": 657299990,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 10315295,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 1848,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100761624,
+      50380812,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "vmweave",
+    "workload": "sc",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 9692,
+        "wall_s": 16.030560562,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 19335,
+        "wall_s": 70.13969656,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 4833,
+        "wall_s": 4.081377264,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 14512,
+        "wall_s": 11.234578,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 4839,
+        "wall_s": 0.00208022,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 4846,
+        "wall_ns": 9807197056,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 4846,
+        "wall_ns": 6223363506,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 19335,
+        "wall_ns": 70139696560,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 4833,
+        "wall_ns": 4081377264,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 14512,
+        "wall_ns": 11234578000,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 4839,
+        "wall_ns": 2080220,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      11603804160,
+      6885115776,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "vmweave",
+    "workload": "srad",
+    "scope": "whole process including initialization and warmups; top-level wrapped APIs only; wall time includes waiting, not pure GPU kernel time",
+    "invocations": 3,
+    "warmups_included": 2,
+    "initialization_included": true,
+    "groups": {
+      "allocation": {
+        "calls": 38,
+        "wall_s": 0.710692484,
+        "nonzero_returns": 0
+      },
+      "copy": {
+        "calls": 12,
+        "wall_s": 1.189252183,
+        "nonzero_returns": 0
+      },
+      "launch": {
+        "calls": 12,
+        "wall_s": 0.107033764,
+        "nonzero_returns": 0
+      },
+      "synchronization": {
+        "calls": 7,
+        "wall_s": 0.016745134,
+        "nonzero_returns": 0
+      },
+      "events": {
+        "calls": 0,
+        "wall_s": 0.0,
+        "nonzero_returns": 0
+      },
+      "other": {
+        "calls": 3,
+        "wall_s": 1.731e-06,
+        "nonzero_returns": 0
+      }
+    },
+    "apis": {
+      "cudaMalloc": {
+        "calls": 19,
+        "wall_ns": 679746617,
+        "nonzero_returns": 0
+      },
+      "cudaFree": {
+        "calls": 19,
+        "wall_ns": 30945867,
+        "nonzero_returns": 0
+      },
+      "cudaMemcpy": {
+        "calls": 12,
+        "wall_ns": 1189252183,
+        "nonzero_returns": 0
+      },
+      "cudaLaunchKernel": {
+        "calls": 12,
+        "wall_ns": 107033764,
+        "nonzero_returns": 0
+      },
+      "cudaDeviceSynchronize": {
+        "calls": 7,
+        "wall_ns": 16745134,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreate": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventDestroy": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventRecord": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventSynchronize": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaEventElapsedTime": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      },
+      "cudaGetLastError": {
+        "calls": 3,
+        "wall_ns": 1731,
+        "nonzero_returns": 0
+      },
+      "cudaEventCreateWithFlags": {
+        "calls": 0,
+        "wall_ns": 0,
+        "nonzero_returns": 0
+      }
+    },
+    "memcpy_requested_bytes_by_kind": [
+      0,
+      100663296,
+      100663296,
+      0,
+      0
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "mode": "flyt",
+  "workload": "sc",
+  "args": [
+    "10",
+    "20",
+    "256",
+    "65536",
+    "65536",
+    "1000",
+    "none",
+    "output.txt",
+    "1"
+  ],
+  "returncode": 0,
+  "correct": true,
+  "samples": [
+    {
+      "iteration": 0,
+      "warmup": true,
+      "seconds": 67.408149538
+    },
+    {
+      "iteration": 1,
+      "warmup": true,
+      "seconds": 72.526469621
+    },
+    {
+      "iteration": 2,
+      "warmup": false,
+      "seconds": 72.406699279
+    },
+    {
+      "iteration": 3,
+      "warmup": false,
+      "seconds": 69.887603156
+    }
+  ],
+  "hashes": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/gate3-sc/output-00.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/gate3-sc/output-01.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/gate3-sc/output-02.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/gate3-sc/output-03.bin\n",
+  "binary_sha256": "9508732a800fac91dc5899acfb6bde717f8eddb8e7184f24537c201bffd77b30  /tmp/steady/sc\n"
+}

@@ -1,0 +1,12 @@
+{"bdf": "0000:40:00.0", "before": "nvidia", "after": "vfio-pci"}
+
+{"bdf": "0000:40:00.0", "before": "vfio-pci", "after": "nvidia"}
+
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rodinia-steady-20261026/run-passthrough.py", line 9, in <module>
+    t.to_native();v.prepare();s={'mode':'passthrough','name':v.name,'namespace':v.ns,'ssh':v.ssh,'scp':v.scp,'ip':v.ip};h.save(h.B/'active-native.json',s);m.stage(s);m.measure(s,'qualification' if label.startswith('gate') else 'formal',label)
+                  ^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/ai-passthrough/runner/passthrough_guest.py", line 13, in prepare
+    self.ip=obj['status']['interfaces'][0]['ipAddress'];self.out=OUT/'identities'/self.name;self.out.mkdir(parents=True,exist_ok=False)
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'ipAddress'

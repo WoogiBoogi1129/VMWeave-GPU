@@ -1,0 +1,43 @@
+{
+  "started_unix": 1792981495.257152,
+  "finished_unix": 1792981768.9437792,
+  "mode": "vmweave",
+  "workload": "sc",
+  "args": [
+    "10",
+    "20",
+    "256",
+    "65536",
+    "65536",
+    "1000",
+    "none",
+    "output.txt",
+    "1"
+  ],
+  "returncode": 0,
+  "correct": true,
+  "samples": [
+    {
+      "iteration": 0,
+      "warmup": true,
+      "seconds": 67.084248687
+    },
+    {
+      "iteration": 1,
+      "warmup": true,
+      "seconds": 68.680339983
+    },
+    {
+      "iteration": 2,
+      "warmup": false,
+      "seconds": 68.262768523
+    },
+    {
+      "iteration": 3,
+      "warmup": false,
+      "seconds": 66.687466189
+    }
+  ],
+  "hashes": "dc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r1-sc/output-00.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r1-sc/output-01.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r1-sc/output-02.bin\ndc01e643fd3e867fe2d726782b3b6b7ecc85ed0eaee7d352a0b7710422c8aa59  /tmp/steady/formal-r1-sc/output-03.bin\n",
+  "binary_sha256": "9508732a800fac91dc5899acfb6bde717f8eddb8e7184f24537c201bffd77b30  /tmp/steady/sc\n"
+}
