@@ -1,0 +1,39 @@
+{
+  "status": "BLOCKED_BY_WORKLOAD_INITIALIZATION",
+  "date_kst": "2026-10-26",
+  "planned_conditions": 30,
+  "completed_conditions": 0,
+  "successful_observer_requests": 0,
+  "vmweave_remeasured": false,
+  "warmup": false,
+  "latency_analysis": false,
+  "flyt_source_commit": "f46f604b887d219847868d2857b30ad83e0177f2",
+  "source_worktree_note": "Existing locally qualified Rodinia build; includes prior compatibility/build changes. No Flyt product changes in this campaign. Source commit alone does not identify binaries; hashes below do.",
+  "vmweave_source_commit": "01b7e2a01fafaaaadbc43c5913bcbd8eca5458e5",
+  "gpu_uuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+  "driver": "580.173.02",
+  "flyt_requested_sm_per_vm": 94,
+  "flyt_requested_vram_mib_per_vm": 2048,
+  "flyt_process_shm_mib": 512,
+  "flyt_backing_gib_per_vm": 4,
+  "vmweave_shm_mib": 64,
+  "mps": "Shared daemon, distinct backend mount namespaces and SHM backing; two-VM computation overlap not reached",
+  "quota_validation": "94 SM / 2147483648 bytes request and virtual server initialization recorded for A; effective SM count and quota enforcement not validated",
+  "binaries": {
+    ".local/rodinia-threeway-20261023/flyt-guest/cpu/cricket-client.so": "4cd408e1382680e5766077c3a5499b72375a55c88757d3e0673c3bee667e3d1f",
+    ".local/rodinia-threeway-20261023/flyt-guest/control-managers/target/release/flyt-client-manager": "f7e8ca1117ac1f38d1b7167d1462d399041d850b5687b517e70cdbdf3eeb76a1",
+    "experiments/thesis-isolation/probes/flyt_mps_mlp.py": "f2d83fe6b59530542a0d12e10b161a0cc266e5eee2b37b583d1c186ccc78714f",
+    ".local/thesis-isolation-20261012/bundle-stage/opt/flyt-cuda-libs/libcudart.so.12": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920"
+  },
+  "pod_images": {
+    "a": {
+      "mongo": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495",
+      "server": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+    },
+    "b": {
+      "mongo": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495",
+      "server": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+    }
+  },
+  "excluded": "Credentials, full cluster inventory, private management logs, large bundles and binaries remain local. Selected failure logs retain original bytes."
+}

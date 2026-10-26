@@ -1,0 +1,15 @@
+[2026-10-26T07:34:38Z INFO  flyt_node_manager] Connected to resource manager
+[2026-10-26T07:34:38Z INFO  flyt_node_manager::resource_manager_handler] Got send gpu info command
+[2026-10-26T07:36:09Z INFO  flyt_node_manager::resource_manager_handler] Got allocate virt server command
+[2026-10-26T07:36:09Z INFO  flyt_node_manager::resource_manager_handler] Allocating virt server: gpu_id: 0, num_cores: 94, memory: 2147483648
+[2026-10-26T07:36:09Z DEBUG flyt_node_manager::virt_server_manager] create_virt_server: gpu_id: 0, gpu_memory: 2147483648, num_sm_cores: 94
+[2026-10-26T07:36:09Z INFO  flyt_node_manager::virt_server_manager] Starting virt server with rpc_id: 1
+[2026-10-26T07:36:09Z INFO  flyt_node_manager::virt_server_manager] Executing command: CUDA_MPS_ENABLE_PER_CTX_DEVICE_MULTIPROCESSOR_PARTITIONING="1" CUDA_VISIBLE_DEVICES="0" "/opt/flyt-test/cricket-rpc-server" "1" "0" "94" "2147483648" "0"
+prg 99 cricker 1 gpu 0 sm 94 mem -2147483648 mode 0
+welcome to cricket!
+send_type -= 0
++07:36:10.238364 [1m[31mERROR[0m: accessing list out of bounds	in [4mlist.c:209[0m
++07:36:10.238387 [1m[31mERROR[0m: accessing list out of bounds	in [4mlist.c:209[0m
+[2026-10-26T07:36:10Z DEBUG flyt_node_manager::virt_server_manager] Received message from virt server: Some(200)
+[2026-10-26T07:36:10Z INFO  flyt_node_manager::virt_server_manager] Virt server initialized with rpc_id: 1
+[2026-10-26T07:36:10Z INFO  flyt_node_manager::resource_manager_handler] Virt server created: 1

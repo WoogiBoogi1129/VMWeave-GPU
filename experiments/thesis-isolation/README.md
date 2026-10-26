@@ -16,3 +16,12 @@ E1 및 단계별 승인된 성능 실험 P를 기록한다. E2는 40회 완료�
 - [Native 교차 접근 예비 시험](evidence/20261014-native-peer/analysis.json): 4조건 실제 제출 후 동기화 오류 700, 상대 버퍼 검사 72회 불일치 0.
 
 각 디렉터리의 `raw-evidence.tar.gz`와 `raw-sha256.json`에 선별 원시 자료와 해시를 보존한다. [계측·재현 도구 설명](instrumentation/README.md)에 환경 차이와 분석 명령을 설명한다. 분석기는 원시 자료를 검사하며 GPU를 실행하지 않는다. 재실행기와 구분한다. Native 보완은 제품 Guest/Worker 경로를 거치지 않으며 학습용 제품 경로의 추가 경계 시험은 미실행이다.
+
+
+## 2026-10-26 Flyt MPS 비교 시도 — 측정 미완료
+
+[비교 및 초기화 실패 보고서](evidence/20261026-flyt-mps-comparison/REPORT.md) · [HTML 보고서](evidence/20261026-flyt-mps-comparison/REPORT.html) · [그래프](evidence/20261026-flyt-mps-comparison/figures/) · [실행 계획](config/flyt-mps-comparison-plan-20261026.md)
+
+기존 VMWeave의 원/확대 성능 결과를 재집계했다. 신규 Flyt는 PyTorch import 오류 및 대체 로딩 설정의 초기화 timeout으로 유효 측정 0구간이며, Flyt 감소율과 시스템 간 차이는 N/A다. 두 VM 동시 MLP 실행이나 성능 우열을 검증한 결과가 아니다. 시험 자원은 회수했다.
+
+재집계·보고서/그래프 생성(GPU 실행 없음): `python3 experiments/thesis-isolation/runner/analyze_flyt_mps_comparison.py`. 의존성은 `matplotlib==3.9.4`, `Markdown==3.10.2`다. 초기화 진단 재실행 도구는 `runner/flyt_mps_initialization.py --help`를 참조한다. 이 도구는 사전 준비한 시험 VM과 로컬 SSH 설정이 필요하며, 자동으로 클러스터를 구성하거나 처리량을 측정하지 않는다.

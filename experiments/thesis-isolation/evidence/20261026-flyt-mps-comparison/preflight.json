@@ -1,0 +1,60 @@
+{
+  "status": "PREFLIGHT_CONFIGURATION_REVIEW",
+  "new_gpu_measurements": 0,
+  "reference_audit": [
+    {
+      "campaign": "original",
+      "condition": "memory",
+      "n": 10,
+      "mean_decrease_pct": 0.352353355264724,
+      "sample_sd": 0.16459315770796457,
+      "min": 0.0434827914971736,
+      "max": 0.6285396675790755,
+      "source": "experiments/thesis-isolation/evidence/20261013/per-run.csv",
+      "sha256": "f8ec7ae30ff52996311af4a0cb23ff92f56ebe045f4eca7ac0bb784d1c42ded5"
+    },
+    {
+      "campaign": "original",
+      "condition": "compute",
+      "n": 10,
+      "mean_decrease_pct": 0.31500029059160495,
+      "sample_sd": 0.13231959391537856,
+      "min": 0.13708010353358224,
+      "max": 0.5752274607540464,
+      "source": "experiments/thesis-isolation/evidence/20261013/per-run.csv",
+      "sha256": "f8ec7ae30ff52996311af4a0cb23ff92f56ebe045f4eca7ac0bb784d1c42ded5"
+    },
+    {
+      "campaign": "expanded",
+      "condition": "memory",
+      "n": 10,
+      "mean_decrease_pct": 0.2914539257778692,
+      "sample_sd": 0.1440039628411111,
+      "min": 0.02350868458598221,
+      "max": 0.4785366777144695,
+      "source": "experiments/thesis-isolation/evidence/20261014-supplement/per-run.csv",
+      "sha256": "b8b0df89faa1752dfe18da8658d08db7e4c798a76cba4ff0eed5590344b121ac"
+    },
+    {
+      "campaign": "expanded",
+      "condition": "compute",
+      "n": 10,
+      "mean_decrease_pct": 0.3688200209720749,
+      "sample_sd": 0.09122990783501687,
+      "min": 0.22794928761319388,
+      "max": 0.5347573596200306,
+      "source": "experiments/thesis-isolation/evidence/20261014-supplement/per-run.csv",
+      "sha256": "b8b0df89faa1752dfe18da8658d08db7e4c798a76cba4ff0eed5590344b121ac"
+    }
+  ],
+  "flyt_shm": {
+    "source": ".local/rodinia-threeway-20261023/flyt-guest/control-managers/src/client-manager-daemon/vcuda_client_handler.rs",
+    "sha256": "49ca45b6a7cea897eb60d56953af09249c9a95e0a74e40a9e687b2a18913a175",
+    "bytes_per_process": 536870912,
+    "vmweave_reference_bytes": 67108864,
+    "backend_path": "/dev/shm/ivshmem-0-ub11.dat",
+    "configuration_override_found": false
+  },
+  "gpu_inventory": "index, uuid, name, driver_version, memory.used [MiB]\n0, GPU-772181af-05a4-0c24-de59-8487bd37c142, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02, 0 MiB\n1, GPU-7d708c42-8d4a-16d5-0746-474567157aa3, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02, 0 MiB\n2, GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02, 0 MiB\n3, GPU-1b4de6a0-88ae-4004-98b9-035906a2473f, NVIDIA RTX PRO 6000 Blackwell Server Edition, 580.173.02, 86917 MiB\n",
+  "cluster_mutations": false
+}

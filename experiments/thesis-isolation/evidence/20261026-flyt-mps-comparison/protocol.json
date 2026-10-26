@@ -1,0 +1,42 @@
+{
+  "scope": "Flyt MPS throughput interference vs historical VMWeave",
+  "campaigns": [
+    "original",
+    "expanded"
+  ],
+  "repetitions_each": 5,
+  "seconds_each": 120,
+  "conditions": [
+    "baseline",
+    "memory",
+    "compute"
+  ],
+  "warmup": false,
+  "separate_pilot": false,
+  "observer": "FP32 MLP 1024-2048-1024 batch32 seed20261012",
+  "correctness": {
+    "rtol": 0.0001,
+    "atol": 1e-06
+  },
+  "initialization_diagnostics": [
+    {
+      "mode": "Flyt libcudart replacement",
+      "outcome": "ImportError",
+      "returncode": 1
+    },
+    {
+      "mode": "real libcudart + Flyt LD_PRELOAD, reused A",
+      "outcome": "initialization timeout",
+      "returncode": 124,
+      "seconds": 40
+    },
+    {
+      "mode": "real libcudart + Flyt LD_PRELOAD, fresh B",
+      "outcome": "initialization timeout",
+      "returncode": 124,
+      "seconds": 40
+    }
+  ],
+  "throughput_denominator": "full observation loop elapsed, including result checking and logging",
+  "stopping_rule": "stop on initialization/compatibility failure; no unsupported performance samples"
+}
