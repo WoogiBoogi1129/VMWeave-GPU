@@ -25,3 +25,11 @@ E1 및 단계별 승인된 성능 실험 P를 기록한다. E2는 40회 완료�
 기존 VMWeave의 원/확대 성능 결과를 재집계했다. 신규 Flyt는 PyTorch import 오류 및 대체 로딩 설정의 초기화 timeout으로 유효 측정 0구간이며, Flyt 감소율과 시스템 간 차이는 N/A다. 두 VM 동시 MLP 실행이나 성능 우열을 검증한 결과가 아니다. 시험 자원은 회수했다.
 
 재집계·보고서/그래프 생성(GPU 실행 없음): `python3 experiments/thesis-isolation/runner/analyze_flyt_mps_comparison.py`. 의존성은 `matplotlib==3.9.4`, `Markdown==3.10.2`다. 초기화 진단 재실행 도구는 `runner/flyt_mps_initialization.py --help`를 참조한다. 이 도구는 사전 준비한 시험 VM과 로컬 SSH 설정이 필요하며, 자동으로 클러스터를 구성하거나 처리량을 측정하지 않는다.
+
+
+## Flyt MPS 호환성 복구 및 신규 비교 (2026-10-26)
+
+- [호환성 복구 보고서](evidence/20261026-flyt-compatibility/REPORT.md): 기존 VMWeave 패키징을 보존한 독립 Flyt 시험 패치, 검증 근거와 비이동 빌드의 제한.
+- [처리량 비교 보고서·그래프](evidence/20261026-flyt-mps-recovered/REPORT.md): 신규 Flyt와 기존 VMWeave의 반복별 처리량 감소율, 방향별 결과, 절대 처리량 및 실제 부하량. SHM·관측 시간·웜업·패치 및 종료 확인 절차의 차이를 명시한다.
+- 재집계: `python3 experiments/thesis-isolation/runner/analyze_flyt_mps_recovered.py` (GPU/클러스터 접근 없음).
+- [승인된 복구 계획과 실행 기록](config/flyt-compatibility-recovery-plan-20261026.md). 기존 초기화 실패 보고서는 당시 결과로 보존한다.

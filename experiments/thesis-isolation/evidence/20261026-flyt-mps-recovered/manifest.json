@@ -1,0 +1,530 @@
+{
+  "completed_conditions": 30,
+  "completed_repetitions": 10,
+  "guest_vm_instances": 20,
+  "gpu_uuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+  "system": "Flyt MPS with experiment-only compatibility patches",
+  "historical_vmweave_remeasured": false,
+  "warmup": false,
+  "observer_target_s": 120,
+  "load_target_s": 130,
+  "requested_sm": 94,
+  "effective_sm": 94,
+  "memory_limit_bytes": 2147483648,
+  "shm_bytes_per_process": 536870912,
+  "shm_backing_bytes_per_vm": 4294967296,
+  "vmweave_shm_bytes": 67108864,
+  "patch_manifest": "experiments/thesis-isolation/evidence/20261026-flyt-compatibility/manifest.json",
+  "identities": [
+    {
+      "run": "original-r1-ab",
+      "side": "a",
+      "vm_uid": "7e207328-eb32-485e-ac6d-57fb5b9aff1b",
+      "vmi_uid": "0b0bd1bd-4b37-46d9-9ea8-933a9f210f35",
+      "server_pod_uid": "e3b905d3-af82-47b4-a641-8c5fef589c36",
+      "guest_ip": "10.85.0.7",
+      "server_ip": "10.85.0.116",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "e1a767cb6b254cb4a94ba0064794d6bb",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r1-ab",
+      "side": "b",
+      "vm_uid": "27760268-0585-435d-850c-acd99a0793a2",
+      "vmi_uid": "509c26a5-8004-4f2a-9552-a0295f0c80fe",
+      "server_pod_uid": "9cabd97b-8861-4e12-855a-ec37e64b94db",
+      "guest_ip": "10.85.0.90",
+      "server_ip": "10.85.0.157",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "a9ea63a08f7140ceb50547a9d287cf66",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r2-ba",
+      "side": "a",
+      "vm_uid": "51c77c7b-ee7c-4fc7-ad46-d6153e9b6bef",
+      "vmi_uid": "2f01d672-8c81-4183-8746-620d319fcbcb",
+      "server_pod_uid": "7be47e04-d718-41e4-984a-30f2799856b2",
+      "guest_ip": "10.85.0.31",
+      "server_ip": "10.85.0.126",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "df16bf8fe752472c981ef88c5eeb1452",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r2-ba",
+      "side": "b",
+      "vm_uid": "0e59939b-efb2-4314-b4e1-5b9809250647",
+      "vmi_uid": "a43ae092-320d-43d1-84ff-34db89fb8bfc",
+      "server_pod_uid": "ee2e867a-0a49-4702-bf01-6b8dd7db9017",
+      "guest_ip": "10.85.0.84",
+      "server_ip": "10.85.0.132",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "0a3f1808e8cd45d1bc4de2135b2db76e",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r3-ab",
+      "side": "a",
+      "vm_uid": "4bb37945-0ab0-44c6-a429-820461681339",
+      "vmi_uid": "823b9da8-8d84-46a4-8ed2-9193c0f36ed0",
+      "server_pod_uid": "b8c3a715-1c6b-4e93-8cbc-ec24e0248a0a",
+      "guest_ip": "10.85.0.216",
+      "server_ip": "10.85.0.61",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "b9415ac67420483687fcb125e6b178a2",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r3-ab",
+      "side": "b",
+      "vm_uid": "7549459c-1a21-4369-9ed8-929e1e22d74b",
+      "vmi_uid": "a41a79f8-9993-45e3-9e58-f1de3f7a1eba",
+      "server_pod_uid": "bf31fc8f-ee3e-4df0-b67e-b57193dacea6",
+      "guest_ip": "10.85.0.134",
+      "server_ip": "10.85.0.196",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "268b4acc5bba42938507422abd1dfa29",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r4-ba",
+      "side": "a",
+      "vm_uid": "5c447029-7815-42fa-9042-f6fb52ef7e0b",
+      "vmi_uid": "70cac9bb-d6c6-4804-9c57-c2715cee0d67",
+      "server_pod_uid": "c8b93263-23e7-4e74-9626-5bac7068b98f",
+      "guest_ip": "10.85.0.76",
+      "server_ip": "10.85.0.167",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "64dd4eb5faa3443d882b53cd6f434750",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r4-ba",
+      "side": "b",
+      "vm_uid": "18b71cf7-ca22-47c0-b5a9-4ac60a0378bc",
+      "vmi_uid": "6a0e6686-0ad3-457f-bc99-33d4258ac159",
+      "server_pod_uid": "93a48312-8395-459a-af86-3da924fb30f6",
+      "guest_ip": "10.85.0.227",
+      "server_ip": "10.85.0.126",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "54e6bc3c7a2647669f37b32f3f4ed53e",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r5-ab",
+      "side": "a",
+      "vm_uid": "d2b46fe0-65de-4523-a096-7beb9cce4835",
+      "vmi_uid": "f5e2297f-da51-4efc-802d-ec92c556b986",
+      "server_pod_uid": "5d60cda8-bbdb-45e4-9ef1-e03e5372fda3",
+      "guest_ip": "10.85.0.217",
+      "server_ip": "10.85.0.150",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "7fcd0bf83d5243a9bc50624d88a5938d",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "original-r5-ab",
+      "side": "b",
+      "vm_uid": "f13e8bfa-673f-4795-a7e5-5e88eed7ced5",
+      "vmi_uid": "23769587-1543-4776-85ae-6d987a7e18f3",
+      "server_pod_uid": "69da6bfb-b1ad-4a48-ae42-8991fc565ab4",
+      "guest_ip": "10.85.0.152",
+      "server_ip": "10.85.0.84",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "4af8b82a14dc42aeb4624eb31cae62ef",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r1-ba",
+      "side": "a",
+      "vm_uid": "3ceae820-34d2-4fd0-9fd6-2cde4984d4b2",
+      "vmi_uid": "346c0650-8855-410d-a4a4-b62dfb4158ed",
+      "server_pod_uid": "1cfbcc72-69da-4943-a231-bc2e9906cfd8",
+      "guest_ip": "10.85.0.143",
+      "server_ip": "10.85.0.48",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "17ae0b5b5292457baadf7c73af7a3b3e",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r1-ba",
+      "side": "b",
+      "vm_uid": "357e06d0-64e0-41ba-8238-ed4f7ab85f02",
+      "vmi_uid": "003158ca-6c87-4237-9107-3a076fc892af",
+      "server_pod_uid": "045633fb-2e2d-4774-8944-44b8ee06f14d",
+      "guest_ip": "10.85.0.56",
+      "server_ip": "10.85.0.60",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "b989042686f1456fba0d2c603892b538",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r2-ab",
+      "side": "a",
+      "vm_uid": "3325dd11-f973-4000-afbd-6c1508387727",
+      "vmi_uid": "bd0f4259-0702-421f-9b91-91454a889745",
+      "server_pod_uid": "04853945-bd13-42d3-aadb-e20f445869f4",
+      "guest_ip": "10.85.0.60",
+      "server_ip": "10.85.0.62",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "c051f40030f74c138f4c199d0cef3856",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r2-ab",
+      "side": "b",
+      "vm_uid": "40f75cab-8e53-4d51-98ea-d6cb7d43250e",
+      "vmi_uid": "655d3b14-8d0b-4ea3-bf39-ba5b2642818a",
+      "server_pod_uid": "60c35b1f-905d-462c-bb02-2d6b1e379b34",
+      "guest_ip": "10.85.0.111",
+      "server_ip": "10.85.0.227",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "e9e610153fd946f1aa335c04eef014ac",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r3-ba",
+      "side": "a",
+      "vm_uid": "fd02c68c-b997-4ddb-beac-7440a5df4b2a",
+      "vmi_uid": "2d35d166-01e0-4687-ab1b-e39d64e78f62",
+      "server_pod_uid": "c7d0e987-48c2-4df7-8bca-a6277f92dbc1",
+      "guest_ip": "10.85.0.18",
+      "server_ip": "10.85.0.216",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "9bacac0eaa5740b6a14477418dddb2cd",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r3-ba",
+      "side": "b",
+      "vm_uid": "614c682b-f34e-4737-b580-ad7b97884f65",
+      "vmi_uid": "4aa2ae1c-0d7d-4624-8f62-68cee311c3b6",
+      "server_pod_uid": "d2a505d0-a6f1-4ab4-8e5d-3d01bdb8cc53",
+      "guest_ip": "10.85.0.167",
+      "server_ip": "10.85.0.168",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "64d53be1913e4ca1b84e575a2fd73659",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r4-ab",
+      "side": "a",
+      "vm_uid": "08c1109d-4ad1-4a57-a7a0-995036cea05e",
+      "vmi_uid": "d41340e1-d0f5-4429-b2d8-b363544ad225",
+      "server_pod_uid": "22858350-30a5-4aac-b691-ee1bbc9ee1cc",
+      "guest_ip": "10.85.0.126",
+      "server_ip": "10.85.0.95",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "9db6e1cabff44609862e1523c7b39314",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r4-ab",
+      "side": "b",
+      "vm_uid": "98a0e4dd-a3c2-4d0c-a347-b0ceede64525",
+      "vmi_uid": "ad937a83-863a-4ff5-bc6b-fb77bdf7f849",
+      "server_pod_uid": "a02a1e21-04df-4c7a-b820-11847384fd6b",
+      "guest_ip": "10.85.0.54",
+      "server_ip": "10.85.0.168",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "98711648854c494583e8246fc6db5dcb",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r5-ba",
+      "side": "a",
+      "vm_uid": "9a976978-d0b3-4450-a48c-4f93892d322a",
+      "vmi_uid": "134a0516-2068-43e2-b15f-d3f0721ccbf7",
+      "server_pod_uid": "4c8a3ab7-8db7-40f1-b398-5b9e57c460f2",
+      "guest_ip": "10.85.0.156",
+      "server_ip": "10.85.0.91",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "6d46c18d1c294b679c500e27f7ba9fd7",
+      "shm_backing_bytes": 4294967296
+    },
+    {
+      "run": "expanded-r5-ba",
+      "side": "b",
+      "vm_uid": "a2dbc09b-9e80-4d9e-8f56-5571378768a4",
+      "vmi_uid": "a94da874-5a94-4ac4-a421-4c4d01ad63ea",
+      "server_pod_uid": "2546a052-c578-4a41-884b-720973d8ab37",
+      "guest_ip": "10.85.0.157",
+      "server_ip": "10.85.0.218",
+      "vm_cpu_cores": 8,
+      "vm_memory": "16Gi",
+      "images": [
+        {
+          "name": "mongo",
+          "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+          "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+        },
+        {
+          "name": "server",
+          "image": "localhost/flyt-threeway-server:20261025",
+          "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+        }
+      ],
+      "shm_allocation": "2f4a7595ca4e4ed8bbd59a94df9ed69d",
+      "shm_backing_bytes": 4294967296
+    }
+  ],
+  "telemetry": "GPU0 NVML/nvidia-smi and host/backend CPU samples; raw/*/telemetry.jsonl.gz",
+  "selection": "All 30 observer records and 20 load records; no request or replicate discarded. Full private process logs are hashed; credentials, keys and large binaries excluded.",
+  "source_protection": "See compatibility preservation audit; baseline packaging untouched.",
+  "protocol_deviation": {
+    "original-r1-ab": "Load kernels synchronized before done, but no explicit post-free acknowledgment.",
+    "original-r2-ba": "Load kernels synchronized before done, but no explicit post-free acknowledgment.",
+    "original-r3-ab": "Runner was already initializing when the barrier was added; same v1 control sequence.",
+    "remaining_runs": "Zero-request observe command acknowledges queued buffer/cache cleanup; no GPU work or warmup."
+  },
+  "finished_time_utc": 1793012871.627363
+}

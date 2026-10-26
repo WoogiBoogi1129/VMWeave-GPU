@@ -1,0 +1,19 @@
+CUDA 12.8 진입점 계약 확인 기록 (요약; 헤더 주석 원문 재배포 없음)
+
+근거: 기록된 CUDA 12.8.1 빌드 이미지의 cuda_runtime_api.h 및 driver_types.h.
+검토에 사용한 로컬 발췌 SHA256: e8184015ed9c21aa4d6968eb1b0ab44d7a9a520c35af7dcb876621cd6e010dcd
+
+- 조회 함수는 API 이름, 출력 함수 포인터, 요청 CUDA 버전, 스트림 선택 flags,
+  선택적 query-result 출력 인자를 받는다.
+- 반환 cudaError_t와 query-result는 구분한다. 선택적 심볼을 찾지 못했을 때
+  NULL 포인터와 cudaDriverEntryPointSymbolNotFound를 관찰해야 한다.
+  cudaSuccess만으로 호출 가능한 함수를 얻었다고 판단하지 않는다.
+- 요청 버전과 일치하는 진입점이 없을 때 query-result의
+  cudaDriverEntryPointVersionNotSufficent를 구분한다.
+- flags는 default/legacy/per-thread default stream 선택을 나타낸다.
+  이번 구현의 명시적 지원 목록은 스트림 비의존 Driver API 5개다.
+- 이번 패치의 추가 제한: 알 수 없는 미래 ABI는 cudaErrorNotSupported,
+  잘못된 입력·flags는 cudaErrorInvalidValue. Native 라이브러리 fallback 없이
+  같은 Flyt 이미지 소유 함수인지 dladdr로 확인한다.
+- test-entrypoint.c에서 정상 호출, 누락 심볼, 버전·flags, 출력 상태와
+  지원하지 않는 graph/capture 경로를 별도 검증한다.

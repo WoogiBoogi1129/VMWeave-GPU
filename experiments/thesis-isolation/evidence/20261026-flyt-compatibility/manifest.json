@@ -1,0 +1,74 @@
+{
+  "guest": {
+    "base_commit": "f46f604b887d219847868d2857b30ad83e0177f2",
+    "changes": [
+      {
+        "path": "cpu/Makefile",
+        "before_sha256": "fc33d590cff8f29e57533d2390565436cd81be33f240468148c4b4fd5aef1bc2",
+        "after_sha256": "584bab26213392b0642f76d1b93e81ea5ae6ef577443dc1b21dea38960e6049c"
+      },
+      {
+        "path": "cpu/cpu-client-entrypoint.c",
+        "before_sha256": null,
+        "after_sha256": "ed0c7af6063d775d0f7295f3a3c2f5ee23d7565d98cacc84d2905b0ca39fefd2"
+      },
+      {
+        "path": "cpu/cpu-client-ivshmem.c",
+        "before_sha256": "11fae6ad56d2a8240f24e175028405f58c97ed28cdc9fefa4b5703851b6bfb01",
+        "after_sha256": "785e8630740c5de94fc5f372b5c441262c9012490f2e220371ebeb5fc1b08593"
+      },
+      {
+        "path": "cpu/cpu-client.c",
+        "before_sha256": "6328e34774d0233b36e628b54544c996b6e2e7b4e55ed7aa09e010963762dd24",
+        "after_sha256": "145d6d65253c5b467815cac8969d7c12ee5bfdf6cea1fe0cde46a81f6da220a1"
+      },
+      {
+        "path": "cpu/test-entrypoint.c",
+        "before_sha256": null,
+        "after_sha256": "2d9dc53485144be3a331d32bdda85cbdb084e3157c5402a24e883841f4d0867d"
+      }
+    ],
+    "binary_sha256": "9550a433a750e2c35b632706aca142fc8f6d4aa8b62effa9005603789dd40d64"
+  },
+  "host": {
+    "base_commit": "06af9de1e9fcf3ddeea28a2c3bd64284dde1bd30",
+    "changes": [
+      {
+        "path": "cpu/cpu-server-driver.c",
+        "before_sha256": "b543bb89d6088772306284e1fb474292420530cdda47235bbfe15629991bf283",
+        "after_sha256": "b633118b0a2458d9defe9b1f290e2c8ed5400742a5fc11849775d1d932a84340"
+      },
+      {
+        "path": "cpu/cpu-server-driver.h",
+        "before_sha256": "34452046344b810f6308f1888bec3b88ba1f98395a2960a44c7688f9b522a73a",
+        "after_sha256": "30afa55d271dd8014d800182ead4710ed0981ebfea529e7cea5db33642cf3312"
+      },
+      {
+        "path": "cpu/cpu-server-resource-controller.c",
+        "before_sha256": "d1bc290994fd3342f6733dcd0b6706bbe1368c8d58a52f167a2826e9459b8008",
+        "after_sha256": "ae1976c925a6b1a8b97fc75390db92969d3b01806123dd04c3bcda707aa88f62"
+      },
+      {
+        "path": "cpu/cpu-server-runtime.c",
+        "before_sha256": "637cfe1fbd609549afbe87c1f3f1548e80f6343a225aeadce0991b9209deb7d0",
+        "after_sha256": "9c22a624809dabf39c71aab1b539797d9fad350b6b9f6b8c2934ff7ac29ade9a"
+      },
+      {
+        "path": "cpu/flyt-cr.c",
+        "before_sha256": "c5ed0b39d72a4fdd4e8a323bed164d7f6bccfba9c2bfe973868884e6b64f1803",
+        "after_sha256": "ec753279ed14a527aaf7442c85069f0fc3d62bd064b6b6d882f10f38049d77cd"
+      },
+      {
+        "path": "cpu/resource-map.c",
+        "before_sha256": "b143d90813b363bf54ce82ac951d94cb71b93c061c5bf7536fbbdbd19e4d5d00",
+        "after_sha256": "45779cac1e1c61139670f6ddec81517c76c061de3d81771c8a875b3442bd1f53"
+      },
+      {
+        "path": "cpu/resource-map.h",
+        "before_sha256": "4cb762489da315049a8bd64da2074b65908f420d0a95a1fcf4bd5534a1b8ade4",
+        "after_sha256": "b47630b198cfa7b4b696ce0457ac640bb5444b142c824b449b3fca40f2ba00f1"
+      }
+    ],
+    "binary_sha256": "3533300d4d7eef18aa55fdf2b7a01d2e892282422d7d0c264f4588538a4410c6"
+  }
+}

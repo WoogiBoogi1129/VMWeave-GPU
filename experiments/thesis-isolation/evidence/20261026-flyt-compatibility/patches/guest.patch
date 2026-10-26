@@ -1,0 +1,201 @@
+--- a/cpu/Makefile
++++ b/cpu/Makefile
+@@ -57,7 +57,7 @@
+ SRC_SERVER_LIB = server-library.c
+ SRC_SERVER_EXE = server-exe.c
+ 
+-SRC_CLIENT = $(RPC_XDR)                 \
++SRC_CLIENT = cpu-client-entrypoint.c $(RPC_XDR)                 \
+ 			 $(RPC_CLIENT)              \
+ 			 cpu-client.c               \
+ 			 cpu-utils.c                \
+--- /dev/null
++++ b/cpu/cpu-client-entrypoint.c
+@@ -0,0 +1,70 @@
++/* Flyt-only CUDA 12.8 runtime entrypoint compatibility. No native fallback. */
++#define _GNU_SOURCE
++#include <cuda_runtime_api.h>
++#include <dlfcn.h>
++#include <stdio.h>
++#include <string.h>
++
++struct entry { const char *base; const char *export; unsigned minimum; int stream_sensitive; };
++static const struct entry entries[] = {
++ {"cuDeviceGet", "cuDeviceGet", 2000, 0},
++ {"cuDeviceGetAttribute", "cuDeviceGetAttribute", 2000, 0},
++ {"cuCtxGetCurrent", "cuCtxGetCurrent", 4000, 0},
++ {"cuCtxSetCurrent", "cuCtxSetCurrent", 4000, 0},
++ {"cuGetErrorString", "cuGetErrorString", 6000, 0},
++};
++cudaError_t cudaGetDriverEntryPointByVersion(const char *symbol, void **out,
++ unsigned version, unsigned long long flags, enum cudaDriverEntryPointQueryResult *status)
++{
++ if (out) *out = NULL;
++ if (status) *status = cudaDriverEntryPointSymbolNotFound;
++ if (!symbol || !out || flags > cudaEnablePerThreadDefaultStream) return cudaErrorInvalidValue;
++ const struct entry *entry = NULL;
++ for (unsigned i=0; i<sizeof(entries)/sizeof(entries[0]); ++i)
++  if (!strcmp(symbol, entries[i].base)) {entry=&entries[i];break;}
++ if (!entry) return cudaSuccess; /* missing optional API: NULL + SymbolNotFound */
++ if (version < entry->minimum) {
++  if (status) *status = cudaDriverEntryPointVersionNotSufficent;
++  return cudaSuccess;
++ }
++ /* Fail closed on unknown future ABI rather than invent support. */
++ if (version > CUDART_VERSION) return cudaErrorNotSupported;
++ Dl_info own, found;
++ void *p=dlsym(RTLD_DEFAULT, entry->export);
++ if (!p || !dladdr((void *)&cudaGetDriverEntryPointByVersion,&own) ||
++     !dladdr(p,&found) || own.dli_fbase!=found.dli_fbase) return cudaErrorNotSupported;
++ *out=p;
++ if (status) *status=cudaDriverEntryPointSuccess;
++ return cudaSuccess;
++}
++cudaError_t cudaGetDriverEntryPoint(const char *symbol,void **out,
++ unsigned long long flags,enum cudaDriverEntryPointQueryResult *status)
++{
++ return cudaGetDriverEntryPointByVersion(symbol,out,CUDART_VERSION,flags,status);
++}
++
++/* New imports required by the fixed PyTorch build. Unsupported graph features
++ * fail explicitly; the eager workload must not silently rely on them. */
++cudaError_t cudaStreamGetCaptureInfo_v2(cudaStream_t stream,
++ enum cudaStreamCaptureStatus *status, unsigned long long *id,
++ cudaGraph_t *graph, const cudaGraphNode_t **dependencies, size_t *count)
++{
++ if (!status) return cudaErrorInvalidValue;
++ cudaError_t e=cudaStreamIsCapturing(stream,status);
++ if (e!=cudaSuccess) return e;
++ if (*status!=cudaStreamCaptureStatusNone) return cudaErrorNotSupported;
++ if(id)*id=0; if(graph)*graph=NULL; if(dependencies)*dependencies=NULL; if(count)*count=0;
++ return cudaSuccess;
++}
++cudaError_t cudaEventRecordWithFlags(cudaEvent_t event,cudaStream_t stream,unsigned flags)
++{ return flags ? cudaErrorNotSupported : cudaEventRecord(event,stream); }
++cudaError_t cudaGraphDebugDotPrint(cudaGraph_t graph,const char *path,unsigned flags)
++{ return cudaErrorNotSupported; }
++cudaError_t cudaGraphInstantiateWithFlags(cudaGraphExec_t *out,cudaGraph_t graph,unsigned long long flags)
++{ if(out)*out=NULL; return cudaErrorNotSupported; }
++cudaError_t cudaLaunchKernelExC(const cudaLaunchConfig_t *config,const void *func,void **args)
++{
++ if (!config || !func) return cudaErrorInvalidValue;
++ if (config->numAttrs) return cudaErrorNotSupported;
++ return cudaLaunchKernel(func,config->gridDim,config->blockDim,args,config->dynamicSmemBytes,config->stream);
++}
+--- a/cpu/cpu-client-ivshmem.c
++++ b/cpu/cpu-client-ivshmem.c
+@@ -15,6 +15,8 @@
+ #include <sys/msg.h>
+ #include <fcntl.h>
+ #include <errno.h>
++#include <dirent.h>
++#include <limits.h>
+ #include "cpu-utils.h"
+ 
+ ivshmem_clnt_ctx *ivshmem_ctx = NULL; 
+@@ -124,27 +126,28 @@
+ }
+ 
+ #define MAX_LINE_LENGTH 4096
++/* Discover the ivshmem BAR without spawning a shell. LD_PRELOAD constructors
++ * otherwise recursively run in the lspci shell before it executes its command. */
+ char *_get_pci_path_clnt() {
+-    FILE *pipe = popen("lspci -D | grep 'RAM memory: Red Hat, Inc. Inter-VM shared memory'", "r");
+-    char buffer[MAX_LINE_LENGTH];
+-    char *pci_path = NULL;
+-
+-    if (pipe && fgets(buffer, sizeof(buffer), pipe)) {
+-        // Locate the first space in the output to isolate the PCI identifier
+-        char *space_pos = strchr(buffer, ' ');
+-        if (space_pos) {
+-            *space_pos = '\0'; // Truncate the string at the first space
+-
+-            // Allocate memory for the full path
+-            pci_path = malloc(strlen("/sys/bus/pci/devices/") + strlen(buffer) + strlen("/resource2") + 1);
+-            if (pci_path) {
+-                sprintf(pci_path, "/sys/bus/pci/devices/%s/resource2", buffer);
+-            }
+-        }
+-    }
+-    
+-    pclose(pipe);
+-    return pci_path;
++    DIR *dir=opendir("/sys/bus/pci/devices");
++    if (!dir) return NULL;
++    struct dirent *entry; char *result=NULL; unsigned matches=0;
++    while ((entry=readdir(dir))) {
++        if (entry->d_name[0]=='.') continue;
++        char path[PATH_MAX]; unsigned vendor=0,device=0;
++        snprintf(path,sizeof(path),"/sys/bus/pci/devices/%s/vendor",entry->d_name);
++        FILE *f=fopen(path,"r"); if(!f)continue;
++        int ok=fscanf(f,"%x",&vendor)==1; fclose(f); if(!ok||vendor!=0x1af4)continue;
++        snprintf(path,sizeof(path),"/sys/bus/pci/devices/%s/device",entry->d_name);
++        f=fopen(path,"r");if(!f)continue;
++        ok=fscanf(f,"%x",&device)==1;fclose(f);if(!ok||device!=0x1110)continue;
++        snprintf(path,sizeof(path),"/sys/bus/pci/devices/%s/resource2",entry->d_name);
++        if(access(path,F_OK))continue;
++        ++matches; if(matches==1)result=strdup(path);
++    }
++    closedir(dir);
++    if(matches!=1){free(result);return NULL;}
++    return result;
+ }
+ 
+ // clnt manager has a counter for last-used shm offset.
+--- a/cpu/cpu-client.c
++++ b/cpu/cpu-client.c
+@@ -319,15 +319,14 @@
+     int has_kernel = 0;
+     LOG(LOG_DBG(1), "intercepted dlopen(%s, %d)", filename, flag);
+ 
+-    if (filename == NULL) {
+-        return dlopen_orig(filename, flag);
+-    }
+-
+     if (dlopen_orig == NULL) {
+         if ((dlopen_orig = dlsym(RTLD_NEXT, "dlopen")) == NULL) {
+             LOGE(LOG_ERROR, "[dlopen] dlsym failed");
+         }
+     }
++
++    if (!dlopen_orig) return NULL;
++    if (!filename) return dlopen_orig(NULL, flag);
+ 
+     static const char *replace_libs[] = {
+         "libcuda.so.1",
+--- /dev/null
++++ b/cpu/test-entrypoint.c
+@@ -0,0 +1,33 @@
++#include <assert.h>
++#include <cuda.h>
++#include <cuda_runtime_api.h>
++#include <stdio.h>
++CUresult cuDeviceGet(CUdevice *d,int ordinal){*d=ordinal;return CUDA_SUCCESS;}
++static int captures=0,records=0,launches=0;
++cudaError_t cudaStreamIsCapturing(cudaStream_t s,enum cudaStreamCaptureStatus *v){*v=captures?cudaStreamCaptureStatusActive:cudaStreamCaptureStatusNone;return cudaSuccess;}
++cudaError_t cudaEventRecord(cudaEvent_t e,cudaStream_t s){records++;return cudaSuccess;}
++cudaError_t cudaLaunchKernel(const void *f,dim3 g,dim3 b,void **a,size_t m,cudaStream_t s){launches++;return cudaSuccess;}
++extern cudaError_t cudaStreamGetCaptureInfo_v2(cudaStream_t,enum cudaStreamCaptureStatus*,unsigned long long*,cudaGraph_t*,const cudaGraphNode_t**,size_t*);
++int main(void){
++ void *p=(void*)1;enum cudaDriverEntryPointQueryResult st;
++ assert(cudaGetDriverEntryPointByVersion("cuDeviceGet",&p,12080,0,&st)==cudaSuccess);
++ assert(p==(void*)cuDeviceGet && st==cudaDriverEntryPointSuccess);
++ CUdevice d=-1;assert(((CUresult(*)(CUdevice*,int))p)(&d,7)==CUDA_SUCCESS && d==7);
++ assert(cudaGetDriverEntryPointByVersion("cuDeviceGet",&p,1000,0,&st)==cudaSuccess && !p && st==cudaDriverEntryPointVersionNotSufficent);
++ assert(cudaGetDriverEntryPointByVersion("noSuchAPI",&p,12080,0,&st)==cudaSuccess && !p && st==cudaDriverEntryPointSymbolNotFound);
++ assert(cudaGetDriverEntryPointByVersion("cuDeviceGet",&p,99999,0,&st)==cudaErrorNotSupported && !p);
++ assert(cudaGetDriverEntryPointByVersion("cuDeviceGet",&p,12080,8,&st)==cudaErrorInvalidValue && !p);
++ assert(cudaGetDriverEntryPointByVersion(NULL,&p,12080,0,&st)==cudaErrorInvalidValue);
++ assert(cudaGetDriverEntryPointByVersion("cuDeviceGet",NULL,12080,0,&st)==cudaErrorInvalidValue);
++ assert(cudaGetDriverEntryPoint("cuDeviceGet",&p,0,NULL)==cudaSuccess && p);
++ enum cudaStreamCaptureStatus cs;unsigned long long id=9;size_t count=9;
++ assert(cudaStreamGetCaptureInfo_v2(0,&cs,&id,NULL,NULL,&count)==cudaSuccess && cs==cudaStreamCaptureStatusNone && id==0 && count==0);
++ captures=1;assert(cudaStreamGetCaptureInfo_v2(0,&cs,NULL,NULL,NULL,NULL)==cudaErrorNotSupported);
++ assert(cudaEventRecordWithFlags(0,0,1)==cudaErrorNotSupported && records==0);
++ assert(cudaEventRecordWithFlags(0,0,0)==cudaSuccess && records==1);
++ cudaLaunchConfig_t config={0};config.numAttrs=1;
++ assert(cudaLaunchKernelExC(&config,(void*)1,NULL)==cudaErrorNotSupported && launches==0);
++ config.numAttrs=0;assert(cudaLaunchKernelExC(&config,(void*)1,NULL)==cudaSuccess && launches==1);
++ assert(cudaGraphDebugDotPrint(0,"/tmp/unused",0)==cudaErrorNotSupported);
++ puts("PASS entrypoint/query status, ABI pointer call, unsupported flags/version/graphs, capture and launch forwarding");
++}

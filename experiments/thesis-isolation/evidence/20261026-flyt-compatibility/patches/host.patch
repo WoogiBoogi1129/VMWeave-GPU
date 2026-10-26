@@ -1,0 +1,440 @@
+--- a/cpu/cpu-server-driver.c
++++ b/cpu/cpu-server-driver.c
+@@ -423,6 +423,17 @@
+     return 1;
+ }
+ 
++CUresult resolve_registered_function(cricket_client *client, addr_data_pair_t *fn) {
++    if (fn->addr) return CUDA_SUCCESS;
++    if (fn->reg_data.type != MODULE_GET_FUNCTION || !fn->reg_data.data)
++        return CUDA_ERROR_INVALID_HANDLE;
++    rpc_cumodulegetfunction_1_argument *args = fn->reg_data.data;
++    addr_data_pair_t *module = NULL;
++    if (resource_mg_get(&client->modules, (void*)args->arg1, (void**)&module))
++        return CUDA_ERROR_INVALID_HANDLE;
++    return cuModuleGetFunction((CUfunction*)&fn->addr, module->addr, args->arg2);
++}
++
+ // Does not support checkpoint/restart yet
+ bool_t rpc_register_function_1_svc(ptr fatCubinHandle, ptr hostFun, char* deviceFun,
+                             char* deviceName, int thread_limit, ptr_result *result, struct svc_req *rqstp)
+@@ -448,27 +459,21 @@
+         return 1;
+     }
+ 
+-    CUfunction func_d_ptr;
+-
+-    result->err = cuModuleGetFunction(&func_d_ptr,
+-                    module->addr,
+-                    deviceName);
+-    
+-
+-    if (result->err == CUDA_SUCCESS) {
+-
+-        rpc_cumodulegetfunction_1_argument *reg_args = malloc(sizeof(rpc_cumodulegetfunction_1_argument));
+-        // list_append(&rm_function_regs, (void**)&reg_args);
+-        reg_args->arg1 = fatCubinHandle;
+-        reg_args->arg2 = strdup(deviceName);
+-
+-        addr_data_pair_t *func_info = malloc(sizeof(addr_data_pair_t));
+-        func_info->addr = func_d_ptr;
+-        func_info->reg_data.type = MODULE_GET_FUNCTION;
+-        func_info->reg_data.size = sizeof(rpc_cumodulegetfunction_1_argument);
+-        func_info->reg_data.data = reg_args;
+-
+-        resource_mg_add_sorted(&client->functions, (void*)hostFun, (void*)func_info);
++    /* Runtime registration records a name; resolve/load code at first launch. */
++    rpc_cumodulegetfunction_1_argument *reg_args = calloc(1, sizeof(*reg_args));
++    addr_data_pair_t *func_info = calloc(1, sizeof(*func_info));
++    if (!reg_args || !func_info || !(reg_args->arg2 = strdup(deviceName))) {
++        free(reg_args); free(func_info); result->err = CUDA_ERROR_OUT_OF_MEMORY;
++        GSCHED_RELEASE; return 1;
++    }
++    reg_args->arg1 = fatCubinHandle;
++    func_info->reg_data.type = MODULE_GET_FUNCTION;
++    func_info->reg_data.size = sizeof(*reg_args);
++    func_info->reg_data.data = reg_args;
++    result->err = CUDA_SUCCESS;
++    if (resource_mg_add_sorted(&client->functions, (void*)hostFun, func_info)) {
++        free(reg_args->arg2); free(reg_args); free(func_info);
++        result->err = CUDA_ERROR_OUT_OF_MEMORY;
+     }
+ 
+     RECORD_RESULT(ptr_result_u, *result);
+@@ -986,6 +991,8 @@
+         return 1;
+     }
+ 
++    *result = resolve_registered_function(client, f_ptr);
++    if (*result != CUDA_SUCCESS) { free(cuda_args); GSCHED_RELEASE; return 1; }
+     LOGE(LOG_DEBUG, "cuLaunchKernel(func=%p->%p, gridDim=[%d,%d,%d], blockDim=[%d,%d,%d], args=%p, sharedMem=%d, stream=%p)", f, f_ptr, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, cuda_args, sharedMemBytes, (void*)hStream);
+     
+     cudaStream_t target_stream = hStream ? resource_map_get_addr(client->custom_streams, (void *)hStream) : client->default_stream;
+@@ -994,11 +1001,11 @@
+ 
+ 
+ 
+-    *result = cuLaunchKernel((CUfunction)f_ptr,
++    *result = cuLaunchKernel((CUfunction)((addr_data_pair_t*)f_ptr)->addr,
+                               gridDimX, gridDimY, gridDimZ,
+                               blockDimX, blockDimY, blockDimZ,
+                               sharedMemBytes,
+-                              (CUstream)hStream,
++                              (CUstream)target_stream,
+                               cuda_args, NULL);
+     GSCHED_RELEASE;
+ 
+--- a/cpu/cpu-server-driver.h
++++ b/cpu/cpu-server-driver.h
+@@ -3,6 +3,8 @@
+ 
+ #include <cuda.h>
+ #include "cpu-server-client-mgr.h"
++
++CUresult resolve_registered_function(cricket_client *client, addr_data_pair_t *fn);
+ 
+ int server_driver_init(int restore);
+ int server_driver_deinit(void);
+--- a/cpu/cpu-server-resource-controller.c
++++ b/cpu/cpu-server-resource-controller.c
+@@ -122,7 +122,8 @@
+ int allow_mem_alloc(uint64_t size) {
+     size_t gpu_memusage = get_gpu_memory_usage();
+     LOGE(LOG_DEBUG, "Current memory usage: %zu, mem_limit: %llu", gpu_memusage, mem_limit);
+-    if (gpu_memusage + size > mem_limit) {
++    if (size > mem_limit || gpu_memusage > mem_limit - size) {
++        fprintf(stderr, "COMPAT memory denied requested=%llu current=%zu limit=%llu\n", (unsigned long long)size, gpu_memusage, (unsigned long long)mem_limit);
+         return 0;
+     }
+     return 1;
+@@ -213,6 +214,12 @@
+         return -1;
+     }
+ 
++    CUexecAffinityParam actual;
++    CUresult affinity_status = cuCtxGetExecAffinity(&actual, CU_EXEC_AFFINITY_TYPE_SM_COUNT);
++    fprintf(stderr, "COMPAT affinity requested_sm=%u query_status=%d effective_sm=%u memory_limit=%llu\n",
++            num_sm_cores, affinity_status,
++            affinity_status == CUDA_SUCCESS ? actual.param.smCount.val : 0,
++            (unsigned long long)mem);
+     return init_device_management(active_device);
+ }
+ 
+--- a/cpu/cpu-server-runtime.c
++++ b/cpu/cpu-server-runtime.c
+@@ -1218,7 +1218,7 @@
+     cuda_args = malloc(param_num*sizeof(void*));
+     for (size_t i = 0; i < param_num; ++i) {
+         cuda_args[i] = args.mem_data_val+sizeof(size_t)+param_num*sizeof(uint16_t)+arg_offsets[i];
+-        *(void**)cuda_args[i] = resource_map_get_addr_default(client->gpu_mem, *(void**)cuda_args[i], *(void**)cuda_args[i]);
++        /* CUDA pointer values, including nested fields, are already valid. */
+         LOGE(LOG_DEBUG, "arg: %p (%d)", *(void**)cuda_args[i], *(int*)cuda_args[i]);
+     }
+ 
+@@ -1229,6 +1229,9 @@
+         GSCHED_RELEASE;
+         return 1;
+     }
++
++    *result = resolve_registered_function(client, func_ptr);
++    if (*result != CUDA_SUCCESS) { free(cuda_args); GSCHED_RELEASE; return 1; }
+ 
+     LOGE(LOG_DEBUG, "cudaLaunchKernel(func=%p, gridDim=[%d,%d,%d], blockDim=[%d,%d,%d], args=%p, sharedMem=%d, stream=%p)",
+                     func_ptr->addr,
+@@ -1711,17 +1714,19 @@
+             }    
+ #else
+     PRIMARY_CTX_RETAIN;
+-    void *dev_mem_ptr; // true device address is passed here by cudamalloc
+-    result->err = cudaMalloc(&dev_mem_ptr, argp); // malloc argp bytes.
++    void *dev_mem_ptr = NULL;
++    result->err = cudaMalloc(&dev_mem_ptr, argp);
++    if (result->err == cudaSuccess && dev_mem_ptr) {
++        mem_alloc_args_t *args = calloc(1, sizeof(*args));
++        if (args) { args->type = MEM_ALLOC_TYPE_DEFAULT; args->size = argp; }
++        if (!args || resource_map_add_range(client->gpu_mem, dev_mem_ptr,
++                    args, argp, (void **)&result->ptr_result_u.ptr) != 0) {
++            cudaFree(dev_mem_ptr);
++            free(args);
++            result->err = cudaErrorMemoryAllocation;
++        }
++    }
+     PRIMARY_CTX_RELEASE;
+-    // resource_mg_create(&rm_memory, (void *)result->ptr_result_u.ptr);
+-    mem_alloc_args_t *args = malloc(sizeof(mem_alloc_args_t));
+-    args->type = MEM_ALLOC_TYPE_DEFAULT;
+-    args->size = argp;
+-    // store a gpu alloc struct in the gpu_mem map, and return the server heap virtual address 
+-    // of the alloc struct back to the client.
+-    // note that the alloc struct contains the true device address.
+-    resource_map_add(client->gpu_mem, dev_mem_ptr, args, (void**)&(result->ptr_result_u.ptr)); 
+ #endif
+ 
+     RECORD_RESULT(ptr_result_u, *result); // store api call metadata. on server.
+@@ -1766,7 +1771,11 @@
+         args->height = height;
+         args->width = width;
+         args->pitch = pptr.pitch;
+-        resource_map_add(client->gpu_mem, (void*)pptr.ptr, args, (void**)&(result->pptr_result_u.ptr.ptr));
++        args->size = pptr.pitch * height * depth;
++        if (resource_map_add_range(client->gpu_mem, pptr.ptr, args, args->size,
++                (void**)&result->pptr_result_u.ptr.ptr)) {
++            cudaFree(pptr.ptr); free(args); result->err = cudaErrorMemoryAllocation;
++        }
+     }
+ 
+     RECORD_RESULT(integer, result->err);
+@@ -1871,7 +1880,12 @@
+         args->width = width;
+         args->height = height;
+         args->pitch = result->ptrsz_result_u.data.s;
+-        resource_map_add(client->gpu_mem, (void*)result->ptrsz_result_u.data.p, args, (void**)&(result->ptrsz_result_u.data.p));
++        args->size = args->pitch * height;
++        if (resource_map_add_range(client->gpu_mem, (void*)result->ptrsz_result_u.data.p,
++                args, args->size, (void**)&result->ptrsz_result_u.data.p)) {
++            cudaFree((void*)result->ptrsz_result_u.data.p); free(args);
++            result->err = cudaErrorMemoryAllocation;
++        }
+     }
+ 
+     RECORD_RESULT(integer, result->err);
+--- a/cpu/flyt-cr.c
++++ b/cpu/flyt-cr.c
+@@ -145,6 +145,9 @@
+ 
+ 
+ int flyt_create_checkpoint(char *basepath) {
++    LOGE(LOG_ERROR, "Direct-pointer compatibility build does not support checkpoint/migration");
++    return -1;
++
+ 
+     SET_EXEC_CTX;
+ 
+@@ -444,6 +447,9 @@
+ 
+ 
+ int flyt_restore_checkpoint(char *basepath) {
++    LOGE(LOG_ERROR, "Direct-pointer compatibility build does not support checkpoint/migration");
++    return -1;
++
+ 
+     SET_EXEC_CTX;
+ 
+--- a/cpu/resource-map.c
++++ b/cpu/resource-map.c
+@@ -12,7 +12,7 @@
+     if (map == NULL) {
+         return NULL;
+     }
+-    map->list = (resource_map_item*)malloc(sizeof(resource_map_item) * init_length);
++    map->list = (resource_map_item*)calloc(init_length, sizeof(resource_map_item));
+     if (map->list == NULL) {
+         free(map);
+         return NULL;
+@@ -41,6 +41,7 @@
+     if (map->list != NULL) {
+         free(map->list);
+     }
++    pthread_mutex_unlock(&map->mutex);
+     pthread_mutex_destroy(&map->mutex);
+     free(map);
+ }
+@@ -53,45 +54,63 @@
+     return (uint64_t)addr - OFFSET;
+ }
+ 
+-resource_map_item* resource_map_get(resource_map* map, void* addr) {
+-    pthread_mutex_lock(&map->mutex);
+-    resource_map_item *val = &(map->list[(uint64_t)addr - OFFSET]); // this is the address of a r_m_item
+-    pthread_mutex_unlock(&map->mutex);
+-    return val;
+-}
+-
+-void* resource_map_get_addr(resource_map* map, void *addr) {
+-    if (resource_map_contains(map, addr)) {
+-        return resource_map_get(map, addr)->mapped_addr;
+-    }
+-    return NULL;
+-}
+-
+-void* resource_map_get_addr_default(resource_map* map, void *addr, void* default_addr) {
+-    if (resource_map_contains(map, addr)) {
+-        return resource_map_get(map, addr)->mapped_addr;
+-    }
+-    return default_addr;
+-}
+-
+-int resource_map_update_addr_idx(resource_map* map, uint64_t idx, void* new_addr) {
+-    if (!resource_map_contains(map, resource_map_addr_from_index(idx))) {
+-        return -1;
+-    }
+-    pthread_mutex_lock(&map->mutex);
+-    map->list[idx].mapped_addr = new_addr;
+-    pthread_mutex_unlock(&map->mutex);
+-    return 0;
+-}
+-
+-uint8_t resource_map_contains(resource_map* map, void* addr) {
+-    pthread_mutex_lock(&map->mutex);
+-    uint8_t val = (uint64_t)addr - OFFSET < map->tail_idx && map->list[(uint64_t)addr - OFFSET].present;
+-    pthread_mutex_unlock(&map->mutex);
+-    return val;
+-}
+-
+-// is mapped_addr given? Yes, it is a true GPU VA.
++/* Range lookup is restricted to allocations owned by this client map. */
++static uint64_t find_index(resource_map *map, void *addr) {
++    uint64_t v = (uintptr_t)addr;
++    for (uint64_t i = 1; i < map->tail_idx; ++i) {
++        resource_map_item *e = &map->list[i];
++        if (e->present && e->extent && v >= e->client_base &&
++            v - e->client_base < e->extent) return i;
++    }
++    uint64_t i = v - OFFSET;
++    return i > 0 && i < map->tail_idx && map->list[i].present &&
++           !map->list[i].extent ? i : 0;
++}
++
++resource_map_item *resource_map_get(resource_map *map, void *addr) {
++    pthread_mutex_lock(&map->mutex);
++    uint64_t i = find_index(map, addr);
++    resource_map_item *e = i ? &map->list[i] : NULL;
++    pthread_mutex_unlock(&map->mutex);
++    return e;
++}
++
++void *resource_map_get_addr(resource_map *map, void *addr) {
++    pthread_mutex_lock(&map->mutex);
++    uint64_t i = find_index(map, addr);
++    void *v = NULL;
++    if (i) {
++        resource_map_item *e = &map->list[i];
++        uint64_t off = e->extent ? (uintptr_t)addr - e->client_base : 0;
++        v = (void *)((uintptr_t)e->mapped_addr + off);
++    }
++    pthread_mutex_unlock(&map->mutex);
++    return v;
++}
++
++void *resource_map_get_addr_default(resource_map *map, void *addr, void *fallback) {
++    void *v = resource_map_get_addr(map, addr);
++    return v ? v : fallback;
++}
++
++int resource_map_update_addr_idx(resource_map *map, uint64_t idx, void *addr) {
++    pthread_mutex_lock(&map->mutex);
++    int rc = -1;
++    if (idx > 0 && idx < map->tail_idx && map->list[idx].present) {
++        map->list[idx].mapped_addr = addr;
++        rc = 0;
++    }
++    pthread_mutex_unlock(&map->mutex);
++    return rc;
++}
++
++uint8_t resource_map_contains(resource_map *map, void *addr) {
++    pthread_mutex_lock(&map->mutex);
++    uint8_t found = find_index(map, addr) != 0;
++    pthread_mutex_unlock(&map->mutex);
++    return found;
++}
++
+ int resource_map_add(resource_map* map, void* mapped_addr, void *args, void **client_addr) {
+     pthread_mutex_lock(&map->mutex);
+     if (map->free_ptr_idx >= map->length && map->tail_idx >= map->length) {
+@@ -101,12 +120,14 @@
+             return -1;
+         }
+         map->list = new_list;
++        memset(map->list + map->length, 0, sizeof(resource_map_item) * map->length);
+         map->length *= 2;
+     }
+     if (map->tail_idx == map->free_ptr_idx) {
+         map->list[map->tail_idx].mapped_addr = mapped_addr;
+         map->list[map->tail_idx].args = args;
+         map->list[map->tail_idx].present = 1;
++        map->list[map->tail_idx].extent = 0;
+         *client_addr = (void*)(map->tail_idx + OFFSET); // return the pointer to where the true addr is stored.
+         map->tail_idx++;
+         map->free_ptr_idx++;
+@@ -117,21 +138,51 @@
+         map->list[alloc_idx].mapped_addr = (void*)mapped_addr;
+         map->list[alloc_idx].args = args;
+         map->list[alloc_idx].present = 1;
++        map->list[alloc_idx].extent = 0;
+         *client_addr = (void*)(alloc_idx + OFFSET);
+     }
+     pthread_mutex_unlock(&map->mutex);
+     return 0;
+ }
+ 
+-void resource_map_unset(resource_map* map, void* client_addr) {
+-    uint64_t idx = (uint64_t)client_addr - OFFSET;
+-
+-    pthread_mutex_lock(&map->mutex);
+-
+-    map->list[idx].mapped_addr = (void*)map->free_ptr_idx;
+-    map->list[idx].present = 0;
+-    free(map->list[idx].args);
+-    map->free_ptr_idx = idx;
++/* Non-migrating compatibility build: preserve CUDA pointer values even when
++ * nested in by-value kernel structs. Ownership/range lookup remains per client.
++ * CUDA may reuse an address after cudaFree, as in a native process. */
++int resource_map_add_range(resource_map *map, void *addr, void *args,
++                           uint64_t size, void **out) {
++    uint64_t base = (uintptr_t)addr;
++    if (!addr || !size || size > UINT64_MAX - base) return -1;
++    pthread_mutex_lock(&map->mutex);
++    for (uint64_t i = 1; i < map->tail_idx; ++i) {
++        resource_map_item *e = &map->list[i];
++        if (e->present && e->extent && base < e->client_base + e->extent &&
++            e->client_base < base + size) {
++            pthread_mutex_unlock(&map->mutex); return -1;
++        }
++    }
++    void *token;
++    int rc = resource_map_add(map, addr, args, &token);
++    if (!rc) {
++        resource_map_item *e = &map->list[resource_map_index_from_addr(token)];
++        e->client_base = base;
++        e->extent = size;
++        *out = addr;
++    }
++    pthread_mutex_unlock(&map->mutex);
++    return rc;
++}
++
++void resource_map_unset(resource_map *map, void *addr) {
++    pthread_mutex_lock(&map->mutex);
++    uint64_t idx = find_index(map, addr);
++    if (idx && (!map->list[idx].extent ||
++                map->list[idx].client_base == (uintptr_t)addr)) {
++        map->list[idx].mapped_addr = (void *)map->free_ptr_idx;
++        map->list[idx].present = 0;
++        free(map->list[idx].args);
++        map->list[idx].args = NULL;
++        map->free_ptr_idx = idx;
++    }
+     pthread_mutex_unlock(&map->mutex);
+ }
+ 
+--- a/cpu/resource-map.h
++++ b/cpu/resource-map.h
+@@ -8,6 +8,8 @@
+     void *mapped_addr;
+     void *args;
+     uint8_t present;
++    uint64_t client_base;
++    uint64_t extent;
+ } resource_map_item;
+ 
+ typedef struct __resource_map {
+@@ -45,6 +47,8 @@
+ 
+ int resource_map_add(resource_map *map, void *orig_addr, void* args, void **mapped_addr);
+ 
++int resource_map_add_range(resource_map *map, void *addr, void *args, uint64_t size, void **client_addr);
++
+ void resource_map_unset(resource_map *map, void *mapped_addr);
+ 
+ resource_map_iter *resource_map_init_iter(resource_map *map);

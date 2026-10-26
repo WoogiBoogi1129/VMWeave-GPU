@@ -1,0 +1,26 @@
+here, pid=5367
+here, send_id=0
+here, htonl pid=-149684224
+here2
+From Control Plane: 10.85.0.84,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.84
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 1
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 0
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7f203df0c000
+clnttcp_create done.
+{"malloc": 0, "base_h2d": 0, "offset_d2h": 0, "value": 2.0, "free": 0, "client_address": "0x100000000000000"}
+api-call-cnt: 4
+memcpy-api-calls: 2
+Non-memcpy-api-calls: 2
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 20

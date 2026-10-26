@@ -1,0 +1,29 @@
+{
+  "pass": true,
+  "method": "Read exactly 8 bytes at each known ELF execCtx/primaryCtx symbol in owned server processes; no ptrace attach, no calls or signals. Compare cgroup pod UID and logged cuCtxGetCurrent values.",
+  "sampled_run": "original-r3-ab",
+  "server_symbol_offsets": {
+    "execCtx": "0x51b38",
+    "primaryCtx": "0x51b40"
+  },
+  "sides": {
+    "a": {
+      "pod_uid": "b8c3a715-1c6b-4e93-8cbc-ec24e0248a0a",
+      "pid": 258718,
+      "recorded_runtime_contexts": [
+        "0x5941a58e7cc0"
+      ],
+      "server_exec_context": "0x5941a58e7cc0",
+      "matches": true
+    },
+    "b": {
+      "pod_uid": "bf31fc8f-ee3e-4df0-b67e-b57193dacea6",
+      "pid": 258710,
+      "recorded_runtime_contexts": [
+        "0x5ca116ce8f60"
+      ],
+      "server_exec_context": "0x5ca116ce8f60",
+      "matches": true
+    }
+  }
+}
