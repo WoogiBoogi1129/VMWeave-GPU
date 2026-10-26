@@ -1,0 +1,22 @@
+{
+  "request": {
+    "name": "bulk-w-1026-v054-fault-worker",
+    "uid": "7697fde7-bf11-4e5c-9de8-2dbf0474b447"
+  },
+  "channel": {
+    "name": "bulk-w-1026-v054-fault-worker",
+    "uid": "1f346cd5-ca99-47a5-b065-d7f7bf04d34d"
+  }
+}
+Running as unit: rodinia-affinity-bulk-w-1026-v054-fault-worker.service; invocation ID: 07bf397f3ccf441f9e8b556ef6f5e60b
+Created symlink /etc/systemd/system/multi-user.target.wants/vmweave-guest-broker.service → /etc/systemd/system/vmweave-guest-broker.service.
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/v054-release-20261026/fault.py", line 15, in <module>
+    assert len(ids)==1,ps
+           ^^^^^^^^^^^
+AssertionError:     PID COMMAND
+      1 python3 /opt/vmweave/control/supervisor.py
+    176 /opt/vmweave/bin/vmweave-shm-session-worker /flyt-channel/5f534fa2bb205d86815180974391eb0d 0
+    206 vmweave-shm-session-worker --session 6
+    212 ps -eo pid,args
+

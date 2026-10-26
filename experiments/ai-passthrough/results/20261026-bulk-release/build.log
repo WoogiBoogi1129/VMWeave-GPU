@@ -1,0 +1,108 @@
+[1/3] STEP 1/9: FROM docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85 AS build
+[1/3] STEP 2/9: RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake python3 && rm -rf /var/lib/apt/lists/*
+--> Using cache 6438dfe909057c759fc7a943681e7761fe81e1d08e0d2cda7ddd4c036307c1c2
+--> 6438dfe90905
+[1/3] STEP 3/9: COPY runtime/shm /src/runtime/shm
+--> b17f2be2b9f7
+[1/3] STEP 4/9: RUN cmake -S /src/runtime/shm -B /build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/vmweave     && cmake --build /build --parallel 2 && cmake --install /build
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found CUDAToolkit: /usr/local/cuda/include (found suitable version "12.8.93", minimum required is "12.8") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build
+[  3%] Building C object queue/CMakeFiles/vmweave_shm_queue.dir/src/queue.c.o
+[  7%] Building C object exec/CMakeFiles/vmweave_cuda_exec.dir/src/exec.c.o
+[ 11%] Linking C static library libvmweave_cuda_exec.a
+[ 11%] Built target vmweave_cuda_exec
+[ 15%] Building C object exec/CMakeFiles/vmweave_cuda_runtime.dir/src/runtime.c.o
+[ 19%] Building C object queue/CMakeFiles/vmweave_shm_queue.dir/src/perf.c.o
+[ 23%] Linking C static library libvmweave_cuda_runtime.a
+[ 23%] Built target vmweave_cuda_runtime
+[ 26%] Linking C static library libvmweave_shm_queue.a
+[ 26%] Built target vmweave_shm_queue
+[ 30%] Building C object CMakeFiles/vmweave_mapping.dir/src/mapping.c.o
+[ 34%] Linking C static library libvmweave_mapping.a
+[ 34%] Built target vmweave_mapping
+[ 38%] Building C object CMakeFiles/vmweave_dispatch.dir/src/dispatch.c.o
+[ 42%] Building C object CMakeFiles/vmweave_guest.dir/src/broker_client.c.o
+[ 46%] Linking C static library libvmweave_dispatch.a
+[ 46%] Built target vmweave_dispatch
+[ 50%] Building C object CMakeFiles/vmweave_guest.dir/src/guest.c.o
+[ 53%] Building C object CMakeFiles/vmweave_guest.dir/src/guest_async.c.o
+[ 57%] Building C object CMakeFiles/vmweave_guest.dir/src/guest_compat.c.o
+[ 61%] Building C object CMakeFiles/vmweave_guest.dir/src/guest_torch.c.o
+[ 65%] Building C object CMakeFiles/vmweave_async.dir/src/async.c.o
+[ 69%] Linking C shared library libvmweave_guest.so
+[ 73%] Building C object CMakeFiles/vmweave_async.dir/src/torch.c.o
+[ 73%] Built target vmweave_guest
+[ 76%] Linking C static library libvmweave_async.a
+[ 76%] Built target vmweave_async
+[ 80%] Building C object CMakeFiles/vmweave_compat.dir/src/compat.c.o
+[ 84%] Linking C static library libvmweave_compat.a
+[ 84%] Built target vmweave_compat
+[ 88%] Building C object CMakeFiles/vmweave-shm-worker.dir/src/worker.c.o
+[ 92%] Building C object CMakeFiles/vmweave-shm-session-worker.dir/src/worker_sessions.c.o
+[ 96%] Linking C executable vmweave-shm-worker
+[100%] Linking C executable vmweave-shm-session-worker
+[100%] Built target vmweave-shm-worker
+[100%] Built target vmweave-shm-session-worker
+-- Install configuration: "Release"
+-- Installing: /opt/vmweave/bin/vmweave-shm-worker
+-- Set runtime path of "/opt/vmweave/bin/vmweave-shm-worker" to ""
+-- Installing: /opt/vmweave/lib/libvmweave_guest.so
+-- Installing: /opt/vmweave/bin/vmweave-shm-session-worker
+-- Set runtime path of "/opt/vmweave/bin/vmweave-shm-session-worker" to ""
+--> 77a4a38208e5
+[1/3] STEP 5/9: COPY tests/integration /src/tests/integration
+--> bbe102652c96
+[1/3] STEP 6/9: COPY scripts/test-shm-training.sh /src/scripts/test-shm-training.sh
+--> 401402b501bf
+[1/3] STEP 7/9: RUN mkdir -p /tmp/vmweave-test-stubs     && ln -s /usr/local/cuda/lib64/stubs/libcuda.so /tmp/vmweave-test-stubs/libcuda.so.1     && LD_LIBRARY_PATH=/tmp/vmweave-test-stubs:/usr/local/cuda/lib64 bash /src/scripts/test-shm-training.sh /build     && rm -rf /tmp/vmweave-test-stubs
+PASS: adjacent refs, bounds, VA collision preservation and exact reservation
+PASS: large sync/async copies, Default, offsets, all directions, Driver wrappers, preflight bounds/overlap/overflow, partial failure, short replies, old peers, small arenas
+PASS: large sync/async copies, Default, offsets, all directions, Driver wrappers, preflight bounds/overlap/overflow, partial failure, short replies, old peers, small arenas
+PASS: packed layout/count/length validation, unknown handles, upload capacity/order/completeness and cleanup
+PASS: async byte budget/backpressure, completion cleanup, large D2D, overlap/unknown handle/overflow rejection
+PASS: in-flight failure requests process retirement without unsafe free
+PASS: in-flight failure requests process retirement without unsafe free
+PASS: in-flight failure requests process retirement without unsafe free
+PASS: memory-info encoding, bounds, CUDA errors, inconsistent observations and closed/wrong-thread guards
+PASS: OOM preserves existing allocation, free, retry and clean shutdown
+PASS: non-OOM failure remains terminal and extensions reject the session
+PASS: private input/output borrowing, capacity preflight, ownership and bounds
+PASS: borrowed output failure poisons context without freeing caller buffer
+PASS: guarded payload tails, private snapshot, single pending, receive retry, corrupted offset and timeout
+PASS: guarded payload tails, private snapshot, single pending, receive retry, corrupted offset and timeout
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+OK
+--> 864b05e457a4
+[1/3] STEP 8/9: COPY experiments/evidence/guest_gpu_smoke.c /src/guest_gpu_smoke.c
+--> fc743a149caf
+[1/3] STEP 9/9: RUN cc -O2 -I/usr/local/cuda/include /src/guest_gpu_smoke.c -L/opt/vmweave/lib     -Wl,-rpath,'$ORIGIN' -lvmweave_guest -o /opt/vmweave/lib/guest-gpu-smoke
+--> 5ed5728966d1
+[3/3] STEP 1/6: FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f AS guest-artifacts
+[3/3] STEP 2/6: COPY --from=build /opt/vmweave/lib/libvmweave_guest.so /opt/vmweave/lib/guest-gpu-smoke /opt/vmweave/guest/
+--> 110bb557d5d7
+[3/3] STEP 3/6: RUN ln -s vmweave /opt/flyt && ln -s libvmweave_guest.so /opt/vmweave/guest/libflyt_guest.so && ln -s libvmweave_guest.so /opt/vmweave/guest/libcuda.so.1
+--> 354c8837f2d5
+[3/3] STEP 4/6: COPY runtime/shm/control/vmweave_env.py runtime/shm/control/guest_broker.py runtime/shm/control/guest_bootstrap.py runtime/shm/control/vmweave-guest-broker.service runtime/shm/control/install_guest_broker.sh /opt/vmweave/guest/
+--> 0fc773c4cea5
+[3/3] STEP 5/6: ARG SOURCE_REVISION=unknown
+--> a645a43d0474
+[3/3] STEP 6/6: RUN printf "%s\n" "$SOURCE_REVISION" > /opt/vmweave/guest/source-revision.txt     && cd /opt/vmweave/guest && sha256sum libvmweave_guest.so libflyt_guest.so vmweave_env.py guest-gpu-smoke guest_broker.py guest_bootstrap.py vmweave-guest-broker.service install_guest_broker.sh source-revision.txt > SHA256SUMS
+[3/3] COMMIT localhost/vmweave-guest-artifacts:v054-validation
+--> e43d27cd3a76
+Successfully tagged localhost/vmweave-guest-artifacts:v054-validation
+e43d27cd3a76fd271a64122ea92f4b952f2cb2c8623232987c7ee968c16e8a9a

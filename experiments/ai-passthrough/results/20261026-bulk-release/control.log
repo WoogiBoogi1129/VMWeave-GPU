@@ -1,0 +1,21 @@
+..client disconnected: EOFError
+client disconnected: EOFError
+....client disconnected: ValueError
+..client disconnected: ValueError
+.......{"event": "channel_review", "level": "INFO", "message": "vms vm is unavailable", "name": "example", "namespace": "review", "reason": "DependencyNotReady", "uid": "channel-uid"}
+..{"event": "dependency_wait", "level": "INFO", "message": "PVC pending", "name": "example"}
+....{"event": "channel_review", "level": "INFO", "message": "vms vm is unavailable", "name": "example", "namespace": "review", "reason": "DependencyNotReady", "uid": "channel-uid"}
+.{"event": "channel_review", "level": "INFO", "message": "vms vm is unavailable", "name": "example", "namespace": "review", "reason": "DependencyNotReady", "uid": "channel-uid"}
+.{"event": "channel_review", "level": "INFO", "message": "Declared dependencies are present; execution remains disabled", "name": "example", "namespace": "review", "reason": "DependenciesPresent", "uid": "channel-uid"}
+.......................client disconnected: EOFError
+.client disconnected: EOFError
+.client disconnected: EOFError
+client disconnected: EOFError
+client disconnected: EOFError
+client disconnected: EOFError
+.client disconnected: EOFError
+................s........................................
+----------------------------------------------------------------------
+Ran 106 tests in 6.992s
+
+OK (skipped=1)
