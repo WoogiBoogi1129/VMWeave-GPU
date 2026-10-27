@@ -1,0 +1,24 @@
+test_cert_manager_release_dns_and_injection (test_deployment.ChartTests.test_cert_manager_release_dns_and_injection) ... ok
+test_cert_manager_requires_issuer (test_deployment.ChartTests.test_cert_manager_requires_issuer) ... ok
+test_empty_secret_name_rejected (test_deployment.ChartTests.test_empty_secret_name_rejected) ... ok
+test_existing_ca_required (test_deployment.ChartTests.test_existing_ca_required) ... ok
+test_existing_tls_and_pull_secrets (test_deployment.ChartTests.test_existing_tls_and_pull_secrets) ... ok
+test_staged_install_has_no_webhook_registration (test_deployment.ChartTests.test_staged_install_has_no_webhook_registration) ... ok
+test_dra_does_not_require_classic_extended_resources (test_deployment.PreflightTests.test_dra_does_not_require_classic_extended_resources) ... ok
+test_hami_resources_and_ready (test_deployment.PreflightTests.test_hami_resources_and_ready) ... ok
+test_unready_and_missing_gpu_are_not_success (test_deployment.PreflightTests.test_unready_and_missing_gpu_are_not_success) ... ok
+test_mixed_revision_does_not_write_lock (test_deployment.ReleaseTests.test_mixed_revision_does_not_write_lock) ... ok
+test_cycle_finishes_halted_with_fresh_allocation (test_deployment.SmokeTests.test_cycle_finishes_halted_with_fresh_allocation) ... ok
+test_default_does_not_patch_vm (test_deployment.SmokeTests.test_default_does_not_patch_vm) ... ok
+test_failed_program_does_not_report_pass (test_deployment.SmokeTests.test_failed_program_does_not_report_pass) ... ok
+test_identity_replacement_aborts (test_deployment.SmokeTests.test_identity_replacement_aborts) ... ok
+test_active_controller_blocks_install_and_migration_for_both_names (test_legacy_utilities.LegacyUtilities.test_active_controller_blocks_install_and_migration_for_both_names) ... ok
+test_cpu_image_layer_matches_entrypoint_and_retains_alias (test_legacy_utilities.LegacyUtilities.test_cpu_image_layer_matches_entrypoint_and_retains_alias) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.609s
+
+OK
+/tmp/tmpw6jorico/result/events.json
+/tmp/tmp9w7mklmw/result/events.json
+Built /tmp/tmpj5_ylz66/image.tar revision aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
