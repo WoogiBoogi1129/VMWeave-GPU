@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "sourceRevision": "2fd0461febbb481d187fa87de895537a14991f18",
+  "guestLibrarySHA256": "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5",
+  "vmUID": "7c130b93-4bca-4264-827d-1c6e7a02a121",
+  "vmiUID": "7a10ddb6-eb22-4995-be06-c72700a2449f",
+  "channelUID": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6",
+  "channelPhase": "Ready",
+  "pvcRef": {
+    "name": "vmweave-k8s-shm",
+    "uid": "884022bd-07b1-4a8b-b212-572f7b7ffcb0"
+  },
+  "scope": "Published Guest/Worker GPU copy/kernel and math-mode API verification; no production fault injection",
+  "releaseDefault": "binary options off; published Worker image enables reuse/arena/eventfd/pinned pool",
+  "productionPaths": "Broker bulk/reuse/gather/owner and application bulk/direct/native enabled; sudo/service workloads require explicit environment"
+}

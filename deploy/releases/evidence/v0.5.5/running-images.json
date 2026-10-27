@@ -1,0 +1,92 @@
+[
+  {
+    "namespace": "vmweave-system",
+    "name": "vmweave-controller-74c445d4b4-grgmw",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "controller",
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2"
+      }
+    ],
+    "ready": true,
+    "imageIDs": [
+      {
+        "name": "controller",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2"
+      }
+    ]
+  },
+  {
+    "namespace": "vmweave-system",
+    "name": "vmweave-webhook-784c4b4d85-b4qr4",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "webhook",
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2"
+      }
+    ],
+    "ready": true,
+    "imageIDs": [
+      {
+        "name": "webhook",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2"
+      }
+    ]
+  },
+  {
+    "namespace": "vmweave-dra-driver",
+    "name": "hami-dra-driver-kubelet-plugin-5jld4",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "gpus",
+        "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+      }
+    ],
+    "ready": true,
+    "imageIDs": [
+      {
+        "name": "gpus",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+      }
+    ]
+  },
+  {
+    "namespace": "vmweave-test-a",
+    "name": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21-prepare",
+    "phase": "Succeeded",
+    "containers": [
+      {
+        "name": "main",
+        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574"
+      }
+    ],
+    "ready": false,
+    "imageIDs": [
+      {
+        "name": "main",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574"
+      }
+    ]
+  },
+  {
+    "namespace": "vmweave-test-a",
+    "name": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21-worker",
+    "phase": "Running",
+    "containers": [
+      {
+        "name": "main",
+        "image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da"
+      }
+    ],
+    "ready": true,
+    "imageIDs": [
+      {
+        "name": "main",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da"
+      }
+    ]
+  }
+]

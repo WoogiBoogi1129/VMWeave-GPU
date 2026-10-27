@@ -54,7 +54,8 @@ The release preserves v0.5.4's fatal bulk-error fencing and environment-preservi
 
 ## Rollback
 
-Restore the captured previous Guest/Broker package and environment, previous approved Profile/Request/channel
-image references, and the saved Helm revision while the VM is stopped. Preserve the VM and root/SHM PVC identities.
+With no active clients, stop the Broker and restore the captured previous Guest/Broker package and environment.
+Halt the VM and wait for channel Stopped before restoring the previous approved Profile/Request/channel image
+references and saved Helm revision, then boot a fresh VMI. Preserve the VM and root/SHM PVC identities.
 Do not mix an old Worker with an enabled native-memset Guest. Disabling only an application option is not a
 complete rollback of the combined Broker/Worker configuration.

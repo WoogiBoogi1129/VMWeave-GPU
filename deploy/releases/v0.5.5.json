@@ -1,0 +1,85 @@
+{
+  "sourceRevision": "2fd0461febbb481d187fa87de895537a14991f18",
+  "tag": "v0.5.5",
+  "scope": "Published v0.5.5 digests and source labels checked; isolated GPU canary and production verification passed. Labels are not cryptographic provenance.",
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:62ee0936806d6d88a176f9dae472481a8bbafe959158fee6079d3e69cd99758b",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:9d8c205787b3dcdd62126748ff5cac27c420ba3c46138bc0671e735185886c17",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:b121e13c9a2278b1699120cd81d8398808494b3020ab2270cb4197745a76e9df"
+  },
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.5.5",
+    "digest": "sha256:acc9eb77db646644fc854aa69b7ce8d5c6e549528bd8ac7efe5c1a62182c4f25"
+  },
+  "workflows": {
+    "v0.5.5:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499139655",
+    "v0.5.5:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499139520",
+    "v0.5.5:hami-dra-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499139709",
+    "v0.5.5:hami-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499139809",
+    "v0.5.5:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499139581",
+    "main:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499127507",
+    "main:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499127518",
+    "main:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499127515",
+    "main:Documentation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499127509",
+    "main:CPU control plane": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/40499127566"
+  },
+  "publishedDateKST": "2026-10-27",
+  "verification": {
+    "control": "115 tests: 114 passed, 1 skipped; includes independently isolated direct and ordinary bulk probes",
+    "deployment": "16 passed",
+    "build": "Full Release CUDA 12.8 build, CPU path tests, CUDA mock and legacy C regressions passed; public runtime image build repeats C/layout/CUDA-mock tests",
+    "canary": "Published Guest/Worker at 50%/2048MiB: 60 memset kernels, 18 large sync/async copies through 128MiB+1, 140 alternating stream enqueues; NW/LU/SRAD/SC output hashes match native references",
+    "production": "Published Guest hash/source, GPU kernel/copy smoke with cache OFF/ON, math-mode API, 18 large sync/async copies and NW/LU output hashes; no production fault injection",
+    "limitations": "Compute Sanitizer did not reach Worker readiness in prior campaign; not qualified. Canary and live runs establish bounded correctness, not a new comparative performance estimate."
+  },
+  "deployment": {
+    "helmRevision": 13,
+    "updatedComponents": [
+      "operator",
+      "helper",
+      "hook",
+      "worker",
+      "guest-artifacts"
+    ],
+    "retainedComponents": [
+      "HAMi 2.10.0",
+      "DRA Helm revision 5"
+    ],
+    "allocation": {
+      "cores": 50,
+      "memoryMiB": 2048,
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "nodeName": "gpu-4"
+    },
+    "application": {
+      "VMWEAVE_BULK_COPY": "1",
+      "VMWEAVE_BULK_DIRECT": "1",
+      "VMWEAVE_NATIVE_MEMSET": "1"
+    },
+    "broker": {
+      "VMWEAVE_BULK_COPY": "1",
+      "VMWEAVE_BROKER_REUSE": "1",
+      "VMWEAVE_BROKER_GATHER": "1",
+      "VMWEAVE_BROKER_OWNER": "1"
+    },
+    "worker": {
+      "VMWEAVE_WORKER_REUSE": "1",
+      "VMWEAVE_SESSION_ARENA": "1",
+      "VMWEAVE_SESSION_EVENTFD": "1",
+      "VMWEAVE_PINNED_POOL": "1"
+    },
+    "vmAndPVCsPreserved": true,
+    "rollback": "Captured v0.5.4 Guest/Broker/configuration, Helm revision 12, prior GPUProfile/GPURequest and channel spec retained locally. Restore the matched package/config before fresh VM binding."
+  },
+  "measuredComparison": {
+    "candidateControlTimeRatio": 0.6573206,
+    "candidateFlytSHMTimeRatio": 1.1004737,
+    "source": "experiments/ai-passthrough/results/20261027-path-optimization-vm",
+    "interpretation": "34.3% less time versus options-OFF bulk-enabled control; 10.0% more than Flyt SHM. Explicit user request authorized deployment despite prior conditional no-promotion outcome."
+  }
+}

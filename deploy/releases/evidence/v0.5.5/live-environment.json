@@ -1,0 +1,38 @@
+{
+  "broker": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_BROKER_REUSE": "1",
+    "VMWEAVE_BROKER_GATHER": "1",
+    "VMWEAVE_BROKER_OWNER": "1"
+  },
+  "applicationLogin": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_BULK_DIRECT": "1",
+    "VMWEAVE_NATIVE_MEMSET": "1"
+  },
+  "service": "active",
+  "sourceRevision": "2fd0461febbb481d187fa87de895537a14991f18",
+  "worker": {
+    "VMWEAVE_WORKER_REUSE": "1",
+    "VMWEAVE_SESSION_ARENA": "1",
+    "VMWEAVE_SESSION_EVENTFD": "1",
+    "VMWEAVE_PINNED_POOL": "1"
+  },
+  "allocation": {
+    "cores": 50,
+    "memoryMiB": 2048,
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "nodeName": "gpu-4"
+  },
+  "helm": {
+    "revision": 13,
+    "updated": "2026-10-27T21:07:34.319290745+09:00",
+    "status": "deployed",
+    "chart": "vmweave-operator-0.5.5",
+    "app_version": "0.5.5",
+    "description": "Upgrade complete"
+  },
+  "draHelmRevision": 5,
+  "otherHelmReleasesUnchanged": true,
+  "workerProcesses": "    PID COMMAND\n      1 python3 /opt/vmweave/control/supervisor.py\n    177 /opt/vmweave/bin/vmweave-shm-session-worker /flyt-channel/736a0d218ccce1cab1c2132b86c4fb36 0\n    248 ps -eo pid,args\n"
+}
