@@ -1,0 +1,80 @@
+{
+  "status": "PREPARING",
+  "modes": [
+    "flyt",
+    "control",
+    "candidate"
+  ],
+  "transport_comparator": "Flyt SHM, not TCP",
+  "rounds": 5,
+  "orders": [
+    [
+      "flyt",
+      "control",
+      "candidate"
+    ],
+    [
+      "control",
+      "candidate",
+      "flyt"
+    ],
+    [
+      "candidate",
+      "flyt",
+      "control"
+    ],
+    [
+      "flyt",
+      "candidate",
+      "control"
+    ],
+    [
+      "candidate",
+      "control",
+      "flyt"
+    ]
+  ],
+  "fresh_VM_per_condition": true,
+  "workloads": [
+    "nw",
+    "lu",
+    "srad",
+    "sc"
+  ],
+  "warmups": 1,
+  "samples_per_VM": {
+    "nw": 3,
+    "lu": 3,
+    "srad": 3,
+    "sc": 1
+  },
+  "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+  "memory_MiB": 8192,
+  "gpu_compute_percent": 100,
+  "qemu_cpus": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39
+  ],
+  "backend_cpus": [
+    40,
+    41,
+    42,
+    43
+  ],
+  "primary_metric": "per-session median completion-inclusive workload seconds; equal-weight geometric mean of candidate/Flyt ratios",
+  "promotion_gate": "all correctness/lifecycle checks pass; geometric-mean candidate/Flyt ratio paired bootstrap 95% upper bound <1; every individual workload ratio 95% upper bound <=1.05; no critical copy-path regression; actual VM recovery passes",
+  "inferential_unit": "independent VM round, not in-process sample",
+  "performance_promotion": "conditional user authorization; do not promote mixed/inconclusive/losing result",
+  "candidate_source_manifest_sha256": "99ddad3bcf1bf8b6c6a6fc90e3f6d7cf565342998c1790f0b8a4e23fa33f97ab",
+  "transport_notes": {
+    "Flyt": "ivshmem payload plus RPC control; 4 GiB backing, original chunk policy",
+    "VMWeave": "64 MiB backing, 17 MiB per direction arenas, 16 MiB logical copy chunks",
+    "interpretation": "128MiB+1 includes different request counts; <=16MiB cases separate relay/copy costs from chunk amplification"
+  }
+}

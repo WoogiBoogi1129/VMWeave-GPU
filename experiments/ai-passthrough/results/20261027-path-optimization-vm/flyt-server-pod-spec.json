@@ -1,0 +1,107 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "flyt-server",
+    "namespace": "path-flyt-1027",
+    "annotations": {
+      "nvidia.com/use-gpuuuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+    }
+  },
+  "spec": {
+    "schedulerName": "hami-scheduler",
+    "runtimeClassName": "nvidia",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "automountServiceAccountToken": false,
+    "restartPolicy": "Never",
+    "terminationGracePeriodSeconds": 15,
+    "containers": [
+      {
+        "name": "server",
+        "image": "localhost/flyt-threeway-server:20261025",
+        "imagePullPolicy": "Never",
+        "command": [
+          "sleep",
+          "7200"
+        ],
+        "securityContext": {
+          "runAsUser": 0
+        },
+        "resources": {
+          "limits": {
+            "nvidia.com/gpu": 1,
+            "nvidia.com/gpumem": 8192,
+            "nvidia.com/gpucores": 100
+          }
+        },
+        "volumeMounts": [
+          {
+            "name": "shm",
+            "mountPath": "/flyt-channel"
+          },
+          {
+            "name": "cuda",
+            "mountPath": "/usr/local/cuda/lib64/stubs/libcuda.so.1",
+            "readOnly": true
+          },
+          {
+            "name": "nvml",
+            "mountPath": "/usr/local/cuda/lib64/stubs/libnvidia-ml.so.1",
+            "readOnly": true
+          }
+        ]
+      },
+      {
+        "name": "mongo",
+        "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+        "imagePullPolicy": "IfNotPresent",
+        "command": [
+          "mongod",
+          "--bind_ip",
+          "127.0.0.1",
+          "--port",
+          "28025",
+          "--dbpath",
+          "/data/db"
+        ],
+        "securityContext": {
+          "runAsUser": 0
+        },
+        "volumeMounts": [
+          {
+            "name": "mongo",
+            "mountPath": "/data/db"
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "shm",
+        "persistentVolumeClaim": {
+          "claimName": "shm"
+        }
+      },
+      {
+        "name": "cuda",
+        "hostPath": {
+          "path": "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02",
+          "type": "File"
+        }
+      },
+      {
+        "name": "nvml",
+        "hostPath": {
+          "path": "/usr/lib/x86_64-linux-gnu/libnvidia-ml.so.580.173.02",
+          "type": "File"
+        }
+      },
+      {
+        "name": "mongo",
+        "emptyDir": {}
+      }
+    ]
+  }
+}

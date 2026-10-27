@@ -44,6 +44,10 @@ void vmweave_shm_close(struct vmweave_shm_channel *);
 /* Explicit peer failure/timeout signal from future supervisor; local only. */
 void vmweave_shm_abort(struct vmweave_shm_channel *);
 
+struct vmweave_shm_part { const void *data; size_t bytes; };
+/* Local-only gather; wire format unchanged. At most two private descriptors. */
+int vmweave_shm_submit_parts(struct vmweave_shm_channel *,const struct vmweave_shm_request *,const struct vmweave_shm_part *,size_t);
+
 /* Guest submit/receive are declared by vmweave_shm_contract.h. receive's function
  * return is delivery status; response.transport_status is the remote result.
  * try_receive is nonblocking. A too-small output buffer leaves response queued
@@ -59,6 +63,10 @@ int vmweave_shm_try_receive(struct vmweave_shm_channel *, uint64_t request_id,
  */
 int vmweave_shm_worker_take(struct vmweave_shm_channel *, struct vmweave_shm_request *);
 void vmweave_shm_request_release(struct vmweave_shm_request *);
+/* Caller owns storage until execution/response completes. Never pass a borrowed
+ * request to request_release. Too-small storage does not consume the request. */
+int vmweave_shm_worker_take_into(struct vmweave_shm_channel *,struct vmweave_shm_request *,void *,size_t);
+void vmweave_shm_request_clear_borrowed(struct vmweave_shm_request *);
 size_t vmweave_shm_response_capacity(const struct vmweave_shm_channel *);
 int vmweave_shm_worker_respond(struct vmweave_shm_channel *,
                            const struct vmweave_shm_response *);

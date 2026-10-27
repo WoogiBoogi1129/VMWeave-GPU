@@ -1,0 +1,80 @@
+[
+  {
+    "uid": "0aea6f9e-f35a-42b0-8e82-681a736c143c",
+    "cpus": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "processes": [
+      {
+        "pid": 4194231,
+        "command": "/opt/flyt-qemu/qemu-kvm -L /opt/flyt-qemu/share/qemu -name guest=vmweave-test-a_path-w-1027-qual-spin50-candidate,debug-threads=on -S -object {\"qom-type\":\"secret\",\"id\":\"masterKey0\",\"format\":\"raw\",\"file\":\"/var/run/kubevirt-private/libvirt/qemu/lib/domain-1-vmweave-test-a_path-/master-key.aes\"} -machine pc-q35-rhel9.8.0,usb=off,vmport=off,dump-guest-core=off,acpi=on -accel kvm -cpu GraniteRapids,dtes64=on,vmx=on,pdcm=on,hypervisor=on,ds=on,ss=on,tsc-adjust=on,fdp-excptn-only=on,zero-fcs-fds=on,waitpkg=on,cldemote=on,movdiri=on,movdir64b=on,md-clear=on,stibp=on,flush-l1d=on,intel-psfd=on,ipred-ctrl=on,rrsba-ctrl=on,ddpd-u=on,bhi-ctrl=on,ibpb=on,ibrs=on,amd-stibp=on,amd-ssbd=on,tsx-ctrl=on,gds-no=on,rfds-no=on,its-no=on,vmx-activity-wait-sipi=on,vmx-tsc-scaling=on,vmx-enable-user-wait-pause=on,hle=off,rtm=off,amx-fp16=off,prefetchiti=off,mcdt-no=off,taa-no=off,pbrsb-no=off -m size=16777216k,maxmem=67108864k -overcommit mem-lock=off -smp 8,sockets=1,dies=1,clusters=1,cores=8,threads=1 -object {\"qom-type\":\"memory-backend-ram\",\"id\":\"ram-node0\",\"size\":17179869184} -numa node,nodeid=0,cpus=0-7,memdev=ram-node0 -uuid 4eb83b94-f719-4eea-ab00-a3c237a8c55d -smbios type=1,manufacturer=KubeVirt,product=None,serial=9a0ecb31-b796-4b4d-a531-65384cf17cae,uuid=4eb83b94-f719-4eea-ab00-a3c237a8c55d,family=KubeVirt -no-user-config -nodefaults -chardev socket,id=charmonitor,fd=20,server=on,wait=off -mon chardev=charmonitor,id=monitor,mode=control -rtc base=utc -no-shutdown -boot strict=on -device {\"driver\":\"pcie-root-port\",\"port\":16,\"chassis\":1,\"id\":\"pci.1\",\"bus\":\"pcie.0\",\"multifunction\":true,\"addr\":\"0x2\"} -device {\"driver\":\"pcie-root-port\",\"port\":17,\"chassis\":2,\"id\":\"pci.2\",\"bus\":\"pcie.0\",\"addr\":\"0x2.0x1\"} -device {\"driver\":\"pcie-root-port\",\"port\":18,\"chassis\":3,\"id\":\"pci.3\",\"bus\":\"pcie.0\",\"addr\":\"0x2.0x2\"} -device {\"driver\":\"pcie-root-port\",\"port\":19,\"chassis\":4,\"id\":\"pci.4\",\"bus\":\"pcie.0\",\"addr\":\"0x2.0x3\"} -device {\"driver\":\"pcie-root-port\",\"port\":20,\"chassis\":5,\"id\":\"pci.5\",\"bus\":\"pcie.0\",\"addr\":\"0x2.0x4\"} -device {\"driver\":\"pcie-root-port\",\"port\":21,\"chassis\":6,\"id\":\"pci.6\",\"bus\":\"pcie.0\",\"addr\":\"0x2.0x5\"} -device {\"driver\":\"pcie-root-port\",\"port\":22,\"chassis\":7,\"id\":\"pci.7\",\"bus\":\"pcie.0\",\"addr\":\"0x2.0x6\"} -device {\"driver\":\"pcie-root-port\",\"port\":23,\"chassis\":8,\"id\":\"pci.8\",\"bus\":\"pcie.0\",\"addr\":\"0x2.0x7\"} -device {\"driver\":\"pcie-root-port\",\"port\":24,\"chassis\":9,\"id\":\"pci.9\",\"bus\":\"pcie.0\",\"multifunction\":true,\"addr\":\"0x3\"} -device {\"driver\":\"pcie-root-port\",\"port\":25,\"chassis\":10,\"id\":\"pci.10\",\"bus\":\"pcie.0\",\"addr\":\"0x3.0x1\"} -device {\"driver\":\"pcie-root-port\",\"port\":26,\"chassis\":11,\"id\":\"pci.11\",\"bus\":\"pcie.0\",\"addr\":\"0x3.0x2\"} -device {\"driver\":\"pcie-root-port\",\"port\":27,\"chassis\":12,\"id\":\"pci.12\",\"bus\":\"pcie.0\",\"addr\":\"0x3.0x3\"} -device {\"driver\":\"pcie-root-port\",\"port\":28,\"chassis\":13,\"id\":\"pci.13\",\"bus\":\"pcie.0\",\"addr\":\"0x3.0x4\"} -device {\"driver\":\"pcie-root-port\",\"port\":29,\"chassis\":14,\"id\":\"pci.14\",\"bus\":\"pcie.0\",\"addr\":\"0x3.0x5\"} -device {\"driver\":\"pcie-root-port\",\"port\":30,\"chassis\":15,\"id\":\"pci.15\",\"bus\":\"pcie.0\",\"addr\":\"0x3.0x6\"} -device {\"driver\":\"pcie-root-port\",\"port\":31,\"chassis\":16,\"id\":\"pci.16\",\"bus\":\"pcie.0\",\"addr\":\"0x3.0x7\"} -device {\"driver\":\"virtio-scsi-pci-non-transitional\",\"id\":\"scsi0\",\"bus\":\"pci.5\",\"addr\":\"0x0\"} -device {\"driver\":\"virtio-serial-pci-non-transitional\",\"id\":\"virtio-serial0\",\"bus\":\"pci.6\",\"addr\":\"0x0\"} -blockdev {\"driver\":\"file\",\"filename\":\"/var/run/kubevirt/container-disks/disk_0.img\",\"node-name\":\"libvirt-3-storage\",\"auto-read-only\":true,\"discard\":\"unmap\",\"cache\":{\"direct\":true,\"no-flush\":false}} -blockdev {\"node-name\":\"libvirt-3-format\",\"read-only\":true,\"discard\":\"unmap\",\"cache\":{\"direct\":true,\"no-flush\":false},\"driver\":\"qcow2\",\"file\":\"libvirt-3-storage\",\"backing\":null} -blockdev {\"driver\":\"file\",\"filename\":\"/var/run/kubevirt-ephemeral-disks/disk-data/root/disk.qcow2\",\"node-name\":\"libvirt-2-storage\",\"auto-read-only\":true,\"discard\":\"unmap\",\"cache\":{\"direct\":true,\"no-flush\":false}} -blockdev {\"node-name\":\"libvirt-2-format\",\"read-only\":false,\"discard\":\"unmap\",\"cache\":{\"direct\":true,\"no-flush\":false},\"driver\":\"qcow2\",\"file\":\"libvirt-2-storage\",\"backing\":\"libvirt-3-format\"} -device {\"driver\":\"virtio-blk-pci-non-transitional\",\"bus\":\"pci.7\",\"addr\":\"0x0\",\"drive\":\"libvirt-2-format\",\"id\":\"ua-root\",\"bootindex\":1,\"write-cache\":\"on\",\"werror\":\"stop\",\"rerror\":\"stop\"} -blockdev {\"driver\":\"file\",\"filename\":\"/var/run/kubevirt-ephemeral-disks/cloud-init-data/vmweave-test-a/path-w-1027-qual-spin50-candidate/noCloud.iso\",\"node-name\":\"libvirt-1-storage\",\"read-only\":false,\"discard\":\"unmap\",\"cache\":{\"direct\":true,\"no-flush\":false}} -device {\"driver\":\"virtio-blk-pci-non-transitional\",\"bus\":\"pci.8\",\"addr\":\"0x0\",\"drive\":\"libvirt-1-storage\",\"id\":\"ua-cloudinit\",\"write-cache\":\"on\",\"werror\":\"stop\",\"rerror\":\"stop\"} -netdev {\"type\":\"tap\",\"fd\":\"21\",\"vhost\":true,\"vhostfd\":\"23\",\"id\":\"hostua-default\"} -device {\"driver\":\"virtio-net-pci-non-transitional\",\"host_mtu\":1280,\"netdev\":\"hostua-default\",\"id\":\"ua-default\",\"mac\":\"66:21:bb:3f:63:99\",\"bus\":\"pci.1\",\"addr\":\"0x0\",\"romfile\":\"\"} -add-fd set=0,fd=19,opaque=serial0-log -chardev socket,id=charserial0,fd=17,server=on,wait=off,logfile=/dev/fdset/0,logappend=on -device {\"driver\":\"isa-serial\",\"chardev\":\"charserial0\",\"id\":\"serial0\",\"index\":0} -chardev socket,id=charchannel0,fd=18,server=on,wait=off -device {\"driver\":\"virtserialport\",\"bus\":\"virtio-serial0.0\",\"nr\":1,\"chardev\":\"charchannel0\",\"id\":\"channel0\",\"name\":\"org.qemu.guest_agent.0\"} -audiodev {\"id\":\"audio1\",\"driver\":\"none\"} -vnc vnc=unix:/var/run/kubevirt-private/2203e491-2b7d-4658-b7db-e74a0defe44d/virt-vnc,audiodev=audio1 -device {\"driver\":\"VGA\",\"id\":\"video0\",\"vgamem_mb\":16,\"bus\":\"pcie.0\",\"addr\":\"0x1\"} -global ICH9-LPC.noreboot=off -watchdog-action reset -device {\"driver\":\"virtio-balloon-pci-non-transitional\",\"id\":\"balloon0\",\"free-page-reporting\":true,\"bus\":\"pci.9\",\"addr\":\"0x0\"} -object {\"qom-type\": \"memory-backend-file\", \"id\": \"vmweave-shm-memory\", \"mem-path\": \"/var/run/flyt-channel/44f80185ff9d03d8f8d61b75b6835c7a/channel\", \"size\": 67108864, \"share\": true} -device ivshmem-plain,id=vmweave-shm-device,memdev=vmweave-shm-memory,bus=pcie.0,addr=0x1e -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny -msg timestamp=on ",
+        "threads": [
+          4194231,
+          4194233,
+          4194234,
+          4194235,
+          4194236,
+          4194237,
+          4194238,
+          4194239,
+          4194240,
+          4194241,
+          4194242,
+          4194243,
+          4194244,
+          4194246,
+          4194247,
+          1143,
+          1144,
+          1157,
+          1158,
+          1160,
+          1161,
+          1162,
+          1163,
+          1276,
+          1277,
+          1291,
+          1292,
+          1293,
+          1294,
+          1295,
+          1296,
+          1308,
+          1311,
+          1312,
+          1313,
+          1314,
+          1315,
+          1316,
+          1317
+        ]
+      }
+    ]
+  },
+  {
+    "uid": "15149f3d-4e26-4d75-84ef-38601f7b2955",
+    "cpus": [
+      40,
+      41,
+      42,
+      43
+    ],
+    "processes": [
+      {
+        "pid": 4192466,
+        "command": "/opt/vmweave/bin/vmweave-shm-session-worker /flyt-channel/44f80185ff9d03d8f8d61b75b6835c7a 0 ",
+        "threads": [
+          4192466
+        ]
+      }
+    ]
+  }
+]

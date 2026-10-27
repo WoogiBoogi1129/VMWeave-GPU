@@ -1,0 +1,138 @@
+--- a/runtime/shm/control/guest_broker.py
++++ b/runtime/shm/control/guest_broker.py
+@@ -55,18 +55,31 @@
+         self.call.restype = ctypes.c_int
+         self.lock = threading.Lock()
+         self.failed = False
++        self.reuse = os.environ.get('VMWEAVE_BROKER_REUSE') == '1'
++        self.scratch = {}
+         # Starts the persistent transport's HELLO and heartbeat without CUDA work.
+         rc, _ = self.exchange(3, b'', 0)
+         if rc:
+             raise RuntimeError(f'transport initialization failed: {rc}')
+ 
++    def buffer(self, name, size):
++        if not 0 <= size <= MAX_BYTES + 24:
++            raise ValueError('scratch size out of bounds')
++        if not self.reuse:
++            return ctypes.create_string_buffer(max(1, size))
++        old = self.scratch.get(name)
++        if old is None or ctypes.sizeof(old) < max(1, size):
++            old = ctypes.create_string_buffer(max(1, size))
++            self.scratch[name] = old
++        return old
++
+     def exchange(self, api, data, capacity):
+-        out = ctypes.create_string_buffer(max(1, capacity))
++        out = self.buffer("output", capacity)
+         got = ctypes.c_size_t()
+         rc = self.call(api, data, len(data), out, capacity, ctypes.byref(got))
+         if got.value > capacity:
+             raise RuntimeError('invalid transport output length')
+-        return rc, out.raw[:got.value]
++        return rc, ctypes.string_at(out, got.value)
+ 
+     def bulk_copy(self, epoch, data, capacity, arena):
+         # All routing metadata is a private socket snapshot, never client-writable.
+@@ -80,7 +93,8 @@
+         prefix = epoch + struct.pack('<II', 0x1012, 0) + data
+         # Input data may change concurrently, like application memory in cudaMemcpy;
+         # only payload is shared. Copy to private storage before transport submission.
+-        request = ctypes.create_string_buffer(len(prefix) + (size if kind == 1 else 0))
++        request_size = len(prefix) + (size if kind == 1 else 0)
++        request = self.buffer("request", request_size)
+         ctypes.memmove(request, prefix, len(prefix))
+         region = (ctypes.c_char * (2 * BULK_BYTES)).from_buffer(arena)
+         try:
+@@ -88,7 +102,7 @@
+                 ctypes.memmove(ctypes.addressof(request) + len(prefix), ctypes.addressof(region), size)
+             output = ctypes.c_void_p(ctypes.addressof(region) + BULK_BYTES)
+             got = ctypes.c_size_t()
+-            rc = self.call(CALL, request, ctypes.sizeof(request), output, capacity, ctypes.byref(got))
++            rc = self.call(CALL, request, request_size, output, capacity, ctypes.byref(got))
+             if got.value > capacity or (not rc and got.value != capacity):
+                 raise RuntimeError('invalid bulk output length')
+             return rc, got.value if not rc else 0
+@@ -224,6 +238,7 @@
+                     arena.close()
+                 conn.close()
+                 if owned:
++                    self.scratch.clear()
+                     self.lock.release()
+ 
+ 
+--- a/runtime/shm/shm-queue/include/vmweave_shm_queue.h
++++ b/runtime/shm/shm-queue/include/vmweave_shm_queue.h
+@@ -59,6 +59,10 @@
+  */
+ int vmweave_shm_worker_take(struct vmweave_shm_channel *, struct vmweave_shm_request *);
+ void vmweave_shm_request_release(struct vmweave_shm_request *);
++/* Caller owns storage until execution/response completes. Never pass a borrowed
++ * request to request_release. Too-small storage does not consume the request. */
++int vmweave_shm_worker_take_into(struct vmweave_shm_channel *,struct vmweave_shm_request *,void *,size_t);
++void vmweave_shm_request_clear_borrowed(struct vmweave_shm_request *);
+ size_t vmweave_shm_response_capacity(const struct vmweave_shm_channel *);
+ int vmweave_shm_worker_respond(struct vmweave_shm_channel *,
+                            const struct vmweave_shm_response *);
+--- a/runtime/shm/shm-queue/src/queue.c
++++ b/runtime/shm/shm-queue/src/queue.c
+@@ -298,7 +298,7 @@
+     vmweave_perf_add(VMWEAVE_PERF_SUBMIT,measured,q->input_bytes);
+     return 0;
+ }
+-int vmweave_shm_worker_take(struct vmweave_shm_channel *c, struct vmweave_shm_request *q)
++static int worker_take(struct vmweave_shm_channel *c, struct vmweave_shm_request *q, void *storage, size_t capacity, int borrowed)
+ {
+     struct record r;
+     uint8_t *payload = NULL;
+@@ -319,7 +319,8 @@
+     if (r.id != c->next || r.bytes > VMWEAVE_SHM_MAX_MESSAGE_BYTES || r.offset > c->request_bytes ||
+         r.bytes > c->request_bytes - (size_t)r.offset) return fail(c, VMWEAVE_SHM_BAD_DESCRIPTOR);
+     if (r.bytes) {
+-        payload = malloc((size_t)r.bytes);
++        if(borrowed && (!storage || r.bytes>capacity))return VMWEAVE_SHM_BAD_DESCRIPTOR;
++        payload = borrowed ? storage : malloc((size_t)r.bytes);
+         if (!payload) return VMWEAVE_SHM_INTERNAL_ERROR; /* not consumed or executed */
+         payload_snapshot(payload, c->request_payload + r.offset, (size_t)r.bytes);
+     }
+@@ -330,6 +331,13 @@
+     vmweave_perf_add(VMWEAVE_PERF_TAKE,measured,q->input_bytes);
+     return 0;
+ }
++int vmweave_shm_worker_take(struct vmweave_shm_channel *c,struct vmweave_shm_request *q){
++    return worker_take(c,q,NULL,0,0);
++}
++int vmweave_shm_worker_take_into(struct vmweave_shm_channel *c,struct vmweave_shm_request *q,void *storage,size_t capacity){
++    return worker_take(c,q,storage,capacity,1);
++}
++void vmweave_shm_request_clear_borrowed(struct vmweave_shm_request *q){if(q)memset(q,0,sizeof(*q));}
+ void vmweave_shm_request_release(struct vmweave_shm_request *q)
+ {
+     if (q) { free((void *)q->input); memset(q, 0, sizeof(*q)); }
+--- a/runtime/shm/src/worker_sessions.c
++++ b/runtime/shm/src/worker_sessions.c
+@@ -75,9 +75,12 @@
+  snprintf(marker,sizeof(marker),"/tmp/vmweave-slot-%lu-mapped",slot);FILE *f=fopen(marker,"wx");if(!f)return 4;fclose(f);
+  snprintf(guest,sizeof(guest),"/tmp/vmweave-slot-%lu-guest",slot);
+  size_t capacity=vmweave_shm_response_capacity(c);unsigned char *output=malloc(capacity);if(!output)return 4;
++ const char *reuse_env=getenv("VMWEAVE_WORKER_REUSE");
++ int reuse=reuse_env&&!strcmp(reuse_env,"1");
++ unsigned char *scratch=reuse?malloc(VMWEAVE_SHM_MAX_MESSAGE_BYTES):NULL;if(reuse&&!scratch)return 4;
+  pid_t pid=0;int fd=-1,hello=0;unsigned char epoch[16]={0};int active=0;struct vmweave_wait idle={0};
+  while(!stopped){
+-  struct vmweave_shm_request q={0};int rc=vmweave_shm_worker_take(c,&q);
++  struct vmweave_shm_request q={0};int rc=reuse?vmweave_shm_worker_take_into(c,&q,scratch,VMWEAVE_SHM_MAX_MESSAGE_BYTES):vmweave_shm_worker_take(c,&q);
+   if(rc==VMWEAVE_SHM_AGAIN){if(vmweave_wait_pause(&idle))break;continue;}if(rc)break;memset(&idle,0,sizeof(idle));
+   struct vmweave_shm_response r={.output=output,.output_capacity=capacity,.result_domain=VMWEAVE_RESULT_LIBRARY};
+   if(q.payload_schema!=1){r.api_result=999;}
+@@ -104,8 +107,8 @@
+     retire(&pid,&fd);r.api_result=999;
+    }else{r.transport_status=msg.transport;r.result_domain=msg.domain;r.api_result=msg.result;r.output_bytes=msg.bytes;}
+   }else r.api_result=999;
+-  rc=vmweave_shm_worker_respond(c,&r);vmweave_shm_request_release(&q);if(rc)break;
++  rc=vmweave_shm_worker_respond(c,&r);if(reuse)vmweave_shm_request_clear_borrowed(&q);else vmweave_shm_request_release(&q);if(rc)break;
+   if(hello){f=fopen(guest,"a");if(f)fclose(f);}
+  }
+- retire(&pid,&fd);unlink(marker);unlink(guest);free(output);vmweave_shm_close(c);vmweave_unmap(&m);return 0;
++ retire(&pid,&fd);unlink(marker);unlink(guest);free(scratch);free(output);vmweave_shm_close(c);vmweave_unmap(&m);return 0;
+ }

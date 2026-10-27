@@ -1,0 +1,68 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-10-27T11:09:50Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 1,
+    "name": "path-w-1027-qual-recovery-candidate",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "path-w-1027-qual-recovery-candidate",
+        "uid": "9295746c-7b06-4b5d-8abf-52a92b56c255"
+      }
+    ],
+    "resourceVersion": "17802018",
+    "uid": "53444516-081a-4bb0-a1cf-847af541a4b3"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:486ca081e7685560c78d9f56409904a3d778decb6770855e6f8949b89df2f3a8",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:5fda1df0dc3fc672778ca4c05a473355231e913ba2889bb159c82a0e477d8063",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "path-w-1027-qual-recovery-candidate",
+      "uid": "3bee27cf-5ad8-4eb0-9704-ff0e121ba51d"
+    },
+    "requestRef": {
+      "name": "path-w-1027-qual-recovery-candidate",
+      "uid": "85195dfa-b48f-4ebd-a12f-1fcc7049575f"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "path-w-1027-qual-recovery-candidate",
+      "uid": "9295746c-7b06-4b5d-8abf-52a92b56c255"
+    },
+    "workerImage": "localhost/vmweave-worker@sha256:912818e601a56947f54ff5e707509f010450d8dec99d3c070071ba3412b491dd"
+  },
+  "status": {
+    "allocation": "a3637dd404ff7f0a7e0cdd95247eb4c2",
+    "backend": "hami",
+    "claimName": "",
+    "claimUID": "",
+    "compute": 100,
+    "everBound": true,
+    "generation": "61cf282bed35ea13836e8bb0940bd71a",
+    "gpuUUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+    "memoryMiB": 8192,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "requestGeneration": 1,
+    "resourcePrefix": "path-w-1027-qual-recovery-candidate-53444516-a3637dd4",
+    "sessions": [
+      "fdb6182c05642e54a00040a65f0daa01"
+    ],
+    "vmiUID": "75bd835c-5f14-42cd-b4b9-d171d5fadca4",
+    "workerPodUID": "5db337b2-b4f8-40ee-ae04-d925bbbff2af"
+  }
+}

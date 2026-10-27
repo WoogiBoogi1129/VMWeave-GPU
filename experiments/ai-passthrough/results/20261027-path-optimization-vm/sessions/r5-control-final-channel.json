@@ -1,0 +1,66 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-10-27T11:03:29Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 1,
+    "name": "path-w-1027-r5-control",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "path-w-1027-r5-control",
+        "uid": "cd654294-fc94-481e-89bb-5fcd69ff4de7"
+      }
+    ],
+    "resourceVersion": "17797820",
+    "uid": "f9516543-81b8-44cd-b040-aa1ba6775e29"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:486ca081e7685560c78d9f56409904a3d778decb6770855e6f8949b89df2f3a8",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:5fda1df0dc3fc672778ca4c05a473355231e913ba2889bb159c82a0e477d8063",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "path-w-1027-r5-control",
+      "uid": "40e6bf70-3e00-4da5-b294-fcc5a926d8e6"
+    },
+    "requestRef": {
+      "name": "path-w-1027-r5-control",
+      "uid": "f0969fc1-8060-4084-93ee-aa5d7dd76f9d"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "path-w-1027-r5-control",
+      "uid": "cd654294-fc94-481e-89bb-5fcd69ff4de7"
+    },
+    "workerImage": "localhost/vmweave-worker@sha256:e9c2cf5ba83c71ccd610eee41641e15923edc69aafefc48fe643c8f801cc3f08"
+  },
+  "status": {
+    "allocation": "30eb6414b28eb4398b8a69a87f5b0840",
+    "backend": "hami",
+    "compute": 100,
+    "everBound": true,
+    "generation": "18afefd31dcd3ab6f13e7ce0226bd2d7",
+    "gpuUUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+    "memoryMiB": 8192,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "requestGeneration": 1,
+    "resourcePrefix": "path-w-1027-r5-control-f951654381b8-30eb6414",
+    "sessions": [
+      "065afe194b020bc45b086c63aa6c3826"
+    ],
+    "vmiUID": "7783c0ce-5087-47d7-81be-1e8cae4cbb5e",
+    "workerPodUID": "0ad7b394-4bc7-41fe-8d1b-27f85aba46db"
+  }
+}

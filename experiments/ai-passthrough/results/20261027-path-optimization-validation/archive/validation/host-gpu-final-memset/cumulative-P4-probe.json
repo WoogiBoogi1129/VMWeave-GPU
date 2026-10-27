@@ -1,0 +1,216 @@
+{
+  "status": "PASS",
+  "scope": "host-file-backed-SHM-real-CUDA",
+  "flags": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_NATIVE_MEMSET": "1",
+    "VMWEAVE_BULK_DIRECT": "1",
+    "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-98ye5qke/broker.sock"
+  },
+  "copy_cases": [
+    {
+      "bytes": 0,
+      "async_mode": false,
+      "roundtrip_seconds": 0.0021832408383488655,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "async_mode": true,
+      "roundtrip_seconds": 0.0023144218139350414,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1,
+      "async_mode": false,
+      "roundtrip_seconds": 0.0011250819079577923,
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    {
+      "bytes": 1,
+      "async_mode": true,
+      "roundtrip_seconds": 0.0043444400653243065,
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    {
+      "bytes": 16777215,
+      "async_mode": false,
+      "roundtrip_seconds": 0.2570644747465849,
+      "sha256": "52bd0aad2a1c4226c3e6d02a7a87f00becc049af00e4607ae4be0cceffceae87"
+    },
+    {
+      "bytes": 16777215,
+      "async_mode": true,
+      "roundtrip_seconds": 0.3054317180067301,
+      "sha256": "52bd0aad2a1c4226c3e6d02a7a87f00becc049af00e4607ae4be0cceffceae87"
+    },
+    {
+      "bytes": 16777216,
+      "async_mode": false,
+      "roundtrip_seconds": 0.07961660157889128,
+      "sha256": "536378dda0c77919a226af4e375ba992db387813f857dd12b62a028a974c9334"
+    },
+    {
+      "bytes": 16777216,
+      "async_mode": true,
+      "roundtrip_seconds": 0.18132822308689356,
+      "sha256": "536378dda0c77919a226af4e375ba992db387813f857dd12b62a028a974c9334"
+    },
+    {
+      "bytes": 16777217,
+      "async_mode": false,
+      "roundtrip_seconds": 0.056257597636431456,
+      "sha256": "70b1730c1ccb1b8238c1a81ed1a3ba61902aff552b4a831c328117dba76d2449"
+    },
+    {
+      "bytes": 16777217,
+      "async_mode": true,
+      "roundtrip_seconds": 0.1707149976864457,
+      "sha256": "70b1730c1ccb1b8238c1a81ed1a3ba61902aff552b4a831c328117dba76d2449"
+    },
+    {
+      "bytes": 16793604,
+      "async_mode": false,
+      "roundtrip_seconds": 0.0541235227137804,
+      "sha256": "7e2138b0f36b047a432e379a9d98a9fc70432773ae2a0e2dee25b02e3a3a889e"
+    },
+    {
+      "bytes": 16793604,
+      "async_mode": true,
+      "roundtrip_seconds": 0.17356763873249292,
+      "sha256": "7e2138b0f36b047a432e379a9d98a9fc70432773ae2a0e2dee25b02e3a3a889e"
+    },
+    {
+      "bytes": 33554432,
+      "async_mode": false,
+      "roundtrip_seconds": 0.09704704908654094,
+      "sha256": "437bf38149db2ebf17396c0fbec43197aa223cdf4df48e86d91fdece12551aea"
+    },
+    {
+      "bytes": 33554432,
+      "async_mode": true,
+      "roundtrip_seconds": 0.26368661085143685,
+      "sha256": "437bf38149db2ebf17396c0fbec43197aa223cdf4df48e86d91fdece12551aea"
+    },
+    {
+      "bytes": 33554433,
+      "async_mode": false,
+      "roundtrip_seconds": 0.1052685072645545,
+      "sha256": "b725dd3843fddac947b5a032565501e27918cb2e96e095d272b9d26fcb5ee14b"
+    },
+    {
+      "bytes": 33554433,
+      "async_mode": true,
+      "roundtrip_seconds": 0.2811752441339195,
+      "sha256": "b725dd3843fddac947b5a032565501e27918cb2e96e095d272b9d26fcb5ee14b"
+    },
+    {
+      "bytes": 134217729,
+      "async_mode": false,
+      "roundtrip_seconds": 0.3863450223580003,
+      "sha256": "08c3e1fc3b9243a406c31b45ad55335c6ea134c8ce7accae3ae5650e48952178"
+    },
+    {
+      "bytes": 134217729,
+      "async_mode": true,
+      "roundtrip_seconds": 1.0784492352977395,
+      "sha256": "08c3e1fc3b9243a406c31b45ad55335c6ea134c8ce7accae3ae5650e48952178"
+    }
+  ],
+  "invalid_memset_last_error": [
+    1,
+    1,
+    0
+  ],
+  "error_survives_successful_memset": [
+    1,
+    1,
+    0
+  ],
+  "memset_cases": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      90
+    ],
+    [
+      0,
+      -1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      90
+    ],
+    [
+      1,
+      -1
+    ],
+    [
+      255,
+      0
+    ],
+    [
+      255,
+      90
+    ],
+    [
+      255,
+      -1
+    ],
+    [
+      4096,
+      0
+    ],
+    [
+      4096,
+      90
+    ],
+    [
+      4096,
+      -1
+    ],
+    [
+      1048576,
+      0
+    ],
+    [
+      1048576,
+      90
+    ],
+    [
+      1048576,
+      -1
+    ],
+    [
+      16777216,
+      0
+    ],
+    [
+      16777216,
+      90
+    ],
+    [
+      16777216,
+      -1
+    ],
+    [
+      16777217,
+      0
+    ],
+    [
+      16777217,
+      90
+    ],
+    [
+      16777217,
+      -1
+    ]
+  ]
+}

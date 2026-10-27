@@ -1,0 +1,41 @@
+{
+  "delimiters": {
+    "runtime/shm/src/owner.c": "balanced text delimiters",
+    "runtime/shm/src/broker_client.c": "balanced text delimiters",
+    "runtime/shm/src/session_ipc.c": "balanced text delimiters",
+    "runtime/shm/src/async.c": "balanced text delimiters",
+    "runtime/shm/src/guest.c": "balanced text delimiters",
+    "runtime/shm/src/worker_sessions.c": "balanced text delimiters",
+    "runtime/shm/include/vmweave_session_ipc.h": "balanced text delimiters",
+    "runtime/shm/include/vmweave_guest.h": "balanced text delimiters",
+    "runtime/shm/include/vmweave_owner.h": "balanced text delimiters",
+    "runtime/shm/shm-queue/src/queue.c": "balanced text delimiters",
+    "runtime/shm/shm-queue/include/vmweave_shm_queue.h": "balanced text delimiters"
+  },
+  "patch_replay": "byte-identical to candidate",
+  "patches": [
+    "P1-direct-bulk.patch",
+    "P2-buffer-reuse.patch",
+    "P3-gather-submit.patch",
+    "P4-session-arena.patch",
+    "P4a-capacity-review.patch",
+    "P5-native-owner.patch",
+    "P6-host-notification.patch",
+    "P7-pinned-pool.patch",
+    "P8-static-review-fixes.patch",
+    "P9-direct-dependency.patch"
+  ],
+  "original_product_unchanged": {
+    "runtime/shm/CMakeLists.txt": true,
+    "runtime/shm/control/guest_broker.py": true,
+    "runtime/shm/src/broker_client.c": true,
+    "runtime/shm/src/async.c": true,
+    "runtime/shm/src/guest.c": true,
+    "runtime/shm/src/worker_sessions.c": true,
+    "runtime/shm/include/vmweave_guest.h": true,
+    "runtime/shm/shm-queue/src/queue.c": true,
+    "runtime/shm/shm-queue/include/vmweave_shm_queue.h": true
+  },
+  "C_compile": "NOT_RUN",
+  "tests": "NOT_RUN"
+}

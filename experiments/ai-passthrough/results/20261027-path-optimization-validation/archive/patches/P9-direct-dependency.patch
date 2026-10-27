@@ -1,0 +1,14 @@
+--- a/runtime/shm/src/broker_client.c
++++ b/runtime/shm/src/broker_client.c
+@@ -215,7 +215,10 @@
+ }
+ static pthread_once_t direct_once=PTHREAD_ONCE_INIT;
+ static int direct_enabled;
+-static void direct_configure(void){const char *v=getenv("VMWEAVE_BULK_DIRECT");direct_enabled=v&&!strcmp(v,"1");}
++static void direct_configure(void){
++ const char *v=getenv("VMWEAVE_BULK_DIRECT"),*enabled=getenv("VMWEAVE_BULK_COPY");
++ direct_enabled=v&&!strcmp(v,"1")&&enabled&&!strcmp(enabled,"1");
++}
+ int vmweave_broker_direct_enabled(void){pthread_once(&direct_once,direct_configure);return direct_enabled;}
+ int vmweave_broker_exchange(uint32_t api,const void *in,size_t n,void *out,size_t cap,size_t *got){
+  return exchange_impl(api,in,n,NULL,out,cap,got);

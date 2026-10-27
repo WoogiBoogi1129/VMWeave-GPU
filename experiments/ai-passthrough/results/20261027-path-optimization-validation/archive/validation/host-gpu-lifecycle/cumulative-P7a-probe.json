@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": [
+    "busy rejection and idle heartbeat",
+    "ten fresh sessions, retained old arena isolation, CLOSE and EOF",
+    "no Broker/Worker FD growth after repeated sessions",
+    "cached session child death fences client, next session recovers",
+    "partial packet deadline with heartbeat and subsequent recovery"
+  ],
+  "fd_before": {
+    "3735479": 5,
+    "3735492": 6
+  },
+  "fd_after": {
+    "3735479": 5,
+    "3735492": 6
+  }
+}

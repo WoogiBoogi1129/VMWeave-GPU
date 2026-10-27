@@ -1,0 +1,570 @@
+{
+  "status": "EXPLORATORY_ONLY",
+  "independent_VMs_per_profile": 1,
+  "order_us": [
+    0,
+    50,
+    10
+  ],
+  "sleep_us": 50,
+  "units": "milliseconds",
+  "rows": [
+    {
+      "operation": "D2D",
+      "bytes": 4096,
+      "profiles": {
+        "0": {
+          "api_ms": 0.47348,
+          "completion_ms": 0.948992,
+          "caller_cpu_ms": 0.093071
+        },
+        "10": {
+          "api_ms": 0.602971,
+          "completion_ms": 1.029443,
+          "caller_cpu_ms": 0.135535
+        },
+        "50": {
+          "api_ms": 0.28573,
+          "completion_ms": 0.659128,
+          "caller_cpu_ms": 0.071205
+        }
+      }
+    },
+    {
+      "operation": "D2D",
+      "bytes": 65536,
+      "profiles": {
+        "0": {
+          "api_ms": 0.608998,
+          "completion_ms": 1.537515,
+          "caller_cpu_ms": 0.169832
+        },
+        "10": {
+          "api_ms": 0.71886,
+          "completion_ms": 1.296014,
+          "caller_cpu_ms": 0.127956
+        },
+        "50": {
+          "api_ms": 0.410576,
+          "completion_ms": 0.841297,
+          "caller_cpu_ms": 0.096433
+        }
+      }
+    },
+    {
+      "operation": "D2D",
+      "bytes": 1048575,
+      "profiles": {
+        "0": {
+          "api_ms": 0.558652,
+          "completion_ms": 1.083832,
+          "caller_cpu_ms": 0.149764
+        },
+        "10": {
+          "api_ms": 0.400494,
+          "completion_ms": 0.713694,
+          "caller_cpu_ms": 0.087073
+        },
+        "50": {
+          "api_ms": 0.824868,
+          "completion_ms": 1.437478,
+          "caller_cpu_ms": 0.237488
+        }
+      }
+    },
+    {
+      "operation": "D2D",
+      "bytes": 1048576,
+      "profiles": {
+        "0": {
+          "api_ms": 0.403307,
+          "completion_ms": 0.723511,
+          "caller_cpu_ms": 0.127836
+        },
+        "10": {
+          "api_ms": 0.829672,
+          "completion_ms": 1.438348,
+          "caller_cpu_ms": 0.167655
+        },
+        "50": {
+          "api_ms": 0.688342,
+          "completion_ms": 1.338494,
+          "caller_cpu_ms": 0.145586
+        }
+      }
+    },
+    {
+      "operation": "D2D",
+      "bytes": 1048577,
+      "profiles": {
+        "0": {
+          "api_ms": 0.529112,
+          "completion_ms": 1.019672,
+          "caller_cpu_ms": 0.089586
+        },
+        "10": {
+          "api_ms": 0.88764,
+          "completion_ms": 1.439614,
+          "caller_cpu_ms": 0.168664
+        },
+        "50": {
+          "api_ms": 0.683981,
+          "completion_ms": 1.335015,
+          "caller_cpu_ms": 0.13805
+        }
+      }
+    },
+    {
+      "operation": "D2D",
+      "bytes": 16777216,
+      "profiles": {
+        "0": {
+          "api_ms": 0.690936,
+          "completion_ms": 1.166789,
+          "caller_cpu_ms": 0.110831
+        },
+        "10": {
+          "api_ms": 0.889126,
+          "completion_ms": 1.673396,
+          "caller_cpu_ms": 0.159958
+        },
+        "50": {
+          "api_ms": 0.763395,
+          "completion_ms": 1.553957,
+          "caller_cpu_ms": 0.11259
+        }
+      }
+    },
+    {
+      "operation": "D2D",
+      "bytes": 134217729,
+      "profiles": {
+        "0": {
+          "api_ms": 0.669508,
+          "completion_ms": 1.633096,
+          "caller_cpu_ms": 0.154341
+        },
+        "10": {
+          "api_ms": 0.700195,
+          "completion_ms": 1.330877,
+          "caller_cpu_ms": 0.056031
+        },
+        "50": {
+          "api_ms": 0.645312,
+          "completion_ms": 1.353159,
+          "caller_cpu_ms": 0.086856
+        }
+      }
+    },
+    {
+      "operation": "D2H",
+      "bytes": 4096,
+      "profiles": {
+        "0": {
+          "api_ms": 0.602345,
+          "completion_ms": 1.17002,
+          "caller_cpu_ms": 0.161695
+        },
+        "10": {
+          "api_ms": 0.628367,
+          "completion_ms": 1.172408,
+          "caller_cpu_ms": 0.138968
+        },
+        "50": {
+          "api_ms": 0.57063,
+          "completion_ms": 1.124026,
+          "caller_cpu_ms": 0.139963
+        }
+      }
+    },
+    {
+      "operation": "D2H",
+      "bytes": 65536,
+      "profiles": {
+        "0": {
+          "api_ms": 0.905378,
+          "completion_ms": 1.383965,
+          "caller_cpu_ms": 0.138613
+        },
+        "10": {
+          "api_ms": 0.87965,
+          "completion_ms": 1.55412,
+          "caller_cpu_ms": 0.151014
+        },
+        "50": {
+          "api_ms": 0.567943,
+          "completion_ms": 1.092062,
+          "caller_cpu_ms": 0.116326
+        }
+      }
+    },
+    {
+      "operation": "D2H",
+      "bytes": 1048575,
+      "profiles": {
+        "0": {
+          "api_ms": 2.537916,
+          "completion_ms": 3.217654,
+          "caller_cpu_ms": 0.640136
+        },
+        "10": {
+          "api_ms": 3.94789,
+          "completion_ms": 4.539715,
+          "caller_cpu_ms": 0.677817
+        },
+        "50": {
+          "api_ms": 3.069587,
+          "completion_ms": 3.652778,
+          "caller_cpu_ms": 0.544419
+        }
+      }
+    },
+    {
+      "operation": "D2H",
+      "bytes": 1048576,
+      "profiles": {
+        "0": {
+          "api_ms": 1.92698,
+          "completion_ms": 2.533997,
+          "caller_cpu_ms": 0.488432
+        },
+        "10": {
+          "api_ms": 1.795989,
+          "completion_ms": 2.395256,
+          "caller_cpu_ms": 0.41795
+        },
+        "50": {
+          "api_ms": 1.99514,
+          "completion_ms": 2.638849,
+          "caller_cpu_ms": 0.432824
+        }
+      }
+    },
+    {
+      "operation": "D2H",
+      "bytes": 1048577,
+      "profiles": {
+        "0": {
+          "api_ms": 1.73276,
+          "completion_ms": 2.382453,
+          "caller_cpu_ms": 0.466015
+        },
+        "10": {
+          "api_ms": 1.853076,
+          "completion_ms": 2.522542,
+          "caller_cpu_ms": 0.430185
+        },
+        "50": {
+          "api_ms": 1.902514,
+          "completion_ms": 2.429107,
+          "caller_cpu_ms": 0.424231
+        }
+      }
+    },
+    {
+      "operation": "D2H",
+      "bytes": 16777216,
+      "profiles": {
+        "0": {
+          "api_ms": 18.056904,
+          "completion_ms": 19.079396,
+          "caller_cpu_ms": 3.304453
+        },
+        "10": {
+          "api_ms": 17.072416,
+          "completion_ms": 17.965384,
+          "caller_cpu_ms": 3.388033
+        },
+        "50": {
+          "api_ms": 16.539754,
+          "completion_ms": 17.563476,
+          "caller_cpu_ms": 3.215516
+        }
+      }
+    },
+    {
+      "operation": "D2H",
+      "bytes": 134217729,
+      "profiles": {
+        "0": {
+          "api_ms": 121.87934,
+          "completion_ms": 122.597431,
+          "caller_cpu_ms": 24.518271
+        },
+        "10": {
+          "api_ms": 129.215245,
+          "completion_ms": 129.712542,
+          "caller_cpu_ms": 25.058262
+        },
+        "50": {
+          "api_ms": 126.725288,
+          "completion_ms": 127.202874,
+          "caller_cpu_ms": 25.325986
+        }
+      }
+    },
+    {
+      "operation": "H2D",
+      "bytes": 4096,
+      "profiles": {
+        "0": {
+          "api_ms": 0.383164,
+          "completion_ms": 0.801709,
+          "caller_cpu_ms": 0.184807
+        },
+        "10": {
+          "api_ms": 0.395585,
+          "completion_ms": 0.845698,
+          "caller_cpu_ms": 0.079142
+        },
+        "50": {
+          "api_ms": 0.417363,
+          "completion_ms": 0.724348,
+          "caller_cpu_ms": 0.098701
+        }
+      }
+    },
+    {
+      "operation": "H2D",
+      "bytes": 65536,
+      "profiles": {
+        "0": {
+          "api_ms": 0.80005,
+          "completion_ms": 1.559852,
+          "caller_cpu_ms": 0.272825
+        },
+        "10": {
+          "api_ms": 0.926664,
+          "completion_ms": 1.512584,
+          "caller_cpu_ms": 0.156756
+        },
+        "50": {
+          "api_ms": 0.808817,
+          "completion_ms": 1.270818,
+          "caller_cpu_ms": 0.119471
+        }
+      }
+    },
+    {
+      "operation": "H2D",
+      "bytes": 1048575,
+      "profiles": {
+        "0": {
+          "api_ms": 3.169204,
+          "completion_ms": 3.790152,
+          "caller_cpu_ms": 0.970148
+        },
+        "10": {
+          "api_ms": 2.847005,
+          "completion_ms": 3.339345,
+          "caller_cpu_ms": 0.928405
+        },
+        "50": {
+          "api_ms": 2.693067,
+          "completion_ms": 3.113113,
+          "caller_cpu_ms": 0.877534
+        }
+      }
+    },
+    {
+      "operation": "H2D",
+      "bytes": 1048576,
+      "profiles": {
+        "0": {
+          "api_ms": 1.906427,
+          "completion_ms": 2.500524,
+          "caller_cpu_ms": 0.462806
+        },
+        "10": {
+          "api_ms": 2.006924,
+          "completion_ms": 2.727768,
+          "caller_cpu_ms": 0.469558
+        },
+        "50": {
+          "api_ms": 1.743782,
+          "completion_ms": 2.213673,
+          "caller_cpu_ms": 0.40473
+        }
+      }
+    },
+    {
+      "operation": "H2D",
+      "bytes": 1048577,
+      "profiles": {
+        "0": {
+          "api_ms": 1.816304,
+          "completion_ms": 2.608732,
+          "caller_cpu_ms": 0.365514
+        },
+        "10": {
+          "api_ms": 1.900868,
+          "completion_ms": 2.661588,
+          "caller_cpu_ms": 0.413713
+        },
+        "50": {
+          "api_ms": 2.013493,
+          "completion_ms": 2.789425,
+          "caller_cpu_ms": 0.436885
+        }
+      }
+    },
+    {
+      "operation": "H2D",
+      "bytes": 16777216,
+      "profiles": {
+        "0": {
+          "api_ms": 18.84316,
+          "completion_ms": 19.644564,
+          "caller_cpu_ms": 3.264943
+        },
+        "10": {
+          "api_ms": 20.577596,
+          "completion_ms": 21.522292,
+          "caller_cpu_ms": 3.476745
+        },
+        "50": {
+          "api_ms": 18.715167,
+          "completion_ms": 19.561327,
+          "caller_cpu_ms": 3.425827
+        }
+      }
+    },
+    {
+      "operation": "H2D",
+      "bytes": 134217729,
+      "profiles": {
+        "0": {
+          "api_ms": 135.233384,
+          "completion_ms": 135.775483,
+          "caller_cpu_ms": 24.424139
+        },
+        "10": {
+          "api_ms": 116.504832,
+          "completion_ms": 116.826956,
+          "caller_cpu_ms": 24.045273
+        },
+        "50": {
+          "api_ms": 131.144156,
+          "completion_ms": 131.521563,
+          "caller_cpu_ms": 23.949234
+        }
+      }
+    },
+    {
+      "operation": "memset",
+      "bytes": 4,
+      "profiles": {
+        "0": {
+          "api_ms": 0.556248,
+          "completion_ms": 1.169487,
+          "caller_cpu_ms": 0.086183
+        },
+        "10": {
+          "api_ms": 0.604614,
+          "completion_ms": 1.246305,
+          "caller_cpu_ms": 0.041547
+        },
+        "50": {
+          "api_ms": 0.765326,
+          "completion_ms": 1.370191,
+          "caller_cpu_ms": 0.092991
+        }
+      }
+    },
+    {
+      "operation": "memset",
+      "bytes": 4096,
+      "profiles": {
+        "0": {
+          "api_ms": 0.604172,
+          "completion_ms": 1.103991,
+          "caller_cpu_ms": 0.146867
+        },
+        "10": {
+          "api_ms": 0.348361,
+          "completion_ms": 0.615283,
+          "caller_cpu_ms": 0.041221
+        },
+        "50": {
+          "api_ms": 0.50606,
+          "completion_ms": 0.896621,
+          "caller_cpu_ms": 0.051126
+        }
+      }
+    },
+    {
+      "operation": "memset",
+      "bytes": 1048576,
+      "profiles": {
+        "0": {
+          "api_ms": 0.505871,
+          "completion_ms": 1.196374,
+          "caller_cpu_ms": 0.067068
+        },
+        "10": {
+          "api_ms": 0.493338,
+          "completion_ms": 0.919304,
+          "caller_cpu_ms": 0.078016
+        },
+        "50": {
+          "api_ms": 0.385124,
+          "completion_ms": 0.646728,
+          "caller_cpu_ms": 0.040942
+        }
+      }
+    },
+    {
+      "operation": "memset",
+      "bytes": 16777216,
+      "profiles": {
+        "0": {
+          "api_ms": 0.363602,
+          "completion_ms": 0.943296,
+          "caller_cpu_ms": 0.049331
+        },
+        "10": {
+          "api_ms": 0.595472,
+          "completion_ms": 0.815615,
+          "caller_cpu_ms": 0.050696
+        },
+        "50": {
+          "api_ms": 0.502911,
+          "completion_ms": 1.114495,
+          "caller_cpu_ms": 0.067752
+        }
+      }
+    }
+  ],
+  "whole_probe_resource_accounting": {
+    "0": {
+      "measurement_scope": "whole microbenchmark process including setup and correctness copies; not per API; worker includes HAMi background threads",
+      "wall_seconds": 6.552101373672485,
+      "worker_container_cpu_seconds": 2.544265,
+      "guest_broker_cpu_seconds": 0.6,
+      "worker_memory_current_bytes": 167604224,
+      "worker_memory_peak_bytes": 383901696
+    },
+    "10": {
+      "measurement_scope": "whole microbenchmark process including setup and correctness copies; not per API; worker includes HAMi background threads",
+      "wall_seconds": 6.1066789627075195,
+      "worker_container_cpu_seconds": 2.441991,
+      "guest_broker_cpu_seconds": 0.62,
+      "worker_memory_current_bytes": 167432192,
+      "worker_memory_peak_bytes": 383348736
+    },
+    "50": {
+      "measurement_scope": "whole microbenchmark process including setup and correctness copies; not per API; worker includes HAMi background threads",
+      "wall_seconds": 6.432469367980957,
+      "worker_container_cpu_seconds": 2.5585770000000005,
+      "guest_broker_cpu_seconds": 0.63,
+      "worker_memory_current_bytes": 167432192,
+      "worker_memory_peak_bytes": 383369216
+    }
+  },
+  "limitations": [
+    "One VM per profile; five in-process samples are not independent VM replications",
+    "All checks and setup remain outside formal timing campaign",
+    "Worker memory peak covers its qualification lifetime, not microbenchmark only",
+    "No automatic change of defaults or production settings"
+  ]
+}

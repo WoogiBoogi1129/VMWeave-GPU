@@ -1,0 +1,109 @@
+--- a/runtime/shm/API_SUPPORT.md
++++ b/runtime/shm/API_SUPPORT.md
+@@ -90,3 +90,21 @@
+ 별도 동기화가 필요하다. 추적 실행은 기능 시연용으로 사용한다.
+ [2단계 실제 요청 추적·검산](../../experiments/evidence/results/2026-09-28-stage2/README.md)에
+ 독립 실행 원본과 검증 절차를 보존한다.
++# Experimental native memset (default off)
++
++In this isolated candidate, `VMWEAVE_NATIVE_MEMSET=1` selects native backend
++`cudaMemset` for supported device allocations, using opcode `0x2108`. The option
++is read once on the first cudaMemset call; restart the process to change it.
++There is no legacy FLYT alias. Unset or any value other than `1` retains the
++existing async-memset plus device-synchronization path. cudaMemsetAsync is unchanged.
++
++The new request uses the existing 40-byte memset layout with stream and reserved
++fields both zero. Successful responses contain no output. A matching candidate
++Worker is required; old Workers reject the opcode. No error triggers fallback or
++automatic replay. Existing opcodes retain their meaning and numbering.
++
++Return does not imply GPU completion. Use the appropriate stream/event/device
++synchronization before consuming results. This does not add pinned-host,
++managed-memory or per-thread-default-stream support. Deployment and GPU
++qualification are pending; this is not a validated performance release.
++
+--- a/runtime/shm/include/vmweave_guest.h
++++ b/runtime/shm/include/vmweave_guest.h
+@@ -3,6 +3,7 @@
+ #include <pthread.h>
+ #include "vmweave_wire.h"
+ extern pthread_mutex_t vmweave_guest_lock;
++int vmweave_guest_record_error(int error);
+ /* Caller serializes these with vmweave_guest_lock. No RPC fallback. */
+ int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received);
+ int vmweave_guest_ref(const void *pointer,size_t bytes,struct vmweave_device_ref *out);
+--- a/runtime/shm/include/vmweave_torch.h
++++ b/runtime/shm/include/vmweave_torch.h
+@@ -7,7 +7,8 @@
+     VMWEAVE_ALLOCATION_ADDRESS, VMWEAVE_MEMSET, VMWEAVE_PRIORITY_RANGE,
+     VMWEAVE_STREAM_PRIORITY_CREATE, VMWEAVE_PRIMARY_CONTEXT_STATE,
+     VMWEAVE_MODULE_BEGIN=0x2040, VMWEAVE_MODULE_CHUNK, VMWEAVE_MODULE_COMMIT,
+-    VMWEAVE_FUNCTION_LAYOUT, VMWEAVE_KERNEL_PACKED
++    VMWEAVE_FUNCTION_LAYOUT, VMWEAVE_KERNEL_PACKED,
++    VMWEAVE_MEMSET_NATIVE=0x2108
+ };
+ #define VMWEAVE_MAX_MODULE_BYTES (512u*1024u*1024u)
+ #define VMWEAVE_MAX_PARAMETER_BYTES 32764u
+--- a/runtime/shm/src/guest.c
++++ b/runtime/shm/src/guest.c
+@@ -127,6 +127,7 @@
+     return 1;
+ }
+ static cudaError_t finish(int e){last_error=(cudaError_t)e;return last_error;}
++int vmweave_guest_record_error(int e){return (int)finish(e);}
+ static void *reserve_device_va(uint64_t address,size_t bytes){
+     if(!address||(address&4095)||!bytes||(bytes&4095)||address>UINTPTR_MAX-bytes)return MAP_FAILED;
+     void *wanted=(void *)(uintptr_t)address;
+--- a/runtime/shm/src/guest_torch.c
++++ b/runtime/shm/src/guest_torch.c
+@@ -59,7 +59,32 @@
+     }
+     pthread_mutex_unlock(&vmweave_guest_lock);return (cudaError_t)e;
+ }
+-cudaError_t cudaMemset(void *dst,int value,size_t bytes){cudaError_t e=cudaMemsetAsync(dst,value,bytes,0);return e?e:cudaDeviceSynchronize();}
++static pthread_once_t native_memset_once=PTHREAD_ONCE_INIT;
++static int native_memset_enabled;
++static void configure_native_memset(void){
++    /* New option: intentionally no legacy FLYT alias. */
++    const char *v=getenv("VMWEAVE_NATIVE_MEMSET");
++    native_memset_enabled=v&&!strcmp(v,"1");
++}
++cudaError_t cudaMemset(void *dst,int value,size_t bytes){
++    pthread_once(&native_memset_once,configure_native_memset);
++    if(!native_memset_enabled){
++        cudaError_t e=cudaMemsetAsync(dst,value,bytes,0);
++        return e?e:cudaDeviceSynchronize();
++    }
++    uint8_t p[40]={0};size_t got=0;struct vmweave_device_ref ref;
++    pthread_mutex_lock(&vmweave_guest_lock);
++    int e=cudaErrorInvalidValue;
++    if(!vmweave_guest_ref(dst,bytes,&ref)){
++        vmweave_put(p,ref.handle,8);vmweave_put(p+8,ref.offset,8);
++        vmweave_put(p+16,bytes,8);vmweave_put(p+32,(uint32_t)value,4);
++        e=vmweave_guest_exchange(VMWEAVE_MEMSET_NATIVE,p,sizeof(p),NULL,0,&got);
++        /* No retry: an error may follow an executed operation. */
++        if(got)e=cudaErrorUnknown;
++    }
++    pthread_mutex_unlock(&vmweave_guest_lock);
++    return (cudaError_t)vmweave_guest_record_error(e);
++}
+ const char *cudaGetErrorString(cudaError_t e){
+     switch(e){case cudaSuccess:return "success";case cudaErrorInvalidValue:return "invalid value";
+     case cudaErrorMemoryAllocation:return "memory allocation failed (GPU quota or Guest VA reservation)";
+--- a/runtime/shm/src/torch.c
++++ b/runtime/shm/src/torch.c
+@@ -54,6 +54,14 @@
+          * dereferenced by the receiver. Legacy handle-only APIs are unchanged. */
+         vmweave_put(r->output,(uintptr_t)address,8);r->output_bytes=8;break;
+     }
++    case VMWEAVE_MEMSET_NATIVE: {
++        if(!p||n!=40||vmweave_get(p+24,8)||vmweave_get(p+36,4))goto invalid;
++        uint64_t bytes=vmweave_get(p+16,8);void *address=NULL;
++        struct vmweave_device_ref ref={vmweave_get(p,8),vmweave_get(p+8,8)};
++        if(bytes>SIZE_MAX||!vmweave_cuda_exec_resolve(s->exec,ref,(size_t)bytes,&address))goto invalid;
++        r->api_result=cudaMemset(address,(int)(int32_t)vmweave_get(p+32,4),(size_t)bytes);
++        break;
++    }
+     case VMWEAVE_MEMSET: {
+         if(n!=40||vmweave_get(p+36,4))goto invalid;
+         struct vmweave_device_ref ref={vmweave_get(p,8),vmweave_get(p+8,8)};

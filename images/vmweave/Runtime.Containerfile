@@ -7,10 +7,12 @@ RUN cmake -S /src/runtime/shm -B /build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTA
     && cmake --build /build --parallel 2 && cmake --install /build
 
 COPY tests/integration /src/tests/integration
+COPY tests/path_optimization /src/tests/path_optimization
 COPY scripts/test-shm-training.sh /src/scripts/test-shm-training.sh
 RUN mkdir -p /tmp/vmweave-test-stubs \
     && ln -s /usr/local/cuda/lib64/stubs/libcuda.so /tmp/vmweave-test-stubs/libcuda.so.1 \
     && LD_LIBRARY_PATH=/tmp/vmweave-test-stubs:/usr/local/cuda/lib64 bash /src/scripts/test-shm-training.sh /build \
+    && CUDA_ROOT=/usr/local/cuda bash /src/tests/path_optimization/run_cuda_mock.sh \
     && rm -rf /tmp/vmweave-test-stubs
 
 COPY experiments/evidence/guest_gpu_smoke.c /src/guest_gpu_smoke.c
@@ -22,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3 ca-cert
 COPY --from=build /opt/vmweave/bin /opt/vmweave/bin
 COPY runtime/shm/control /opt/vmweave/control
 RUN ln -s vmweave /opt/flyt
-ENV VMWEAVE_API_GROUP=vmweave.io
+ENV VMWEAVE_API_GROUP=vmweave.io VMWEAVE_WORKER_REUSE=1 VMWEAVE_SESSION_ARENA=1 VMWEAVE_SESSION_EVENTFD=1 VMWEAVE_PINNED_POOL=1
 ENTRYPOINT ["/usr/bin/tini","--","python3","/opt/vmweave/control/supervisor.py"]
 
 FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f AS guest-artifacts

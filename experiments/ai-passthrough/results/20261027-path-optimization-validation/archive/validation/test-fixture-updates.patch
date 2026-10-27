@@ -1,0 +1,35 @@
+--- a/tests/control/test_guest_broker.py
++++ b/tests/control/test_guest_broker.py
+@@ -70,6 +70,7 @@
+         class LimitsTransport(Fake):
+             def __init__(self):
+                 super().__init__();self.lib=object() if old_library else Library()
++                self.limits=getattr(self.lib, 'vmweave_guest_transport_limits', None)
+             def exchange(self, api, data, capacity):
+                 if api==broker.CALL:
+                     return (801,b'') if old_worker else (0,struct.pack('<IIQQ',1,1,16*1024*1024,16*1024*1024))
+--- a/tests/integration/large_copy_async.c
++++ b/tests/integration/large_copy_async.c
+@@ -8,7 +8,7 @@
+ cudaError_t cudaHostAlloc(void **p,size_t n,unsigned flags){(void)flags;*p=malloc(n);assert(*p);live+=n;if(live>peak)peak=live;return cudaSuccess;}
+ cudaError_t cudaFreeHost(void *p){for(int i=0;i<128;i++)if(stages[i].host==p)live-=stages[i].bytes;free(p);return cudaSuccess;}
+ cudaError_t cudaEventCreateWithFlags(cudaEvent_t *e,unsigned f){(void)f;*e=(cudaEvent_t)calloc(1,sizeof(struct mock_event));assert(*e);return cudaSuccess;}
+-cudaError_t cudaEventRecord(cudaEvent_t e,cudaStream_t s){(void)e;(void)s;return record_error?cudaErrorUnknown:cudaSuccess;}
++cudaError_t cudaEventRecord(cudaEvent_t e,cudaStream_t s){(void)s;if(!record_error)((struct mock_event*)e)->ready=0;return record_error?cudaErrorUnknown:cudaSuccess;}
+ cudaError_t cudaEventQuery(cudaEvent_t e){return ((struct mock_event*)e)->ready?cudaSuccess:cudaErrorNotReady;}
+ cudaError_t cudaEventSynchronize(cudaEvent_t e){waits++;if(wait_error)return cudaErrorUnknown;((struct mock_event*)e)->ready=1;return cudaSuccess;}
+ cudaError_t cudaEventDestroy(cudaEvent_t e){assert(((struct mock_event*)e)->ready);free(e);return cudaSuccess;}
+--- a/tests/integration/large_copy_guest.c
++++ b/tests/integration/large_copy_guest.c
+@@ -7,6 +7,11 @@
+ static int legacy;
+ static uint64_t expected_stream;
+ void vmweave_broker_close(void){}
++/* This legacy-path fixture deliberately keeps direct bulk disabled. */
++int vmweave_broker_direct_enabled(void){return 0;}
++int vmweave_broker_copy_direct(const void *h,const void *p,size_t n,size_t *got){
++    (void)h;(void)p;(void)n;(void)got;assert(0);return 999;
++}
+ int vmweave_broker_exchange(uint32_t api,const void *input,size_t n,void *output,size_t cap,size_t *got){
+     *got=0;
+     if(api==VMWEAVE_API_RUNTIME_MALLOC){static uint64_t handle=10;vmweave_put(output,handle++,8);*got=8;return 0;}

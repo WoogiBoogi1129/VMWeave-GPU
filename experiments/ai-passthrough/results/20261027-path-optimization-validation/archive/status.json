@@ -1,0 +1,62 @@
+{
+  "status": "ACTUAL_VM_TESTED_PERFORMANCE_GATE_FAILED_NOT_PROMOTED",
+  "baseline": "unbuilt P0 + existing working-tree bulk implementation",
+  "stages": {
+    "P0": "HOST_CORRECTNESS_PASS",
+    "P1": "HOST_CORRECTNESS_PASS",
+    "P2a": "HOST_CORRECTNESS_PASS",
+    "P2b": "HOST_CORRECTNESS_PASS",
+    "P3": "HOST_CORRECTNESS_PASS",
+    "P4": "HOST_CORRECTNESS_PASS",
+    "P5": "HOST_CORRECTNESS_PASS",
+    "P6b": "HOST_CORRECTNESS_PASS",
+    "P7a": "HOST_CORRECTNESS_PASS"
+  },
+  "P6a": "EXPLORATORY_0_10_50_US_1_VM_PER_PROFILE",
+  "out_of_scope": [
+    "P7b multi-outstanding pipeline",
+    "D2H early return",
+    "cross-VM interrupt wiring"
+  ],
+  "P5_scope": "existing Python socket protocol with native owner context; no per-request C I/O-thread handoff",
+  "checks": {
+    "python_ast": "PASS",
+    "shell_syntax": "PASS",
+    "patch_replay": "PASS_BYTE_IDENTICAL_80_FILES",
+    "C_text_delimiters": "BALANCED",
+    "original_product_hashes": "UNCHANGED_91_FILES",
+    "full_build": "PASS",
+    "cpu_mock": "PASS",
+    "cuda_mock": "PASS",
+    "regression": "PASS_45",
+    "final_guest_regression": "PASS_40",
+    "layout_permissions": "PASS_6_IN_ISOLATED_ROOT_CONTAINER",
+    "cpu_asan_ubsan": "PASS",
+    "ipc_failures": "PASS",
+    "gpu_correctness": "PASS_19_HOST_CONDITIONS",
+    "final_memset_revalidation": "PASS_10_AFFECTED_CONDITIONS",
+    "broker_lifecycle": "PASS_BASELINE_AND_ALL_FEATURES",
+    "native_error_semantics": "PASS_IMMEDIATE_AND_STICKY_MEMSET",
+    "actual_VM_PCI_BAR": "PASS_CONTROL_AND_COMBINED_CANDIDATE",
+    "device_verification_kernels": "PASS_DEFAULT_BLOCKING_AND_NONBLOCKING_EXPLICIT_COMPLETION",
+    "actual_VM_child_recovery": "PASS",
+    "actual_VM_generation_recreation": "PASS",
+    "Flyt_performance_comparison": "COMPLETED_DO_NOT_PROMOTE",
+    "GPU_sanitizer": "TOOL_STARTUP_BLOCKED_NOT_PASS"
+  },
+  "not_run": [
+    "individual-stage full performance ablation",
+    "full syscall-failure/concurrency qualification",
+    "successful GPU Compute Sanitizer qualification",
+    "full CUDA API/kernel/stream semantic qualification"
+  ],
+  "validated_at": "2026-10-27T09:45:02.116809+00:00",
+  "fixes": [
+    "torch dispatcher transport_status initialization",
+    "native memset success preserves previous TLS last-error"
+  ],
+  "report": "validation/REPORT.md",
+  "deployment": "NOT_PERFORMED_PERFORMANCE_GATE_FAILED",
+  "actual_VM_report": "../flyt-k8s-poc-github/experiments/ai-passthrough/results/20261027-path-optimization-vm/REPORT.md",
+  "actual_VM_completed_at": "2026-10-27T11:22:13.458028+00:00"
+}

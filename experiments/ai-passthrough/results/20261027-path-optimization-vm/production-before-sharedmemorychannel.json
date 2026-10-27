@@ -1,0 +1,66 @@
+{
+    "apiVersion": "vmweave.io/v1alpha1",
+    "kind": "SharedMemoryChannel",
+    "metadata": {
+        "creationTimestamp": "2026-10-26T12:32:01Z",
+        "finalizers": [
+            "vmweave.io/shm-detach"
+        ],
+        "generation": 1,
+        "name": "vmweave-k8s-01",
+        "namespace": "vmweave-test-a",
+        "ownerReferences": [
+            {
+                "apiVersion": "kubevirt.io/v1",
+                "controller": true,
+                "kind": "VirtualMachine",
+                "name": "vmweave-k8s-01",
+                "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121"
+            }
+        ],
+        "resourceVersion": "17247406",
+        "uid": "e4f2511c-4029-487a-9b67-1cf779bbab24"
+    },
+    "spec": {
+        "drain": false,
+        "gid": 107,
+        "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:c7477248b04daee854ebe5caa1cf5c331d529a18a023e69bd3956404cdc13bb7",
+        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:48233ff5e849fbd265c9436da508a87ed9d87ba671daf13ba33b80c67cc6e23b",
+        "lifecycle": "VM",
+        "pvcRef": {
+            "name": "vmweave-k8s-shm",
+            "uid": "884022bd-07b1-4a8b-b212-572f7b7ffcb0"
+        },
+        "requestRef": {
+            "name": "vmweave-k8s-01-v054",
+            "uid": "d5fe5724-b6b8-4005-9867-72de6306ab0e"
+        },
+        "sessions": 1,
+        "uid": 107,
+        "vmRef": {
+            "name": "vmweave-k8s-01",
+            "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121"
+        },
+        "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:f4eebcffcaf23a3617a465931f6019fb2f75ea479c846fd53ff008c44fa5d945"
+    },
+    "status": {
+        "allocation": "6049677d7fee1143710514bae5e3a54f",
+        "backend": "hami",
+        "compute": 50,
+        "everBound": true,
+        "generation": "15226940fa19e034aa561368fdb0d981",
+        "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "memoryMiB": 2048,
+        "nodeName": "gpu-4",
+        "phase": "Ready",
+        "profileGeneration": 1,
+        "reason": "MappingACK",
+        "requestGeneration": 1,
+        "resourcePrefix": "vmweave-k8s-01-e4f2511c4029-6049677d",
+        "sessions": [
+            "94965f45ccb1e6765982fb77a567ad69"
+        ],
+        "vmiUID": "69d77baa-98cf-4bda-a67e-22df037f52bc",
+        "workerPodUID": "2d0f299a-4c08-4f15-9129-80fceb642203"
+    }
+}

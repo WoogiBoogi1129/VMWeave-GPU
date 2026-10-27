@@ -59,7 +59,32 @@ cudaError_t cudaMemsetAsync(void *dst,int value,size_t bytes,cudaStream_t stream
     }
     pthread_mutex_unlock(&vmweave_guest_lock);return (cudaError_t)e;
 }
-cudaError_t cudaMemset(void *dst,int value,size_t bytes){cudaError_t e=cudaMemsetAsync(dst,value,bytes,0);return e?e:cudaDeviceSynchronize();}
+static pthread_once_t native_memset_once=PTHREAD_ONCE_INIT;
+static int native_memset_enabled;
+static void configure_native_memset(void){
+    /* New option: intentionally no legacy FLYT alias. */
+    const char *v=getenv("VMWEAVE_NATIVE_MEMSET");
+    native_memset_enabled=v&&!strcmp(v,"1");
+}
+cudaError_t cudaMemset(void *dst,int value,size_t bytes){
+    pthread_once(&native_memset_once,configure_native_memset);
+    if(!native_memset_enabled){
+        cudaError_t e=cudaMemsetAsync(dst,value,bytes,0);
+        return e?e:cudaDeviceSynchronize();
+    }
+    uint8_t p[40]={0};size_t got=0;struct vmweave_device_ref ref;
+    pthread_mutex_lock(&vmweave_guest_lock);
+    int e=cudaErrorInvalidValue;
+    if(!vmweave_guest_ref(dst,bytes,&ref)){
+        vmweave_put(p,ref.handle,8);vmweave_put(p+8,ref.offset,8);
+        vmweave_put(p+16,bytes,8);vmweave_put(p+32,(uint32_t)value,4);
+        e=vmweave_guest_exchange(VMWEAVE_MEMSET_NATIVE,p,sizeof(p),NULL,0,&got);
+        /* No retry: an error may follow an executed operation. */
+        if(got)e=cudaErrorUnknown;
+    }
+    pthread_mutex_unlock(&vmweave_guest_lock);
+    return (cudaError_t)vmweave_guest_record_error(e);
+}
 const char *cudaGetErrorString(cudaError_t e){
     switch(e){case cudaSuccess:return "success";case cudaErrorInvalidValue:return "invalid value";
     case cudaErrorMemoryAllocation:return "memory allocation failed (GPU quota or Guest VA reservation)";

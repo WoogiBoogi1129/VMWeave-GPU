@@ -1,0 +1,1082 @@
+{
+  "library": "/opt/vmweave/lib/libvmweave_guest.so",
+  "rows": [
+    {
+      "operation": "H2D",
+      "bytes": 4096,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 1878681,
+          "completion_ns": 2200509,
+          "caller_cpu_ns": 410582
+        },
+        {
+          "warmup": false,
+          "api_ns": 962573,
+          "completion_ns": 2186511,
+          "caller_cpu_ns": 258050
+        },
+        {
+          "warmup": false,
+          "api_ns": 492581,
+          "completion_ns": 917077,
+          "caller_cpu_ns": 132646
+        },
+        {
+          "warmup": false,
+          "api_ns": 659670,
+          "completion_ns": 1355802,
+          "caller_cpu_ns": 231370
+        },
+        {
+          "warmup": false,
+          "api_ns": 417262,
+          "completion_ns": 952487,
+          "caller_cpu_ns": 141704
+        },
+        {
+          "warmup": false,
+          "api_ns": 744265,
+          "completion_ns": 1689145,
+          "caller_cpu_ns": 280683
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2D",
+      "bytes": 4096,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 688301,
+          "completion_ns": 1528071,
+          "caller_cpu_ns": 161504
+        },
+        {
+          "warmup": false,
+          "api_ns": 823358,
+          "completion_ns": 1347139,
+          "caller_cpu_ns": 139905
+        },
+        {
+          "warmup": false,
+          "api_ns": 1189738,
+          "completion_ns": 2303128,
+          "caller_cpu_ns": 453271
+        },
+        {
+          "warmup": false,
+          "api_ns": 700921,
+          "completion_ns": 1235429,
+          "caller_cpu_ns": 100528
+        },
+        {
+          "warmup": false,
+          "api_ns": 1250097,
+          "completion_ns": 1949022,
+          "caller_cpu_ns": 249252
+        },
+        {
+          "warmup": false,
+          "api_ns": 452288,
+          "completion_ns": 1614360,
+          "caller_cpu_ns": 174804
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2H",
+      "bytes": 4096,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 590221,
+          "completion_ns": 1104628,
+          "caller_cpu_ns": 85791
+        },
+        {
+          "warmup": false,
+          "api_ns": 1032672,
+          "completion_ns": 1683208,
+          "caller_cpu_ns": 275281
+        },
+        {
+          "warmup": false,
+          "api_ns": 633400,
+          "completion_ns": 1156508,
+          "caller_cpu_ns": 133266
+        },
+        {
+          "warmup": false,
+          "api_ns": 1345190,
+          "completion_ns": 1838434,
+          "caller_cpu_ns": 144050
+        },
+        {
+          "warmup": false,
+          "api_ns": 530839,
+          "completion_ns": 1437841,
+          "caller_cpu_ns": 171103
+        },
+        {
+          "warmup": false,
+          "api_ns": 646052,
+          "completion_ns": 944434,
+          "caller_cpu_ns": 107685
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "H2D",
+      "bytes": 65536,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 1549202,
+          "completion_ns": 2462030,
+          "caller_cpu_ns": 379100
+        },
+        {
+          "warmup": false,
+          "api_ns": 809074,
+          "completion_ns": 1315270,
+          "caller_cpu_ns": 144023
+        },
+        {
+          "warmup": false,
+          "api_ns": 1313615,
+          "completion_ns": 2032708,
+          "caller_cpu_ns": 282103
+        },
+        {
+          "warmup": false,
+          "api_ns": 701493,
+          "completion_ns": 1118721,
+          "caller_cpu_ns": 190027
+        },
+        {
+          "warmup": false,
+          "api_ns": 1672660,
+          "completion_ns": 2400209,
+          "caller_cpu_ns": 227865
+        },
+        {
+          "warmup": false,
+          "api_ns": 1013072,
+          "completion_ns": 1455835,
+          "caller_cpu_ns": 154367
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2D",
+      "bytes": 65536,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 662160,
+          "completion_ns": 1160988,
+          "caller_cpu_ns": 89447
+        },
+        {
+          "warmup": false,
+          "api_ns": 740149,
+          "completion_ns": 1354899,
+          "caller_cpu_ns": 193383
+        },
+        {
+          "warmup": false,
+          "api_ns": 575096,
+          "completion_ns": 827846,
+          "caller_cpu_ns": 97374
+        },
+        {
+          "warmup": false,
+          "api_ns": 1090558,
+          "completion_ns": 2081073,
+          "caller_cpu_ns": 283478
+        },
+        {
+          "warmup": false,
+          "api_ns": 821230,
+          "completion_ns": 1431746,
+          "caller_cpu_ns": 94834
+        },
+        {
+          "warmup": false,
+          "api_ns": 1448074,
+          "completion_ns": 1989520,
+          "caller_cpu_ns": 227236
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2H",
+      "bytes": 65536,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 1735264,
+          "completion_ns": 2414605,
+          "caller_cpu_ns": 262798
+        },
+        {
+          "warmup": false,
+          "api_ns": 1005477,
+          "completion_ns": 2375909,
+          "caller_cpu_ns": 298039
+        },
+        {
+          "warmup": false,
+          "api_ns": 963421,
+          "completion_ns": 2200165,
+          "caller_cpu_ns": 215400
+        },
+        {
+          "warmup": false,
+          "api_ns": 1073560,
+          "completion_ns": 1771181,
+          "caller_cpu_ns": 181538
+        },
+        {
+          "warmup": false,
+          "api_ns": 1430122,
+          "completion_ns": 2028567,
+          "caller_cpu_ns": 265064
+        },
+        {
+          "warmup": false,
+          "api_ns": 1097452,
+          "completion_ns": 1907388,
+          "caller_cpu_ns": 337713
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "H2D",
+      "bytes": 1048575,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 7944001,
+          "completion_ns": 8777072,
+          "caller_cpu_ns": 2627503
+        },
+        {
+          "warmup": false,
+          "api_ns": 5243225,
+          "completion_ns": 6746676,
+          "caller_cpu_ns": 1191285
+        },
+        {
+          "warmup": false,
+          "api_ns": 3575860,
+          "completion_ns": 4263703,
+          "caller_cpu_ns": 1147639
+        },
+        {
+          "warmup": false,
+          "api_ns": 4369535,
+          "completion_ns": 5513458,
+          "caller_cpu_ns": 1123008
+        },
+        {
+          "warmup": false,
+          "api_ns": 3754335,
+          "completion_ns": 4287649,
+          "caller_cpu_ns": 1034595
+        },
+        {
+          "warmup": false,
+          "api_ns": 3654622,
+          "completion_ns": 4304991,
+          "caller_cpu_ns": 1159182
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2D",
+      "bytes": 1048575,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 1103492,
+          "completion_ns": 2364961,
+          "caller_cpu_ns": 266714
+        },
+        {
+          "warmup": false,
+          "api_ns": 613534,
+          "completion_ns": 1143620,
+          "caller_cpu_ns": 137031
+        },
+        {
+          "warmup": false,
+          "api_ns": 1080286,
+          "completion_ns": 1798551,
+          "caller_cpu_ns": 215387
+        },
+        {
+          "warmup": false,
+          "api_ns": 1158141,
+          "completion_ns": 2388744,
+          "caller_cpu_ns": 296126
+        },
+        {
+          "warmup": false,
+          "api_ns": 590210,
+          "completion_ns": 1248608,
+          "caller_cpu_ns": 108583
+        },
+        {
+          "warmup": false,
+          "api_ns": 922284,
+          "completion_ns": 1384814,
+          "caller_cpu_ns": 214571
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2H",
+      "bytes": 1048575,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 4450608,
+          "completion_ns": 5340896,
+          "caller_cpu_ns": 701077
+        },
+        {
+          "warmup": false,
+          "api_ns": 3714183,
+          "completion_ns": 4860925,
+          "caller_cpu_ns": 694351
+        },
+        {
+          "warmup": false,
+          "api_ns": 4168730,
+          "completion_ns": 5000744,
+          "caller_cpu_ns": 694147
+        },
+        {
+          "warmup": false,
+          "api_ns": 3502593,
+          "completion_ns": 4256279,
+          "caller_cpu_ns": 605476
+        },
+        {
+          "warmup": false,
+          "api_ns": 3579692,
+          "completion_ns": 4858366,
+          "caller_cpu_ns": 620253
+        },
+        {
+          "warmup": false,
+          "api_ns": 3453444,
+          "completion_ns": 4518712,
+          "caller_cpu_ns": 555696
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "H2D",
+      "bytes": 1048576,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 5642281,
+          "completion_ns": 6666580,
+          "caller_cpu_ns": 2342375
+        },
+        {
+          "warmup": false,
+          "api_ns": 3303370,
+          "completion_ns": 4071062,
+          "caller_cpu_ns": 681501
+        },
+        {
+          "warmup": false,
+          "api_ns": 2661401,
+          "completion_ns": 3287420,
+          "caller_cpu_ns": 668178
+        },
+        {
+          "warmup": false,
+          "api_ns": 2829645,
+          "completion_ns": 3641050,
+          "caller_cpu_ns": 647687
+        },
+        {
+          "warmup": false,
+          "api_ns": 3115659,
+          "completion_ns": 3896789,
+          "caller_cpu_ns": 621957
+        },
+        {
+          "warmup": false,
+          "api_ns": 3754811,
+          "completion_ns": 4431056,
+          "caller_cpu_ns": 654512
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2D",
+      "bytes": 1048576,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 906017,
+          "completion_ns": 1449928,
+          "caller_cpu_ns": 134581
+        },
+        {
+          "warmup": false,
+          "api_ns": 435157,
+          "completion_ns": 715034,
+          "caller_cpu_ns": 97898
+        },
+        {
+          "warmup": false,
+          "api_ns": 669827,
+          "completion_ns": 1208293,
+          "caller_cpu_ns": 143889
+        },
+        {
+          "warmup": false,
+          "api_ns": 571380,
+          "completion_ns": 1072884,
+          "caller_cpu_ns": 117350
+        },
+        {
+          "warmup": false,
+          "api_ns": 1397442,
+          "completion_ns": 2175332,
+          "caller_cpu_ns": 142606
+        },
+        {
+          "warmup": false,
+          "api_ns": 1217124,
+          "completion_ns": 2443733,
+          "caller_cpu_ns": 224363
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2H",
+      "bytes": 1048576,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 2965425,
+          "completion_ns": 3735435,
+          "caller_cpu_ns": 513933
+        },
+        {
+          "warmup": false,
+          "api_ns": 2606494,
+          "completion_ns": 3904452,
+          "caller_cpu_ns": 645699
+        },
+        {
+          "warmup": false,
+          "api_ns": 2625123,
+          "completion_ns": 3780979,
+          "caller_cpu_ns": 489963
+        },
+        {
+          "warmup": false,
+          "api_ns": 2458658,
+          "completion_ns": 3301724,
+          "caller_cpu_ns": 518680
+        },
+        {
+          "warmup": false,
+          "api_ns": 2494828,
+          "completion_ns": 3316638,
+          "caller_cpu_ns": 532384
+        },
+        {
+          "warmup": false,
+          "api_ns": 2852118,
+          "completion_ns": 4041583,
+          "caller_cpu_ns": 465176
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "H2D",
+      "bytes": 1048577,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 3139749,
+          "completion_ns": 3890220,
+          "caller_cpu_ns": 598154
+        },
+        {
+          "warmup": false,
+          "api_ns": 3047907,
+          "completion_ns": 3671311,
+          "caller_cpu_ns": 603604
+        },
+        {
+          "warmup": false,
+          "api_ns": 2766764,
+          "completion_ns": 3665590,
+          "caller_cpu_ns": 659588
+        },
+        {
+          "warmup": false,
+          "api_ns": 3146643,
+          "completion_ns": 3816227,
+          "caller_cpu_ns": 640047
+        },
+        {
+          "warmup": false,
+          "api_ns": 3213051,
+          "completion_ns": 3744355,
+          "caller_cpu_ns": 672055
+        },
+        {
+          "warmup": false,
+          "api_ns": 3162794,
+          "completion_ns": 3706654,
+          "caller_cpu_ns": 615506
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2D",
+      "bytes": 1048577,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 747501,
+          "completion_ns": 1283347,
+          "caller_cpu_ns": 136109
+        },
+        {
+          "warmup": false,
+          "api_ns": 858338,
+          "completion_ns": 1449835,
+          "caller_cpu_ns": 222652
+        },
+        {
+          "warmup": false,
+          "api_ns": 450807,
+          "completion_ns": 745837,
+          "caller_cpu_ns": 93665
+        },
+        {
+          "warmup": false,
+          "api_ns": 1066463,
+          "completion_ns": 1664405,
+          "caller_cpu_ns": 221116
+        },
+        {
+          "warmup": false,
+          "api_ns": 647081,
+          "completion_ns": 1164897,
+          "caller_cpu_ns": 98605
+        },
+        {
+          "warmup": false,
+          "api_ns": 963699,
+          "completion_ns": 1554377,
+          "caller_cpu_ns": 216874
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2H",
+      "bytes": 1048577,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 2049733,
+          "completion_ns": 3105140,
+          "caller_cpu_ns": 401302
+        },
+        {
+          "warmup": false,
+          "api_ns": 2839072,
+          "completion_ns": 4186614,
+          "caller_cpu_ns": 481806
+        },
+        {
+          "warmup": false,
+          "api_ns": 2914402,
+          "completion_ns": 3731388,
+          "caller_cpu_ns": 584663
+        },
+        {
+          "warmup": false,
+          "api_ns": 2572127,
+          "completion_ns": 3231592,
+          "caller_cpu_ns": 525547
+        },
+        {
+          "warmup": false,
+          "api_ns": 2071735,
+          "completion_ns": 3088174,
+          "caller_cpu_ns": 407685
+        },
+        {
+          "warmup": false,
+          "api_ns": 2386217,
+          "completion_ns": 3745290,
+          "caller_cpu_ns": 510746
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "H2D",
+      "bytes": 16777216,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 156539868,
+          "completion_ns": 157938482,
+          "caller_cpu_ns": 51259982
+        },
+        {
+          "warmup": false,
+          "api_ns": 37009495,
+          "completion_ns": 38529479,
+          "caller_cpu_ns": 7643451
+        },
+        {
+          "warmup": false,
+          "api_ns": 37636724,
+          "completion_ns": 38877038,
+          "caller_cpu_ns": 7706020
+        },
+        {
+          "warmup": false,
+          "api_ns": 34118163,
+          "completion_ns": 35339734,
+          "caller_cpu_ns": 7082476
+        },
+        {
+          "warmup": false,
+          "api_ns": 34030490,
+          "completion_ns": 35105593,
+          "caller_cpu_ns": 7089943
+        },
+        {
+          "warmup": false,
+          "api_ns": 33560589,
+          "completion_ns": 35116026,
+          "caller_cpu_ns": 6697115
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2D",
+      "bytes": 16777216,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 3209240,
+          "completion_ns": 5757765,
+          "caller_cpu_ns": 680020
+        },
+        {
+          "warmup": false,
+          "api_ns": 4496188,
+          "completion_ns": 9667224,
+          "caller_cpu_ns": 1065400
+        },
+        {
+          "warmup": false,
+          "api_ns": 6858442,
+          "completion_ns": 12265635,
+          "caller_cpu_ns": 2762555
+        },
+        {
+          "warmup": false,
+          "api_ns": 5792623,
+          "completion_ns": 11396849,
+          "caller_cpu_ns": 3038947
+        },
+        {
+          "warmup": false,
+          "api_ns": 1580963,
+          "completion_ns": 2172382,
+          "caller_cpu_ns": 605687
+        },
+        {
+          "warmup": false,
+          "api_ns": 854513,
+          "completion_ns": 1669000,
+          "caller_cpu_ns": 260057
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2H",
+      "bytes": 16777216,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 24502444,
+          "completion_ns": 26195390,
+          "caller_cpu_ns": 2921339
+        },
+        {
+          "warmup": false,
+          "api_ns": 24240872,
+          "completion_ns": 25229456,
+          "caller_cpu_ns": 3413398
+        },
+        {
+          "warmup": false,
+          "api_ns": 24583444,
+          "completion_ns": 25563481,
+          "caller_cpu_ns": 3516606
+        },
+        {
+          "warmup": false,
+          "api_ns": 24287380,
+          "completion_ns": 25810095,
+          "caller_cpu_ns": 3490426
+        },
+        {
+          "warmup": false,
+          "api_ns": 23714772,
+          "completion_ns": 25142030,
+          "caller_cpu_ns": 3508445
+        },
+        {
+          "warmup": false,
+          "api_ns": 23879386,
+          "completion_ns": 25272212,
+          "caller_cpu_ns": 3517970
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "H2D",
+      "bytes": 134217729,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 304380215,
+          "completion_ns": 304882270,
+          "caller_cpu_ns": 50918686
+        },
+        {
+          "warmup": false,
+          "api_ns": 284060423,
+          "completion_ns": 285151324,
+          "caller_cpu_ns": 52093609
+        },
+        {
+          "warmup": false,
+          "api_ns": 243924124,
+          "completion_ns": 244702060,
+          "caller_cpu_ns": 48208586
+        },
+        {
+          "warmup": false,
+          "api_ns": 249825767,
+          "completion_ns": 250815873,
+          "caller_cpu_ns": 49560408
+        },
+        {
+          "warmup": false,
+          "api_ns": 246772591,
+          "completion_ns": 247441341,
+          "caller_cpu_ns": 46897681
+        },
+        {
+          "warmup": false,
+          "api_ns": 263934846,
+          "completion_ns": 264647791,
+          "caller_cpu_ns": 51520222
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2D",
+      "bytes": 134217729,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 1415162,
+          "completion_ns": 2602860,
+          "caller_cpu_ns": 124463
+        },
+        {
+          "warmup": false,
+          "api_ns": 1038703,
+          "completion_ns": 1500420,
+          "caller_cpu_ns": 124672
+        },
+        {
+          "warmup": false,
+          "api_ns": 985650,
+          "completion_ns": 2176525,
+          "caller_cpu_ns": 111517
+        },
+        {
+          "warmup": false,
+          "api_ns": 565778,
+          "completion_ns": 1592038,
+          "caller_cpu_ns": 98828
+        },
+        {
+          "warmup": false,
+          "api_ns": 1210378,
+          "completion_ns": 1980391,
+          "caller_cpu_ns": 144097
+        },
+        {
+          "warmup": false,
+          "api_ns": 1205516,
+          "completion_ns": 2239534,
+          "caller_cpu_ns": 154929
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "D2H",
+      "bytes": 134217729,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 193080413,
+          "completion_ns": 194474354,
+          "caller_cpu_ns": 23650213
+        },
+        {
+          "warmup": false,
+          "api_ns": 187858285,
+          "completion_ns": 188470362,
+          "caller_cpu_ns": 26739288
+        },
+        {
+          "warmup": false,
+          "api_ns": 184414498,
+          "completion_ns": 185083828,
+          "caller_cpu_ns": 26554793
+        },
+        {
+          "warmup": false,
+          "api_ns": 180590763,
+          "completion_ns": 181383475,
+          "caller_cpu_ns": 26523980
+        },
+        {
+          "warmup": false,
+          "api_ns": 181975951,
+          "completion_ns": 182679230,
+          "caller_cpu_ns": 26840401
+        },
+        {
+          "warmup": false,
+          "api_ns": 180748774,
+          "completion_ns": 182024742,
+          "caller_cpu_ns": 26777734
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "memset",
+      "bytes": 4,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 2286276,
+          "completion_ns": 3459528,
+          "caller_cpu_ns": 204742
+        },
+        {
+          "warmup": false,
+          "api_ns": 1559991,
+          "completion_ns": 2299849,
+          "caller_cpu_ns": 170774
+        },
+        {
+          "warmup": false,
+          "api_ns": 1285685,
+          "completion_ns": 2022393,
+          "caller_cpu_ns": 147719
+        },
+        {
+          "warmup": false,
+          "api_ns": 1009415,
+          "completion_ns": 1439307,
+          "caller_cpu_ns": 183815
+        },
+        {
+          "warmup": false,
+          "api_ns": 2183136,
+          "completion_ns": 2938664,
+          "caller_cpu_ns": 320621
+        },
+        {
+          "warmup": false,
+          "api_ns": 1638891,
+          "completion_ns": 3242281,
+          "caller_cpu_ns": 279864
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "memset",
+      "bytes": 4096,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 2181962,
+          "completion_ns": 2779729,
+          "caller_cpu_ns": 276079
+        },
+        {
+          "warmup": false,
+          "api_ns": 1290114,
+          "completion_ns": 2476380,
+          "caller_cpu_ns": 287961
+        },
+        {
+          "warmup": false,
+          "api_ns": 1243789,
+          "completion_ns": 2061501,
+          "caller_cpu_ns": 230416
+        },
+        {
+          "warmup": false,
+          "api_ns": 1460627,
+          "completion_ns": 2092180,
+          "caller_cpu_ns": 122356
+        },
+        {
+          "warmup": false,
+          "api_ns": 1435995,
+          "completion_ns": 2004946,
+          "caller_cpu_ns": 237234
+        },
+        {
+          "warmup": false,
+          "api_ns": 1830819,
+          "completion_ns": 2401096,
+          "caller_cpu_ns": 251780
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "memset",
+      "bytes": 1048576,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 1396521,
+          "completion_ns": 2470078,
+          "caller_cpu_ns": 145757
+        },
+        {
+          "warmup": false,
+          "api_ns": 1262771,
+          "completion_ns": 1921059,
+          "caller_cpu_ns": 282172
+        },
+        {
+          "warmup": false,
+          "api_ns": 1244014,
+          "completion_ns": 1510883,
+          "caller_cpu_ns": 122460
+        },
+        {
+          "warmup": false,
+          "api_ns": 1852665,
+          "completion_ns": 2794326,
+          "caller_cpu_ns": 119982
+        },
+        {
+          "warmup": false,
+          "api_ns": 1028563,
+          "completion_ns": 1527868,
+          "caller_cpu_ns": 100764
+        },
+        {
+          "warmup": false,
+          "api_ns": 796646,
+          "completion_ns": 1165867,
+          "caller_cpu_ns": 123533
+        }
+      ],
+      "correct": true
+    },
+    {
+      "operation": "memset",
+      "bytes": 16777216,
+      "samples": [
+        {
+          "warmup": true,
+          "api_ns": 1823284,
+          "completion_ns": 2486947,
+          "caller_cpu_ns": 125871
+        },
+        {
+          "warmup": false,
+          "api_ns": 976315,
+          "completion_ns": 1362297,
+          "caller_cpu_ns": 96494
+        },
+        {
+          "warmup": false,
+          "api_ns": 1719208,
+          "completion_ns": 2328547,
+          "caller_cpu_ns": 109911
+        },
+        {
+          "warmup": false,
+          "api_ns": 1719084,
+          "completion_ns": 2545388,
+          "caller_cpu_ns": 118581
+        },
+        {
+          "warmup": false,
+          "api_ns": 1038833,
+          "completion_ns": 1763668,
+          "caller_cpu_ns": 146742
+        },
+        {
+          "warmup": false,
+          "api_ns": 1320255,
+          "completion_ns": 1943638,
+          "caller_cpu_ns": 98782
+        }
+      ],
+      "correct": true
+    }
+  ],
+  "status": "PASS",
+  "timing": "caller return and explicit device completion; one warmup excluded"
+}

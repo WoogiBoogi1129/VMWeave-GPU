@@ -1,0 +1,27 @@
+--- a/runtime/shm/src/session_ipc.c
++++ b/runtime/shm/src/session_ipc.c
+@@ -37,13 +37,13 @@
+ static int header(const unsigned char *h){return get(h,4)==MAGIC&&get(h+4,4)==1&&!get(h+52,4);}
+ int vmweave_ipc_call(struct vmweave_ipc *c,int fd,uint32_t api,const void *input,size_t n,void *out,size_t cap,
+  uint32_t *transport,uint32_t *domain,uint32_t *result,size_t *got){
+- unsigned char h[64]={0},r[64];unsigned mode=0;size_t wire=n;*got=0;
++ unsigned char h[64]={0},r[64];unsigned mode=0;size_t wire=n;*got=0;if(cap>VMWEAVE_IPC_HALF)cap=VMWEAVE_IPC_HALF;
+  if(!c->arena||c->sequence==UINT64_MAX||n>VMWEAVE_IPC_HALF||cap>VMWEAVE_IPC_HALF||(n&&!input)||(cap&&!out))return -1;
+  const unsigned char *p=input;
+  if(api==0x1012u&&n>=48&&!get(p+4,4)){
+   uint64_t bytes=get(p+40,8),kind=get(p,4);
+   if(bytes>=1024u*1024u&&bytes<=16u*1024u*1024u){
+-   if(kind==1&&n==48+bytes&&!cap){mode=1;memcpy(c->arena+48,p+48,(size_t)bytes);wire=48;}
++   if(kind==1&&n==48+bytes){mode=1;memcpy(c->arena+48,p+48,(size_t)bytes);wire=48;}
+    else if(kind==2&&n==48&&cap>=bytes)mode=2;
+   }
+  }
+@@ -70,7 +70,7 @@
+   unsigned char descriptor[48];if(*api!=0x1012u||n<48||io(fd,descriptor,48,0)||get(descriptor+4,4))return -1;
+   uint64_t size=get(descriptor+40,8);
+   if(size<1024u*1024u||size>16u*1024u*1024u||get(descriptor,4)!=m)return -1;
+-  if(m==1){if(n!=48+size||cap)return -1;memcpy(c->arena,descriptor,48);*input=c->arena;}
++  if(m==1){if(n!=48+size)return -1;memcpy(c->arena,descriptor,48);*input=c->arena;}
+   else{if(n!=48||cap<size)return -1;memcpy(scratch,descriptor,48);*input=scratch;}
+  }else{if(io(fd,scratch,(size_t)n,0))return -1;*input=scratch;}
+  *output=c->arena+VMWEAVE_IPC_HALF;++c->sequence;return 0;

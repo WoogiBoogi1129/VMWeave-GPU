@@ -1,0 +1,29 @@
+[
+  {
+    "name": "baseline-bulk",
+    "features": [],
+    "status": "FAIL",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-kqwfkn12/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-kqwfkn12/e59d719a3d324253b5d38f3c948a8d9c/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-kqwfkn12/e59d719a3d324253b5d38f3c948a8d9c/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+      }
+    },
+    "error": "CalledProcessError(1, ['/usr/bin/python3', '/home/ubuntu/taeuk/vmweave-path-optimization-20261027/tests/gpu_probe.py', '/home/ubuntu/taeuk/vmweave-path-optimization-20261027/validation/host-gpu-smoke/baseline-bulk-probe.json'])",
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  }
+]

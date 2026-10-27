@@ -1,0 +1,35 @@
+[
+  {
+    "name": "baseline-bulk",
+    "features": [],
+    "status": "FAIL",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-bkvaohx6/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-bkvaohx6/7922049fed8c429abb4b94be19d20f28/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-bkvaohx6/7922049fed8c429abb4b94be19d20f28/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-bkvaohx6/hami.cache"
+      }
+    },
+    "error": "CalledProcessError(1, ['/usr/bin/python3', '/home/ubuntu/taeuk/vmweave-path-optimization-20261027/tests/gpu_probe.py', '/home/ubuntu/taeuk/vmweave-path-optimization-20261027/validation/host-gpu-smoke-hami/baseline-bulk-probe.json'])",
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  }
+]

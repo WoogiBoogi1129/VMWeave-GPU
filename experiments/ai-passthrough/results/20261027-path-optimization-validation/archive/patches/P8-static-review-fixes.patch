@@ -1,0 +1,122 @@
+--- a/runtime/shm/control/guest_broker.py
++++ b/runtime/shm/control/guest_broker.py
+@@ -44,6 +44,10 @@
+ 
+ 
+ class Transport:
++    # Defaults also support existing mock subclasses without native initialization.
++    owner_mode = False
++    reuse = False
++    parts = None
+     def __init__(self, library):
+         # This process is the SHM owner, never a client of its own socket.
+         env.pop('VMWEAVE_BROKER_SOCKET')
+@@ -75,6 +79,9 @@
+         # Starts the persistent transport's HELLO and heartbeat without CUDA work.
+         rc, _ = self.exchange(3, b'', 0)
+         if rc:
++            if self.owner is not None:
++                self.owner_close(self.owner)
++                self.owner = None
+             raise RuntimeError(f'transport initialization failed: {rc}')
+ 
+     def init_owner(self):
+@@ -152,7 +159,7 @@
+             raise ValueError('invalid bulk capacity')
+         prefix = epoch + struct.pack('<II', 0x1012, 0) + data
+         # Input data may change concurrently, like application memory in cudaMemcpy;
+-        # only payload is shared. Copy to private storage before transport submission.
++        # only payload is shared. Gather mode copies payload directly into transport SHM.
+         request_size = len(prefix) + (size if kind == 1 and self.parts is None else 0)
+         request = self.buffer("request", request_size)
+         ctypes.memmove(request, prefix, len(prefix))
+@@ -277,7 +284,7 @@
+                     raise ValueError('client cannot send transport controls')
+                 rc, out = self.exchange(CALL, epoch + struct.pack('<II', api, 0) + data, capacity)
+                 if api == COPY_LIMITS and not rc:
+-                    limits = self.limits
++                    limits = getattr(self, "limits", None)
+                     request, response = ctypes.c_size_t(), ctypes.c_size_t()
+                     if len(out) != 24 or limits is None or limits(ctypes.byref(request), ctypes.byref(response)):
+                         rc, out = 801, b''
+@@ -307,7 +314,7 @@
+                     arena.close()
+                 conn.close()
+                 if owned:
+-                    self.scratch.clear()
++                    getattr(self, "scratch", {}).clear()
+                     self.lock.release()
+ 
+ 
+@@ -355,6 +362,9 @@
+             finally: busy.release()
+     finally:
+         listener.close()
++        while True:
++            try: pending.get_nowait().close()
++            except queue.Empty: break
+         if transport.owner is not None:
+             transport.owner_close(transport.owner)
+             transport.owner = None
+--- a/runtime/shm/shm-queue/src/queue.c
++++ b/runtime/shm/shm-queue/src/queue.c
+@@ -289,8 +289,7 @@
+     }
+     if (!q || total!=q->input_bytes || q->request_id != c->next || c->next == UINT64_MAX || !q->api_id ||
+         !q->payload_schema || q->input_bytes > c->request_bytes ||
+-        q->input_bytes > VMWEAVE_SHM_MAX_MESSAGE_BYTES ||
+-        0) return VMWEAVE_SHM_BAD_DESCRIPTOR;
++        q->input_bytes > VMWEAVE_SHM_MAX_MESSAGE_BYTES) return VMWEAVE_SHM_BAD_DESCRIPTOR;
+     if (memcmp(q->identity.channel_generation, c->identity.channel_generation, 16) ||
+         memcmp(q->identity.session_id, c->identity.session_id, 16)) return VMWEAVE_SHM_STALE_IDENTITY;
+     rc = space(&c->req);
+--- a/runtime/shm/src/guest.c
++++ b/runtime/shm/src/guest.c
+@@ -49,9 +49,9 @@
+     struct vmweave_shm_request q={.identity=identity,.request_id=*id,.api_id=api,.payload_schema=1,.input=in,.input_bytes=n+tail_bytes};
+     struct vmweave_shm_response r={.output=out,.output_capacity=cap};
+     if(vmweave_shm_submit_parts(c,&q,parts,2)){broken=1;return 999;}
+-    vmweave_trace("guest","submit",trace_allocation,&q,NULL);
++    if(!tail_bytes)vmweave_trace("guest","submit",trace_allocation,&q,NULL);
+     if(vmweave_shm_receive(c,*id,&r)){broken=1;return 999;}
+-    vmweave_trace("guest","receive",trace_allocation,&q,&r);
++    if(!tail_bytes)vmweave_trace("guest","receive",trace_allocation,&q,&r);
+     ++*id;*got=r.output_bytes;
+     if(r.transport_status){
+         fprintf(stderr,"vmweave rejected api=0x%x transport_status=%u\n",api,r.transport_status);
+--- a/runtime/shm/src/session_ipc.c
++++ b/runtime/shm/src/session_ipc.c
+@@ -6,6 +6,7 @@
+ #include <sys/eventfd.h>
+ #include <poll.h>
+ #include <time.h>
++#include <stdatomic.h>
+ #include <unistd.h>
+ #include <fcntl.h>
+ #include <errno.h>
+@@ -76,8 +77,10 @@
+   }
+  }
+  put(h,MAGIC,4);put(h+4,1,4);put(h+8,mode,4);put(h+12,api,4);put(h+16,++c->sequence,8);put(h+24,n,8);put(h+32,cap,8);
++ atomic_thread_fence(memory_order_release);
+  if(io(fd,h,64,1)||notify(c->request_event)||io(fd,(void*)input,wire,1)||await_event(c->response_event,fd)||io(fd,r,64,0)||!header(r)||
+     get(r+8,4)!=mode||get(r+12,4)||get(r+16,8)!=c->sequence||get(r+24,8)||get(r+32,8))return -1;
++ atomic_thread_fence(memory_order_acquire);
+  uint64_t produced=get(r+56,8);if(produced>cap||produced>VMWEAVE_IPC_HALF)return -1;
+  *transport=(uint32_t)get(r+40,4);*domain=(uint32_t)get(r+44,4);*result=(uint32_t)get(r+48,4);
+  if((*transport||*result)&&produced)return -1;
+@@ -91,6 +94,7 @@
+  const void **input,size_t *bytes,void **output,size_t *capacity,unsigned *mode){
+  unsigned char h[64];if(await_event(c->request_event,fd)||io(fd,h,64,0)||!header(h)||c->sequence==UINT64_MAX||get(h+16,8)!=c->sequence+1||
+  get(h+40,4)||get(h+44,4)||get(h+48,4)||get(h+56,8))return -1;
++ atomic_thread_fence(memory_order_acquire);
+  uint64_t n=get(h+24,8),cap=get(h+32,8),m=get(h+8,4);
+  if(n>scratch_cap||n>VMWEAVE_IPC_HALF||cap>VMWEAVE_IPC_HALF||m>2)return -1;
+  *api=(uint32_t)get(h+12,4);*bytes=(size_t)n;*capacity=(size_t)cap;*mode=(unsigned)m;
+@@ -109,5 +113,6 @@
+  unsigned char h[64]={0};put(h,MAGIC,4);put(h+4,1,4);put(h+8,mode,4);put(h+16,c->sequence,8);
+  put(h+40,transport,4);put(h+44,domain,4);put(h+48,result,4);put(h+56,n,8);
+  if(mode==2&&n&&out!=c->arena+VMWEAVE_IPC_HALF)return -1;
++ atomic_thread_fence(memory_order_release);
+  if(io(fd,h,64,1)||notify(c->response_event))return -1;return mode==2?0:io(fd,(void*)out,n,1);
+ }

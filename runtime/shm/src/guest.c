@@ -28,7 +28,7 @@ static size_t transport_request_bytes,transport_response_bytes;
 static atomic_int broken;
 static pid_t owner_pid;
 static uint8_t trace_allocation[16]; /* Written and read only by the I/O thread. */
-static struct {uint32_t api;const void *input;size_t bytes;void *output;size_t capacity,received;int result;} job;
+static struct {uint32_t api;const void *input;size_t bytes;const void *tail;size_t tail_bytes;void *output;size_t capacity,received;int result;} job;
 static struct {void *base;size_t bytes,mapped;uint64_t handle;} allocations[4096];
 /* One past the last live slot; protected by vmweave_guest_lock. */
 static unsigned allocation_span;
@@ -42,20 +42,26 @@ __attribute__((constructor)) static void setup_fork(void){
     pthread_cond_init(&io_cond,&attr);pthread_condattr_destroy(&attr);pthread_atfork(before_fork,after_fork,child_fork);
 }
 
-static int exchange(struct vmweave_shm_channel *c,struct vmweave_shm_identity identity,uint64_t *id,
-                    uint32_t api,const void *in,size_t n,void *out,size_t cap,size_t *got){
-    struct vmweave_shm_request q={.identity=identity,.request_id=*id,.api_id=api,.payload_schema=1,.input=in,.input_bytes=n};
+static int exchange_parts(struct vmweave_shm_channel *c,struct vmweave_shm_identity identity,uint64_t *id,
+                    uint32_t api,const void *in,size_t n,const void *tail,size_t tail_bytes,void *out,size_t cap,size_t *got){
+    if(tail_bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES||n>VMWEAVE_SHM_MAX_MESSAGE_BYTES-tail_bytes)return 1;
+    struct vmweave_shm_part parts[2]={{in,n},{tail,tail_bytes}};
+    struct vmweave_shm_request q={.identity=identity,.request_id=*id,.api_id=api,.payload_schema=1,.input=in,.input_bytes=n+tail_bytes};
     struct vmweave_shm_response r={.output=out,.output_capacity=cap};
-    if(vmweave_shm_submit(c,&q)){broken=1;return 999;}
-    vmweave_trace("guest","submit",trace_allocation,&q,NULL);
+    if(vmweave_shm_submit_parts(c,&q,parts,2)){broken=1;return 999;}
+    if(!tail_bytes)vmweave_trace("guest","submit",trace_allocation,&q,NULL);
     if(vmweave_shm_receive(c,*id,&r)){broken=1;return 999;}
-    vmweave_trace("guest","receive",trace_allocation,&q,&r);
+    if(!tail_bytes)vmweave_trace("guest","receive",trace_allocation,&q,&r);
     ++*id;*got=r.output_bytes;
     if(r.transport_status){
         fprintf(stderr,"vmweave rejected api=0x%x transport_status=%u\n",api,r.transport_status);
         if(r.transport_status==VMWEAVE_SHM_UNSUPPORTED_API)return 801;broken=1;return 999;}
     if(r.result_domain!=VMWEAVE_RESULT_CUDA_RUNTIME&&r.result_domain!=VMWEAVE_RESULT_CUDA_DRIVER&&r.result_domain!=VMWEAVE_RESULT_LIBRARY&&api>VMWEAVE_HEARTBEAT){broken=1;return 999;}
     return (int)r.api_result;
+}
+static int exchange(struct vmweave_shm_channel *c,struct vmweave_shm_identity identity,uint64_t *id,
+                    uint32_t api,const void *in,size_t n,void *out,size_t cap,size_t *got){
+    return exchange_parts(c,identity,id,api,in,n,NULL,0,out,cap,got);
 }
 static void *io_main(void *unused){
     (void)unused;struct vmweave_shm_layout l;struct vmweave_mapping m={0};struct vmweave_shm_channel *c=NULL;
@@ -83,7 +89,7 @@ static void *io_main(void *unused){
         }
         if(broken)break;
         pthread_mutex_unlock(&io_lock);
-        job.result=exchange(c,identity,&id,job.api,job.input,job.bytes,job.output,job.capacity,&job.received);
+        job.result=exchange_parts(c,identity,&id,job.api,job.input,job.bytes,job.tail,job.tail_bytes,job.output,job.capacity,&job.received);
         pthread_mutex_lock(&io_lock);work=0;finished=1;pthread_cond_broadcast(&io_cond);
         if(job.api==VMWEAVE_GOODBYE)broken=1;
     }
@@ -91,7 +97,10 @@ static void *io_main(void *unused){
 }
 extern int vmweave_broker_exchange(uint32_t,const void*,size_t,void*,size_t,size_t*);
 extern void vmweave_broker_close(void);
-int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received){
+int vmweave_guest_exchange_parts(uint32_t api,const void *input,size_t bytes,const void *tail,size_t tail_bytes,void *output,size_t capacity,size_t *received){
+    if(received)*received=0;
+    if((bytes&&!input)||(tail_bytes&&!tail)||(capacity&&!output)||tail_bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES||bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES-tail_bytes)return 1;
+    if(tail_bytes&&vmweave_getenv("VMWEAVE_BROKER_SOCKET"))return 801;
     if(vmweave_getenv("VMWEAVE_BROKER_SOCKET")){size_t ignored;return vmweave_broker_exchange(api,input,bytes,output,capacity,received?received:&ignored);}
     if(owner_pid&&owner_pid!=getpid())return 999;
     uint64_t measured=vmweave_perf_enabled()?vmweave_perf_now():0;
@@ -99,7 +108,7 @@ int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *out
     if(!started){owner_pid=getpid();started=1;if(pthread_create(&io_thread,NULL,io_main,NULL)){broken=1;initialized=1;}}
     while(!initialized)pthread_cond_wait(&io_cond,&io_lock);
     if(broken){pthread_mutex_unlock(&io_lock);return 999;}
-    job.api=api;job.input=input;job.bytes=bytes;job.output=output;job.capacity=capacity;job.received=0;
+    job.api=api;job.input=input;job.bytes=bytes;job.tail=tail;job.tail_bytes=tail_bytes;job.output=output;job.capacity=capacity;job.received=0;
     finished=0;work=1;pthread_cond_broadcast(&io_cond);
     while(!finished&&!broken)pthread_cond_wait(&io_cond,&io_lock);
     int result=finished?job.result:999;if(received)*received=job.received;
@@ -107,6 +116,9 @@ int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *out
     if(vmweave_getenv("VMWEAVE_TRACE_CALLS"))fprintf(stderr,"vmweave api=0x%x bytes=%zu result=%d\n",api,bytes,result);
     vmweave_perf_add(VMWEAVE_PERF_EXCHANGE,measured,bytes);
     return result;
+}
+int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received){
+    return vmweave_guest_exchange_parts(api,input,bytes,NULL,0,output,capacity,received);
 }
 __attribute__((destructor)) static void shutdown_guest(void){
     if(vmweave_getenv("VMWEAVE_BROKER_SOCKET")){vmweave_broker_close();return;}
@@ -127,6 +139,8 @@ int vmweave_guest_ref(const void *p,size_t n,struct vmweave_device_ref *r){
     return 1;
 }
 static cudaError_t finish(int e){last_error=(cudaError_t)e;return last_error;}
+/* Native memset success must not clear an earlier CUDA last-error value. */
+int vmweave_guest_record_error(int e){if(e)last_error=(cudaError_t)e;return e;}
 static void *reserve_device_va(uint64_t address,size_t bytes){
     if(!address||(address&4095)||!bytes||(bytes&4095)||address>UINTPTR_MAX-bytes)return MAP_FAILED;
     void *wanted=(void *)(uintptr_t)address;
@@ -238,7 +252,9 @@ int vmweave_guest_copy(void *dst,const void *src,size_t n,int kind,uint64_t stre
     size_t limit=kind==cudaMemcpyHostToDevice?copy_h2d_limit:copy_d2h_limit;
     if(kind==cudaMemcpyDeviceToDevice)limit=n;
     size_t chunk=n<limit?n:limit,header=async?56:48;
-    size_t capacity=header+(kind==cudaMemcpyHostToDevice?chunk:0);
+    int direct=!async&&kind==cudaMemcpyHostToDevice&&chunk>=1024u*1024u&&
+        vmweave_getenv("VMWEAVE_BROKER_SOCKET")&&vmweave_broker_direct_enabled();
+    size_t capacity=header+(kind==cudaMemcpyHostToDevice&&!direct?chunk:0);
     int optimized=vmweave_copy_optimized();uint8_t *in;
     if(optimized){
         if(capacity>copy_capacity){void *p=realloc(copy_buffer,capacity);if(!p)return 2;copy_buffer=p;copy_capacity=capacity;}
@@ -252,9 +268,16 @@ int vmweave_guest_copy(void *dst,const void *src,size_t n,int kind,uint64_t stre
         vmweave_put(p,kind==cudaMemcpyHostToDevice?1:kind==cudaMemcpyDeviceToHost?2:3,4);
         vmweave_put(p+8,d.handle,8);vmweave_put(p+16,d.handle?d.offset+offset:0,8);
         vmweave_put(p+24,s.handle,8);vmweave_put(p+32,s.handle?s.offset+offset:0,8);vmweave_put(p+40,bytes,8);
-        if(kind==cudaMemcpyHostToDevice&&bytes)memcpy(in+header,(const uint8_t*)src+offset,bytes);
+        if(kind==cudaMemcpyHostToDevice&&bytes&&!direct)memcpy(in+header,(const uint8_t*)src+offset,bytes);
         size_t got=0;void *output=kind==cudaMemcpyDeviceToHost&&bytes?(uint8_t*)dst+offset:NULL;
-        e=vmweave_guest_exchange(async?VMWEAVE_ASYNC_COPY:VMWEAVE_API_RUNTIME_MEMCPY,in,
+        if(direct&&bytes>=1024u*1024u){
+            e=vmweave_broker_copy_direct(in,(const uint8_t*)src+offset,bytes,&got);
+        }else if(direct){
+            /* Final small chunk still needs a complete legacy request. */
+            uint8_t *tail=malloc(header+bytes);if(!tail){e=2;break;}
+            memcpy(tail,in,header);memcpy(tail+header,(const uint8_t*)src+offset,bytes);
+            e=vmweave_guest_exchange(VMWEAVE_API_RUNTIME_MEMCPY,tail,header+bytes,NULL,0,&got);free(tail);
+        }else e=vmweave_guest_exchange(async?VMWEAVE_ASYNC_COPY:VMWEAVE_API_RUNTIME_MEMCPY,in,
             header+(kind==cudaMemcpyHostToDevice?bytes:0),output,kind==cudaMemcpyDeviceToHost?bytes:0,&got);
         if(!e&&got!=(kind==cudaMemcpyDeviceToHost?bytes:0))e=999;
         if(e)break;

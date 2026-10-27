@@ -1,0 +1,361 @@
+{
+  "status": "NOT_RUN",
+  "base": {
+    "application": {
+      "VMWEAVE_BULK_COPY": "1"
+    },
+    "broker": {
+      "VMWEAVE_BULK_COPY": "1"
+    }
+  },
+  "flags": {
+    "P0": {
+      "application": {
+        "VMWEAVE_NATIVE_MEMSET": "1"
+      }
+    },
+    "P1": {
+      "application": {
+        "VMWEAVE_BULK_DIRECT": "1"
+      }
+    },
+    "P2a": {
+      "broker": {
+        "VMWEAVE_BROKER_REUSE": "1"
+      }
+    },
+    "P2b": {
+      "worker": {
+        "VMWEAVE_WORKER_REUSE": "1"
+      }
+    },
+    "P3": {
+      "broker": {
+        "VMWEAVE_BROKER_GATHER": "1"
+      }
+    },
+    "P4": {
+      "worker": {
+        "VMWEAVE_SESSION_ARENA": "1"
+      }
+    },
+    "P5": {
+      "broker": {
+        "VMWEAVE_BROKER_OWNER": "1"
+      }
+    },
+    "P6b": {
+      "worker": {
+        "VMWEAVE_SESSION_ARENA": "1",
+        "VMWEAVE_SESSION_EVENTFD": "1"
+      }
+    },
+    "P7a": {
+      "cuda_child": {
+        "VMWEAVE_PINNED_POOL": "1"
+      }
+    }
+  },
+  "conditions": [
+    {
+      "name": "baseline-bulk",
+      "features": []
+    },
+    {
+      "name": "single-P0",
+      "features": [
+        "P0"
+      ]
+    },
+    {
+      "name": "single-P1",
+      "features": [
+        "P1"
+      ]
+    },
+    {
+      "name": "single-P2a",
+      "features": [
+        "P2a"
+      ]
+    },
+    {
+      "name": "single-P2b",
+      "features": [
+        "P2b"
+      ]
+    },
+    {
+      "name": "single-P3",
+      "features": [
+        "P3"
+      ]
+    },
+    {
+      "name": "single-P4",
+      "features": [
+        "P4"
+      ]
+    },
+    {
+      "name": "single-P5",
+      "features": [
+        "P5"
+      ]
+    },
+    {
+      "name": "single-P6b",
+      "features": [
+        "P6b"
+      ]
+    },
+    {
+      "name": "single-P7a",
+      "features": [
+        "P7a"
+      ]
+    },
+    {
+      "name": "cumulative-P0",
+      "features": [
+        "P0"
+      ]
+    },
+    {
+      "name": "cumulative-P1",
+      "features": [
+        "P0",
+        "P1"
+      ]
+    },
+    {
+      "name": "cumulative-P2a",
+      "features": [
+        "P0",
+        "P1",
+        "P2a"
+      ]
+    },
+    {
+      "name": "cumulative-P2b",
+      "features": [
+        "P0",
+        "P1",
+        "P2a",
+        "P2b"
+      ]
+    },
+    {
+      "name": "cumulative-P3",
+      "features": [
+        "P0",
+        "P1",
+        "P2a",
+        "P2b",
+        "P3"
+      ]
+    },
+    {
+      "name": "cumulative-P4",
+      "features": [
+        "P0",
+        "P1",
+        "P2a",
+        "P2b",
+        "P3",
+        "P4"
+      ]
+    },
+    {
+      "name": "cumulative-P5",
+      "features": [
+        "P0",
+        "P1",
+        "P2a",
+        "P2b",
+        "P3",
+        "P4",
+        "P5"
+      ]
+    },
+    {
+      "name": "cumulative-P6b",
+      "features": [
+        "P0",
+        "P1",
+        "P2a",
+        "P2b",
+        "P3",
+        "P4",
+        "P5",
+        "P6b"
+      ]
+    },
+    {
+      "name": "cumulative-P7a",
+      "features": [
+        "P0",
+        "P1",
+        "P2a",
+        "P2b",
+        "P3",
+        "P4",
+        "P5",
+        "P6b",
+        "P7a"
+      ]
+    }
+  ],
+  "seed": 20261027,
+  "orders": [
+    {
+      "round": 1,
+      "order": [
+        "single-P1",
+        "cumulative-P1",
+        "single-P3",
+        "single-P6b",
+        "cumulative-P5",
+        "cumulative-P2a",
+        "cumulative-P0",
+        "single-P5",
+        "cumulative-P3",
+        "baseline-bulk",
+        "cumulative-P2b",
+        "cumulative-P6b",
+        "cumulative-P4",
+        "single-P2a",
+        "single-P7a",
+        "single-P4",
+        "cumulative-P7a",
+        "single-P0",
+        "single-P2b"
+      ],
+      "fresh_vm_session_per_condition": true
+    },
+    {
+      "round": 2,
+      "order": [
+        "single-P0",
+        "single-P2b",
+        "cumulative-P1",
+        "baseline-bulk",
+        "single-P7a",
+        "cumulative-P6b",
+        "cumulative-P0",
+        "cumulative-P2a",
+        "cumulative-P3",
+        "single-P3",
+        "cumulative-P7a",
+        "single-P2a",
+        "single-P1",
+        "cumulative-P2b",
+        "cumulative-P5",
+        "single-P6b",
+        "single-P4",
+        "cumulative-P4",
+        "single-P5"
+      ],
+      "fresh_vm_session_per_condition": true
+    },
+    {
+      "round": 3,
+      "order": [
+        "cumulative-P5",
+        "cumulative-P2b",
+        "cumulative-P1",
+        "single-P2a",
+        "baseline-bulk",
+        "cumulative-P2a",
+        "single-P5",
+        "cumulative-P0",
+        "single-P3",
+        "cumulative-P4",
+        "cumulative-P6b",
+        "single-P1",
+        "cumulative-P3",
+        "single-P0",
+        "single-P2b",
+        "cumulative-P7a",
+        "single-P7a",
+        "single-P6b",
+        "single-P4"
+      ],
+      "fresh_vm_session_per_condition": true
+    },
+    {
+      "round": 4,
+      "order": [
+        "cumulative-P3",
+        "cumulative-P6b",
+        "cumulative-P5",
+        "cumulative-P2a",
+        "single-P5",
+        "single-P0",
+        "cumulative-P7a",
+        "single-P2b",
+        "single-P3",
+        "single-P6b",
+        "single-P4",
+        "single-P2a",
+        "baseline-bulk",
+        "single-P1",
+        "cumulative-P4",
+        "single-P7a",
+        "cumulative-P2b",
+        "cumulative-P1",
+        "cumulative-P0"
+      ],
+      "fresh_vm_session_per_condition": true
+    },
+    {
+      "round": 5,
+      "order": [
+        "single-P4",
+        "cumulative-P6b",
+        "cumulative-P3",
+        "cumulative-P2b",
+        "single-P0",
+        "single-P3",
+        "cumulative-P7a",
+        "single-P7a",
+        "cumulative-P0",
+        "cumulative-P5",
+        "single-P2a",
+        "single-P1",
+        "cumulative-P1",
+        "single-P6b",
+        "cumulative-P2a",
+        "single-P2b",
+        "cumulative-P4",
+        "baseline-bulk",
+        "single-P5"
+      ],
+      "fresh_vm_session_per_condition": true
+    }
+  ],
+  "wait_profiles": [
+    {
+      "name": "baseline",
+      "VMWEAVE_SPIN_US": "0",
+      "VMWEAVE_SLEEP_US": "50"
+    },
+    {
+      "name": "short-spin",
+      "VMWEAVE_SPIN_US": "10",
+      "VMWEAVE_SLEEP_US": "50"
+    },
+    {
+      "name": "longer-spin",
+      "VMWEAVE_SPIN_US": "50",
+      "VMWEAVE_SLEEP_US": "50"
+    }
+  ],
+  "notes": [
+    "Unset all feature flags before each condition, then apply only listed features.",
+    "P6a wait profiles are separate comparisons on both SHM owners.",
+    "Record frozen cache flags; do not combine different policies across conditions.",
+    "P6b requires P4; standalone condition is relative to P4 control.",
+    "Only synchronous bulk copy uses host arena; async/D2D remain inline."
+  ]
+}

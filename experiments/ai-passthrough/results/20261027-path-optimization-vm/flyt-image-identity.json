@@ -1,0 +1,15 @@
+{
+  "pod_uid": "a4786fee-8725-4758-aa55-5934282042bd",
+  "containers": [
+    {
+      "name": "mongo",
+      "image": "docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7",
+      "imageID": "docker.io/library/mongo@sha256:6dad6a5e2addb71d84eb417fcbcba0e11d096669917f8e8c26607cd7b52f9495"
+    },
+    {
+      "name": "server",
+      "image": "localhost/flyt-threeway-server:20261025",
+      "imageID": "localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09"
+    }
+  ]
+}

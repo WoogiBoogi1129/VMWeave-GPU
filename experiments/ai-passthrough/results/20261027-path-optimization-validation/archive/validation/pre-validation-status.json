@@ -1,0 +1,37 @@
+{
+  "status": "CODE_PREPARED_NOT_EXECUTED",
+  "baseline": "unbuilt P0 + existing working-tree bulk implementation",
+  "stages": {
+    "P0": "CODE_PREPARED",
+    "P1": "CODE_PREPARED",
+    "P2a": "CODE_PREPARED",
+    "P2b": "CODE_PREPARED",
+    "P3": "CODE_PREPARED",
+    "P4": "CODE_PREPARED",
+    "P5": "CODE_PREPARED",
+    "P6b": "CODE_PREPARED",
+    "P7a": "CODE_PREPARED"
+  },
+  "P6a": "PROFILE_MATRIX_PREPARED",
+  "out_of_scope": [
+    "P7b multi-outstanding pipeline",
+    "D2H early return",
+    "cross-VM interrupt wiring"
+  ],
+  "P5_scope": "existing Python socket protocol with native owner context; no per-request C I/O-thread handoff",
+  "checks": {
+    "python_ast": "PASS",
+    "shell_syntax": "PASS",
+    "patch_replay": "PASS_BYTE_IDENTICAL",
+    "C_text_delimiters": "BALANCED",
+    "original_product_hashes": "UNCHANGED"
+  },
+  "not_run": [
+    "C compile/link",
+    "mock/unit tests",
+    "sanitizers",
+    "GPU correctness",
+    "performance",
+    "deployment"
+  ]
+}

@@ -1,0 +1,434 @@
+[
+  {
+    "name": "single-P0",
+    "features": [
+      "P0"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-i78oz51n/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-i78oz51n/6bf68d9f38984f87b82e5f4a1faa2281/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-i78oz51n/6bf68d9f38984f87b82e5f4a1faa2281/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-i78oz51n/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P0",
+    "features": [
+      "P0"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-2msz_ohl/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-2msz_ohl/1245d37a611b45eb95e8a17717a425e3/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-2msz_ohl/1245d37a611b45eb95e8a17717a425e3/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-2msz_ohl/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P1",
+    "features": [
+      "P0",
+      "P1"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-4qq0ku9w/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-4qq0ku9w/6467853e6d394d128d093d9fe0780c07/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-4qq0ku9w/6467853e6d394d128d093d9fe0780c07/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-4qq0ku9w/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P2a",
+    "features": [
+      "P0",
+      "P1",
+      "P2a"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-k1b4t5w9/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-k1b4t5w9/751df628991241229c7f26731e535922/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-k1b4t5w9/751df628991241229c7f26731e535922/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-k1b4t5w9/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P2b",
+    "features": [
+      "P0",
+      "P1",
+      "P2a",
+      "P2b"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-4ljrisuw/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-4ljrisuw/f9f70c69ae7048dcbf5a7fd3850c2ee6/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-4ljrisuw/f9f70c69ae7048dcbf5a7fd3850c2ee6/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_WORKER_REUSE": "1",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-4ljrisuw/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P3",
+    "features": [
+      "P0",
+      "P1",
+      "P2a",
+      "P2b",
+      "P3"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-b21i2eke/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_BROKER_GATHER": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-b21i2eke/ac1298feffca430799f5284cfaf5c7ef/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-b21i2eke/ac1298feffca430799f5284cfaf5c7ef/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_WORKER_REUSE": "1",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-b21i2eke/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P4",
+    "features": [
+      "P0",
+      "P1",
+      "P2a",
+      "P2b",
+      "P3",
+      "P4"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-98ye5qke/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_BROKER_GATHER": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-98ye5qke/a51ac693b08a489a99b15944a620d957/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-98ye5qke/a51ac693b08a489a99b15944a620d957/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_WORKER_REUSE": "1",
+        "VMWEAVE_SESSION_ARENA": "1",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-98ye5qke/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P5",
+    "features": [
+      "P0",
+      "P1",
+      "P2a",
+      "P2b",
+      "P3",
+      "P4",
+      "P5"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-lry2q_w3/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_BROKER_GATHER": "1",
+        "VMWEAVE_BROKER_OWNER": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-lry2q_w3/67e421d6898941c1882d6b54d7b51c87/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-lry2q_w3/67e421d6898941c1882d6b54d7b51c87/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_WORKER_REUSE": "1",
+        "VMWEAVE_SESSION_ARENA": "1",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-lry2q_w3/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P6b",
+    "features": [
+      "P0",
+      "P1",
+      "P2a",
+      "P2b",
+      "P3",
+      "P4",
+      "P5",
+      "P6b"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-_0y3y5xe/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_BROKER_GATHER": "1",
+        "VMWEAVE_BROKER_OWNER": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-_0y3y5xe/0f50f62963484575a6510d6abc4b3ece/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-_0y3y5xe/0f50f62963484575a6510d6abc4b3ece/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_WORKER_REUSE": "1",
+        "VMWEAVE_SESSION_ARENA": "1",
+        "VMWEAVE_SESSION_EVENTFD": "1",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-_0y3y5xe/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  },
+  {
+    "name": "cumulative-P7a",
+    "features": [
+      "P0",
+      "P1",
+      "P2a",
+      "P2b",
+      "P3",
+      "P4",
+      "P5",
+      "P6b",
+      "P7a"
+    ],
+    "status": "PASS",
+    "environments": {
+      "application": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_NATIVE_MEMSET": "1",
+        "VMWEAVE_BULK_DIRECT": "1",
+        "VMWEAVE_BROKER_SOCKET": "/tmp/vmw-val-m9q4ig0p/broker.sock"
+      },
+      "broker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_BROKER_GATHER": "1",
+        "VMWEAVE_BROKER_OWNER": "1",
+        "VMWEAVE_LAYOUT": "/tmp/vmw-val-m9q4ig0p/ee6064b6bdb34e27b0d988dee0f57827/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:00.0",
+        "VMWEAVE_SLOT": "0",
+        "VMWEAVE_TEST_CHANNEL": "/tmp/vmw-val-m9q4ig0p/ee6064b6bdb34e27b0d988dee0f57827/channel"
+      },
+      "worker": {
+        "CUDA_VISIBLE_DEVICES": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_WORKER_REUSE": "1",
+        "VMWEAVE_SESSION_ARENA": "1",
+        "VMWEAVE_SESSION_EVENTFD": "1",
+        "VMWEAVE_PINNED_POOL": "1",
+        "VMWEAVE_RESOURCE_BACKEND": "hami",
+        "VMWEAVE_GPU_UUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+        "VMWEAVE_MEMORY_BYTES": "2147483648",
+        "CUDA_DEVICE_MEMORY_LIMIT": "2G",
+        "CUDA_DEVICE_SM_LIMIT": "100",
+        "CUDA_DEVICE_MEMORY_SHARED_CACHE": "/tmp/vmw-val-m9q4ig0p/hami.cache"
+      }
+    },
+    "session_child_reaped": true,
+    "worker_exit": 0,
+    "broker_exit": -15,
+    "markers_removed": true
+  }
+]

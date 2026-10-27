@@ -1,0 +1,47 @@
+here, pid=2441
+here, send_id=0
+here, htonl pid=-1995898880
+here2
+From Control Plane: 10.85.0.150,1,1,/dev/shm/ivshmem-0-ub11.dat#
+sup
+server ip from cmgr: 10.85.0.150
+rpc_id from cmgr: 1
+shm_enable from cmgr: 1
+be from cmgr: /dev/shm/ivshmem-0-ub11.dat
+unix mq id from lib: 0
+shm enabled? 1
+Sending ivshmem req, size: 4
+proc_be_off from cmgr: 1073741824
+proc_be_sz from cmgr: 536870912
+check0
+len shm path: 27
+check
+clnt ivshmem ctx created. mmap VA: 0x7f08c8f8a000
+clnttcp_create done.
+WG size of kernel = 16 X 16
+Randomizing the input matrix
+Start the SRAD main loop
+Computation Done
+EXPERIMENT_SAMPLE {"iteration":0,"warmup":true,"seconds":0.134153497}
+WG size of kernel = 16 X 16
+Randomizing the input matrix
+Start the SRAD main loop
+Computation Done
+EXPERIMENT_SAMPLE {"iteration":1,"warmup":false,"seconds":0.043358781}
+WG size of kernel = 16 X 16
+Randomizing the input matrix
+Start the SRAD main loop
+Computation Done
+EXPERIMENT_SAMPLE {"iteration":2,"warmup":false,"seconds":0.042362838}
+WG size of kernel = 16 X 16
+Randomizing the input matrix
+Start the SRAD main loop
+Computation Done
+EXPERIMENT_SAMPLE {"iteration":3,"warmup":false,"seconds":0.041558894}
+api-call-cnt: 95
+memcpy-api-calls: 16
+Non-memcpy-api-calls: 79
+ivshmem-memcpy-rpc-call-cnt: 0
+memcpy-sz: 268435456
+/tmp/short/srad: /tmp/flyt-test/libcudart.so.12: no version information available (required by /tmp/short/srad)
+EXPERIMENT_INIT 0.002776056

@@ -18,6 +18,7 @@ import time
 import socket
 import struct
 import threading
+import queue
 
 MAGIC = 0x32574D56
 MAX_BYTES = 16 * 1024 * 1024 + 4096
@@ -43,6 +44,10 @@ def receive(conn, count):
 
 
 class Transport:
+    # Defaults also support existing mock subclasses without native initialization.
+    owner_mode = False
+    reuse = False
+    parts = None
     def __init__(self, library):
         # This process is the SHM owner, never a client of its own socket.
         env.pop('VMWEAVE_BROKER_SOCKET')
@@ -53,20 +58,95 @@ class Transport:
         self.call.argtypes = [ctypes.c_uint32, ctypes.c_void_p, ctypes.c_size_t,
                               ctypes.c_void_p, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
         self.call.restype = ctypes.c_int
+        self.parts = None
+        if os.environ.get('VMWEAVE_BROKER_GATHER') == '1':
+            self.parts = getattr(self.lib, 'vmweave_guest_exchange_parts', None)
+            if self.parts is not None:
+                self.parts.argtypes = [ctypes.c_uint32, ctypes.c_void_p, ctypes.c_size_t,
+                                      ctypes.c_void_p, ctypes.c_size_t, ctypes.c_void_p,
+                                      ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
+                self.parts.restype = ctypes.c_int
+        self.owner = None
+        self.owner_mode = os.environ.get('VMWEAVE_BROKER_OWNER') == '1'
+        self.last_heartbeat = time.monotonic()
+        self.limits = getattr(self.lib, 'vmweave_guest_transport_limits', None)
+        if self.owner_mode:
+            self.init_owner()
         self.lock = threading.Lock()
         self.failed = False
+        self.reuse = os.environ.get('VMWEAVE_BROKER_REUSE') == '1'
+        self.scratch = {}
         # Starts the persistent transport's HELLO and heartbeat without CUDA work.
         rc, _ = self.exchange(3, b'', 0)
         if rc:
+            if self.owner is not None:
+                self.owner_close(self.owner)
+                self.owner = None
             raise RuntimeError(f'transport initialization failed: {rc}')
 
+    def init_owner(self):
+        ctx = ctypes.c_void_p()
+        op = self.lib.vmweave_owner_open
+        op.argtypes = [ctypes.POINTER(ctypes.c_void_p)]; op.restype = ctypes.c_int
+        ex = self.lib.vmweave_owner_exchange
+        ex.argtypes = [ctypes.c_void_p, ctypes.c_uint32, ctypes.c_void_p, ctypes.c_size_t,
+                       ctypes.c_void_p, ctypes.c_size_t, ctypes.c_void_p, ctypes.c_size_t,
+                       ctypes.POINTER(ctypes.c_size_t)]
+        ex.restype = ctypes.c_int
+        limits = self.lib.vmweave_owner_limits
+        limits.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_size_t), ctypes.POINTER(ctypes.c_size_t)]
+        limits.restype = ctypes.c_int
+        close = self.lib.vmweave_owner_close
+        close.argtypes = [ctypes.c_void_p]; close.restype = ctypes.c_int
+        rc = op(ctypes.byref(ctx))
+        if rc: raise RuntimeError('native transport owner initialization failed')
+        self.owner = ctx
+        self.call = lambda api, data, n, out, cap, got: ex(ctx, api, data, n, None, 0, out, cap, got)
+        if self.parts is not None:
+            self.parts = lambda api, head, nh, tail, nt, out, cap, got: ex(ctx, api, head, nh, tail, nt, out, cap, got)
+        self.limits = lambda request, response: limits(ctx, request, response)
+        self.owner_close = close
+
+    def heartbeat(self):
+        if self.owner_mode and time.monotonic() - self.last_heartbeat >= 2:
+            rc, _ = self.exchange(3, b'', 0)
+            if rc:
+                self.failed = True
+                raise RuntimeError('transport heartbeat failed')
+            self.last_heartbeat = time.monotonic()
+
+    def receive(self, conn, count, deadline):
+        if not self.owner_mode:
+            return receive(conn, count)
+        data = bytearray()
+        while len(data) < count:
+            self.heartbeat()
+            remaining = deadline - time.monotonic()
+            if remaining <= 0: raise TimeoutError('partial packet deadline')
+            if not select.select([conn], [], [], min(0.1, remaining))[0]: continue
+            chunk = conn.recv(count - len(data))
+            if not chunk: raise EOFError()
+            data.extend(chunk)
+        return bytes(data)
+
+    def buffer(self, name, size):
+        if not 0 <= size <= MAX_BYTES + 24:
+            raise ValueError('scratch size out of bounds')
+        if not self.reuse:
+            return ctypes.create_string_buffer(max(1, size))
+        old = self.scratch.get(name)
+        if old is None or ctypes.sizeof(old) < max(1, size):
+            old = ctypes.create_string_buffer(max(1, size))
+            self.scratch[name] = old
+        return old
+
     def exchange(self, api, data, capacity):
-        out = ctypes.create_string_buffer(max(1, capacity))
+        out = self.buffer("output", capacity)
         got = ctypes.c_size_t()
         rc = self.call(api, data, len(data), out, capacity, ctypes.byref(got))
         if got.value > capacity:
             raise RuntimeError('invalid transport output length')
-        return rc, out.raw[:got.value]
+        return rc, ctypes.string_at(out, got.value)
 
     def bulk_copy(self, epoch, data, capacity, arena):
         # All routing metadata is a private socket snapshot, never client-writable.
@@ -79,16 +159,21 @@ class Transport:
             raise ValueError('invalid bulk capacity')
         prefix = epoch + struct.pack('<II', 0x1012, 0) + data
         # Input data may change concurrently, like application memory in cudaMemcpy;
-        # only payload is shared. Copy to private storage before transport submission.
-        request = ctypes.create_string_buffer(len(prefix) + (size if kind == 1 else 0))
+        # only payload is shared. Gather mode copies payload directly into transport SHM.
+        request_size = len(prefix) + (size if kind == 1 and self.parts is None else 0)
+        request = self.buffer("request", request_size)
         ctypes.memmove(request, prefix, len(prefix))
         region = (ctypes.c_char * (2 * BULK_BYTES)).from_buffer(arena)
         try:
-            if kind == 1:
+            if kind == 1 and self.parts is None:
                 ctypes.memmove(ctypes.addressof(request) + len(prefix), ctypes.addressof(region), size)
             output = ctypes.c_void_p(ctypes.addressof(region) + BULK_BYTES)
             got = ctypes.c_size_t()
-            rc = self.call(CALL, request, ctypes.sizeof(request), output, capacity, ctypes.byref(got))
+            if self.parts is not None and kind == 1:
+                rc = self.parts(CALL, request, len(prefix), ctypes.addressof(region), size,
+                                output, capacity, ctypes.byref(got))
+            else:
+                rc = self.call(CALL, request, request_size, output, capacity, ctypes.byref(got))
             if got.value > capacity or (not rc and got.value != capacity):
                 raise RuntimeError('invalid bulk output length')
             return rc, got.value if not rc else 0
@@ -112,6 +197,8 @@ class Transport:
             cache_enabled = False
             next_health = 0.0
             while True:
+                if self.owner_mode:
+                    self.heartbeat()
                 if cache_enabled:
                     now = time.monotonic()
                     if now >= next_health:
@@ -124,10 +211,13 @@ class Transport:
                         next_health = time.monotonic() + HEALTH_INTERVAL
                     if not select.select([conn], [], [], max(0, next_health-time.monotonic()))[0]:
                         continue
-                magic, api, count, capacity = REQUEST.unpack(receive(conn, REQUEST.size))
+                if self.owner_mode and not select.select([conn], [], [], 0.01)[0]:
+                    continue
+                deadline = time.monotonic() + 30
+                magic, api, count, capacity = REQUEST.unpack(self.receive(conn, REQUEST.size, deadline))
                 if magic != MAGIC or count > MAX_BYTES or capacity > MAX_BYTES:
                     raise ValueError('invalid broker request')
-                data = receive(conn, count)
+                data = self.receive(conn, count, deadline)
                 if api == 2 and not count:
                     rc, _ = self.exchange(CLOSE, epoch, 0)
                     opened = False
@@ -194,7 +284,7 @@ class Transport:
                     raise ValueError('client cannot send transport controls')
                 rc, out = self.exchange(CALL, epoch + struct.pack('<II', api, 0) + data, capacity)
                 if api == COPY_LIMITS and not rc:
-                    limits = getattr(self.lib, 'vmweave_guest_transport_limits', None)
+                    limits = getattr(self, "limits", None)
                     request, response = ctypes.c_size_t(), ctypes.c_size_t()
                     if len(out) != 24 or limits is None or limits(ctypes.byref(request), ctypes.byref(response)):
                         rc, out = 801, b''
@@ -224,6 +314,7 @@ class Transport:
                     arena.close()
                 conn.close()
                 if owned:
+                    getattr(self, "scratch", {}).clear()
                     self.lock.release()
 
 
@@ -243,9 +334,40 @@ def main():
     os.chmod(path, 0o660)
     listener.listen(8)
     print('VMWeave broker ready; no active CUDA job', flush=True)
-    while True:
-        conn, _ = listener.accept()
-        threading.Thread(target=transport.serve, args=(conn,), daemon=True).start()
+    if not transport.owner_mode:
+        while True:
+            conn, _ = listener.accept()
+            threading.Thread(target=transport.serve, args=(conn,), daemon=True).start()
+    # Only connection admission crosses threads; all transport calls remain here.
+    pending = queue.Queue(maxsize=1)
+    busy = threading.Lock()
+    def accept_clients():
+        while True:
+            conn, _ = listener.accept()
+            conn.settimeout(30)
+            if not busy.acquire(blocking=False):
+                try: conn.sendall(RESPONSE.pack(MAGIC, 46, 0))
+                except OSError: pass
+                finally: conn.close()
+            else:
+                pending.put(conn)
+    threading.Thread(target=accept_clients, daemon=True).start()
+    try:
+        while not transport.failed:
+            try: conn = pending.get(timeout=0.1)
+            except queue.Empty:
+                transport.heartbeat()
+                continue
+            try: transport.serve(conn)
+            finally: busy.release()
+    finally:
+        listener.close()
+        while True:
+            try: pending.get_nowait().close()
+            except queue.Empty: break
+        if transport.owner is not None:
+            transport.owner_close(transport.owner)
+            transport.owner = None
 
 
 if __name__ == '__main__':

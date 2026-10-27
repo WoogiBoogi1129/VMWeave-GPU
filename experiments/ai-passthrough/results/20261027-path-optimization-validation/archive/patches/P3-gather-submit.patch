@@ -1,0 +1,199 @@
+--- a/runtime/shm/control/guest_broker.py
++++ b/runtime/shm/control/guest_broker.py
+@@ -53,6 +53,14 @@
+         self.call.argtypes = [ctypes.c_uint32, ctypes.c_void_p, ctypes.c_size_t,
+                               ctypes.c_void_p, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
+         self.call.restype = ctypes.c_int
++        self.parts = None
++        if os.environ.get('VMWEAVE_BROKER_GATHER') == '1':
++            self.parts = getattr(self.lib, 'vmweave_guest_exchange_parts', None)
++            if self.parts is not None:
++                self.parts.argtypes = [ctypes.c_uint32, ctypes.c_void_p, ctypes.c_size_t,
++                                      ctypes.c_void_p, ctypes.c_size_t, ctypes.c_void_p,
++                                      ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
++                self.parts.restype = ctypes.c_int
+         self.lock = threading.Lock()
+         self.failed = False
+         self.reuse = os.environ.get('VMWEAVE_BROKER_REUSE') == '1'
+@@ -93,16 +101,20 @@
+         prefix = epoch + struct.pack('<II', 0x1012, 0) + data
+         # Input data may change concurrently, like application memory in cudaMemcpy;
+         # only payload is shared. Copy to private storage before transport submission.
+-        request_size = len(prefix) + (size if kind == 1 else 0)
++        request_size = len(prefix) + (size if kind == 1 and self.parts is None else 0)
+         request = self.buffer("request", request_size)
+         ctypes.memmove(request, prefix, len(prefix))
+         region = (ctypes.c_char * (2 * BULK_BYTES)).from_buffer(arena)
+         try:
+-            if kind == 1:
++            if kind == 1 and self.parts is None:
+                 ctypes.memmove(ctypes.addressof(request) + len(prefix), ctypes.addressof(region), size)
+             output = ctypes.c_void_p(ctypes.addressof(region) + BULK_BYTES)
+             got = ctypes.c_size_t()
+-            rc = self.call(CALL, request, request_size, output, capacity, ctypes.byref(got))
++            if self.parts is not None and kind == 1:
++                rc = self.parts(CALL, request, len(prefix), ctypes.addressof(region), size,
++                                output, capacity, ctypes.byref(got))
++            else:
++                rc = self.call(CALL, request, request_size, output, capacity, ctypes.byref(got))
+             if got.value > capacity or (not rc and got.value != capacity):
+                 raise RuntimeError('invalid bulk output length')
+             return rc, got.value if not rc else 0
+--- a/runtime/shm/include/vmweave_guest.h
++++ b/runtime/shm/include/vmweave_guest.h
+@@ -6,6 +6,7 @@
+ int vmweave_broker_direct_enabled(void);
+ int vmweave_broker_copy_direct(const void *,const void *,size_t,size_t *);
+ int vmweave_guest_record_error(int error);
++int vmweave_guest_exchange_parts(uint32_t,const void *,size_t,const void *,size_t,void *,size_t,size_t *);
+ /* Caller serializes these with vmweave_guest_lock. No RPC fallback. */
+ int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received);
+ int vmweave_guest_ref(const void *pointer,size_t bytes,struct vmweave_device_ref *out);
+--- a/runtime/shm/shm-queue/include/vmweave_shm_queue.h
++++ b/runtime/shm/shm-queue/include/vmweave_shm_queue.h
+@@ -44,6 +44,10 @@
+ /* Explicit peer failure/timeout signal from future supervisor; local only. */
+ void vmweave_shm_abort(struct vmweave_shm_channel *);
+ 
++struct vmweave_shm_part { const void *data; size_t bytes; };
++/* Local-only gather; wire format unchanged. At most two private descriptors. */
++int vmweave_shm_submit_parts(struct vmweave_shm_channel *,const struct vmweave_shm_request *,const struct vmweave_shm_part *,size_t);
++
+ /* Guest submit/receive are declared by vmweave_shm_contract.h. receive's function
+  * return is delivery status; response.transport_status is the remote result.
+  * try_receive is nonblocking. A too-small output buffer leaves response queued
+--- a/runtime/shm/shm-queue/src/queue.c
++++ b/runtime/shm/shm-queue/src/queue.c
+@@ -271,7 +271,8 @@
+     return r->kind == kind ? 0 : VMWEAVE_SHM_BAD_DESCRIPTOR;
+ }
+ 
+-int vmweave_shm_submit(struct vmweave_shm_channel *c, const struct vmweave_shm_request *q)
++int vmweave_shm_submit_parts(struct vmweave_shm_channel *c, const struct vmweave_shm_request *q,
++                              const struct vmweave_shm_part *parts,size_t count)
+ {
+     struct record r = {0};
+     uint64_t now, delta;
+@@ -279,10 +280,17 @@
+     if (rc) return rc;
+     if (c->pending) return VMWEAVE_SHM_QUEUE_FULL;
+     uint64_t measured=vmweave_perf_enabled()?vmweave_perf_now():0;
+-    if (!q || q->request_id != c->next || c->next == UINT64_MAX || !q->api_id ||
++    if(!parts||!count||count>2)return VMWEAVE_SHM_BAD_DESCRIPTOR;
++    struct vmweave_shm_part local[2];memcpy(local,parts,count*sizeof(*parts));
++    size_t total=0;
++    for(size_t i=0;i<count;i++){
++        if((local[i].bytes&&!local[i].data)||local[i].bytes>c->request_bytes-total)return VMWEAVE_SHM_BAD_DESCRIPTOR;
++        total+=local[i].bytes;
++    }
++    if (!q || total!=q->input_bytes || q->request_id != c->next || c->next == UINT64_MAX || !q->api_id ||
+         !q->payload_schema || q->input_bytes > c->request_bytes ||
+         q->input_bytes > VMWEAVE_SHM_MAX_MESSAGE_BYTES ||
+-        (q->input_bytes && !q->input)) return VMWEAVE_SHM_BAD_DESCRIPTOR;
++        0) return VMWEAVE_SHM_BAD_DESCRIPTOR;
+     if (memcmp(q->identity.channel_generation, c->identity.channel_generation, 16) ||
+         memcmp(q->identity.session_id, c->identity.session_id, 16)) return VMWEAVE_SHM_STALE_IDENTITY;
+     rc = space(&c->req);
+@@ -291,12 +299,21 @@
+     if (rc || now > UINT64_MAX - delta) return fail(c, VMWEAVE_SHM_INTERNAL_ERROR);
+     r.kind = 1; r.identity = c->identity; r.id = q->request_id;
+     r.api = q->api_id; r.schema = q->payload_schema; r.bytes = q->input_bytes;
+-    if (q->input_bytes) memcpy(c->request_payload, q->input, q->input_bytes);
++    size_t offset=0;
++    for(size_t i=0;i<count;i++){
++        if(local[i].bytes)memcpy(c->request_payload+offset,local[i].data,local[i].bytes);
++        offset+=local[i].bytes;
++    }
+     c->active = r.id; c->api = r.api; c->schema = r.schema;
+     c->pending = 1; c->deadline_ns = now + delta;
+     push(&c->req, &r);
+     vmweave_perf_add(VMWEAVE_PERF_SUBMIT,measured,q->input_bytes);
+     return 0;
++}
++int vmweave_shm_submit(struct vmweave_shm_channel *c,const struct vmweave_shm_request *q){
++    if(!q)return VMWEAVE_SHM_BAD_DESCRIPTOR;
++    struct vmweave_shm_part part={q->input,q->input_bytes};
++    return vmweave_shm_submit_parts(c,q,&part,1);
+ }
+ static int worker_take(struct vmweave_shm_channel *c, struct vmweave_shm_request *q, void *storage, size_t capacity, int borrowed)
+ {
+--- a/runtime/shm/src/guest.c
++++ b/runtime/shm/src/guest.c
+@@ -28,7 +28,7 @@
+ static atomic_int broken;
+ static pid_t owner_pid;
+ static uint8_t trace_allocation[16]; /* Written and read only by the I/O thread. */
+-static struct {uint32_t api;const void *input;size_t bytes;void *output;size_t capacity,received;int result;} job;
++static struct {uint32_t api;const void *input;size_t bytes;const void *tail;size_t tail_bytes;void *output;size_t capacity,received;int result;} job;
+ static struct {void *base;size_t bytes,mapped;uint64_t handle;} allocations[4096];
+ /* One past the last live slot; protected by vmweave_guest_lock. */
+ static unsigned allocation_span;
+@@ -42,11 +42,13 @@
+     pthread_cond_init(&io_cond,&attr);pthread_condattr_destroy(&attr);pthread_atfork(before_fork,after_fork,child_fork);
+ }
+ 
+-static int exchange(struct vmweave_shm_channel *c,struct vmweave_shm_identity identity,uint64_t *id,
+-                    uint32_t api,const void *in,size_t n,void *out,size_t cap,size_t *got){
+-    struct vmweave_shm_request q={.identity=identity,.request_id=*id,.api_id=api,.payload_schema=1,.input=in,.input_bytes=n};
++static int exchange_parts(struct vmweave_shm_channel *c,struct vmweave_shm_identity identity,uint64_t *id,
++                    uint32_t api,const void *in,size_t n,const void *tail,size_t tail_bytes,void *out,size_t cap,size_t *got){
++    if(tail_bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES||n>VMWEAVE_SHM_MAX_MESSAGE_BYTES-tail_bytes)return 1;
++    struct vmweave_shm_part parts[2]={{in,n},{tail,tail_bytes}};
++    struct vmweave_shm_request q={.identity=identity,.request_id=*id,.api_id=api,.payload_schema=1,.input=in,.input_bytes=n+tail_bytes};
+     struct vmweave_shm_response r={.output=out,.output_capacity=cap};
+-    if(vmweave_shm_submit(c,&q)){broken=1;return 999;}
++    if(vmweave_shm_submit_parts(c,&q,parts,2)){broken=1;return 999;}
+     vmweave_trace("guest","submit",trace_allocation,&q,NULL);
+     if(vmweave_shm_receive(c,*id,&r)){broken=1;return 999;}
+     vmweave_trace("guest","receive",trace_allocation,&q,&r);
+@@ -56,6 +58,10 @@
+         if(r.transport_status==VMWEAVE_SHM_UNSUPPORTED_API)return 801;broken=1;return 999;}
+     if(r.result_domain!=VMWEAVE_RESULT_CUDA_RUNTIME&&r.result_domain!=VMWEAVE_RESULT_CUDA_DRIVER&&r.result_domain!=VMWEAVE_RESULT_LIBRARY&&api>VMWEAVE_HEARTBEAT){broken=1;return 999;}
+     return (int)r.api_result;
++}
++static int exchange(struct vmweave_shm_channel *c,struct vmweave_shm_identity identity,uint64_t *id,
++                    uint32_t api,const void *in,size_t n,void *out,size_t cap,size_t *got){
++    return exchange_parts(c,identity,id,api,in,n,NULL,0,out,cap,got);
+ }
+ static void *io_main(void *unused){
+     (void)unused;struct vmweave_shm_layout l;struct vmweave_mapping m={0};struct vmweave_shm_channel *c=NULL;
+@@ -83,7 +89,7 @@
+         }
+         if(broken)break;
+         pthread_mutex_unlock(&io_lock);
+-        job.result=exchange(c,identity,&id,job.api,job.input,job.bytes,job.output,job.capacity,&job.received);
++        job.result=exchange_parts(c,identity,&id,job.api,job.input,job.bytes,job.tail,job.tail_bytes,job.output,job.capacity,&job.received);
+         pthread_mutex_lock(&io_lock);work=0;finished=1;pthread_cond_broadcast(&io_cond);
+         if(job.api==VMWEAVE_GOODBYE)broken=1;
+     }
+@@ -91,7 +97,10 @@
+ }
+ extern int vmweave_broker_exchange(uint32_t,const void*,size_t,void*,size_t,size_t*);
+ extern void vmweave_broker_close(void);
+-int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received){
++int vmweave_guest_exchange_parts(uint32_t api,const void *input,size_t bytes,const void *tail,size_t tail_bytes,void *output,size_t capacity,size_t *received){
++    if(received)*received=0;
++    if((bytes&&!input)||(tail_bytes&&!tail)||(capacity&&!output)||tail_bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES||bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES-tail_bytes)return 1;
++    if(tail_bytes&&vmweave_getenv("VMWEAVE_BROKER_SOCKET"))return 801;
+     if(vmweave_getenv("VMWEAVE_BROKER_SOCKET")){size_t ignored;return vmweave_broker_exchange(api,input,bytes,output,capacity,received?received:&ignored);}
+     if(owner_pid&&owner_pid!=getpid())return 999;
+     uint64_t measured=vmweave_perf_enabled()?vmweave_perf_now():0;
+@@ -99,7 +108,7 @@
+     if(!started){owner_pid=getpid();started=1;if(pthread_create(&io_thread,NULL,io_main,NULL)){broken=1;initialized=1;}}
+     while(!initialized)pthread_cond_wait(&io_cond,&io_lock);
+     if(broken){pthread_mutex_unlock(&io_lock);return 999;}
+-    job.api=api;job.input=input;job.bytes=bytes;job.output=output;job.capacity=capacity;job.received=0;
++    job.api=api;job.input=input;job.bytes=bytes;job.tail=tail;job.tail_bytes=tail_bytes;job.output=output;job.capacity=capacity;job.received=0;
+     finished=0;work=1;pthread_cond_broadcast(&io_cond);
+     while(!finished&&!broken)pthread_cond_wait(&io_cond,&io_lock);
+     int result=finished?job.result:999;if(received)*received=job.received;
+@@ -107,6 +116,9 @@
+     if(vmweave_getenv("VMWEAVE_TRACE_CALLS"))fprintf(stderr,"vmweave api=0x%x bytes=%zu result=%d\n",api,bytes,result);
+     vmweave_perf_add(VMWEAVE_PERF_EXCHANGE,measured,bytes);
+     return result;
++}
++int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received){
++    return vmweave_guest_exchange_parts(api,input,bytes,NULL,0,output,capacity,received);
+ }
+ __attribute__((destructor)) static void shutdown_guest(void){
+     if(vmweave_getenv("VMWEAVE_BROKER_SOCKET")){vmweave_broker_close();return;}

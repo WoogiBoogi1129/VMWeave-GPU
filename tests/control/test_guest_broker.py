@@ -70,6 +70,7 @@ class CopyLimitsTests(unittest.TestCase):
         class LimitsTransport(Fake):
             def __init__(self):
                 super().__init__();self.lib=object() if old_library else Library()
+                self.limits=getattr(self.lib, 'vmweave_guest_transport_limits', None)
             def exchange(self, api, data, capacity):
                 if api==broker.CALL:
                     return (801,b'') if old_worker else (0,struct.pack('<IIQQ',1,1,16*1024*1024,16*1024*1024))

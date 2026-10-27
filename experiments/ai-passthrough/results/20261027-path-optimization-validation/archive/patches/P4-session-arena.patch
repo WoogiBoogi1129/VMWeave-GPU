@@ -1,0 +1,229 @@
+--- a/runtime/shm/CMakeLists.txt
++++ b/runtime/shm/CMakeLists.txt
+@@ -25,7 +25,7 @@
+ target_link_libraries(vmweave_guest PRIVATE vmweave_mapping)
+ install(TARGETS vmweave-shm-worker vmweave_guest RUNTIME DESTINATION bin LIBRARY DESTINATION lib)
+ 
+-add_executable(vmweave-shm-session-worker src/worker_sessions.c)
++add_executable(vmweave-shm-session-worker src/worker_sessions.c src/session_ipc.c)
+ target_link_libraries(vmweave-shm-session-worker PRIVATE vmweave_dispatch vmweave_cuda_runtime vmweave_async vmweave_compat)
+ install(TARGETS vmweave-shm-session-worker RUNTIME DESTINATION bin)
+ 
+--- /dev/null
++++ b/runtime/shm/include/vmweave_session_ipc.h
+@@ -0,0 +1,17 @@
++#ifndef VMWEAVE_SESSION_IPC_H
++#define VMWEAVE_SESSION_IPC_H
++#include <stddef.h>
++#include <stdint.h>
++/* Private host IPC only. Never expose this memfd to the VM. */
++#define VMWEAVE_IPC_ARENA_BYTES (2u*(16u*1024u*1024u+4096u))
++#define VMWEAVE_IPC_HALF (VMWEAVE_IPC_ARENA_BYTES/2u)
++struct vmweave_ipc { unsigned char *arena; int fd; uint64_t sequence; };
++int vmweave_ipc_create(struct vmweave_ipc *);
++int vmweave_ipc_map(struct vmweave_ipc *,int);
++void vmweave_ipc_close(struct vmweave_ipc *);
++int vmweave_ipc_handshake(int,int);
++int vmweave_ipc_call(struct vmweave_ipc *,int,uint32_t,const void *,size_t,void *,size_t,uint32_t *,uint32_t *,uint32_t *,size_t *);
++/* child receive returns 0 on success; failure terminates the session. */
++int vmweave_ipc_receive(struct vmweave_ipc *,int,void *,size_t,uint32_t *,const void **,size_t *,void **,size_t *,unsigned *);
++int vmweave_ipc_reply(struct vmweave_ipc *,int,unsigned,uint32_t,uint32_t,uint32_t,const void *,size_t);
++#endif
+--- /dev/null
++++ b/runtime/shm/src/session_ipc.c
+@@ -0,0 +1,85 @@
++#define _GNU_SOURCE
++#include "vmweave_session_ipc.h"
++#include <sys/mman.h>
++#include <sys/socket.h>
++#include <sys/stat.h>
++#include <unistd.h>
++#include <fcntl.h>
++#include <errno.h>
++#include <string.h>
++#define MAGIC 0x31505756u
++#define SEALS (F_SEAL_GROW|F_SEAL_SHRINK|F_SEAL_SEAL)
++static uint64_t get(const unsigned char *p,unsigned n){uint64_t v=0;for(unsigned i=0;i<n;i++)v|=(uint64_t)p[i]<<(8*i);return v;}
++static void put(unsigned char *p,uint64_t v,unsigned n){for(unsigned i=0;i<n;i++)p[i]=(unsigned char)(v>>(8*i));}
++static int io(int fd,void *p,size_t n,int write){
++ while(n){ssize_t k=write?send(fd,p,n,MSG_NOSIGNAL):recv(fd,p,n,0);
++  if(k<0&&errno==EINTR)continue;if(k<=0)return -1;p=(char*)p+k;n-=(size_t)k;}return 0;
++}
++int vmweave_ipc_map(struct vmweave_ipc *c,int fd){
++ struct stat st;int seals=fcntl(fd,F_GET_SEALS);
++ if(fstat(fd,&st)||!S_ISREG(st.st_mode)||st.st_size!=VMWEAVE_IPC_ARENA_BYTES||seals<0||(seals&SEALS)!=SEALS)return -1;
++ void *p=mmap(NULL,VMWEAVE_IPC_ARENA_BYTES,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
++ if(p==MAP_FAILED)return -1;c->arena=p;c->fd=fd;c->sequence=0;return 0;
++}
++int vmweave_ipc_create(struct vmweave_ipc *c){
++ int fd=memfd_create("vmweave-host-session",MFD_ALLOW_SEALING|MFD_CLOEXEC);if(fd<0)return -1;
++ if(ftruncate(fd,VMWEAVE_IPC_ARENA_BYTES)||fcntl(fd,F_ADD_SEALS,SEALS)||vmweave_ipc_map(c,fd)){close(fd);return -1;}return 0;
++}
++void vmweave_ipc_close(struct vmweave_ipc *c){if(c->arena)munmap(c->arena,VMWEAVE_IPC_ARENA_BYTES);if(c->fd>=0)close(c->fd);*c=(struct vmweave_ipc){.fd=-1};}
++int vmweave_ipc_handshake(int fd,int child){
++ unsigned char hello[8]={0},other[8];put(hello,MAGIC,4);put(hello+4,1,4);
++ if(child){if(io(fd,hello,8,1)||io(fd,other,8,0))return -1;}
++ else if(io(fd,other,8,0)||memcmp(hello,other,8)||io(fd,hello,8,1))return -1;
++ return memcmp(hello,other,8)?-1:0;
++}
++/* 64-byte private socket descriptor: magic/version/mode/api/sequence/input bytes/
++ * output capacity/transport/domain/result/reserved/produced bytes. */
++static int header(const unsigned char *h){return get(h,4)==MAGIC&&get(h+4,4)==1&&!get(h+52,4);}
++int vmweave_ipc_call(struct vmweave_ipc *c,int fd,uint32_t api,const void *input,size_t n,void *out,size_t cap,
++ uint32_t *transport,uint32_t *domain,uint32_t *result,size_t *got){
++ unsigned char h[64]={0},r[64];unsigned mode=0;size_t wire=n;*got=0;
++ if(!c->arena||c->sequence==UINT64_MAX||n>VMWEAVE_IPC_HALF||cap>VMWEAVE_IPC_HALF||(n&&!input)||(cap&&!out))return -1;
++ const unsigned char *p=input;
++ if(api==0x1012u&&n>=48&&!get(p+4,4)){
++  uint64_t bytes=get(p+40,8),kind=get(p,4);
++  if(bytes>=1024u*1024u&&bytes<=16u*1024u*1024u){
++   if(kind==1&&n==48+bytes&&!cap){mode=1;memcpy(c->arena+48,p+48,(size_t)bytes);wire=48;}
++   else if(kind==2&&n==48&&cap>=bytes)mode=2;
++  }
++ }
++ put(h,MAGIC,4);put(h+4,1,4);put(h+8,mode,4);put(h+12,api,4);put(h+16,++c->sequence,8);put(h+24,n,8);put(h+32,cap,8);
++ if(io(fd,h,64,1)||io(fd,(void*)input,wire,1)||io(fd,r,64,0)||!header(r)||
++    get(r+8,4)!=mode||get(r+12,4)||get(r+16,8)!=c->sequence||get(r+24,8)||get(r+32,8))return -1;
++ uint64_t produced=get(r+56,8);if(produced>cap||produced>VMWEAVE_IPC_HALF)return -1;
++ *transport=(uint32_t)get(r+40,4);*domain=(uint32_t)get(r+44,4);*result=(uint32_t)get(r+48,4);
++ if((*transport||*result)&&produced)return -1;
++ if(mode==2){
++  if(!*transport&&!*result&&produced!=get(p+40,8))return -1;
++  if(produced)memcpy(out,c->arena+VMWEAVE_IPC_HALF,(size_t)produced);
++ }else if(io(fd,out,(size_t)produced,0))return -1;
++ *got=(size_t)produced;return 0;
++}
++int vmweave_ipc_receive(struct vmweave_ipc *c,int fd,void *scratch,size_t scratch_cap,uint32_t *api,
++ const void **input,size_t *bytes,void **output,size_t *capacity,unsigned *mode){
++ unsigned char h[64];if(io(fd,h,64,0)||!header(h)||c->sequence==UINT64_MAX||get(h+16,8)!=c->sequence+1||
++ get(h+40,4)||get(h+44,4)||get(h+48,4)||get(h+56,8))return -1;
++ uint64_t n=get(h+24,8),cap=get(h+32,8),m=get(h+8,4);
++ if(n>scratch_cap||n>VMWEAVE_IPC_HALF||cap>VMWEAVE_IPC_HALF||m>2)return -1;
++ *api=(uint32_t)get(h+12,4);*bytes=(size_t)n;*capacity=(size_t)cap;*mode=(unsigned)m;
++ if(m){
++  unsigned char descriptor[48];if(*api!=0x1012u||n<48||io(fd,descriptor,48,0)||get(descriptor+4,4))return -1;
++  uint64_t size=get(descriptor+40,8);
++  if(size<1024u*1024u||size>16u*1024u*1024u||get(descriptor,4)!=m)return -1;
++  if(m==1){if(n!=48+size||cap)return -1;memcpy(c->arena,descriptor,48);*input=c->arena;}
++  else{if(n!=48||cap<size)return -1;memcpy(scratch,descriptor,48);*input=scratch;}
++ }else{if(io(fd,scratch,(size_t)n,0))return -1;*input=scratch;}
++ *output=c->arena+VMWEAVE_IPC_HALF;++c->sequence;return 0;
++}
++int vmweave_ipc_reply(struct vmweave_ipc *c,int fd,unsigned mode,uint32_t transport,uint32_t domain,uint32_t result,const void *out,size_t n){
++ if(n>VMWEAVE_IPC_HALF||(n&&!out)||mode>2)return -1;
++ if(transport||result)n=0;
++ unsigned char h[64]={0};put(h,MAGIC,4);put(h+4,1,4);put(h+8,mode,4);put(h+16,c->sequence,8);
++ put(h+40,transport,4);put(h+44,domain,4);put(h+48,result,4);put(h+56,n,8);
++ if(mode==2&&n&&out!=c->arena+VMWEAVE_IPC_HALF)return -1;
++ if(io(fd,h,64,1))return -1;return mode==2?0:io(fd,(void*)out,n,1);
++}
+--- a/runtime/shm/src/worker_sessions.c
++++ b/runtime/shm/src/worker_sessions.c
+@@ -5,6 +5,8 @@
+ #include "vmweave_torch.h"
+ #include "vmweave_sessions.h"
+ #include "vmweave_perf.h"
++#include "vmweave_session_ipc.h"
++#include <fcntl.h>
+ #include <sys/time.h>
+ #include <sys/socket.h>
+ #include <sys/wait.h>
+@@ -24,7 +26,13 @@
+  char *p=buf;while(n){ssize_t r=writing?send(fd,p,n,MSG_NOSIGNAL):recv(fd,p,n,0);if(r<0&&errno==EINTR&&!stopped)continue;if(r<=0)return -1;p+=r;n-=r;}return 0;
+ }
+ /* This executable instance owns one CUDA context lifetime. No parent CUDA calls. */
+-static int execute_session(int fd){
++static struct vmweave_ipc parent_ipc={.fd=-1};
++static int ipc_enabled;
++static int execute_session(int fd,int arena_fd){
++ struct vmweave_ipc child_ipc={.fd=-1};int arena=arena_fd>=0;
++ struct timeval timeout={.tv_sec=20};
++ if(setsockopt(fd,SOL_SOCKET,SO_RCVTIMEO,&timeout,sizeof(timeout))||setsockopt(fd,SOL_SOCKET,SO_SNDTIMEO,&timeout,sizeof(timeout)))return 1;
++ if(arena&&(vmweave_ipc_map(&child_ipc,arena_fd)||vmweave_ipc_handshake(fd,1)))return 1;
+  struct vmweave_cuda_runtime *runtime=NULL;struct vmweave_cuda_session session={0};uint32_t error=0;
+  if(vmweave_cuda_runtime_open(&runtime,&error)||vmweave_cuda_exec_create(vmweave_cuda_runtime_backend(),runtime,&session.exec))return 1;
+  unsigned char *in=malloc(VMWEAVE_SESSION_MAX_BYTES),*out=malloc(VMWEAVE_SESSION_MAX_BYTES);if(!in||!out)return 1;
+@@ -32,40 +40,56 @@
+  while(1){
+   if(vmweave_async_reap())break;
+   struct pollfd pending={.fd=fd,.events=POLLIN};int ready=poll(&pending,1,10);
+-  if(ready==0)continue;if(ready<0||transfer(fd,&m,sizeof(m),0))break;
+-  if(m.bytes>VMWEAVE_SESSION_MAX_BYTES||transfer(fd,in,m.bytes,0))break;
+-  struct vmweave_shm_request q={.api_id=m.api,.payload_schema=1,.input=in,.input_bytes=m.bytes};
+-  struct vmweave_shm_response r={.output=out,.output_capacity=VMWEAVE_SESSION_MAX_BYTES};int rc=0;
++  if(ready==0)continue;if(ready<0)break;
++  const void *input=in;void *output=out;size_t bytes=0,capacity=VMWEAVE_SESSION_MAX_BYTES;uint32_t api=0;unsigned mode=0;
++  if(arena){
++   if(vmweave_ipc_receive(&child_ipc,fd,in,VMWEAVE_SESSION_MAX_BYTES,&api,&input,&bytes,&output,&capacity,&mode))break;
++  }else{
++   if(transfer(fd,&m,sizeof(m),0)||m.bytes>VMWEAVE_SESSION_MAX_BYTES||transfer(fd,in,m.bytes,0))break;
++   api=m.api;bytes=m.bytes;
++  }
++  struct vmweave_shm_request q={.api_id=api,.payload_schema=1,.input=input,.input_bytes=bytes};
++  struct vmweave_shm_response r={.output=output,.output_capacity=capacity};int rc=0;
+   if(vmweave_cuda_exec_check(session.exec)!=VMWEAVE_SHM_OK)break;
+   if(q.api_id>=0x3000)rc=vmweave_compat_dispatch(&session,&q,&r);
+   else if(q.api_id>=0x2100&&q.api_id!=VMWEAVE_STREAM_PRIORITY_CREATE)rc=vmweave_torch_dispatch(&session,&q,&r);
+   else if(q.api_id>=0x2000)rc=vmweave_async_dispatch(&session,&q,&r);
+   else rc=vmweave_cuda_dispatch(&session,&q,&r);
+-  if(rc||r.output_bytes>VMWEAVE_SESSION_MAX_BYTES)break;
++  if(rc||r.output_bytes>capacity)break;
+   m=(struct message){.transport=r.transport_status,.domain=r.result_domain,.result=r.api_result,.bytes=r.output_bytes};
+-  if(transfer(fd,&m,sizeof(m),1)||transfer(fd,out,m.bytes,1))break;
++  if(arena){if(vmweave_ipc_reply(&child_ipc,fd,mode,r.transport_status,r.result_domain,r.api_result,output,r.output_bytes))break;}
++  else if(transfer(fd,&m,sizeof(m),1)||transfer(fd,out,m.bytes,1))break;
+  }
+  /* Exit releases CUDA, libraries and outstanding asynchronous work together. */
+- return 0;
++ if(arena)vmweave_ipc_close(&child_ipc);free(in);free(out);return 0;
+ }
+ static int retire(pid_t *pid,int *fd){
+  if(*fd>=0){close(*fd);*fd=-1;}
+- if(*pid>0){kill(*pid,SIGKILL);pid_t n;do{n=waitpid(*pid,NULL,0);}while(n<0&&errno==EINTR);if(n!=*pid)return -1;*pid=0;}return 0;
++ if(*pid>0){kill(*pid,SIGKILL);pid_t n;do{n=waitpid(*pid,NULL,0);}while(n<0&&errno==EINTR);if(n!=*pid)return -1;*pid=0;}vmweave_ipc_close(&parent_ipc);return 0;
+ }
+ static int spawn(pid_t *pid,int *fd){
+  int fds[2];if(socketpair(AF_UNIX,SOCK_STREAM,0,fds))return -1;
+- *pid=fork();if(*pid<0){close(fds[0]);close(fds[1]);return -1;}
++ if(ipc_enabled&&vmweave_ipc_create(&parent_ipc)){close(fds[0]);close(fds[1]);return -1;}
++ *pid=fork();if(*pid<0){close(fds[0]);close(fds[1]);vmweave_ipc_close(&parent_ipc);return -1;}
+  if(!*pid){
+   close(fds[0]);prctl(PR_SET_PDEATHSIG,SIGKILL);if(getppid()==1)_exit(1);
+   char number[24];snprintf(number,sizeof(number),"%d",fds[1]);
+-  for(int i=3;i<1024;i++)if(i!=fds[1])close(i);
++  for(int i=3;i<1024;i++)if(i!=fds[1]&&i!=parent_ipc.fd)close(i);
++  if(ipc_enabled){
++   char descriptor[24];snprintf(descriptor,sizeof(descriptor),"%d",parent_ipc.fd);
++   if(fcntl(parent_ipc.fd,F_SETFD,0))_exit(1);
++   execl("/proc/self/exe","vmweave-shm-session-worker","--session-arena",number,descriptor,NULL);_exit(1);
++  }
+   execl("/proc/self/exe","vmweave-shm-session-worker","--session",number,NULL);_exit(1);
+  }
+  close(fds[1]);*fd=fds[0];struct timeval timeout={.tv_sec=20};
+- setsockopt(*fd,SOL_SOCKET,SO_RCVTIMEO,&timeout,sizeof(timeout));setsockopt(*fd,SOL_SOCKET,SO_SNDTIMEO,&timeout,sizeof(timeout));return 0;
++ if(setsockopt(*fd,SOL_SOCKET,SO_RCVTIMEO,&timeout,sizeof(timeout))||setsockopt(*fd,SOL_SOCKET,SO_SNDTIMEO,&timeout,sizeof(timeout))||
++    (ipc_enabled&&vmweave_ipc_handshake(*fd,0))){retire(pid,fd);return -1;}return 0;
+ }
+ int main(int argc,char **argv){
+- if(argc==3&&!strcmp(argv[1],"--session"))return execute_session(atoi(argv[2]));
++ if(argc==3&&!strcmp(argv[1],"--session"))return execute_session(atoi(argv[2]),-1);
++ if(argc==4&&!strcmp(argv[1],"--session-arena"))return execute_session(atoi(argv[2]),atoi(argv[3]));
++ const char *ipc_env=getenv("VMWEAVE_SESSION_ARENA");ipc_enabled=ipc_env&&!strcmp(ipc_env,"1");
+  if(argc!=3)return 2;char *end;unsigned long slot=strtoul(argv[2],&end,10);if(*end||slot>=32)return 2;
+  struct vmweave_shm_layout l;struct vmweave_mapping m={0};struct vmweave_shm_channel *c=NULL;
+  char path[512],marker[128],guest[128];snprintf(path,sizeof(path),"%s/layout.bin",argv[1]);
+@@ -103,7 +127,13 @@
+   }else if(q.api_id==VMWEAVE_SESSION_CALL&&active&&q.input_bytes>=VMWEAVE_SESSION_ENVELOPE&&q.input_bytes-VMWEAVE_SESSION_ENVELOPE<=VMWEAVE_SESSION_MAX_BYTES&&!memcmp(q.input,epoch,16)&&!vmweave_get((const unsigned char*)q.input+20,4)){
+    uint32_t api=vmweave_get((const unsigned char*)q.input+16,4);
+    struct message msg={.api=api,.bytes=q.input_bytes-VMWEAVE_SESSION_ENVELOPE};struct pollfd pollfd={.fd=fd,.events=POLLIN};
+-   if(api<0x1000||fd<0||transfer(fd,&msg,sizeof(msg),1)||transfer(fd,(char*)q.input+VMWEAVE_SESSION_ENVELOPE,msg.bytes,1)||poll(&pollfd,1,20000)<=0||transfer(fd,&msg,sizeof(msg),0)||msg.bytes>capacity||transfer(fd,output,msg.bytes,0)){
++   if(ipc_enabled){
++    size_t produced=0;
++    if(api<0x1000||fd<0||vmweave_ipc_call(&parent_ipc,fd,api,(char*)q.input+VMWEAVE_SESSION_ENVELOPE,msg.bytes,output,capacity,
++       &r.transport_status,&r.result_domain,&r.api_result,&produced)){
++     retire(&pid,&fd);r.api_result=999;r.output_bytes=0;
++    }else r.output_bytes=produced;
++   }else if(api<0x1000||fd<0||transfer(fd,&msg,sizeof(msg),1)||transfer(fd,(char*)q.input+VMWEAVE_SESSION_ENVELOPE,msg.bytes,1)||poll(&pollfd,1,20000)<=0||transfer(fd,&msg,sizeof(msg),0)||msg.bytes>capacity||transfer(fd,output,msg.bytes,0)){
+     retire(&pid,&fd);r.api_result=999;
+    }else{r.transport_status=msg.transport;r.result_domain=msg.domain;r.api_result=msg.result;r.output_bytes=msg.bytes;}
+   }else r.api_result=999;

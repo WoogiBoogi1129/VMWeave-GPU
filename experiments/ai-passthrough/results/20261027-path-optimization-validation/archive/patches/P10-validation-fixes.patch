@@ -1,0 +1,23 @@
+--- a/runtime/shm/src/guest.c
++++ b/runtime/shm/src/guest.c
+@@ -139,7 +139,8 @@
+     return 1;
+ }
+ static cudaError_t finish(int e){last_error=(cudaError_t)e;return last_error;}
+-int vmweave_guest_record_error(int e){return (int)finish(e);}
++/* Native memset success must not clear an earlier CUDA last-error value. */
++int vmweave_guest_record_error(int e){if(e)last_error=(cudaError_t)e;return e;}
+ static void *reserve_device_va(uint64_t address,size_t bytes){
+     if(!address||(address&4095)||!bytes||(bytes&4095)||address>UINTPTR_MAX-bytes)return MAP_FAILED;
+     void *wanted=(void *)(uintptr_t)address;
+--- a/runtime/shm/src/torch.c
++++ b/runtime/shm/src/torch.c
+@@ -6,7 +6,7 @@
+ 
+ int vmweave_torch_dispatch(struct vmweave_cuda_session *s,const struct vmweave_shm_request *q,struct vmweave_shm_response *r) {
+     const uint8_t *p=q->input;size_t n=q->input_bytes,at=0;
+-    r->output_bytes=0;r->api_result=0;r->result_domain=VMWEAVE_RESULT_CUDA_RUNTIME;
++    r->output_bytes=0;r->api_result=0;r->transport_status=VMWEAVE_SHM_OK;r->result_domain=VMWEAVE_RESULT_CUDA_RUNTIME;
+     if(q->payload_schema!=1)goto unsupported;
+     switch(q->api_id) {
+     case VMWEAVE_PRIMARY_CONTEXT_STATE: {

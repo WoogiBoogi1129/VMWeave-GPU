@@ -8,7 +8,7 @@ struct mock_event {int ready;};
 cudaError_t cudaHostAlloc(void **p,size_t n,unsigned flags){(void)flags;*p=malloc(n);assert(*p);live+=n;if(live>peak)peak=live;return cudaSuccess;}
 cudaError_t cudaFreeHost(void *p){for(int i=0;i<128;i++)if(stages[i].host==p)live-=stages[i].bytes;free(p);return cudaSuccess;}
 cudaError_t cudaEventCreateWithFlags(cudaEvent_t *e,unsigned f){(void)f;*e=(cudaEvent_t)calloc(1,sizeof(struct mock_event));assert(*e);return cudaSuccess;}
-cudaError_t cudaEventRecord(cudaEvent_t e,cudaStream_t s){(void)e;(void)s;return record_error?cudaErrorUnknown:cudaSuccess;}
+cudaError_t cudaEventRecord(cudaEvent_t e,cudaStream_t s){(void)s;if(!record_error)((struct mock_event*)e)->ready=0;return record_error?cudaErrorUnknown:cudaSuccess;}
 cudaError_t cudaEventQuery(cudaEvent_t e){return ((struct mock_event*)e)->ready?cudaSuccess:cudaErrorNotReady;}
 cudaError_t cudaEventSynchronize(cudaEvent_t e){waits++;if(wait_error)return cudaErrorUnknown;((struct mock_event*)e)->ready=1;return cudaSuccess;}
 cudaError_t cudaEventDestroy(cudaEvent_t e){assert(((struct mock_event*)e)->ready);free(e);return cudaSuccess;}

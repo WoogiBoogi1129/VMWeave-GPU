@@ -1,0 +1,199 @@
+{
+  "vm": {
+    "apiVersion": "kubevirt.io/v1",
+    "kind": "VirtualMachine",
+    "metadata": {
+      "annotations": {
+        "kubevirt.io/latest-observed-api-version": "v1",
+        "kubevirt.io/storage-observed-api-version": "v1"
+      },
+      "creationTimestamp": "2026-10-27T10:16:08Z",
+      "finalizers": [
+        "kubevirt.io/virtualMachineControllerFinalize"
+      ],
+      "generation": 3,
+      "name": "path-w-1027-qual-sanitizer-candidate",
+      "namespace": "vmweave-test-a",
+      "resourceVersion": "17774184",
+      "uid": "cd1da543-beab-4fd5-8195-13547448d9fe"
+    },
+    "spec": {
+      "runStrategy": "Always",
+      "template": {
+        "metadata": {
+          "annotations": {
+            "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:486ca081e7685560c78d9f56409904a3d778decb6770855e6f8949b89df2f3a8\",\"pvc\":{\"name\":\"path-w-1027-qual-sanitizer-candidate\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+            "kubevirt.io/pci-topology-version": "v3",
+            "vmweave.io/shm-allocation": "7d3c33337de52eb97898f98ae178ecc9",
+            "vmweave.io/shm-channel": "path-w-1027-qual-sanitizer-candidate",
+            "vmweave.io/shm-channel-uid": "96518284-8552-476a-a120-ba682166f03c",
+            "vmweave.io/shm-generation": "5dfd49dbea2c8cc8ce0f9664992bb65c"
+          }
+        },
+        "spec": {
+          "architecture": "amd64",
+          "domain": {
+            "cpu": {
+              "cores": 8
+            },
+            "devices": {
+              "disks": [
+                {
+                  "disk": {
+                    "bus": "virtio"
+                  },
+                  "name": "root"
+                },
+                {
+                  "disk": {
+                    "bus": "virtio"
+                  },
+                  "name": "cloudinit"
+                }
+              ],
+              "interfaces": [
+                {
+                  "masquerade": {},
+                  "name": "default"
+                }
+              ]
+            },
+            "firmware": {
+              "serial": "710de368-0716-4f37-b689-5d787fa88a27",
+              "uuid": "01132e24-5278-4977-8fa2-6d0eb22c4b1f"
+            },
+            "machine": {
+              "type": "q35"
+            },
+            "resources": {
+              "requests": {
+                "memory": "16Gi"
+              }
+            }
+          },
+          "networks": [
+            {
+              "name": "default",
+              "pod": {}
+            }
+          ],
+          "nodeSelector": {
+            "kubernetes.io/hostname": "gpu-4"
+          },
+          "volumes": [
+            {
+              "containerDisk": {
+                "image": "localhost/flyt-evidence-guest@sha256:47e520785c49e6db93631ef4876dcb40b73b23ffc766327e6b02cdfe3496c052"
+              },
+              "name": "root"
+            },
+            {
+              "cloudInitNoCloud": {
+                "userData": "#cloud-config\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKdMWCpvXPb7efaG24ws5p+j4N7Ze1TiUIFj96x2FXdr ubuntu@gpu-4\n# vmweave-layout-b64: fTwzM33lLrl4mPmK4XjsyV39SdvqLIzIzg+WZJkrtlwAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACl5XWsCo4FLUA4orXr7UYkAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+              },
+              "name": "cloudinit"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": "2026-10-27T10:16:09Z",
+          "lastTransitionTime": "2026-10-27T10:16:09Z",
+          "message": "VMI does not exist",
+          "reason": "VMINotExists",
+          "status": "False",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-27T10:16:13Z",
+          "message": "Failure while starting VMI: admission webhook \"validate.vmweave.io\" denied the request: managed VM requires channel binding",
+          "reason": "FailedCreate",
+          "status": "True",
+          "type": "Failure"
+        }
+      ],
+      "printableStatus": "Stopped",
+      "volumeSnapshotStatuses": [
+        {
+          "enabled": false,
+          "name": "root",
+          "reason": "Snapshot is not supported for this volumeSource type [root]"
+        },
+        {
+          "enabled": false,
+          "name": "cloudinit",
+          "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+        }
+      ]
+    }
+  },
+  "channel": {
+    "apiVersion": "vmweave.io/v1alpha1",
+    "kind": "SharedMemoryChannel",
+    "metadata": {
+      "creationTimestamp": "2026-10-27T10:16:09Z",
+      "finalizers": [
+        "vmweave.io/shm-detach"
+      ],
+      "generation": 1,
+      "name": "path-w-1027-qual-sanitizer-candidate",
+      "namespace": "vmweave-test-a",
+      "ownerReferences": [
+        {
+          "apiVersion": "kubevirt.io/v1",
+          "controller": true,
+          "kind": "VirtualMachine",
+          "name": "path-w-1027-qual-sanitizer-candidate",
+          "uid": "cd1da543-beab-4fd5-8195-13547448d9fe"
+        }
+      ],
+      "resourceVersion": "17774197",
+      "uid": "96518284-8552-476a-a120-ba682166f03c"
+    },
+    "spec": {
+      "drain": false,
+      "gid": 107,
+      "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:486ca081e7685560c78d9f56409904a3d778decb6770855e6f8949b89df2f3a8",
+      "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:5fda1df0dc3fc672778ca4c05a473355231e913ba2889bb159c82a0e477d8063",
+      "lifecycle": "VM",
+      "pvcRef": {
+        "name": "path-w-1027-qual-sanitizer-candidate",
+        "uid": "21406d50-7f45-423c-8f3b-d21af920e79b"
+      },
+      "requestRef": {
+        "name": "path-w-1027-qual-sanitizer-candidate",
+        "uid": "b078d4ea-b8b3-44bb-b304-1616484fd7f5"
+      },
+      "sessions": 1,
+      "uid": 107,
+      "vmRef": {
+        "name": "path-w-1027-qual-sanitizer-candidate",
+        "uid": "cd1da543-beab-4fd5-8195-13547448d9fe"
+      },
+      "workerImage": "localhost/vmweave-worker@sha256:bbf235a8b4f5fdee49861569681ca743c782144313a29f0f1b279b3daffd3cd3"
+    },
+    "status": {
+      "allocation": "7d3c33337de52eb97898f98ae178ecc9",
+      "backend": "hami",
+      "compute": 100,
+      "generation": "5dfd49dbea2c8cc8ce0f9664992bb65c",
+      "gpuUUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "memoryMiB": 8192,
+      "nodeName": "gpu-4",
+      "phase": "Preparing",
+      "profileGeneration": 1,
+      "reason": "WorkerStarting",
+      "requestGeneration": 1,
+      "resourcePrefix": "path-w-1027-qual-sanitizer-candidate-9651828-7d3c3333",
+      "sessions": [
+        "29795d6b02a3814b500e28ad7afb5189"
+      ],
+      "workerPodUID": "696022ea-7ff3-4870-922c-13580ac40330"
+    }
+  },
+  "reason": "compute-sanitizer with inherited HAMi preload did not reach worker readiness; no kernel validation claim"
+}

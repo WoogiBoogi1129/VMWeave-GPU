@@ -6,7 +6,7 @@ int vmweave_async_stream(uint64_t,void **);
 
 int vmweave_torch_dispatch(struct vmweave_cuda_session *s,const struct vmweave_shm_request *q,struct vmweave_shm_response *r) {
     const uint8_t *p=q->input;size_t n=q->input_bytes,at=0;
-    r->output_bytes=0;r->api_result=0;r->result_domain=VMWEAVE_RESULT_CUDA_RUNTIME;
+    r->output_bytes=0;r->api_result=0;r->transport_status=VMWEAVE_SHM_OK;r->result_domain=VMWEAVE_RESULT_CUDA_RUNTIME;
     if(q->payload_schema!=1)goto unsupported;
     switch(q->api_id) {
     case VMWEAVE_PRIMARY_CONTEXT_STATE: {
@@ -53,6 +53,14 @@ int vmweave_torch_dispatch(struct vmweave_cuda_session *s,const struct vmweave_s
         /* Explicit device-VA token for opt-in mirror mode, never a CPU address
          * dereferenced by the receiver. Legacy handle-only APIs are unchanged. */
         vmweave_put(r->output,(uintptr_t)address,8);r->output_bytes=8;break;
+    }
+    case VMWEAVE_MEMSET_NATIVE: {
+        if(!p||n!=40||vmweave_get(p+24,8)||vmweave_get(p+36,4))goto invalid;
+        uint64_t bytes=vmweave_get(p+16,8);void *address=NULL;
+        struct vmweave_device_ref ref={vmweave_get(p,8),vmweave_get(p+8,8)};
+        if(bytes>SIZE_MAX||!vmweave_cuda_exec_resolve(s->exec,ref,(size_t)bytes,&address))goto invalid;
+        r->api_result=cudaMemset(address,(int)(int32_t)vmweave_get(p+32,4),(size_t)bytes);
+        break;
     }
     case VMWEAVE_MEMSET: {
         if(n!=40||vmweave_get(p+36,4))goto invalid;

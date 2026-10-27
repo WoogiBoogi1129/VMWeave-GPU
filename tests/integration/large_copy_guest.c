@@ -7,6 +7,11 @@ static unsigned char *remote[2];
 static int legacy;
 static uint64_t expected_stream;
 void vmweave_broker_close(void){}
+/* This legacy-path fixture deliberately keeps direct bulk disabled. */
+int vmweave_broker_direct_enabled(void){return 0;}
+int vmweave_broker_copy_direct(const void *h,const void *p,size_t n,size_t *got){
+    (void)h;(void)p;(void)n;(void)got;assert(0);return 999;
+}
 int vmweave_broker_exchange(uint32_t api,const void *input,size_t n,void *output,size_t cap,size_t *got){
     *got=0;
     if(api==VMWEAVE_API_RUNTIME_MALLOC){static uint64_t handle=10;vmweave_put(output,handle++,8);*got=8;return 0;}

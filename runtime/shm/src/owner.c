@@ -1,0 +1,61 @@
+#define _POSIX_C_SOURCE 200809L
+#include "vmweave_owner.h"
+#include "vmweave_mapping.h"
+#include "vmweave_shm_queue.h"
+#include "vmweave_env.h"
+#include <pthread.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+struct vmweave_owner {
+ struct vmweave_mapping mapping;
+ struct vmweave_shm_channel *channel;
+ struct vmweave_shm_identity identity;
+ pthread_t thread;pid_t pid;uint64_t next;
+ size_t request_capacity,response_capacity;int failed;
+};
+static int owned(struct vmweave_owner *o){return o&&o->pid==getpid()&&pthread_equal(o->thread,pthread_self());}
+int vmweave_owner_exchange(struct vmweave_owner *o,uint32_t api,const void *a,size_t na,const void *b,size_t nb,void *out,size_t cap,size_t *got){
+ if(got)*got=0;
+ if(!owned(o)||o->failed||!got)return 999;
+ if((na&&!a)||(nb&&!b)||(cap&&!out)||nb>o->request_capacity||na>o->request_capacity-nb)return 1;
+ struct vmweave_shm_part parts[2]={{a,na},{b,nb}};
+ struct vmweave_shm_request q={.identity=o->identity,.request_id=o->next,.api_id=api,.payload_schema=1,.input=a,.input_bytes=na+nb};
+ struct vmweave_shm_response r={.output=out,.output_capacity=cap};
+ if(vmweave_shm_submit_parts(o->channel,&q,parts,2)||vmweave_shm_receive(o->channel,o->next,&r))goto fail;
+ ++o->next;*got=r.output_bytes;
+ if(r.transport_status==VMWEAVE_SHM_UNSUPPORTED_API)return 801;
+ if(r.transport_status)goto fail;
+ if(api>3&&r.result_domain!=VMWEAVE_RESULT_CUDA_RUNTIME&&r.result_domain!=VMWEAVE_RESULT_CUDA_DRIVER&&r.result_domain!=VMWEAVE_RESULT_LIBRARY)goto fail;
+ return r.api_result;
+fail:o->failed=1;vmweave_shm_abort(o->channel);*got=0;return 999;
+}
+int vmweave_owner_open(struct vmweave_owner **out){
+ if(!out)return 1;*out=NULL;
+ /* A Broker owns transport directly; never recursively connect to its socket. */
+ if(vmweave_getenv("VMWEAVE_BROKER_SOCKET"))return 1;
+ const char *path=vmweave_getenv("VMWEAVE_LAYOUT"),*bdf=vmweave_getenv("VMWEAVE_IVSHMEM_BDF"),*slotenv=vmweave_getenv("VMWEAVE_SLOT");
+ char *end;unsigned long slot=0;if(slotenv){errno=0;slot=strtoul(slotenv,&end,10);if(errno||end==slotenv||*end)return 1;}
+ struct vmweave_shm_layout layout;
+ if(!path||!bdf||vmweave_layout_read(path,&layout)||slot>=layout.session_count)return 1;
+ struct vmweave_owner *o=calloc(1,sizeof(*o));if(!o)return 2;
+ o->thread=pthread_self();o->pid=getpid();o->next=1;
+ if(vmweave_map_guest(bdf,&layout,&o->mapping))goto fail;
+ if(vmweave_shm_open(o->mapping.address,o->mapping.bytes,&layout,(uint32_t)slot,VMWEAVE_SHM_GUEST,30000,&o->channel))goto fail;
+ memcpy(o->identity.channel_generation,layout.channel_generation,16);memcpy(o->identity.session_id,layout.slots[slot].session_id,16);
+ o->request_capacity=layout.slots[slot].request_payload.bytes;
+ if(o->request_capacity>VMWEAVE_SHM_MAX_MESSAGE_BYTES)o->request_capacity=VMWEAVE_SHM_MAX_MESSAGE_BYTES;
+ o->response_capacity=vmweave_shm_response_capacity(o->channel);
+ size_t got;if(vmweave_owner_exchange(o,1,NULL,0,NULL,0,NULL,0,&got))goto fail;
+ *out=o;return 0;
+fail:if(o->channel)vmweave_shm_close(o->channel);vmweave_unmap(&o->mapping);free(o);return 999;
+}
+int vmweave_owner_limits(struct vmweave_owner *o,size_t *request,size_t *response){
+ if(!owned(o)||o->failed||!request||!response)return 999;*request=o->request_capacity;*response=o->response_capacity;return 0;
+}
+int vmweave_owner_close(struct vmweave_owner *o){
+ if(!owned(o))return 999;int rc=0;size_t got;
+ if(!o->failed)rc=vmweave_owner_exchange(o,2,NULL,0,NULL,0,NULL,0,&got);
+ vmweave_shm_close(o->channel);vmweave_unmap(&o->mapping);free(o);return rc;
+}

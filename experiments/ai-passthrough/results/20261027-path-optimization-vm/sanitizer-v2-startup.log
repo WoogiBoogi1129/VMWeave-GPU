@@ -1,0 +1,8 @@
+========= COMPUTE-SANITIZER
+    PID    PPID %CPU STAT COMMAND
+      1       0  0.3 Ss   python3 /opt/vmweave/control/supervisor.py
+    176       1  0.5 Ssl  /opt/compute-sanitizer/compute-sanitizer --tool memcheck --target-processes all --require-cuda-init no --launch-timeout 180 --preload-library /usr/local/vgpu/libvgpu.so --error-exitcode 86 --log-file /tmp/memcheck-%p.log /opt/vmweave/bin/vmweave-shm-session-worker-real /flyt-channel/06d01ddfa7c9129539b418d9f38fd7ce 0
+    177     176  0.0 S    /opt/compute-sanitizer/TreeLauncherSubreaper /flyt-channel/06d01ddfa7c9129539b418d9f38fd7ce 0 /opt/vmweave/bin/vmweave-shm-session-worker-real
+    183     177 99.7 R    /opt/vmweave/bin/vmweave-shm-session-worker-real /flyt-channel/06d01ddfa7c9129539b418d9f38fd7ce 0
+    240       0  0.0 Ss   sh -c cat /tmp/memcheck*; ps -eo pid,ppid,pcpu,stat,args
+    242     240  0.0 R    ps -eo pid,ppid,pcpu,stat,args

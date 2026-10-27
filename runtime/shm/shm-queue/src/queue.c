@@ -271,7 +271,8 @@ static int matches(struct vmweave_shm_channel *c, const struct record *r, uint16
     return r->kind == kind ? 0 : VMWEAVE_SHM_BAD_DESCRIPTOR;
 }
 
-int vmweave_shm_submit(struct vmweave_shm_channel *c, const struct vmweave_shm_request *q)
+int vmweave_shm_submit_parts(struct vmweave_shm_channel *c, const struct vmweave_shm_request *q,
+                              const struct vmweave_shm_part *parts,size_t count)
 {
     struct record r = {0};
     uint64_t now, delta;
@@ -279,10 +280,16 @@ int vmweave_shm_submit(struct vmweave_shm_channel *c, const struct vmweave_shm_r
     if (rc) return rc;
     if (c->pending) return VMWEAVE_SHM_QUEUE_FULL;
     uint64_t measured=vmweave_perf_enabled()?vmweave_perf_now():0;
-    if (!q || q->request_id != c->next || c->next == UINT64_MAX || !q->api_id ||
+    if(!parts||!count||count>2)return VMWEAVE_SHM_BAD_DESCRIPTOR;
+    struct vmweave_shm_part local[2];memcpy(local,parts,count*sizeof(*parts));
+    size_t total=0;
+    for(size_t i=0;i<count;i++){
+        if((local[i].bytes&&!local[i].data)||local[i].bytes>c->request_bytes-total)return VMWEAVE_SHM_BAD_DESCRIPTOR;
+        total+=local[i].bytes;
+    }
+    if (!q || total!=q->input_bytes || q->request_id != c->next || c->next == UINT64_MAX || !q->api_id ||
         !q->payload_schema || q->input_bytes > c->request_bytes ||
-        q->input_bytes > VMWEAVE_SHM_MAX_MESSAGE_BYTES ||
-        (q->input_bytes && !q->input)) return VMWEAVE_SHM_BAD_DESCRIPTOR;
+        q->input_bytes > VMWEAVE_SHM_MAX_MESSAGE_BYTES) return VMWEAVE_SHM_BAD_DESCRIPTOR;
     if (memcmp(q->identity.channel_generation, c->identity.channel_generation, 16) ||
         memcmp(q->identity.session_id, c->identity.session_id, 16)) return VMWEAVE_SHM_STALE_IDENTITY;
     rc = space(&c->req);
@@ -291,14 +298,23 @@ int vmweave_shm_submit(struct vmweave_shm_channel *c, const struct vmweave_shm_r
     if (rc || now > UINT64_MAX - delta) return fail(c, VMWEAVE_SHM_INTERNAL_ERROR);
     r.kind = 1; r.identity = c->identity; r.id = q->request_id;
     r.api = q->api_id; r.schema = q->payload_schema; r.bytes = q->input_bytes;
-    if (q->input_bytes) memcpy(c->request_payload, q->input, q->input_bytes);
+    size_t offset=0;
+    for(size_t i=0;i<count;i++){
+        if(local[i].bytes)memcpy(c->request_payload+offset,local[i].data,local[i].bytes);
+        offset+=local[i].bytes;
+    }
     c->active = r.id; c->api = r.api; c->schema = r.schema;
     c->pending = 1; c->deadline_ns = now + delta;
     push(&c->req, &r);
     vmweave_perf_add(VMWEAVE_PERF_SUBMIT,measured,q->input_bytes);
     return 0;
 }
-int vmweave_shm_worker_take(struct vmweave_shm_channel *c, struct vmweave_shm_request *q)
+int vmweave_shm_submit(struct vmweave_shm_channel *c,const struct vmweave_shm_request *q){
+    if(!q)return VMWEAVE_SHM_BAD_DESCRIPTOR;
+    struct vmweave_shm_part part={q->input,q->input_bytes};
+    return vmweave_shm_submit_parts(c,q,&part,1);
+}
+static int worker_take(struct vmweave_shm_channel *c, struct vmweave_shm_request *q, void *storage, size_t capacity, int borrowed)
 {
     struct record r;
     uint8_t *payload = NULL;
@@ -319,7 +335,8 @@ int vmweave_shm_worker_take(struct vmweave_shm_channel *c, struct vmweave_shm_re
     if (r.id != c->next || r.bytes > VMWEAVE_SHM_MAX_MESSAGE_BYTES || r.offset > c->request_bytes ||
         r.bytes > c->request_bytes - (size_t)r.offset) return fail(c, VMWEAVE_SHM_BAD_DESCRIPTOR);
     if (r.bytes) {
-        payload = malloc((size_t)r.bytes);
+        if(borrowed && (!storage || r.bytes>capacity))return VMWEAVE_SHM_BAD_DESCRIPTOR;
+        payload = borrowed ? storage : malloc((size_t)r.bytes);
         if (!payload) return VMWEAVE_SHM_INTERNAL_ERROR; /* not consumed or executed */
         payload_snapshot(payload, c->request_payload + r.offset, (size_t)r.bytes);
     }
@@ -330,6 +347,13 @@ int vmweave_shm_worker_take(struct vmweave_shm_channel *c, struct vmweave_shm_re
     vmweave_perf_add(VMWEAVE_PERF_TAKE,measured,q->input_bytes);
     return 0;
 }
+int vmweave_shm_worker_take(struct vmweave_shm_channel *c,struct vmweave_shm_request *q){
+    return worker_take(c,q,NULL,0,0);
+}
+int vmweave_shm_worker_take_into(struct vmweave_shm_channel *c,struct vmweave_shm_request *q,void *storage,size_t capacity){
+    return worker_take(c,q,storage,capacity,1);
+}
+void vmweave_shm_request_clear_borrowed(struct vmweave_shm_request *q){if(q)memset(q,0,sizeof(*q));}
 void vmweave_shm_request_release(struct vmweave_shm_request *q)
 {
     if (q) { free((void *)q->input); memset(q, 0, sizeof(*q)); }

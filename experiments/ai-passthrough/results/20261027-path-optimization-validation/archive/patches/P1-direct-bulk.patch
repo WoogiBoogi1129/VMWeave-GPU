@@ -1,0 +1,112 @@
+--- a/runtime/shm/include/vmweave_guest.h
++++ b/runtime/shm/include/vmweave_guest.h
+@@ -3,6 +3,8 @@
+ #include <pthread.h>
+ #include "vmweave_wire.h"
+ extern pthread_mutex_t vmweave_guest_lock;
++int vmweave_broker_direct_enabled(void);
++int vmweave_broker_copy_direct(const void *,const void *,size_t,size_t *);
+ int vmweave_guest_record_error(int error);
+ /* Caller serializes these with vmweave_guest_lock. No RPC fallback. */
+ int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received);
+--- a/runtime/shm/src/broker_client.c
++++ b/runtime/shm/src/broker_client.c
+@@ -108,14 +108,14 @@
+  void *mapped=mmap(NULL,2*BULK_BYTES,PROT_READ|PROT_WRITE,MAP_SHARED,received,0);close(received);
+  if(mapped==MAP_FAILED){fail();return;}bulk=mapped;
+ }
+-static int bulk_request(const void *in,size_t n,void *out,size_t cap,size_t *got){
++static int bulk_request(const void *in,size_t n,const void *payload,void *out,size_t cap,size_t *got){
+  uint32_t kind,reserved;uint64_t bytes;
+  if(n<48)return -1;
+  memcpy(&kind,in,4);memcpy(&reserved,(const char*)in+4,4);memcpy(&bytes,(const char*)in+40,8);
+  if(reserved||bytes<BULK_THRESHOLD||bytes>BULK_BYTES||
+     !((kind==1&&n==48+bytes&&!cap)||(kind==2&&n==48&&cap==bytes)))return -1;
+  if(!bulk_probed)bulk_negotiate();if(failed)return 999;if(!bulk)return -1;
+- if(kind==1)memcpy(bulk,(const char*)in+48,(size_t)bytes);
++ if(kind==1)memcpy(bulk,payload?payload:(const char*)in+48,(size_t)bytes);
+  struct {uint32_t magic,api;uint64_t bytes,capacity;} q={MAGIC,BULK_COPY,48,cap};
+  struct {uint32_t magic,result;uint64_t bytes;} r;
+  ++wire_calls;
+@@ -164,7 +164,7 @@
+  }
+  return 1;
+ }
+-int vmweave_broker_exchange(uint32_t api,const void *in,size_t n,void *out,size_t cap,size_t *got){
++static int exchange_impl(uint32_t api,const void *in,size_t n,const void *payload,void *out,size_t cap,size_t *got){
+  if(got)*got=0;
+  /* This precedes the inherited mutex, including when another thread forked. */
+  if(owner&&owner!=getpid())return 999;
+@@ -191,8 +191,17 @@
+   if(api==PRIMARY_STATE&&have_primary&&cap>=8){memcpy(out,primary,8);*got=8;++primary_hits;result=0;goto done;}
+  }
+  if(api==SET_DEVICE||api==2)invalidate();
+- result=api==0x1012u?bulk_request(in,n,out,cap,got):-1;
+- if(result==-1)result=request(api,in,n,out,cap,got);
++ result=api==0x1012u?bulk_request(in,n,payload,out,cap,got):-1;
++ if(result==-1){
++  if(payload){
++   /* No CUDA request has been sent: capability fallback may materialize payload. */
++   unsigned char *joined=malloc(n);
++   if(!joined){result=2;}else{
++    memcpy(joined,in,48);memcpy(joined+48,payload,n-48);
++    result=request(api,joined,n,out,cap,got);free(joined);
++   }
++  }else result=request(api,in,n,out,cap,got);
++ }
+  if(result){invalidate();if(result==999&&cache_enabled)fail();goto done;}
+  if(cache_enabled&&!n){
+   if(api==GET_DEVICE&&*got==4&&!memcmp(out,(unsigned char[4]){0},4)){memcpy(device,out,4);have_device=1;}
+@@ -203,6 +212,20 @@
+  if(math_request&&*got==0)remember_math(in);
+  if(api==2)fail();
+  done:pthread_mutex_unlock(&lock);return result;
++}
++static pthread_once_t direct_once=PTHREAD_ONCE_INIT;
++static int direct_enabled;
++static void direct_configure(void){const char *v=getenv("VMWEAVE_BULK_DIRECT");direct_enabled=v&&!strcmp(v,"1");}
++int vmweave_broker_direct_enabled(void){pthread_once(&direct_once,direct_configure);return direct_enabled;}
++int vmweave_broker_exchange(uint32_t api,const void *in,size_t n,void *out,size_t cap,size_t *got){
++ return exchange_impl(api,in,n,NULL,out,cap,got);
++}
++int vmweave_broker_copy_direct(const void *descriptor,const void *payload,size_t bytes,size_t *got){
++ if(!descriptor||!payload||!got||bytes<BULK_THRESHOLD||bytes>BULK_BYTES)return 1;
++ uint32_t kind,reserved;uint64_t encoded;
++ memcpy(&kind,descriptor,4);memcpy(&reserved,(const char*)descriptor+4,4);memcpy(&encoded,(const char*)descriptor+40,8);
++ if(kind!=1||reserved||encoded!=bytes)return 1;
++ return exchange_impl(0x1012u,descriptor,48+bytes,payload,NULL,0,got);
+ }
+ void vmweave_broker_close(void){
+  if(owner!=getpid())return;
+--- a/runtime/shm/src/guest.c
++++ b/runtime/shm/src/guest.c
+@@ -239,7 +239,9 @@
+     size_t limit=kind==cudaMemcpyHostToDevice?copy_h2d_limit:copy_d2h_limit;
+     if(kind==cudaMemcpyDeviceToDevice)limit=n;
+     size_t chunk=n<limit?n:limit,header=async?56:48;
+-    size_t capacity=header+(kind==cudaMemcpyHostToDevice?chunk:0);
++    int direct=!async&&kind==cudaMemcpyHostToDevice&&chunk>=1024u*1024u&&
++        vmweave_getenv("VMWEAVE_BROKER_SOCKET")&&vmweave_broker_direct_enabled();
++    size_t capacity=header+(kind==cudaMemcpyHostToDevice&&!direct?chunk:0);
+     int optimized=vmweave_copy_optimized();uint8_t *in;
+     if(optimized){
+         if(capacity>copy_capacity){void *p=realloc(copy_buffer,capacity);if(!p)return 2;copy_buffer=p;copy_capacity=capacity;}
+@@ -253,9 +255,16 @@
+         vmweave_put(p,kind==cudaMemcpyHostToDevice?1:kind==cudaMemcpyDeviceToHost?2:3,4);
+         vmweave_put(p+8,d.handle,8);vmweave_put(p+16,d.handle?d.offset+offset:0,8);
+         vmweave_put(p+24,s.handle,8);vmweave_put(p+32,s.handle?s.offset+offset:0,8);vmweave_put(p+40,bytes,8);
+-        if(kind==cudaMemcpyHostToDevice&&bytes)memcpy(in+header,(const uint8_t*)src+offset,bytes);
++        if(kind==cudaMemcpyHostToDevice&&bytes&&!direct)memcpy(in+header,(const uint8_t*)src+offset,bytes);
+         size_t got=0;void *output=kind==cudaMemcpyDeviceToHost&&bytes?(uint8_t*)dst+offset:NULL;
+-        e=vmweave_guest_exchange(async?VMWEAVE_ASYNC_COPY:VMWEAVE_API_RUNTIME_MEMCPY,in,
++        if(direct&&bytes>=1024u*1024u){
++            e=vmweave_broker_copy_direct(in,(const uint8_t*)src+offset,bytes,&got);
++        }else if(direct){
++            /* Final small chunk still needs a complete legacy request. */
++            uint8_t *tail=malloc(header+bytes);if(!tail){e=2;break;}
++            memcpy(tail,in,header);memcpy(tail+header,(const uint8_t*)src+offset,bytes);
++            e=vmweave_guest_exchange(VMWEAVE_API_RUNTIME_MEMCPY,tail,header+bytes,NULL,0,&got);free(tail);
++        }else e=vmweave_guest_exchange(async?VMWEAVE_ASYNC_COPY:VMWEAVE_API_RUNTIME_MEMCPY,in,
+             header+(kind==cudaMemcpyHostToDevice?bytes:0),output,kind==cudaMemcpyDeviceToHost?bytes:0,&got);
+         if(!e&&got!=(kind==cudaMemcpyDeviceToHost?bytes:0))e=999;
+         if(e)break;

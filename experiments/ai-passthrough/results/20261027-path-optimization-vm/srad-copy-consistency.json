@@ -1,0 +1,10 @@
+{
+  "workload": "srad 2048 x 2048 float, 2 iterations",
+  "copy_count": {
+    "H2D_16MiB": 2,
+    "D2H_16MiB": 2
+  },
+  "micro_based_gap_ms": 42.984722,
+  "observed_workload_median_gap_ms": 43.874288,
+  "interpretation": "Consistency check only; micro includes additional explicit synchronization and different measurement boundaries; not an exclusive time attribution"
+}

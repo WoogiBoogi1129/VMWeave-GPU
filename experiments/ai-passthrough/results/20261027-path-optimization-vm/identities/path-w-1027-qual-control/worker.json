@@ -1,0 +1,401 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "annotations": {
+      "hami.io/bind-phase": "success",
+      "hami.io/bind-time": "1793096048",
+      "hami.io/vgpu-devices-allocated": "GPU-772181af-05a4-0c24-de59-8487bd37c142,NVIDIA,8192,100:;",
+      "hami.io/vgpu-devices-to-allocate": ";;",
+      "hami.io/vgpu-node": "gpu-4",
+      "hami.io/vgpu-time": "1793096048",
+      "nvidia.com/use-gpuuuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "vmweave.io/detach-channel-uid": "3a4ee7d2-4ade-414a-8574-cc12efd5258e"
+    },
+    "creationTimestamp": "2026-10-27T10:14:08Z",
+    "finalizers": [
+      "vmweave.io/detach-observation"
+    ],
+    "generation": 1,
+    "labels": {
+      "hami.io/vgpu-node": "gpu-4",
+      "vmweave.io/channel": "path-w-1027-qual-control"
+    },
+    "name": "path-w-1027-qual-control-3a4ee7d24ade-657a6ed1-worker",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "path-w-1027-qual-control",
+        "uid": "3a4ee7d2-4ade-414a-8574-cc12efd5258e"
+      }
+    ],
+    "resourceVersion": "17773106",
+    "uid": "bab9a996-7b28-4ede-90ef-7d3c98e73b5f"
+  },
+  "spec": {
+    "automountServiceAccountToken": true,
+    "containers": [
+      {
+        "command": [
+          "sh",
+          "-ec",
+          "if test -f /opt/vmweave/control/supervisor.py; then exec python3 /opt/vmweave/control/supervisor.py \"$@\"; else exec python3 /opt/flyt/control/supervisor.py \"$@\"; fi",
+          "vmweave-control"
+        ],
+        "env": [
+          {
+            "name": "VMWEAVE_PERSISTENT",
+            "value": "1"
+          },
+          {
+            "name": "VMWEAVE_GENERATION",
+            "value": "8e2c2ae6a3005ef5a09f46bdee0a3d4c"
+          },
+          {
+            "name": "FLYT_GENERATION",
+            "value": "8e2c2ae6a3005ef5a09f46bdee0a3d4c"
+          },
+          {
+            "name": "VMWEAVE_ALLOCATION",
+            "value": "657a6ed13b346e5541cdfb7a128e6dfa"
+          },
+          {
+            "name": "FLYT_ALLOCATION",
+            "value": "657a6ed13b346e5541cdfb7a128e6dfa"
+          },
+          {
+            "name": "VMWEAVE_GPU_UUID",
+            "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+          },
+          {
+            "name": "FLYT_GPU_UUID",
+            "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+          },
+          {
+            "name": "VMWEAVE_RESOURCE_BACKEND",
+            "value": "hami"
+          },
+          {
+            "name": "FLYT_RESOURCE_BACKEND",
+            "value": "hami"
+          },
+          {
+            "name": "VMWEAVE_NAMESPACE",
+            "value": "vmweave-test-a"
+          },
+          {
+            "name": "FLYT_NAMESPACE",
+            "value": "vmweave-test-a"
+          },
+          {
+            "name": "VMWEAVE_API_GROUP",
+            "value": "vmweave.io"
+          },
+          {
+            "name": "VMWEAVE_MEMORY_BYTES",
+            "value": "8589934592"
+          },
+          {
+            "name": "FLYT_MEMORY_BYTES",
+            "value": "8589934592"
+          },
+          {
+            "name": "VMWEAVE_SESSIONS",
+            "value": "1"
+          },
+          {
+            "name": "FLYT_SESSIONS",
+            "value": "1"
+          },
+          {
+            "name": "VMWEAVE_CHANNEL_NAME",
+            "value": "path-w-1027-qual-control"
+          },
+          {
+            "name": "FLYT_CHANNEL_NAME",
+            "value": "path-w-1027-qual-control"
+          },
+          {
+            "name": "VMWEAVE_CHANNEL_UID",
+            "value": "3a4ee7d2-4ade-414a-8574-cc12efd5258e"
+          },
+          {
+            "name": "FLYT_CHANNEL_UID",
+            "value": "3a4ee7d2-4ade-414a-8574-cc12efd5258e"
+          },
+          {
+            "name": "VMWEAVE_POD_UID",
+            "valueFrom": {
+              "fieldRef": {
+                "apiVersion": "v1",
+                "fieldPath": "metadata.uid"
+              }
+            }
+          },
+          {
+            "name": "FLYT_POD_UID",
+            "valueFrom": {
+              "fieldRef": {
+                "apiVersion": "v1",
+                "fieldPath": "metadata.uid"
+              }
+            }
+          }
+        ],
+        "image": "localhost/vmweave-worker@sha256:e9c2cf5ba83c71ccd610eee41641e15923edc69aafefc48fe643c8f801cc3f08",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "main",
+        "readinessProbe": {
+          "exec": {
+            "command": [
+              "sh",
+              "-ec",
+              "test -f /tmp/vmweave-worker-ready || test -f /tmp/flyt-worker-ready"
+            ]
+          },
+          "failureThreshold": 3,
+          "periodSeconds": 2,
+          "successThreshold": 1,
+          "timeoutSeconds": 1
+        },
+        "resources": {
+          "limits": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "100",
+            "nvidia.com/gpumem": "8192"
+          },
+          "requests": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "100",
+            "nvidia.com/gpumem": "8192"
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/flyt-channel",
+            "name": "channel"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-fhgk5",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "gpu-4",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Never",
+    "runtimeClassName": "nvidia",
+    "schedulerName": "hami-scheduler",
+    "securityContext": {
+      "fsGroup": 107,
+      "runAsGroup": 107,
+      "runAsUser": 107
+    },
+    "serviceAccount": "path-w-1027-qual-control-3a4ee7d24ade-657a6ed1-worker",
+    "serviceAccountName": "path-w-1027-qual-control-3a4ee7d24ade-657a6ed1-worker",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "name": "channel",
+        "persistentVolumeClaim": {
+          "claimName": "path-w-1027-qual-control"
+        }
+      },
+      {
+        "name": "kube-api-access-fhgk5",
+        "projected": {
+          "defaultMode": 420,
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "expirationSeconds": 3607,
+                "path": "token"
+              }
+            },
+            {
+              "configMap": {
+                "items": [
+                  {
+                    "key": "ca.crt",
+                    "path": "ca.crt"
+                  }
+                ],
+                "name": "kube-root-ca.crt"
+              }
+            },
+            {
+              "downwardAPI": {
+                "items": [
+                  {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "metadata.namespace"
+                    },
+                    "path": "namespace"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "status": {
+    "allocatedResources": {
+      "nvidia.com/gpu": "1",
+      "nvidia.com/gpucores": "100",
+      "nvidia.com/gpumem": "8192"
+    },
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-27T10:14:09Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-27T10:14:08Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-27T10:14:12Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-27T10:14:12Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-27T10:14:08Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "nvidia.com/gpu": "1",
+          "nvidia.com/gpucores": "100",
+          "nvidia.com/gpumem": "8192"
+        },
+        "allocatedResourcesStatus": [
+          {
+            "name": "nvidia.com/gpu",
+            "resources": [
+              {
+                "health": "Healthy",
+                "resourceID": "GPU-772181af-05a4-0c24-de59-8487bd37c142-4"
+              }
+            ]
+          }
+        ],
+        "containerID": "cri-o://d7a09a34c6588af62c4c99b63ac8f7d782acdcd37867d72b84930f7aca4a0aa3",
+        "image": "localhost/vmweave-worker:path-control-20261027",
+        "imageID": "localhost/vmweave-worker@sha256:e9c2cf5ba83c71ccd610eee41641e15923edc69aafefc48fe643c8f801cc3f08",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "100",
+            "nvidia.com/gpumem": "8192"
+          },
+          "requests": {
+            "nvidia.com/gpu": "1",
+            "nvidia.com/gpucores": "100",
+            "nvidia.com/gpumem": "8192"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-27T10:14:10Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 107,
+            "supplementalGroups": [
+              107,
+              44,
+              993
+            ],
+            "uid": 107
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/flyt-channel",
+            "name": "channel"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-fhgk5",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "hostIP": "192.168.24.21",
+    "hostIPs": [
+      {
+        "ip": "192.168.24.21"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Running",
+    "podIP": "10.85.0.161",
+    "podIPs": [
+      {
+        "ip": "10.85.0.161"
+      }
+    ],
+    "qosClass": "BestEffort",
+    "resources": {},
+    "startTime": "2026-10-27T10:14:08Z"
+  }
+}

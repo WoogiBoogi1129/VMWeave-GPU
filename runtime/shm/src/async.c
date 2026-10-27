@@ -4,22 +4,62 @@
 #include <cuda.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
 
 enum {STREAM=1,EVENT,MODULE,FUNCTION,UPLOAD};
 struct object {uint64_t id,parent;int kind;void *pointer;size_t bytes,received;};
 static struct object objects[4096];static uint64_t next=1;
 static size_t upload_bytes;
-struct stage {void *host;cudaEvent_t done;size_t bytes;};
+struct stage {void *host;cudaEvent_t done;size_t bytes;int active;};
+static pthread_once_t pool_once=PTHREAD_ONCE_INIT;static int pool_enabled;static size_t pool_bytes;
+static void pool_configure(void){const char *v=getenv("VMWEAVE_PINNED_POOL");pool_enabled=v&&!strcmp(v,"1");}
+static int pooled(void){pthread_once(&pool_once,pool_configure);return pool_enabled;}
 static size_t staged_bytes;static struct stage stages[128];
 static struct object *find(uint64_t id,int kind){for(int i=0;i<4096;i++)if(objects[i].id==id&&id&&objects[i].kind==kind)return &objects[i];return NULL;}
 static struct object *reserve(void){if(next==UINT64_MAX)return NULL;for(int i=0;i<4096;i++)if(!objects[i].id)return &objects[i];return NULL;}
 static int stream(uint64_t id,cudaStream_t *out){struct object *o;if(!id){*out=0;return 1;}o=find(id,STREAM);if(!o)return 0;*out=(cudaStream_t)o->pointer;return 1;}
 int vmweave_async_stream(uint64_t id,void **out){cudaStream_t s;if(!stream(id,&s))return 0;*out=s;return 1;}
 int vmweave_async_reap(void){
-    for(int i=0;i<128;i++)if(stages[i].host){cudaError_t e=cudaEventQuery(stages[i].done);
+    for(int i=0;i<128;i++)if(stages[i].host&&stages[i].active){
+        cudaError_t e=cudaEventQuery(stages[i].done);
         if(e==cudaErrorNotReady)continue;if(e!=cudaSuccess)return -1;
-        if(cudaEventDestroy(stages[i].done)!=cudaSuccess||cudaFreeHost(stages[i].host)!=cudaSuccess)return -1;
-        staged_bytes-=stages[i].bytes;memset(&stages[i],0,sizeof(stages[i]));}return 0;
+        if(!pooled()){
+            if(cudaEventDestroy(stages[i].done)!=cudaSuccess||cudaFreeHost(stages[i].host)!=cudaSuccess)return -1;
+        }
+        staged_bytes-=stages[i].bytes;
+        if(pooled())stages[i].active=0;else memset(&stages[i],0,sizeof(stages[i]));
+    }return 0;
+}
+/* Return -1 only for a session-fatal completion/cleanup failure. */
+static int pool_acquire(size_t bytes,int *slot){
+    size_t capacity=4096;
+    while(capacity<bytes){if(capacity>VMWEAVE_ASYNC_STAGING_BYTES/2)return cudaErrorMemoryAllocation;capacity*=2;}
+    if(capacity>VMWEAVE_ASYNC_STAGING_BYTES)return cudaErrorMemoryAllocation;
+    for(;;){
+        if(vmweave_async_reap())return -1;
+        int best=-1,empty=-1,pending=-1;
+        for(int i=0;i<128;i++){
+            if(!stages[i].host){if(empty<0)empty=i;continue;}
+            if(stages[i].active){if(pending<0)pending=i;continue;}
+            if(stages[i].bytes>=capacity&&(best<0||stages[i].bytes<stages[best].bytes))best=i;
+        }
+        if(best>=0){*slot=best;return 0;}
+        /* Evict completed slots only; live DMA storage must never be freed. */
+        for(int i=0;i<128&&(empty<0||capacity>VMWEAVE_ASYNC_STAGING_BYTES-pool_bytes);i++){
+            if(stages[i].host&&!stages[i].active){
+                if(cudaEventDestroy(stages[i].done)!=cudaSuccess||cudaFreeHost(stages[i].host)!=cudaSuccess)return -1;
+                pool_bytes-=stages[i].bytes;memset(&stages[i],0,sizeof(stages[i]));if(empty<0)empty=i;
+            }
+        }
+        if(empty>=0&&capacity<=VMWEAVE_ASYNC_STAGING_BYTES-pool_bytes){
+            void *host=NULL;cudaEvent_t event=NULL;
+            cudaError_t e=cudaHostAlloc(&host,capacity,cudaHostAllocDefault);if(e)return e;
+            e=cudaEventCreateWithFlags(&event,cudaEventDisableTiming);
+            if(e){if(cudaFreeHost(host)!=cudaSuccess)return -1;return e;}
+            stages[empty]=(struct stage){.host=host,.done=event,.bytes=capacity};pool_bytes+=capacity;*slot=empty;return 0;
+        }
+        if(pending<0||cudaEventSynchronize(stages[pending].done)!=cudaSuccess)return -1;
+    }
 }
 int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_shm_request *q,struct vmweave_shm_response *r){
     const uint8_t *p=q->input;size_t n=q->input_bytes;struct object *o=NULL;cudaStream_t st=0;uint64_t id=0;
@@ -113,25 +153,30 @@ int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_s
         if(k==2&&(bytes>r->output_capacity||(bytes&&!r->output)))goto invalid;
         if(!bytes)break;
         if(k==1){
-            /* Backpressure owns staging until the completion event, including
-             * across streams. Never free a buffer merely because enqueue returned. */
-            int i;
-            for(;;){
-                if(vmweave_async_reap())return -1;
-                for(i=0;i<128&&stages[i].host;i++);
-                if(i<128&&bytes<=VMWEAVE_ASYNC_STAGING_BYTES-staged_bytes)break;
-                int pending;for(pending=0;pending<128&&!stages[pending].host;pending++);
-                if(pending==128||cudaEventSynchronize(stages[pending].done)!=cudaSuccess)return -1;
+            int i=-1;void *host=NULL;cudaEvent_t event=NULL;size_t capacity=(size_t)bytes;
+            if(pooled()){
+                int result=pool_acquire((size_t)bytes,&i);if(result<0)return -1;
+                r->api_result=(uint32_t)result;if(result)break;
+                host=stages[i].host;event=stages[i].done;capacity=stages[i].bytes;
+            }else{
+                for(;;){
+                    if(vmweave_async_reap())return -1;
+                    for(i=0;i<128&&stages[i].host;i++);
+                    if(i<128&&bytes<=VMWEAVE_ASYNC_STAGING_BYTES-staged_bytes)break;
+                    int pending;for(pending=0;pending<128&&!stages[pending].host;pending++);
+                    if(pending==128||cudaEventSynchronize(stages[pending].done)!=cudaSuccess)return -1;
+                }
+                r->api_result=cudaHostAlloc(&host,capacity,cudaHostAllocDefault);if(r->api_result)break;
+                r->api_result=cudaEventCreateWithFlags(&event,cudaEventDisableTiming);
+                if(r->api_result){if(cudaFreeHost(host)!=cudaSuccess)return -1;break;}
             }
-            void *host=NULL;cudaEvent_t event=NULL;
-            r->api_result=cudaHostAlloc(&host,(size_t)bytes,cudaHostAllocDefault);if(r->api_result)break;
-            r->api_result=cudaEventCreateWithFlags(&event,cudaEventDisableTiming);
-            if(r->api_result){cudaFreeHost(host);break;}
             memcpy(host,p+56,(size_t)bytes);
+            /* Track ownership before enqueue; failed enqueue/record terminates
+             * the CUDA process without reusing possibly in-flight memory. */
+            stages[i]=(struct stage){.host=host,.done=event,.bytes=capacity,.active=1};staged_bytes+=capacity;
             r->api_result=cudaMemcpyAsync(dst,host,(size_t)bytes,cudaMemcpyHostToDevice,st);
             if(!r->api_result)r->api_result=cudaEventRecord(event,st);
-            if(r->api_result){/* Cannot free potentially in-flight staging. Exit this process. */return -1;}
-            stages[i].host=host;stages[i].done=event;stages[i].bytes=(size_t)bytes;staged_bytes+=(size_t)bytes;
+            if(r->api_result)return -1;
         }else if(k==2){
             /* Conservative completion: this initial DtoH path blocks until stream
              * work completes and bytes can be returned, never returns stale data. */
@@ -180,6 +225,10 @@ error:r->result_domain=0;r->api_result=0;r->output_bytes=0;return 0;
 int vmweave_async_close(void){
     if(cudaDeviceSynchronize()!=cudaSuccess)return -1;
     if(vmweave_async_reap())return -1;
+    for(int i=0;i<128;i++)if(stages[i].host){
+        if(stages[i].active||cudaEventDestroy(stages[i].done)!=cudaSuccess||cudaFreeHost(stages[i].host)!=cudaSuccess)return -1;
+        pool_bytes-=stages[i].bytes;memset(&stages[i],0,sizeof(stages[i]));
+    }
     for(int i=0;i<4096;i++)if(objects[i].id){int e=0;
         if(objects[i].kind==STREAM)e=cudaStreamDestroy((cudaStream_t)objects[i].pointer);
         if(objects[i].kind==EVENT)e=cudaEventDestroy((cudaEvent_t)objects[i].pointer);

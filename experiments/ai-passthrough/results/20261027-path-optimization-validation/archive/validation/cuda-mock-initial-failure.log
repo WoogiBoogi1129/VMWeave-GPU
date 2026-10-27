@@ -1,0 +1,5 @@
+PASS completed-only reuse, size class, live storage exclusion, cap
+PASS guest: routing, frozen option, bounds, errors/no replay, async unchanged, response length
+PASS guest: routing, frozen option, bounds, errors/no replay, async unchanged, response length
+memset-worker: tests/memset/worker.c:40: main: Assertion `!vmweave_torch_dispatch(&s,&q,&r)&&!r.transport_status&&r.api_result==injected&&native_calls==2' failed.
+tests/run_cuda_mock.sh: line 19:    23 Aborted                 build-tests/memset-worker

@@ -90,3 +90,20 @@ malloc 크기·opaque handle·복사 방향/크기는 기록하되 데이터 내
 별도 동기화가 필요하다. 추적 실행은 기능 시연용으로 사용한다.
 [2단계 실제 요청 추적·검산](../../experiments/evidence/results/2026-09-28-stage2/README.md)에
 독립 실행 원본과 검증 절차를 보존한다.
+# Experimental native memset (default off)
+
+In v0.5.5, `VMWEAVE_NATIVE_MEMSET=1` selects native backend
+`cudaMemset` for supported device allocations, using opcode `0x2108`. The option
+is read once on the first cudaMemset call; restart the process to change it.
+There is no legacy FLYT alias. Unset or any value other than `1` retains the
+existing async-memset plus device-synchronization path. cudaMemsetAsync is unchanged.
+
+The new request uses the existing 40-byte memset layout with stream and reserved
+fields both zero. Successful responses contain no output. A matching v0.5.5
+Worker is required; old Workers reject the opcode. No error triggers fallback or
+automatic replay. Existing opcodes retain their meaning and numbering.
+
+Return does not imply GPU completion. Use the appropriate stream/event/device
+synchronization before consuming results. This does not add pinned-host,
+managed-memory or per-thread-default-stream support. Actual-VM correctness and recovery have been validated for the combined option set.
+See docs/runtime/path-optimization.md for configuration and measured performance limits.

@@ -21,6 +21,7 @@ jobs:
         with:
           version: v3.17.3
       - run: python3 -m unittest discover -s tests/control -v
+      - run: bash tests/path_optimization/run_cpu.sh
       - run: python3 -m unittest discover -s experiments/evidence/tests -v
       - name: Build CPU queue and dispatch libraries
         run: |

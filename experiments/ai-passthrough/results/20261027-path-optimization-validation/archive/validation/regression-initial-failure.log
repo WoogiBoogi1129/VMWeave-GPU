@@ -1,0 +1,28 @@
+test_guest_broker.py
+.client disconnected: EOFError
+.client disconnected: EOFError
+.client disconnected: EOFError
+Eclient disconnected: EOFError
+F
+======================================================================
+ERROR: test_default_slot_and_legacy_peers (test_guest_broker.CopyLimitsTests.test_default_slot_and_legacy_peers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/vmweave-path-optimization-20261027/source/tests/control/test_guest_broker.py", line 91, in test_default_slot_and_legacy_peers
+    self.assertEqual((rc,struct.unpack('<IIQQ',out)),(0,(1,3,16777216,16777216)))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+struct.error: unpack requires a buffer of 24 bytes
+
+======================================================================
+FAIL: test_small_slot_accounts_envelope_and_async_header (test_guest_broker.CopyLimitsTests.test_small_slot_accounts_envelope_and_async_header)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/vmweave-path-optimization-20261027/source/tests/control/test_guest_broker.py", line 87, in test_small_slot_accounts_envelope_and_async_header
+    self.assertEqual(rc,0);self.assertEqual(struct.unpack('<IIQQ',out),(1,3,8112,4096))
+    ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 801 != 0
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.007s
+
+FAILED (failures=1, errors=1)

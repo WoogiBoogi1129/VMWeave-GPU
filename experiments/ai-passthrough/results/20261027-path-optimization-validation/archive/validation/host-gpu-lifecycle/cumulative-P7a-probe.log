@@ -1,0 +1,5 @@
+PASS busy rejection and idle heartbeat
+PASS ten fresh sessions, retained old arena isolation, CLOSE and EOF
+PASS no Broker/Worker FD growth after repeated sessions
+PASS cached session child death fences client, next session recovers
+PASS partial packet deadline with heartbeat and subsequent recovery
