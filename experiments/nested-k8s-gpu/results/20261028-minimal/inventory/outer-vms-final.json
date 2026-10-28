@@ -1,0 +1,300 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "kubevirt.io/v1",
+      "kind": "VirtualMachine",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"kubevirt.io/v1\",\"kind\":\"VirtualMachine\",\"metadata\":{\"annotations\":{},\"name\":\"vw-k8s-cp-01\",\"namespace\":\"vmweave-nested-k8s\"},\"spec\":{\"runStrategy\":\"Always\",\"template\":{\"metadata\":{\"labels\":{\"nested-k8s-vm\":\"vw-k8s-cp-01\"}},\"spec\":{\"domain\":{\"cpu\":{\"cores\":4},\"devices\":{\"disks\":[{\"disk\":{\"bus\":\"virtio\"},\"name\":\"root\"},{\"disk\":{\"bus\":\"virtio\"},\"name\":\"cloudinit\"}],\"interfaces\":[{\"macAddress\":\"02:00:00:28:10:01\",\"masquerade\":{},\"name\":\"default\"}]},\"firmware\":{\"uuid\":\"61f95fe9-49ce-42e0-b997-ff5320327801\"},\"machine\":{\"type\":\"q35\"},\"resources\":{\"requests\":{\"cpu\":\"4\",\"memory\":\"8Gi\"}}},\"networks\":[{\"name\":\"default\",\"pod\":{}}],\"nodeSelector\":{\"kubernetes.io/hostname\":\"gpu-4\"},\"volumes\":[{\"name\":\"root\",\"persistentVolumeClaim\":{\"claimName\":\"nested-cp\"}},{\"cloudInitNoCloud\":{\"networkData\":\"version: 2\\nethernets:\\n  eth0:\\n    match:\\n      macaddress: \\\"02:00:00:28:10:01\\\"\\n    set-name: eth0\\n    dhcp4: true\\n\",\"userData\":\"#cloud-config\\nhostname: vw-k8s-cp-01\\nmanage_etc_hosts: true\\nusers:\\n  - name: ubuntu\\n    sudo: ALL=(ALL) NOPASSWD:ALL\\n    shell: /bin/bash\\n    ssh_authorized_keys:\\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGX6GHJtH0ISfBU/+dV1ioL0nhySW/AvBlZ4x8rLNJhl ubuntu@gpu-4\\ngrowpart:\\n  mode: auto\\n  devices: [\\\"/\\\"]\\nresize_rootfs: true\\n\"},\"name\":\"cloudinit\"}]}}}}\n",
+          "kubevirt.io/latest-observed-api-version": "v1",
+          "kubevirt.io/storage-observed-api-version": "v1"
+        },
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "finalizers": [
+          "kubevirt.io/virtualMachineControllerFinalize"
+        ],
+        "generation": 3,
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444976",
+        "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1"
+      },
+      "spec": {
+        "runStrategy": "Always",
+        "template": {
+          "metadata": {
+            "annotations": {
+              "kubevirt.io/pci-topology-version": "v3"
+            },
+            "labels": {
+              "nested-k8s-vm": "vw-k8s-cp-01"
+            }
+          },
+          "spec": {
+            "architecture": "amd64",
+            "domain": {
+              "cpu": {
+                "cores": 4
+              },
+              "devices": {
+                "disks": [
+                  {
+                    "disk": {
+                      "bus": "virtio"
+                    },
+                    "name": "root"
+                  },
+                  {
+                    "disk": {
+                      "bus": "virtio"
+                    },
+                    "name": "cloudinit"
+                  }
+                ],
+                "interfaces": [
+                  {
+                    "macAddress": "02:00:00:28:10:01",
+                    "masquerade": {},
+                    "name": "default"
+                  }
+                ]
+              },
+              "firmware": {
+                "serial": "5b0ef69e-593a-45a3-8d49-071ae1edb5ec",
+                "uuid": "61f95fe9-49ce-42e0-b997-ff5320327801"
+              },
+              "machine": {
+                "type": "q35"
+              },
+              "resources": {
+                "requests": {
+                  "cpu": "4",
+                  "memory": "8Gi"
+                }
+              }
+            },
+            "networks": [
+              {
+                "name": "default",
+                "pod": {}
+              }
+            ],
+            "nodeSelector": {
+              "kubernetes.io/hostname": "gpu-4"
+            },
+            "volumes": [
+              {
+                "name": "root",
+                "persistentVolumeClaim": {
+                  "claimName": "nested-cp"
+                }
+              },
+              {
+                "cloudInitNoCloud": {
+                  "networkData": "version: 2\nethernets:\n  eth0:\n    match:\n      macaddress: \"02:00:00:28:10:01\"\n    set-name: eth0\n    dhcp4: true\n",
+                  "userData": "#cloud-config\nhostname: vw-k8s-cp-01\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGX6GHJtH0ISfBU/+dV1ioL0nhySW/AvBlZ4x8rLNJhl ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n"
+                },
+                "name": "cloudinit"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-28T09:30:25Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": null,
+            "message": "cannot migrate VMI: PVC nested-cp is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+            "reason": "DisksNotLiveMigratable",
+            "status": "False",
+            "type": "LiveMigratable"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": null,
+            "status": "True",
+            "type": "StorageLiveMigratable"
+          }
+        ],
+        "created": true,
+        "desiredGeneration": 3,
+        "observedGeneration": 3,
+        "printableStatus": "Running",
+        "ready": true,
+        "runStrategy": "Always",
+        "volumeSnapshotStatuses": [
+          {
+            "enabled": false,
+            "name": "root",
+            "reason": "No VolumeSnapshotClass: Volume snapshots are not configured for this StorageClass [] [root]"
+          },
+          {
+            "enabled": false,
+            "name": "cloudinit",
+            "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "kubevirt.io/v1",
+      "kind": "VirtualMachine",
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"kubevirt.io/v1\",\"kind\":\"VirtualMachine\",\"metadata\":{\"annotations\":{},\"name\":\"vw-k8s-worker-01\",\"namespace\":\"vmweave-nested-k8s\"},\"spec\":{\"runStrategy\":\"Always\",\"template\":{\"metadata\":{\"labels\":{\"nested-k8s-vm\":\"vw-k8s-worker-01\"}},\"spec\":{\"domain\":{\"cpu\":{\"cores\":4},\"devices\":{\"disks\":[{\"disk\":{\"bus\":\"virtio\"},\"name\":\"root\"},{\"disk\":{\"bus\":\"virtio\"},\"name\":\"cloudinit\"}],\"interfaces\":[{\"macAddress\":\"02:00:00:28:10:02\",\"masquerade\":{},\"name\":\"default\"}]},\"firmware\":{\"uuid\":\"18c4a618-4312-4f95-9b58-1f21a4d0c65a\"},\"machine\":{\"type\":\"q35\"},\"resources\":{\"requests\":{\"cpu\":\"4\",\"memory\":\"16Gi\"}}},\"networks\":[{\"name\":\"default\",\"pod\":{}}],\"nodeSelector\":{\"kubernetes.io/hostname\":\"gpu-4\"},\"volumes\":[{\"name\":\"root\",\"persistentVolumeClaim\":{\"claimName\":\"nested-worker\"}},{\"cloudInitNoCloud\":{\"networkData\":\"version: 2\\nethernets:\\n  eth0:\\n    match:\\n      macaddress: \\\"02:00:00:28:10:02\\\"\\n    set-name: eth0\\n    dhcp4: true\\n\",\"userData\":\"#cloud-config\\nhostname: vw-k8s-worker-01\\nmanage_etc_hosts: true\\nusers:\\n  - name: ubuntu\\n    sudo: ALL=(ALL) NOPASSWD:ALL\\n    shell: /bin/bash\\n    ssh_authorized_keys:\\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGX6GHJtH0ISfBU/+dV1ioL0nhySW/AvBlZ4x8rLNJhl ubuntu@gpu-4\\ngrowpart:\\n  mode: auto\\n  devices: [\\\"/\\\"]\\nresize_rootfs: true\\n\"},\"name\":\"cloudinit\"}]}}}}\n",
+          "kubevirt.io/latest-observed-api-version": "v1",
+          "kubevirt.io/storage-observed-api-version": "v1"
+        },
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "finalizers": [
+          "kubevirt.io/virtualMachineControllerFinalize"
+        ],
+        "generation": 10,
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446549",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      },
+      "spec": {
+        "runStrategy": "Always",
+        "template": {
+          "metadata": {
+            "annotations": {
+              "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\",\"pvc\":{\"name\":\"nested-shm\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+              "kubevirt.io/pci-topology-version": "v3",
+              "vmweave.io/shm-allocation": "1fcaa4a2ead715e40bbbf494ea64d5da",
+              "vmweave.io/shm-channel": "vw-k8s-worker-01",
+              "vmweave.io/shm-channel-uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+              "vmweave.io/shm-generation": "bb091f4d777bcb1e42c5cd4159d725c9"
+            },
+            "labels": {
+              "nested-k8s-vm": "vw-k8s-worker-01"
+            }
+          },
+          "spec": {
+            "architecture": "amd64",
+            "domain": {
+              "cpu": {
+                "cores": 4
+              },
+              "devices": {
+                "disks": [
+                  {
+                    "disk": {
+                      "bus": "virtio"
+                    },
+                    "name": "root"
+                  },
+                  {
+                    "disk": {
+                      "bus": "virtio"
+                    },
+                    "name": "cloudinit"
+                  }
+                ],
+                "interfaces": [
+                  {
+                    "macAddress": "02:00:00:28:10:02",
+                    "masquerade": {},
+                    "name": "default"
+                  }
+                ]
+              },
+              "firmware": {
+                "serial": "fb8adf66-2cec-427d-b4a6-1049d5f6cee1",
+                "uuid": "18c4a618-4312-4f95-9b58-1f21a4d0c65a"
+              },
+              "machine": {
+                "type": "q35"
+              },
+              "resources": {
+                "requests": {
+                  "cpu": "4",
+                  "memory": "16Gi"
+                }
+              }
+            },
+            "networks": [
+              {
+                "name": "default",
+                "pod": {}
+              }
+            ],
+            "nodeSelector": {
+              "kubernetes.io/hostname": "gpu-4"
+            },
+            "volumes": [
+              {
+                "name": "root",
+                "persistentVolumeClaim": {
+                  "claimName": "nested-worker"
+                }
+              },
+              {
+                "cloudInitNoCloud": {
+                  "networkData": "version: 2\nethernets:\n  eth0:\n    match:\n      macaddress: \"02:00:00:28:10:02\"\n    set-name: eth0\n    dhcp4: true\n",
+                  "userData": "#cloud-config\nhostname: vw-k8s-worker-01\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGX6GHJtH0ISfBU/+dV1ioL0nhySW/AvBlZ4x8rLNJhl ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n# vmweave-layout-b64: H8qkourXFeQLu/SU6mTV2rsJH013e8seQsXNQVnXJckAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACyORtcKmwQLbjEd8u1yZvAAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+                },
+                "name": "cloudinit"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-10-28T09:33:05Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": null,
+            "message": "cannot migrate VMI: PVC nested-worker is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+            "reason": "DisksNotLiveMigratable",
+            "status": "False",
+            "type": "LiveMigratable"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": null,
+            "status": "True",
+            "type": "StorageLiveMigratable"
+          }
+        ],
+        "created": true,
+        "desiredGeneration": 10,
+        "observedGeneration": 10,
+        "printableStatus": "Running",
+        "ready": true,
+        "runStrategy": "Always",
+        "volumeSnapshotStatuses": [
+          {
+            "enabled": false,
+            "name": "root",
+            "reason": "No VolumeSnapshotClass: Volume snapshots are not configured for this StorageClass [] [root]"
+          },
+          {
+            "enabled": false,
+            "name": "cloudinit",
+            "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+          }
+        ]
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

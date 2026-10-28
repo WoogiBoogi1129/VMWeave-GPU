@@ -1,0 +1,27 @@
+3: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1380 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 10.245.0.10/24 scope global wg0
+       valid_lft forever preferred_lft forever
+PING 10.245.0.11 (10.245.0.11) 56(84) bytes of data.
+64 bytes from 10.245.0.11: icmp_seq=1 ttl=64 time=1.86 ms
+64 bytes from 10.245.0.11: icmp_seq=2 ttl=64 time=2.22 ms
+
+--- 10.245.0.11 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 1.857/2.037/2.217/0.180 ms
+PING 10.245.0.11 (10.245.0.11) 1352(1380) bytes of data.
+1360 bytes from 10.245.0.11: icmp_seq=1 ttl=64 time=2.28 ms
+
+--- 10.245.0.11 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 2.280/2.280/2.280/0.000 ms
+interface: wg0
+  public key: CHMsQJaMRN9LkT1DZE1Vu2ZV+SKTTg6NR0TGRuDGCEE=
+  private key: (hidden)
+  listening port: 51820
+
+peer: Itf0v/ACzPuVNTAWQPx8JFA0nJvutv0BCgAdrgVNH3c=
+  endpoint: 10.99.41.66:51820
+  allowed ips: 10.245.0.11/32
+  latest handshake: 2 seconds ago
+  transfer: 1.80 KiB received, 1.89 KiB sent
+  persistent keepalive: every 25 seconds

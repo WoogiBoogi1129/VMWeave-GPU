@@ -1,0 +1,702 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "DaemonSet",
+  "metadata": {
+    "annotations": {
+      "deprecated.daemonset.template.generation": "8",
+      "meta.helm.sh/release-name": "vmweave-dra",
+      "meta.helm.sh/release-namespace": "vmweave-dra-driver"
+    },
+    "creationTimestamp": "2026-10-20T12:47:19Z",
+    "generation": 8,
+    "labels": {
+      "app.kubernetes.io/instance": "vmweave-dra",
+      "app.kubernetes.io/managed-by": "Helm",
+      "app.kubernetes.io/name": "hami-dra-driver",
+      "app.kubernetes.io/version": "v0.1.1",
+      "helm.sh/chart": "hami-dra-driver-0.1.1"
+    },
+    "managedFields": [
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:spec": {
+            "f:template": {
+              "f:spec": {
+                "f:nodeSelector": {}
+              }
+            }
+          }
+        },
+        "manager": "kubectl-patch",
+        "operation": "Update",
+        "time": "2026-10-21T06:41:35Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:deprecated.daemonset.template.generation": {},
+              "f:meta.helm.sh/release-name": {},
+              "f:meta.helm.sh/release-namespace": {}
+            },
+            "f:labels": {
+              ".": {},
+              "f:app.kubernetes.io/instance": {},
+              "f:app.kubernetes.io/managed-by": {},
+              "f:app.kubernetes.io/name": {},
+              "f:app.kubernetes.io/version": {},
+              "f:helm.sh/chart": {}
+            }
+          },
+          "f:spec": {
+            "f:revisionHistoryLimit": {},
+            "f:selector": {},
+            "f:template": {
+              "f:metadata": {
+                "f:labels": {
+                  ".": {},
+                  "f:app.kubernetes.io/instance": {},
+                  "f:app.kubernetes.io/name": {},
+                  "f:hami-dra-driver-component": {}
+                }
+              },
+              "f:spec": {
+                "f:containers": {
+                  "k:{\"name\":\"gpus\"}": {
+                    ".": {},
+                    "f:args": {},
+                    "f:command": {},
+                    "f:env": {
+                      ".": {},
+                      "k:{\"name\":\"CDI_ROOT\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"FEATURE_GATES\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"HAMI_HOST_HOOK_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"HEALTHCHECK_PORT\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"IMAGE_NAME\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"KUBELET_PLUGINS_DIRECTORY_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"KUBELET_REGISTRAR_DIRECTORY_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"LOG_VERBOSITY\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MASK_NVIDIA_DRIVER_PARAMS\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NAMESPACE\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:valueFrom": {
+                          ".": {},
+                          "f:fieldRef": {}
+                        }
+                      },
+                      "k:{\"name\":\"NODE_NAME\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:valueFrom": {
+                          ".": {},
+                          "f:fieldRef": {}
+                        }
+                      },
+                      "k:{\"name\":\"NVIDIA_CDI_HOOK_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_DRIVER_ROOT\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_MIG_CONFIG_DEVICES\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_VISIBLE_DEVICES\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"VMWEAVE_DRA_GPU_UUIDS\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      }
+                    },
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:lifecycle": {
+                      ".": {},
+                      "f:postStart": {
+                        ".": {},
+                        "f:exec": {
+                          ".": {},
+                          "f:command": {}
+                        }
+                      }
+                    },
+                    "f:livenessProbe": {
+                      ".": {},
+                      "f:failureThreshold": {},
+                      "f:grpc": {
+                        ".": {},
+                        "f:port": {},
+                        "f:service": {}
+                      },
+                      "f:periodSeconds": {},
+                      "f:successThreshold": {},
+                      "f:timeoutSeconds": {}
+                    },
+                    "f:name": {},
+                    "f:resources": {},
+                    "f:securityContext": {
+                      ".": {},
+                      "f:privileged": {}
+                    },
+                    "f:startupProbe": {
+                      ".": {},
+                      "f:failureThreshold": {},
+                      "f:grpc": {
+                        ".": {},
+                        "f:port": {},
+                        "f:service": {}
+                      },
+                      "f:periodSeconds": {},
+                      "f:successThreshold": {},
+                      "f:timeoutSeconds": {}
+                    },
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {},
+                    "f:volumeMounts": {
+                      ".": {},
+                      "k:{\"mountPath\":\"/driver-root\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:mountPropagation": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/tmp\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/usr/local/vgpu\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/var/lib/kubelet/plugins\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:mountPropagation": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/var/lib/kubelet/plugins_registry\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/var/run/cdi\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      }
+                    }
+                  }
+                },
+                "f:dnsPolicy": {},
+                "f:initContainers": {
+                  ".": {},
+                  "k:{\"name\":\"init-container\"}": {
+                    ".": {},
+                    "f:command": {},
+                    "f:env": {
+                      ".": {},
+                      "k:{\"name\":\"KUBELET_PLUGINS_DIRECTORY_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"KUBELET_REGISTRAR_DIRECTORY_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_DRIVER_ROOT\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_VISIBLE_DEVICES\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      }
+                    },
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:name": {},
+                    "f:resources": {},
+                    "f:securityContext": {
+                      ".": {},
+                      "f:privileged": {}
+                    },
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {},
+                    "f:volumeMounts": {
+                      ".": {},
+                      "k:{\"mountPath\":\"/driver-root-parent\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {},
+                        "f:readOnly": {}
+                      }
+                    }
+                  }
+                },
+                "f:priorityClassName": {},
+                "f:restartPolicy": {},
+                "f:schedulerName": {},
+                "f:securityContext": {},
+                "f:serviceAccount": {},
+                "f:serviceAccountName": {},
+                "f:terminationGracePeriodSeconds": {},
+                "f:volumes": {
+                  ".": {},
+                  "k:{\"name\":\"cdi\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"driver-root\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"driver-root-parent\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"host-tmp\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"host-vgpu\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"plugins\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"plugins-registry\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  }
+                }
+              }
+            },
+            "f:updateStrategy": {
+              "f:rollingUpdate": {
+                ".": {},
+                "f:maxSurge": {},
+                "f:maxUnavailable": {}
+              },
+              "f:type": {}
+            }
+          }
+        },
+        "manager": "helm",
+        "operation": "Update",
+        "time": "2026-10-28T09:27:52Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:status": {
+            "f:currentNumberScheduled": {},
+            "f:desiredNumberScheduled": {},
+            "f:numberAvailable": {},
+            "f:numberMisscheduled": {},
+            "f:numberReady": {},
+            "f:observedGeneration": {},
+            "f:updatedNumberScheduled": {}
+          }
+        },
+        "manager": "kube-controller-manager",
+        "operation": "Update",
+        "subresource": "status",
+        "time": "2026-10-28T09:28:03Z"
+      }
+    ],
+    "name": "hami-dra-driver-kubelet-plugin",
+    "namespace": "vmweave-dra-driver",
+    "resourceVersion": "18443376",
+    "uid": "8786f0ed-cf12-4509-ab0a-bb5d2a2b496b"
+  },
+  "spec": {
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "hami-dra-driver-component": "kubelet-plugin"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app.kubernetes.io/instance": "vmweave-dra",
+          "app.kubernetes.io/name": "hami-dra-driver",
+          "hami-dra-driver-component": "kubelet-plugin"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "args": [
+              "# Conditionally mask the params file to prevent this container from\n# recreating any missing GPU device nodes. This is necessary, for\n# example, when running under nvkind to limit the set GPUs governed\n# by the plugin even though it has cgroup access to all of them.\nif [ \"${MASK_NVIDIA_DRIVER_PARAMS}\" = \"true\" ]; then\n  cp /proc/driver/nvidia/params root/gpu-params\n  sed -i 's/^ModifyDeviceFiles: 1$/ModifyDeviceFiles: 0/' root/gpu-params\n  mount --bind root/gpu-params /proc/driver/nvidia/params\nfi\nhami-kubelet-plugin -v $(LOG_VERBOSITY)"
+            ],
+            "command": [
+              "bash",
+              "-c"
+            ],
+            "env": [
+              {
+                "name": "LOG_VERBOSITY",
+                "value": "4"
+              },
+              {
+                "name": "MASK_NVIDIA_DRIVER_PARAMS",
+                "value": "false"
+              },
+              {
+                "name": "NVIDIA_DRIVER_ROOT",
+                "value": "/"
+              },
+              {
+                "name": "NVIDIA_VISIBLE_DEVICES",
+                "value": "void"
+              },
+              {
+                "name": "CDI_ROOT",
+                "value": "/var/run/cdi"
+              },
+              {
+                "name": "NVIDIA_MIG_CONFIG_DEVICES",
+                "value": "all"
+              },
+              {
+                "name": "NODE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "spec.nodeName"
+                  }
+                }
+              },
+              {
+                "name": "NAMESPACE",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "metadata.namespace"
+                  }
+                }
+              },
+              {
+                "name": "HAMI_HOST_HOOK_PATH",
+                "value": "/var/lib/vmweave-hami-dra"
+              },
+              {
+                "name": "IMAGE_NAME",
+                "value": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+              },
+              {
+                "name": "NVIDIA_CDI_HOOK_PATH",
+                "value": "/usr/local/nvidia/toolkit/nvidia-ctk"
+              },
+              {
+                "name": "FEATURE_GATES",
+                "value": "DynamicMIG=false,HAMiCoreSupport=true,MPSSupport=false,PassthroughSupport=false,TimeSlicingSettings=false,"
+              },
+              {
+                "name": "KUBELET_REGISTRAR_DIRECTORY_PATH",
+                "value": "/var/lib/kubelet/plugins_registry"
+              },
+              {
+                "name": "KUBELET_PLUGINS_DIRECTORY_PATH",
+                "value": "/var/lib/kubelet/plugins"
+              },
+              {
+                "name": "HEALTHCHECK_PORT",
+                "value": "51516"
+              },
+              {
+                "name": "VMWEAVE_DRA_GPU_UUIDS",
+                "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+              }
+            ],
+            "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+            "imagePullPolicy": "IfNotPresent",
+            "lifecycle": {
+              "postStart": {
+                "exec": {
+                  "command": [
+                    "/bin/bash",
+                    "-c",
+                    "/usr/bin/vgpu-init.sh /usr/local/vgpu"
+                  ]
+                }
+              }
+            },
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "grpc": {
+                "port": 51516,
+                "service": "liveness"
+              },
+              "periodSeconds": 30,
+              "successThreshold": 1,
+              "timeoutSeconds": 10
+            },
+            "name": "gpus",
+            "resources": {},
+            "securityContext": {
+              "privileged": true
+            },
+            "startupProbe": {
+              "failureThreshold": 60,
+              "grpc": {
+                "port": 51516,
+                "service": "liveness"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 10
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/kubelet/plugins_registry",
+                "name": "plugins-registry"
+              },
+              {
+                "mountPath": "/var/lib/kubelet/plugins",
+                "mountPropagation": "Bidirectional",
+                "name": "plugins"
+              },
+              {
+                "mountPath": "/var/run/cdi",
+                "name": "cdi"
+              },
+              {
+                "mountPath": "/driver-root",
+                "mountPropagation": "HostToContainer",
+                "name": "driver-root"
+              },
+              {
+                "mountPath": "/usr/local/vgpu",
+                "name": "host-vgpu"
+              },
+              {
+                "mountPath": "/tmp",
+                "name": "host-tmp"
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "initContainers": [
+          {
+            "command": [
+              "bash",
+              "/usr/bin/kubelet-plugin-prestart.sh"
+            ],
+            "env": [
+              {
+                "name": "NVIDIA_DRIVER_ROOT",
+                "value": "/"
+              },
+              {
+                "name": "NVIDIA_VISIBLE_DEVICES",
+                "value": "void"
+              },
+              {
+                "name": "KUBELET_REGISTRAR_DIRECTORY_PATH",
+                "value": "/var/lib/kubelet/plugins_registry"
+              },
+              {
+                "name": "KUBELET_PLUGINS_DIRECTORY_PATH",
+                "value": "/var/lib/kubelet/plugins"
+              }
+            ],
+            "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "init-container",
+            "resources": {},
+            "securityContext": {
+              "privileged": true
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/driver-root-parent",
+                "name": "driver-root-parent",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "nodeSelector": {
+          "kubernetes.io/hostname": "gpu-4"
+        },
+        "priorityClassName": "system-node-critical",
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "vmweave-dra-hami-dra-driver-service-account-kubeletplugin",
+        "serviceAccountName": "vmweave-dra-hami-dra-driver-service-account-kubeletplugin",
+        "terminationGracePeriodSeconds": 30,
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/var/lib/kubelet/plugins_registry",
+              "type": ""
+            },
+            "name": "plugins-registry"
+          },
+          {
+            "hostPath": {
+              "path": "/var/lib/kubelet/plugins",
+              "type": ""
+            },
+            "name": "plugins"
+          },
+          {
+            "hostPath": {
+              "path": "/var/run/cdi",
+              "type": ""
+            },
+            "name": "cdi"
+          },
+          {
+            "hostPath": {
+              "path": "/",
+              "type": "DirectoryOrCreate"
+            },
+            "name": "driver-root-parent"
+          },
+          {
+            "hostPath": {
+              "path": "/",
+              "type": "DirectoryOrCreate"
+            },
+            "name": "driver-root"
+          },
+          {
+            "hostPath": {
+              "path": "/var/lib/vmweave-hami-dra/vgpu",
+              "type": "DirectoryOrCreate"
+            },
+            "name": "host-vgpu"
+          },
+          {
+            "hostPath": {
+              "path": "/tmp",
+              "type": ""
+            },
+            "name": "host-tmp"
+          }
+        ]
+      }
+    },
+    "updateStrategy": {
+      "rollingUpdate": {
+        "maxSurge": 0,
+        "maxUnavailable": "100%"
+      },
+      "type": "RollingUpdate"
+    }
+  },
+  "status": {
+    "currentNumberScheduled": 1,
+    "desiredNumberScheduled": 1,
+    "numberAvailable": 1,
+    "numberMisscheduled": 0,
+    "numberReady": 1,
+    "observedGeneration": 8,
+    "updatedNumberScheduled": 1
+  }
+}

@@ -1,0 +1,10 @@
+time=2026-10-28T09:20:05.10815457Z level=info msg=Running subsys=cilium-dbg
+time=2026-10-28T09:20:05.11207096Z level=info msg="Starting hive" subsys=cilium-dbg
+time=2026-10-28T09:20:05.112310722Z level=info msg="Establishing connection to apiserver" subsys=cilium-dbg module=k8s-client ipAddr=https://10.247.0.1:443
+time=2026-10-28T09:20:40.117215635Z level=info msg="Establishing connection to apiserver" subsys=cilium-dbg module=k8s-client ipAddr=https://10.247.0.1:443
+time=2026-10-28T09:21:10.133390694Z level=error msg="Unable to contact k8s api-server" subsys=cilium-dbg module=k8s-client ipAddr=https://10.247.0.1:443 error="Get \"https://10.247.0.1:443/api/v1/namespaces/kube-system\": dial tcp 10.247.0.1:443: i/o timeout"
+time=2026-10-28T09:21:10.133530878Z level=error msg="Start hook failed" subsys=cilium-dbg function="client.(*compositeClientset).onStart (k8s-client)" error="Get \"https://10.247.0.1:443/api/v1/namespaces/kube-system\": dial tcp 10.247.0.1:443: i/o timeout"
+time=2026-10-28T09:21:10.133569605Z level=error msg="Failed to start hive" subsys=cilium-dbg error="Get \"https://10.247.0.1:443/api/v1/namespaces/kube-system\": dial tcp 10.247.0.1:443: i/o timeout" duration=1m5.02136817s
+time=2026-10-28T09:21:10.133665663Z level=info msg="Stopping hive" subsys=cilium-dbg
+time=2026-10-28T09:21:10.133765784Z level=info msg="Stopped hive" subsys=cilium-dbg duration=87.839µs
+time=2026-10-28T09:21:10.133811001Z level=fatal msg="Build config failed" subsys=cilium-dbg error="failed to start: Get \"https://10.247.0.1:443/api/v1/namespaces/kube-system\": dial tcp 10.247.0.1:443: i/o timeout"

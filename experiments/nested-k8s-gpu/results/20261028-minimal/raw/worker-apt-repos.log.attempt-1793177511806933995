@@ -1,0 +1,18 @@
+curl: (22) The requested URL returned error: 403
+[오류] 키 다운로드에 실패했습니다: https://pkgs.k8s.io/addons:/cri-o:/stable:/v1.35/deb/Release.key
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 30, in <module>
+    print(ssh(sys.argv[1],sys.argv[2]))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 20, in ssh
+    return run(['ssh','-i',PRIVATE/'id_ed25519','-o','StrictHostKeyChecking=accept-new','-o',f'UserKnownHostsFile={PRIVATE}/known_hosts','-o','ConnectTimeout=8',f'ubuntu@{ip}',command],**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 10, in run
+    return subprocess.check_output([str(x) for x in args],text=True,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-i', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/id_ed25519', '-o', 'StrictHostKeyChecking=accept-new', '-o', 'UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/known_hosts', '-o', 'ConnectTimeout=8', 'ubuntu@10.99.41.66', 'cd /home/ubuntu/nested && sudo env DEBIAN_FRONTEND=noninteractive KUBERNETES_VERSION=v1.35 CILIUM_VERSION=1.20.2 CIDR=10.246.0.0/16 bash k8s-worker-setup.sh --step apt-repos']' returned non-zero exit status 1.

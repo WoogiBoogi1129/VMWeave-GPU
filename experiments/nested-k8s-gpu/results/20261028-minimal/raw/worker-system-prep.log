@@ -1,0 +1,200 @@
+[오류] 381번째 줄에서 실패: awk '{print $1}'
+sysctl: setting key "net.ipv4.conf.all.accept_source_route": Invalid argument
+sysctl: setting key "net.ipv4.conf.all.promote_secondaries": Invalid argument
+실행할 단계:
+ - 1 (system-prep): 시스템 설정 (의존성, 스왑, 모듈, Sysctl)
+3초 후 시작합니다... (취소: Ctrl+C)
+
+[1단계] 시스템 설정 (의존성, 스왑, 모듈, Sysctl)
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [3643 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [510 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [6505 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [1250 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1055 kB]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [238 kB]
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [23.2 kB]
+Get:13 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [79.6 kB]
+Get:14 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [13.7 kB]
+Get:15 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [544 B]
+Get:16 http://archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+Get:18 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+Get:19 http://archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+Get:21 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [3936 kB]
+Get:22 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [578 kB]
+Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [6778 kB]
+Get:24 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [1302 kB]
+Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1289 kB]
+Get:26 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [326 kB]
+Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [30.8 kB]
+Get:28 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [86.1 kB]
+Get:29 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [16.6 kB]
+Get:30 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [756 B]
+Get:31 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [70.2 kB]
+Get:32 http://archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.4 kB]
+Get:33 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [412 B]
+Get:34 http://archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:35 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [30.8 kB]
+Get:36 http://archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.9 kB]
+Get:37 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [676 B]
+Get:38 http://archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 48.5 MB in 47s (1038 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+bash-completion is already the newest version (1:2.11-5ubuntu1).
+bash-completion set to manually installed.
+iproute2 is already the newest version (5.15.0-1ubuntu2.2).
+iproute2 set to manually installed.
+iptables is already the newest version (1.8.7-1ubuntu5.2).
+iptables set to manually installed.
+software-properties-common is already the newest version (0.99.22.9).
+software-properties-common set to manually installed.
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  apt-transport-https conntrack ebtables gnupg2 socat
+The following packages will be upgraded:
+  ca-certificates curl libcurl4
+3 upgraded, 5 newly installed, 0 to remove and 76 not upgraded.
+Need to get 1101 kB of archives.
+After this operation, 1974 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ca-certificates all 20260816ubuntu0.22.04.1 [140 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 apt-transport-https all 2.4.14 [1510 B]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 conntrack amd64 1:1.4.6-2build2 [33.5 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.30 [194 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libcurl4 amd64 7.81.0-1ubuntu1.30 [293 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 ebtables amd64 2.0.11-4build2 [84.9 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 gnupg2 all 2.2.27-3ubuntu2.5 [5544 B]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 socat amd64 1.7.4.1-3ubuntu4 [349 kB]
+Preconfiguring packages ...
+Fetched 1101 kB in 2s (533 kB/s)
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 64626 files and directories currently installed.)
+Preparing to unpack .../0-ca-certificates_20260816ubuntu0.22.04.1_all.deb ...
+Unpacking ca-certificates (20260816ubuntu0.22.04.1) over (20260601~22.04.1) ...
+Selecting previously unselected package apt-transport-https.
+Preparing to unpack .../1-apt-transport-https_2.4.14_all.deb ...
+Unpacking apt-transport-https (2.4.14) ...
+Selecting previously unselected package conntrack.
+Preparing to unpack .../2-conntrack_1%3a1.4.6-2build2_amd64.deb ...
+Unpacking conntrack (1:1.4.6-2build2) ...
+Preparing to unpack .../3-curl_7.81.0-1ubuntu1.30_amd64.deb ...
+Unpacking curl (7.81.0-1ubuntu1.30) over (7.81.0-1ubuntu1.27) ...
+Preparing to unpack .../4-libcurl4_7.81.0-1ubuntu1.30_amd64.deb ...
+Unpacking libcurl4:amd64 (7.81.0-1ubuntu1.30) over (7.81.0-1ubuntu1.27) ...
+Selecting previously unselected package ebtables.
+Preparing to unpack .../5-ebtables_2.0.11-4build2_amd64.deb ...
+Unpacking ebtables (2.0.11-4build2) ...
+Selecting previously unselected package gnupg2.
+Preparing to unpack .../6-gnupg2_2.2.27-3ubuntu2.5_all.deb ...
+Unpacking gnupg2 (2.2.27-3ubuntu2.5) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../7-socat_1.7.4.1-3ubuntu4_amd64.deb ...
+Unpacking socat (1.7.4.1-3ubuntu4) ...
+Setting up gnupg2 (2.2.27-3ubuntu2.5) ...
+Setting up apt-transport-https (2.4.14) ...
+Setting up conntrack (1:1.4.6-2build2) ...
+Setting up ca-certificates (20260816ubuntu0.22.04.1) ...
+Updating certificates in /etc/ssl/certs...
+rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+4 added, 5 removed; done.
+Setting up ebtables (2.0.11-4build2) ...
+Setting up socat (1.7.4.1-3ubuntu4) ...
+Setting up libcurl4:amd64 (7.81.0-1ubuntu1.30) ...
+Setting up curl (7.81.0-1ubuntu1.30) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.15) ...
+Processing triggers for ca-certificates (20260816ubuntu0.22.04.1) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+kernel.printk = 4 4 1 7
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+kernel.kptr_restrict = 1
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+kernel.sysrq = 176
+* Applying /etc/sysctl.d/10-network-security.conf ...
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+kernel.yama.ptrace_scope = 1
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+vm.mmap_min_addr = 65536
+* Applying /usr/lib/sysctl.d/50-default.conf ...
+kernel.core_uses_pid = 1
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.default.promote_secondaries = 1
+net.ipv4.ping_group_range = 0 2147483647
+net.core.default_qdisc = fq_codel
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+fs.protected_regular = 1
+fs.protected_fifos = 1
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+kernel.pid_max = 4194304
+* Applying /etc/sysctl.d/99-cloudimg-ipv6.conf ...
+net.ipv6.conf.all.use_tempaddr = 0
+net.ipv6.conf.default.use_tempaddr = 0
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.d/k8s.conf ...
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward = 1
+* Applying /etc/sysctl.conf ...
+
+============================================================
+ [선택한 단계 실행이 완료되었습니다]
+============================================================
+ 1. 쉘 다시 불러오기:  source ~/.bashrc
+ 2. 컨트롤 플레인에서 확인: kubectl get nodes
+============================================================
+

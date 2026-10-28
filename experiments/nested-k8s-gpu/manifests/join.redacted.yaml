@@ -1,0 +1,13 @@
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: 10.245.0.10:6443
+    token: <GENERATE_AT_EXECUTION>
+    caCertHashes: ["sha256:39cdacbbcb8e670f4abb309b10a87edd575083b5b6c4f8c4bfc703927081685a"]
+nodeRegistration:
+  name: vw-k8s-worker-01
+  criSocket: unix:///var/run/crio/crio.sock
+  kubeletExtraArgs:
+    - name: node-ip
+      value: 10.245.0.11

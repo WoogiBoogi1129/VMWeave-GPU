@@ -1,0 +1,97 @@
+실행할 단계:
+ - 3 (install-packages): 패키지 설치 (CRI-O, Kubeadm, Kubelet, Kubectl)
+3초 후 시작합니다... (취소: Ctrl+C)
+
+[3단계] 패키지 설치 (CRI-O, Kubeadm, Kubelet, Kubectl)
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.35/deb  InRelease [1230 B]
+Hit:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.35/deb  Packages [15.2 kB]
+Hit:4 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Get:6 https://download.opensuse.org/repositories/isv:/cri-o:/stable:/v1.35/deb  InRelease [1547 B]
+Hit:7 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:8 https://download.opensuse.org/repositories/isv:/cri-o:/stable:/v1.35/deb  Packages [5125 B]
+Fetched 23.1 kB in 2s (13.4 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  kubernetes-cni
+The following NEW packages will be installed:
+  cri-o kubeadm kubectl kubelet kubernetes-cni
+0 upgraded, 5 newly installed, 0 to remove and 76 not upgraded.
+Need to get 104 MB of archives.
+After this operation, 397 MB of additional disk space will be used.
+Get:1 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.35/deb  kubeadm 1.35.9-1.1 [12.5 MB]
+Get:5 https://mirror.aardsoft.fi/opensuse/repositories/isv%3A/cri-o%3A/stable%3A/v1.35/deb  cri-o 1.35.10-1.1 [27.6 MB]
+Get:2 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.35/deb  kubectl 1.35.9-1.1 [11.7 MB]
+Get:3 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.35/deb  kubernetes-cni 1.8.0-1.1 [38.9 MB]
+Get:4 https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/core:/stable:/v1.35/deb  kubelet 1.35.9-1.1 [13.1 MB]
+Fetched 104 MB in 2min 11s (790 kB/s)
+Selecting previously unselected package cri-o.
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 64702 files and directories currently installed.)
+Preparing to unpack .../cri-o_1.35.10-1.1_amd64.deb ...
+Unpacking cri-o (1.35.10-1.1) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../kubeadm_1.35.9-1.1_amd64.deb ...
+Unpacking kubeadm (1.35.9-1.1) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../kubectl_1.35.9-1.1_amd64.deb ...
+Unpacking kubectl (1.35.9-1.1) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../kubernetes-cni_1.8.0-1.1_amd64.deb ...
+Unpacking kubernetes-cni (1.8.0-1.1) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../kubelet_1.35.9-1.1_amd64.deb ...
+Unpacking kubelet (1.35.9-1.1) ...
+Setting up kubeadm (1.35.9-1.1) ...
+Setting up cri-o (1.35.10-1.1) ...
+Setting up kubectl (1.35.9-1.1) ...
+Setting up kubernetes-cni (1.8.0-1.1) ...
+Setting up kubelet (1.35.9-1.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+cri-o set on hold.
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+
+============================================================
+ [선택한 단계 실행이 완료되었습니다]
+============================================================
+ 1. 쉘 다시 불러오기:  source ~/.bashrc
+ 2. 노드 확인:        kubectl get nodes
+ 3. 파드 확인:        kubectl get pods -A
+============================================================
+

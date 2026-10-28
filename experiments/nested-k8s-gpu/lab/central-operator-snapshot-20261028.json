@@ -1,0 +1,306 @@
+{
+  "observed_at": "2026-10-28T11:34:06.387164+00:00",
+  "purpose": "Read-only documentation snapshot; existing central Operator lab has NOT been executed",
+  "outer_context": "kubernetes-admin@kubernetes",
+  "deployments": [
+    {
+      "name": "vmweave-controller",
+      "uid": "93bf4fd4-264c-44c1-9889-d3c1854a33ac",
+      "namespace": "vmweave-system",
+      "generation": 14,
+      "spec": {
+        "replicas": 1,
+        "serviceAccountName": "vmweave-controller",
+        "containers": [
+          {
+            "name": "controller",
+            "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+            "args": [
+              "--component=controller",
+              "--mode=active",
+              "--namespaces=vmweave-test-a,vmweave-test-b",
+              "--system-namespace=vmweave-system",
+              "--controller-service-account=vmweave-controller",
+              "--leader-elect=true"
+            ]
+          }
+        ]
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T12:07:41Z",
+            "lastUpdateTime": "2026-10-27T12:07:41Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-09-30T08:46:07Z",
+            "lastUpdateTime": "2026-10-27T12:07:41Z",
+            "message": "ReplicaSet \"vmweave-controller-74c445d4b4\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          }
+        ],
+        "observedGeneration": 14,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "terminatingReplicas": 0,
+        "updatedReplicas": 1
+      }
+    },
+    {
+      "name": "vmweave-webhook",
+      "uid": "f638107c-0f06-4395-9856-657b23fc2c49",
+      "namespace": "vmweave-system",
+      "generation": 12,
+      "spec": {
+        "replicas": 1,
+        "serviceAccountName": "vmweave-webhook",
+        "containers": [
+          {
+            "name": "webhook",
+            "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+            "args": [
+              "--component=webhook",
+              "--mode=active",
+              "--namespaces=vmweave-test-a,vmweave-test-b",
+              "--system-namespace=vmweave-system",
+              "--controller-service-account=vmweave-controller",
+              "--leader-elect=true"
+            ]
+          }
+        ]
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-27T12:07:40Z",
+            "lastUpdateTime": "2026-10-27T12:07:40Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2026-09-30T08:46:07Z",
+            "lastUpdateTime": "2026-10-27T12:07:40Z",
+            "message": "ReplicaSet \"vmweave-webhook-784c4b4d85\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          }
+        ],
+        "observedGeneration": 12,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "terminatingReplicas": 0,
+        "updatedReplicas": 1
+      }
+    }
+  ],
+  "pods": [
+    {
+      "name": "vmweave-controller-74c445d4b4-grgmw",
+      "uid": "26718755-8c31-476e-ba5b-d5cbb68ac90c",
+      "containerStatuses": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "96Mi"
+          },
+          "containerID": "cri-o://6972f3efe15731d8cb4d2c8e1cdfdd60dfa5eb214098484ef8163baa322f2d5f",
+          "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+          "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+          "lastState": {},
+          "name": "controller",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "memory": "512Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "96Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-27T12:07:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-dftpm",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vmweave-webhook-784c4b4d85-b4qr4",
+      "uid": "9031d029-9588-4da8-9a24-efa56de44d75",
+      "containerStatuses": [
+        {
+          "allocatedResources": {
+            "cpu": "100m",
+            "memory": "96Mi"
+          },
+          "containerID": "cri-o://d187c457371fd2d5c5ee1da41dcb7f6e0e3d8de1ca99d7fb1d09f3f5092d2e81",
+          "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+          "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+          "lastState": {},
+          "name": "webhook",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "memory": "512Mi"
+            },
+            "requests": {
+              "cpu": "100m",
+              "memory": "96Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-27T12:07:39Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 65532,
+              "supplementalGroups": [
+                65532
+              ],
+              "uid": 65532
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/tls",
+              "name": "tls",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-8tkqf",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "webhooks": [
+    {
+      "name": "vmweave-system-vmweave",
+      "webhooks": [
+        {
+          "admissionReviewVersions": [
+            "v1"
+          ],
+          "clientConfig": {
+            "caBundle": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURJekNDQWd1Z0F3SUJBZ0lVQVlwUjFiNy9KamFMWElmOGl1V2NWb1VFc1Vrd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0lURWZNQjBHQTFVRUF3d1dWazFYWldGMlpTQmtaWFpsYkc5d2JXVnVkQ0JEUVRBZUZ3MHlOakE1TXpBdwpPRE0yTXpKYUZ3MHlOekE1TXpBd09ETTJNekphTUNFeEh6QWRCZ05WQkFNTUZsWk5WMlZoZG1VZ1pHVjJaV3h2CmNHMWxiblFnUTBFd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUNjS2JpWm8vODAKblhOcHZWUGpGLzc1dVYzUDY3QTArL0daTHNWdCt2b2s5RXY5elhJYmxKYnRwLzRyajBqSE52RWNxcG1NMmpBWQpKTGlIdkk1RmNRMjBybFl3MEdxMlNmaVppSHBpMXNTODF3T24zSGpoVWdzTVl5NzR2b2tYRFdpWWpNMnQxODJqCkkvVHNsZ0gvRkdVMndsOHFZbG85WGZtMlF1OUh5WXlzbndqWFkvejZwU1R2RWFjeEt4N0lKRHJmaFlyU3gzUjMKVXZ4b3JOQmQ2Sk11K2c2aDJEajk5L2doWXNSSzRoTjgxSFRyczNMUk5kcno4S0JpUlBZUHhVYkJVSTIxYzFveQppVUFSck9SRlo0RjBibUxLdWVTUGxWaGVkdXBKRE5OVjF5MExwajhkeW1SLzJpdVpYWG9BY204eERvOTlDWkVYCkhRWHJxdkdNZHFSWEFnTUJBQUdqVXpCUk1CMEdBMVVkRGdRV0JCVGZMMzdQM0ROV0MrMXorV2xJa29NQzNIMFMKOFRBZkJnTlZIU01FR0RBV2dCVGZMMzdQM0ROV0MrMXorV2xJa29NQzNIMFM4VEFQQmdOVkhSTUJBZjhFQlRBRApBUUgvTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFDYkFLc2lVTXdiNXllZS85NVNsVEFrbTFBQWR3b1JHOEVqCjlBakYwdnNxeVYvdDdzeXVUcEhpV1JPc2U5R3JkMWhSUTBpM0JrQWw3YzlSZUppSXU4UFZmWU9PaStoSGpua0sKOXFJWllJZzc2MGpPRnQ2ejEyeldXQlpKZmx4enRLUDVKNkpzMktHZ1hmOVFkZDNYN05rbitoRGpWaU8yaWV4VAovaE55b3VvMC9TMFh5MmlpaXVzdjkvSWhBaVVjc0dGZGFCUVgxcGRqcUQzSEZBSlZOVW0xbThQKzFaMU9IbjdLCnRINWhUcHJBS0M5VDZyTmkzck1HTVZVRWk5MTB6dDV0S0VDY3JuKy9PMVM3RHc3cmVoa3hjTGZPWEorQkl1TVoKU2VZWXUybkJ5L0RDd2VTUVRSaGZUOE5YS0hrdTdzT3Z0TGduME1TQk9VYXhJUXZKQ0x6RwotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==",
+            "service": {
+              "name": "vmweave-webhook",
+              "namespace": "vmweave-system",
+              "path": "/validate",
+              "port": 443
+            }
+          },
+          "failurePolicy": "Fail",
+          "matchPolicy": "Equivalent",
+          "name": "validate.vmweave.io",
+          "namespaceSelector": {
+            "matchExpressions": [
+              {
+                "key": "kubernetes.io/metadata.name",
+                "operator": "In",
+                "values": [
+                  "vmweave-test-a",
+                  "vmweave-test-b"
+                ]
+              }
+            ]
+          },
+          "objectSelector": {},
+          "rules": [
+            {
+              "apiGroups": [
+                "vmweave.io"
+              ],
+              "apiVersions": [
+                "v1alpha1"
+              ],
+              "operations": [
+                "CREATE",
+                "UPDATE"
+              ],
+              "resources": [
+                "sharedmemorychannels"
+              ],
+              "scope": "Namespaced"
+            },
+            {
+              "apiGroups": [
+                "vmweave.io"
+              ],
+              "apiVersions": [
+                "v1alpha1"
+              ],
+              "operations": [
+                "UPDATE"
+              ],
+              "resources": [
+                "channelattachments/status"
+              ],
+              "scope": "Namespaced"
+            },
+            {
+              "apiGroups": [
+                "kubevirt.io"
+              ],
+              "apiVersions": [
+                "v1"
+              ],
+              "operations": [
+                "CREATE",
+                "UPDATE"
+              ],
+              "resources": [
+                "virtualmachineinstances",
+                "virtualmachineinstancemigrations"
+              ],
+              "scope": "Namespaced"
+            }
+          ],
+          "sideEffects": "None",
+          "timeoutSeconds": 10
+        }
+      ]
+    }
+  ]
+}

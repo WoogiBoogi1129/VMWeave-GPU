@@ -1,0 +1,16 @@
+PING 10.245.0.10 (10.245.0.10) 1192(1220) bytes of data.
+1200 bytes from 10.245.0.10: icmp_seq=1 ttl=64 time=2.08 ms
+
+--- 10.245.0.10 ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 2.082/2.082/2.082/0.000 ms
+default via 10.0.2.1 dev eth0 proto dhcp src 10.0.2.2 metric 100 
+10.0.2.0/24 dev eth0 proto kernel scope link src 10.0.2.2 metric 100 
+10.0.2.1 dev eth0 proto dhcp scope link src 10.0.2.2 metric 100 
+10.96.0.10 via 10.0.2.1 dev eth0 proto dhcp src 10.0.2.2 metric 100 
+10.245.0.0/24 dev wg0 proto kernel scope link src 10.245.0.11 
+10.246.0.0/24 via 10.246.1.117 dev cilium_host proto kernel src 10.246.1.117 mtu 1230 
+10.246.1.0/24 via 10.246.1.117 dev cilium_host proto kernel src 10.246.1.117 
+10.246.1.117 dev cilium_host proto kernel scope link 
+3: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1220 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/none 

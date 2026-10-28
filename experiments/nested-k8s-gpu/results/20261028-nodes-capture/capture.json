@@ -1,0 +1,129 @@
+{
+  "captured_at": "2026-10-28T11:22:47.337Z",
+  "kind": "actual interactive SSH ttyd/tmux terminal screenshot",
+  "edited": false,
+  "file": "control-plane-kubectl-get-nodes-wide.png",
+  "command": "kubectl get nodes -o wide",
+  "guest_hostname": "vw-k8s-cp-01",
+  "context": "kubernetes-admin@vmweave-nested",
+  "connection": {
+    "outer_context": "kubernetes-admin@kubernetes",
+    "namespace": "vmweave-nested-k8s",
+    "vm": "vw-k8s-cp-01",
+    "vmi_uid": "b674c137-5bee-4e6c-bc03-29affd46b60f",
+    "vmi_status": {
+      "activePods": {
+        "95c7b955-3073-4dbc-a68b-88710e2296f4": "gpu-4"
+      },
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:30:25Z",
+          "status": "True",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": null,
+          "message": "cannot migrate VMI: PVC nested-cp is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+          "reason": "DisksNotLiveMigratable",
+          "status": "False",
+          "type": "LiveMigratable"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": null,
+          "status": "True",
+          "type": "StorageLiveMigratable"
+        }
+      ],
+      "currentCPUTopology": {
+        "cores": 4
+      },
+      "guestOSInfo": {},
+      "interfaces": [
+        {
+          "infoSource": "domain",
+          "ipAddress": "10.85.0.84",
+          "ipAddresses": [
+            "10.85.0.84"
+          ],
+          "linkState": "up",
+          "mac": "02:00:00:28:10:01",
+          "name": "default",
+          "podInterfaceName": "eth0",
+          "queueCount": 1
+        }
+      ],
+      "launcherContainerImageVersion": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+      "machine": {
+        "type": "pc-q35-rhel9.8.0"
+      },
+      "memory": {
+        "guestAtBoot": "8Gi",
+        "guestCurrent": "8Gi",
+        "guestRequested": "8Gi",
+        "memoryOverhead": "308Mi"
+      },
+      "migrationMethod": "BlockMigration",
+      "migrationTransport": "Unix",
+      "nodeName": "gpu-4",
+      "phase": "Running",
+      "phaseTransitionTimestamps": [
+        {
+          "phase": "Pending",
+          "phaseTransitionTimestamp": "2026-10-28T09:30:21Z"
+        },
+        {
+          "phase": "Scheduling",
+          "phaseTransitionTimestamp": "2026-10-28T09:30:21Z"
+        },
+        {
+          "phase": "Scheduled",
+          "phaseTransitionTimestamp": "2026-10-28T09:30:25Z"
+        },
+        {
+          "phase": "Running",
+          "phaseTransitionTimestamp": "2026-10-28T09:30:28Z"
+        }
+      ],
+      "qosClass": "Burstable",
+      "runtimeUser": 107,
+      "selinuxContext": "none",
+      "virtualMachineRevisionName": "revision-start-vm-888c008b-a71e-4f19-a9a5-a3e074bf0bf1-3",
+      "volumeStatus": [
+        {
+          "name": "cloudinit",
+          "size": 1048576,
+          "target": "vdb"
+        },
+        {
+          "name": "root",
+          "persistentVolumeClaimInfo": {
+            "accessModes": [
+              "ReadWriteOnce"
+            ],
+            "capacity": {
+              "storage": "40Gi"
+            },
+            "claimName": "nested-cp",
+            "filesystemOverhead": "0.055",
+            "requests": {
+              "storage": "40Gi"
+            },
+            "volumeMode": "Filesystem"
+          },
+          "target": "vda"
+        }
+      ]
+    },
+    "ssh_service": "vw-k8s-cp-01",
+    "ssh_service_ip": "10.96.178.29"
+  },
+  "tool": "Playwright Chromium 153.0.8010.12",
+  "viewport": {
+    "width": 2400,
+    "height": 900
+  },
+  "both_nodes_ready": true
+}

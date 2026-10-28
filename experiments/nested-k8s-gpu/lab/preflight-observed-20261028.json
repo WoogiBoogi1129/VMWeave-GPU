@@ -1,0 +1,186 @@
+{
+  "observed_at": "2026-10-28T11:39:48.229300+00:00",
+  "namespace": "vmweave-test-b",
+  "context": "kubernetes-admin@kubernetes",
+  "result": "PASS",
+  "scope": "read-only ownership/readiness preflight, not a VM/GPU lab result",
+  "components": {
+    "controller": {
+      "name": "vmweave-controller",
+      "uid": "93bf4fd4-264c-44c1-9889-d3c1854a33ac",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+      "args": [
+        "--component=controller",
+        "--mode=active",
+        "--namespaces=vmweave-test-a,vmweave-test-b",
+        "--system-namespace=vmweave-system",
+        "--controller-service-account=vmweave-controller",
+        "--leader-elect=true"
+      ],
+      "serviceAccount": "vmweave-controller",
+      "generation": 14,
+      "podSelector": {
+        "matchLabels": {
+          "app": "vmweave-controller"
+        }
+      },
+      "pods": [
+        {
+          "name": "vmweave-controller-74c445d4b4-grgmw",
+          "uid": "26718755-8c31-476e-ba5b-d5cbb68ac90c",
+          "containers": [
+            {
+              "allocatedResources": {
+                "cpu": "100m",
+                "memory": "96Mi"
+              },
+              "containerID": "cri-o://6972f3efe15731d8cb4d2c8e1cdfdd60dfa5eb214098484ef8163baa322f2d5f",
+              "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+              "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+              "lastState": {},
+              "name": "controller",
+              "ready": true,
+              "resources": {
+                "limits": {
+                  "memory": "512Mi"
+                },
+                "requests": {
+                  "cpu": "100m",
+                  "memory": "96Mi"
+                }
+              },
+              "restartCount": 0,
+              "started": true,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-27T12:07:39Z"
+                }
+              },
+              "user": {
+                "linux": {
+                  "gid": 65532,
+                  "supplementalGroups": [
+                    65532
+                  ],
+                  "uid": 65532
+                }
+              },
+              "volumeMounts": [
+                {
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                  "name": "kube-api-access-dftpm",
+                  "readOnly": true,
+                  "recursiveReadOnly": "Disabled"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "webhook": {
+      "name": "vmweave-webhook",
+      "uid": "f638107c-0f06-4395-9856-657b23fc2c49",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+      "args": [
+        "--component=webhook",
+        "--mode=active",
+        "--namespaces=vmweave-test-a,vmweave-test-b",
+        "--system-namespace=vmweave-system",
+        "--controller-service-account=vmweave-controller",
+        "--leader-elect=true"
+      ],
+      "serviceAccount": "vmweave-webhook",
+      "generation": 12,
+      "podSelector": {
+        "matchLabels": {
+          "app": "vmweave-webhook"
+        }
+      },
+      "pods": [
+        {
+          "name": "vmweave-webhook-784c4b4d85-b4qr4",
+          "uid": "9031d029-9588-4da8-9a24-efa56de44d75",
+          "containers": [
+            {
+              "allocatedResources": {
+                "cpu": "100m",
+                "memory": "96Mi"
+              },
+              "containerID": "cri-o://d187c457371fd2d5c5ee1da41dcb7f6e0e3d8de1ca99d7fb1d09f3f5092d2e81",
+              "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+              "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+              "lastState": {},
+              "name": "webhook",
+              "ready": true,
+              "resources": {
+                "limits": {
+                  "memory": "512Mi"
+                },
+                "requests": {
+                  "cpu": "100m",
+                  "memory": "96Mi"
+                }
+              },
+              "restartCount": 0,
+              "started": true,
+              "state": {
+                "running": {
+                  "startedAt": "2026-10-27T12:07:39Z"
+                }
+              },
+              "user": {
+                "linux": {
+                  "gid": 65532,
+                  "supplementalGroups": [
+                    65532
+                  ],
+                  "uid": 65532
+                }
+              },
+              "volumeMounts": [
+                {
+                  "mountPath": "/tls",
+                  "name": "tls",
+                  "readOnly": true,
+                  "recursiveReadOnly": "Disabled"
+                },
+                {
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                  "name": "kube-api-access-8tkqf",
+                  "readOnly": true,
+                  "recursiveReadOnly": "Disabled"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "admission": [
+    {
+      "configuration": "vmweave-system-vmweave",
+      "name": "validate.vmweave.io",
+      "service": {
+        "name": "vmweave-webhook",
+        "namespace": "vmweave-system",
+        "path": "/validate",
+        "port": 443
+      },
+      "namespaceSelector": {
+        "matchExpressions": [
+          {
+            "key": "kubernetes.io/metadata.name",
+            "operator": "In",
+            "values": [
+              "vmweave-test-a",
+              "vmweave-test-b"
+            ]
+          }
+        ]
+      },
+      "failurePolicy": "Fail"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "result": "PASS",
+  "at": "2026-10-28T09:34:59.659979+00:00",
+  "K1": {
+    "result": "PASS"
+  },
+  "G1-G3": {
+    "result": "PASS",
+    "started": "2026-10-28T09:26:00.597728+00:00",
+    "finished": "2026-10-28T09:26:21.413953+00:00",
+    "elapsed_seconds": 20.816185845062137
+  },
+  "G2": {
+    "result": "PASS",
+    "started": "2026-10-28T09:26:21.414321+00:00",
+    "finished": "2026-10-28T09:26:29.293910+00:00",
+    "elapsed_seconds": 7.879596274346113
+  },
+  "G4": {
+    "result": "PASS",
+    "started": "2026-10-28T09:26:29.294340+00:00",
+    "finished": "2026-10-28T09:27:10.764266+00:00",
+    "elapsed_seconds": 41.46992811514065
+  },
+  "G5": {
+    "result": "PASS",
+    "started": "2026-10-28T09:27:10.764660+00:00",
+    "finished": "2026-10-28T09:27:35.847044+00:00",
+    "elapsed_seconds": 25.082381292711943
+  },
+  "K2": {
+    "result": "PASS",
+    "started": "2026-10-28T09:27:35.847323+00:00",
+    "finished": "2026-10-28T09:29:37.105550+00:00",
+    "elapsed_seconds": 121.25823003007099
+  },
+  "K3": {
+    "result": "PASS",
+    "started": "2026-10-28T09:29:37.105919+00:00",
+    "finished": "2026-10-28T09:31:18.838042+00:00",
+    "elapsed_seconds": 101.73212233930826
+  },
+  "Q1": {
+    "result": "PASS",
+    "started": "2026-10-28T09:31:18.838399+00:00",
+    "finished": "2026-10-28T09:31:40.537688+00:00",
+    "elapsed_seconds": 21.699290815740824
+  },
+  "G6": {
+    "result": "PASS",
+    "started": "2026-10-28T09:31:40.538054+00:00",
+    "finished": "2026-10-28T09:34:20.941068+00:00",
+    "elapsed_seconds": 160.40301882009953
+  },
+  "numeric_checks": [
+    {
+      "test": "g1-a",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "g1-b",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "g4-delete-next",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "g4-sigkill-next",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "g5-active",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "g5-next",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "g6-recovery",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "k2-recovery",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "k3-recovery",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    },
+    {
+      "test": "q1-small",
+      "event": "RESULT",
+      "elements": 8388608,
+      "mismatches": 0,
+      "checksum": 18014393673449472,
+      "kernel_launches": 1
+    }
+  ],
+  "gpu_mapping_count": 13,
+  "protected_channel_unchanged": {
+    "allocation": true,
+    "generation": true,
+    "vmiUID": true,
+    "workerPodUID": true,
+    "channel_uid": true
+  },
+  "protected_running_pod_changes": 3,
+  "scope": "single execution per condition; no statistical reliability or performance claim",
+  "broker_epoch_capture": "per-client random epoch not exported by baseline; Channel session ID, allocation and CUDA child PID used for attribution",
+  "environment_control": "NOT_ESTABLISHED: three concurrent outer workload rollouts found in final comparison",
+  "operational_interpretation": "Observed PASS; external changes during K2/K3 prevent claiming isolated fault recovery",
+  "external_change_discovery": "After all scenarios, during final baseline comparison; no further GPU workloads submitted"
+}

@@ -1,0 +1,47 @@
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 promiscuity 0 minmtu 0 maxmtu 0 addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1280 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 02:00:00:28:10:02 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 1280 addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 parentbus virtio parentdev virtio0 
+3: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1380 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/none  promiscuity 0 minmtu 0 maxmtu 2147483552 
+    wireguard addrgenmode none numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 
+4: cilium_net@cilium_host: <BROADCAST,MULTICAST,NOARP,UP,LOWER_UP> mtu 1280 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether c2:48:40:92:9a:15 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 65535 
+    veth addrgenmode eui64 numtxqueues 4 numrxqueues 4 gso_max_size 65536 gso_max_segs 65535 
+5: cilium_host@cilium_net: <BROADCAST,MULTICAST,NOARP,UP,LOWER_UP> mtu 1280 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether da:ec:f4:f1:ee:9a brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 65535 
+    veth addrgenmode eui64 numtxqueues 4 numrxqueues 4 gso_max_size 65536 gso_max_segs 65535 
+6: cilium_vxlan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1280 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether aa:05:d6:a1:33:5f brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 65535 
+    vxlan external id 0 srcport 0 0 dstport 8472 nolearning ttl auto ageing 300 udpcsum noudp6zerocsumtx noudp6zerocsumrx addrgenmode eui64 numtxqueues 1 numrxqueues 1 gso_max_size 65536 gso_max_segs 65535 
+8: lxc_health@if7: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1280 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether 76:11:a5:6a:f6:d7 brd ff:ff:ff:ff:ff:ff link-netnsid 0 promiscuity 0 minmtu 68 maxmtu 65535 
+    veth addrgenmode eui64 numtxqueues 4 numrxqueues 4 gso_max_size 65536 gso_max_segs 65535 
+10: lxc9f6ac08e7e9e@if9: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1280 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether f6:8e:11:1b:95:1d brd ff:ff:ff:ff:ff:ff link-netns 283d34f7-74e7-4ec7-82f5-4facdff0679b promiscuity 0 minmtu 68 maxmtu 65535 
+    veth addrgenmode eui64 numtxqueues 4 numrxqueues 4 gso_max_size 65536 gso_max_segs 65535 
+12: lxc9e0397d6ccdb@if11: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1280 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether be:4f:49:b4:03:6f brd ff:ff:ff:ff:ff:ff link-netns 5a8990ec-0588-4574-ada8-40e782d5bda8 promiscuity 0 minmtu 68 maxmtu 65535 
+    veth addrgenmode eui64 numtxqueues 4 numrxqueues 4 gso_max_size 65536 gso_max_segs 65535 
+14: lxc3e3a327ac35b@if13: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1280 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether ee:fb:12:fe:8e:6f brd ff:ff:ff:ff:ff:ff link-netns 705cacff-356b-4aba-95c8-0033bfdb25e5 promiscuity 0 minmtu 68 maxmtu 65535 
+    veth addrgenmode eui64 numtxqueues 4 numrxqueues 4 gso_max_size 65536 gso_max_segs 65535 
+default via 10.0.2.1 dev eth0 proto dhcp src 10.0.2.2 metric 100 
+10.0.2.0/24 dev eth0 proto kernel scope link src 10.0.2.2 metric 100 
+10.0.2.1 dev eth0 proto dhcp scope link src 10.0.2.2 metric 100 
+10.96.0.10 via 10.0.2.1 dev eth0 proto dhcp src 10.0.2.2 metric 100 
+10.245.0.0/24 dev wg0 proto kernel scope link src 10.245.0.11 
+10.246.0.0/24 via 10.246.1.117 dev cilium_host proto kernel src 10.246.1.117 mtu 1230 
+10.246.1.0/24 via 10.246.1.117 dev cilium_host proto kernel src 10.246.1.117 
+10.246.1.117 dev cilium_host proto kernel scope link 
+interface: wg0
+  public key: Itf0v/ACzPuVNTAWQPx8JFA0nJvutv0BCgAdrgVNH3c=
+  private key: (hidden)
+  listening port: 51820
+
+peer: CHMsQJaMRN9LkT1DZE1Vu2ZV+SKTTg6NR0TGRuDGCEE=
+  endpoint: 10.96.178.29:51820
+  allowed ips: 10.245.0.10/32
+  latest handshake: 46 seconds ago
+  transfer: 4.23 MiB received, 1.61 MiB sent
+  persistent keepalive: every 25 seconds

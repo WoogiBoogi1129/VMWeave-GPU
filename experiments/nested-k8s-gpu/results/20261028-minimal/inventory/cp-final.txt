@@ -1,0 +1,30 @@
+vw-k8s-cp-01
+61f95fe949ce42e0b997ff5320327801
+aad2fe7a-2e53-425c-ad4f-22323da97206
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1280 qdisc fq_codel state UP group default qlen 1000
+    inet 10.0.2.2/24 metric 100 brd 10.0.2.255 scope global dynamic eth0
+       valid_lft 86313349sec preferred_lft 86313349sec
+3: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1220 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 10.245.0.10/24 scope global wg0
+       valid_lft forever preferred_lft forever
+5: cilium_host@cilium_net: <BROADCAST,MULTICAST,NOARP,UP,LOWER_UP> mtu 1220 qdisc noqueue state UP group default qlen 1000
+    inet 10.246.0.179/32 scope global cilium_host
+       valid_lft forever preferred_lft forever
+default via 10.0.2.1 dev eth0 proto dhcp src 10.0.2.2 metric 100 
+10.0.2.0/24 dev eth0 proto kernel scope link src 10.0.2.2 metric 100 
+10.0.2.1 dev eth0 proto dhcp scope link src 10.0.2.2 metric 100 
+10.96.0.10 via 10.0.2.1 dev eth0 proto dhcp src 10.0.2.2 metric 100 
+10.245.0.0/24 dev wg0 proto kernel scope link src 10.245.0.10 
+10.246.0.0/24 via 10.246.0.179 dev cilium_host proto kernel src 10.246.0.179 
+10.246.0.179 dev cilium_host proto kernel scope link 
+10.246.1.0/24 via 10.246.0.179 dev cilium_host proto kernel src 10.246.0.179 mtu 1170 
+NTPSynchronized=yes
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        39G  4.7G   34G  13% /
+active
+active
+active
+3496b9bef850a34a4125a829c7569693e6bd3faa2d8f0f0ea7a72b23ec436814  /etc/kubernetes/pki/ca.crt

@@ -1,0 +1,322 @@
+[
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:43Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{modelserve}",
+      "kind": "Pod",
+      "name": "modelserve-6f8ccf5c75-d8vq5",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "17879099",
+      "uid": "9987a435-6e5e-4461-8dde-15056417b358"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:43Z",
+    "message": "Stopping container modelserve",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:43Z",
+      "name": "modelserve-6f8ccf5c75-d8vq5.18e2a78315171420",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444472",
+      "uid": "12136152-cd38-4497-a00d-f8e89626ee1f"
+    },
+    "reason": "Killing",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:43Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "modelserve-6f8ccf5c75",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444463",
+      "uid": "ae1e5ab3-6018-42e6-8d5d-2c9b2444f9d8"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:43Z",
+    "message": "Deleted pod: modelserve-6f8ccf5c75-d8vq5",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:43Z",
+      "name": "modelserve-6f8ccf5c75.18e2a78313f53246",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444467",
+      "uid": "b6340d2e-0a40-4531-8d70-c4c5080a7f6d"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:43Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "modelserve-fd647bcd9-svls5",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444496",
+      "uid": "8a7c8d4f-b827-4369-98d2-17cd189b8878"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:43Z",
+    "message": "Successfully assigned aap-mp-control/modelserve-fd647bcd9-svls5 to gpu-4",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:43Z",
+      "name": "modelserve-fd647bcd9-svls5.18e2a78343be88ad",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444500",
+      "uid": "e95c43f1-d6d8-4887-b669-fbbd7f234694"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:44Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{modelserve}",
+      "kind": "Pod",
+      "name": "modelserve-fd647bcd9-svls5",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444498",
+      "uid": "8a7c8d4f-b827-4369-98d2-17cd189b8878"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:44Z",
+    "message": "Container image \"registry:3.0.0\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:44Z",
+      "name": "modelserve-fd647bcd9-svls5.18e2a7837fa8b884",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444513",
+      "uid": "f4505e83-4c90-4df5-8553-620d296dcc5f"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:45Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{modelserve}",
+      "kind": "Pod",
+      "name": "modelserve-fd647bcd9-svls5",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444498",
+      "uid": "8a7c8d4f-b827-4369-98d2-17cd189b8878"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:45Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:45Z",
+      "name": "modelserve-fd647bcd9-svls5.18e2a7838c271a46",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444515",
+      "uid": "814b8a9e-ffb4-4c7b-8a0f-2955a677289e"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:45Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{modelserve}",
+      "kind": "Pod",
+      "name": "modelserve-fd647bcd9-svls5",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444498",
+      "uid": "8a7c8d4f-b827-4369-98d2-17cd189b8878"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:45Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:45Z",
+      "name": "modelserve-fd647bcd9-svls5.18e2a7838cd3ecf8",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444516",
+      "uid": "7dfaf1f0-5d48-4075-89b5-755b397b39dd"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:45Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{modelserve}",
+      "kind": "Pod",
+      "name": "modelserve-fd647bcd9-svls5",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444498",
+      "uid": "8a7c8d4f-b827-4369-98d2-17cd189b8878"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:45Z",
+    "message": "Readiness probe failed: Get \"http://10.85.0.243:8080/readyz\": dial tcp 10.85.0.243:8080: connect: connection refused",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:45Z",
+      "name": "modelserve-fd647bcd9-svls5.18e2a7838d48fe6e",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444517",
+      "uid": "d06e5331-49ac-444d-9813-8f37071a19bb"
+    },
+    "reason": "Unhealthy",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Warning"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:43Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "ReplicaSet",
+      "name": "modelserve-fd647bcd9",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444493",
+      "uid": "14ed2b16-cd29-47e5-ae92-ceb8a099d0a0"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:43Z",
+    "message": "Created pod: modelserve-fd647bcd9-svls5",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:43Z",
+      "name": "modelserve-fd647bcd9.18e2a783433db277",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444497",
+      "uid": "ea9a9249-58f2-498e-a7d7-fa4dd551f2e8"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "replicaset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "replicaset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:43Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "modelserve",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444462",
+      "uid": "23e1552b-c731-4c5f-bc1f-b2d05af4427d"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:43Z",
+    "message": "Scaled down replica set modelserve-6f8ccf5c75 from 1 to 0",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:43Z",
+      "name": "modelserve.18e2a78312779f4c",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444464",
+      "uid": "a5c84318-8ac3-494c-9640-5da7ff6bab12"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:29:43Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "name": "modelserve",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444473",
+      "uid": "23e1552b-c731-4c5f-bc1f-b2d05af4427d"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:29:43Z",
+    "message": "Scaled up replica set modelserve-fd647bcd9 from 0 to 1",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:29:43Z",
+      "name": "modelserve.18e2a7834229c90e",
+      "namespace": "aap-mp-control",
+      "resourceVersion": "18444494",
+      "uid": "b64cc7c9-9ba4-4ceb-9b71-1d5468416ba1"
+    },
+    "reason": "ScalingReplicaSet",
+    "reportingComponent": "deployment-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "deployment-controller"
+    },
+    "type": "Normal"
+  }
+]

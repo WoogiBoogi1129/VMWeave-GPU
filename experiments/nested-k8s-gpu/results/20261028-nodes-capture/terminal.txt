@@ -1,0 +1,37 @@
+ubuntu@vw-k8s-cp-01:~$ date --iso-8601=seconds
+2026-10-28T11:22:46+00:00
+ubuntu@vw-k8s-cp-01:~$ hostname
+vw-k8s-cp-01
+ubuntu@vw-k8s-cp-01:~$ kubectl config current-context
+kubernetes-admin@vmweave-nested
+ubuntu@vw-k8s-cp-01:~$ kubectl get nodes -o wide
+NAME               STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+vw-k8s-cp-01       Ready    control-plane   142m   v1.35.9   10.245.0.10   <none>        Ubuntu 22.04.5 LTS   5.15.0-191-generic   cri-o://1.35.10
+vw-k8s-worker-01   Ready    <none>          140m   v1.35.9   10.245.0.11   <none>        Ubuntu 22.04.5 LTS   5.15.0-191-generic   cri-o://1.35.10
+ubuntu@vw-k8s-cp-01:~$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

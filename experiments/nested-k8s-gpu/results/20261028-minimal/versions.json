@@ -1,0 +1,32 @@
+{
+  "outer_context": "kubernetes-admin@kubernetes",
+  "host_node": "gpu-4",
+  "namespace": "vmweave-nested-k8s",
+  "operator_namespace": "vmweave-nested-system",
+  "kubernetes": "1.35.9",
+  "apt_kubernetes": "1.35.9-1.1",
+  "crio": "1.35.10-1.1",
+  "cilium": "1.20.2",
+  "helm": "v3.22.0",
+  "cilium_cli": "v0.20.1",
+  "installer_commit": "25b80e29bf2de6ec2363f052ea26e5c56210eb03",
+  "vmweave_guest_commit": "2fd0461febbb481d187fa87de895537a14991f18",
+  "images": {
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574",
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da",
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05"
+  },
+  "workload_image": "localhost/nested-gpu@sha256:82a988dfa68d030c31a2ca0cac9543a5f655a0d40e151d5b60cb0e3b770a00ff",
+  "network": {
+    "nodes": [
+      "10.245.0.10",
+      "10.245.0.11"
+    ],
+    "pods": "10.246.0.0/16",
+    "services": "10.247.0.0/16",
+    "wireguard_mtu": 1220,
+    "cilium_mtu": 1220,
+    "inter_node_route_mtu": 1170,
+    "cilium_api_endpoint": "10.245.0.10:6443"
+  }
+}

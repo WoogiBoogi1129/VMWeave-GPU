@@ -1,0 +1,4850 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:21Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444869",
+        "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:21Z",
+      "message": "Successfully assigned vmweave-nested-k8s/virt-launcher-vw-k8s-cp-01-g4x57 to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:21Z",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57.18e2a78c0b853605",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444873",
+        "uid": "d3290848-721c-4a76-8b2f-bc293f2f3e32"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:22Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444872",
+        "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:22Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:22Z",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57.18e2a78c4aa9dcc8",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444897",
+        "uid": "8e44d98d-7591-4e83-949b-7b0e95982fdb"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:25Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444872",
+        "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:25Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:25Z",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57.18e2a78cfb277137",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444919",
+        "uid": "49f4a0e4-f672-494a-b89f-c0f6be26f8da"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:25Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444872",
+        "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:25Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:25Z",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57.18e2a78cfbc18534",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444920",
+        "uid": "7fc84aec-745e-4159-8c1f-89ec9bd1c9ec"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:25Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444872",
+        "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:25Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:25Z",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57.18e2a78cfc89a466",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444921",
+        "uid": "3b0f98ec-f522-49fd-80ec-3060ac375621"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:25Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444872",
+        "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:25Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:25Z",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57.18e2a78d0af0a399",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444925",
+        "uid": "c35ac565-1149-4554-8f67-6ffd7aed3314"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:25Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444872",
+        "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:25Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:25Z",
+        "name": "virt-launcher-vw-k8s-cp-01-g4x57.18e2a78d0b7e32d8",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444931",
+        "uid": "8b846b13-3164-4fbe-9607-95f7794f2af9"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:37Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422004",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:37Z",
+      "message": "Successfully assigned vmweave-nested-k8s/virt-launcher-vw-k8s-cp-01-hck52 to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a53705a0bc53",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422009",
+        "uid": "f8fbbd0e-a7f0-48ae-840e-5cc84d8f85f8"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:38Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:38Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a537424c4398",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422045",
+        "uid": "5d5d65d0-b357-4f35-b3b8-3aca4daff6fe"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:42Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:42Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:42Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a5382a1c730d",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422085",
+        "uid": "d16dbc67-d62d-4161-ae92-fd5c349a6479"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:42Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:42Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:42Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a5382a9e26f2",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422086",
+        "uid": "4c0c14e6-c9dc-4170-b71d-b30c390824f6"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:42Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:42Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:42Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a5382b23aed5",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422087",
+        "uid": "6397a41b-07f6-439f-8d4f-f4ef3a10c83c"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:42Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:42Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:42Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a538377a2136",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422091",
+        "uid": "edc6a02e-d2c8-44f7-ba83-0742001e598d"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:42Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:42Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:42Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a5383817a4e8",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422092",
+        "uid": "93ab737f-30eb-47a3-aff1-d0917d346963"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:29:39Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:29:39Z",
+      "message": "Stopping container guest-console-log",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:29:39Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a78241268e28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444417",
+        "uid": "839074d3-2e92-418c-b081-74d7fc4a6738"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:29:39Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422006",
+        "uid": "84ad6251-6077-4a22-ad8d-bec7d1c8e8a8"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:29:39Z",
+      "message": "Stopping container compute",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:29:39Z",
+        "name": "virt-launcher-vw-k8s-cp-01-hck52.18e2a78241286b5e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444418",
+        "uid": "af328db7-9605-4bef-9cd3-e01ec912dbd8"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:37Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422025",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:37Z",
+      "message": "Successfully assigned vmweave-nested-k8s/virt-launcher-vw-k8s-worker-01-6zqff to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a53711351341",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422031",
+        "uid": "e5fdc17e-68a4-4a53-914c-a7be512886db"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:38Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:38Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a53758f943f8",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422047",
+        "uid": "401212e5-4f25-4b5a-a8a4-0f8c08985554"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:43Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:43Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:43Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a538599534fd",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422101",
+        "uid": "f2f1cb2e-beb3-42fb-9ab8-34936ed61ae1"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:43Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:43Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:43Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a5385a206b24",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422102",
+        "uid": "ead9f62f-d23b-4ae3-972f-0bc893536659"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:43Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:43Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:43Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a5385ad00375",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422103",
+        "uid": "bfb43946-b091-4da6-9dbc-8831b7cfb077"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:43Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:43Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:43Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a53865e3738c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422109",
+        "uid": "92208e5c-4477-42a9-bddc-b16aa72db356"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:43Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:43Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:43Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a538667244f6",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422110",
+        "uid": "b746c8c9-0fd9-4da0-9d03-af2ee99308f7"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:56:59Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:56:59Z",
+      "message": "Stopping container guest-console-log",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:56:59Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a5b9d9b7f884",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426973",
+        "uid": "d2e60131-472c-4a4e-ac6c-94d6d042199a"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:56:59Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422030",
+        "uid": "728a2255-ba77-48b3-94d7-7b1052df2660"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:56:59Z",
+      "message": "Stopping container compute",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:56:59Z",
+        "name": "virt-launcher-vw-k8s-worker-01-6zqff.18e2a5b9d9b8cb7a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426974",
+        "uid": "e61ac084-345d-489f-a2f0-48690edfcc66"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:01Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446449",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:01Z",
+      "message": "Successfully assigned vmweave-nested-k8s/virt-launcher-vw-k8s-worker-01-gr5gw to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:01Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b137d3b69c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446454",
+        "uid": "6c74ce10-8a26-4ae0-aa3d-cc7831fb5564"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:02Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:02Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:02Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b1760d7fa2",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446468",
+        "uid": "8c364a60-f42e-4ab2-9e84-330c6147ab5c"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:04Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:04Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:04Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b20bb19e90",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446502",
+        "uid": "15860ece-e2d3-4926-8b94-2969b3c3584d"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:04Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:04Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:04Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b20c42489c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446503",
+        "uid": "c951ba40-96fb-470c-a1dc-a92776db3f40"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:04Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:04Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:04Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b20cfa8c0a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446504",
+        "uid": "b57161cf-3534-4415-acc4-cec5a1dcbc8a"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:05Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:05Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:05Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b21b35cabb",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446510",
+        "uid": "da3b73c0-c542-4246-b54b-9e50575cafb5"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:05Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:05Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:05Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b21bec80fa",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446511",
+        "uid": "6c1e5b46-41a0-4706-b1a3-0755a3bac508"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:05Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:05Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:05Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b21c052e8e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446512",
+        "uid": "21c79231-1c51-4a2e-b702-44be7488ebf9"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:05Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:05Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:05Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b2271ed0b2",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446513",
+        "uid": "f1c82318-8b22-4d93-8f0f-941b5d515983"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:05Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446452",
+        "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:05Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:05Z",
+        "name": "virt-launcher-vw-k8s-worker-01-gr5gw.18e2a7b227eef060",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446514",
+        "uid": "5dd80102-9355-4f4f-98f7-304610103805"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:25Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427316",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:25Z",
+      "message": "Successfully assigned vmweave-nested-k8s/virt-launcher-vw-k8s-worker-01-jtf28 to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:25Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c00bb4d0e6",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427321",
+        "uid": "eb778901-b78e-436f-aff7-d31f2b15d7f0"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:26Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:26Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:26Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c04b9c2447",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427339",
+        "uid": "5ea87e26-9a7d-454a-88dd-7f541f71105f"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0dc8bb699",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427357",
+        "uid": "76dedf14-1aea-44c3-b723-ecce9ac0a72b"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0dd3828e5",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427358",
+        "uid": "478140aa-60e1-428e-aa71-67e57a0a6b06"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0de0c3a5b",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427359",
+        "uid": "2e5c4306-8f54-49ca-8784-edffb7f5d29f"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0ec7ef75e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427363",
+        "uid": "04bc5c4a-d1d5-43ca-bbce-7914a0feb58a"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0ed034f5c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427364",
+        "uid": "6ddde5ed-223a-4b7f-912c-b42eea693d5c"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0eddab7fe",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427365",
+        "uid": "3351eacf-bdf6-40a4-8b27-41db7e2149db"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0f81b909e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427372",
+        "uid": "20c82ffc-80fc-4364-8545-b9fdf222c135"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:29Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:29Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a5c0f8bb65b5",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427373",
+        "uid": "fd226dae-7c7c-4a74-9c56-4aa1b044ba61"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:27:38Z",
+      "message": "Stopping container guest-console-log",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:38Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a76612e5e571",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443096",
+        "uid": "190b52a9-d967-4743-8f46-ac16ab9fe3fc"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:27:38Z",
+      "message": "Stopping container hook-sidecar-0",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:38Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a76612e6902c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443100",
+        "uid": "c5bb2dd2-443e-4b0f-b66f-bc5d4d51e1b7"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427319",
+        "uid": "c8a09a88-ebd0-4be1-83c6-736c7dd0b917"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:27:38Z",
+      "message": "Stopping container compute",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:38Z",
+        "name": "virt-launcher-vw-k8s-worker-01-jtf28.18e2a76612e77a29",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443101",
+        "uid": "098ec5f2-6693-4889-acbe-17560c5f7bda"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:44Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443886",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:44Z",
+      "message": "Successfully assigned vmweave-nested-k8s/virt-launcher-vw-k8s-worker-01-x7ztf to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:44Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a7758ac342fa",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443891",
+        "uid": "6085138a-37fe-4191-9201-69eb0cec909c"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:45Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:45Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:45Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a775c64a2d4b",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443920",
+        "uid": "a04df7bd-41bf-4429-a028-30b935d547e0"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a776522a2d9e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443940",
+        "uid": "f031f11d-01a0-44bb-8fff-75e4eb1f6c11"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a77652dca213",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443941",
+        "uid": "7d82fe81-b2e8-453a-8436-8f44dcf6afb3"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a77653b5172e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443942",
+        "uid": "6f575af1-571b-4247-9655-17e185ee6543"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a77660445151",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443946",
+        "uid": "ee048869-f16a-4316-88c2-e1c0dc6adcb2"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a77660f7f8c6",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443947",
+        "uid": "36c192cd-c65e-4466-9cab-5910851495ff"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a776610eee72",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443948",
+        "uid": "f6216f50-a43e-470f-a5f7-c60c62acacf4"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a7766baf7851",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443949",
+        "uid": "5dbd26e1-a0e7-485a-9ec5-a99f356308e8"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:48Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:48Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:48Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a7766c38c12a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443950",
+        "uid": "53b4591e-ec6e-48b9-810b-14ca583058b2"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:31:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.initContainers{guest-console-log}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:31:55Z",
+      "message": "Stopping container guest-console-log",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:31:55Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a7a1e7a5b987",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445742",
+        "uid": "83011d04-578b-480c-bceb-001b481fd916"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:31:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{hook-sidecar-0}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:31:55Z",
+      "message": "Stopping container hook-sidecar-0",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:31:55Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a7a1e7a777d5",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445743",
+        "uid": "05d89a5f-773f-4019-a81c-9c6b7bfb7c93"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:31:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{compute}",
+        "kind": "Pod",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443889",
+        "uid": "d8cf0502-dc2d-4fc4-a503-5771ac0ed6e2"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:31:55Z",
+      "message": "Stopping container compute",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:31:55Z",
+        "name": "virt-launcher-vw-k8s-worker-01-x7ztf.18e2a7a1e7a9501e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445747",
+        "uid": "1bc207db-8472-4cc0-854f-eb3d8615a754"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 2,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:37Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18421979",
+        "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:21Z",
+      "message": "Started the virtual machine by creating the new virtual machine instance vw-k8s-cp-01",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "name": "vw-k8s-cp-01.18e2a536fdd6d9cc",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444865",
+        "uid": "608c7aec-08cb-4a90-8695-3f1cb4d4b46a"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:37Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422000",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:37Z",
+      "message": "Created virtual machine pod virt-launcher-vw-k8s-cp-01-hck52",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "name": "vw-k8s-cp-01.18e2a5370530417c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422005",
+        "uid": "bdacafea-6437-4fba-8b3c-991a7508f9c5"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:44Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422099",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:44Z",
+      "message": "VirtualMachineInstance defined.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:44Z",
+        "name": "vw-k8s-cp-01.18e2a538c8e86fad",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422138",
+        "uid": "6de19fa5-7df3-476b-8b33-28ede5d81cca"
+      },
+      "reason": "Created",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:45Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422099",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:45Z",
+      "message": "VirtualMachineInstance started.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:45Z",
+        "name": "vw-k8s-cp-01.18e2a538cbfa8c8a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422140",
+        "uid": "5f7510d7-29ae-4bad-8ef4-10f900b5adbd"
+      },
+      "reason": "Started",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:29:39Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444408",
+        "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:29:39Z",
+      "message": "Stopped the virtual machine by deleting the virtual machine instance d7c30348-95cd-4fac-9eaa-562bd76f4b96",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:29:39Z",
+        "name": "vw-k8s-cp-01.18e2a7823f55bfc1",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444412",
+        "uid": "cf94c17e-ef55-4687-8046-383ffa937b07"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 4,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:29:39Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444410",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:15Z",
+      "message": "Deleted virtual machine pod virt-launcher-vw-k8s-cp-01-hck52",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:29:39Z",
+        "name": "vw-k8s-cp-01.18e2a7823fffb66d",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444808",
+        "uid": "8b66c24a-81ed-4e60-ab75-3fa5114319b1"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 2,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:29:39Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444410",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:29:39Z",
+      "message": "Signaled Graceful Shutdown",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:29:39Z",
+        "name": "vw-k8s-cp-01.18e2a78241f18c9a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444422",
+        "uid": "4ce9f793-a47f-44ca-a8d1-23e1ca55cd62"
+      },
+      "reason": "ShuttingDown",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:10Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444423",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:10Z",
+      "message": "VirtualMachineInstance stopping",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:10Z",
+        "name": "vw-k8s-cp-01.18e2a7895ade913a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444750",
+        "uid": "b636ef9d-1cbb-4977-b437-7a4510b50239"
+      },
+      "reason": "Deleted",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 3,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:10Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444423",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:10Z",
+      "message": "Signaled Deletion",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:10Z",
+        "name": "vw-k8s-cp-01.18e2a7895bcfaf4a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444759",
+        "uid": "216c808b-baea-4ff3-acec-de7794897eeb"
+      },
+      "reason": "Deleted",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:10Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444423",
+        "uid": "d7c30348-95cd-4fac-9eaa-562bd76f4b96"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:10Z",
+      "message": "The VirtualMachineInstance crashed.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:10Z",
+        "name": "vw-k8s-cp-01.18e2a7895ee97b6d",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444753",
+        "uid": "a750b24a-4190-4b33-b167-38fa2db1c8da"
+      },
+      "reason": "Stopped",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:21Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444868",
+        "uid": "b674c137-5bee-4e6c-bc03-29affd46b60f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:21Z",
+      "message": "Created virtual machine pod virt-launcher-vw-k8s-cp-01-g4x57",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:21Z",
+        "name": "vw-k8s-cp-01.18e2a78c0afafbd3",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444871",
+        "uid": "1771992e-4cbe-4f54-80d5-2797d3d0089d"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:28Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444947",
+        "uid": "b674c137-5bee-4e6c-bc03-29affd46b60f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:28Z",
+      "message": "VirtualMachineInstance defined.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:28Z",
+        "name": "vw-k8s-cp-01.18e2a78da1e9730f",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444971",
+        "uid": "54109af6-c45b-4cd4-87fa-08a5eb871cc3"
+      },
+      "reason": "Created",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:30:28Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444947",
+        "uid": "b674c137-5bee-4e6c-bc03-29affd46b60f"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:30:28Z",
+      "message": "VirtualMachineInstance started.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:30:28Z",
+        "name": "vw-k8s-cp-01.18e2a78da6045cc4",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18444973",
+        "uid": "1f4a9d7c-1445-4462-95ec-aafb13f78db3"
+      },
+      "reason": "Started",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:45Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446255",
+        "uid": "783e19c3-1b3b-4ab5-81d1-a7e4cd3c03d7"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:45Z",
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:45Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare.18e2a7ad9c6210bf",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446258",
+        "uid": "99e7d98e-05fd-4082-a8c7-a4eeb3a0f1f2"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:46Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446256",
+        "uid": "783e19c3-1b3b-4ab5-81d1-a7e4cd3c03d7"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:46Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:46Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare.18e2a7addabff035",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446283",
+        "uid": "6ddd2c56-81aa-4a58-90b6-9f41b0d0ac9d"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:46Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446256",
+        "uid": "783e19c3-1b3b-4ab5-81d1-a7e4cd3c03d7"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:46Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:46Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare.18e2a7ade3b6e936",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446285",
+        "uid": "121cbb7a-93f7-4416-94d3-9f1c3b6720b3"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:46Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446256",
+        "uid": "783e19c3-1b3b-4ab5-81d1-a7e4cd3c03d7"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:46Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:46Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare.18e2a7ade46ca06b",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446286",
+        "uid": "e7d03c6c-6db4-4a7b-bfb3-785106e2f405"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:49Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446316",
+        "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:49Z",
+      "message": "find fit node(gpu-4), 0 nodes not fit, 1 nodes fit(gpu-4:6.61)",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:49Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker.18e2a7ae8131a2ab",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446321",
+        "uid": "a6ad5063-7243-4427-a38f-063080a3c983"
+      },
+      "reason": "FilteringSucceed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:49Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446319",
+        "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:49Z",
+      "message": "Successfully binding node [gpu-4] to vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:49Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker.18e2a7ae86869f5e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446325",
+        "uid": "09f90851-2cdd-4bde-8fc8-9f7ca1d2b7c5"
+      },
+      "reason": "BindingSucceed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "action": "Binding",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-28T09:32:49.670715Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446316",
+        "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:49Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker.18e2a7ae8691f001",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446326",
+        "uid": "4f27d3ff-a870-4ea4-beaf-18a106d366b2"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+      "source": {},
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:50Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446324",
+        "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:50Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:50Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker.18e2a7aecebeade2",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446349",
+        "uid": "45067358-aa84-48a9-8740-a62ec1c45d2a"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:51Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446324",
+        "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:51Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:51Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker.18e2a7aeeaa98f13",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446351",
+        "uid": "635edd03-b270-4429-abc9-b83278f5d8ae"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:51Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446324",
+        "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:51Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:51Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker.18e2a7aeecc76cf1",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446352",
+        "uid": "9824940c-80f5-4c65-817b-8d836fc4b915"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:51Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446324",
+        "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:51Z",
+      "message": "Readiness probe failed: ",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:51Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker.18e2a7aeef03b9fa",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446354",
+        "uid": "88a38034-fd68-4c90-9e63-68186e696c3e"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443661",
+        "uid": "1035bbdb-1694-4e46-89f9-8c9d84455ebc"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:29Z",
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:29Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare.18e2a771efb6630b",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443664",
+        "uid": "74732898-8669-4b8a-a6db-81321d80ae06"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:30Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443662",
+        "uid": "1035bbdb-1694-4e46-89f9-8c9d84455ebc"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:30Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:30Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare.18e2a7722e4af066",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443674",
+        "uid": "fb330099-5cda-446d-ac37-d1d8c067bf19"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:30Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443662",
+        "uid": "1035bbdb-1694-4e46-89f9-8c9d84455ebc"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:30Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:30Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare.18e2a77238010736",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443677",
+        "uid": "86778e5e-9be3-484c-acb3-7cfd04bd5652"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:30Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443662",
+        "uid": "1035bbdb-1694-4e46-89f9-8c9d84455ebc"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:30Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:30Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-prepare.18e2a7723891994c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443678",
+        "uid": "f7bcd8ef-1153-4e03-a0c5-15fcbafb7ccd"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:29Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446072",
+        "uid": "eb81054e-b358-449a-8d80-1ebab3bcbe85"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:29Z",
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:29Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim.18e2a7a9ee574660",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446076",
+        "uid": "f203439a-e951-43ce-85e6-83109a8c33ef"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:31Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446073",
+        "uid": "eb81054e-b358-449a-8d80-1ebab3bcbe85"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:31Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:31Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim.18e2a7aa2ffb1470",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446102",
+        "uid": "4f7c9515-e1c9-4a9b-ac31-125feecba246"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:31Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446073",
+        "uid": "eb81054e-b358-449a-8d80-1ebab3bcbe85"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:31Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:31Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim.18e2a7aa383b5e00",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446104",
+        "uid": "ce652cbe-b60d-4f9f-8b92-0d1d3b14a143"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:31Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446073",
+        "uid": "eb81054e-b358-449a-8d80-1ebab3bcbe85"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:31Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:31Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-reclaim.18e2a7aa38eb47c1",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446105",
+        "uid": "1c4f47a3-a924-494d-86fd-04a33261703a"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:33Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443711",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:33Z",
+      "message": "find fit node(gpu-4), 0 nodes not fit, 1 nodes fit(gpu-4:6.61)",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:33Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a772d4c18246",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443716",
+        "uid": "11f38485-848a-44c9-af56-f540ef7e5ae2"
+      },
+      "reason": "FilteringSucceed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:33Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443714",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:33Z",
+      "message": "Successfully binding node [gpu-4] to vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:33Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a772d9c78966",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443720",
+        "uid": "ac806d1c-2f00-4606-910c-1b88e7773b2d"
+      },
+      "reason": "BindingSucceed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "action": "Binding",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-28T09:28:33.369656Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443711",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:33Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a772d9d603ce",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443721",
+        "uid": "38faa501-d3ac-4cdd-aa72-71e948f1ea57"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+      "source": {},
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:34Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443719",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:34Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:34Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a7732250f0c9",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443745",
+        "uid": "4649e438-712b-4647-b907-a544d5e1a3a7"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:35Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443719",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:35Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:35Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a773408de766",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443749",
+        "uid": "cc440c4a-0a5b-48bf-8b42-83367218012b"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:35Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443719",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:35Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:35Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a77342816873",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443750",
+        "uid": "8aeafdf6-2cd2-4e34-8ea7-1b38905d8e1f"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 2,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:35Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443719",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:35Z",
+      "message": "Readiness probe failed: ",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:35Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a77344c44581",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443753",
+        "uid": "d3930f44-6ba3-4929-9ab0-20e657c59f7f"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:31:55Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443719",
+        "uid": "63227643-3744-4649-b5e3-05e35df65aa6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:31:55Z",
+      "message": "Stopping container main",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:31:55Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-4431ab49-worker.18e2a7a1e9dae11a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445751",
+        "uid": "b61e094e-c598-498c-9cdb-65a1d3485ede"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:10Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427118",
+        "uid": "b9ef99a8-0a1d-4b9f-bc51-718b79f75656"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:10Z",
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:10Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare.18e2a5bc79b422f2",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427121",
+        "uid": "00acecec-65e6-444d-a0de-fa760935c914"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:11Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427119",
+        "uid": "b9ef99a8-0a1d-4b9f-bc51-718b79f75656"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:11Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:11Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare.18e2a5bcb7b58ad9",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427132",
+        "uid": "36adf8e9-4ba5-453e-9ff1-61235af6a0e0"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:11Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427119",
+        "uid": "b9ef99a8-0a1d-4b9f-bc51-718b79f75656"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:11Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:11Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare.18e2a5bcc3911157",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427141",
+        "uid": "6be99b83-923e-48f1-853a-9d7797875b2e"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:11Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427119",
+        "uid": "b9ef99a8-0a1d-4b9f-bc51-718b79f75656"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:11Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:11Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-prepare.18e2a5bcc42b54ff",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427143",
+        "uid": "99672820-f1dc-4fa9-9800-985486d64396"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:13Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443480",
+        "uid": "29fc0ece-c10a-474e-9f69-069585f024c6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:13Z",
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:13Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim.18e2a76e51fa1582",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443484",
+        "uid": "ed1e2fd9-71be-4843-8bb2-059bcaa2d4d4"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "default-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "default-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:14Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443482",
+        "uid": "29fc0ece-c10a-474e-9f69-069585f024c6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:14Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:14Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim.18e2a76e8b3c11b7",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443496",
+        "uid": "ec3b66a8-42ee-4e56-be02-4486d0bd527b"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:15Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443482",
+        "uid": "29fc0ece-c10a-474e-9f69-069585f024c6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:15Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:15Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim.18e2a76e95ff5837",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443498",
+        "uid": "577a617f-33a2-4a88-b129-a9647276a58c"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:15Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443482",
+        "uid": "29fc0ece-c10a-474e-9f69-069585f024c6"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:15Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:15Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-reclaim.18e2a76e9689f503",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443499",
+        "uid": "fe05a2e6-affd-482e-b127-53b68ad85fc5"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:14Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427185",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:14Z",
+      "message": "find fit node(gpu-4), 0 nodes not fit, 1 nodes fit(gpu-4:6.61)",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:14Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a5bd7e1713a7",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427190",
+        "uid": "91bb0e72-220a-4f1b-92d3-9dd3292de9a0"
+      },
+      "reason": "FilteringSucceed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:15Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427188",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:15Z",
+      "message": "Successfully binding node [gpu-4] to vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:15Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a5bd83910e6a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427194",
+        "uid": "3639042a-42ed-49df-b21b-d45b8dee98b2"
+      },
+      "reason": "BindingSucceed",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "",
+      "source": {
+        "component": "hami-scheduler"
+      },
+      "type": "Normal"
+    },
+    {
+      "action": "Binding",
+      "apiVersion": "v1",
+      "eventTime": "2026-10-28T08:57:15.022218Z",
+      "firstTimestamp": null,
+      "involvedObject": {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427185",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": null,
+      "message": "Successfully assigned vmweave-nested-k8s/vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker to gpu-4",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:15Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a5bd839ab811",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427195",
+        "uid": "f7176988-9215-4024-b753-1c74ea90aab2"
+      },
+      "reason": "Scheduled",
+      "reportingComponent": "hami-scheduler",
+      "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+      "source": {},
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:16Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427193",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:16Z",
+      "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da\" already present on machine and can be accessed by the pod",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:16Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a5bdc5f3f4a5",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427221",
+        "uid": "c8a426e5-c9de-4ecc-bb63-94a22419db8f"
+      },
+      "reason": "Pulled",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:16Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427193",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:16Z",
+      "message": "Container created",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:16Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a5bde50c9a99",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427223",
+        "uid": "e5ef534e-4d0d-4201-aef2-8516a32d55a4"
+      },
+      "reason": "Created",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:16Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427193",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:16Z",
+      "message": "Container started",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:16Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a5bde6f363af",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427224",
+        "uid": "5fd4c5c6-480d-4151-a11b-8080944f8fdc"
+      },
+      "reason": "Started",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:16Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427193",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:16Z",
+      "message": "Readiness probe failed: ",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:16Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a5bde8d99ec7",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427226",
+        "uid": "72ecf4ac-12fa-4887-88f2-3d639af71c6c"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:38Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427193",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:27:38Z",
+      "message": "Stopping container main",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:38Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a76614844833",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443106",
+        "uid": "357b5bc5-8d82-4d45-8c25-a80ca9511f10"
+      },
+      "reason": "Killing",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:39Z",
+      "involvedObject": {
+        "apiVersion": "v1",
+        "fieldPath": "spec.containers{main}",
+        "kind": "Pod",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427193",
+        "uid": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:27:39Z",
+      "message": "Readiness probe errored and resulted in unknown state: rpc error: code = NotFound desc = container is not created or running: checking if PID of 29b66bdb8f0974c23c2009fe9318ad127950c6268ddb993762ca7df821863e23 is running failed: container process not found",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:39Z",
+        "name": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker.18e2a76635ce0ab7",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443111",
+        "uid": "377a5b7d-765b-49a9-a2a2-5e949e8b6674"
+      },
+      "reason": "Unhealthy",
+      "reportingComponent": "kubelet",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "kubelet",
+        "host": "gpu-4"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 4,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:37Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18421992",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:01Z",
+      "message": "Started the virtual machine by creating the new virtual machine instance vw-k8s-worker-01",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "name": "vw-k8s-worker-01.18e2a53703f8f602",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446446",
+        "uid": "aa61e9c0-f731-4451-be05-0a6d78fcff06"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:37Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422023",
+        "uid": "2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:37Z",
+      "message": "Created virtual machine pod virt-launcher-vw-k8s-worker-01-6zqff",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:37Z",
+        "name": "vw-k8s-worker-01.18e2a53710db1a57",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422028",
+        "uid": "9710e245-363c-435d-a837-050297b180fd"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:45Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422118",
+        "uid": "2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:45Z",
+      "message": "VirtualMachineInstance defined.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:45Z",
+        "name": "vw-k8s-worker-01.18e2a538f5d82523",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422163",
+        "uid": "e5dcb0e8-1fc7-4e6c-b20f-4c9f80f9fc6e"
+      },
+      "reason": "Created",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:47:45Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422118",
+        "uid": "2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:47:45Z",
+      "message": "VirtualMachineInstance started.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:47:45Z",
+        "name": "vw-k8s-worker-01.18e2a538f92bd6fb",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18422165",
+        "uid": "1cd6e719-d3e5-4753-8426-a5ddf06444b6"
+      },
+      "reason": "Started",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:56:59Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426964",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:56:59Z",
+      "message": "Stopped the virtual machine by deleting the virtual machine instance 2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:56:59Z",
+        "name": "vw-k8s-worker-01.18e2a5b9d7e7536a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426967",
+        "uid": "b5343db7-36f1-4773-a596-af097b831efd"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 4,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:56:59Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426966",
+        "uid": "2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:08Z",
+      "message": "Deleted virtual machine pod virt-launcher-vw-k8s-worker-01-6zqff",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:56:59Z",
+        "name": "vw-k8s-worker-01.18e2a5b9d88c8e16",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427085",
+        "uid": "8f17d231-f390-4d56-831a-be25e654d773"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 2,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:56:59Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426966",
+        "uid": "2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:56:59Z",
+      "message": "Signaled Graceful Shutdown",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:56:59Z",
+        "name": "vw-k8s-worker-01.18e2a5b9da64c1e5",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426977",
+        "uid": "390cd6b7-e124-4e97-99b1-3220317c55b8"
+      },
+      "reason": "ShuttingDown",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 4,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:03Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426978",
+        "uid": "2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:04Z",
+      "message": "Signaled Deletion",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:03Z",
+        "name": "vw-k8s-worker-01.18e2a5badf574df6",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427040",
+        "uid": "58c0c458-1cc8-4682-8355-c700777cf3c6"
+      },
+      "reason": "Deleted",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:03Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18426978",
+        "uid": "2dbc4c61-eebd-49ab-8fac-911f1ea9c4bb"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:03Z",
+      "message": "The VirtualMachineInstance was shut down.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:03Z",
+        "name": "vw-k8s-worker-01.18e2a5bae2e0641e",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427024",
+        "uid": "ae45a249-8033-4cc4-94a4-20344c7728a1"
+      },
+      "reason": "Stopped",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 10,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:10Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427109",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:12Z",
+      "message": "Error creating virtual machine instance: admission webhook \"validate.vmweave.io\" denied the request: managed VM requires channel binding",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:10Z",
+        "name": "vw-k8s-worker-01.18e2a5bc6fec0675",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427154",
+        "uid": "589d6057-99eb-4849-b9d2-34bebb9fba25"
+      },
+      "reason": "FailedCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 22,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:14Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427178",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:46Z",
+      "message": "Error creating virtual machine instance: admission webhook \"validate.vmweave.io\" denied the request: channel unavailable",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:14Z",
+        "name": "vw-k8s-worker-01.18e2a5bd719698e7",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446265",
+        "uid": "3baf6f33-16cb-4d9e-a068-d277fc8fb749"
+      },
+      "reason": "FailedCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:25Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427309",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:25Z",
+      "message": "Created virtual machine pod virt-launcher-vw-k8s-worker-01-jtf28",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:25Z",
+        "name": "vw-k8s-worker-01.18e2a5c00b3b689f",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427318",
+        "uid": "d1ad4a99-2424-41d5-9f9d-1363a3297aa3"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:32Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427385",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:32Z",
+      "message": "VirtualMachineInstance defined.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:32Z",
+        "name": "vw-k8s-worker-01.18e2a5c198c25ac5",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427412",
+        "uid": "ecc4780b-9402-4c0c-aa42-f484f2a53549"
+      },
+      "reason": "Created",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T08:57:32Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427385",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T08:57:32Z",
+      "message": "VirtualMachineInstance started.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T08:57:32Z",
+        "name": "vw-k8s-worker-01.18e2a5c19c71ba2b",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18427414",
+        "uid": "2dab4244-ee15-45c9-b50a-f6e13b031bd9"
+      },
+      "reason": "Started",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:38Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443088",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:27:38Z",
+      "message": "Stopped the virtual machine by deleting the virtual machine instance 553454f9-310b-4bbf-bd4c-6468392b28a3",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:38Z",
+        "name": "vw-k8s-worker-01.18e2a7661159baa9",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443092",
+        "uid": "7c14206a-03bf-4d07-892b-a440c10f777d"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 5,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:38Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443091",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:14Z",
+      "message": "Deleted virtual machine pod virt-launcher-vw-k8s-worker-01-jtf28",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:38Z",
+        "name": "vw-k8s-worker-01.18e2a76611fbbfee",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443490",
+        "uid": "27966d6d-a26d-4040-87c2-ce8701e920a9"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:27:38Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443091",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:27:38Z",
+      "message": "Signaled Graceful Shutdown",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:27:38Z",
+        "name": "vw-k8s-worker-01.18e2a76613b8919b",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443103",
+        "uid": "22999609-2fb3-4edd-8507-0be9efdc3f52"
+      },
+      "reason": "ShuttingDown",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:08Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443102",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:08Z",
+      "message": "VirtualMachineInstance stopping",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:08Z",
+        "name": "vw-k8s-worker-01.18e2a76d21aeb35a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443412",
+        "uid": "4ae19ebc-0078-42e4-bc1c-be0b7bb63b49"
+      },
+      "reason": "Deleted",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 3,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:08Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443102",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:08Z",
+      "message": "Signaled Deletion",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:08Z",
+        "name": "vw-k8s-worker-01.18e2a76d22ecd431",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443419",
+        "uid": "c0da48fe-6a02-45e7-a0f9-ce3fe4cb98b3"
+      },
+      "reason": "Deleted",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:08Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443102",
+        "uid": "553454f9-310b-4bbf-bd4c-6468392b28a3"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:08Z",
+      "message": "The VirtualMachineInstance crashed.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:08Z",
+        "name": "vw-k8s-worker-01.18e2a76d25b85015",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443415",
+        "uid": "27888edd-3a47-45cc-b5f5-9e4b54c964be"
+      },
+      "reason": "Stopped",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:44Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443885",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:44Z",
+      "message": "Created virtual machine pod virt-launcher-vw-k8s-worker-01-x7ztf",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:44Z",
+        "name": "vw-k8s-worker-01.18e2a7758a36858c",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443888",
+        "uid": "29cd308d-fc2a-4871-a633-bd31ab8981c2"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:51Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443956",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:51Z",
+      "message": "VirtualMachineInstance defined.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:51Z",
+        "name": "vw-k8s-worker-01.18e2a77710fa5807",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443979",
+        "uid": "0f935294-b10d-4589-aba6-b8e1b9bc93bb"
+      },
+      "reason": "Created",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:28:51Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443956",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:28:51Z",
+      "message": "VirtualMachineInstance started.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:28:51Z",
+        "name": "vw-k8s-worker-01.18e2a77714ac3165",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18443995",
+        "uid": "db48b73c-a0a6-428b-bbde-ad3d45737e53"
+      },
+      "reason": "Started",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:31:55Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445732",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:31:55Z",
+      "message": "Stopped the virtual machine by deleting the virtual machine instance 160ec636-c40f-47f5-886e-3ca9d2e86ff9",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:31:55Z",
+        "name": "vw-k8s-worker-01.18e2a7a1e5a6f11d",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445736",
+        "uid": "d3154a31-71c5-4b9a-8ede-5e48400004cf"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 5,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:31:55Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445735",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:30Z",
+      "message": "Deleted virtual machine pod virt-launcher-vw-k8s-worker-01-x7ztf",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:31:55Z",
+        "name": "vw-k8s-worker-01.18e2a7a1e6590911",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446082",
+        "uid": "bf40024f-6c43-4b5e-9039-d4d2309f4510"
+      },
+      "reason": "SuccessfulDelete",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:31:55Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445735",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:31:55Z",
+      "message": "Signaled Graceful Shutdown",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:31:55Z",
+        "name": "vw-k8s-worker-01.18e2a7a1e805a368",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445746",
+        "uid": "a066545c-7205-4808-a808-45baebd9b507"
+      },
+      "reason": "ShuttingDown",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:25Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445745",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:25Z",
+      "message": "VirtualMachineInstance stopping",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:25Z",
+        "name": "vw-k8s-worker-01.18e2a7a8f5cd37da",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446018",
+        "uid": "227ad29c-096e-499a-9845-534f13fefa37"
+      },
+      "reason": "Deleted",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 3,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:25Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445745",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:25Z",
+      "message": "Signaled Deletion",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:25Z",
+        "name": "vw-k8s-worker-01.18e2a7a8f69579c1",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446026",
+        "uid": "222d7611-13e4-4ea3-8ef3-e6b5d93cab82"
+      },
+      "reason": "Deleted",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:32:25Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18445745",
+        "uid": "160ec636-c40f-47f5-886e-3ca9d2e86ff9"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:32:25Z",
+      "message": "The VirtualMachineInstance crashed.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:32:25Z",
+        "name": "vw-k8s-worker-01.18e2a7a8f9a9a7c9",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446022",
+        "uid": "67ba6dd8-5b36-4206-940b-68a9ba487fc4"
+      },
+      "reason": "Stopped",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Warning"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:01Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446448",
+        "uid": "8365e184-8715-42a3-954d-b82dc01e3a41"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:01Z",
+      "message": "Created virtual machine pod virt-launcher-vw-k8s-worker-01-gr5gw",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:01Z",
+        "name": "vw-k8s-worker-01.18e2a7b137647532",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446453",
+        "uid": "536f199b-d4a0-4842-862a-85fbcaa1c024"
+      },
+      "reason": "SuccessfulCreate",
+      "reportingComponent": "virtualmachine-controller",
+      "reportingInstance": "",
+      "source": {
+        "component": "virtualmachine-controller"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:07Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446520",
+        "uid": "8365e184-8715-42a3-954d-b82dc01e3a41"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:07Z",
+      "message": "VirtualMachineInstance defined.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:07Z",
+        "name": "vw-k8s-worker-01.18e2a7b2c86eaac3",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446543",
+        "uid": "d185a93f-664d-4c12-962d-e88576031b8d"
+      },
+      "reason": "Created",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    },
+    {
+      "apiVersion": "v1",
+      "count": 1,
+      "eventTime": null,
+      "firstTimestamp": "2026-10-28T09:33:08Z",
+      "involvedObject": {
+        "apiVersion": "kubevirt.io/v1",
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446520",
+        "uid": "8365e184-8715-42a3-954d-b82dc01e3a41"
+      },
+      "kind": "Event",
+      "lastTimestamp": "2026-10-28T09:33:08Z",
+      "message": "VirtualMachineInstance started.",
+      "metadata": {
+        "creationTimestamp": "2026-10-28T09:33:08Z",
+        "name": "vw-k8s-worker-01.18e2a7b2cc22b12a",
+        "namespace": "vmweave-nested-k8s",
+        "resourceVersion": "18446546",
+        "uid": "aca159b0-292b-4da3-bd7f-87b249181c5b"
+      },
+      "reason": "Started",
+      "reportingComponent": "virt-handler",
+      "reportingInstance": "gpu-4",
+      "source": {
+        "component": "virt-handler",
+        "host": "gpu-4"
+      },
+      "type": "Normal"
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

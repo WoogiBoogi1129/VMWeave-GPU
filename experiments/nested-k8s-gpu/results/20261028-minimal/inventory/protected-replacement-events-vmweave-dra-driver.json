@@ -1,0 +1,326 @@
+[
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:52Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{gpus}",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-5jld4",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "14716179",
+      "uid": "8bcfe93f-3c9c-4a49-b11b-d5789c52284f"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:52Z",
+    "message": "Stopping container gpus",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:52Z",
+      "name": "hami-dra-driver-kubelet-plugin-5jld4.18e2a7693d0237b6",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443246",
+      "uid": "b40e1740-33b0-4f63-b897-20af154befc0"
+    },
+    "reason": "Killing",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:52Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443250",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:52Z",
+    "message": "Successfully assigned vmweave-dra-driver/hami-dra-driver-kubelet-plugin-fcs7d to gpu-4",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:52Z",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d.18e2a769699c7dc4",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443254",
+      "uid": "5817abd7-1831-40cd-bc69-cb32dd9e8f7e"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:53Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.initContainers{init-container}",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443252",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:53Z",
+    "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:53Z",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d.18e2a769a714d6b3",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443276",
+      "uid": "661d03c1-f1c2-4cd6-8361-e3e8eea9d556"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:54Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.initContainers{init-container}",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443252",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:54Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:54Z",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d.18e2a769b4112dc5",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443278",
+      "uid": "6805a3d5-3d09-472f-b963-c9bddc9556b6"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:54Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.initContainers{init-container}",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443252",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:54Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:54Z",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d.18e2a769b4f63bdf",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443279",
+      "uid": "300fa17d-d1bd-4602-b484-af0e8a5e3cfc"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:54Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{gpus}",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443252",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:54Z",
+    "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:54Z",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d.18e2a769d478dc1e",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443281",
+      "uid": "f822f2a6-b927-4599-8c00-2d07e5a454b2"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:54Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{gpus}",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443252",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:54Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:54Z",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d.18e2a769e2c24177",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443285",
+      "uid": "d67d0635-2f4d-4d44-b987-5a26c8848cce"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:54Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{gpus}",
+      "kind": "Pod",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443252",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:54Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:54Z",
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d.18e2a769e3c31c50",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443286",
+      "uid": "03df45ad-31bc-4998-b2ab-911967339cec"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:52Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "DaemonSet",
+      "name": "hami-dra-driver-kubelet-plugin",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443239",
+      "uid": "8786f0ed-cf12-4509-ab0a-bb5d2a2b496b"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:52Z",
+    "message": "Deleted pod: hami-dra-driver-kubelet-plugin-5jld4",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:52Z",
+      "name": "hami-dra-driver-kubelet-plugin.18e2a7693bda3b95",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443244",
+      "uid": "5a7a05dc-562f-43f5-8978-8950db1e4381"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "daemonset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "daemonset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:27:52Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "DaemonSet",
+      "name": "hami-dra-driver-kubelet-plugin",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443245",
+      "uid": "8786f0ed-cf12-4509-ab0a-bb5d2a2b496b"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:27:52Z",
+    "message": "Created pod: hami-dra-driver-kubelet-plugin-fcs7d",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:52Z",
+      "name": "hami-dra-driver-kubelet-plugin.18e2a769690ae02a",
+      "namespace": "vmweave-dra-driver",
+      "resourceVersion": "18443251",
+      "uid": "51bfc0ae-6546-4eae-8371-5b186ebbf45f"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "daemonset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "daemonset-controller"
+    },
+    "type": "Normal"
+  }
+]

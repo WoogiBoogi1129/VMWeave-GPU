@@ -44,6 +44,7 @@ python3 -m venv .local/docs-venv
 - 기존 배포: [새 API 이전](docs/guides/migrate-to-vmweave-api.md)
 - CPU 환경: [제어기 설치와 검증](docs/getting-started/cpu-control-plane.md)
 - GPU 환경: [요구 조건과 준비 순서](docs/getting-started/gpu.md)
+- VM 내부 Kubernetes: [기존 중앙 Operator 실습 절차](docs/guides/nested-k8s-lab.md) · [기존 실험 결과·캡처](experiments/nested-k8s-gpu/README.md)
 - 소스 검증: [빌드·테스트](docs/development/index.md)
 - 기존 자료: [개발 이력과 출처](docs/history/index.md)
 

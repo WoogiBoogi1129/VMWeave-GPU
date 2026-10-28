@@ -1,0 +1,69 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "annotations": {
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"vmweave.io/v1alpha1\",\"kind\":\"SharedMemoryChannel\",\"metadata\":{\"annotations\":{},\"name\":\"vw-k8s-worker-01\",\"namespace\":\"vmweave-nested-k8s\"},\"spec\":{\"gid\":107,\"hookImage\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\",\"image\":\"ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574\",\"lifecycle\":\"VM\",\"pvcRef\":{\"name\":\"nested-shm\",\"uid\":\"77e3b065-d5af-4c6e-8019-0a76899d22b7\"},\"requestRef\":{\"name\":\"vw-k8s-worker-01\",\"uid\":\"ad412d97-8836-43d1-a3af-c7faca5ac649\"},\"sessions\":1,\"uid\":107,\"vmRef\":{\"name\":\"vw-k8s-worker-01\",\"uid\":\"d5fb5dad-f845-4ba7-8dbb-5508efb459b4\"},\"workerImage\":\"ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da\"}}\n"
+    },
+    "creationTimestamp": "2026-10-28T08:57:10Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 1,
+    "name": "vw-k8s-worker-01",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      }
+    ],
+    "resourceVersion": "18427547",
+    "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "nested-shm",
+      "uid": "77e3b065-d5af-4c6e-8019-0a76899d22b7"
+    },
+    "requestRef": {
+      "name": "vw-k8s-worker-01",
+      "uid": "ad412d97-8836-43d1-a3af-c7faca5ac649"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "vw-k8s-worker-01",
+      "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+    },
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da"
+  },
+  "status": {
+    "allocation": "5f55f1a42c3fc352f19c2484a2b48752",
+    "backend": "hami",
+    "compute": 50,
+    "everBound": true,
+    "generation": "f3410c38f548e4f72a757b0f69e4682d",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "memoryMiB": 2048,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "requestGeneration": 1,
+    "resourcePrefix": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4",
+    "sessions": [
+      "33fca7b99f19401ceba902ca2b6ddf11"
+    ],
+    "vmiUID": "553454f9-310b-4bbf-bd4c-6468392b28a3",
+    "workerPodUID": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+  }
+}

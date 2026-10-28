@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/build_workload.py", line 12, in <module>
+    try:save('raw/workload-build.log',ssh('worker',cmd,stderr=subprocess.STDOUT))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 20, in ssh
+    return run(['ssh','-i',PRIVATE/'id_ed25519','-o','StrictHostKeyChecking=accept-new','-o',f'UserKnownHostsFile={PRIVATE}/known_hosts','-o','ConnectTimeout=8',f'ubuntu@{ip}',command],**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 10, in run
+    return subprocess.check_output([str(x) for x in args],text=True,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-i', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/id_ed25519', '-o', 'StrictHostKeyChecking=accept-new', '-o', 'UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/known_hosts', '-o', 'ConnectTimeout=8', 'ubuntu@10.99.41.66', "set -eu\ncd /home/ubuntu/nested/workload\ncp /opt/vmweave/lib/libvmweave_guest.so .\ngcc -std=c11 -O2 -Wall -Wextra -Werror correctness.c -L. -lvmweave_guest -o correctness\nsudo podman build --pull=missing -t localhost/nested-gpu:20261028 -f Containerfile .\nsudo podman image inspect localhost/nested-gpu:20261028 --format '{{.Id}}'\nsha256sum correctness libvmweave_guest.so\n"]' returned non-zero exit status 125.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/build_workload.py", line 13, in <module>
+    except subprocess.CalledProcessError as e:save('raw/workload-build-failed.log',e.output);raise RuntimeError('build failed')
+                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: build failed

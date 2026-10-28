@@ -1,0 +1,230 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "creationTimestamp": "2026-10-28T09:26:51Z",
+    "generateName": "g4-sigkill-",
+    "generation": 1,
+    "labels": {
+      "batch.kubernetes.io/controller-uid": "2fcad1c8-1137-479a-9135-771d28355659",
+      "batch.kubernetes.io/job-name": "g4-sigkill",
+      "controller-uid": "2fcad1c8-1137-479a-9135-771d28355659",
+      "job-name": "g4-sigkill",
+      "test": "g4-sigkill"
+    },
+    "name": "g4-sigkill-2n2s4",
+    "namespace": "nested-validation",
+    "ownerReferences": [
+      {
+        "apiVersion": "batch/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "Job",
+        "name": "g4-sigkill",
+        "uid": "2fcad1c8-1137-479a-9135-771d28355659"
+      }
+    ],
+    "resourceVersion": "4432",
+    "uid": "4af1e304-95ce-4359-bfd4-2be283df9798"
+  },
+  "spec": {
+    "automountServiceAccountToken": false,
+    "containers": [
+      {
+        "env": [
+          {
+            "name": "VMWEAVE_BROKER_SOCKET",
+            "value": "/run/vmweave/gpu.sock"
+          },
+          {
+            "name": "LD_LIBRARY_PATH",
+            "value": "/opt/vmweave/lib"
+          }
+        ],
+        "image": "localhost/nested-gpu@sha256:82a988dfa68d030c31a2ca0cac9543a5f655a0d40e151d5b60cb0e3b770a00ff",
+        "imagePullPolicy": "Never",
+        "name": "gpu",
+        "resources": {
+          "limits": {
+            "cpu": "1",
+            "memory": "512Mi"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "128Mi"
+          }
+        },
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/run/vmweave",
+            "name": "broker",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "vw-k8s-worker-01",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "vw-k8s-worker-01"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Never",
+    "schedulerName": "default-scheduler",
+    "securityContext": {
+      "runAsGroup": 998,
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "terminationGracePeriodSeconds": 10,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "hostPath": {
+          "path": "/run/vmweave",
+          "type": "Directory"
+        },
+        "name": "broker"
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:26:57Z",
+        "observedGeneration": 1,
+        "status": "False",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:26:51Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:26:56Z",
+        "observedGeneration": 1,
+        "reason": "PodFailed",
+        "status": "False",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:26:56Z",
+        "observedGeneration": 1,
+        "reason": "PodFailed",
+        "status": "False",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:26:51Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "100m",
+          "memory": "128Mi"
+        },
+        "containerID": "cri-o://7d6bcba92502c8fc4c5487263b632e8be9c20cf271285d9c3c2b3ec7f65c4dff",
+        "image": "localhost/nested-gpu:20261028",
+        "imageID": "localhost/nested-gpu@sha256:82a988dfa68d030c31a2ca0cac9543a5f655a0d40e151d5b60cb0e3b770a00ff",
+        "lastState": {},
+        "name": "gpu",
+        "ready": false,
+        "resources": {
+          "limits": {
+            "cpu": "1",
+            "memory": "512Mi"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "128Mi"
+          }
+        },
+        "restartCount": 0,
+        "started": false,
+        "state": {
+          "terminated": {
+            "containerID": "cri-o://7d6bcba92502c8fc4c5487263b632e8be9c20cf271285d9c3c2b3ec7f65c4dff",
+            "exitCode": 137,
+            "finishedAt": "2026-10-28T09:26:56Z",
+            "reason": "Error",
+            "startedAt": "2026-10-28T09:26:51Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 998,
+            "supplementalGroups": [
+              998
+            ],
+            "uid": 1000
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/run/vmweave",
+            "name": "broker",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "hostIP": "10.245.0.11",
+    "hostIPs": [
+      {
+        "ip": "10.245.0.11"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Failed",
+    "podIP": "10.246.1.134",
+    "podIPs": [
+      {
+        "ip": "10.246.1.134"
+      }
+    ],
+    "qosClass": "Burstable",
+    "startTime": "2026-10-28T09:26:51Z"
+  }
+}

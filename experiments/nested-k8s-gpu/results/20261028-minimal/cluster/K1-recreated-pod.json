@@ -1,0 +1,185 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "creationTimestamp": "2026-10-28T09:24:36Z",
+    "generateName": "cpu-web-78fcdb85c4-",
+    "generation": 1,
+    "labels": {
+      "app": "cpu-web",
+      "pod-template-hash": "78fcdb85c4"
+    },
+    "name": "cpu-web-78fcdb85c4-rvwl4",
+    "namespace": "nested-validation",
+    "ownerReferences": [
+      {
+        "apiVersion": "apps/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "ReplicaSet",
+        "name": "cpu-web-78fcdb85c4",
+        "uid": "677a0deb-513b-4a04-92c0-3225cbdb1789"
+      }
+    ],
+    "resourceVersion": "4010",
+    "uid": "b0da8014-9f5b-49c8-8708-b097ef8cc42f"
+  },
+  "spec": {
+    "automountServiceAccountToken": false,
+    "containers": [
+      {
+        "command": [
+          "sh",
+          "-ec",
+          "mkdir -p /tmp/www; echo nested-k8s-ok > /tmp/www/index.html; exec httpd -f -p 8080 -h /tmp/www"
+        ],
+        "image": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "web",
+        "resources": {
+          "limits": {
+            "cpu": "100m",
+            "memory": "64Mi"
+          },
+          "requests": {
+            "cpu": "10m",
+            "memory": "16Mi"
+          }
+        },
+        "securityContext": {
+          "capabilities": {
+            "add": [
+              "NET_RAW"
+            ]
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File"
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "vw-k8s-worker-01",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "vw-k8s-worker-01"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Always",
+    "schedulerName": "default-scheduler",
+    "securityContext": {},
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:24:37Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:24:36Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:24:37Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:24:37Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-28T09:24:36Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "10m",
+          "memory": "16Mi"
+        },
+        "containerID": "cri-o://1a3c31c510d5f2b869b20d87a477cd79bd1d9399fcaccdf8b9edb9463b77b5e8",
+        "image": "docker.io/library/busybox:1.36.1",
+        "imageID": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+        "lastState": {},
+        "name": "web",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "cpu": "100m",
+            "memory": "64Mi"
+          },
+          "requests": {
+            "cpu": "10m",
+            "memory": "16Mi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-28T09:24:36Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0,
+              10
+            ],
+            "uid": 0
+          }
+        }
+      }
+    ],
+    "hostIP": "10.245.0.11",
+    "hostIPs": [
+      {
+        "ip": "10.245.0.11"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Running",
+    "podIP": "10.246.1.175",
+    "podIPs": [
+      {
+        "ip": "10.246.1.175"
+      }
+    ],
+    "qosClass": "Burstable",
+    "startTime": "2026-10-28T09:24:36Z"
+  }
+}

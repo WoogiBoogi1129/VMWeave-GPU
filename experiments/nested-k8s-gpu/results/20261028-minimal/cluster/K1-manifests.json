@@ -1,0 +1,130 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "cpu-web",
+        "namespace": "nested-validation"
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "cpu-web"
+          }
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "cpu-web"
+            }
+          },
+          "spec": {
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "name": "web",
+                "image": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+                "securityContext": {
+                  "capabilities": {
+                    "add": [
+                      "NET_RAW"
+                    ]
+                  }
+                },
+                "command": [
+                  "sh",
+                  "-ec",
+                  "mkdir -p /tmp/www; echo nested-k8s-ok > /tmp/www/index.html; exec httpd -f -p 8080 -h /tmp/www"
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "10m",
+                    "memory": "16Mi"
+                  },
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "64Mi"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "name": "cpu-web",
+        "namespace": "nested-validation"
+      },
+      "spec": {
+        "selector": {
+          "app": "cpu-web"
+        },
+        "ports": [
+          {
+            "port": 80,
+            "targetPort": 8080
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "cpu-client",
+        "namespace": "nested-validation"
+      },
+      "spec": {
+        "nodeSelector": {
+          "kubernetes.io/hostname": "vw-k8s-cp-01"
+        },
+        "tolerations": [
+          {
+            "key": "node-role.kubernetes.io/control-plane",
+            "operator": "Exists",
+            "effect": "NoSchedule"
+          }
+        ],
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "name": "client",
+            "image": "docker.io/library/busybox@sha256:73aaf090f3d85aa34ee199857f03fa3a95c8ede2ffd4cc2cdb5b94e566b11662",
+            "securityContext": {
+              "capabilities": {
+                "add": [
+                  "NET_RAW"
+                ]
+              }
+            },
+            "command": [
+              "sleep",
+              "3600"
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "10m",
+                "memory": "16Mi"
+              },
+              "limits": {
+                "cpu": "100m",
+                "memory": "64Mi"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

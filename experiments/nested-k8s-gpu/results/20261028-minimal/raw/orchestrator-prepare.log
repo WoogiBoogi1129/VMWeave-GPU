@@ -1,0 +1,37 @@
+namespace/vmweave-nested-k8s created
+
+namespace/vmweave-nested-system created
+
+Release "nested" does not exist. Installing it now.
+NAME: nested
+LAST DEPLOYED: Wed Oct 28 17:47:18 2026
+NAMESPACE: vmweave-nested-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+
+Release "nested" has been upgraded. Happy Helming!
+NAME: nested
+LAST DEPLOYED: Wed Oct 28 17:47:23 2026
+NAMESPACE: vmweave-nested-system
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+
+WARNING: Image format was not specified for '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/cp/disk.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+WARNING: Image format was not specified for '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/worker/disk.img' and probing guessed raw.
+         Automatically detecting the format is dangerous for raw images, write operations on block 0 will be restricted.
+         Specify the 'raw' format explicitly to remove the restrictions.
+persistentvolume/nested-cp created
+persistentvolumeclaim/nested-cp created
+virtualmachine.kubevirt.io/vw-k8s-cp-01 created
+service/vw-k8s-cp-01 created
+persistentvolume/nested-worker created
+persistentvolumeclaim/nested-worker created
+virtualmachine.kubevirt.io/vw-k8s-worker-01 created
+service/vw-k8s-worker-01 created
+persistentvolume/nested-shm created
+persistentvolumeclaim/nested-shm created
+

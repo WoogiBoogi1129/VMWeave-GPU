@@ -1,0 +1,13 @@
+Restart=no
+ActiveState=inactive
+Oct 28 08:57:46 vw-k8s-worker-01 systemd[1]: Started VMWeave persistent GPU session broker.
+Oct 28 08:57:46 vw-k8s-worker-01 python3[662]: VMWeave broker ready; no active CUDA job
+Oct 28 09:26:36 vw-k8s-worker-01 python3[662]: client disconnected: EOFError
+Oct 28 09:26:56 vw-k8s-worker-01 python3[662]: client disconnected: EOFError
+-- Boot 98622db4372b42f4ace1d2e5a7b489cf --
+Oct 28 09:29:06 vw-k8s-worker-01 systemd[1]: Started VMWeave persistent GPU session broker.
+Oct 28 09:29:06 vw-k8s-worker-01 python3[661]: VMWeave broker ready; no active CUDA job
+Oct 28 09:31:47 vw-k8s-worker-01 systemd[1]: Stopping VMWeave persistent GPU session broker...
+Oct 28 09:31:47 vw-k8s-worker-01 systemd[1]: vmweave-guest-broker.service: Deactivated successfully.
+Oct 28 09:31:47 vw-k8s-worker-01 systemd[1]: Stopped VMWeave persistent GPU session broker.
+Oct 28 09:31:47 vw-k8s-worker-01 systemd[1]: vmweave-guest-broker.service: Consumed 1.601s CPU time.

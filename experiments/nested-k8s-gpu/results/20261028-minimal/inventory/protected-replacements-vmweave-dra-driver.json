@@ -1,0 +1,556 @@
+[
+  {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:27:52Z",
+      "generateName": "hami-dra-driver-kubelet-plugin-",
+      "generation": 1,
+      "labels": {
+        "app.kubernetes.io/instance": "vmweave-dra",
+        "app.kubernetes.io/name": "hami-dra-driver",
+        "controller-revision-hash": "bd459b48",
+        "hami-dra-driver-component": "kubelet-plugin",
+        "pod-template-generation": "8"
+      },
+      "name": "hami-dra-driver-kubelet-plugin-fcs7d",
+      "namespace": "vmweave-dra-driver",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "DaemonSet",
+          "name": "hami-dra-driver-kubelet-plugin",
+          "uid": "8786f0ed-cf12-4509-ab0a-bb5d2a2b496b"
+        }
+      ],
+      "resourceVersion": "18443375",
+      "uid": "96062a08-fa5f-427d-b9b5-1d085f22b3fb"
+    },
+    "spec": {
+      "affinity": {
+        "nodeAffinity": {
+          "requiredDuringSchedulingIgnoredDuringExecution": {
+            "nodeSelectorTerms": [
+              {
+                "matchFields": [
+                  {
+                    "key": "metadata.name",
+                    "operator": "In",
+                    "values": [
+                      "gpu-4"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "containers": [
+        {
+          "args": [
+            "# Conditionally mask the params file to prevent this container from\n# recreating any missing GPU device nodes. This is necessary, for\n# example, when running under nvkind to limit the set GPUs governed\n# by the plugin even though it has cgroup access to all of them.\nif [ \"${MASK_NVIDIA_DRIVER_PARAMS}\" = \"true\" ]; then\n  cp /proc/driver/nvidia/params root/gpu-params\n  sed -i 's/^ModifyDeviceFiles: 1$/ModifyDeviceFiles: 0/' root/gpu-params\n  mount --bind root/gpu-params /proc/driver/nvidia/params\nfi\nhami-kubelet-plugin -v $(LOG_VERBOSITY)"
+          ],
+          "command": [
+            "bash",
+            "-c"
+          ],
+          "env": [
+            {
+              "name": "LOG_VERBOSITY",
+              "value": "4"
+            },
+            {
+              "name": "MASK_NVIDIA_DRIVER_PARAMS",
+              "value": "false"
+            },
+            {
+              "name": "NVIDIA_DRIVER_ROOT",
+              "value": "/"
+            },
+            {
+              "name": "NVIDIA_VISIBLE_DEVICES",
+              "value": "void"
+            },
+            {
+              "name": "CDI_ROOT",
+              "value": "/var/run/cdi"
+            },
+            {
+              "name": "NVIDIA_MIG_CONFIG_DEVICES",
+              "value": "all"
+            },
+            {
+              "name": "NODE_NAME",
+              "valueFrom": {
+                "fieldRef": {
+                  "apiVersion": "v1",
+                  "fieldPath": "spec.nodeName"
+                }
+              }
+            },
+            {
+              "name": "NAMESPACE",
+              "valueFrom": {
+                "fieldRef": {
+                  "apiVersion": "v1",
+                  "fieldPath": "metadata.namespace"
+                }
+              }
+            },
+            {
+              "name": "HAMI_HOST_HOOK_PATH",
+              "value": "/var/lib/vmweave-hami-dra"
+            },
+            {
+              "name": "IMAGE_NAME",
+              "value": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+            },
+            {
+              "name": "NVIDIA_CDI_HOOK_PATH",
+              "value": "/usr/local/nvidia/toolkit/nvidia-ctk"
+            },
+            {
+              "name": "FEATURE_GATES",
+              "value": "DynamicMIG=false,HAMiCoreSupport=true,MPSSupport=false,PassthroughSupport=false,TimeSlicingSettings=false,"
+            },
+            {
+              "name": "KUBELET_REGISTRAR_DIRECTORY_PATH",
+              "value": "/var/lib/kubelet/plugins_registry"
+            },
+            {
+              "name": "KUBELET_PLUGINS_DIRECTORY_PATH",
+              "value": "/var/lib/kubelet/plugins"
+            },
+            {
+              "name": "HEALTHCHECK_PORT",
+              "value": "51516"
+            },
+            {
+              "name": "VMWEAVE_DRA_GPU_UUIDS",
+              "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+            }
+          ],
+          "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+          "imagePullPolicy": "IfNotPresent",
+          "lifecycle": {
+            "postStart": {
+              "exec": {
+                "command": [
+                  "/bin/bash",
+                  "-c",
+                  "/usr/bin/vgpu-init.sh /usr/local/vgpu"
+                ]
+              }
+            }
+          },
+          "livenessProbe": {
+            "failureThreshold": 3,
+            "grpc": {
+              "port": 51516,
+              "service": "liveness"
+            },
+            "periodSeconds": 30,
+            "successThreshold": 1,
+            "timeoutSeconds": 10
+          },
+          "name": "gpus",
+          "resources": {},
+          "securityContext": {
+            "privileged": true
+          },
+          "startupProbe": {
+            "failureThreshold": 60,
+            "grpc": {
+              "port": 51516,
+              "service": "liveness"
+            },
+            "periodSeconds": 10,
+            "successThreshold": 1,
+            "timeoutSeconds": 10
+          },
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "volumeMounts": [
+            {
+              "mountPath": "/var/lib/kubelet/plugins_registry",
+              "name": "plugins-registry"
+            },
+            {
+              "mountPath": "/var/lib/kubelet/plugins",
+              "mountPropagation": "Bidirectional",
+              "name": "plugins"
+            },
+            {
+              "mountPath": "/var/run/cdi",
+              "name": "cdi"
+            },
+            {
+              "mountPath": "/driver-root",
+              "mountPropagation": "HostToContainer",
+              "name": "driver-root"
+            },
+            {
+              "mountPath": "/usr/local/vgpu",
+              "name": "host-vgpu"
+            },
+            {
+              "mountPath": "/tmp",
+              "name": "host-tmp"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-xmvqw",
+              "readOnly": true
+            }
+          ]
+        }
+      ],
+      "dnsPolicy": "ClusterFirst",
+      "enableServiceLinks": true,
+      "initContainers": [
+        {
+          "command": [
+            "bash",
+            "/usr/bin/kubelet-plugin-prestart.sh"
+          ],
+          "env": [
+            {
+              "name": "NVIDIA_DRIVER_ROOT",
+              "value": "/"
+            },
+            {
+              "name": "NVIDIA_VISIBLE_DEVICES",
+              "value": "void"
+            },
+            {
+              "name": "KUBELET_REGISTRAR_DIRECTORY_PATH",
+              "value": "/var/lib/kubelet/plugins_registry"
+            },
+            {
+              "name": "KUBELET_PLUGINS_DIRECTORY_PATH",
+              "value": "/var/lib/kubelet/plugins"
+            }
+          ],
+          "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+          "imagePullPolicy": "IfNotPresent",
+          "name": "init-container",
+          "resources": {},
+          "securityContext": {
+            "privileged": true
+          },
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "volumeMounts": [
+            {
+              "mountPath": "/driver-root-parent",
+              "name": "driver-root-parent",
+              "readOnly": true
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-xmvqw",
+              "readOnly": true
+            }
+          ]
+        }
+      ],
+      "nodeName": "gpu-4",
+      "nodeSelector": {
+        "kubernetes.io/hostname": "gpu-4"
+      },
+      "preemptionPolicy": "PreemptLowerPriority",
+      "priority": 2000001000,
+      "priorityClassName": "system-node-critical",
+      "restartPolicy": "Always",
+      "schedulerName": "default-scheduler",
+      "securityContext": {},
+      "serviceAccount": "vmweave-dra-hami-dra-driver-service-account-kubeletplugin",
+      "serviceAccountName": "vmweave-dra-hami-dra-driver-service-account-kubeletplugin",
+      "terminationGracePeriodSeconds": 30,
+      "tolerations": [
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/not-ready",
+          "operator": "Exists"
+        },
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/unreachable",
+          "operator": "Exists"
+        },
+        {
+          "effect": "NoSchedule",
+          "key": "node.kubernetes.io/disk-pressure",
+          "operator": "Exists"
+        },
+        {
+          "effect": "NoSchedule",
+          "key": "node.kubernetes.io/memory-pressure",
+          "operator": "Exists"
+        },
+        {
+          "effect": "NoSchedule",
+          "key": "node.kubernetes.io/pid-pressure",
+          "operator": "Exists"
+        },
+        {
+          "effect": "NoSchedule",
+          "key": "node.kubernetes.io/unschedulable",
+          "operator": "Exists"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": {
+            "path": "/var/lib/kubelet/plugins_registry",
+            "type": ""
+          },
+          "name": "plugins-registry"
+        },
+        {
+          "hostPath": {
+            "path": "/var/lib/kubelet/plugins",
+            "type": ""
+          },
+          "name": "plugins"
+        },
+        {
+          "hostPath": {
+            "path": "/var/run/cdi",
+            "type": ""
+          },
+          "name": "cdi"
+        },
+        {
+          "hostPath": {
+            "path": "/",
+            "type": "DirectoryOrCreate"
+          },
+          "name": "driver-root-parent"
+        },
+        {
+          "hostPath": {
+            "path": "/",
+            "type": "DirectoryOrCreate"
+          },
+          "name": "driver-root"
+        },
+        {
+          "hostPath": {
+            "path": "/var/lib/vmweave-hami-dra/vgpu",
+            "type": "DirectoryOrCreate"
+          },
+          "name": "host-vgpu"
+        },
+        {
+          "hostPath": {
+            "path": "/tmp",
+            "type": ""
+          },
+          "name": "host-tmp"
+        },
+        {
+          "name": "kube-api-access-xmvqw",
+          "projected": {
+            "defaultMode": 420,
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "expirationSeconds": 3607,
+                  "path": "token"
+                }
+              },
+              {
+                "configMap": {
+                  "items": [
+                    {
+                      "key": "ca.crt",
+                      "path": "ca.crt"
+                    }
+                  ],
+                  "name": "kube-root-ca.crt"
+                }
+              },
+              {
+                "downwardAPI": {
+                  "items": [
+                    {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.namespace"
+                      },
+                      "path": "namespace"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:27:53Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodReadyToStartContainers"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:27:54Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Initialized"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:28:03Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:28:03Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "ContainersReady"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:27:52Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodScheduled"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "containerID": "cri-o://c3a8af2e8c4f5f0e07aa05d386b8bb39d1f74867f4f55b2382fdcfcfdcf1b70a",
+          "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+          "imageID": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+          "lastState": {},
+          "name": "gpus",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-28T09:27:54Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/var/lib/kubelet/plugins_registry",
+              "name": "plugins-registry"
+            },
+            {
+              "mountPath": "/var/lib/kubelet/plugins",
+              "name": "plugins"
+            },
+            {
+              "mountPath": "/var/run/cdi",
+              "name": "cdi"
+            },
+            {
+              "mountPath": "/driver-root",
+              "name": "driver-root"
+            },
+            {
+              "mountPath": "/usr/local/vgpu",
+              "name": "host-vgpu"
+            },
+            {
+              "mountPath": "/tmp",
+              "name": "host-tmp"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-xmvqw",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "hostIP": "192.168.24.21",
+      "hostIPs": [
+        {
+          "ip": "192.168.24.21"
+        }
+      ],
+      "initContainerStatuses": [
+        {
+          "containerID": "cri-o://e7913fa77cbae419b384475c310f288d8e497d746f3255eca7cc8504aa5a7768",
+          "image": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+          "imageID": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947",
+          "lastState": {},
+          "name": "init-container",
+          "ready": true,
+          "resources": {},
+          "restartCount": 0,
+          "started": false,
+          "state": {
+            "terminated": {
+              "containerID": "cri-o://e7913fa77cbae419b384475c310f288d8e497d746f3255eca7cc8504aa5a7768",
+              "exitCode": 0,
+              "finishedAt": "2026-10-28T09:27:54Z",
+              "reason": "Completed",
+              "startedAt": "2026-10-28T09:27:54Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 0,
+              "supplementalGroups": [
+                0
+              ],
+              "uid": 0
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/driver-root-parent",
+              "name": "driver-root-parent",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-xmvqw",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "observedGeneration": 1,
+      "phase": "Running",
+      "podIP": "10.85.0.36",
+      "podIPs": [
+        {
+          "ip": "10.85.0.36"
+        }
+      ],
+      "qosClass": "BestEffort",
+      "resources": {},
+      "startTime": "2026-10-28T09:27:52Z"
+    }
+  }
+]

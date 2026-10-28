@@ -1,0 +1,86 @@
+{
+  "apiVersion": "batch/v1",
+  "kind": "Job",
+  "metadata": {
+    "name": "g6-active",
+    "namespace": "nested-validation"
+  },
+  "spec": {
+    "backoffLimit": 0,
+    "activeDeadlineSeconds": 360,
+    "template": {
+      "metadata": {
+        "labels": {
+          "test": "g6-active"
+        }
+      },
+      "spec": {
+        "restartPolicy": "Never",
+        "automountServiceAccountToken": false,
+        "nodeSelector": {
+          "kubernetes.io/hostname": "vw-k8s-worker-01"
+        },
+        "terminationGracePeriodSeconds": 10,
+        "securityContext": {
+          "runAsUser": 1000,
+          "runAsGroup": 998,
+          "runAsNonRoot": true,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "containers": [
+          {
+            "name": "gpu",
+            "image": "localhost/nested-gpu@sha256:82a988dfa68d030c31a2ca0cac9543a5f655a0d40e151d5b60cb0e3b770a00ff",
+            "imagePullPolicy": "Never",
+            "env": [
+              {
+                "name": "VMWEAVE_BROKER_SOCKET",
+                "value": "/run/vmweave/gpu.sock"
+              },
+              {
+                "name": "LD_LIBRARY_PATH",
+                "value": "/opt/vmweave/lib"
+              }
+            ],
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi"
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "broker",
+                "mountPath": "/run/vmweave",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "broker",
+            "hostPath": {
+              "path": "/run/vmweave",
+              "type": "Directory"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

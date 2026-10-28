@@ -1,0 +1,21 @@
+ping: permission denied (are you root?)
+command terminated with exit code 1
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/cpu_check.py", line 25, in <module>
+    output=inner('exec','cpu-client','-n',INNER,'--',*cmd);save('cluster/K1-'+label+'.txt',output)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 27, in inner
+    return ssh('cp','sudo kubectl --kubeconfig=/etc/kubernetes/admin.conf '+shlex.join(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 20, in ssh
+    return run(['ssh','-i',PRIVATE/'id_ed25519','-o','StrictHostKeyChecking=accept-new','-o',f'UserKnownHostsFile={PRIVATE}/known_hosts','-o','ConnectTimeout=8',f'ubuntu@{ip}',command],**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 10, in run
+    return subprocess.check_output([str(x) for x in args],text=True,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-i', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/id_ed25519', '-o', 'StrictHostKeyChecking=accept-new', '-o', 'UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/known_hosts', '-o', 'ConnectTimeout=8', 'ubuntu@10.96.178.29', 'sudo kubectl --kubeconfig=/etc/kubernetes/admin.conf exec cpu-client -n nested-validation -- ping -c 1 -s 1252 10.246.1.195']' returned non-zero exit status 1.

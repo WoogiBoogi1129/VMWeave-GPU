@@ -1,0 +1,29 @@
+cp system-prep START
+worker system-prep START
+worker system-prep DONE
+worker apt-repos START
+cp system-prep DONE
+cp apt-repos START
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/install_prepare.py", line 52, in <module>
+    list(pool.map(prepare,['cp','worker']))
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/install_prepare.py", line 38, in prepare
+    ssh(role,cmd,stderr=subprocess.STDOUT,stdout=f) if False else subprocess.run(['python3',str(EXP/'runner/common.py'),role,cmd],stdout=f,stderr=subprocess.STDOUT,check=True)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py', 'cp', 'cd /home/ubuntu/nested && sudo env DEBIAN_FRONTEND=noninteractive KUBERNETES_VERSION=v1.35 CILIUM_VERSION=1.20.2 CIDR=10.246.0.0/16 bash k8s-setup.sh --step apt-repos']' returned non-zero exit status 1.

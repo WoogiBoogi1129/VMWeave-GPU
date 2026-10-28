@@ -1,0 +1,19 @@
+{
+  "prefix": "central-k8s-REPLACE",
+  "namespace": "vmweave-test-b",
+  "node": "gpu-4",
+  "pv_root": "/REPLACE/absolute/path/on/gpu-node",
+  "ssh_public_key": "/REPLACE/id_ed25519.pub",
+  "release_lock": "deploy/releases/v0.5.5.json",
+  "gpu_uuid": "REPLACE_WITH_APPROVED_GPU_UUID",
+  "compute": 50,
+  "memory_mib": 2048,
+  "qemu_uid": 107,
+  "qemu_gid": 107,
+  "cp_ip": "10.249.0.10",
+  "worker_ip": "10.249.0.11",
+  "node_cidr": "10.249.0.0/24",
+  "pod_cidr": "10.250.0.0/16",
+  "service_cidr": "10.251.0.0/16",
+  "wireguard_mtu": 1220
+}

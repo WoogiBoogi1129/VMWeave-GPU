@@ -1,0 +1,512 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {
+      "deployment.kubernetes.io/revision": "16",
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/name\":\"modelserve\",\"app.kubernetes.io/part-of\":\"modelserve\"},\"name\":\"modelserve\",\"namespace\":\"aap-mp-control\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app.kubernetes.io/name\":\"modelserve\"}},\"strategy\":{\"type\":\"Recreate\"},\"template\":{\"metadata\":{\"labels\":{\"app.kubernetes.io/name\":\"modelserve\",\"app.kubernetes.io/part-of\":\"modelserve\"}},\"spec\":{\"containers\":[{\"command\":[\"/opt/modelserve/modelserve\"],\"env\":[{\"name\":\"MS_ADDR\",\"value\":\":8080\"},{\"name\":\"MS_NAMESPACE\",\"value\":\"aap-serving\"},{\"name\":\"MS_CONTROL_NAMESPACE\",\"value\":\"aap-mp-control\"},{\"name\":\"MS_STORE_ROOT\",\"value\":\"/models/hf\"},{\"name\":\"MS_STORE_HOSTPATH\",\"value\":\"/home/aap/models/hf\"},{\"name\":\"MS_IMPORT_IMAGE\",\"value\":\"vllm/vllm-openai:v0.31.0\"},{\"name\":\"MS_GPUS\",\"value\":\"GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a=97887,GPU-1b4de6a0-88ae-4004-98b9-035906a2473f=97887\"},{\"name\":\"MS_DEFAULT_GPU\",\"value\":\"GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a\"},{\"name\":\"MS_API_TOKEN\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"token\",\"name\":\"modelserve-api\",\"optional\":true}}},{\"name\":\"HF_TOKEN\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"HF_TOKEN\",\"name\":\"modelserve-hf\",\"optional\":true}}}],\"image\":\"registry:3.0.0\",\"imagePullPolicy\":\"IfNotPresent\",\"livenessProbe\":{\"httpGet\":{\"path\":\"/healthz\",\"port\":\"http\"},\"periodSeconds\":20,\"timeoutSeconds\":3},\"name\":\"modelserve\",\"ports\":[{\"containerPort\":8080,\"name\":\"http\"}],\"readinessProbe\":{\"httpGet\":{\"path\":\"/readyz\",\"port\":\"http\"},\"periodSeconds\":10,\"timeoutSeconds\":3},\"resources\":{\"limits\":{\"cpu\":\"500m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"50m\",\"memory\":\"64Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]},\"readOnlyRootFilesystem\":true},\"volumeMounts\":[{\"mountPath\":\"/opt/modelserve\",\"name\":\"bin\",\"readOnly\":true},{\"mountPath\":\"/models/hf\",\"name\":\"store\",\"readOnly\":true}]}],\"securityContext\":{\"runAsGroup\":1001,\"runAsNonRoot\":true,\"runAsUser\":1001,\"seccompProfile\":{\"type\":\"RuntimeDefault\"}},\"serviceAccountName\":\"modelserve\",\"volumes\":[{\"hostPath\":{\"path\":\"/home/aap/models/.modelserve-dev/bin\",\"type\":\"Directory\"},\"name\":\"bin\"},{\"hostPath\":{\"path\":\"/home/aap/models/hf\",\"type\":\"Directory\"},\"name\":\"store\"}]}}}}\n"
+    },
+    "creationTimestamp": "2026-10-22T19:48:35Z",
+    "generation": 17,
+    "labels": {
+      "app.kubernetes.io/name": "modelserve",
+      "app.kubernetes.io/part-of": "modelserve"
+    },
+    "managedFields": [
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:spec": {
+            "f:template": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:kubectl.kubernetes.io/restartedAt": {}
+                }
+              }
+            }
+          }
+        },
+        "manager": "kubectl-rollout",
+        "operation": "Update",
+        "time": "2026-10-27T14:18:35Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:kubectl.kubernetes.io/last-applied-configuration": {}
+            },
+            "f:labels": {
+              ".": {},
+              "f:app.kubernetes.io/name": {},
+              "f:app.kubernetes.io/part-of": {}
+            }
+          },
+          "f:spec": {
+            "f:progressDeadlineSeconds": {},
+            "f:replicas": {},
+            "f:revisionHistoryLimit": {},
+            "f:selector": {},
+            "f:strategy": {
+              "f:type": {}
+            },
+            "f:template": {
+              "f:metadata": {
+                "f:labels": {
+                  ".": {},
+                  "f:app.kubernetes.io/name": {},
+                  "f:app.kubernetes.io/part-of": {}
+                }
+              },
+              "f:spec": {
+                "f:containers": {
+                  "k:{\"name\":\"modelserve\"}": {
+                    ".": {},
+                    "f:command": {},
+                    "f:env": {
+                      ".": {},
+                      "k:{\"name\":\"HF_TOKEN\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:valueFrom": {
+                          ".": {},
+                          "f:secretKeyRef": {}
+                        }
+                      },
+                      "k:{\"name\":\"MS_ADDR\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MS_API_TOKEN\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:valueFrom": {
+                          ".": {},
+                          "f:secretKeyRef": {}
+                        }
+                      },
+                      "k:{\"name\":\"MS_CONTROL_NAMESPACE\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MS_DEFAULT_GPU\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MS_GPUS\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MS_IMPORT_IMAGE\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MS_NAMESPACE\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MS_STORE_HOSTPATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"MS_STORE_ROOT\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      }
+                    },
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:livenessProbe": {
+                      ".": {},
+                      "f:failureThreshold": {},
+                      "f:httpGet": {
+                        ".": {},
+                        "f:path": {},
+                        "f:port": {},
+                        "f:scheme": {}
+                      },
+                      "f:periodSeconds": {},
+                      "f:successThreshold": {},
+                      "f:timeoutSeconds": {}
+                    },
+                    "f:name": {},
+                    "f:ports": {
+                      ".": {},
+                      "k:{\"containerPort\":8080,\"protocol\":\"TCP\"}": {
+                        ".": {},
+                        "f:containerPort": {},
+                        "f:name": {},
+                        "f:protocol": {}
+                      }
+                    },
+                    "f:readinessProbe": {
+                      ".": {},
+                      "f:failureThreshold": {},
+                      "f:httpGet": {
+                        ".": {},
+                        "f:path": {},
+                        "f:port": {},
+                        "f:scheme": {}
+                      },
+                      "f:periodSeconds": {},
+                      "f:successThreshold": {},
+                      "f:timeoutSeconds": {}
+                    },
+                    "f:resources": {
+                      ".": {},
+                      "f:limits": {
+                        ".": {},
+                        "f:cpu": {},
+                        "f:memory": {}
+                      },
+                      "f:requests": {
+                        ".": {},
+                        "f:cpu": {},
+                        "f:memory": {}
+                      }
+                    },
+                    "f:securityContext": {
+                      ".": {},
+                      "f:allowPrivilegeEscalation": {},
+                      "f:capabilities": {
+                        ".": {},
+                        "f:drop": {}
+                      },
+                      "f:readOnlyRootFilesystem": {}
+                    },
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {},
+                    "f:volumeMounts": {
+                      ".": {},
+                      "k:{\"mountPath\":\"/models/hf\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {},
+                        "f:readOnly": {}
+                      },
+                      "k:{\"mountPath\":\"/opt/modelserve\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {},
+                        "f:readOnly": {}
+                      }
+                    }
+                  }
+                },
+                "f:dnsPolicy": {},
+                "f:restartPolicy": {},
+                "f:schedulerName": {},
+                "f:securityContext": {
+                  ".": {},
+                  "f:runAsGroup": {},
+                  "f:runAsNonRoot": {},
+                  "f:runAsUser": {},
+                  "f:seccompProfile": {
+                    ".": {},
+                    "f:type": {}
+                  }
+                },
+                "f:serviceAccount": {},
+                "f:serviceAccountName": {},
+                "f:terminationGracePeriodSeconds": {},
+                "f:volumes": {
+                  ".": {},
+                  "k:{\"name\":\"bin\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"store\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "manager": "kubectl-client-side-apply",
+        "operation": "Update",
+        "time": "2026-10-28T09:29:43Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              "f:deployment.kubernetes.io/revision": {}
+            }
+          },
+          "f:status": {
+            "f:availableReplicas": {},
+            "f:conditions": {
+              ".": {},
+              "k:{\"type\":\"Available\"}": {
+                ".": {},
+                "f:lastTransitionTime": {},
+                "f:lastUpdateTime": {},
+                "f:message": {},
+                "f:reason": {},
+                "f:status": {},
+                "f:type": {}
+              },
+              "k:{\"type\":\"Progressing\"}": {
+                ".": {},
+                "f:lastTransitionTime": {},
+                "f:lastUpdateTime": {},
+                "f:message": {},
+                "f:reason": {},
+                "f:status": {},
+                "f:type": {}
+              }
+            },
+            "f:observedGeneration": {},
+            "f:readyReplicas": {},
+            "f:replicas": {},
+            "f:terminatingReplicas": {},
+            "f:updatedReplicas": {}
+          }
+        },
+        "manager": "kube-controller-manager",
+        "operation": "Update",
+        "subresource": "status",
+        "time": "2026-10-28T09:29:45Z"
+      }
+    ],
+    "name": "modelserve",
+    "namespace": "aap-mp-control",
+    "resourceVersion": "18444525",
+    "uid": "23e1552b-c731-4c5f-bc1f-b2d05af4427d"
+  },
+  "spec": {
+    "progressDeadlineSeconds": 600,
+    "replicas": 1,
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "app.kubernetes.io/name": "modelserve"
+      }
+    },
+    "strategy": {
+      "type": "Recreate"
+    },
+    "template": {
+      "metadata": {
+        "annotations": {
+          "kubectl.kubernetes.io/restartedAt": "2026-10-27T23:18:35+09:00"
+        },
+        "labels": {
+          "app.kubernetes.io/name": "modelserve",
+          "app.kubernetes.io/part-of": "modelserve"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "command": [
+              "/opt/modelserve/modelserve"
+            ],
+            "env": [
+              {
+                "name": "MS_ADDR",
+                "value": ":8080"
+              },
+              {
+                "name": "MS_NAMESPACE",
+                "value": "aap-serving"
+              },
+              {
+                "name": "MS_CONTROL_NAMESPACE",
+                "value": "aap-mp-control"
+              },
+              {
+                "name": "MS_STORE_ROOT",
+                "value": "/models/hf"
+              },
+              {
+                "name": "MS_STORE_HOSTPATH",
+                "value": "/home/aap/models/hf"
+              },
+              {
+                "name": "MS_IMPORT_IMAGE",
+                "value": "vllm/vllm-openai:v0.31.0"
+              },
+              {
+                "name": "MS_GPUS",
+                "value": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a=97887,GPU-1b4de6a0-88ae-4004-98b9-035906a2473f=97887"
+              },
+              {
+                "name": "MS_DEFAULT_GPU",
+                "value": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a"
+              },
+              {
+                "name": "MS_API_TOKEN",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "key": "token",
+                    "name": "modelserve-api",
+                    "optional": true
+                  }
+                }
+              },
+              {
+                "name": "HF_TOKEN",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "key": "HF_TOKEN",
+                    "name": "modelserve-hf",
+                    "optional": true
+                  }
+                }
+              }
+            ],
+            "image": "registry:3.0.0",
+            "imagePullPolicy": "IfNotPresent",
+            "livenessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/healthz",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 20,
+              "successThreshold": 1,
+              "timeoutSeconds": 3
+            },
+            "name": "modelserve",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http",
+                "protocol": "TCP"
+              }
+            ],
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/readyz",
+                "port": "http",
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 10,
+              "successThreshold": 1,
+              "timeoutSeconds": 3
+            },
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "256Mi"
+              },
+              "requests": {
+                "cpu": "50m",
+                "memory": "64Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "readOnlyRootFilesystem": true
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/opt/modelserve",
+                "name": "bin",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/models/hf",
+                "name": "store",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "runAsGroup": 1001,
+          "runAsNonRoot": true,
+          "runAsUser": 1001,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccount": "modelserve",
+        "serviceAccountName": "modelserve",
+        "terminationGracePeriodSeconds": 30,
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/home/aap/models/.modelserve-dev/bin",
+              "type": "Directory"
+            },
+            "name": "bin"
+          },
+          {
+            "hostPath": {
+              "path": "/home/aap/models/hf",
+              "type": "Directory"
+            },
+            "name": "store"
+          }
+        ]
+      }
+    }
+  },
+  "status": {
+    "availableReplicas": 1,
+    "conditions": [
+      {
+        "lastTransitionTime": "2026-10-28T09:29:45Z",
+        "lastUpdateTime": "2026-10-28T09:29:45Z",
+        "message": "Deployment has minimum availability.",
+        "reason": "MinimumReplicasAvailable",
+        "status": "True",
+        "type": "Available"
+      },
+      {
+        "lastTransitionTime": "2026-10-22T19:48:35Z",
+        "lastUpdateTime": "2026-10-28T09:29:45Z",
+        "message": "ReplicaSet \"modelserve-fd647bcd9\" has successfully progressed.",
+        "reason": "NewReplicaSetAvailable",
+        "status": "True",
+        "type": "Progressing"
+      }
+    ],
+    "observedGeneration": 17,
+    "readyReplicas": 1,
+    "replicas": 1,
+    "terminatingReplicas": 0,
+    "updatedReplicas": 1
+  }
+}

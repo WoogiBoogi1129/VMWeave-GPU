@@ -1,0 +1,13 @@
+ipam:
+  mode: kubernetes
+routingMode: tunnel
+tunnelProtocol: vxlan
+devices: wg0
+MTU: 1220
+kubeProxyReplacement: false
+operator:
+  replicas: 1
+ipv6:
+  enabled: false
+k8sServiceHost: 10.245.0.10
+k8sServicePort: 6443

@@ -18,6 +18,11 @@
 
 ## 재현과 판정
 
+[VM 내부 2노드 Kubernetes·GPU Pod 실험](../../experiments/nested-k8s-gpu/README.md)은
+2026-10-28 별도 Operator에서 두 Node Ready와 GPU Pod 정확성·회수·운영 조건의 기능 PASS를 기록했다.
+외부 재배포가 겹쳐 환경 불변과 장애 영향 분리는 확인하지 못했다.
+[기존 중앙 Operator로 수행할 상세 실습](../guides/nested-k8s-lab.md)은 별도 자료이며 전체 실습은 아직 미실행이다.
+
 [재현 절차](reproduction.md)는 오프라인 증거 검증과 GPU 재실행을 구분합니다.
 실행 성공만으로 전체 실험 계획을 PASS로 바꾸지 않습니다.
 실패·제외·대체·중단 기록은 해당 결과의 일부입니다.

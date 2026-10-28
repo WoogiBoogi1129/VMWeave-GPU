@@ -1,0 +1,53 @@
+--- k8s-worker-setup.sh
++++ k8s-worker-setup.sh.experiment
+@@ -431,10 +431,10 @@
+     > /etc/apt/sources.list.d/kubernetes.list
+ 
+   download_key \
+-    "https://pkgs.k8s.io/addons:/cri-o:/stable:/${CRIO_VERSION}/deb/Release.key" \
++    "https://download.opensuse.org/repositories/isv:/cri-o:/stable:/${CRIO_VERSION}/deb/Release.key" \
+     "/etc/apt/keyrings/cri-o-apt-keyring.gpg"
+ 
+-  echo "deb [signed-by=/etc/apt/keyrings/cri-o-apt-keyring.gpg] https://pkgs.k8s.io/addons:/cri-o:/stable:/${CRIO_VERSION}/deb/ /" \
++  echo "deb [signed-by=/etc/apt/keyrings/cri-o-apt-keyring.gpg] https://download.opensuse.org/repositories/isv:/cri-o:/stable:/${CRIO_VERSION}/deb/ /" \
+     > /etc/apt/sources.list.d/cri-o.list
+ }
+ 
+@@ -445,7 +445,7 @@
+   require_file "/etc/apt/sources.list.d/cri-o.list" "CRI-O APT 저장소가 없습니다. 먼저 apt-repos 단계를 실행하세요"
+ 
+   "${APT_GET[@]}" update
+-  "${APT_GET[@]}" install -y --no-install-recommends cri-o kubelet kubeadm kubectl
++  "${APT_GET[@]}" install -y --no-install-recommends cri-o=1.35.10-1.1 kubelet=1.35.9-1.1 kubeadm=1.35.9-1.1 kubectl=1.35.9-1.1
+ 
+   apt-mark hold cri-o kubelet kubeadm kubectl
+ 
+@@ -483,18 +483,7 @@
+     exit 1
+   fi
+ 
+-  JOIN_CMD=(
+-    kubeadm join "${CONTROL_PLANE_ENDPOINT}"
+-    --token "${JOIN_TOKEN}"
+-    --discovery-token-ca-cert-hash "${DISCOVERY_HASH}"
+-    --cri-socket unix:///var/run/crio/crio.sock
+-  )
+-
+-  if [ -n "${NODE_NAME}" ]; then
+-    JOIN_CMD+=(--node-name "${NODE_NAME}")
+-  fi
+-
+-  "${JOIN_CMD[@]}"
++  kubeadm join --config=/home/ubuntu/nested/join.yaml
+ }
+ 
+ step_shell_config() {
+@@ -550,7 +539,7 @@
+   fi
+ 
+   if selected_contains join-cluster; then
+-    collect_join_info
++    : # join.yaml supplies protected discovery credentials
+   fi
+ 
+   print_selected_steps

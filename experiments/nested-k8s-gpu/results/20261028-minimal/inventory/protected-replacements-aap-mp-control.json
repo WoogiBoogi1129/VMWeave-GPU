@@ -1,0 +1,381 @@
+[
+  {
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+      "annotations": {
+        "kubectl.kubernetes.io/restartedAt": "2026-10-27T23:18:35+09:00"
+      },
+      "creationTimestamp": "2026-10-28T09:29:43Z",
+      "generateName": "modelserve-fd647bcd9-",
+      "generation": 1,
+      "labels": {
+        "app.kubernetes.io/name": "modelserve",
+        "app.kubernetes.io/part-of": "modelserve",
+        "pod-template-hash": "fd647bcd9"
+      },
+      "name": "modelserve-fd647bcd9-svls5",
+      "namespace": "aap-mp-control",
+      "ownerReferences": [
+        {
+          "apiVersion": "apps/v1",
+          "blockOwnerDeletion": true,
+          "controller": true,
+          "kind": "ReplicaSet",
+          "name": "modelserve-fd647bcd9",
+          "uid": "14ed2b16-cd29-47e5-ae92-ceb8a099d0a0"
+        }
+      ],
+      "resourceVersion": "18444544",
+      "uid": "8a7c8d4f-b827-4369-98d2-17cd189b8878"
+    },
+    "spec": {
+      "containers": [
+        {
+          "command": [
+            "/opt/modelserve/modelserve"
+          ],
+          "env": [
+            {
+              "name": "MS_ADDR",
+              "value": ":8080"
+            },
+            {
+              "name": "MS_NAMESPACE",
+              "value": "aap-serving"
+            },
+            {
+              "name": "MS_CONTROL_NAMESPACE",
+              "value": "aap-mp-control"
+            },
+            {
+              "name": "MS_STORE_ROOT",
+              "value": "/models/hf"
+            },
+            {
+              "name": "MS_STORE_HOSTPATH",
+              "value": "/home/aap/models/hf"
+            },
+            {
+              "name": "MS_IMPORT_IMAGE",
+              "value": "vllm/vllm-openai:v0.31.0"
+            },
+            {
+              "name": "MS_GPUS",
+              "value": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a=97887,GPU-1b4de6a0-88ae-4004-98b9-035906a2473f=97887"
+            },
+            {
+              "name": "MS_DEFAULT_GPU",
+              "value": "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a"
+            },
+            {
+              "name": "MS_API_TOKEN",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "key": "token",
+                  "name": "modelserve-api",
+                  "optional": true
+                }
+              }
+            },
+            {
+              "name": "HF_TOKEN",
+              "valueFrom": {
+                "secretKeyRef": {
+                  "key": "HF_TOKEN",
+                  "name": "modelserve-hf",
+                  "optional": true
+                }
+              }
+            }
+          ],
+          "image": "registry:3.0.0",
+          "imagePullPolicy": "IfNotPresent",
+          "livenessProbe": {
+            "failureThreshold": 3,
+            "httpGet": {
+              "path": "/healthz",
+              "port": "http",
+              "scheme": "HTTP"
+            },
+            "periodSeconds": 20,
+            "successThreshold": 1,
+            "timeoutSeconds": 3
+          },
+          "name": "modelserve",
+          "ports": [
+            {
+              "containerPort": 8080,
+              "name": "http",
+              "protocol": "TCP"
+            }
+          ],
+          "readinessProbe": {
+            "failureThreshold": 3,
+            "httpGet": {
+              "path": "/readyz",
+              "port": "http",
+              "scheme": "HTTP"
+            },
+            "periodSeconds": 10,
+            "successThreshold": 1,
+            "timeoutSeconds": 3
+          },
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "50m",
+              "memory": "64Mi"
+            }
+          },
+          "securityContext": {
+            "allowPrivilegeEscalation": false,
+            "capabilities": {
+              "drop": [
+                "ALL"
+              ]
+            },
+            "readOnlyRootFilesystem": true
+          },
+          "terminationMessagePath": "/dev/termination-log",
+          "terminationMessagePolicy": "File",
+          "volumeMounts": [
+            {
+              "mountPath": "/opt/modelserve",
+              "name": "bin",
+              "readOnly": true
+            },
+            {
+              "mountPath": "/models/hf",
+              "name": "store",
+              "readOnly": true
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-7glx4",
+              "readOnly": true
+            }
+          ]
+        }
+      ],
+      "dnsPolicy": "ClusterFirst",
+      "enableServiceLinks": true,
+      "nodeName": "gpu-4",
+      "preemptionPolicy": "PreemptLowerPriority",
+      "priority": 0,
+      "restartPolicy": "Always",
+      "schedulerName": "default-scheduler",
+      "securityContext": {
+        "runAsGroup": 1001,
+        "runAsNonRoot": true,
+        "runAsUser": 1001,
+        "seccompProfile": {
+          "type": "RuntimeDefault"
+        }
+      },
+      "serviceAccount": "modelserve",
+      "serviceAccountName": "modelserve",
+      "terminationGracePeriodSeconds": 30,
+      "tolerations": [
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/not-ready",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        },
+        {
+          "effect": "NoExecute",
+          "key": "node.kubernetes.io/unreachable",
+          "operator": "Exists",
+          "tolerationSeconds": 300
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": {
+            "path": "/home/aap/models/.modelserve-dev/bin",
+            "type": "Directory"
+          },
+          "name": "bin"
+        },
+        {
+          "hostPath": {
+            "path": "/home/aap/models/hf",
+            "type": "Directory"
+          },
+          "name": "store"
+        },
+        {
+          "name": "kube-api-access-7glx4",
+          "projected": {
+            "defaultMode": 420,
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "expirationSeconds": 3607,
+                  "path": "token"
+                }
+              },
+              {
+                "configMap": {
+                  "items": [
+                    {
+                      "key": "ca.crt",
+                      "path": "ca.crt"
+                    }
+                  ],
+                  "name": "kube-root-ca.crt"
+                }
+              },
+              {
+                "downwardAPI": {
+                  "items": [
+                    {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.namespace"
+                      },
+                      "path": "namespace"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "status": {
+      "allocatedResources": {
+        "cpu": "50m",
+        "memory": "64Mi"
+      },
+      "conditions": [
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:29:44Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodReadyToStartContainers"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:29:43Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Initialized"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:29:45Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:29:45Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "ContainersReady"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": "2026-10-28T09:29:43Z",
+          "observedGeneration": 1,
+          "status": "True",
+          "type": "PodScheduled"
+        }
+      ],
+      "containerStatuses": [
+        {
+          "allocatedResources": {
+            "cpu": "50m",
+            "memory": "64Mi"
+          },
+          "containerID": "cri-o://d7175f1cfac73e9d3016b490d6fd07c74b7fcf6501c7e592c91b175199eac1fb",
+          "image": "docker.io/library/registry:3.0.0",
+          "imageID": "docker.io/library/registry@sha256:5b12b22f21522fe69443079df04c0f3f42cb9977857f3c20404386652a6c6d8e",
+          "lastState": {},
+          "name": "modelserve",
+          "ready": true,
+          "resources": {
+            "limits": {
+              "cpu": "500m",
+              "memory": "256Mi"
+            },
+            "requests": {
+              "cpu": "50m",
+              "memory": "64Mi"
+            }
+          },
+          "restartCount": 0,
+          "started": true,
+          "state": {
+            "running": {
+              "startedAt": "2026-10-28T09:29:45Z"
+            }
+          },
+          "user": {
+            "linux": {
+              "gid": 1001,
+              "supplementalGroups": [
+                1001
+              ],
+              "uid": 1001
+            }
+          },
+          "volumeMounts": [
+            {
+              "mountPath": "/opt/modelserve",
+              "name": "bin",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/models/hf",
+              "name": "store",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            },
+            {
+              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+              "name": "kube-api-access-7glx4",
+              "readOnly": true,
+              "recursiveReadOnly": "Disabled"
+            }
+          ]
+        }
+      ],
+      "hostIP": "192.168.24.21",
+      "hostIPs": [
+        {
+          "ip": "192.168.24.21"
+        }
+      ],
+      "observedGeneration": 1,
+      "phase": "Running",
+      "podIP": "10.85.0.243",
+      "podIPs": [
+        {
+          "ip": "10.85.0.243"
+        }
+      ],
+      "qosClass": "Burstable",
+      "resources": {
+        "limits": {
+          "cpu": "500m",
+          "memory": "256Mi"
+        },
+        "requests": {
+          "cpu": "28m",
+          "memory": "64Mi"
+        }
+      },
+      "startTime": "2026-10-28T09:29:43Z"
+    }
+  }
+]

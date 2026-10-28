@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-28T09:26:29.293249+00:00",
+  "channel_uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+  "channel_status": {
+    "allocation": "5f55f1a42c3fc352f19c2484a2b48752",
+    "backend": "hami",
+    "compute": 50,
+    "everBound": true,
+    "generation": "f3410c38f548e4f72a757b0f69e4682d",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "memoryMiB": 2048,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "requestGeneration": 1,
+    "resourcePrefix": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4",
+    "sessions": [
+      "33fca7b99f19401ceba902ca2b6ddf11"
+    ],
+    "vmiUID": "553454f9-310b-4bbf-bd4c-6468392b28a3",
+    "workerPodUID": "2bf4361f-f040-44a1-b34e-aaeda405c0af"
+  },
+  "worker": "vw-k8s-worker-01-71b4f671a1d3-5f55f1a4-worker",
+  "processes": [
+    {
+      "pid": 175,
+      "command": "/opt/vmweave/bin/vmweave-shm-session-worker /flyt-channel/5f55f1a42c3fc352f19c2484a2b48752 0 "
+    }
+  ],
+  "gpu_processes": []
+}

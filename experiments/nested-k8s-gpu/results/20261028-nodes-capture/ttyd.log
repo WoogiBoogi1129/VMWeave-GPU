@@ -1,0 +1,28 @@
+[2026/10/28 20:22:44:6612] N: ttyd 1.7.7-40e79c7 (libwebsockets 4.3.3-unknown)
+[2026/10/28 20:22:44:6613] N: tty configuration:
+[2026/10/28 20:22:44:6613] N:   start command: tmux -L nested-nodes-2810850 attach-session -t capture
+[2026/10/28 20:22:44:6613] N:   close signal: SIGHUP (1)
+[2026/10/28 20:22:44:6613] N:   terminal type: xterm-256color
+[2026/10/28 20:22:44:6613] N:   check origin: true
+[2026/10/28 20:22:44:6613] N: The --writable option is not set, will start in readonly mode
+[2026/10/28 20:22:44:6614] N: lws_create_context: LWS: 4.3.3-unknown, MbedTLS-2.28.5 NET SRV H1 H2 WS ConMon IPV6-off
+[2026/10/28 20:22:44:6745] N: elops_init_pt_uv:  Using foreign event loop...
+[2026/10/28 20:22:44:6746] N: __lws_lc_tag:  ++ [wsi|0|pipe] (1)
+[2026/10/28 20:22:44:6746] N: __lws_lc_tag:  ++ [vh|0|netlink] (1)
+[2026/10/28 20:22:44:6747] N: __lws_lc_tag:  ++ [vh|1|default|127.0.0.1|127.0.0.1|33717] (2)
+[2026/10/28 20:22:44:6938] N: [vh|1|default|127.0.0.1|127.0.0.1|33717]: lws_socket_bind: source ads 127.0.0.1
+[2026/10/28 20:22:44:6938] N: __lws_lc_tag:  ++ [wsi|1|listen|default|127.0.0.1|33717] (2)
+[2026/10/28 20:22:44:6938] N:  Listening on port: 33717
+[2026/10/28 20:22:45:0071] N: __lws_lc_tag:  ++ [wsisrv|0|adopted] (1)
+[2026/10/28 20:22:45:0079] N: HTTP / - 127.0.0.1
+[2026/10/28 20:22:45:2213] N: HTTP /token - 127.0.0.1
+[2026/10/28 20:22:45:3075] N: __lws_lc_tag:  ++ [wsisrv|1|adopted] (2)
+[2026/10/28 20:22:45:3082] N: WS   /ws - 127.0.0.1, clients: 1
+[2026/10/28 20:22:45:3224] N: started process, pid: 2810961
+[2026/10/28 20:22:47:3460] N: WS closed from 127.0.0.1, clients: 0
+[2026/10/28 20:22:47:3461] N: killing process, pid: 2810961
+[2026/10/28 20:22:47:3462] N: __lws_lc_untag:  -- [wsisrv|1|adopted] (1) 2.038s
+[2026/10/28 20:22:47:3471] N: __lws_lc_untag:  -- [wsisrv|0|adopted] (0) 2.340s
+[2026/10/28 20:22:47:3480] N: process killed with signal 0, pid: 2810961
+[2026/10/28 20:22:47:3899] N: received signal: SIGTERM (15), exiting...
+[2026/10/28 20:22:47:3900] N: send ^C to force exit.

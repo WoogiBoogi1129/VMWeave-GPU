@@ -1,0 +1,415 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "nested-cp"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "40Gi"
+        },
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "volumeMode": "Filesystem",
+        "persistentVolumeReclaimPolicy": "Retain",
+        "storageClassName": "",
+        "claimRef": {
+          "namespace": "vmweave-nested-k8s",
+          "name": "nested-cp"
+        },
+        "local": {
+          "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/cp"
+        },
+        "nodeAffinity": {
+          "required": {
+            "nodeSelectorTerms": [
+              {
+                "matchExpressions": [
+                  {
+                    "key": "kubernetes.io/hostname",
+                    "operator": "In",
+                    "values": [
+                      "gpu-4"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "nested-cp",
+        "namespace": "vmweave-nested-k8s"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "volumeMode": "Filesystem",
+        "storageClassName": "",
+        "volumeName": "nested-cp",
+        "resources": {
+          "requests": {
+            "storage": "40Gi"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "kubevirt.io/v1",
+      "kind": "VirtualMachine",
+      "metadata": {
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s"
+      },
+      "spec": {
+        "runStrategy": "Always",
+        "template": {
+          "metadata": {
+            "labels": {
+              "nested-k8s-vm": "vw-k8s-cp-01"
+            }
+          },
+          "spec": {
+            "nodeSelector": {
+              "kubernetes.io/hostname": "gpu-4"
+            },
+            "domain": {
+              "cpu": {
+                "cores": 4
+              },
+              "resources": {
+                "requests": {
+                  "cpu": "4",
+                  "memory": "8Gi"
+                }
+              },
+              "machine": {
+                "type": "q35"
+              },
+              "firmware": {
+                "uuid": "61f95fe9-49ce-42e0-b997-ff5320327801"
+              },
+              "devices": {
+                "disks": [
+                  {
+                    "name": "root",
+                    "disk": {
+                      "bus": "virtio"
+                    }
+                  },
+                  {
+                    "name": "cloudinit",
+                    "disk": {
+                      "bus": "virtio"
+                    }
+                  }
+                ],
+                "interfaces": [
+                  {
+                    "name": "default",
+                    "masquerade": {},
+                    "macAddress": "02:00:00:28:10:01"
+                  }
+                ]
+              }
+            },
+            "networks": [
+              {
+                "name": "default",
+                "pod": {}
+              }
+            ],
+            "volumes": [
+              {
+                "name": "root",
+                "persistentVolumeClaim": {
+                  "claimName": "nested-cp"
+                }
+              },
+              {
+                "name": "cloudinit",
+                "cloudInitNoCloud": {
+                  "userData": "#cloud-config\nhostname: vw-k8s-cp-01\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGX6GHJtH0ISfBU/+dV1ioL0nhySW/AvBlZ4x8rLNJhl ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n",
+                  "networkData": "version: 2\nethernets:\n  eth0:\n    match:\n      macaddress: \"02:00:00:28:10:01\"\n    set-name: eth0\n    dhcp4: true\n"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "name": "vw-k8s-cp-01",
+        "namespace": "vmweave-nested-k8s"
+      },
+      "spec": {
+        "selector": {
+          "nested-k8s-vm": "vw-k8s-cp-01"
+        },
+        "ports": [
+          {
+            "name": "ssh",
+            "port": 22,
+            "targetPort": 22
+          },
+          {
+            "name": "wireguard",
+            "port": 51820,
+            "targetPort": 51820,
+            "protocol": "UDP"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "nested-worker"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "80Gi"
+        },
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "volumeMode": "Filesystem",
+        "persistentVolumeReclaimPolicy": "Retain",
+        "storageClassName": "",
+        "claimRef": {
+          "namespace": "vmweave-nested-k8s",
+          "name": "nested-worker"
+        },
+        "local": {
+          "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/worker"
+        },
+        "nodeAffinity": {
+          "required": {
+            "nodeSelectorTerms": [
+              {
+                "matchExpressions": [
+                  {
+                    "key": "kubernetes.io/hostname",
+                    "operator": "In",
+                    "values": [
+                      "gpu-4"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "nested-worker",
+        "namespace": "vmweave-nested-k8s"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "volumeMode": "Filesystem",
+        "storageClassName": "",
+        "volumeName": "nested-worker",
+        "resources": {
+          "requests": {
+            "storage": "80Gi"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "kubevirt.io/v1",
+      "kind": "VirtualMachine",
+      "metadata": {
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s"
+      },
+      "spec": {
+        "runStrategy": "Always",
+        "template": {
+          "metadata": {
+            "labels": {
+              "nested-k8s-vm": "vw-k8s-worker-01"
+            }
+          },
+          "spec": {
+            "nodeSelector": {
+              "kubernetes.io/hostname": "gpu-4"
+            },
+            "domain": {
+              "cpu": {
+                "cores": 4
+              },
+              "resources": {
+                "requests": {
+                  "cpu": "4",
+                  "memory": "16Gi"
+                }
+              },
+              "machine": {
+                "type": "q35"
+              },
+              "firmware": {
+                "uuid": "18c4a618-4312-4f95-9b58-1f21a4d0c65a"
+              },
+              "devices": {
+                "disks": [
+                  {
+                    "name": "root",
+                    "disk": {
+                      "bus": "virtio"
+                    }
+                  },
+                  {
+                    "name": "cloudinit",
+                    "disk": {
+                      "bus": "virtio"
+                    }
+                  }
+                ],
+                "interfaces": [
+                  {
+                    "name": "default",
+                    "masquerade": {},
+                    "macAddress": "02:00:00:28:10:02"
+                  }
+                ]
+              }
+            },
+            "networks": [
+              {
+                "name": "default",
+                "pod": {}
+              }
+            ],
+            "volumes": [
+              {
+                "name": "root",
+                "persistentVolumeClaim": {
+                  "claimName": "nested-worker"
+                }
+              },
+              {
+                "name": "cloudinit",
+                "cloudInitNoCloud": {
+                  "userData": "#cloud-config\nhostname: vw-k8s-worker-01\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGX6GHJtH0ISfBU/+dV1ioL0nhySW/AvBlZ4x8rLNJhl ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n",
+                  "networkData": "version: 2\nethernets:\n  eth0:\n    match:\n      macaddress: \"02:00:00:28:10:02\"\n    set-name: eth0\n    dhcp4: true\n"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "name": "vw-k8s-worker-01",
+        "namespace": "vmweave-nested-k8s"
+      },
+      "spec": {
+        "selector": {
+          "nested-k8s-vm": "vw-k8s-worker-01"
+        },
+        "ports": [
+          {
+            "name": "ssh",
+            "port": 22,
+            "targetPort": 22
+          },
+          {
+            "name": "wireguard",
+            "port": 51820,
+            "targetPort": 51820,
+            "protocol": "UDP"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolume",
+      "metadata": {
+        "name": "nested-shm"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "volumeMode": "Filesystem",
+        "persistentVolumeReclaimPolicy": "Retain",
+        "storageClassName": "",
+        "claimRef": {
+          "namespace": "vmweave-nested-k8s",
+          "name": "nested-shm"
+        },
+        "local": {
+          "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/shm"
+        },
+        "nodeAffinity": {
+          "required": {
+            "nodeSelectorTerms": [
+              {
+                "matchExpressions": [
+                  {
+                    "key": "kubernetes.io/hostname",
+                    "operator": "In",
+                    "values": [
+                      "gpu-4"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "name": "nested-shm",
+        "namespace": "vmweave-nested-k8s"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "volumeMode": "Filesystem",
+        "storageClassName": "",
+        "volumeName": "nested-shm",
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        }
+      }
+    }
+  ]
+}

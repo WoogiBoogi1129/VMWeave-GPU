@@ -1,0 +1,819 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "DaemonSet",
+  "metadata": {
+    "annotations": {
+      "deprecated.daemonset.template.generation": "144",
+      "meta.helm.sh/release-name": "hami",
+      "meta.helm.sh/release-namespace": "kube-system"
+    },
+    "creationTimestamp": "2026-09-21T15:12:58Z",
+    "generation": 144,
+    "labels": {
+      "app.kubernetes.io/component": "hami-device-plugin",
+      "app.kubernetes.io/instance": "hami",
+      "app.kubernetes.io/managed-by": "Helm",
+      "app.kubernetes.io/name": "hami",
+      "app.kubernetes.io/version": "2.10.0",
+      "helm.sh/chart": "hami-2.10.0"
+    },
+    "managedFields": [
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:metadata": {
+            "f:annotations": {
+              ".": {},
+              "f:deprecated.daemonset.template.generation": {},
+              "f:meta.helm.sh/release-name": {},
+              "f:meta.helm.sh/release-namespace": {}
+            },
+            "f:labels": {
+              ".": {},
+              "f:app.kubernetes.io/component": {},
+              "f:app.kubernetes.io/instance": {},
+              "f:app.kubernetes.io/managed-by": {},
+              "f:app.kubernetes.io/name": {},
+              "f:app.kubernetes.io/version": {},
+              "f:helm.sh/chart": {}
+            }
+          },
+          "f:spec": {
+            "f:revisionHistoryLimit": {},
+            "f:selector": {},
+            "f:template": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:checksum/hami-scheduler-config": {},
+                  "f:checksum/hami-scheduler-device-config": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:app.kubernetes.io/component": {},
+                  "f:app.kubernetes.io/instance": {},
+                  "f:app.kubernetes.io/name": {},
+                  "f:hami.io/webhook": {}
+                }
+              },
+              "f:spec": {
+                "f:containers": {
+                  "k:{\"name\":\"device-plugin\"}": {
+                    ".": {},
+                    "f:command": {},
+                    "f:env": {
+                      ".": {},
+                      "k:{\"name\":\"DEVICE_LIST_STRATEGY\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"HOOK_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NODE_NAME\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:valueFrom": {
+                          ".": {},
+                          "f:fieldRef": {}
+                        }
+                      },
+                      "k:{\"name\":\"NVIDIA_CDI_HOOK_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_DRIVER_ROOT\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_MIG_MONITOR_DEVICES\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"PASS_DEVICE_SPECS\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      }
+                    },
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:lifecycle": {
+                      ".": {},
+                      "f:postStart": {
+                        ".": {},
+                        "f:exec": {
+                          ".": {},
+                          "f:command": {}
+                        }
+                      }
+                    },
+                    "f:name": {},
+                    "f:resources": {},
+                    "f:securityContext": {
+                      ".": {},
+                      "f:allowPrivilegeEscalation": {},
+                      "f:capabilities": {
+                        ".": {},
+                        "f:add": {},
+                        "f:drop": {}
+                      },
+                      "f:privileged": {}
+                    },
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {},
+                    "f:volumeMounts": {
+                      ".": {},
+                      "k:{\"mountPath\":\"/config\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/device-config.yaml\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {},
+                        "f:subPath": {}
+                      },
+                      "k:{\"mountPath\":\"/driver-root\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {},
+                        "f:readOnly": {}
+                      },
+                      "k:{\"mountPath\":\"/tmp\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/usr/local/vgpu\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/usrbin\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/var/lib/kubelet/device-plugins\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/var/run/cdi\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      }
+                    }
+                  },
+                  "k:{\"name\":\"vgpu-monitor\"}": {
+                    ".": {},
+                    "f:command": {},
+                    "f:env": {
+                      ".": {},
+                      "k:{\"name\":\"HAMI_RESYNC_INTERVAL\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"HOOK_PATH\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NODE_NAME\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:valueFrom": {
+                          ".": {},
+                          "f:fieldRef": {}
+                        }
+                      },
+                      "k:{\"name\":\"NVIDIA_MIG_MONITOR_DEVICES\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      },
+                      "k:{\"name\":\"NVIDIA_VISIBLE_DEVICES\"}": {
+                        ".": {},
+                        "f:name": {},
+                        "f:value": {}
+                      }
+                    },
+                    "f:image": {},
+                    "f:imagePullPolicy": {},
+                    "f:name": {},
+                    "f:ports": {
+                      ".": {},
+                      "k:{\"containerPort\":9394,\"protocol\":\"TCP\"}": {
+                        ".": {},
+                        "f:containerPort": {},
+                        "f:name": {},
+                        "f:protocol": {}
+                      }
+                    },
+                    "f:resources": {},
+                    "f:securityContext": {
+                      ".": {},
+                      "f:allowPrivilegeEscalation": {},
+                      "f:capabilities": {
+                        ".": {},
+                        "f:add": {},
+                        "f:drop": {}
+                      }
+                    },
+                    "f:terminationMessagePath": {},
+                    "f:terminationMessagePolicy": {},
+                    "f:volumeMounts": {
+                      ".": {},
+                      "k:{\"mountPath\":\"/hostvar\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/run/containerd\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/run/docker\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/sysinfo\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/tmp\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      },
+                      "k:{\"mountPath\":\"/usr/local/vgpu/containers\"}": {
+                        ".": {},
+                        "f:mountPath": {},
+                        "f:name": {}
+                      }
+                    }
+                  }
+                },
+                "f:dnsPolicy": {},
+                "f:hostPID": {},
+                "f:priorityClassName": {},
+                "f:restartPolicy": {},
+                "f:runtimeClassName": {},
+                "f:schedulerName": {},
+                "f:securityContext": {},
+                "f:serviceAccount": {},
+                "f:serviceAccountName": {},
+                "f:terminationGracePeriodSeconds": {},
+                "f:volumes": {
+                  ".": {},
+                  "k:{\"name\":\"cdi-root\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"containerds\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"ctrs\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"device-config\"}": {
+                    ".": {},
+                    "f:configMap": {
+                      ".": {},
+                      "f:defaultMode": {},
+                      "f:name": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"device-plugin\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"deviceconfig\"}": {
+                    ".": {},
+                    "f:configMap": {
+                      ".": {},
+                      "f:defaultMode": {},
+                      "f:name": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"dockers\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"driver-root\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"hosttmp\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"hostvar\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"lib\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"sysinfo\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  },
+                  "k:{\"name\":\"usrbin\"}": {
+                    ".": {},
+                    "f:hostPath": {
+                      ".": {},
+                      "f:path": {},
+                      "f:type": {}
+                    },
+                    "f:name": {}
+                  }
+                }
+              }
+            },
+            "f:updateStrategy": {
+              "f:rollingUpdate": {
+                ".": {},
+                "f:maxSurge": {},
+                "f:maxUnavailable": {}
+              },
+              "f:type": {}
+            }
+          }
+        },
+        "manager": "helm",
+        "operation": "Update",
+        "time": "2026-09-21T15:31:13Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:spec": {
+            "f:template": {
+              "f:spec": {
+                "f:nodeSelector": {}
+              }
+            }
+          }
+        },
+        "manager": "kubectl-patch",
+        "operation": "Update",
+        "time": "2026-10-26T05:07:03Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:spec": {
+            "f:template": {
+              "f:metadata": {
+                "f:annotations": {
+                  "f:kubectl.kubernetes.io/restartedAt": {}
+                }
+              }
+            }
+          }
+        },
+        "manager": "kubectl-rollout",
+        "operation": "Update",
+        "time": "2026-10-28T09:28:38Z"
+      },
+      {
+        "apiVersion": "apps/v1",
+        "fieldsType": "FieldsV1",
+        "fieldsV1": {
+          "f:status": {
+            "f:currentNumberScheduled": {},
+            "f:desiredNumberScheduled": {},
+            "f:numberAvailable": {},
+            "f:numberMisscheduled": {},
+            "f:numberReady": {},
+            "f:observedGeneration": {},
+            "f:updatedNumberScheduled": {}
+          }
+        },
+        "manager": "kube-controller-manager",
+        "operation": "Update",
+        "subresource": "status",
+        "time": "2026-10-28T09:28:41Z"
+      }
+    ],
+    "name": "hami-device-plugin",
+    "namespace": "kube-system",
+    "resourceVersion": "18443844",
+    "uid": "37c1ffc1-3237-4496-81f2-a4690ae10b71"
+  },
+  "spec": {
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "app.kubernetes.io/component": "hami-device-plugin",
+        "app.kubernetes.io/instance": "hami",
+        "app.kubernetes.io/name": "hami"
+      }
+    },
+    "template": {
+      "metadata": {
+        "annotations": {
+          "checksum/hami-scheduler-config": "25f59f38328307178da3b9304fdf140ede687e949004525067117a272a920da2",
+          "checksum/hami-scheduler-device-config": "f0bee2e0e1b557aea9f321a300ba1f288944edbf533bcbef476d45f34e1cf172",
+          "kubectl.kubernetes.io/restartedAt": "2026-10-28T18:28:38+09:00"
+        },
+        "labels": {
+          "app.kubernetes.io/component": "hami-device-plugin",
+          "app.kubernetes.io/instance": "hami",
+          "app.kubernetes.io/name": "hami",
+          "hami.io/webhook": "ignore"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "command": [
+              "nvidia-device-plugin",
+              "--config-file=/device-config.yaml",
+              "--mig-strategy=none",
+              "--disable-core-limit=false",
+              "-v=4"
+            ],
+            "env": [
+              {
+                "name": "NODE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "spec.nodeName"
+                  }
+                }
+              },
+              {
+                "name": "NVIDIA_MIG_MONITOR_DEVICES",
+                "value": "all"
+              },
+              {
+                "name": "DEVICE_LIST_STRATEGY",
+                "value": "cdi-annotations"
+              },
+              {
+                "name": "HOOK_PATH",
+                "value": "/usr/local"
+              },
+              {
+                "name": "PASS_DEVICE_SPECS",
+                "value": "false"
+              },
+              {
+                "name": "NVIDIA_DRIVER_ROOT",
+                "value": "/"
+              },
+              {
+                "name": "NVIDIA_CDI_HOOK_PATH",
+                "value": "/usr/local/nvidia/toolkit/nvidia-ctk"
+              }
+            ],
+            "image": "docker.io/projecthami/hami:v2.10.0",
+            "imagePullPolicy": "IfNotPresent",
+            "lifecycle": {
+              "postStart": {
+                "exec": {
+                  "command": [
+                    "/bin/sh",
+                    "-c",
+                    "/k8s-vgpu/bin/vgpu-init.sh /usr/local/vgpu/"
+                  ]
+                }
+              }
+            },
+            "name": "device-plugin",
+            "resources": {},
+            "securityContext": {
+              "allowPrivilegeEscalation": true,
+              "capabilities": {
+                "add": [
+                  "SYS_ADMIN"
+                ],
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "privileged": true
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/kubelet/device-plugins",
+                "name": "device-plugin"
+              },
+              {
+                "mountPath": "/usr/local/vgpu",
+                "name": "lib"
+              },
+              {
+                "mountPath": "/usrbin",
+                "name": "usrbin"
+              },
+              {
+                "mountPath": "/config",
+                "name": "deviceconfig"
+              },
+              {
+                "mountPath": "/tmp",
+                "name": "hosttmp"
+              },
+              {
+                "mountPath": "/device-config.yaml",
+                "name": "device-config",
+                "subPath": "device-config.yaml"
+              },
+              {
+                "mountPath": "/var/run/cdi",
+                "name": "cdi-root"
+              },
+              {
+                "mountPath": "/driver-root",
+                "name": "driver-root",
+                "readOnly": true
+              }
+            ]
+          },
+          {
+            "command": [
+              "vGPUmonitor",
+              "-v=4"
+            ],
+            "env": [
+              {
+                "name": "NODE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "spec.nodeName"
+                  }
+                }
+              },
+              {
+                "name": "NVIDIA_VISIBLE_DEVICES",
+                "value": "all"
+              },
+              {
+                "name": "NVIDIA_MIG_MONITOR_DEVICES",
+                "value": "all"
+              },
+              {
+                "name": "HOOK_PATH",
+                "value": "/usr/local/vgpu"
+              },
+              {
+                "name": "HAMI_RESYNC_INTERVAL",
+                "value": "5m"
+              }
+            ],
+            "image": "docker.io/projecthami/hami:v2.10.0",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "vgpu-monitor",
+            "ports": [
+              {
+                "containerPort": 9394,
+                "name": "metrics",
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {},
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "add": [
+                  "SYS_ADMIN"
+                ],
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/usr/local/vgpu/containers",
+                "name": "ctrs"
+              },
+              {
+                "mountPath": "/run/docker",
+                "name": "dockers"
+              },
+              {
+                "mountPath": "/run/containerd",
+                "name": "containerds"
+              },
+              {
+                "mountPath": "/sysinfo",
+                "name": "sysinfo"
+              },
+              {
+                "mountPath": "/hostvar",
+                "name": "hostvar"
+              },
+              {
+                "mountPath": "/tmp",
+                "name": "hosttmp"
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "hostPID": true,
+        "nodeSelector": {
+          "gpu": "on"
+        },
+        "priorityClassName": "system-node-critical",
+        "restartPolicy": "Always",
+        "runtimeClassName": "nvidia",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "hami-device-plugin",
+        "serviceAccountName": "hami-device-plugin",
+        "terminationGracePeriodSeconds": 30,
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/usr/local/vgpu/containers",
+              "type": ""
+            },
+            "name": "ctrs"
+          },
+          {
+            "hostPath": {
+              "path": "/tmp",
+              "type": ""
+            },
+            "name": "hosttmp"
+          },
+          {
+            "hostPath": {
+              "path": "/run/docker",
+              "type": ""
+            },
+            "name": "dockers"
+          },
+          {
+            "hostPath": {
+              "path": "/run/containerd",
+              "type": ""
+            },
+            "name": "containerds"
+          },
+          {
+            "hostPath": {
+              "path": "/var/lib/kubelet/device-plugins",
+              "type": ""
+            },
+            "name": "device-plugin"
+          },
+          {
+            "hostPath": {
+              "path": "/usr/local/vgpu",
+              "type": ""
+            },
+            "name": "lib"
+          },
+          {
+            "hostPath": {
+              "path": "/",
+              "type": "Directory"
+            },
+            "name": "driver-root"
+          },
+          {
+            "hostPath": {
+              "path": "/var/run/cdi",
+              "type": "DirectoryOrCreate"
+            },
+            "name": "cdi-root"
+          },
+          {
+            "hostPath": {
+              "path": "/usr/bin",
+              "type": ""
+            },
+            "name": "usrbin"
+          },
+          {
+            "hostPath": {
+              "path": "/sys",
+              "type": ""
+            },
+            "name": "sysinfo"
+          },
+          {
+            "hostPath": {
+              "path": "/var",
+              "type": ""
+            },
+            "name": "hostvar"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "hami-device-plugin"
+            },
+            "name": "deviceconfig"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "hami-scheduler-device"
+            },
+            "name": "device-config"
+          }
+        ]
+      }
+    },
+    "updateStrategy": {
+      "rollingUpdate": {
+        "maxSurge": 0,
+        "maxUnavailable": 1
+      },
+      "type": "RollingUpdate"
+    }
+  },
+  "status": {
+    "currentNumberScheduled": 1,
+    "desiredNumberScheduled": 1,
+    "numberAvailable": 1,
+    "numberMisscheduled": 0,
+    "numberReady": 1,
+    "observedGeneration": 144,
+    "updatedNumberScheduled": 1
+  }
+}

@@ -1,0 +1,9 @@
+ipam:
+  mode: kubernetes
+routingMode: tunnel
+tunnelProtocol: vxlan
+devices: wg0
+MTU: 1280
+kubeProxyReplacement: false
+operator:
+  replicas: 1

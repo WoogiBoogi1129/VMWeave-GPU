@@ -1,0 +1,12 @@
+worker apt-repos START
+cp apt-repos START
+worker apt-repos DONE
+worker install-packages START
+cp apt-repos DONE
+cp install-packages START
+worker install-packages DONE
+cp install-packages DONE
+Created symlink /etc/systemd/system/multi-user.target.wants/wg-quick@wg0.service → /lib/systemd/system/wg-quick@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/wg-quick@wg0.service → /lib/systemd/system/wg-quick@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/vmweave-guest-broker.service → /etc/systemd/system/vmweave-guest-broker.service.
+PREPARATION COMPLETE

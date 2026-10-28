@@ -1,0 +1,359 @@
+[
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:38Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{device-plugin}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-lgpxh",
+      "namespace": "kube-system",
+      "resourceVersion": "17059254",
+      "uid": "b7d73ab6-cd6f-4832-afb7-f42cc7e71c2f"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:38Z",
+    "message": "Stopping container device-plugin",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:38Z",
+      "name": "hami-device-plugin-lgpxh.18e2a77404a5b841",
+      "namespace": "kube-system",
+      "resourceVersion": "18443799",
+      "uid": "94c6cd85-3685-4bb2-b4cb-fab5c6f50b64"
+    },
+    "reason": "Killing",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:38Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{vgpu-monitor}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-lgpxh",
+      "namespace": "kube-system",
+      "resourceVersion": "17059254",
+      "uid": "b7d73ab6-cd6f-4832-afb7-f42cc7e71c2f"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:38Z",
+    "message": "Stopping container vgpu-monitor",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:38Z",
+      "name": "hami-device-plugin-lgpxh.18e2a77404a7823e",
+      "namespace": "kube-system",
+      "resourceVersion": "18443800",
+      "uid": "b7daf69b-35df-4d2e-b008-ce4823207d07"
+    },
+    "reason": "Killing",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:39Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "name": "hami-device-plugin-vm785",
+      "namespace": "kube-system",
+      "resourceVersion": "18443805",
+      "uid": "9131c5a5-8acc-4d56-b57f-f513b8d3e700"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:39Z",
+    "message": "Successfully assigned kube-system/hami-device-plugin-vm785 to gpu-4",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:39Z",
+      "name": "hami-device-plugin-vm785.18e2a77434d71693",
+      "namespace": "kube-system",
+      "resourceVersion": "18443809",
+      "uid": "30bfad2d-0ec9-4abb-9a54-aa0b0c80205c"
+    },
+    "reason": "Scheduled",
+    "reportingComponent": "default-scheduler",
+    "reportingInstance": "",
+    "source": {
+      "component": "default-scheduler"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{device-plugin}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-vm785",
+      "namespace": "kube-system",
+      "resourceVersion": "18443807",
+      "uid": "9131c5a5-8acc-4d56-b57f-f513b8d3e700"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:40Z",
+    "message": "Container image \"docker.io/projecthami/hami:v2.10.0\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:40Z",
+      "name": "hami-device-plugin-vm785.18e2a77472b7f96b",
+      "namespace": "kube-system",
+      "resourceVersion": "18443832",
+      "uid": "454e1528-195f-42e9-b5ab-9e2392ecb504"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{device-plugin}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-vm785",
+      "namespace": "kube-system",
+      "resourceVersion": "18443807",
+      "uid": "9131c5a5-8acc-4d56-b57f-f513b8d3e700"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:40Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:40Z",
+      "name": "hami-device-plugin-vm785.18e2a7748744a4fd",
+      "namespace": "kube-system",
+      "resourceVersion": "18443835",
+      "uid": "db24b035-9d7a-4528-a55e-88c4764d2840"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{device-plugin}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-vm785",
+      "namespace": "kube-system",
+      "resourceVersion": "18443807",
+      "uid": "9131c5a5-8acc-4d56-b57f-f513b8d3e700"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:40Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:40Z",
+      "name": "hami-device-plugin-vm785.18e2a774896e918c",
+      "namespace": "kube-system",
+      "resourceVersion": "18443836",
+      "uid": "0c688e9f-f1fa-4b5d-9ff8-07a5ce8e6e66"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{vgpu-monitor}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-vm785",
+      "namespace": "kube-system",
+      "resourceVersion": "18443807",
+      "uid": "9131c5a5-8acc-4d56-b57f-f513b8d3e700"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:40Z",
+    "message": "Container image \"docker.io/projecthami/hami:v2.10.0\" already present on machine and can be accessed by the pod",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:40Z",
+      "name": "hami-device-plugin-vm785.18e2a7748c811c3b",
+      "namespace": "kube-system",
+      "resourceVersion": "18443837",
+      "uid": "dff56cc6-c571-43a7-b93f-0bd3ec3c70dc"
+    },
+    "reason": "Pulled",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:40Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{vgpu-monitor}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-vm785",
+      "namespace": "kube-system",
+      "resourceVersion": "18443807",
+      "uid": "9131c5a5-8acc-4d56-b57f-f513b8d3e700"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:40Z",
+    "message": "Container created",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:41Z",
+      "name": "hami-device-plugin-vm785.18e2a774a09e5a05",
+      "namespace": "kube-system",
+      "resourceVersion": "18443839",
+      "uid": "f1460774-f678-4f5f-890d-8ec0f41d2906"
+    },
+    "reason": "Created",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:41Z",
+    "involvedObject": {
+      "apiVersion": "v1",
+      "fieldPath": "spec.containers{vgpu-monitor}",
+      "kind": "Pod",
+      "name": "hami-device-plugin-vm785",
+      "namespace": "kube-system",
+      "resourceVersion": "18443807",
+      "uid": "9131c5a5-8acc-4d56-b57f-f513b8d3e700"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:41Z",
+    "message": "Container started",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:41Z",
+      "name": "hami-device-plugin-vm785.18e2a774a2a87ba1",
+      "namespace": "kube-system",
+      "resourceVersion": "18443840",
+      "uid": "c2042fcc-0f7d-4914-bf4b-dacc5d6579fb"
+    },
+    "reason": "Started",
+    "reportingComponent": "kubelet",
+    "reportingInstance": "gpu-4",
+    "source": {
+      "component": "kubelet",
+      "host": "gpu-4"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:38Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "DaemonSet",
+      "name": "hami-device-plugin",
+      "namespace": "kube-system",
+      "resourceVersion": "18443792",
+      "uid": "37c1ffc1-3237-4496-81f2-a4690ae10b71"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:38Z",
+    "message": "Deleted pod: hami-device-plugin-lgpxh",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:38Z",
+      "name": "hami-device-plugin.18e2a774038f5ed4",
+      "namespace": "kube-system",
+      "resourceVersion": "18443795",
+      "uid": "000ba825-22f7-49e9-83e7-7fd3c89f63b7"
+    },
+    "reason": "SuccessfulDelete",
+    "reportingComponent": "daemonset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "daemonset-controller"
+    },
+    "type": "Normal"
+  },
+  {
+    "apiVersion": "v1",
+    "count": 1,
+    "eventTime": null,
+    "firstTimestamp": "2026-10-28T09:28:39Z",
+    "involvedObject": {
+      "apiVersion": "apps/v1",
+      "kind": "DaemonSet",
+      "name": "hami-device-plugin",
+      "namespace": "kube-system",
+      "resourceVersion": "18443798",
+      "uid": "37c1ffc1-3237-4496-81f2-a4690ae10b71"
+    },
+    "kind": "Event",
+    "lastTimestamp": "2026-10-28T09:28:39Z",
+    "message": "Created pod: hami-device-plugin-vm785",
+    "metadata": {
+      "creationTimestamp": "2026-10-28T09:28:39Z",
+      "name": "hami-device-plugin.18e2a774343094cd",
+      "namespace": "kube-system",
+      "resourceVersion": "18443806",
+      "uid": "7bf39ded-8635-401c-951c-ddd5dadb2656"
+    },
+    "reason": "SuccessfulCreate",
+    "reportingComponent": "daemonset-controller",
+    "reportingInstance": "",
+    "source": {
+      "component": "daemonset-controller"
+    },
+    "type": "Normal"
+  }
+]

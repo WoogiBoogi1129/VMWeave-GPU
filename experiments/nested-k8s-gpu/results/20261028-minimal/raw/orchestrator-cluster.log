@@ -1,0 +1,28 @@
+cp init-cluster START
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/cluster.py", line 9, in step
+    try: output=ssh(role,command,stderr=subprocess.STDOUT)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 20, in ssh
+    return run(['ssh','-i',PRIVATE/'id_ed25519','-o','StrictHostKeyChecking=accept-new','-o',f'UserKnownHostsFile={PRIVATE}/known_hosts','-o','ConnectTimeout=8',f'ubuntu@{ip}',command],**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/common.py", line 10, in run
+    return subprocess.check_output([str(x) for x in args],text=True,**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-i', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/id_ed25519', '-o', 'StrictHostKeyChecking=accept-new', '-o', 'UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/known_hosts', '-o', 'ConnectTimeout=8', 'ubuntu@10.96.178.29', 'cd /home/ubuntu/nested && sudo env KUBERNETES_VERSION=v1.35 CILIUM_VERSION=1.20.2 CIDR=10.246.0.0/16 bash k8s-setup.sh --step init-cluster']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/cluster.py", line 16, in <module>
+    step('cp','init-cluster');step('cp','kubeconfig');step('cp','install-helm')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/runner/cluster.py", line 11, in step
+    save(f'raw/{role}-{name}-failed-{time.time_ns()}.log',re.sub(r'\b[a-z0-9]{6}\.[a-z0-9]{16}\b','<REDACTED_TOKEN>',e.output));raise RuntimeError(name+' failed; inspect log')
+                                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: init-cluster failed; inspect log
