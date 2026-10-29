@@ -1,0 +1,141 @@
+{
+  "status": "PASS",
+  "identities": [
+    {
+      "name": "ai-sgemm-w-correct",
+      "mode": "vmweave",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "worker_image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-w-diagnostic",
+      "mode": "vmweave",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "worker_image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-w-formal12",
+      "mode": "vmweave",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "worker_image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-w-formal3",
+      "mode": "vmweave",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "worker_image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-w-scan12",
+      "mode": "vmweave",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "worker_image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-w-scan34",
+      "mode": "vmweave",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "worker_image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-p-first",
+      "mode": "passthrough",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-p-formal1",
+      "mode": "passthrough",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-p-formal23",
+      "mode": "passthrough",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    },
+    {
+      "name": "ai-sgemm-p-scan23",
+      "mode": "passthrough",
+      "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      }
+    }
+  ]
+}

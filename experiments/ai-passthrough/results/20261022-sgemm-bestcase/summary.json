@@ -1,0 +1,783 @@
+{
+  "status": "PASS",
+  "selected_n": 16384,
+  "paired_geomean_ratio": 1.000090403897067,
+  "paired_ratio_min": 0.9959197207290804,
+  "paired_ratio_max": 1.0024385259997597,
+  "pairs": [
+    {
+      "pair": "b1",
+      "order": "P,W",
+      "p_tflops": 76.84400741771952,
+      "w_tflops": 77.03139352773336,
+      "ratio": 1.0024385259997597
+    },
+    {
+      "pair": "b2",
+      "order": "W,P",
+      "p_tflops": 77.07523622480055,
+      "w_tflops": 76.76074773613126,
+      "ratio": 0.9959197207290804
+    },
+    {
+      "pair": "b3",
+      "order": "P,W",
+      "p_tflops": 76.82540990368564,
+      "w_tflops": 76.97338491817158,
+      "ratio": 1.001926120728434
+    }
+  ],
+  "exploration": [
+    {
+      "n": 4096,
+      "p_tflops": 75.77488515173664,
+      "w_tflops": 72.5533279303524,
+      "ratio": 0.9574851586388657
+    },
+    {
+      "n": 8192,
+      "p_tflops": 76.89100295628366,
+      "w_tflops": 75.96047618994706,
+      "ratio": 0.9878981060129279
+    },
+    {
+      "n": 16384,
+      "p_tflops": 76.90412486942681,
+      "w_tflops": 77.07649201623828,
+      "ratio": 1.0022413251188298
+    },
+    {
+      "n": 20480,
+      "p_tflops": 72.59969019645585,
+      "w_tflops": 72.29439092271785,
+      "ratio": 0.9957947578989406
+    }
+  ],
+  "measurements": [
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "ae09bcff-c9cc-4fb1-8a4f-faf8305e2eed": 1.2807029075450012
+      },
+      "stage": "b1",
+      "n": 16384,
+      "backend": "passthrough",
+      "completed_gemms": 528,
+      "seconds": 60.43850746199999,
+      "gemms_per_second": 8.736152201176939,
+      "ms_per_gemm": 114.46687019318179,
+      "tflops": 76.84400741771952,
+      "guest_cpu_seconds": 60.531937000000006,
+      "gpu_samples": 39,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 99.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2197.0,
+          "min": 2190.0,
+          "max": 2205.0
+        },
+        "power_W": {
+          "median": 600.42,
+          "min": 598.29,
+          "max": 604.29
+        },
+        "temperature_C": {
+          "median": 70.0,
+          "min": 65.0,
+          "max": 72.0
+        }
+      },
+      "memory_used_bytes": 3835887616
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "cfa919eb-3969-470a-a696-06106be9f4bd": 1.0120313632989022,
+        "db3a949c-bb1a-439f-b589-824826870156": 0.09233619487279168
+      },
+      "stage": "b1",
+      "n": 16384,
+      "backend": "vmweave",
+      "completed_gemms": 528,
+      "seconds": 60.291485108,
+      "gemms_per_second": 8.757455535457366,
+      "ms_per_gemm": 114.18841876515151,
+      "tflops": 77.03139352773336,
+      "guest_cpu_seconds": 0.05909799999999876,
+      "gpu_samples": 57,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 96.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2205.0,
+          "min": 2182.0,
+          "max": 2227.0
+        },
+        "power_W": {
+          "median": 600.56,
+          "min": 589.34,
+          "max": 603.0
+        },
+        "temperature_C": {
+          "median": 67.0,
+          "min": 55.0,
+          "max": 70.0
+        }
+      },
+      "memory_used_bytes": 3823240192
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "054b0782-1265-46c5-8915-40c72c2e3b1c": 1.3003147685976717
+      },
+      "stage": "b2",
+      "n": 16384,
+      "backend": "passthrough",
+      "completed_gemms": 528,
+      "seconds": 60.25718951,
+      "gemms_per_second": 8.762439873044121,
+      "ms_per_gemm": 114.12346498106061,
+      "tflops": 77.07523622480055,
+      "guest_cpu_seconds": 60.385734,
+      "gpu_samples": 39,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 99.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2197.0,
+          "min": 2182.0,
+          "max": 2227.0
+        },
+        "power_W": {
+          "median": 600.52,
+          "min": 596.88,
+          "max": 610.36
+        },
+        "temperature_C": {
+          "median": 68.0,
+          "min": 56.0,
+          "max": 71.0
+        }
+      },
+      "memory_used_bytes": 3835887616
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "cfa919eb-3969-470a-a696-06106be9f4bd": 1.0124284891679116,
+        "db3a949c-bb1a-439f-b589-824826870156": 0.09627647444288871
+      },
+      "stage": "b2",
+      "n": 16384,
+      "backend": "vmweave",
+      "completed_gemms": 528,
+      "seconds": 60.50406298400003,
+      "gemms_per_second": 8.72668667126746,
+      "ms_per_gemm": 114.59102837878794,
+      "tflops": 76.76074773613126,
+      "guest_cpu_seconds": 0.06185499999999777,
+      "gpu_samples": 57,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 96.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2197.0,
+          "min": 2182.0,
+          "max": 2227.0
+        },
+        "power_W": {
+          "median": 600.33,
+          "min": 593.65,
+          "max": 603.05
+        },
+        "temperature_C": {
+          "median": 70.0,
+          "min": 64.0,
+          "max": 72.0
+        }
+      },
+      "memory_used_bytes": 3823240192
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "054b0782-1265-46c5-8915-40c72c2e3b1c": 1.2931862655070745
+      },
+      "stage": "b3",
+      "n": 16384,
+      "backend": "passthrough",
+      "completed_gemms": 528,
+      "seconds": 60.45313811600002,
+      "gemms_per_second": 8.734037908616942,
+      "ms_per_gemm": 114.49457976515154,
+      "tflops": 76.82540990368564,
+      "guest_cpu_seconds": 60.53791400000001,
+      "gpu_samples": 40,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 100.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2190.0,
+          "min": 2190.0,
+          "max": 2205.0
+        },
+        "power_W": {
+          "median": 599.93,
+          "min": 597.21,
+          "max": 602.67
+        },
+        "temperature_C": {
+          "median": 70.0,
+          "min": 65.0,
+          "max": 72.0
+        }
+      },
+      "memory_used_bytes": 3835887616
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "474564e5-19c5-4482-acac-a4b77ab51f02": 1.0119872237707823,
+        "0e89b7e0-e888-4559-b29f-655c4546195c": 0.08857656225564838
+      },
+      "stage": "b3",
+      "n": 16384,
+      "backend": "vmweave",
+      "completed_gemms": 528,
+      "seconds": 60.336921919999995,
+      "gemms_per_second": 8.750860720075659,
+      "ms_per_gemm": 114.27447333333332,
+      "tflops": 76.97338491817158,
+      "guest_cpu_seconds": 0.053981000000002055,
+      "gpu_samples": 57,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 98.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2197.0,
+          "min": 2182.0,
+          "max": 2242.0
+        },
+        "power_W": {
+          "median": 600.27,
+          "min": 591.96,
+          "max": 603.38
+        },
+        "temperature_C": {
+          "median": 68.0,
+          "min": 55.0,
+          "max": 71.0
+        }
+      },
+      "memory_used_bytes": 3823240192
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "9bfbbb73-bd11-446b-b02f-e462a9b9748d": 1.0138200484991535,
+        "3c2d25b8-9fba-4147-be1a-8abe90cf482f": 0.09485126220621251
+      },
+      "stage": "diagnostic",
+      "n": 16384,
+      "backend": "vmweave",
+      "completed_gemms": 64,
+      "seconds": 7.248491463999997,
+      "gemms_per_second": 8.829423379727944,
+      "ms_per_gemm": 113.25767912499995,
+      "tflops": 77.66442938054514,
+      "guest_cpu_seconds": 0.0083479999999998,
+      "gpu_samples": 7,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 98.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2220.0,
+          "min": 2212.0,
+          "max": 2235.0
+        },
+        "power_W": {
+          "median": 600.27,
+          "min": 595.47,
+          "max": 602.73
+        },
+        "temperature_C": {
+          "median": 59.0,
+          "min": 57.0,
+          "max": 61.0
+        }
+      },
+      "memory_used_bytes": 3823240192
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "20251a88-90ff-49a7-96cf-030ac9c44113": 1.281462617214817
+      },
+      "stage": "explore",
+      "n": 16384,
+      "backend": "passthrough",
+      "completed_gemms": 528,
+      "seconds": 60.391261504,
+      "gemms_per_second": 8.742986764153422,
+      "ms_per_gemm": 114.37738921212122,
+      "tflops": 76.90412486942681,
+      "guest_cpu_seconds": 60.44747799999999,
+      "gpu_samples": 40,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 100.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2197.0,
+          "min": 2182.0,
+          "max": 2212.0
+        },
+        "power_W": {
+          "median": 600.015,
+          "min": 587.23,
+          "max": 602.08
+        },
+        "temperature_C": {
+          "median": 69.5,
+          "min": 61.0,
+          "max": 71.0
+        }
+      },
+      "memory_used_bytes": 3835887616
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "0725df9d-06cf-4cb9-998c-163d2ad19df5": 1.0125156004402251,
+        "336d725e-a1f2-4f25-956c-5270a7f29187": 0.09482975554566708
+      },
+      "stage": "explore",
+      "n": 16384,
+      "backend": "vmweave",
+      "completed_gemms": 528,
+      "seconds": 60.25620775200001,
+      "gemms_per_second": 8.762582640001515,
+      "ms_per_gemm": 114.12160559090911,
+      "tflops": 77.07649201623828,
+      "guest_cpu_seconds": 0.0589549999999992,
+      "gpu_samples": 57,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 96.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 3659.0,
+          "min": 3659.0,
+          "max": 3659.0
+        },
+        "clock_MHz": {
+          "median": 2205.0,
+          "min": 2175.0,
+          "max": 2250.0
+        },
+        "power_W": {
+          "median": 600.5,
+          "min": 589.93,
+          "max": 603.1
+        },
+        "temperature_C": {
+          "median": 67.0,
+          "min": 54.0,
+          "max": 70.0
+        }
+      },
+      "memory_used_bytes": 3823240192
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "ae09bcff-c9cc-4fb1-8a4f-faf8305e2eed": 1.280517440044652
+      },
+      "stage": "explore",
+      "n": 20480,
+      "backend": "passthrough",
+      "completed_gemms": 256,
+      "seconds": 60.57941155400002,
+      "gemms_per_second": 4.2258581493780865,
+      "ms_per_gemm": 236.63832638281258,
+      "tflops": 72.59969019645585,
+      "guest_cpu_seconds": 60.691300999999996,
+      "gpu_samples": 40,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 100.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 5387.0,
+          "min": 5387.0,
+          "max": 5387.0
+        },
+        "clock_MHz": {
+          "median": 2107.0,
+          "min": 2092.0,
+          "max": 2137.0
+        },
+        "power_W": {
+          "median": 600.1600000000001,
+          "min": 593.8,
+          "max": 605.73
+        },
+        "temperature_C": {
+          "median": 67.0,
+          "min": 57.0,
+          "max": 69.0
+        }
+      },
+      "memory_used_bytes": 5647826944
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "0725df9d-06cf-4cb9-998c-163d2ad19df5": 1.0193850160156004,
+        "336d725e-a1f2-4f25-956c-5270a7f29187": 0.08673128251018017
+      },
+      "stage": "explore",
+      "n": 20480,
+      "backend": "vmweave",
+      "completed_gemms": 256,
+      "seconds": 60.83523846,
+      "gemms_per_second": 4.208087392775217,
+      "ms_per_gemm": 237.637650234375,
+      "tflops": 72.29439092271785,
+      "guest_cpu_seconds": 0.028340000000000032,
+      "gpu_samples": 57,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 97.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 5387.0,
+          "min": 5387.0,
+          "max": 5387.0
+        },
+        "clock_MHz": {
+          "median": 2100.0,
+          "min": 2085.0,
+          "max": 2145.0
+        },
+        "power_W": {
+          "median": 599.61,
+          "min": 593.82,
+          "max": 605.39
+        },
+        "temperature_C": {
+          "median": 68.0,
+          "min": 62.0,
+          "max": 71.0
+        }
+      },
+      "memory_used_bytes": 5635179520
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "c8429cc6-fd4a-4a02-9928-4d73c7df6452": 1.2742933984120763
+      },
+      "stage": "explore",
+      "n": 4096,
+      "backend": "passthrough",
+      "completed_gemms": 33088,
+      "seconds": 60.014344902999994,
+      "gemms_per_second": 551.3348525836528,
+      "ms_per_gemm": 1.8137797661690038,
+      "tflops": 75.77488515173664,
+      "guest_cpu_seconds": 60.058341999999996,
+      "gpu_samples": 40,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 100.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 779.0,
+          "min": 779.0,
+          "max": 779.0
+        },
+        "clock_MHz": {
+          "median": 2295.0,
+          "min": 2272.0,
+          "max": 2340.0
+        },
+        "power_W": {
+          "median": 599.91,
+          "min": 598.85,
+          "max": 600.77
+        },
+        "temperature_C": {
+          "median": 67.0,
+          "min": 54.0,
+          "max": 70.0
+        }
+      },
+      "memory_used_bytes": 815988736
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "312fef74-269b-4e87-b9be-346d6d0bd125": 0.716455553187074,
+        "beeb7861-f513-4586-8a70-c52dc530c34a": 0.7724445976047815
+      },
+      "stage": "explore",
+      "n": 4096,
+      "backend": "vmweave",
+      "completed_gemms": 31680,
+      "seconds": 60.01194115000001,
+      "gemms_per_second": 527.8949387891945,
+      "ms_per_gemm": 1.8943163241792933,
+      "tflops": 72.5533279303524,
+      "guest_cpu_seconds": 2.354683,
+      "gpu_samples": 57,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 93.0,
+          "min": 90.0,
+          "max": 95.0
+        },
+        "memory_MiB": {
+          "median": 779.0,
+          "min": 779.0,
+          "max": 779.0
+        },
+        "clock_MHz": {
+          "median": 2355.0,
+          "min": 2340.0,
+          "max": 2392.0
+        },
+        "power_W": {
+          "median": 600.62,
+          "min": 586.48,
+          "max": 617.49
+        },
+        "temperature_C": {
+          "median": 65.0,
+          "min": 48.0,
+          "max": 70.0
+        }
+      },
+      "memory_used_bytes": 803341312
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "20251a88-90ff-49a7-96cf-030ac9c44113": 1.273083838238168
+      },
+      "stage": "explore",
+      "n": 8192,
+      "backend": "passthrough",
+      "completed_gemms": 4208,
+      "seconds": 60.17277382,
+      "gemms_per_second": 69.93195980274655,
+      "ms_per_gemm": 14.29961355038023,
+      "tflops": 76.89100295628366,
+      "guest_cpu_seconds": 60.240342999999996,
+      "gpu_samples": 39,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 100.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 1355.0,
+          "min": 1355.0,
+          "max": 1355.0
+        },
+        "clock_MHz": {
+          "median": 2205.0,
+          "min": 2190.0,
+          "max": 2242.0
+        },
+        "power_W": {
+          "median": 600.05,
+          "min": 597.42,
+          "max": 609.06
+        },
+        "temperature_C": {
+          "median": 64.0,
+          "min": 50.0,
+          "max": 69.0
+        }
+      },
+      "memory_used_bytes": 1419968512
+    },
+    {
+      "host_cpu_average_cores_by_pod_uid": {
+        "312fef74-269b-4e87-b9be-346d6d0bd125": 0.9826258551169761,
+        "beeb7861-f513-4586-8a70-c52dc530c34a": 0.1660128589047049
+      },
+      "stage": "explore",
+      "n": 8192,
+      "backend": "vmweave",
+      "completed_gemms": 4160,
+      "seconds": 60.215109238,
+      "gemms_per_second": 69.08565063890552,
+      "ms_per_gemm": 14.47478587451923,
+      "tflops": 75.96047618994706,
+      "guest_cpu_seconds": 0.3487640000000001,
+      "gpu_samples": 57,
+      "gpu_telemetry": {
+        "utilization": {
+          "median": 100.0,
+          "min": 96.0,
+          "max": 100.0
+        },
+        "memory_MiB": {
+          "median": 1355.0,
+          "min": 1355.0,
+          "max": 1355.0
+        },
+        "clock_MHz": {
+          "median": 2205.0,
+          "min": 2190.0,
+          "max": 2227.0
+        },
+        "power_W": {
+          "median": 600.25,
+          "min": 592.78,
+          "max": 604.83
+        },
+        "temperature_C": {
+          "median": 70.0,
+          "min": 65.0,
+          "max": 72.0
+        }
+      },
+      "memory_used_bytes": 1407321088
+    }
+  ],
+  "correctness": [
+    {
+      "n": 4096,
+      "status": "PASS",
+      "elements": 16777216,
+      "atol": 1e-05,
+      "rtol": 0.0001,
+      "exceeded": 0,
+      "max_abs_error": 0.0,
+      "bitwise_equal": true,
+      "input_sha256": [
+        "a6687100f9a3843fc6d6849398954152fae39759e9e6b8447a99b9b6f7aa191a",
+        "c563074a5ce7c9ad9146ed0e148350ef29c5fb4dfb665c3126aaa2e552c3ea72"
+      ]
+    },
+    {
+      "n": 8192,
+      "status": "PASS",
+      "elements": 67108864,
+      "atol": 1e-05,
+      "rtol": 0.0001,
+      "exceeded": 0,
+      "max_abs_error": 0.0,
+      "bitwise_equal": true,
+      "input_sha256": [
+        "ce293b96fc0d0d560521e8d65c6b6039d93d77277a8d8c4cc217712bc9980da3",
+        "22864241f39c03a5b77a67a0b1f3d3071d5886c680e8e598ad3dd74234943204"
+      ]
+    },
+    {
+      "n": 16384,
+      "status": "PASS",
+      "elements": 268435456,
+      "atol": 1e-05,
+      "rtol": 0.0001,
+      "exceeded": 0,
+      "max_abs_error": 0.0,
+      "bitwise_equal": true,
+      "input_sha256": [
+        "13dbd45fb050ceb7efb1882ef939ecf5fb57762d0957e6ac35a854d997ba9bb8",
+        "ed60aa4f112776b3ba20987a141cd832935906ef0d44597636fbe242db2202d2"
+      ]
+    },
+    {
+      "n": 20480,
+      "status": "PASS",
+      "elements": 419430400,
+      "atol": 1e-05,
+      "rtol": 0.0001,
+      "exceeded": 0,
+      "max_abs_error": 0.0,
+      "bitwise_equal": true,
+      "input_sha256": [
+        "70509518129f5176e2c9729f810ec67395a51e77bf557b962ce23833de1c57d1",
+        "db01c7fb2cad61502505e29ef65064242f127f9d59b9041fa2f9046abaf9b979"
+      ]
+    }
+  ],
+  "mode_summary": {
+    "passthrough": {
+      "median_tflops": 76.84400741771952,
+      "mean_tflops": 76.91488451540191,
+      "sample_cv": 0.0018095279306810158,
+      "range_over_median": 0.0032510839753172706
+    },
+    "vmweave": {
+      "median_tflops": 76.97338491817158,
+      "mean_tflops": 76.92184206067873,
+      "sample_cv": 0.0018524629462814343,
+      "range_over_median": 0.0035160957503662976
+    }
+  }
+}

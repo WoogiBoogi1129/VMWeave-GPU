@@ -1,0 +1,141 @@
+{
+  "n": 8192,
+  "shape": [
+    8192,
+    8192
+  ],
+  "dtype": "float32",
+  "layout": "column-major",
+  "backend": "vmweave",
+  "mode": "correctness",
+  "diagnostic": false,
+  "numpy": "2.2.6",
+  "source_sha256": "4eb84afc7568f0a2a65653cc615e65e6bfb548250159845c37a74285ead2a01c",
+  "workspace_bytes": 16777216,
+  "group_size": 16,
+  "tf32_policy": "CUBLAS_PEDANTIC_MATH",
+  "input_seeds": [
+    20261022,
+    20261023
+  ],
+  "math_mode": 2,
+  "pointer_mode": 0,
+  "cublas_version": null,
+  "memory_before": {
+    "free": 8013217792,
+    "total": 8589934592,
+    "used": 576716800
+  },
+  "input_sha256": [
+    "ce293b96fc0d0d560521e8d65c6b6039d93d77277a8d8c4cc217712bc9980da3",
+    "22864241f39c03a5b77a67a0b1f3d3071d5886c680e8e598ad3dd74234943204"
+  ],
+  "memory_ready": {
+    "free": 7182613504,
+    "total": 8589934592,
+    "used": 1407321088
+  },
+  "output_sha256": "73a5be997c6d4f8179c7d313ffc6faee8a08dcd090c4aaaa105c54303ccb08e7",
+  "output_bytes": 268435456,
+  "finite": true,
+  "cpu_reference": [
+    {
+      "index": 0,
+      "actual": 0.18827985227108002,
+      "fp64_reference": 0.18827981793465506,
+      "abs_error": 3.4336424953318456e-08
+    },
+    {
+      "index": 104729,
+      "actual": -0.014464074745774269,
+      "fp64_reference": -0.014463748975022853,
+      "abs_error": 3.257707514164876e-07
+    },
+    {
+      "index": 209458,
+      "actual": -0.4383732080459595,
+      "fp64_reference": -0.4383716264025079,
+      "abs_error": 1.5816434515980582e-06
+    },
+    {
+      "index": 314187,
+      "actual": 0.271755576133728,
+      "fp64_reference": 0.27175541386250507,
+      "abs_error": 1.6227122295875418e-07
+    },
+    {
+      "index": 418916,
+      "actual": 0.30094343423843384,
+      "fp64_reference": 0.30094339393520875,
+      "abs_error": 4.030322509063211e-08
+    },
+    {
+      "index": 523645,
+      "actual": -0.15856152772903442,
+      "fp64_reference": -0.15856161519506873,
+      "abs_error": 8.746603430420663e-08
+    },
+    {
+      "index": 628374,
+      "actual": -0.4834553301334381,
+      "fp64_reference": -0.4834544020619055,
+      "abs_error": 9.280715326243083e-07
+    },
+    {
+      "index": 733103,
+      "actual": 0.5995186567306519,
+      "fp64_reference": 0.5995189006946487,
+      "abs_error": 2.439639968931928e-07
+    },
+    {
+      "index": 837832,
+      "actual": 0.4238264560699463,
+      "fp64_reference": 0.423825959916896,
+      "abs_error": 4.961530503111433e-07
+    },
+    {
+      "index": 942561,
+      "actual": -0.04921199753880501,
+      "fp64_reference": -0.04921218349226142,
+      "abs_error": 1.859534564108145e-07
+    },
+    {
+      "index": 1047290,
+      "actual": -0.1692829132080078,
+      "fp64_reference": -0.16928245687953092,
+      "abs_error": 4.563284768943632e-07
+    },
+    {
+      "index": 1152019,
+      "actual": -0.5903398394584656,
+      "fp64_reference": -0.5903392290827734,
+      "abs_error": 6.103756922115622e-07
+    },
+    {
+      "index": 1256748,
+      "actual": -0.10364369302988052,
+      "fp64_reference": -0.1036434445050877,
+      "abs_error": 2.485247928285528e-07
+    },
+    {
+      "index": 1361477,
+      "actual": -0.2902316153049469,
+      "fp64_reference": -0.2902315126736617,
+      "abs_error": 1.0263128519261144e-07
+    },
+    {
+      "index": 1466206,
+      "actual": -0.22631968557834625,
+      "fp64_reference": -0.22631811855408848,
+      "abs_error": 1.567024257770333e-06
+    },
+    {
+      "index": 1570935,
+      "actual": -0.25796622037887573,
+      "fp64_reference": -0.2579659911029845,
+      "abs_error": 2.2927589121701786e-07
+    }
+  ],
+  "setup_and_run_seconds": 7.3049867153167725,
+  "guest_clock_offset_seconds": 0.23244524002075195
+}

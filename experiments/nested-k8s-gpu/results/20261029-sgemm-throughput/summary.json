@@ -1,0 +1,112 @@
+{
+  "scope": "same retained Worker VM, Guest vs Pod, effective completion-delimited FP32 SGEMM throughput",
+  "runs": 12,
+  "measurement_windows": 24,
+  "correctness_checks": 36,
+  "summary": [
+    {
+      "n": 1024,
+      "phase": "resident_compute",
+      "guest_gflops": [
+        1585.480572932,
+        1804.184505906,
+        1595.383396233
+      ],
+      "pod_gflops": [
+        1766.149737759,
+        1666.32818138,
+        1660.181106297
+      ],
+      "guest_median": 1595.383396233,
+      "pod_median": 1666.32818138,
+      "paired_pod_guest_ratios": [
+        1.1139523043747497,
+        0.923590783495409,
+        1.040615760585825
+      ],
+      "paired_ratio_median": 1.040615760585825,
+      "paired_change_percent": 4.061576058582506
+    },
+    {
+      "n": 1024,
+      "phase": "transfer_inclusive",
+      "guest_gflops": [
+        57.079861461,
+        57.288328882,
+        57.653442671
+      ],
+      "pod_gflops": [
+        54.686867247,
+        56.527195262,
+        57.795327895
+      ],
+      "guest_median": 57.288328882,
+      "pod_median": 56.527195262,
+      "paired_pod_guest_ratios": [
+        0.9580763836360217,
+        0.9867139845959244,
+        1.0024610017620226
+      ],
+      "paired_ratio_median": 0.9867139845959244,
+      "paired_change_percent": -1.328601540407559
+    },
+    {
+      "n": 4096,
+      "phase": "resident_compute",
+      "guest_gflops": [
+        49337.016951096,
+        50126.656847051,
+        50934.486497819
+      ],
+      "pod_gflops": [
+        50769.525060613,
+        49860.31117882,
+        50246.00901119
+      ],
+      "guest_median": 50126.656847051,
+      "pod_median": 50246.00901119,
+      "paired_pod_guest_ratios": [
+        1.0290351585491466,
+        0.9946865463411275,
+        0.9864830778914698
+      ],
+      "paired_ratio_median": 0.9946865463411275,
+      "paired_change_percent": -0.531345365887248
+    },
+    {
+      "n": 4096,
+      "phase": "transfer_inclusive",
+      "guest_gflops": [
+        209.555678234,
+        196.207640219,
+        200.325636979
+      ],
+      "pod_gflops": [
+        203.238014803,
+        203.120137946,
+        191.419574998
+      ],
+      "guest_median": 200.325636979,
+      "pod_median": 203.120137946,
+      "paired_pod_guest_ratios": [
+        0.9698521009583649,
+        1.0352305227221759,
+        0.9555420758156201
+      ],
+      "paired_ratio_median": 0.9698521009583649,
+      "paired_change_percent": -3.0147899041635062
+    }
+  ],
+  "identities_unchanged": {
+    "allocation": true,
+    "generation": true,
+    "workerPodUID": true,
+    "gpuUUID": true,
+    "resourcePrefix": true
+  },
+  "changed_outer_controllers": [],
+  "changed_outer_pods": [],
+  "gpu_monitor_samples": 215,
+  "gpu_monitor_errors": [],
+  "foreign_target_gpu_samples": []
+}

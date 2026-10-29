@@ -1,0 +1,861 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-29T08:24:42Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "sgemm-20261029"
+        },
+        "name": "sgemm29-1024-1-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "164661",
+        "uid": "69aa51a8-03b2-443a-adc9-b8edfa53db1a"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 180,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "69aa51a8-03b2-443a-adc9-b8edfa53db1a"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "69aa51a8-03b2-443a-adc9-b8edfa53db1a",
+              "batch.kubernetes.io/job-name": "sgemm29-1024-1-pod",
+              "controller-uid": "69aa51a8-03b2-443a-adc9-b8edfa53db1a",
+              "job-name": "sgemm29-1024-1-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "1024",
+                  "5",
+                  "/tmp/sgemm-go",
+                  "sgemm29-1024-1-pod"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_BROKER_SOCKET",
+                    "value": "/run/vmweave/gpu.sock"
+                  },
+                  {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/opt/vmweave/lib"
+                  }
+                ],
+                "image": "localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01",
+                "imagePullPolicy": "Never",
+                "name": "sgemm",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-29T08:25:01Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-29T08:25:01Z",
+            "lastTransitionTime": "2026-10-29T08:25:01Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-29T08:25:01Z",
+            "lastTransitionTime": "2026-10-29T08:25:01Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-29T08:24:42Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-29T08:25:04Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "sgemm-20261029"
+        },
+        "name": "sgemm29-1024-2-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "164728",
+        "uid": "adb200a5-3c2d-4b65-9ec5-54a3997b7f90"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 180,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "adb200a5-3c2d-4b65-9ec5-54a3997b7f90"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "adb200a5-3c2d-4b65-9ec5-54a3997b7f90",
+              "batch.kubernetes.io/job-name": "sgemm29-1024-2-pod",
+              "controller-uid": "adb200a5-3c2d-4b65-9ec5-54a3997b7f90",
+              "job-name": "sgemm29-1024-2-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "1024",
+                  "5",
+                  "/tmp/sgemm-go",
+                  "sgemm29-1024-2-pod"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_BROKER_SOCKET",
+                    "value": "/run/vmweave/gpu.sock"
+                  },
+                  {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/opt/vmweave/lib"
+                  }
+                ],
+                "image": "localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01",
+                "imagePullPolicy": "Never",
+                "name": "sgemm",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-29T08:25:23Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-29T08:25:23Z",
+            "lastTransitionTime": "2026-10-29T08:25:23Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-29T08:25:23Z",
+            "lastTransitionTime": "2026-10-29T08:25:23Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-29T08:25:05Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-29T08:26:00Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "sgemm-20261029"
+        },
+        "name": "sgemm29-1024-3-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "164861",
+        "uid": "3afe293d-1d56-46d7-a794-5f157cd5831a"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 180,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "3afe293d-1d56-46d7-a794-5f157cd5831a"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "3afe293d-1d56-46d7-a794-5f157cd5831a",
+              "batch.kubernetes.io/job-name": "sgemm29-1024-3-pod",
+              "controller-uid": "3afe293d-1d56-46d7-a794-5f157cd5831a",
+              "job-name": "sgemm29-1024-3-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "1024",
+                  "5",
+                  "/tmp/sgemm-go",
+                  "sgemm29-1024-3-pod"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_BROKER_SOCKET",
+                    "value": "/run/vmweave/gpu.sock"
+                  },
+                  {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/opt/vmweave/lib"
+                  }
+                ],
+                "image": "localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01",
+                "imagePullPolicy": "Never",
+                "name": "sgemm",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-29T08:26:19Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-29T08:26:19Z",
+            "lastTransitionTime": "2026-10-29T08:26:19Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-29T08:26:19Z",
+            "lastTransitionTime": "2026-10-29T08:26:19Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-29T08:26:00Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-29T08:26:41Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "sgemm-20261029"
+        },
+        "name": "sgemm29-4096-1-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "164964",
+        "uid": "fc3d43de-9e34-49f5-a1da-408b8c8eab6b"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 180,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "fc3d43de-9e34-49f5-a1da-408b8c8eab6b"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "fc3d43de-9e34-49f5-a1da-408b8c8eab6b",
+              "batch.kubernetes.io/job-name": "sgemm29-4096-1-pod",
+              "controller-uid": "fc3d43de-9e34-49f5-a1da-408b8c8eab6b",
+              "job-name": "sgemm29-4096-1-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "4096",
+                  "5",
+                  "/tmp/sgemm-go",
+                  "sgemm29-4096-1-pod"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_BROKER_SOCKET",
+                    "value": "/run/vmweave/gpu.sock"
+                  },
+                  {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/opt/vmweave/lib"
+                  }
+                ],
+                "image": "localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01",
+                "imagePullPolicy": "Never",
+                "name": "sgemm",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-29T08:27:01Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-29T08:27:01Z",
+            "lastTransitionTime": "2026-10-29T08:27:01Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-29T08:27:01Z",
+            "lastTransitionTime": "2026-10-29T08:27:01Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-29T08:26:41Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-29T08:27:04Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "sgemm-20261029"
+        },
+        "name": "sgemm29-4096-2-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "165030",
+        "uid": "4517fc3d-11b6-4ec2-8a0c-1637123c39ac"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 180,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "4517fc3d-11b6-4ec2-8a0c-1637123c39ac"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "4517fc3d-11b6-4ec2-8a0c-1637123c39ac",
+              "batch.kubernetes.io/job-name": "sgemm29-4096-2-pod",
+              "controller-uid": "4517fc3d-11b6-4ec2-8a0c-1637123c39ac",
+              "job-name": "sgemm29-4096-2-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "4096",
+                  "5",
+                  "/tmp/sgemm-go",
+                  "sgemm29-4096-2-pod"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_BROKER_SOCKET",
+                    "value": "/run/vmweave/gpu.sock"
+                  },
+                  {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/opt/vmweave/lib"
+                  }
+                ],
+                "image": "localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01",
+                "imagePullPolicy": "Never",
+                "name": "sgemm",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-29T08:27:24Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-29T08:27:24Z",
+            "lastTransitionTime": "2026-10-29T08:27:24Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-29T08:27:24Z",
+            "lastTransitionTime": "2026-10-29T08:27:24Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-29T08:27:04Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-29T08:28:05Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "sgemm-20261029"
+        },
+        "name": "sgemm29-4096-3-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "165174",
+        "uid": "d7209748-d0ed-4a45-9245-f795984f9368"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 180,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "d7209748-d0ed-4a45-9245-f795984f9368"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "d7209748-d0ed-4a45-9245-f795984f9368",
+              "batch.kubernetes.io/job-name": "sgemm29-4096-3-pod",
+              "controller-uid": "d7209748-d0ed-4a45-9245-f795984f9368",
+              "job-name": "sgemm29-4096-3-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "4096",
+                  "5",
+                  "/tmp/sgemm-go",
+                  "sgemm29-4096-3-pod"
+                ],
+                "env": [
+                  {
+                    "name": "VMWEAVE_BROKER_SOCKET",
+                    "value": "/run/vmweave/gpu.sock"
+                  },
+                  {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "/opt/vmweave/lib"
+                  }
+                ],
+                "image": "localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01",
+                "imagePullPolicy": "Never",
+                "name": "sgemm",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-29T08:28:25Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-29T08:28:25Z",
+            "lastTransitionTime": "2026-10-29T08:28:25Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-29T08:28:25Z",
+            "lastTransitionTime": "2026-10-29T08:28:25Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-29T08:28:05Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

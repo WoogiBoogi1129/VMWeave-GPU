@@ -18,6 +18,12 @@
 
 ## 재현과 판정
 
+[2026-10-29 내부 Kubernetes SGEMM 처리량](../../experiments/nested-k8s-gpu/results/20261029-sgemm-throughput/REPORT.md)은
+같은 Worker VM의 Guest 직접 실행과 Pod 실행을 행렬 크기별 3쌍으로 비교했다.
+12개 실행의 검산·회수는 통과했으며, Pod 처리량의 일관된 저하는 관측하지 않았다. 통계적 동등성을 입증한 결과는 아니다.
+[VMWeave·Flyt·Passthrough 기존 결과 비교](../../experiments/nested-k8s-gpu/results/20261029-performance-comparison/REPORT.md)는
+워크로드·GPU quota·버전·측정 경계 차이를 구분하며, 동일 조건 4방식 순위를 주장하지 않는다.
+
 [VM 내부 2노드 Kubernetes·GPU Pod 실험](../../experiments/nested-k8s-gpu/README.md)은
 2026-10-28 별도 Operator에서 두 Node Ready와 GPU Pod 정확성·회수·운영 조건의 기능 PASS를 기록했다.
 외부 재배포가 겹쳐 환경 불변과 장애 영향 분리는 확인하지 못했다.

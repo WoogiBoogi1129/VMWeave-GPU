@@ -1,0 +1,110 @@
+{
+  "Id": "0de5ed8c441d117a2cfb50957b6a7996749572fa936c9806f119702d1383fd3e",
+  "Digest": "sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01",
+  "RepoTags": [
+    "localhost/nested-sgemm:20261029"
+  ],
+  "RepoDigests": [
+    "localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01"
+  ],
+  "Parent": "f90de16f5534d752ce5957b96e9fbc8aaf64d0699a90775a33395754b59a9f37",
+  "Comment": "",
+  "Created": "2026-10-29T08:22:37.192894522Z",
+  "Config": {
+    "User": "1000:998",
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock",
+      "LD_LIBRARY_PATH=/opt/vmweave/lib"
+    ],
+    "Entrypoint": [
+      "/opt/vmweave/bin/sgemm"
+    ],
+    "Labels": {
+      "io.buildah.version": "1.23.1",
+      "org.opencontainers.image.version": "22.04"
+    }
+  },
+  "Version": "",
+  "Author": "",
+  "Architecture": "amd64",
+  "Os": "linux",
+  "Size": 80780741,
+  "VirtualSize": 80780741,
+  "GraphDriver": {
+    "Name": "overlay",
+    "Data": {
+      "LowerDir": "/var/lib/containers/storage/overlay/ac6d22d92fc7b2f5b91484aa1bc6079fadd318f167aa070648cf446bea120b4d/diff:/var/lib/containers/storage/overlay/beb59027b96ddbf30ac9c80b527668fe7011f4f553fe83f5e59199e9a84fb5ca/diff",
+      "UpperDir": "/var/lib/containers/storage/overlay/cc177442315db1f592e26673b153c9f4dbb330e259052e7f0dd9e1d406b74c28/diff",
+      "WorkDir": "/var/lib/containers/storage/overlay/cc177442315db1f592e26673b153c9f4dbb330e259052e7f0dd9e1d406b74c28/work"
+    }
+  },
+  "RootFS": {
+    "Type": "layers",
+    "Layers": [
+      "sha256:beb59027b96ddbf30ac9c80b527668fe7011f4f553fe83f5e59199e9a84fb5ca",
+      "sha256:8a53fc5bba8ce2f22b7807e5e54a39c5fb049ae4d1657a01c25d4aaa144d28a8",
+      "sha256:eae2026f02175e9626857524ff8e5cf848376b79d6626162d5e2874a695b8f35"
+    ]
+  },
+  "Labels": {
+    "io.buildah.version": "1.23.1",
+    "org.opencontainers.image.version": "22.04"
+  },
+  "Annotations": {},
+  "ManifestType": "application/vnd.oci.image.manifest.v1+json",
+  "User": "1000:998",
+  "History": [
+    {
+      "created": "2026-07-31T21:53:09.616839868Z",
+      "created_by": "/bin/sh -c #(nop)  ARG RELEASE",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-07-31T21:53:09.673958815Z",
+      "created_by": "/bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-07-31T21:53:09.726430018Z",
+      "created_by": "/bin/sh -c #(nop)  LABEL org.opencontainers.image.version=22.04",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-07-31T21:53:11.93725626Z",
+      "created_by": "/bin/sh -c #(nop) ADD file:4501ff54ffd37d854b1cfbcd2e37da58bf8a49da3a6a82232d03e7556d337a92 in / "
+    },
+    {
+      "created": "2026-07-31T21:53:12.336585804Z",
+      "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/bash\"]",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-10-29T08:22:36.319018061Z",
+      "created_by": "/bin/sh -c #(nop) COPY file:55c94e98d8e254be4f940d6ef334fb054263417b6b3c19bead8df49f6be66892 in /opt/vmweave/bin/sgemm ",
+      "comment": "FROM docker.io/library/ubuntu@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f"
+    },
+    {
+      "created": "2026-10-29T08:22:36.812050051Z",
+      "created_by": "/bin/sh -c #(nop) COPY file:45eb754d055c0ccd4e4527ce6cb949e3b2193dc67e510ee0ae0a457134575760 in /opt/vmweave/lib/libvmweave_guest.so "
+    },
+    {
+      "created": "2026-10-29T08:22:36.995979997Z",
+      "created_by": "/bin/sh -c #(nop) ENV VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/vmweave/lib",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-10-29T08:22:37.098997835Z",
+      "created_by": "/bin/sh -c #(nop) USER 1000:998",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-10-29T08:22:37.193327832Z",
+      "created_by": "/bin/sh -c #(nop) ENTRYPOINT [\"/opt/vmweave/bin/sgemm\"]",
+      "empty_layer": true
+    }
+  ],
+  "NamesHistory": [
+    "localhost/nested-sgemm:20261029"
+  ]
+}

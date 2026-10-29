@@ -1,0 +1,16 @@
+STEP 1/6: FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f
+STEP 2/6: COPY sgemm /opt/vmweave/bin/sgemm
+--> eb74722e561
+STEP 3/6: COPY libvmweave_guest.so /opt/vmweave/lib/libvmweave_guest.so
+--> 41ed0ac33a8
+STEP 4/6: ENV VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/vmweave/lib
+--> 635544e8a97
+STEP 5/6: USER 1000:998
+--> f90de16f553
+STEP 6/6: ENTRYPOINT ["/opt/vmweave/bin/sgemm"]
+COMMIT localhost/nested-sgemm:20261029
+--> 0de5ed8c441
+Successfully tagged localhost/nested-sgemm:20261029
+0de5ed8c441d117a2cfb50957b6a7996749572fa936c9806f119702d1383fd3e
+b3a6d698b55e7bc411805589e7f1108131ffaca1e8314c2a54697c8ec1ae2c09  sgemm
+32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5  libvmweave_guest.so

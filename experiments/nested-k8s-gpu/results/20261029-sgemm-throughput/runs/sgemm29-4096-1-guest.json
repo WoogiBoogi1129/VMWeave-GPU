@@ -1,0 +1,87 @@
+{
+  "name": "sgemm29-4096-1-guest",
+  "mode": "guest",
+  "n": 4096,
+  "pair": 1,
+  "released_at": "2026-10-29T08:26:24.822048+00:00",
+  "completed_at": "2026-10-29T08:26:39.211072+00:00",
+  "orchestration_seconds_including_barrier": 17.522814457770437,
+  "records": [
+    {
+      "event": "ready",
+      "label": "sgemm29-4096-1-guest",
+      "n": 4096,
+      "uid": 1000,
+      "gid": 998,
+      "matrix_bytes": 67108864,
+      "math_mode": 2,
+      "cpu_fallback": false
+    },
+    {
+      "event": "warmup",
+      "gemms": 670,
+      "seconds": 2.001332465
+    },
+    {
+      "event": "correctness",
+      "phase": "warmup",
+      "finite_elements": 16777216,
+      "fp64_reference_samples": 32,
+      "max_abs_error": 0,
+      "failures": 0
+    },
+    {
+      "event": "measurement_start",
+      "phase": "resident_compute",
+      "unix_seconds": 1793262387
+    },
+    {
+      "event": "result",
+      "label": "sgemm29-4096-1-guest",
+      "n": 4096,
+      "phase": "resident_compute",
+      "completed_gemms": 1796,
+      "seconds": 5.003147245,
+      "gemms_per_second": 358.974044146,
+      "gflops": 49337.016951096,
+      "ms_per_gemm": 2.785716729,
+      "transfer_bytes_per_gemm": 0
+    },
+    {
+      "event": "correctness",
+      "phase": "resident_compute",
+      "finite_elements": 16777216,
+      "fp64_reference_samples": 32,
+      "max_abs_error": 0,
+      "failures": 0
+    },
+    {
+      "event": "measurement_start",
+      "phase": "transfer_inclusive",
+      "unix_seconds": 1793262393
+    },
+    {
+      "event": "result",
+      "label": "sgemm29-4096-1-guest",
+      "n": 4096,
+      "phase": "transfer_inclusive",
+      "completed_gemms": 8,
+      "seconds": 5.24687108,
+      "gemms_per_second": 1.524718233,
+      "gflops": 209.555678234,
+      "ms_per_gemm": 655.858885,
+      "transfer_bytes_per_gemm": 201326592
+    },
+    {
+      "event": "correctness",
+      "phase": "transfer_inclusive",
+      "finite_elements": 16777216,
+      "fp64_reference_samples": 32,
+      "max_abs_error": 0,
+      "failures": 0
+    },
+    {
+      "event": "PASS"
+    }
+  ]
+}

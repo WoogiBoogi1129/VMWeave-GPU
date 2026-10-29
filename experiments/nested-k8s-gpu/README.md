@@ -14,6 +14,14 @@ VM 두 대를 Control Plane과 Worker로 구성하고, Worker VM의 비특권 Po
 
 ## 완료된 결과
 
+2026-10-29에 같은 Worker VM의 **Guest 직접 실행과 내부 Pod의 FP32 SGEMM 처리량**을
+행렬 크기별 3쌍으로 비교했다. [처리량 분석 보고서·그래프](results/20261029-sgemm-throughput/REPORT.md)를 참고한다.
+기존 기능 실험과 별도 실행이며 Device Plugin 기반 자원 할당 성능은 측정하지 않았다.
+
+[VMWeave·Flyt·Passthrough 기존 결과와의 비교 보고서](results/20261029-performance-comparison/REPORT.md)는
+SGEMM 처리량과 Rodinia 완료 시간을 조건별로 대조한다. 서로 다른 실험의 수치를 합쳐 단일 성능 순위로 해석하지 않는다.
+인용한 10/22 SGEMM의 [선별 공개 범위](../ai-passthrough/results/20261022-sgemm-bestcase/README.md)도 함께 제공한다.
+
 두 Node Ready, 노드 간 통신·DNS·Service, GPU Pod A/B의 정확성·회수·재사용을 확인했다.
 각 정확성 작업은 32 MiB, 정수 8,388,608개, 불일치 0개, kernel 1회다.
 소켓 없는 대조, 종료·재시작·VM 재생성·quota 초과·broker 수동 복구도 조건별 최소 횟수로 수행했다.

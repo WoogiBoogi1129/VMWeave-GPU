@@ -1,0 +1,123 @@
+PASS: 24 current SGEMM windows, historical SGEMM, 160 Rodinia samples, 18 initialization-inclusive samples, candidate medians; source hashes
+[
+  {
+    "workload": "nw",
+    "mode": "passthrough",
+    "mean_seconds": 0.0248873223,
+    "std_seconds": 0.013288302191233602,
+    "time_ratio_vs_passthrough": 1.0,
+    "relative_throughput_percent": 100.0,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "nw",
+    "mode": "flyt",
+    "mean_seconds": 0.2558750871,
+    "std_seconds": 0.04715936629679423,
+    "time_ratio_vs_passthrough": 10.281342605508026,
+    "relative_throughput_percent": 9.726356161541293,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "nw",
+    "mode": "vmweave",
+    "mean_seconds": 0.5403493526,
+    "std_seconds": 0.03571314350713874,
+    "time_ratio_vs_passthrough": 21.711831674233594,
+    "relative_throughput_percent": 4.605783680548449,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "lu",
+    "mode": "passthrough",
+    "mean_seconds": 0.015458754,
+    "std_seconds": 0.0014138447251671982,
+    "time_ratio_vs_passthrough": 1.0,
+    "relative_throughput_percent": 100.0,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "lu",
+    "mode": "flyt",
+    "mean_seconds": 0.2546842826,
+    "std_seconds": 0.11130190970416473,
+    "time_ratio_vs_passthrough": 16.47508477073896,
+    "relative_throughput_percent": 6.06977149990802,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "lu",
+    "mode": "vmweave",
+    "mean_seconds": 0.4846598167,
+    "std_seconds": 0.03695355070801387,
+    "time_ratio_vs_passthrough": 31.35180343124679,
+    "relative_throughput_percent": 3.18960917891999,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "srad",
+    "mode": "passthrough",
+    "mean_seconds": 0.0217844277,
+    "std_seconds": 0.0027514798897068323,
+    "time_ratio_vs_passthrough": 1.0,
+    "relative_throughput_percent": 100.0,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "srad",
+    "mode": "flyt",
+    "mean_seconds": 0.048450106300000004,
+    "std_seconds": 0.006558284650549411,
+    "time_ratio_vs_passthrough": 2.22407065116519,
+    "relative_throughput_percent": 44.96260042261249,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "srad",
+    "mode": "vmweave",
+    "mean_seconds": 0.2652592473,
+    "std_seconds": 0.05777667411563752,
+    "time_ratio_vs_passthrough": 12.176553405623778,
+    "relative_throughput_percent": 8.212504529714845,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "sc",
+    "mode": "passthrough",
+    "mean_seconds": 3.4132032766,
+    "std_seconds": 0.22611139626654153,
+    "time_ratio_vs_passthrough": 1.0,
+    "relative_throughput_percent": 99.99999999999999,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "sc",
+    "mode": "flyt",
+    "mean_seconds": 24.991949999,
+    "std_seconds": 1.484858946784675,
+    "time_ratio_vs_passthrough": 7.322139343512899,
+    "relative_throughput_percent": 13.657210728800962,
+    "samples": 10,
+    "independent_sessions": 5
+  },
+  {
+    "workload": "sc",
+    "mode": "vmweave",
+    "mean_seconds": 40.5085447679,
+    "std_seconds": 0.23217769577869293,
+    "time_ratio_vs_passthrough": 11.86818993337304,
+    "relative_throughput_percent": 8.425884701996772,
+    "samples": 10,
+    "independent_sessions": 5
+  }
+]

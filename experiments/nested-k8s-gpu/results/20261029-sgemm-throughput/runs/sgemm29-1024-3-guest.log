@@ -1,0 +1,10 @@
+{"event":"ready","label":"sgemm29-1024-3-guest","n":1024,"uid":1000,"gid":998,"matrix_bytes":4194304,"math_mode":2,"cpu_fallback":false}
+{"event":"warmup","gemms":1495,"seconds":2.001202370}
+{"event":"correctness","phase":"warmup","finite_elements":1048576,"fp64_reference_samples":32,"max_abs_error":0,"failures":0}
+{"event":"measurement_start","phase":"resident_compute","unix_seconds":1793262348}
+{"event":"result","label":"sgemm29-1024-3-guest","n":1024,"phase":"resident_compute","completed_gemms":3715,"seconds":5.000617263,"gemms_per_second":742.908286039,"gflops":1595.383396233,"ms_per_gemm":1.346061174,"transfer_bytes_per_gemm":0}
+{"event":"correctness","phase":"resident_compute","finite_elements":1048576,"fp64_reference_samples":32,"max_abs_error":0,"failures":0}
+{"event":"measurement_start","phase":"transfer_inclusive","unix_seconds":1793262353}
+{"event":"result","label":"sgemm29-1024-3-guest","n":1024,"phase":"transfer_inclusive","completed_gemms":135,"seconds":5.028499237,"gemms_per_second":26.846976332,"gflops":57.653442671,"ms_per_gemm":37.248142496,"transfer_bytes_per_gemm":12582912}
+{"event":"correctness","phase":"transfer_inclusive","finite_elements":1048576,"fp64_reference_samples":32,"max_abs_error":0,"failures":0}
+{"event":"PASS"}

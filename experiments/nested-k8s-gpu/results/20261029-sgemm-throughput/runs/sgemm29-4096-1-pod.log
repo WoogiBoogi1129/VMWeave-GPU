@@ -1,0 +1,10 @@
+{"event":"ready","label":"sgemm29-4096-1-pod","n":4096,"uid":1000,"gid":998,"matrix_bytes":67108864,"math_mode":2,"cpu_fallback":false}
+{"event":"warmup","gemms":661,"seconds":2.003399319}
+{"event":"correctness","phase":"warmup","finite_elements":16777216,"fp64_reference_samples":32,"max_abs_error":0,"failures":0}
+{"event":"measurement_start","phase":"resident_compute","unix_seconds":1793262407}
+{"event":"result","label":"sgemm29-4096-1-pod","n":4096,"phase":"resident_compute","completed_gemms":1847,"seconds":5.000041792,"gemms_per_second":369.396912433,"gflops":50769.525060613,"ms_per_gemm":2.707115210,"transfer_bytes_per_gemm":0}
+{"event":"correctness","phase":"resident_compute","finite_elements":16777216,"fp64_reference_samples":32,"max_abs_error":0,"failures":0}
+{"event":"measurement_start","phase":"transfer_inclusive","unix_seconds":1793262412}
+{"event":"result","label":"sgemm29-4096-1-pod","n":4096,"phase":"transfer_inclusive","completed_gemms":8,"seconds":5.409970319,"gemms_per_second":1.478751181,"gflops":203.238014803,"ms_per_gemm":676.246289875,"transfer_bytes_per_gemm":201326592}
+{"event":"correctness","phase":"transfer_inclusive","finite_elements":16777216,"fp64_reference_samples":32,"max_abs_error":0,"failures":0}
+{"event":"PASS"}

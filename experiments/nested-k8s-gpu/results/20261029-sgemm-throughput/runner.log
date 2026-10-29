@@ -1,0 +1,23 @@
+time="2026-10-29T08:22:38Z" level=error msg="error loading cached network config: network \"podman\" not found in CNI cache"
+time="2026-10-29T08:22:38Z" level=warning msg="falling back to loading from existing plugins on disk"
+time="2026-10-29T08:22:38Z" level=error msg="Error tearing down partially created network namespace for container 0a3ebbf36688af0a9b73376db23559a033f097375f4dff4a93ba928af84e1d9f: CNI network \"podman\" not found"
+Error: error configuring network namespace for container 0a3ebbf36688af0a9b73376db23559a033f097375f4dff4a93ba928af84e1d9f: CNI network "podman" not found
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/throughput/run.py", line 173, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/throughput/run.py", line 160, in main
+    save('inventory/binary-library.sha256',ssh('worker',f'cd {REMOTE} && sha256sum sgemm libvmweave_guest.so; sudo podman run --rm --entrypoint /usr/bin/sha256sum '+shlex.quote(image)+' /opt/vmweave/bin/sgemm /opt/vmweave/lib/libvmweave_guest.so'))
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/throughput/run.py", line 34, in ssh
+    def ssh(role,cmd,**kw):return call(sshargs(role,cmd),**kw)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/throughput/run.py", line 25, in call
+    def call(args,**kw):return subprocess.check_output([str(x) for x in args],text=True,timeout=kw.pop('timeout',60),**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-i', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/id_ed25519', '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/known_hosts', '-o', 'ConnectTimeout=8', 'ubuntu@10.99.41.66', 'cd /home/ubuntu/nested/sgemm-20261029 && sha256sum sgemm libvmweave_guest.so; sudo podman run --rm --entrypoint /usr/bin/sha256sum localhost/nested-sgemm@sha256:389536c4f6910ee315f52a3d7b9252440f3570846940f50a92a2d21c725ccc01 /opt/vmweave/bin/sgemm /opt/vmweave/lib/libvmweave_guest.so']' returned non-zero exit status 127.

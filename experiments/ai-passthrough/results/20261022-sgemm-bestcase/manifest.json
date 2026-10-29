@@ -1,0 +1,76 @@
+{
+  "purpose": "Direct SGEMM favorable-case throughput, not training throughput",
+  "sizes": [
+    4096,
+    8192,
+    16384
+  ],
+  "optional_size": 20480,
+  "optional_rule": "16384 ratio greater than8192 and20480 memory/correctness gate passes",
+  "selection": "highest W/P; within2% relative of best prefer higher P TFLOP/s",
+  "correctness": {
+    "atol": 1e-05,
+    "rtol": 0.0001,
+    "whole_output": true,
+    "additional_cpu_fp64_samples": 16
+  },
+  "memory_limit_bytes": 6871947673,
+  "workspace_bytes": 16777216,
+  "precision": "FP32 CUBLAS_PEDANTIC_MATH(2)",
+  "warmup": "at least30 GEMMs and5seconds",
+  "group_size": 16,
+  "timed_seconds": 60,
+  "final_pairs": [
+    "P,W",
+    "W,P",
+    "P,W"
+  ],
+  "diagnostic_gemms": 64,
+  "gpu": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+  "vm": "8vCPU/16GiB QEMU affinity32-39",
+  "worker": "100%/8192MiB affinity40-43",
+  "release": {
+    "sourceRevision": "4f2ad748aa9fb9892e3e72ab18e559d6d8f81800",
+    "tag": "v0.5.2",
+    "scope": "Published images/chart and live GPU/math-cache API verification on gpu-4. Classic upstream HAMi 2.10.0 retained; vmweave-hami published separately. Image revision labels are not cryptographic provenance.",
+    "images": {
+      "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:9152aaea2323e7d779faa9851ac5d69f19d64cfdaa8a16371b19955956bc2d05",
+      "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:650c56233043dc4bae61bbd4e3793cc46f9ddf759034972e3d8d3492a72b0192",
+      "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:0e7ecf6f38bb58652d7bb1c13c6dcb6893c2f4392958913626d68b82feba9977",
+      "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:49b2dc7ba08a1ad69bbf69de64ececcb30a31e69ce72d84a5604155090b769d4",
+      "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:252bcd842770f35f2ae6c611fb6b8a508f10f3131daaaaeb43a026d92c26a764",
+      "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:ce860652ce5cd252731b2bd861a4fbd62c0bec3fe4de636fecb633aeb0299273",
+      "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+    },
+    "chart": {
+      "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+      "version": "0.5.2",
+      "digest": "sha256:3c287a5ef9241c812060ac12a0794fd8fcb9e93cb89d9f04162ce560fea7a895"
+    },
+    "workflows": {
+      "v0.5.2:hami-dra-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864830",
+      "v0.5.2:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864770",
+      "v0.5.2:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864765",
+      "v0.5.2:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864764",
+      "v0.5.2:hami-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721864732",
+      "main:Documentation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861433",
+      "main:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861430",
+      "main:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861406",
+      "main:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861402",
+      "main:CPU control plane": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/39721861391"
+    },
+    "verification": {
+      "imageMetadataAndRevision": "PASS",
+      "chartDownloadAndContent": "PASS",
+      "guestDownloadAndChecksums": "PASS",
+      "publishedGuestRegression": "PASS: math 16, state 20",
+      "clusterExecution": "PASS: published Guest/Worker copy/PTX kernel with default and enabled cache; BLAS modes, duplicate hits, dlsym, handles, threads, invalid enum and create/destroy. No production fault injection.",
+      "draDriverRollout": "PASS: ready, prior device-selection configuration preserved; allocation workload not rerun."
+    },
+    "publishedDateKST": "2026-10-22"
+  },
+  "git_head": "70e09338ba768178a37fbe34e468d191e0dc98db",
+  "bench_sha256": "4eb84afc7568f0a2a65653cc615e65e6bfb548250159845c37a74285ead2a01c",
+  "guest_sha256": "984b75265deff2151262f9a42b94ea8a04322c3c651c4fcd24ffbb1459bcc171",
+  "note": "Optional size correctness/memory qualification is prepared alongside basic sizes to minimize GPU transitions; timed optional run remains conditional."
+}

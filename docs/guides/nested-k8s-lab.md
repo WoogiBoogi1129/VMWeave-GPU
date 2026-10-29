@@ -23,3 +23,5 @@ WireGuard·Cilium, broker·GPU binding, init/join, CPU/GPU Pod 검증, 원본 �
 - [조건별 결과 보고서](../../experiments/nested-k8s-gpu/results/20261028-minimal/REPORT.md)
 - [실제 CP 터미널의 두 Ready 노드 캡처](../../experiments/nested-k8s-gpu/results/20261028-nodes-capture/README.md)
 - [유지 자원과 접속·복구 인계](../../experiments/nested-k8s-gpu/results/20261028-minimal/HANDOFF.md)
+- [2026-10-29 Guest/Pod SGEMM 처리량 분석](../../experiments/nested-k8s-gpu/results/20261029-sgemm-throughput/REPORT.md)
+- [VMWeave·Flyt·Passthrough 기존 결과와의 비교](../../experiments/nested-k8s-gpu/results/20261029-performance-comparison/REPORT.md)

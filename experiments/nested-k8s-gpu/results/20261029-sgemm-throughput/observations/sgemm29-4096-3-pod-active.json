@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-29T08:28:09.073401+00:00",
+  "expect": "active",
+  "result": "PASS",
+  "elapsed_seconds": 0.5538021926768124,
+  "channel_uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+  "channel_status": {
+    "allocation": "1fcaa4a2ead715e40bbbf494ea64d5da",
+    "backend": "hami",
+    "claimName": "",
+    "claimUID": "",
+    "compute": 50,
+    "everBound": true,
+    "generation": "bb091f4d777bcb1e42c5cd4159d725c9",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "memoryMiB": 2048,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "requestGeneration": 1,
+    "resourcePrefix": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2",
+    "sessions": [
+      "2c8e46d70a9b040b6e311df2ed7266f0"
+    ],
+    "vmiUID": "8365e184-8715-42a3-954d-b82dc01e3a41",
+    "workerPodUID": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+  },
+  "children": [
+    {
+      "pid": 41536,
+      "command": "vmweave-shm-session-worker --session-events 6 7 8 9 "
+    }
+  ],
+  "host_gpu_processes": [
+    {
+      "gpu_uuid": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "host_pid": 2185347,
+      "namespace_pids": [
+        2185347,
+        41536
+      ],
+      "cgroup": "0::/kubepods.slice/kubepods-besteffort.slice/kubepods-besteffort-pod07a45bd4_0891_4a96_9b9d_9fefe7283077.slice/crio-dfd1690424fbddcdb8753680f26f326418a53f70cc1037de1043b5190a0b0d57.scope/container\n",
+      "memory_mib": "754",
+      "child_matches": true
+    }
+  ]
+}
