@@ -1,0 +1,6 @@
+FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f
+COPY copy nw srad /opt/bench/bin/
+COPY libvmweave_guest.so libcudart.so.12 libstdc++.so.6 libgcc_s.so.1 barrier.so /opt/bench/lib/
+ENV VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib
+USER 1000:998
+WORKDIR /tmp

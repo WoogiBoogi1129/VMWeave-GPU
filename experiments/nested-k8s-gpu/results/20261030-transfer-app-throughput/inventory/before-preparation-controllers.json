@@ -1,0 +1,706 @@
+[
+  {
+    "namespace": "aap-ate-system",
+    "name": "ate-api-server",
+    "kind": "Deployment",
+    "uid": "3345eb60-851e-4b40-9f4a-3c7a4e040a94",
+    "generation": 1,
+    "spec_sha256": "774dad71b9df2dbbafbaab0b01cd9b4bf07bcc72a3a78ae0e942d4fd6331d50e"
+  },
+  {
+    "namespace": "aap-ate-system",
+    "name": "ate-controller",
+    "kind": "Deployment",
+    "uid": "526322cf-8776-4bfb-870a-6e33419e5939",
+    "generation": 1,
+    "spec_sha256": "74b991b19d9c3f526a0c572cbbccacbefda91cf6348e41c06946cbf6768e6243"
+  },
+  {
+    "namespace": "aap-ate-system",
+    "name": "ate-idp-server",
+    "kind": "Deployment",
+    "uid": "57f28a53-b926-40e0-a1a7-bae498701356",
+    "generation": 1,
+    "spec_sha256": "04554cbcce614ff3c085b79d03fb4caafe163244c91535e283dfd566795c8eb6"
+  },
+  {
+    "namespace": "aap-ate-system",
+    "name": "atenet-egress",
+    "kind": "Deployment",
+    "uid": "e4d31d0d-bdfd-4ea3-b18f-cfb04e0b5062",
+    "generation": 1,
+    "spec_sha256": "c9cd2f8435cadb45d31d09bccbf242796546982052813ecba5af949c1f6b16d3"
+  },
+  {
+    "namespace": "aap-ate-system",
+    "name": "atenet-router",
+    "kind": "Deployment",
+    "uid": "6d1daa62-9031-43f1-b310-de65f77efcf6",
+    "generation": 1,
+    "spec_sha256": "62518c4f3b567ca17ebdc6683815c1144e5a7b94a519215bb9fca9e1cca81762"
+  },
+  {
+    "namespace": "aap-ate-system",
+    "name": "k8s-credential-provider",
+    "kind": "Deployment",
+    "uid": "fb6b3110-e0e9-4495-b1b7-0a9769de94c5",
+    "generation": 6,
+    "spec_sha256": "3e40a31ee698da85cd273e728fd8ba1808f7eef5ca7d64ee956ca4d53e084a4a"
+  },
+  {
+    "namespace": "aap-ate-system",
+    "name": "rustfs",
+    "kind": "Deployment",
+    "uid": "03a411e6-8537-4f74-aef4-ce985a628479",
+    "generation": 1,
+    "spec_sha256": "d59e1a2cac7b15f146816f17d09401063f4472a7af5c051600762a373257d15a"
+  },
+  {
+    "namespace": "aap-auth",
+    "name": "keycloak",
+    "kind": "Deployment",
+    "uid": "29fd3c7b-b17c-4be6-a703-1fc2cf23bdef",
+    "generation": 3,
+    "spec_sha256": "5fb5e481686254d419d7ce0149e9a8d3bb15b891cadfd6cc912bca8a3e2c0f3d"
+  },
+  {
+    "namespace": "aap-cert-manager",
+    "name": "cert-manager",
+    "kind": "Deployment",
+    "uid": "6ff5f532-91b6-460c-8d71-625c6f7b018a",
+    "generation": 1,
+    "spec_sha256": "e5096de7604d6fc7edc8141a6482c4135c935b1e9c43d6615bba19fd92144347"
+  },
+  {
+    "namespace": "aap-cert-manager",
+    "name": "cert-manager-cainjector",
+    "kind": "Deployment",
+    "uid": "ba68312f-b4a7-4474-a922-4491af391797",
+    "generation": 1,
+    "spec_sha256": "b485fe080a9da504aff4570e1efe0ef480ad195d291d2060de7be52e4cf9c536"
+  },
+  {
+    "namespace": "aap-cert-manager",
+    "name": "cert-manager-webhook",
+    "kind": "Deployment",
+    "uid": "4da2b417-09a6-461a-af8d-83aa76d1a032",
+    "generation": 1,
+    "spec_sha256": "df6adbe743363fad0f8ae71a8c8e873e3941d74634aeff138bdb5363f8f6a848"
+  },
+  {
+    "namespace": "aap-gateway",
+    "name": "aap-gateway",
+    "kind": "Deployment",
+    "uid": "da7e0290-adbc-48ba-ba17-385b59d7568b",
+    "generation": 1,
+    "spec_sha256": "7c9e7ffa27ef11455397dce125413b80b0f231cbf30d02c250363c3acfb62b74"
+  },
+  {
+    "namespace": "aap-gateway",
+    "name": "agentgateway",
+    "kind": "Deployment",
+    "uid": "b5af7f3e-60bb-4d92-a908-562498d1fde8",
+    "generation": 1,
+    "spec_sha256": "300a1f62ddfc72c63106987ac2801b6f20009ad60280928295e82cc8ff1708a6"
+  },
+  {
+    "namespace": "aap-kagent",
+    "name": "kagent-controller",
+    "kind": "Deployment",
+    "uid": "464162fe-404b-4bbf-bcf4-446f8931ecf0",
+    "generation": 1,
+    "spec_sha256": "1064c89d33a269a6eb905ef9262a719ad81d1eac087d87ab4528e13aa8efd6c7"
+  },
+  {
+    "namespace": "aap-kagent",
+    "name": "kagent-default",
+    "kind": "Deployment",
+    "uid": "3b416dc3-760b-44e3-be15-6497e4457f48",
+    "generation": 3,
+    "spec_sha256": "0cc40a7b94ca171de6e6a2655d0c63b9e1a5db59d0c7bb2f9ff7f5ec0c1ce043"
+  },
+  {
+    "namespace": "aap-kagent",
+    "name": "kagent-grafana-mcp",
+    "kind": "Deployment",
+    "uid": "e227b56d-4b05-410a-a327-be6b8ca1fc66",
+    "generation": 1,
+    "spec_sha256": "b82295c85992d6f517963ba799989d695fa6d319af0dcfd437691490ee85026e"
+  },
+  {
+    "namespace": "aap-kagent",
+    "name": "kagent-postgresql",
+    "kind": "Deployment",
+    "uid": "176fad11-479a-467b-bff9-743644e3970e",
+    "generation": 1,
+    "spec_sha256": "795cc2d656e05c116b264356195ef574a3d1cfbb7837d60d2c2f29837d7b5266"
+  },
+  {
+    "namespace": "aap-kagent",
+    "name": "kagent-tools",
+    "kind": "Deployment",
+    "uid": "a4d9e2ce-74fc-42ba-83b0-d89671fe0eb3",
+    "generation": 1,
+    "spec_sha256": "2aafd7a895f70fffde9f5cdea7f89bff8b420cf5ad743f6e47b2e71c1573b8d0"
+  },
+  {
+    "namespace": "aap-kagent",
+    "name": "kagent-ui",
+    "kind": "Deployment",
+    "uid": "759e86ff-4eef-4443-b9f7-51049edb8523",
+    "generation": 1,
+    "spec_sha256": "96e81b9f17a79d028927f295d43626f71da9dbc9bd8de3c507f33438c5aaf333"
+  },
+  {
+    "namespace": "aap-kserve",
+    "name": "llmisvc-controller-manager",
+    "kind": "Deployment",
+    "uid": "15aec3de-ed47-4d2e-9b92-e6bcda87f6da",
+    "generation": 1,
+    "spec_sha256": "504b60042b8949b7375bad2a16858264b41db1f5ba55225074d49f51588926aa"
+  },
+  {
+    "namespace": "aap-kueue",
+    "name": "kueue-controller-manager",
+    "kind": "Deployment",
+    "uid": "45ceea28-03cf-4f33-b35c-9d5f0e548651",
+    "generation": 3,
+    "spec_sha256": "47475baa2f9474c6fc14295a32c50c075d623bd404ec023ed424c08a6adeb6d2"
+  },
+  {
+    "namespace": "aap-lab",
+    "name": "hub",
+    "kind": "Deployment",
+    "uid": "677522bb-be02-4e18-9fdf-9867fa3509b2",
+    "generation": 10,
+    "spec_sha256": "ae1dd5806471b1215bee104f0c00ab99d92f4bdb4d26b190d50346af768ccc13"
+  },
+  {
+    "namespace": "aap-lab",
+    "name": "proxy",
+    "kind": "Deployment",
+    "uid": "5c56c0c8-b796-4104-b248-842dcb14a5a5",
+    "generation": 4,
+    "spec_sha256": "f9f8ccc78b357b22e61fa243b6926d687d2bf89fd2068565917eea6682d01f2f"
+  },
+  {
+    "namespace": "aap-langfuse",
+    "name": "aap-langfuse-redis",
+    "kind": "Deployment",
+    "uid": "38837cb3-9990-4d60-bf1e-d6149a6dbf25",
+    "generation": 1,
+    "spec_sha256": "f25cc301d9b9183e019a1e1e986566bb742309149ddf0bf94e5af4b54f58a1ee"
+  },
+  {
+    "namespace": "aap-langfuse",
+    "name": "aap-langfuse-s3-all-in-one",
+    "kind": "Deployment",
+    "uid": "d5ed124e-2484-4e52-8c9c-bc95c184dd04",
+    "generation": 1,
+    "spec_sha256": "6405da2abfc3b7b967d359f43963617505e43315d916d39ee7decdbbfff13a2c"
+  },
+  {
+    "namespace": "aap-langfuse",
+    "name": "aap-langfuse-web",
+    "kind": "Deployment",
+    "uid": "b1cdd436-5514-4b2a-a2f7-da92af1be5c3",
+    "generation": 3,
+    "spec_sha256": "ceac2ac53d0cc087dec1fa9ed03a1024a862111bfe9bc8fd62520d6644774ab1"
+  },
+  {
+    "namespace": "aap-langfuse",
+    "name": "aap-langfuse-worker",
+    "kind": "Deployment",
+    "uid": "8d420b01-f9a6-4f0e-8575-6d9e1e33c060",
+    "generation": 3,
+    "spec_sha256": "868f9e9f0d7dd59a09491c5d2bf382825ed16d37e8b64e385bcfb56a4d67dc73"
+  },
+  {
+    "namespace": "aap-lifecycle",
+    "name": "lifecycle-controller",
+    "kind": "Deployment",
+    "uid": "c5bd9cdc-51a5-4cd1-ac1f-73b5f784b15e",
+    "generation": 26,
+    "spec_sha256": "8b66eb057090fbe1f9d3a830291e390f6b47d633ae07840ca88ec11aea46a511"
+  },
+  {
+    "namespace": "aap-monitoring",
+    "name": "aap-kps-grafana",
+    "kind": "Deployment",
+    "uid": "86db51de-30aa-40a1-bcef-76c386f7771b",
+    "generation": 1,
+    "spec_sha256": "f4d072d63c8ca8023aa34a6b4690f27383f09fbdb4f11f51250a13662ca1ba6e"
+  },
+  {
+    "namespace": "aap-monitoring",
+    "name": "aap-kps-kube-prometheus-st-operator",
+    "kind": "Deployment",
+    "uid": "150c0a12-6b8c-4a14-8e51-46b6b5692dc1",
+    "generation": 1,
+    "spec_sha256": "6a2537f3d08e0e349e50295959e9e499fe17465235de35930b874a82354419eb"
+  },
+  {
+    "namespace": "aap-monitoring",
+    "name": "aap-kps-kube-state-metrics",
+    "kind": "Deployment",
+    "uid": "8c319ef8-e052-4685-8ad9-5b3962c9c72c",
+    "generation": 1,
+    "spec_sha256": "9c3793fa7d58ee2450ff680dc4f4756926f1599463208a06e248ca9c1ee67743"
+  },
+  {
+    "namespace": "aap-monitoring",
+    "name": "aap-otel-collector",
+    "kind": "Deployment",
+    "uid": "7f8e88d9-a66a-4015-a9a0-3c1aef34dbb9",
+    "generation": 4,
+    "spec_sha256": "1230a8863f0f370a87016acc9fdc1fb40b917ca0c2247cdfa8140f84f37fdeaa"
+  },
+  {
+    "namespace": "aap-mp-control",
+    "name": "modelserve",
+    "kind": "Deployment",
+    "uid": "23e1552b-c731-4c5f-bc1f-b2d05af4427d",
+    "generation": 28,
+    "spec_sha256": "714d427920c24d753c55b7706a2b5dfec44c52d79b07eda8e145770702f06e59"
+  },
+  {
+    "namespace": "aap-podcert-system",
+    "name": "podcertificate-controller",
+    "kind": "Deployment",
+    "uid": "7fa0218e-93d3-4453-979d-b421c227781f",
+    "generation": 1,
+    "spec_sha256": "d7a0e41d73fcefcec5a22534d1d112f70984c139403586a342b3ba411b05f372"
+  },
+  {
+    "namespace": "aap-registry",
+    "name": "aap-registry",
+    "kind": "Deployment",
+    "uid": "a0e77c3e-1d17-4a42-9ac5-2c4f1420fc1d",
+    "generation": 1,
+    "spec_sha256": "d46969ed5f23514bea0241a80b9b07e1401ad56695a0360646a03377fe65acf8"
+  },
+  {
+    "namespace": "aap-search",
+    "name": "aap-deepresearch",
+    "kind": "Deployment",
+    "uid": "b2596f94-05e9-44f9-9831-c427d754156d",
+    "generation": 5,
+    "spec_sha256": "1d38842bc6b575a2740f6909f06ea1425afdf5f9e84f0d235f71ace1b2fd1d2e"
+  },
+  {
+    "namespace": "aap-search",
+    "name": "aap-research",
+    "kind": "Deployment",
+    "uid": "53430f38-d90b-439f-ae4e-6f2cf756dfe5",
+    "generation": 3,
+    "spec_sha256": "90d316863d473720dbaf7b9250f2870539de71f1ef4927d77f7627ebf4679103"
+  },
+  {
+    "namespace": "aap-search",
+    "name": "aap-web",
+    "kind": "Deployment",
+    "uid": "7c9ca8ac-bbe9-4d2c-a1d6-8f903962967c",
+    "generation": 8,
+    "spec_sha256": "ac68482c23b632186faff470bee0cf6fb571ef20cfd74774b19a7aba51b99885"
+  },
+  {
+    "namespace": "aap-search",
+    "name": "crawl4ai",
+    "kind": "Deployment",
+    "uid": "0a3bfbf1-f1e8-491c-a780-343465a5df32",
+    "generation": 2,
+    "spec_sha256": "2f243e9d91a9a3245eef98e152376c7e69f261e1fd9ff1182075a6729ffcb7e3"
+  },
+  {
+    "namespace": "aap-search",
+    "name": "ntfy",
+    "kind": "Deployment",
+    "uid": "bbb7d1e4-cb4b-46f7-9866-ef160df145fe",
+    "generation": 1,
+    "spec_sha256": "432486e7697d9380b623b905cd79178e93cf040ce0df11bffd6c7b221755c9d9"
+  },
+  {
+    "namespace": "aap-search",
+    "name": "searxng",
+    "kind": "Deployment",
+    "uid": "43a30b0f-2381-4909-91a2-9aaa70be79c1",
+    "generation": 2,
+    "spec_sha256": "836d349c380380cc715b764255885c001701952e969525956f69fd3a507bf55c"
+  },
+  {
+    "namespace": "aap-serving",
+    "name": "gpt-oss-20b-kserve",
+    "kind": "Deployment",
+    "uid": "db32a75c-e947-407a-bd68-23e4c9d623fb",
+    "generation": 13,
+    "spec_sha256": "49dbfee59b2ccb3ec2be7f639b6e645e3ca31db4a38ae66dbf86ee9d851bd0e5"
+  },
+  {
+    "namespace": "aap-serving",
+    "name": "qwen3-asr-kserve",
+    "kind": "Deployment",
+    "uid": "677fadb5-43bf-4c18-bcb2-539f7be6fd54",
+    "generation": 6,
+    "spec_sha256": "5f351c5cee0d5a769045bb1978a50202b557f3fa8490b4398beb8c2bc7971776"
+  },
+  {
+    "namespace": "aap-serving",
+    "name": "qwen3-embedding-kserve",
+    "kind": "Deployment",
+    "uid": "b2f8c95c-4798-4024-ade2-a9060af79575",
+    "generation": 6,
+    "spec_sha256": "f8412c3f48ec9d155c77b85edf0dcf96a9f8967adb8baef070cd5abdb6049de8"
+  },
+  {
+    "namespace": "aap-serving",
+    "name": "qwen35-27b-kserve",
+    "kind": "Deployment",
+    "uid": "315e6682-0640-4e75-8aea-a42a9de6c232",
+    "generation": 3,
+    "spec_sha256": "bebb888e01968cd9fa4f3ec5caa561cf1102a2340494fa9264ab87c5babc1c8c"
+  },
+  {
+    "namespace": "aap-system",
+    "name": "aap-orchestrator",
+    "kind": "Deployment",
+    "uid": "86c81b3b-7898-4f10-aff3-f62e9bcc81c4",
+    "generation": 84,
+    "spec_sha256": "2c1a0f79532ab46186f4383697e06b2be3afaf9f5aef32d31715d796bc718794"
+  },
+  {
+    "namespace": "aap-system",
+    "name": "aap-render",
+    "kind": "Deployment",
+    "uid": "2167c6d2-8de1-43cd-9019-5d79407e0720",
+    "generation": 1,
+    "spec_sha256": "b0a78a17123e74dee412f684540a7d824a526e62d6be23c2839677115408ec8b"
+  },
+  {
+    "namespace": "aap-system",
+    "name": "aap-ui",
+    "kind": "Deployment",
+    "uid": "69604124-94c6-4a14-9e53-ee7d9a2c1579",
+    "generation": 70,
+    "spec_sha256": "3dc5b6eb1ca83aa9b15dce9d62ba436f647c27b692da5507794d054c7a7cdf24"
+  },
+  {
+    "namespace": "aap-system",
+    "name": "docparse",
+    "kind": "Deployment",
+    "uid": "f3313e35-0d90-4447-aac7-21fb3e4aeab3",
+    "generation": 1,
+    "spec_sha256": "17023348762985290c069158e9eeb09304e9c4eff2005e3ac4f1e4d5ef6ea6df"
+  },
+  {
+    "namespace": "aap-system",
+    "name": "oauth2-proxy",
+    "kind": "Deployment",
+    "uid": "541e05f2-53a0-4a62-a91f-781871d7d65b",
+    "generation": 6,
+    "spec_sha256": "5555dc03a6dffecdee5b50b8fe76106321644abd59e2fd085ef73e4eb6a7c0b0"
+  },
+  {
+    "namespace": "aap-trainer",
+    "name": "jobset-controller",
+    "kind": "Deployment",
+    "uid": "03db12c2-e9fb-47ae-a671-20e3cb93b1dc",
+    "generation": 1,
+    "spec_sha256": "b47966528c922802f345afd11d6f8958188907b6c69e682c7318a5f4dd7662bf"
+  },
+  {
+    "namespace": "aap-trainer",
+    "name": "kubeflow-trainer-controller-manager",
+    "kind": "Deployment",
+    "uid": "6cdfb529-dc0a-4e07-b7a6-1f84fa7b45a5",
+    "generation": 1,
+    "spec_sha256": "246952808957814c5b8bb28302651640d5041879505abaae4369a6a0d5bac6cb"
+  },
+  {
+    "namespace": "aap-workers",
+    "name": "aap-agents",
+    "kind": "Deployment",
+    "uid": "ca011ac8-10d1-4f22-abc2-379ad4be41e5",
+    "generation": 2,
+    "spec_sha256": "49aa7364ab5d2e394db3717cd44f97cb6676697ba98d947328babf12820c6bfe"
+  },
+  {
+    "namespace": "aap-ws-18da210377a5",
+    "name": "aap-agents",
+    "kind": "Deployment",
+    "uid": "67a8fa83-7ba7-4992-8895-960dd5324deb",
+    "generation": 2,
+    "spec_sha256": "49aa7364ab5d2e394db3717cd44f97cb6676697ba98d947328babf12820c6bfe"
+  },
+  {
+    "namespace": "aap-ws-b7c84be92fbc",
+    "name": "aap-agents",
+    "kind": "Deployment",
+    "uid": "6c6739a3-603d-4475-b058-15240849d059",
+    "generation": 2,
+    "spec_sha256": "49aa7364ab5d2e394db3717cd44f97cb6676697ba98d947328babf12820c6bfe"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "gpu-operator",
+    "kind": "Deployment",
+    "uid": "9f6a8f4b-4c95-4765-a3a7-d157c28654a4",
+    "generation": 1,
+    "spec_sha256": "de0df47a36f4d9c2bd57b500dadc23a0a7205ef6042c1438e91ad4a17f4c2c1b"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "gpu-operator-node-feature-discovery-gc",
+    "kind": "Deployment",
+    "uid": "e5c2b4d5-dd18-4a1b-b270-5b9c4031ef2f",
+    "generation": 1,
+    "spec_sha256": "fe485c8287c9cae8e3b8e236b549ea76d3a169a1266ef2ba5098cb6b9ec5fe95"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "gpu-operator-node-feature-discovery-master",
+    "kind": "Deployment",
+    "uid": "26093960-b132-4164-8dd1-eb5fe6499b78",
+    "generation": 1,
+    "spec_sha256": "a714de9b93b5cfa5d2de9f152386e0e6b76e961a8ce44241b1fdd36b2a3a953b"
+  },
+  {
+    "namespace": "kube-system",
+    "name": "cilium-operator",
+    "kind": "Deployment",
+    "uid": "c5ab6bfc-44a7-4c3b-bded-c0c70ce97c7f",
+    "generation": 1,
+    "spec_sha256": "2cf2c03e1bccdba6fb487d49a4490c99c2e4176bd88825a00513972741afd7fa"
+  },
+  {
+    "namespace": "kube-system",
+    "name": "coredns",
+    "kind": "Deployment",
+    "uid": "82f54ce6-4922-46e2-a11b-d6a42454679f",
+    "generation": 1,
+    "spec_sha256": "b590b7a8109b09a21ae17f714099081223bdfbc6f0242cd35981c71467931c05"
+  },
+  {
+    "namespace": "kube-system",
+    "name": "hami-scheduler",
+    "kind": "Deployment",
+    "uid": "225332b4-4edb-4439-826e-01f422f707f4",
+    "generation": 1,
+    "spec_sha256": "88b8a070afcbb83e4a3a2a6ed903de779e7e0b97855474cba846f3db75109e17"
+  },
+  {
+    "namespace": "kubevirt",
+    "name": "virt-api",
+    "kind": "Deployment",
+    "uid": "b561c20d-14dc-4310-a23b-1d651c67e5c3",
+    "generation": 76,
+    "spec_sha256": "9f03b7fbb116e4b361ea87b362026d10791c3d5ec7e03014aaea8b9cb54d92a4"
+  },
+  {
+    "namespace": "kubevirt",
+    "name": "virt-controller",
+    "kind": "Deployment",
+    "uid": "68404780-a712-4d9f-84c0-3a0b238904b6",
+    "generation": 71,
+    "spec_sha256": "dc2bb0309ed9206caf79dd9f26112aca5c819701e877f1863dce54b994ed05aa"
+  },
+  {
+    "namespace": "kubevirt",
+    "name": "virt-exportproxy",
+    "kind": "Deployment",
+    "uid": "64754aa3-02e1-464a-97f0-c283cafe302c",
+    "generation": 71,
+    "spec_sha256": "e6e58b2f9cb49aa3d38a0610677ac75ff441947ae2a61d8143bd03b6bc939742"
+  },
+  {
+    "namespace": "kubevirt",
+    "name": "virt-operator",
+    "kind": "Deployment",
+    "uid": "59950cdb-92a8-4e8d-bcbb-46945d5bc497",
+    "generation": 1,
+    "spec_sha256": "e683865de6602b8f99331f10c21c1e9e99ab1db175a3cfb992875929e28180f0"
+  },
+  {
+    "namespace": "kubevirt",
+    "name": "virt-template-apiserver",
+    "kind": "Deployment",
+    "uid": "824d29c1-0062-46e3-b7af-6d46c6e8ef84",
+    "generation": 71,
+    "spec_sha256": "647a274bb52a3d6cf704dfe76939dce1380ce574cfc19b9aaa792d00cdbb8d32"
+  },
+  {
+    "namespace": "kubevirt",
+    "name": "virt-template-controller",
+    "kind": "Deployment",
+    "uid": "bcf20e08-f4ae-4972-99f7-93904fc4da5a",
+    "generation": 71,
+    "spec_sha256": "1b582564d0eb7d29af4a663a0b2aecd203cdbefd72e7527796a83f069fbc39b3"
+  },
+  {
+    "namespace": "llm-monitoring",
+    "name": "llm-kps-grafana",
+    "kind": "Deployment",
+    "uid": "d62c7205-472b-445b-a9a8-f053125ec8d5",
+    "generation": 2,
+    "spec_sha256": "101edb8963388ce7dea6f2f402282f86f609072b638e99f152ea2f62c311b884"
+  },
+  {
+    "namespace": "llm-monitoring",
+    "name": "llm-kps-kube-prometheus-st-operator",
+    "kind": "Deployment",
+    "uid": "f7486db6-f99b-4d5d-8273-2e42b0fe02bf",
+    "generation": 2,
+    "spec_sha256": "507182d954a5ec27b02352fc6a02f86b525f0ae83aaeb18cebab186b18abdf95"
+  },
+  {
+    "namespace": "llm-monitoring",
+    "name": "llm-kps-kube-state-metrics",
+    "kind": "Deployment",
+    "uid": "8665c078-b49a-4b17-a575-4c2d5d86bf2b",
+    "generation": 1,
+    "spec_sha256": "1a2226596b546586801d3d6c866fece850beda9a80d23590b800eac670db0705"
+  },
+  {
+    "namespace": "vmweave-nested-system",
+    "name": "nested-controller",
+    "kind": "Deployment",
+    "uid": "0a496002-b082-4b82-ab45-f32a94f5ac24",
+    "generation": 1,
+    "spec_sha256": "f0f8c15efc6eba5c4327d9e42f91b92682b02c3d7e2a520a515ff29fd49fda2b"
+  },
+  {
+    "namespace": "vmweave-nested-system",
+    "name": "nested-webhook",
+    "kind": "Deployment",
+    "uid": "15ebe82a-d4ea-462c-a310-a6a6cd4eb276",
+    "generation": 1,
+    "spec_sha256": "e057e8a9eb7259fe5f37770b08480b2dda90c39803c9bfc923fbd63c538d05d4"
+  },
+  {
+    "namespace": "vmweave-system",
+    "name": "vmweave-controller",
+    "kind": "Deployment",
+    "uid": "93bf4fd4-264c-44c1-9889-d3c1854a33ac",
+    "generation": 14,
+    "spec_sha256": "fd5b769ebb399e43fb7f9464a0cb895b21b69633794c26ae4615ed5f3645c83b"
+  },
+  {
+    "namespace": "vmweave-system",
+    "name": "vmweave-webhook",
+    "kind": "Deployment",
+    "uid": "f638107c-0f06-4395-9856-657b23fc2c49",
+    "generation": 12,
+    "spec_sha256": "e7a1fff740ff2b71a51e796210dcbce706fe10701211592f303d8664307f0645"
+  },
+  {
+    "namespace": "aap-ate-system",
+    "name": "atelet",
+    "kind": "DaemonSet",
+    "uid": "207b9832-7024-439c-9b6a-2e039769862b",
+    "generation": 4,
+    "spec_sha256": "ebb1d4f9334ae50e9e657e2a73da4de12ef50675e68d82b09ab4491ffc3c5423"
+  },
+  {
+    "namespace": "aap-gpu-dra",
+    "name": "gpu-cnlab-dra-kubelet-plugin",
+    "kind": "DaemonSet",
+    "uid": "a0599ad6-e430-4e7e-9a6a-924db6d7b3af",
+    "generation": 6,
+    "spec_sha256": "988c8d258f1ed3348d7e3831b64a53f8fcdef9c85f92ead3c9466fa78477d508"
+  },
+  {
+    "namespace": "aap-monitoring",
+    "name": "aap-kps-prometheus-node-exporter",
+    "kind": "DaemonSet",
+    "uid": "c647560f-5377-4491-9b5c-b4f15ed0bd08",
+    "generation": 1,
+    "spec_sha256": "0372112a3741f9528a04f1d2474ecf20842b8aa483b3d6a576f50cbf85d15ab0"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "gpu-feature-discovery",
+    "kind": "DaemonSet",
+    "uid": "9099afe8-d682-4e1b-9722-393e1b7aaefe",
+    "generation": 3,
+    "spec_sha256": "68967ff0862707ba1ab6f77955e075d171a8a4b23b5594402c1fd2e05823dfc4"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "gpu-operator-node-feature-discovery-worker",
+    "kind": "DaemonSet",
+    "uid": "45a275ac-52e6-4cf8-bd05-7ff71b1d0c42",
+    "generation": 1,
+    "spec_sha256": "0fafc883a7b6ea186ca6f296356c2a0b17e40e5f5fbaa0f308a063b9cdca8036"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "nvidia-container-toolkit-daemonset",
+    "kind": "DaemonSet",
+    "uid": "9ce81e92-6a4d-4405-9cbd-f6ef6d605a07",
+    "generation": 3,
+    "spec_sha256": "dcd7e3cbaf139b949bcd4a4378d1c84cddba82f72af0b4563b1a20c34285e51c"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "nvidia-dcgm-exporter",
+    "kind": "DaemonSet",
+    "uid": "7728b1d8-c431-4a4f-a754-553bc656369d",
+    "generation": 141,
+    "spec_sha256": "d9a6e58851768680d74631839214ec6125a6359624ee7b4a552e19263fb4299c"
+  },
+  {
+    "namespace": "gpu-operator",
+    "name": "nvidia-operator-validator",
+    "kind": "DaemonSet",
+    "uid": "fc55c4d5-c75c-4169-ab43-1e8c93b0ca2d",
+    "generation": 3,
+    "spec_sha256": "26a9b52600f873624aea560a9cf9082b586f71592d476c217e29924e1a3ca805"
+  },
+  {
+    "namespace": "kube-system",
+    "name": "cilium",
+    "kind": "DaemonSet",
+    "uid": "57f0453c-a7f0-4fa4-84d1-7232337f0271",
+    "generation": 1,
+    "spec_sha256": "636a6115db1e9f84e01721fbc8ea8e39c0b29295ff171d5bfc1077914ffdfbbe"
+  },
+  {
+    "namespace": "kube-system",
+    "name": "cilium-envoy",
+    "kind": "DaemonSet",
+    "uid": "8d9537e3-6d48-40b0-8756-18fcaf8ee84f",
+    "generation": 1,
+    "spec_sha256": "682ec1f37c752d06f322c5e2253bef4c5d429d569454992e4053ad487d816d4f"
+  },
+  {
+    "namespace": "kube-system",
+    "name": "hami-device-plugin",
+    "kind": "DaemonSet",
+    "uid": "37c1ffc1-3237-4496-81f2-a4690ae10b71",
+    "generation": 145,
+    "spec_sha256": "6f8a56291c06387a8acbbfd55ac169a2d49a7ff2d74541ea415434962c11f7ca"
+  },
+  {
+    "namespace": "kube-system",
+    "name": "kube-proxy",
+    "kind": "DaemonSet",
+    "uid": "fe6e529b-908b-42d2-aa8d-1ada88f6dc8d",
+    "generation": 1,
+    "spec_sha256": "f3b91203454353033c90f0ee9b2627c51e5f4e9218c29d15d95bc901bb2d6db9"
+  },
+  {
+    "namespace": "kubevirt",
+    "name": "virt-handler",
+    "kind": "DaemonSet",
+    "uid": "bc8ca1ea-3a20-4966-90aa-0b79670e094c",
+    "generation": 1,
+    "spec_sha256": "eeea57a36badde31fceca4b920a6b97af7ca980f47450b6082e014ca08d408ae"
+  },
+  {
+    "namespace": "vmweave-dra-driver",
+    "name": "hami-dra-driver-kubelet-plugin",
+    "kind": "DaemonSet",
+    "uid": "8786f0ed-cf12-4509-ab0a-bb5d2a2b496b",
+    "generation": 8,
+    "spec_sha256": "41d5f39444b53fa0e0a428c0e524f941c8cfe42ba784f56e2563f44f2603dd6f"
+  }
+]

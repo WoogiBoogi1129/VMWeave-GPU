@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/transfer-app/run.py", line 203, in <module>
+    connect();prepare() if a.action=='prepare' else run()
+              ^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/transfer-app/run.py", line 69, in prepare
+    h.save('build.log',h.ssh('worker',build,stderr=subprocess.STDOUT,timeout=180))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/throughput/run.py", line 34, in ssh
+    def ssh(role,cmd,**kw):return call(sshargs(role,cmd),**kw)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/nested-k8s-gpu/throughput/run.py", line 25, in call
+    def call(args,**kw):return subprocess.check_output([str(x) for x in args],text=True,timeout=kw.pop('timeout',60),**kw)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-i', '/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/id_ed25519', '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/nested-k8s-20261028/known_hosts', '-o', 'ConnectTimeout=8', 'ubuntu@10.99.41.66', 'cd /home/ubuntu/nested/transfer-app-20261030 && cp /opt/vmweave/lib/libvmweave_guest.so . && cp -L /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /lib/x86_64-linux-gnu/libgcc_s.so.1 . && chmod 755 nw srad && gcc -std=c11 -O2 -Wall -Wextra -Werror copy.c -L. -lvmweave_guest -o copy && gcc -std=c11 -O2 -Wall -Wextra -Werror -shared -fPIC barrier.c -ldl -o barrier.so && sudo podman build --pull=false --network=none -t localhost/nested-transfer-app:20261030 -f Containerfile .']' returned non-zero exit status 1.

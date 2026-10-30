@@ -25,3 +25,4 @@ WireGuard·Cilium, broker·GPU binding, init/join, CPU/GPU Pod 검증, 원본 �
 - [유지 자원과 접속·복구 인계](../../experiments/nested-k8s-gpu/results/20261028-minimal/HANDOFF.md)
 - [2026-10-29 Guest/Pod SGEMM 처리량 분석](../../experiments/nested-k8s-gpu/results/20261029-sgemm-throughput/REPORT.md)
 - [VMWeave·Flyt·Passthrough 기존 결과와의 비교](../../experiments/nested-k8s-gpu/results/20261029-performance-comparison/REPORT.md)
+- [2026-10-30 전송 지연·대역폭 및 Rodinia 애플리케이션 처리량](../../experiments/nested-k8s-gpu/results/20261030-transfer-app-throughput/REPORT.md)

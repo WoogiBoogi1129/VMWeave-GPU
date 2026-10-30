@@ -14,6 +14,12 @@ VM 두 대를 Control Plane과 Worker로 구성하고, Worker VM의 비특권 Po
 
 ## 완료된 결과
 
+2026-10-30 추가 실험은 **H2D/D2H 전송 지연시간·대역폭과 Rodinia NW/SRAD 애플리케이션 처리량**을
+같은 Worker VM의 Guest 직접 실행과 내부 Pod에서 비교한다.
+[통합 성능 보고서·그래프·원본](results/20261030-transfer-app-throughput/REPORT.md)에는
+기존 SGEMM 결과와 이번 추가 측정의 범위·검산·제한을 함께 정리했다.
+AI 모델 추론·학습이나 전체 서비스 요청 처리량을 측정한 결과는 아니다.
+
 2026-10-29에 같은 Worker VM의 **Guest 직접 실행과 내부 Pod의 FP32 SGEMM 처리량**을
 행렬 크기별 3쌍으로 비교했다. [처리량 분석 보고서·그래프](results/20261029-sgemm-throughput/REPORT.md)를 참고한다.
 기존 기능 실험과 별도 실행이며 Device Plugin 기반 자원 할당 성능은 측정하지 않았다.

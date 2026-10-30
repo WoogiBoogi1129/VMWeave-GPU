@@ -1,0 +1,1206 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:47:18Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-copy-1-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "327457",
+        "uid": "da222741-aae6-44d4-9bb8-90497cbba85d"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "da222741-aae6-44d4-9bb8-90497cbba85d"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "da222741-aae6-44d4-9bb8-90497cbba85d",
+              "batch.kubernetes.io/job-name": "xferapp30-copy-1-pod",
+              "controller-uid": "da222741-aae6-44d4-9bb8-90497cbba85d",
+              "job-name": "xferapp30-copy-1-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-copy-1-pod; cd /tmp/xferapp30-copy-1-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib /opt/bench/bin/copy /tmp/xferapp30-copy-1-pod/go"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:47:47Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:47:47Z",
+            "lastTransitionTime": "2026-10-30T07:47:47Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:47:47Z",
+            "lastTransitionTime": "2026-10-30T07:47:47Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:47:18Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:47:51Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-copy-2-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "327542",
+        "uid": "50b4a979-0a80-45e5-a314-307f969b8cd0"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "50b4a979-0a80-45e5-a314-307f969b8cd0"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "50b4a979-0a80-45e5-a314-307f969b8cd0",
+              "batch.kubernetes.io/job-name": "xferapp30-copy-2-pod",
+              "controller-uid": "50b4a979-0a80-45e5-a314-307f969b8cd0",
+              "job-name": "xferapp30-copy-2-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-copy-2-pod; cd /tmp/xferapp30-copy-2-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib /opt/bench/bin/copy /tmp/xferapp30-copy-2-pod/go"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:48:19Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:48:19Z",
+            "lastTransitionTime": "2026-10-30T07:48:19Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:48:19Z",
+            "lastTransitionTime": "2026-10-30T07:48:19Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:47:51Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:49:15Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-copy-3-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "327733",
+        "uid": "c15682ea-17d2-41e2-8a6a-9efc0ded64df"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "c15682ea-17d2-41e2-8a6a-9efc0ded64df"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "c15682ea-17d2-41e2-8a6a-9efc0ded64df",
+              "batch.kubernetes.io/job-name": "xferapp30-copy-3-pod",
+              "controller-uid": "c15682ea-17d2-41e2-8a6a-9efc0ded64df",
+              "job-name": "xferapp30-copy-3-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-copy-3-pod; cd /tmp/xferapp30-copy-3-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib /opt/bench/bin/copy /tmp/xferapp30-copy-3-pod/go"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:49:45Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:49:45Z",
+            "lastTransitionTime": "2026-10-30T07:49:45Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:49:45Z",
+            "lastTransitionTime": "2026-10-30T07:49:45Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:49:16Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:49:55Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-nw-1-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "327793",
+        "uid": "aa2fe2d1-4666-4a90-b3da-f1027208548f"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "aa2fe2d1-4666-4a90-b3da-f1027208548f"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "aa2fe2d1-4666-4a90-b3da-f1027208548f",
+              "batch.kubernetes.io/job-name": "xferapp30-nw-1-pod",
+              "controller-uid": "aa2fe2d1-4666-4a90-b3da-f1027208548f",
+              "job-name": "xferapp30-nw-1-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-nw-1-pod; cd /tmp/xferapp30-nw-1-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-nw-1-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/nw 2048 10; sha256sum output-*.bin"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:50:06Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:50:06Z",
+            "lastTransitionTime": "2026-10-30T07:50:06Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:50:06Z",
+            "lastTransitionTime": "2026-10-30T07:50:06Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:49:55Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:50:09Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-nw-2-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "327837",
+        "uid": "59a0f75c-fb97-46e7-b99b-276a287ef79a"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "59a0f75c-fb97-46e7-b99b-276a287ef79a"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "59a0f75c-fb97-46e7-b99b-276a287ef79a",
+              "batch.kubernetes.io/job-name": "xferapp30-nw-2-pod",
+              "controller-uid": "59a0f75c-fb97-46e7-b99b-276a287ef79a",
+              "job-name": "xferapp30-nw-2-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-nw-2-pod; cd /tmp/xferapp30-nw-2-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-nw-2-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/nw 2048 10; sha256sum output-*.bin"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:50:18Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:50:18Z",
+            "lastTransitionTime": "2026-10-30T07:50:18Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:50:18Z",
+            "lastTransitionTime": "2026-10-30T07:50:18Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:50:09Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:50:36Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-nw-3-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "327912",
+        "uid": "50bae4d9-3ab0-4a59-a29d-4bbbcf42b7e6"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "50bae4d9-3ab0-4a59-a29d-4bbbcf42b7e6"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "50bae4d9-3ab0-4a59-a29d-4bbbcf42b7e6",
+              "batch.kubernetes.io/job-name": "xferapp30-nw-3-pod",
+              "controller-uid": "50bae4d9-3ab0-4a59-a29d-4bbbcf42b7e6",
+              "job-name": "xferapp30-nw-3-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-nw-3-pod; cd /tmp/xferapp30-nw-3-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-nw-3-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/nw 2048 10; sha256sum output-*.bin"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:50:45Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:50:45Z",
+            "lastTransitionTime": "2026-10-30T07:50:45Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:50:45Z",
+            "lastTransitionTime": "2026-10-30T07:50:45Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:50:36Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:50:55Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-srad-1-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "327972",
+        "uid": "fea0abbf-807d-41ee-a9c6-0b4bb2f21ec1"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "fea0abbf-807d-41ee-a9c6-0b4bb2f21ec1"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "fea0abbf-807d-41ee-a9c6-0b4bb2f21ec1",
+              "batch.kubernetes.io/job-name": "xferapp30-srad-1-pod",
+              "controller-uid": "fea0abbf-807d-41ee-a9c6-0b4bb2f21ec1",
+              "job-name": "xferapp30-srad-1-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-srad-1-pod; cd /tmp/xferapp30-srad-1-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-srad-1-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/srad 2048 2048 0 127 0 127 0.5 2; sha256sum output-*.bin"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:51:04Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:51:04Z",
+            "lastTransitionTime": "2026-10-30T07:51:04Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:51:04Z",
+            "lastTransitionTime": "2026-10-30T07:51:04Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:50:55Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:51:07Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-srad-2-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "328016",
+        "uid": "52837419-f3d9-4332-8ac0-b709ff9b4d71"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "52837419-f3d9-4332-8ac0-b709ff9b4d71"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "52837419-f3d9-4332-8ac0-b709ff9b4d71",
+              "batch.kubernetes.io/job-name": "xferapp30-srad-2-pod",
+              "controller-uid": "52837419-f3d9-4332-8ac0-b709ff9b4d71",
+              "job-name": "xferapp30-srad-2-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-srad-2-pod; cd /tmp/xferapp30-srad-2-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-srad-2-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/srad 2048 2048 0 127 0 127 0.5 2; sha256sum output-*.bin"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:51:16Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:51:16Z",
+            "lastTransitionTime": "2026-10-30T07:51:16Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:51:16Z",
+            "lastTransitionTime": "2026-10-30T07:51:16Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:51:07Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    },
+    {
+      "apiVersion": "batch/v1",
+      "kind": "Job",
+      "metadata": {
+        "creationTimestamp": "2026-10-30T07:51:33Z",
+        "generation": 1,
+        "labels": {
+          "experiment": "transfer-app-20261030"
+        },
+        "name": "xferapp30-srad-3-pod",
+        "namespace": "nested-validation",
+        "resourceVersion": "328088",
+        "uid": "f11200b0-942a-44ba-8a2e-06a0a7888a52"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 300,
+        "backoffLimit": 0,
+        "completionMode": "NonIndexed",
+        "completions": 1,
+        "manualSelector": false,
+        "parallelism": 1,
+        "podReplacementPolicy": "TerminatingOrFailed",
+        "selector": {
+          "matchLabels": {
+            "batch.kubernetes.io/controller-uid": "f11200b0-942a-44ba-8a2e-06a0a7888a52"
+          }
+        },
+        "suspend": false,
+        "template": {
+          "metadata": {
+            "labels": {
+              "batch.kubernetes.io/controller-uid": "f11200b0-942a-44ba-8a2e-06a0a7888a52",
+              "batch.kubernetes.io/job-name": "xferapp30-srad-3-pod",
+              "controller-uid": "f11200b0-942a-44ba-8a2e-06a0a7888a52",
+              "job-name": "xferapp30-srad-3-pod"
+            }
+          },
+          "spec": {
+            "automountServiceAccountToken": false,
+            "containers": [
+              {
+                "args": [
+                  "set -eu; mkdir /tmp/xferapp30-srad-3-pod; cd /tmp/xferapp30-srad-3-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-srad-3-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/srad 2048 2048 0 127 0 127 0.5 2; sha256sum output-*.bin"
+                ],
+                "command": [
+                  "/bin/sh",
+                  "-c"
+                ],
+                "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "resources": {
+                  "limits": {
+                    "memory": "1Gi"
+                  },
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "securityContext": {
+                  "allowPrivilegeEscalation": false,
+                  "capabilities": {
+                    "drop": [
+                      "ALL"
+                    ]
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/run/vmweave",
+                    "name": "broker",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "nodeSelector": {
+              "kubernetes.io/hostname": "vw-k8s-worker-01"
+            },
+            "restartPolicy": "Never",
+            "schedulerName": "default-scheduler",
+            "securityContext": {
+              "runAsGroup": 998,
+              "runAsNonRoot": true,
+              "runAsUser": 1000,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationGracePeriodSeconds": 30,
+            "volumes": [
+              {
+                "hostPath": {
+                  "path": "/run/vmweave",
+                  "type": "Directory"
+                },
+                "name": "broker"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "completionTime": "2026-10-30T07:51:42Z",
+        "conditions": [
+          {
+            "lastProbeTime": "2026-10-30T07:51:42Z",
+            "lastTransitionTime": "2026-10-30T07:51:42Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "SuccessCriteriaMet"
+          },
+          {
+            "lastProbeTime": "2026-10-30T07:51:42Z",
+            "lastTransitionTime": "2026-10-30T07:51:42Z",
+            "message": "Reached expected number of succeeded pods",
+            "reason": "CompletionsReached",
+            "status": "True",
+            "type": "Complete"
+          }
+        ],
+        "ready": 0,
+        "startTime": "2026-10-30T07:51:33Z",
+        "succeeded": 1,
+        "terminating": 0,
+        "uncountedTerminatedPods": {}
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

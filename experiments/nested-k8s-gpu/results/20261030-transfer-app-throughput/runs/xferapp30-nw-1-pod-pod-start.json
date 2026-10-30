@@ -1,0 +1,221 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "creationTimestamp": "2026-10-30T07:49:55Z",
+    "finalizers": [
+      "batch.kubernetes.io/job-tracking"
+    ],
+    "generateName": "xferapp30-nw-1-pod-",
+    "generation": 1,
+    "labels": {
+      "batch.kubernetes.io/controller-uid": "aa2fe2d1-4666-4a90-b3da-f1027208548f",
+      "batch.kubernetes.io/job-name": "xferapp30-nw-1-pod",
+      "controller-uid": "aa2fe2d1-4666-4a90-b3da-f1027208548f",
+      "job-name": "xferapp30-nw-1-pod"
+    },
+    "name": "xferapp30-nw-1-pod-n4cp9",
+    "namespace": "nested-validation",
+    "ownerReferences": [
+      {
+        "apiVersion": "batch/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "Job",
+        "name": "xferapp30-nw-1-pod",
+        "uid": "aa2fe2d1-4666-4a90-b3da-f1027208548f"
+      }
+    ],
+    "resourceVersion": "327769",
+    "uid": "f18be344-d27c-43ad-899c-6bcec9a4e97d"
+  },
+  "spec": {
+    "automountServiceAccountToken": false,
+    "containers": [
+      {
+        "args": [
+          "set -eu; mkdir /tmp/xferapp30-nw-1-pod; cd /tmp/xferapp30-nw-1-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-nw-1-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/nw 2048 10; sha256sum output-*.bin"
+        ],
+        "command": [
+          "/bin/sh",
+          "-c"
+        ],
+        "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+        "imagePullPolicy": "Never",
+        "name": "benchmark",
+        "resources": {
+          "limits": {
+            "memory": "1Gi"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "256Mi"
+          }
+        },
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/run/vmweave",
+            "name": "broker",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "vw-k8s-worker-01",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "vw-k8s-worker-01"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Never",
+    "schedulerName": "default-scheduler",
+    "securityContext": {
+      "runAsGroup": 998,
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "hostPath": {
+          "path": "/run/vmweave",
+          "type": "Directory"
+        },
+        "name": "broker"
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-30T07:49:57Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-30T07:49:55Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-30T07:49:57Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-30T07:49:57Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-10-30T07:49:55Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "100m",
+          "memory": "256Mi"
+        },
+        "containerID": "cri-o://f0a510883350b4581bf883f7ce197ba38521ee5cc44ed92f5c28fcc7b924cae3",
+        "image": "localhost/nested-transfer-app:20261030",
+        "imageID": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+        "lastState": {},
+        "name": "benchmark",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "memory": "1Gi"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "256Mi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-10-30T07:49:56Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 998,
+            "supplementalGroups": [
+              998
+            ],
+            "uid": 1000
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/run/vmweave",
+            "name": "broker",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "hostIP": "10.245.0.11",
+    "hostIPs": [
+      {
+        "ip": "10.245.0.11"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Running",
+    "podIP": "10.246.1.108",
+    "podIPs": [
+      {
+        "ip": "10.246.1.108"
+      }
+    ],
+    "qosClass": "Burstable",
+    "startTime": "2026-10-30T07:49:55Z"
+  }
+}

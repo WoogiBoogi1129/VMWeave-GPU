@@ -14,3 +14,4 @@
 - [2026-10-16~17 VMWeave와 passthrough VM의 동일 FP32 학습 성능 비교](ai-passthrough/README.md)
 - [2026-10-28 VM 내부 2노드 Kubernetes·GPU Pod 결과·캡처 및 향후 중앙 Operator 실습](nested-k8s-gpu/README.md)
 - [2026-10-29 Guest/Pod SGEMM 처리량](nested-k8s-gpu/results/20261029-sgemm-throughput/REPORT.md) · [VMWeave·Flyt·Passthrough 기존 결과 비교](nested-k8s-gpu/results/20261029-performance-comparison/REPORT.md)
+- [2026-10-30 내부 Kubernetes 전송 지연·대역폭 및 Rodinia 처리량 통합 보고서](nested-k8s-gpu/results/20261030-transfer-app-throughput/REPORT.md)

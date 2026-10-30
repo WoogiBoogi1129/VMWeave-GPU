@@ -1,0 +1,26 @@
+{
+  "offline_reanalysis": "PASS; four derived JSON/CSV files byte-identical",
+  "prior_evidence_manifests": [
+    {
+      "manifest": "experiments/nested-k8s-gpu/results/20261028-minimal/SHA256SUMS",
+      "verified_files": 338
+    },
+    {
+      "manifest": "experiments/nested-k8s-gpu/results/20261028-nodes-capture/SHA256SUMS",
+      "verified_files": 7
+    },
+    {
+      "manifest": "experiments/nested-k8s-gpu/results/20261029-sgemm-throughput/SHA256SUMS",
+      "verified_files": 120
+    },
+    {
+      "manifest": "experiments/nested-k8s-gpu/results/20261029-performance-comparison/SHA256SUMS",
+      "verified_files": 12
+    }
+  ],
+  "credential_pattern_scan": "PASS; no matches",
+  "c_syntax": "PASS: gcc -std=c11 -O2 -Wall -Wextra -Werror -fsyntax-only",
+  "python_syntax": "PASS: py_compile",
+  "guest_source_equality": "PASS: copy.c, barrier.c, Containerfile",
+  "docs_check": "PASS: 74 HTML pages, 223 search entries"
+}

@@ -1,0 +1,111 @@
+{
+  "Id": "2615cb94fc4ee8983a6b54578be107af3a1e5c610ed9e920d1c16780e50c6f34",
+  "Digest": "sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+  "RepoTags": [
+    "localhost/nested-transfer-app:20261030"
+  ],
+  "RepoDigests": [
+    "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e"
+  ],
+  "Parent": "4047395c00220bf3beffb64f6811546c5f4a5505873fc66c714594b58acf8c33",
+  "Comment": "",
+  "Created": "2026-10-30T07:46:17.840296518Z",
+  "Config": {
+    "User": "1000:998",
+    "Env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock",
+      "LD_LIBRARY_PATH=/opt/bench/lib"
+    ],
+    "Cmd": [
+      "/bin/bash"
+    ],
+    "WorkingDir": "/tmp",
+    "Labels": {
+      "io.buildah.version": "1.23.1",
+      "org.opencontainers.image.version": "22.04"
+    }
+  },
+  "Version": "",
+  "Author": "",
+  "Architecture": "amd64",
+  "Os": "linux",
+  "Size": 84025232,
+  "VirtualSize": 84025232,
+  "GraphDriver": {
+    "Name": "overlay",
+    "Data": {
+      "LowerDir": "/var/lib/containers/storage/overlay/938fccb8af1d9787ad018d83457842b3492fe34eff7499e82d81f0c96fdbc055/diff:/var/lib/containers/storage/overlay/beb59027b96ddbf30ac9c80b527668fe7011f4f553fe83f5e59199e9a84fb5ca/diff",
+      "UpperDir": "/var/lib/containers/storage/overlay/4d4445144d5db502cb791aaf5a28129a347487adf7de85de260f90d6cd477061/diff",
+      "WorkDir": "/var/lib/containers/storage/overlay/4d4445144d5db502cb791aaf5a28129a347487adf7de85de260f90d6cd477061/work"
+    }
+  },
+  "RootFS": {
+    "Type": "layers",
+    "Layers": [
+      "sha256:beb59027b96ddbf30ac9c80b527668fe7011f4f553fe83f5e59199e9a84fb5ca",
+      "sha256:5a01a3ade12fb3fcce0622074b9ef2ec6bddae6492857be675f27685152ca97d",
+      "sha256:d0257253a7bf3255d3b54749254a88981f4d9085c64f951b50e152c92c3aa87a"
+    ]
+  },
+  "Labels": {
+    "io.buildah.version": "1.23.1",
+    "org.opencontainers.image.version": "22.04"
+  },
+  "Annotations": {},
+  "ManifestType": "application/vnd.oci.image.manifest.v1+json",
+  "User": "1000:998",
+  "History": [
+    {
+      "created": "2026-07-31T21:53:09.616839868Z",
+      "created_by": "/bin/sh -c #(nop)  ARG RELEASE",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-07-31T21:53:09.673958815Z",
+      "created_by": "/bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-07-31T21:53:09.726430018Z",
+      "created_by": "/bin/sh -c #(nop)  LABEL org.opencontainers.image.version=22.04",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-07-31T21:53:11.93725626Z",
+      "created_by": "/bin/sh -c #(nop) ADD file:4501ff54ffd37d854b1cfbcd2e37da58bf8a49da3a6a82232d03e7556d337a92 in / "
+    },
+    {
+      "created": "2026-07-31T21:53:12.336585804Z",
+      "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/bash\"]",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-10-30T07:46:16.588842389Z",
+      "created_by": "/bin/sh -c #(nop) COPY multi:e169bd7af44026325b812dd883acb839d21f02b5374062cf87f2df4dd05f5829 in /opt/bench/bin/ ",
+      "comment": "FROM docker.io/library/ubuntu@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f"
+    },
+    {
+      "created": "2026-10-30T07:46:17.315786034Z",
+      "created_by": "/bin/sh -c #(nop) COPY multi:c073063441aa3a55639723eb724a9e04652fa54018c9a06061cfb04f77904397 in /opt/bench/lib/ "
+    },
+    {
+      "created": "2026-10-30T07:46:17.545507932Z",
+      "created_by": "/bin/sh -c #(nop) ENV VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-10-30T07:46:17.662993523Z",
+      "created_by": "/bin/sh -c #(nop) USER 1000:998",
+      "empty_layer": true
+    },
+    {
+      "created": "2026-10-30T07:46:17.840766492Z",
+      "created_by": "/bin/sh -c #(nop) WORKDIR /tmp",
+      "empty_layer": true
+    }
+  ],
+  "NamesHistory": [
+    "localhost/nested-transfer-app:20261030"
+  ]
+}

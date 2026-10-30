@@ -18,6 +18,11 @@
 
 ## 재현과 판정
 
+[2026-10-30 내부 Kubernetes 전송·애플리케이션 처리량](../../experiments/nested-k8s-gpu/results/20261030-transfer-app-throughput/REPORT.md)은
+H2D/D2H의 복사 완료 지연·유효 대역폭과 Rodinia NW/SRAD의 처리량을 Guest/Pod 각 3회로 비교한다.
+기존 SGEMM 결과를 함께 정리하며, 전송 경로와 실제 알고리즘 처리 구간의 측정 경계를 명시한다.
+AI 모델 추론·학습 처리량이나 GPU PCIe 최대 대역폭을 뜻하지 않는다.
+
 [2026-10-29 내부 Kubernetes SGEMM 처리량](../../experiments/nested-k8s-gpu/results/20261029-sgemm-throughput/REPORT.md)은
 같은 Worker VM의 Guest 직접 실행과 Pod 실행을 행렬 크기별 3쌍으로 비교했다.
 12개 실행의 검산·회수는 통과했으며, Pod 처리량의 일관된 저하는 관측하지 않았다. 통계적 동등성을 입증한 결과는 아니다.

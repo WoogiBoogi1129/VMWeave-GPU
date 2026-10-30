@@ -1,0 +1,391 @@
+{
+  "processes": 18,
+  "copy_windows": 48,
+  "application_measured_tasks": 24,
+  "application_warmup_tasks": 24,
+  "full_copy_checks": 48,
+  "application_full_output_checks": 48,
+  "transfer_summary": [
+    {
+      "bytes": 4096,
+      "direction": "H2D",
+      "guest": {
+        "GB_per_second": 0.003669478513134789,
+        "p50_completion_ms": 1.0582194999999999,
+        "p95_completion_ms": 1.894454,
+        "p50_api_return_ms": 0.5698105,
+        "run_GB_per_second": [
+          0.003949639962984762,
+          0.0031005359360809807,
+          0.003669478513134789
+        ],
+        "min_GB_per_second": 0.0031005359360809807,
+        "max_GB_per_second": 0.003949639962984762
+      },
+      "pod": {
+        "GB_per_second": 0.0036594707316026584,
+        "p50_completion_ms": 1.070665,
+        "p95_completion_ms": 1.920547,
+        "p50_api_return_ms": 0.55922,
+        "run_GB_per_second": [
+          0.0035545278277998365,
+          0.0036594707316026584,
+          0.0036712698676149356
+        ],
+        "min_GB_per_second": 0.0035545278277998365,
+        "max_GB_per_second": 0.0036712698676149356
+      },
+      "paired_bandwidth_change_percent": [
+        -10.003750693426172,
+        18.027038132902938,
+        0.04881768550311083
+      ],
+      "median_paired_bandwidth_change_percent": 0.04881768550311083
+    },
+    {
+      "bytes": 4096,
+      "direction": "D2H",
+      "guest": {
+        "GB_per_second": 0.003618523925413574,
+        "p50_completion_ms": 1.0814080000000001,
+        "p95_completion_ms": 1.9841669999999998,
+        "p50_api_return_ms": 0.587836,
+        "run_GB_per_second": [
+          0.0036430668799608983,
+          0.003618523925413574,
+          0.0032713966255953405
+        ],
+        "min_GB_per_second": 0.0032713966255953405,
+        "max_GB_per_second": 0.0036430668799608983
+      },
+      "pod": {
+        "GB_per_second": 0.0035140622361737373,
+        "p50_completion_ms": 1.09432,
+        "p95_completion_ms": 1.996263,
+        "p50_api_return_ms": 0.597683,
+        "run_GB_per_second": [
+          0.003530443817100905,
+          0.0034549396867111027,
+          0.0035140622361737373
+        ],
+        "min_GB_per_second": 0.0034549396867111027,
+        "max_GB_per_second": 0.003530443817100905
+      },
+      "paired_bandwidth_change_percent": [
+        -3.0914355012116035,
+        -4.520744979840774,
+        7.417798523107422
+      ],
+      "median_paired_bandwidth_change_percent": -3.0914355012116035
+    },
+    {
+      "bytes": 1048576,
+      "direction": "H2D",
+      "guest": {
+        "GB_per_second": 0.2366563545963877,
+        "p50_completion_ms": 4.2860035,
+        "p95_completion_ms": 5.4113169999999995,
+        "p50_api_return_ms": 3.6027825,
+        "run_GB_per_second": [
+          0.2366563545963877,
+          0.24848211145607388,
+          0.23502173866085335
+        ],
+        "min_GB_per_second": 0.23502173866085335,
+        "max_GB_per_second": 0.24848211145607388
+      },
+      "pod": {
+        "GB_per_second": 0.24453910293754116,
+        "p50_completion_ms": 4.238471,
+        "p95_completion_ms": 5.182073,
+        "p50_api_return_ms": 3.509582,
+        "run_GB_per_second": [
+          0.23927247358176498,
+          0.24453910293754116,
+          0.2587055278097797
+        ],
+        "min_GB_per_second": 0.23927247358176498,
+        "max_GB_per_second": 0.2587055278097797
+      },
+      "paired_bandwidth_change_percent": [
+        1.105450555020604,
+        -1.586837980177802,
+        10.077275950674114
+      ],
+      "median_paired_bandwidth_change_percent": 1.105450555020604
+    },
+    {
+      "bytes": 1048576,
+      "direction": "D2H",
+      "guest": {
+        "GB_per_second": 0.2606219510590233,
+        "p50_completion_ms": 3.982477,
+        "p95_completion_ms": 4.818422999999999,
+        "p50_api_return_ms": 3.203383,
+        "run_GB_per_second": [
+          0.2620166490348781,
+          0.2606219510590233,
+          0.25979501933513777
+        ],
+        "min_GB_per_second": 0.25979501933513777,
+        "max_GB_per_second": 0.2620166490348781
+      },
+      "pod": {
+        "GB_per_second": 0.2675208053860719,
+        "p50_completion_ms": 3.89934,
+        "p95_completion_ms": 4.696285,
+        "p50_api_return_ms": 3.134913,
+        "run_GB_per_second": [
+          0.26442687285610567,
+          0.2752049175505934,
+          0.2675208053860719
+        ],
+        "min_GB_per_second": 0.26442687285610567,
+        "max_GB_per_second": 0.2752049175505934
+      },
+      "paired_bandwidth_change_percent": [
+        0.9198743019214639,
+        5.595448285270299,
+        2.9738006797458416
+      ],
+      "median_paired_bandwidth_change_percent": 2.9738006797458416
+    },
+    {
+      "bytes": 16777216,
+      "direction": "H2D",
+      "guest": {
+        "GB_per_second": 0.207624518680412,
+        "p50_completion_ms": 87.61529499999999,
+        "p95_completion_ms": 100.280081,
+        "p50_api_return_ms": 83.66768250000001,
+        "run_GB_per_second": [
+          0.207624518680412,
+          0.183389552706246,
+          0.20845683499398146
+        ],
+        "min_GB_per_second": 0.183389552706246,
+        "max_GB_per_second": 0.20845683499398146
+      },
+      "pod": {
+        "GB_per_second": 0.2051791347740474,
+        "p50_completion_ms": 80.545521,
+        "p95_completion_ms": 101.22080899999999,
+        "p50_api_return_ms": 76.728295,
+        "run_GB_per_second": [
+          0.2051791347740474,
+          0.19948627653942716,
+          0.2071236297905707
+        ],
+        "min_GB_per_second": 0.19948627653942716,
+        "max_GB_per_second": 0.2071236297905707
+      },
+      "paired_bandwidth_change_percent": [
+        -1.1777914872032502,
+        8.77733960067233,
+        -0.6395593617495199
+      ],
+      "median_paired_bandwidth_change_percent": -0.6395593617495199
+    },
+    {
+      "bytes": 16777216,
+      "direction": "D2H",
+      "guest": {
+        "GB_per_second": 0.19995680828046905,
+        "p50_completion_ms": 81.82974600000001,
+        "p95_completion_ms": 97.931531,
+        "p50_api_return_ms": 77.47570749999998,
+        "run_GB_per_second": [
+          0.2044254606146757,
+          0.19995680828046905,
+          0.19887312940309787
+        ],
+        "min_GB_per_second": 0.19887312940309787,
+        "max_GB_per_second": 0.2044254606146757
+      },
+      "pod": {
+        "GB_per_second": 0.2066548784893729,
+        "p50_completion_ms": 77.022081,
+        "p95_completion_ms": 96.777912,
+        "p50_api_return_ms": 72.54804700000001,
+        "run_GB_per_second": [
+          0.20331843149564632,
+          0.2066548784893729,
+          0.21550912703111721
+        ],
+        "min_GB_per_second": 0.20331843149564632,
+        "max_GB_per_second": 0.21550912703111721
+      },
+      "paired_bandwidth_change_percent": [
+        -0.5415319186273138,
+        3.349758513602996,
+        8.365130914342721
+      ],
+      "median_paired_bandwidth_change_percent": 3.349758513602996
+    },
+    {
+      "bytes": 67108864,
+      "direction": "H2D",
+      "guest": {
+        "GB_per_second": 0.33837381657344817,
+        "p50_completion_ms": 187.77421900000002,
+        "p95_completion_ms": 264.191028,
+        "p50_api_return_ms": 186.55108650000003,
+        "run_GB_per_second": [
+          0.2901713334204035,
+          0.34252949618518286,
+          0.33837381657344817
+        ],
+        "min_GB_per_second": 0.2901713334204035,
+        "max_GB_per_second": 0.34252949618518286
+      },
+      "pod": {
+        "GB_per_second": 0.31235099180656434,
+        "p50_completion_ms": 206.911103,
+        "p95_completion_ms": 260.688754,
+        "p50_api_return_ms": 205.10826799999998,
+        "run_GB_per_second": [
+          0.31132202221529726,
+          0.32008364543946755,
+          0.31235099180656434
+        ],
+        "min_GB_per_second": 0.31132202221529726,
+        "max_GB_per_second": 0.32008364543946755
+      },
+      "paired_bandwidth_change_percent": [
+        7.289034566433328,
+        -6.55296872114638,
+        -7.6905550879807105
+      ],
+      "median_paired_bandwidth_change_percent": -6.55296872114638
+    },
+    {
+      "bytes": 67108864,
+      "direction": "D2H",
+      "guest": {
+        "GB_per_second": 0.4473737774433802,
+        "p50_completion_ms": 148.951711,
+        "p95_completion_ms": 158.858138,
+        "p50_api_return_ms": 147.20403149999999,
+        "run_GB_per_second": [
+          0.4473737774433802,
+          0.45287817441206124,
+          0.4363051078746037
+        ],
+        "min_GB_per_second": 0.4363051078746037,
+        "max_GB_per_second": 0.45287817441206124
+      },
+      "pod": {
+        "GB_per_second": 0.45550133012627547,
+        "p50_completion_ms": 147.5444095,
+        "p95_completion_ms": 155.012216,
+        "p50_api_return_ms": 146.2511685,
+        "run_GB_per_second": [
+          0.44451543637826013,
+          0.4565653674505941,
+          0.45550133012627547
+        ],
+        "min_GB_per_second": 0.44451543637826013,
+        "max_GB_per_second": 0.4565653674505941
+      },
+      "paired_bandwidth_change_percent": [
+        -0.638915647102678,
+        0.81416885309602,
+        4.399724391305737
+      ],
+      "median_paired_bandwidth_change_percent": 0.81416885309602
+    }
+  ],
+  "application_summary": [
+    {
+      "workload": "nw",
+      "guest": {
+        "median_tasks_per_second": 1.9113223932756378,
+        "run_tasks_per_second": [
+          2.370364361233341,
+          1.9113223932756378,
+          1.8590085182558818
+        ],
+        "min_tasks_per_second": 1.8590085182558818,
+        "max_tasks_per_second": 2.370364361233341,
+        "median_run_mean_ms": 523.1979719999999
+      },
+      "pod": {
+        "median_tasks_per_second": 2.0496624164494444,
+        "run_tasks_per_second": [
+          2.108177798027622,
+          2.031556770627403,
+          2.0496624164494444
+        ],
+        "min_tasks_per_second": 2.031556770627403,
+        "max_tasks_per_second": 2.108177798027622,
+        "median_run_mean_ms": 487.88522050000006
+      },
+      "paired_throughput_change_percent": [
+        -11.061023676094194,
+        6.290638239512614,
+        10.25567641682641
+      ],
+      "median_paired_throughput_change_percent": 6.290638239512614
+    },
+    {
+      "workload": "srad",
+      "guest": {
+        "median_tasks_per_second": 3.1844409641123024,
+        "run_tasks_per_second": [
+          2.6502189590364758,
+          3.1844409641123024,
+          4.918780699585981
+        ],
+        "min_tasks_per_second": 2.6502189590364758,
+        "max_tasks_per_second": 4.918780699585981,
+        "median_run_mean_ms": 314.026861
+      },
+      "pod": {
+        "median_tasks_per_second": 4.730473245058287,
+        "run_tasks_per_second": [
+          5.192656675784055,
+          2.872702505539813,
+          4.730473245058287
+        ],
+        "min_tasks_per_second": 2.872702505539813,
+        "max_tasks_per_second": 5.192656675784055,
+        "median_run_mean_ms": 211.39533999999998
+      },
+      "paired_throughput_change_percent": [
+        95.93311934014382,
+        -9.789424959849736,
+        -3.8283360456290216
+      ],
+      "median_paired_throughput_change_percent": -3.8283360456290216
+    }
+  ],
+  "identities_unchanged": {
+    "allocation": true,
+    "generation": true,
+    "workerPodUID": true,
+    "gpuUUID": true,
+    "resourcePrefix": true
+  },
+  "changed_outer_controllers": [
+    [
+      "aap-ate-system",
+      "Deployment",
+      "k8s-credential-provider"
+    ]
+  ],
+  "changed_outer_pods": [
+    [
+      "aap-ate-system",
+      "k8s-credential-provider-6d8f5c4fdb-xngcz"
+    ],
+    [
+      "aap-ate-system",
+      "k8s-credential-provider-8fdcdf6f-g7jtt"
+    ]
+  ],
+  "gpu_monitor_samples": 264,
+  "gpu_monitor_errors": [],
+  "foreign_target_gpu_samples": [],
+  "completed_jobs": 9,
+  "final_idle": true
+}

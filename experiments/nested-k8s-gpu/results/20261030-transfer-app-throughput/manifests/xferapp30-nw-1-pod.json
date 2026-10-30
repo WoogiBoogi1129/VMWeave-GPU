@@ -1,0 +1,80 @@
+{
+  "apiVersion": "batch/v1",
+  "kind": "Job",
+  "metadata": {
+    "name": "xferapp30-nw-1-pod",
+    "namespace": "nested-validation",
+    "labels": {
+      "experiment": "transfer-app-20261030"
+    }
+  },
+  "spec": {
+    "backoffLimit": 0,
+    "activeDeadlineSeconds": 300,
+    "template": {
+      "spec": {
+        "restartPolicy": "Never",
+        "automountServiceAccountToken": false,
+        "nodeSelector": {
+          "kubernetes.io/hostname": "vw-k8s-worker-01"
+        },
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "runAsGroup": 998,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "containers": [
+          {
+            "name": "benchmark",
+            "image": "localhost/nested-transfer-app@sha256:73d69accc7e535fd1ecd589e756f5d2ef765b76c42d29a3c43a2772f1bf20a6e",
+            "imagePullPolicy": "Never",
+            "args": [
+              "set -eu; mkdir /tmp/xferapp30-nw-1-pod; cd /tmp/xferapp30-nw-1-pod; timeout -k 5 240 env VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock LD_LIBRARY_PATH=/opt/bench/lib LD_PRELOAD=/opt/bench/lib/barrier.so:/opt/bench/lib/libvmweave_guest.so VMWEAVE_MIRROR_DEVICE_VA=1 VMWEAVE_TRACE_REQUESTS=0 EXPERIMENT_BARRIER=/tmp/xferapp30-nw-1-pod/go EXPERIMENT_REPEATS=2 /opt/bench/bin/nw 2048 10; sha256sum output-*.bin"
+            ],
+            "env": [],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "256Mi"
+              },
+              "limits": {
+                "memory": "1Gi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "broker",
+                "mountPath": "/run/vmweave",
+                "readOnly": true
+              }
+            ],
+            "command": [
+              "/bin/sh",
+              "-c"
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "broker",
+            "hostPath": {
+              "path": "/run/vmweave",
+              "type": "Directory"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
