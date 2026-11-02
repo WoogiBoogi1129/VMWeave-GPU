@@ -1,0 +1,228 @@
+{
+  "apiVersion": "kubevirt.io/v1",
+  "kind": "VirtualMachineInstance",
+  "metadata": {
+    "annotations": {
+      "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\",\"pvc\":{\"name\":\"tt-vmweave-shm-1102\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+      "kubevirt.io/latest-observed-api-version": "v1",
+      "kubevirt.io/pci-topology-version": "v3",
+      "kubevirt.io/storage-observed-api-version": "v1",
+      "kubevirt.io/vm-generation": "19",
+      "vmweave.io/shm-allocation": "23247a85dd509b7e78939595c5c2741b",
+      "vmweave.io/shm-channel": "tt-vmweave-1102",
+      "vmweave.io/shm-channel-uid": "ed129ccf-f1f5-40cb-b33e-750884596d0e",
+      "vmweave.io/shm-generation": "b83d16b2dc4329292e5e837e51de58d6"
+    },
+    "creationTimestamp": "2026-11-02T10:04:44Z",
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize",
+      "kubevirt.io/foregroundDeleteVirtualMachine"
+    ],
+    "generation": 8,
+    "labels": {
+      "kubevirt.io/nodeName": "gpu-4"
+    },
+    "name": "tt-vmweave-1102",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "tt-vmweave-1102",
+        "uid": "84a829db-738e-4cf6-963a-4185317d554a"
+      }
+    ],
+    "resourceVersion": "22260990",
+    "uid": "01b43d44-8365-4a58-91d5-7e2c2d6d81ee"
+  },
+  "spec": {
+    "architecture": "amd64",
+    "domain": {
+      "cpu": {
+        "cores": 8,
+        "model": "host-model"
+      },
+      "devices": {
+        "disks": [
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "root"
+          },
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "cloudinit"
+          }
+        ],
+        "interfaces": [
+          {
+            "macAddress": "56:f1:74:f4:23:8c",
+            "masquerade": {},
+            "name": "default"
+          }
+        ]
+      },
+      "features": {
+        "acpi": {
+          "enabled": true
+        }
+      },
+      "firmware": {
+        "bootloader": {
+          "efi": {
+            "secureBoot": false
+          }
+        },
+        "serial": "a5208756-d003-4aa1-b9bf-08402ee6cfb0",
+        "uuid": "0f4a7af9-7f2b-4e15-a7ef-e36128e71b7a"
+      },
+      "machine": {
+        "type": "q35"
+      },
+      "memory": {
+        "guest": "16Gi",
+        "maxGuest": "64Gi"
+      },
+      "resources": {
+        "requests": {
+          "memory": "16Gi"
+        }
+      }
+    },
+    "evictionStrategy": "None",
+    "networks": [
+      {
+        "name": "default",
+        "pod": {}
+      }
+    ],
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "volumes": [
+      {
+        "name": "root",
+        "persistentVolumeClaim": {
+          "claimName": "tt-vmweave-1102"
+        }
+      },
+      {
+        "cloudInitNoCloud": {
+          "userData": "#cloud-config\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKdMWCpvXPb7efaG24ws5p+j4N7Ze1TiUIFj96x2FXdr ubuntu@gpu-4\nssh_pwauth: false\n# vmweave-layout-b64: IyR6hd1Qm354k5WVxcJ0G7g9FrLcQykpLl6DflHeWNYAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPqN5PYQUdB/FRECDtexpfgAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+        },
+        "name": "cloudinit"
+      }
+    ]
+  },
+  "status": {
+    "activePods": {
+      "f8b3f712-415d-4828-890f-85e0ca216690": "gpu-4"
+    },
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-02T10:04:49Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "message": "cannot migrate VMI: PVC tt-vmweave-1102 is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+        "reason": "DisksNotLiveMigratable",
+        "status": "False",
+        "type": "LiveMigratable"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "status": "True",
+        "type": "StorageLiveMigratable"
+      }
+    ],
+    "currentCPUTopology": {
+      "cores": 8
+    },
+    "guestOSInfo": {},
+    "interfaces": [
+      {
+        "infoSource": "domain",
+        "ipAddress": "10.85.0.41",
+        "ipAddresses": [
+          "10.85.0.41"
+        ],
+        "linkState": "up",
+        "mac": "56:f1:74:f4:23:8c",
+        "name": "default",
+        "podInterfaceName": "eth0",
+        "queueCount": 1
+      }
+    ],
+    "launcherContainerImageVersion": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+    "machine": {
+      "type": "pc-q35-rhel9.8.0"
+    },
+    "memory": {
+      "guestAtBoot": "16Gi",
+      "guestCurrent": "16Gi",
+      "guestRequested": "16Gi",
+      "memoryOverhead": "373293057"
+    },
+    "migrationMethod": "BlockMigration",
+    "migrationTransport": "Unix",
+    "nodeName": "gpu-4",
+    "phase": "Running",
+    "phaseTransitionTimestamps": [
+      {
+        "phase": "Pending",
+        "phaseTransitionTimestamp": "2026-11-02T10:04:44Z"
+      },
+      {
+        "phase": "Scheduling",
+        "phaseTransitionTimestamp": "2026-11-02T10:04:45Z"
+      },
+      {
+        "phase": "Scheduled",
+        "phaseTransitionTimestamp": "2026-11-02T10:04:49Z"
+      },
+      {
+        "phase": "Running",
+        "phaseTransitionTimestamp": "2026-11-02T10:04:52Z"
+      }
+    ],
+    "qosClass": "Burstable",
+    "runtimeUser": 107,
+    "selinuxContext": "none",
+    "virtualMachineRevisionName": "revision-start-vm-84a829db-738e-4cf6-963a-4185317d554a-19",
+    "volumeStatus": [
+      {
+        "name": "cloudinit",
+        "size": 1048576,
+        "target": "vdb"
+      },
+      {
+        "name": "root",
+        "persistentVolumeClaimInfo": {
+          "accessModes": [
+            "ReadWriteOnce"
+          ],
+          "capacity": {
+            "storage": "32Gi"
+          },
+          "claimName": "tt-vmweave-1102",
+          "filesystemOverhead": "0.055",
+          "requests": {
+            "storage": "32Gi"
+          },
+          "volumeMode": "Filesystem"
+        },
+        "target": "vda"
+      }
+    ]
+  }
+}

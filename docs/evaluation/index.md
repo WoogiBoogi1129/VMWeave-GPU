@@ -16,6 +16,12 @@
 | 제한된 PyTorch 학습 | 고정 FP32 eager MLP·SGD, passthrough와 정확성 비교 | [구현·검증 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md) |
 | VMWeave/passthrough 학습 성능 (2026-10-16~17) | 동일 GPU·FP32 MLP 80측정; VMWeave/PT 처리량 1.790–2.121%, 큰 모델 복사 제한과 공유 호스트 변경 기록 | [보고서·Grafana·그래프](../../experiments/ai-passthrough/README.md) |
 
+[2026-11-02~03 PyTorch 학습 통신·연산 통합 비교](../../experiments/training-threeway/results/20261102/REPORT.md)는
+동일 GPU의 VMWeave v0.5.5·Flyt SHM·Passthrough를 10조건 × 10블록, 정식 300회로 비교했다.
+조건별 VMWeave 처리량은 Flyt의 2.34–4.24배, Passthrough의 6.9–8.8%였으며,
+정확성 25건·변경 입력 전송 24건과 설정 복구를 확인했다. 제한된 합성 MLP 결과이며
+두 PCIe 사건, 중단 블록 교체, 검산 환경 재구성 및 짧은 Passthrough 측정 구간을 보고서에 공개한다.
+
 ## 재현과 판정
 
 [2026-10-30 내부 Kubernetes 전송·애플리케이션 처리량](../../experiments/nested-k8s-gpu/results/20261030-transfer-app-throughput/REPORT.md)은

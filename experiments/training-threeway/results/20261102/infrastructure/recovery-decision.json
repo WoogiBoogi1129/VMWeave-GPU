@@ -1,0 +1,20 @@
+{
+  "decision_utc": 1793639551.9660375,
+  "reason": "PCIe link down/up, device re-enumeration and VFIO startup failure before b9 passthrough measurements. Rerun the entire paired block to avoid mixing pre/post-interruption visits.",
+  "preserved_completed_but_unpaired_runs": 10,
+  "preserved_directory": "interrupted/formal-b9-attempt1",
+  "rerun_block": "b9",
+  "execution_phase": "formal-recovery",
+  "canonical_directory": "formal/b9",
+  "unchanged": [
+    "benchmark source",
+    "protocol steps",
+    "warmup",
+    "sync",
+    "mode and case order",
+    "five-case visit grouping",
+    "images and libraries"
+  ],
+  "performance_based_exclusions": false,
+  "replacement_completed_utc": 1793641903.846631
+}

@@ -1,0 +1,77 @@
+formal-recovery b9 flyt small-1024-roundtrip PASS 4831.629439153262
+formal-recovery b9 flyt large-1024-roundtrip PASS 4836.739211816981
+formal-recovery b9 flyt small-32-resident PASS 196.53930721390142
+formal-recovery b9 flyt small-32-h2d PASS 152.18485823620276
+formal-recovery b9 flyt small-1024-resident PASS 5632.423716175117
+formal-recovery b9 flyt small-1024-h2d PASS 5644.988260124739
+formal-recovery b9 flyt large-32-resident PASS 212.42861201774258
+formal-recovery b9 flyt large-32-h2d PASS 197.38652916981425
+formal-recovery b9 flyt large-1024-resident PASS 6195.103520616458
+formal-recovery b9 flyt large-1024-h2d PASS 4973.4027063568565
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal-recovery b9 passthrough small-1024-roundtrip PASS 272118.2199536224
+formal-recovery b9 passthrough large-1024-roundtrip PASS 189520.40999346774
+formal-recovery b9 passthrough small-32-resident PASS 9162.560997774242
+formal-recovery b9 passthrough small-32-h2d PASS 8481.07059264666
+formal-recovery b9 passthrough small-1024-resident PASS 281525.37105059467
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal-recovery b9 passthrough small-1024-h2d PASS 257874.8669306685
+formal-recovery b9 passthrough large-32-resident PASS 8698.462283458994
+formal-recovery b9 passthrough large-32-h2d PASS 8420.549913377894
+formal-recovery b9 passthrough large-1024-resident PASS 274417.1100951097
+formal-recovery b9 passthrough large-1024-h2d PASS 182939.27238177703
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal-recovery b9 vmweave small-1024-roundtrip PASS 21349.771912033422
+formal-recovery b9 vmweave large-1024-roundtrip PASS 11857.47974859881
+formal-recovery b9 vmweave small-32-resident PASS 757.482011909275
+formal-recovery b9 vmweave small-32-h2d PASS 694.2594908750327
+formal-recovery b9 vmweave small-1024-resident PASS 23665.670987475387
+formal-recovery b9 vmweave small-1024-h2d PASS 21761.044508290346
+formal-recovery b9 vmweave large-32-resident PASS 762.6717268486814
+formal-recovery b9 vmweave large-32-h2d PASS 681.1104305673396
+formal-recovery b9 vmweave large-1024-resident PASS 23008.824066298923
+formal-recovery b9 vmweave large-1024-h2d PASS 13000.572500068485
+formal b10 flyt large-1024-roundtrip PASS 5201.515104059512
+formal b10 flyt small-32-resident PASS 197.1616804641642
+formal b10 flyt small-32-h2d PASS 159.383560482464
+formal b10 flyt small-1024-resident PASS 6375.028687327027
+formal b10 flyt small-1024-h2d PASS 5409.288871631334
+formal b10 flyt large-32-resident PASS 187.69054377127057
+formal b10 flyt large-32-h2d PASS 165.48815145776365
+formal b10 flyt large-1024-resident PASS 5263.927711626808
+formal b10 flyt large-1024-h2d PASS 5386.2674381185225
+formal b10 flyt small-1024-roundtrip PASS 4747.986946980303
+formal b10 vmweave large-1024-roundtrip PASS 11913.320474785698
+formal b10 vmweave small-32-resident PASS 747.326028406291
+formal b10 vmweave small-32-h2d PASS 693.0331863076455
+formal b10 vmweave small-1024-resident PASS 24276.291269650905
+formal b10 vmweave small-1024-h2d PASS 22025.594450157005
+formal b10 vmweave large-32-resident PASS 756.9904660015546
+formal b10 vmweave large-32-h2d PASS 681.0442157960573
+formal b10 vmweave large-1024-resident PASS 23371.347845101584
+formal b10 vmweave large-1024-h2d PASS 13260.617067676902
+formal b10 vmweave small-1024-roundtrip PASS 21403.48432535108
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b10 passthrough large-1024-roundtrip PASS 171604.68243967794
+formal b10 passthrough small-32-resident PASS 8420.71597788541
+formal b10 passthrough small-32-h2d PASS 7752.766207321379
+formal b10 passthrough small-1024-resident PASS 264590.92439122085
+formal b10 passthrough small-1024-h2d PASS 269735.42362031754
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b10 passthrough large-32-resident PASS 9162.112670461833
+formal b10 passthrough large-32-h2d PASS 8671.213956565538
+formal b10 passthrough large-1024-resident PASS 263117.38298299914
+formal b10 passthrough large-1024-h2d PASS 185062.01270966147
+formal b10 passthrough small-1024-roundtrip PASS 277144.9430818125
+{"before": "vfio-pci", "after": "nvidia"}
+
+MEASUREMENTS_COMPLETE

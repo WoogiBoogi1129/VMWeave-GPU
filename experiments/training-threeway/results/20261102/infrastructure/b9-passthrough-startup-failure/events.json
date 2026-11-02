@@ -1,0 +1,2972 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:02Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492959",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:02Z",
+            "message": "find fit node(gpu-4), 0 nodes not fit, 1 nodes fit(gpu-4:8.68)",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:02Z",
+                "name": "flyt-server.18e4460a9a2d4b00",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492961",
+                "uid": "eb69fc67-9073-4785-b9b0-923d230edad0"
+            },
+            "reason": "FilteringSucceed",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "hami-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:03Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492960",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:03Z",
+            "message": "Successfully binding node [gpu-4] to training-threeway-1102/flyt-server",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:03Z",
+                "name": "flyt-server.18e4460a9f2ad566",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492965",
+                "uid": "0a930955-861f-4630-ab21-40b6a2b14deb"
+            },
+            "reason": "BindingSucceed",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "hami-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "action": "Binding",
+            "apiVersion": "v1",
+            "eventTime": "2026-11-02T16:06:03.035241Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492959",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Successfully assigned training-threeway-1102/flyt-server to gpu-4",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:03Z",
+                "name": "flyt-server.18e4460a9f3980d5",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492966",
+                "uid": "7bfc60af-df5c-4573-b447-05f7c0a97a81"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:04Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:04Z",
+            "message": "Container image \"localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:04Z",
+                "name": "flyt-server.18e4460af7a1ff1c",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492989",
+                "uid": "d9ce27d0-efce-4305-9768-82e3bf989c4d"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:05Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:05Z",
+                "name": "flyt-server.18e4460b19cd9405",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492995",
+                "uid": "1f293617-9a4d-4ad2-993d-531a9c253398"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:05Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:05Z",
+                "name": "flyt-server.18e4460b1bac08b8",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492999",
+                "uid": "0bd9e657-07c7-4e68-a786-7dc815a50631"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:05Z",
+            "message": "Container image \"docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:05Z",
+                "name": "flyt-server.18e4460b1bc4368e",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22493008",
+                "uid": "1efcc6e4-3d9f-4d48-a66a-7b9ba4a00711"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:05Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:05Z",
+                "name": "flyt-server.18e4460b28c06ccd",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22493014",
+                "uid": "5c43d8f7-511d-4090-96e7-af65287831d3"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:06:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:06:05Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:06:05Z",
+                "name": "flyt-server.18e4460b2a78435e",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22493015",
+                "uid": "699c5411-710b-4394-82fe-e82e9552e8f9"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:34Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:34Z",
+            "message": "Stopping container server",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:34Z",
+                "name": "flyt-server.18e4469d9146e486",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499129",
+                "uid": "95688b1f-6377-4c83-9b4f-acc45d3de83b"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:34Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492964",
+                "uid": "1f4dfa04-f8bb-4faa-8d03-e34a74209556"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:34Z",
+            "message": "Stopping container mongo",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:34Z",
+                "name": "flyt-server.18e4469d91476a0f",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499130",
+                "uid": "d78a52b6-9dc2-46ef-9839-679b6d671994"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:03Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499465",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:03Z",
+            "message": "find fit node(gpu-4), 0 nodes not fit, 1 nodes fit(gpu-4:8.68)",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:03Z",
+                "name": "flyt-server.18e446a4594aa511",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499467",
+                "uid": "7fd147b9-5ea2-43f1-82f5-ec87e258ab69"
+            },
+            "reason": "FilteringSucceed",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "hami-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:03Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499466",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:03Z",
+            "message": "Successfully binding node [gpu-4] to training-threeway-1102/flyt-server",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:03Z",
+                "name": "flyt-server.18e446a45e7f29d7",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499471",
+                "uid": "46ba88c1-2adb-4755-ae69-fca63ef7c45c"
+            },
+            "reason": "BindingSucceed",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "hami-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "action": "Binding",
+            "apiVersion": "v1",
+            "eventTime": "2026-11-02T16:17:03.374821Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499465",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Successfully assigned training-threeway-1102/flyt-server to gpu-4",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:03Z",
+                "name": "flyt-server.18e446a45e87bf26",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499472",
+                "uid": "5027c2d4-7378-46fb-b270-6d302ce97c0b"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "hami-scheduler",
+            "reportingInstance": "hami-scheduler-hami-scheduler-754645766-6rl99",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:04Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:04Z",
+            "message": "Container image \"localhost/flyt-threeway-server@sha256:3ab91091aad3fed7000e305d02fa89b4d61bc36c6d653aa05db1358929709f09\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:04Z",
+                "name": "flyt-server.18e446a4b5713f5b",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499494",
+                "uid": "e1f69b6c-f8ab-43eb-b5cf-ee8867f3c7d7"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:05Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:05Z",
+                "name": "flyt-server.18e446a4d6c384e2",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499497",
+                "uid": "dc25e58e-1f64-49f8-b993-571ec885c1fa"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:05Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:05Z",
+                "name": "flyt-server.18e446a4d8c6a7fd",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499498",
+                "uid": "0636c808-fedf-4de1-9ee3-5c3d4e74cd2c"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:05Z",
+            "message": "Container image \"docker.io/library/mongo@sha256:c53852c00c23ca9f23fc39690350ffa9a80e3642fe8f96879726d8da0abe80a7\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:05Z",
+                "name": "flyt-server.18e446a4d8ddd32f",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499499",
+                "uid": "f2588b2b-61d7-46b5-a9c4-1fdc433eed85"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:05Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:05Z",
+                "name": "flyt-server.18e446a4e6ff588b",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499500",
+                "uid": "6c8e156a-0339-438d-aa87-1f64c56febfc"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:17:05Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:17:05Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:17:05Z",
+                "name": "flyt-server.18e446a4e8ff8d7e",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499501",
+                "uid": "8c87acae-1fe0-4a7a-8eee-c08487b3ded9"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:28:00Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{server}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:28:00Z",
+            "message": "Stopping container server",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:28:00Z",
+                "name": "flyt-server.18e4473d68e33188",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505890",
+                "uid": "38d6ce97-b736-45cc-85d9-73c007e97b10"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:28:00Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{mongo}",
+                "kind": "Pod",
+                "name": "flyt-server",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499470",
+                "uid": "f57ec9be-550e-4338-8169-b682d1473a83"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:28:00Z",
+            "message": "Stopping container mongo",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:28:00Z",
+                "name": "flyt-server.18e4473d68e437b1",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505891",
+                "uid": "eb73ebda-c6eb-473f-93ba-4734254aa035"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 26,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T09:10:44Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachine",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22226215",
+                "uid": "e18e0d72-d340-44f5-bec2-55ae2c247860"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:35Z",
+            "message": "Started the virtual machine by creating the new virtual machine instance tt-flyt-1102",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T09:10:44Z",
+                "name": "tt-flyt-1102.18e42f60cd97e06e",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499161",
+                "uid": "9cfe35f5-4585-4373-adad-d99e7d123671"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:34Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492644",
+                "uid": "c7767504-7e33-4ddc-9e45-db76712e684d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:34Z",
+            "message": "Created virtual machine pod virt-launcher-tt-flyt-1102-xpstf",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:34Z",
+                "name": "tt-flyt-1102.18e44604161288cf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492648",
+                "uid": "e7ccfb4d-c845-4692-a053-7e57e9bbe269"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:42Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492733",
+                "uid": "c7767504-7e33-4ddc-9e45-db76712e684d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:42Z",
+            "message": "VirtualMachineInstance defined.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:42Z",
+                "name": "tt-flyt-1102.18e44605cd8d4df0",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492758",
+                "uid": "26491359-29a2-4449-b581-865ac3dc8b26"
+            },
+            "reason": "Created",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:42Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492733",
+                "uid": "c7767504-7e33-4ddc-9e45-db76712e684d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:42Z",
+            "message": "VirtualMachineInstance started.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:42Z",
+                "name": "tt-flyt-1102.18e44605d3b72cb3",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492760",
+                "uid": "7096e912-08c4-4cd5-9404-d05739d5efe2"
+            },
+            "reason": "Started",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:23Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachine",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498985",
+                "uid": "e18e0d72-d340-44f5-bec2-55ae2c247860"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:23Z",
+            "message": "Stopped the virtual machine by deleting the virtual machine instance c7767504-7e33-4ddc-9e45-db76712e684d",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:23Z",
+                "name": "tt-flyt-1102.18e4469b0723e8a9",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498989",
+                "uid": "5cc5c264-7d4e-44c2-820e-4b8d54132927"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 4,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:23Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498987",
+                "uid": "c7767504-7e33-4ddc-9e45-db76712e684d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:32Z",
+            "message": "Deleted virtual machine pod virt-launcher-tt-flyt-1102-xpstf",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:23Z",
+                "name": "tt-flyt-1102.18e4469b079e98fc",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499108",
+                "uid": "e0e143a6-cd0c-495a-8760-d6f2618e0041"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:23Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498987",
+                "uid": "c7767504-7e33-4ddc-9e45-db76712e684d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:23Z",
+            "message": "Signaled Graceful Shutdown",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:23Z",
+                "name": "tt-flyt-1102.18e4469b099e481d",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498997",
+                "uid": "2891e37f-f713-4ce9-a52e-f5183fced0e8"
+            },
+            "reason": "ShuttingDown",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 3,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:27Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498995",
+                "uid": "c7767504-7e33-4ddc-9e45-db76712e684d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:27Z",
+            "message": "Signaled Deletion",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:27Z",
+                "name": "tt-flyt-1102.18e4469c01bed585",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499043",
+                "uid": "d93501c6-c6f1-4ec9-8549-b0c9eccc03f0"
+            },
+            "reason": "Deleted",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:27Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498995",
+                "uid": "c7767504-7e33-4ddc-9e45-db76712e684d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:27Z",
+            "message": "The VirtualMachineInstance was shut down.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:27Z",
+                "name": "tt-flyt-1102.18e4469c04ec9abc",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499037",
+                "uid": "34dc3b9d-fcb6-4cb0-be4b-6956d2ec2dd8"
+            },
+            "reason": "Stopped",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:36Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499163",
+                "uid": "d9885e8a-85b6-4c51-b854-1dc9d63aef84"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:36Z",
+            "message": "Created virtual machine pod virt-launcher-tt-flyt-1102-pk6wb",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:36Z",
+                "name": "tt-flyt-1102.18e4469e0181abeb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499166",
+                "uid": "47628207-c1fb-4835-8c54-0544745e2bb1"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:43Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499231",
+                "uid": "d9885e8a-85b6-4c51-b854-1dc9d63aef84"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:43Z",
+            "message": "VirtualMachineInstance defined.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:43Z",
+                "name": "tt-flyt-1102.18e4469fa8bf8a90",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499259",
+                "uid": "9cb837cc-4c57-49f7-bbfe-ee12075f325f"
+            },
+            "reason": "Created",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:43Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499231",
+                "uid": "d9885e8a-85b6-4c51-b854-1dc9d63aef84"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:43Z",
+            "message": "VirtualMachineInstance started.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:43Z",
+                "name": "tt-flyt-1102.18e4469fac6fb00b",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499261",
+                "uid": "acd9ab9f-e81c-4363-9918-2fcf29679ffb"
+            },
+            "reason": "Started",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:49Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachine",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505742",
+                "uid": "e18e0d72-d340-44f5-bec2-55ae2c247860"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:49Z",
+            "message": "Stopped the virtual machine by deleting the virtual machine instance d9885e8a-85b6-4c51-b854-1dc9d63aef84",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:49Z",
+                "name": "tt-flyt-1102.18e4473adc1549db",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505745",
+                "uid": "1704812e-e5c5-49fa-8489-aa44d31e12dc"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 4,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:49Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505744",
+                "uid": "d9885e8a-85b6-4c51-b854-1dc9d63aef84"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:59Z",
+            "message": "Deleted virtual machine pod virt-launcher-tt-flyt-1102-pk6wb",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:49Z",
+                "name": "tt-flyt-1102.18e4473adcb61cc9",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505869",
+                "uid": "5a5b4dd9-bacb-4c6a-9cf3-fc6b037cfea5"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:49Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505744",
+                "uid": "d9885e8a-85b6-4c51-b854-1dc9d63aef84"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:49Z",
+            "message": "Signaled Graceful Shutdown",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:49Z",
+                "name": "tt-flyt-1102.18e4473ade71ab00",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505753",
+                "uid": "11f4cd8f-3099-404e-a7af-ef3818f07deb"
+            },
+            "reason": "ShuttingDown",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 3,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:53Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505752",
+                "uid": "d9885e8a-85b6-4c51-b854-1dc9d63aef84"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:54Z",
+            "message": "Signaled Deletion",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:53Z",
+                "name": "tt-flyt-1102.18e4473bd990cb64",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505803",
+                "uid": "5f608777-97ec-4657-9721-6ca1d8218987"
+            },
+            "reason": "Deleted",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:54Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-flyt-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505752",
+                "uid": "d9885e8a-85b6-4c51-b854-1dc9d63aef84"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:54Z",
+            "message": "The VirtualMachineInstance was shut down.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:54Z",
+                "name": "tt-flyt-1102.18e4473bdcbb6d93",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505799",
+                "uid": "28a2b68a-60bc-4d45-9776-453443dfb71d"
+            },
+            "reason": "Stopped",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 25,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T09:27:16Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachine",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22485424",
+                "uid": "7cefd004-3a1f-4da1-98f6-83af2339aa67"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:40Z",
+            "message": "Started the virtual machine by creating the new virtual machine instance tt-passthrough-1102",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T15:55:17Z",
+                "name": "tt-passthrough-1102.18e43047e6f0ed6f",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507299",
+                "uid": "23f795ba-277f-43a1-aff8-ea8ce8f8150f"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:04:15Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachine",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491484",
+                "uid": "7cefd004-3a1f-4da1-98f6-83af2339aa67"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:04:15Z",
+            "message": "Stopped the virtual machine by deleting the virtual machine instance 9fccdb27-085f-4056-856d-683ba31e69af",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:04:15Z",
+                "name": "tt-passthrough-1102.18e445f17ecdd68d",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491487",
+                "uid": "64cf118b-7ff1-495a-806c-0e8fd8b53f4b"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 4,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:04:15Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491486",
+                "uid": "9fccdb27-085f-4056-856d-683ba31e69af"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:04:25Z",
+            "message": "Deleted virtual machine pod virt-launcher-tt-passthrough-1102-vsdwp",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:04:15Z",
+                "name": "tt-passthrough-1102.18e445f17f8bc6cb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491606",
+                "uid": "644f8efa-9ecf-48ff-ab16-ed3a3a473931"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:04:15Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491486",
+                "uid": "9fccdb27-085f-4056-856d-683ba31e69af"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:04:15Z",
+            "message": "Signaled Graceful Shutdown",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:04:15Z",
+                "name": "tt-passthrough-1102.18e445f1813378eb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491493",
+                "uid": "96a170e4-7567-4ea4-af3a-da52e87b61ad"
+            },
+            "reason": "ShuttingDown",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:04:20Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491494",
+                "uid": "9fccdb27-085f-4056-856d-683ba31e69af"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:04:20Z",
+            "message": "Signaled Deletion",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:04:20Z",
+                "name": "tt-passthrough-1102.18e445f2d476f4fc",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491556",
+                "uid": "f9cbdf38-87a5-4984-9da8-621a9344bfb7"
+            },
+            "reason": "Deleted",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:04:20Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491494",
+                "uid": "9fccdb27-085f-4056-856d-683ba31e69af"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:04:20Z",
+            "message": "The VirtualMachineInstance was shut down.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:04:20Z",
+                "name": "tt-passthrough-1102.18e445f2d7c756c6",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491558",
+                "uid": "3fb367d5-ae7c-45ba-8b17-c66b033825bd"
+            },
+            "reason": "Stopped",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:09Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506930",
+                "uid": "e668ddec-37e3-4198-88b5-8199f863b2a5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:09Z",
+            "message": "Created virtual machine pod virt-launcher-tt-passthrough-1102-xpg8h",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:09Z",
+                "name": "tt-passthrough-1102.18e4474d556c71d3",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506933",
+                "uid": "6cc6ecf9-e1db-47f3-a55f-924ab373f9b7"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:21Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506997",
+                "uid": "e668ddec-37e3-4198-88b5-8199f863b2a5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:21Z",
+            "message": "server error. command SyncVMI failed: \"LibvirtError(Code=1, Domain=10, Message='internal error: QEMU unexpectedly closed the monitor (vm='training-threeway-1102_tt-passthrough-1102'): 2026-11-02T16:29:21.724850Z qemu-kvm: -device {\\\"driver\\\":\\\"vfio-pci\\\",\\\"host\\\":\\\"0000:40:00.0\\\",\\\"id\\\":\\\"ua-gpu-gpu\\\",\\\"bus\\\":\\\"pci.9\\\",\\\"addr\\\":\\\"0x0\\\"}: vfio_container_dma_unmap(0x5770c1d72c00, 0x100000000, 0x380000000) = -22 (Invalid argument)\\n2026-11-02T16:29:21.725079Z qemu-kvm: -device {\\\"driver\\\":\\\"vfio-pci\\\",\\\"host\\\":\\\"0000:40:00.0\\\",\\\"id\\\":\\\"ua-gpu-gpu\\\",\\\"bus\\\":\\\"pci.9\\\",\\\"addr\\\":\\\"0x0\\\"}: vfio: error disconnecting group 25 from container\\n2026-11-02T16:29:21.725868Z qemu-kvm: -device {\\\"driver\\\":\\\"vfio-pci\\\",\\\"host\\\":\\\"0000:40:00.0\\\",\\\"id\\\":\\\"ua-gpu-gpu\\\",\\\"bus\\\":\\\"pci.9\\\",\\\"addr\\\":\\\"0x0\\\"}: vfio 0000:40:00.0: error getting device from group 25: No such device\\nVerify all devices in group 25 are bound to vfio-\u003cbus\u003e or pci-stub and not already in use')\"",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:21Z",
+                "name": "tt-passthrough-1102.18e447505577f55e",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507087",
+                "uid": "3b5b771c-b5e9-4fe3-9ae6-0ad86f557991"
+            },
+            "reason": "SyncFailed",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Warning"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:22Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507088",
+                "uid": "e668ddec-37e3-4198-88b5-8199f863b2a5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:22Z",
+            "message": "Signaled Deletion",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:22Z",
+                "name": "tt-passthrough-1102.18e44750589c75a5",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507089",
+                "uid": "d36ed7b7-2438-42cd-bbd4-1a9111e63feb"
+            },
+            "reason": "Deleted",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 3,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:24Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507091",
+                "uid": "e668ddec-37e3-4198-88b5-8199f863b2a5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:28Z",
+            "message": "unable to create virt-launcher client connection: context deadline exceeded",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:24Z",
+                "name": "tt-passthrough-1102.18e44750d3083ed6",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507171",
+                "uid": "3cde2d84-69df-4423-8a80-e9f42af5f07f"
+            },
+            "reason": "SyncFailed",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Warning"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:28Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507139",
+                "uid": "e668ddec-37e3-4198-88b5-8199f863b2a5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:28Z",
+            "message": "The VirtualMachineInstance crashed.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:28Z",
+                "name": "tt-passthrough-1102.18e44751c8fe446a",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507173",
+                "uid": "3fdd866c-312c-40d0-96b0-f1785231867b"
+            },
+            "reason": "Stopped",
+            "reportingComponent": "virt-handler",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "virt-handler",
+                "host": "gpu-4"
+            },
+            "type": "Warning"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:28Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachine",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507141",
+                "uid": "7cefd004-3a1f-4da1-98f6-83af2339aa67"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:28Z",
+            "message": "Stopped the virtual machine by deleting the virtual machine instance e668ddec-37e3-4198-88b5-8199f863b2a5",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:28Z",
+                "name": "tt-passthrough-1102.18e44751c9ff6323",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507175",
+                "uid": "22c4949e-0bed-4a4e-8f52-a0ac8f523d89"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:28Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507174",
+                "uid": "e668ddec-37e3-4198-88b5-8199f863b2a5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:28Z",
+            "message": "Deleted virtual machine pod virt-launcher-tt-passthrough-1102-xpg8h",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:28Z",
+                "name": "tt-passthrough-1102.18e44751ccbdd1a9",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507179",
+                "uid": "6fc234a8-1c8c-4ce4-98f7-0f761d1cdbcf"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:40Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507301",
+                "uid": "7ca90e77-0a50-47f7-9671-89416eb8df1e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:40Z",
+            "message": "Created virtual machine pod virt-launcher-tt-passthrough-1102-m7g96",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:40Z",
+                "name": "tt-passthrough-1102.18e44754a15b1ee5",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507304",
+                "uid": "b2e2c823-7653-45f7-8859-0a9498f55215"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:34:10Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachine",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22509920",
+                "uid": "7cefd004-3a1f-4da1-98f6-83af2339aa67"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:34:10Z",
+            "message": "Stopped the virtual machine by deleting the virtual machine instance 7ca90e77-0a50-47f7-9671-89416eb8df1e",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:34:10Z",
+                "name": "tt-passthrough-1102.18e4479391084a59",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22509925",
+                "uid": "bd230154-e891-460b-a792-92b011e589bc"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:34:10Z",
+            "involvedObject": {
+                "apiVersion": "kubevirt.io/v1",
+                "kind": "VirtualMachineInstance",
+                "name": "tt-passthrough-1102",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22509923",
+                "uid": "7ca90e77-0a50-47f7-9671-89416eb8df1e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:34:10Z",
+            "message": "Deleted virtual machine pod virt-launcher-tt-passthrough-1102-m7g96",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:34:10Z",
+                "name": "tt-passthrough-1102.18e4479391c94d5d",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22509928",
+                "uid": "dad1ffb7-6b02-49f2-abf1-0151b5130f18"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "virtualmachine-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "virtualmachine-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:36Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499165",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:36Z",
+            "message": "Successfully assigned training-threeway-1102/virt-launcher-tt-flyt-1102-pk6wb to gpu-4",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:36Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469e020d3b95",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499170",
+                "uid": "030b0921-635f-4ac2-8daa-efb2a20d774a"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:37Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:37Z",
+            "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:37Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469e512e9dbd",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499178",
+                "uid": "7db06772-95b4-48c7-9bda-f5db9c0b7888"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:39Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469eed2c819e",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499218",
+                "uid": "db16596c-9d70-4c85-a005-861a1796eb27"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:40Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469eedf9553c",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499219",
+                "uid": "99410210-f98f-4700-8342-b708b281fc9b"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:40Z",
+            "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469eeef706e1",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499220",
+                "uid": "14515de7-7f1c-47e3-947c-cab1ecd9603c"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:40Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469efcb2c8e3",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499222",
+                "uid": "737dd1bc-885f-403f-bb76-2c3418b7e0b3"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:40Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469efd59055e",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499223",
+                "uid": "189aaf01-9ea0-403f-8a73-50e23a0363fc"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:40Z",
+            "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469efd76a4e6",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499224",
+                "uid": "6dfdcbb7-6a5b-423a-a9c7-3930b954900f"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:40Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469f07cd7b8d",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499226",
+                "uid": "b4e1814c-f8b3-40d2-8487-25b45a532339"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:40Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:40Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4469f087221f0",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499227",
+                "uid": "a0495087-7a03-43f2-ae55-1f928d5b7991"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:49Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:49Z",
+            "message": "Stopping container guest-console-log",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:49Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4473add634b72",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505749",
+                "uid": "6057260f-a7e0-489e-86a1-1ae204cad79e"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:49Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:49Z",
+            "message": "Stopping container hook-sidecar-0",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:49Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4473add64952c",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505750",
+                "uid": "c48bb9c0-2a26-4f16-b65d-c85f4f7d712e"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:27:49Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22499168",
+                "uid": "2d764c27-f87e-466c-8cfc-9ab65e2d7d05"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:27:49Z",
+            "message": "Stopping container compute",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:27:49Z",
+                "name": "virt-launcher-tt-flyt-1102-pk6wb.18e4473add654253",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22505751",
+                "uid": "f75adbf0-d11d-45e5-a813-cdb442ac93dd"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:34Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492646",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:34Z",
+            "message": "Successfully assigned training-threeway-1102/virt-launcher-tt-flyt-1102-xpstf to gpu-4",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:34Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e44604168a62cd",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492651",
+                "uid": "05b89e3a-9d5f-4fd7-bc1a-879f73013c1f"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:36Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:36Z",
+            "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:36Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e4460467efabce",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492678",
+                "uid": "01214ac2-b51e-451d-a0c2-3b886b287b1c"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e4460511cb38e2",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492718",
+                "uid": "291fa4ba-1727-45cf-a709-e27b9abc53b7"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e446051279e651",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492720",
+                "uid": "7a82284f-d575-48d7-bd49-05d16b4bb977"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e44605134a6db6",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492721",
+                "uid": "36ed5b38-91db-428d-b9af-d05e1bc7afa4"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e44605210e3506",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492723",
+                "uid": "c0db2c28-743f-4fe8-921e-8a2573ffafe9"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e4460521b44edf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492724",
+                "uid": "7fec13be-c27e-4964-b016-a6863c6df1ef"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container image \"ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e4460521d4801b",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492725",
+                "uid": "c940b711-f5e6-41dc-84c1-67bd73cc630d"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e446052c8510d2",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492726",
+                "uid": "6802fad6-dd71-4c2c-a319-7c414cdad7a0"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:05:39Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:05:39Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:05:39Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e446052d143818",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492727",
+                "uid": "1e2e78df-7a35-4dcb-a480-1990ed6009c7"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:23Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:23Z",
+            "message": "Stopping container guest-console-log",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:23Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e4469b08542060",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498992",
+                "uid": "50538325-b951-4039-b6cd-84a222386256"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:23Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{hook-sidecar-0}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:23Z",
+            "message": "Stopping container hook-sidecar-0",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:23Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e4469b08553407",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498993",
+                "uid": "611fc958-1efd-4c7b-9cd6-da6b266e6bf6"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:16:23Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-flyt-1102-xpstf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22492650",
+                "uid": "e0fe7cfb-7d14-4787-90a2-810fa4b2ce5d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:16:23Z",
+            "message": "Stopping container compute",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:16:23Z",
+                "name": "virt-launcher-tt-flyt-1102-xpstf.18e4469b08557185",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22498994",
+                "uid": "8cea4181-077f-4a06-ac1d-4a6ad4d9e085"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:40Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-m7g96",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507302",
+                "uid": "e8901375-bd7c-4dd4-8b48-ae84773ddec6"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:40Z",
+            "message": "0/1 nodes are available: 1 Insufficient vmweave.io/training-passthrough. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:40Z",
+                "name": "virt-launcher-tt-passthrough-1102-m7g96.18e44754a157dc85",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507306",
+                "uid": "d8c6bb11-5068-44a6-ad4a-4e47cc2f0a63"
+            },
+            "reason": "FailedScheduling",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Warning"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:04:15Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-vsdwp",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22489630",
+                "uid": "3117a310-999b-4f51-bf7c-0cde83644ad5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:04:15Z",
+            "message": "Stopping container guest-console-log",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:04:15Z",
+                "name": "virt-launcher-tt-passthrough-1102-vsdwp.18e445f180546994",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491491",
+                "uid": "8dd32de3-5faa-44f6-ad35-6c5af963a56b"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:04:15Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-vsdwp",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22489630",
+                "uid": "3117a310-999b-4f51-bf7c-0cde83644ad5"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:04:15Z",
+            "message": "Stopping container compute",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:04:15Z",
+                "name": "virt-launcher-tt-passthrough-1102-vsdwp.18e445f180556c4c",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22491492",
+                "uid": "efa4e992-c38d-47be-9af5-ff58eacd9b67"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:09Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506931",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:09Z",
+            "message": "Successfully assigned training-threeway-1102/virt-launcher-tt-passthrough-1102-xpg8h to gpu-4",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:09Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e4474d55ebffdf",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506936",
+                "uid": "ae3fa774-854c-454e-8c6b-45bdf8961c6c"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:10Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506934",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:10Z",
+            "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:10Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e4474dad8f08ea",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506948",
+                "uid": "d022229f-9a7b-4486-a12f-7a066a0b9a04"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:13Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506934",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:13Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:13Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e4474e5c4dc6ab",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506987",
+                "uid": "0e32a1a6-bb98-4bd6-adf6-94d09052d9ac"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:13Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506934",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:13Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:13Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e4474e5ce56757",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506988",
+                "uid": "b4eec391-8396-4b91-b606-811a0d433fe6"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:13Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506934",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:13Z",
+            "message": "Container image \"localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:13Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e4474e5dbae316",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506989",
+                "uid": "43ed1f78-616e-43e5-98f9-053270597156"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:13Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506934",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:13Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:13Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e4474e6a953ff9",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506991",
+                "uid": "7500bfff-f7fb-4271-b5c1-ec977c69f139"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:13Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{compute}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506934",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:13Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:13Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e4474e6b4b5e2d",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506992",
+                "uid": "8b52ae32-7f99-49dd-804e-8fa7783f9f56"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-11-02T16:29:24Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.initContainers{guest-console-log}",
+                "kind": "Pod",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22506934",
+                "uid": "d1fe3a6d-f200-4a1a-ac9e-95f1ebe97295"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-11-02T16:29:24Z",
+            "message": "Stopping container guest-console-log",
+            "metadata": {
+                "creationTimestamp": "2026-11-02T16:29:24Z",
+                "name": "virt-launcher-tt-passthrough-1102-xpg8h.18e44751062a10b8",
+                "namespace": "training-threeway-1102",
+                "resourceVersion": "22507136",
+                "uid": "4c937e8a-2072-4bf2-ba10-2a01687f23b7"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "gpu-4",
+            "source": {
+                "component": "kubelet",
+                "host": "gpu-4"
+            },
+            "type": "Normal"
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

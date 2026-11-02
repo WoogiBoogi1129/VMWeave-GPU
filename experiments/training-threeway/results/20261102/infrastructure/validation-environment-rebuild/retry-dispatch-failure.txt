@@ -1,0 +1,26 @@
+RETRY_SUPPLEMENTARY_VALIDATION 1793644617.4782004
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/check_transfers.py", line 42, in <module>
+    if __name__=='__main__':run()
+                            ^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/check_transfers.py", line 8, in run
+    context=collect(O)
+            ^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/collect_context.py", line 28, in collect
+    output.mkdir(parents=True,exist_ok=False)
+  File "/usr/lib/python3.12/pathlib.py", line 1313, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/results/20261102/host-context'
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/training-threeway-20261102/finish_after_validation_startup_failure.py", line 8, in <module>
+    subprocess.run(['python3','-u','experiments/training-threeway/check_transfers.py'],check=True)
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '-u', 'experiments/training-threeway/check_transfers.py']' returned non-zero exit status 1.
+CLEANUP_COMPLETE
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/training-threeway-20261102/finish_after_validation_startup_failure.py", line 8, in <module>
+    subprocess.run(['python3','-u','experiments/training-threeway/check_transfers.py'],check=True)
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '-u', 'experiments/training-threeway/check_transfers.py']' returned non-zero exit status 1.

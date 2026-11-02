@@ -1,0 +1,26 @@
+[
+  {
+    "stage": "base-firmware",
+    "error": "missing /lib/firmware directory",
+    "resolution": "create directory and extract preserved firmware archive",
+    "benchmark_started": false
+  },
+  {
+    "stage": "flyt-shm-setup",
+    "error": "undefined allocation variables in generated host script",
+    "resolution": "serialize allocation values; resume existing empty test backing",
+    "benchmark_started": false
+  },
+  {
+    "stage": "vm-restart",
+    "error": "generated MAC changed while persisted guest netplan matched first-boot MAC",
+    "resolution": "pin MAC per test VM; retain first-boot MAC for prepared VMWeave VM",
+    "benchmark_started": false
+  },
+  {
+    "stage": "environment-inventory",
+    "error": "version probe lacked CUDA library search path",
+    "resolution": "use the bundled native CUDA library path for version inventory; benchmark command already specified its path",
+    "benchmark_started": false
+  }
+]

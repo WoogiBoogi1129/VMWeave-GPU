@@ -1,0 +1,195 @@
+{
+  "reference": "passthrough-reference.pt",
+  "candidate": "vmweave-reference.pt",
+  "rtol": 0.0001,
+  "atol": 1e-06,
+  "passed": true,
+  "tensors": [
+    {
+      "tensor": "/1/loss",
+      "shape": [],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/output",
+      "shape": [
+        1024,
+        8
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/weights/0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/weights/0.bias",
+      "shape": [
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/weights/2.weight",
+      "shape": [
+        8,
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/weights/2.bias",
+      "shape": [
+        8
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/gradients/0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/gradients/0.bias",
+      "shape": [
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/gradients/2.weight",
+      "shape": [
+        8,
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/1/gradients/2.bias",
+      "shape": [
+        8
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/loss",
+      "shape": [],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/output",
+      "shape": [
+        1024,
+        8
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/weights/0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/weights/0.bias",
+      "shape": [
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/weights/2.weight",
+      "shape": [
+        8,
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/weights/2.bias",
+      "shape": [
+        8
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/gradients/0.weight",
+      "shape": [
+        64,
+        32
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/gradients/0.bias",
+      "shape": [
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/gradients/2.weight",
+      "shape": [
+        8,
+        64
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    },
+    {
+      "tensor": "/10/gradients/2.bias",
+      "shape": [
+        8
+      ],
+      "max_absolute_error": 0.0,
+      "finite": true,
+      "close": true
+    }
+  ]
+}

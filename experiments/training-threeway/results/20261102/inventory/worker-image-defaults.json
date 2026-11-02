@@ -1,0 +1,11 @@
+{
+  "utc": 1793612662.4594007,
+  "source": "admin container using the exact worker image; image defaults, not a worker process trace",
+  "worker_image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da",
+  "flags": {
+    "VMWEAVE_WORKER_REUSE": "1",
+    "VMWEAVE_SESSION_ARENA": "1",
+    "VMWEAVE_SESSION_EVENTFD": "1",
+    "VMWEAVE_PINNED_POOL": "1"
+  }
+}

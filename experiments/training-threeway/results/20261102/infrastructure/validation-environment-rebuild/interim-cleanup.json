@@ -1,0 +1,68 @@
+{
+  "utc": 1793644642.034661,
+  "test_resources_removed": true,
+  "gpu0_driver": "nvidia",
+  "gpu0_compute_idle": true,
+  "hami_config_exactly_restored": true,
+  "monitors": [
+    {
+      "namespace": "kube-system",
+      "name": "hami-device-plugin",
+      "pod_spec_restored": true
+    },
+    {
+      "namespace": "gpu-operator",
+      "name": "nvidia-dcgm-exporter",
+      "pod_spec_restored": true
+    }
+  ],
+  "preserved": [
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid_unchanged": true,
+      "spec_unchanged": true,
+      "phase": null,
+      "vmi_phase": "Running",
+      "vmi_ready": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid_unchanged": true,
+      "spec_unchanged": true,
+      "phase": null,
+      "vmi_phase": "Running",
+      "vmi_ready": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid_unchanged": true,
+      "spec_unchanged": true,
+      "phase": null,
+      "vmi_phase": "Running",
+      "vmi_ready": true
+    },
+    {
+      "kind": "sharedmemorychannel",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid_unchanged": true,
+      "spec_unchanged": true,
+      "phase": "Ready"
+    },
+    {
+      "kind": "sharedmemorychannel",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid_unchanged": true,
+      "spec_unchanged": true,
+      "phase": "Ready"
+    }
+  ],
+  "scope": "Configuration/current readiness checks, not proof of uninterrupted application-level SLA"
+}

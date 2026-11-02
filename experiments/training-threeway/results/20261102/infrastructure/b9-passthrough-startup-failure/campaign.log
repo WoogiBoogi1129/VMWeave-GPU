@@ -1,0 +1,415 @@
+{"before": "nvidia", "after": "vfio-pci"}
+
+pilot p1 passthrough small-32-resident PASS 8106.708220302161
+pilot p1 passthrough small-32-h2d PASS 9321.431128059827
+pilot p1 passthrough small-1024-resident PASS 391489.31289613637
+pilot p1 passthrough small-1024-h2d PASS 291857.069306283
+pilot p1 passthrough large-32-resident PASS 9432.1182287276
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+pilot p1 passthrough large-32-h2d PASS 9754.325872062314
+pilot p1 passthrough large-1024-resident PASS 327124.7482660303
+pilot p1 passthrough large-1024-h2d PASS 182487.68574288086
+pilot p1 passthrough small-1024-roundtrip PASS 252721.92027938084
+pilot p1 passthrough large-1024-roundtrip PASS 157713.77101029776
+{"before": "vfio-pci", "after": "nvidia"}
+
+pilot p1 vmweave small-32-resident PASS 748.9823252027709
+pilot p1 vmweave small-32-h2d PASS 708.574461776249
+pilot p1 vmweave small-1024-resident PASS 24387.85993380125
+pilot p1 vmweave small-1024-h2d PASS 21666.669901106627
+pilot p1 vmweave large-32-resident PASS 758.0737701144573
+pilot p1 vmweave large-32-h2d PASS 620.3319611016855
+pilot p1 vmweave large-1024-resident PASS 23802.990083700308
+pilot p1 vmweave large-1024-h2d PASS 12754.71803561368
+pilot p1 vmweave small-1024-roundtrip PASS 21512.924388611747
+pilot p1 vmweave large-1024-roundtrip PASS 11527.06722690574
+pilot p1 flyt small-32-resident PASS 173.4306118281062
+pilot p1 flyt small-32-h2d PASS 183.82065856691736
+pilot p1 flyt small-1024-resident PASS 4994.264697104073
+pilot p1 flyt small-1024-h2d PASS 5316.227415499082
+pilot p1 flyt large-32-resident PASS 170.76181819701912
+pilot p1 flyt large-32-h2d PASS 153.9508489119899
+pilot p1 flyt large-1024-resident PASS 5178.364603869422
+pilot p1 flyt large-1024-h2d PASS 5050.9176537805915
+pilot p1 flyt small-1024-roundtrip PASS 4621.953462148089
+pilot p1 flyt large-1024-roundtrip PASS 4172.089233057553
+pilot p2 vmweave small-32-resident PASS 742.8090394225196
+pilot p2 vmweave large-1024-h2d PASS 12462.082721376153
+pilot p2 flyt small-32-resident PASS 154.679427188505
+pilot p2 flyt large-1024-h2d PASS 3985.63400554318
+{"before": "nvidia", "after": "vfio-pci"}
+
+pilot p2 passthrough small-32-resident PASS 9409.54299862051
+pilot p2 passthrough large-1024-h2d PASS 188028.29341514013
+{"before": "vfio-pci", "after": "nvidia"}
+
+pilot p3 flyt small-32-resident PASS 220.90241662085813
+pilot p3 flyt large-1024-h2d PASS 4451.6601866191795
+{"before": "nvidia", "after": "vfio-pci"}
+
+pilot p3 passthrough small-32-resident PASS 8250.773626860573
+pilot p3 passthrough large-1024-h2d PASS 186705.50803697482
+{"before": "vfio-pci", "after": "nvidia"}
+
+pilot p3 vmweave small-32-resident PASS 768.1203615802085
+pilot p3 vmweave large-1024-h2d PASS 13415.843763970344
+pilot p4 flyt small-32-resident PASS 216.25919841684413
+pilot p4 flyt large-1024-h2d PASS 4794.556235566333
+pilot p4 vmweave small-32-resident PASS 772.5849964401126
+pilot p4 vmweave large-1024-h2d PASS 13177.924932130798
+{"before": "nvidia", "after": "vfio-pci"}
+
+pilot p4 passthrough small-32-resident PASS 8064.298478838834
+pilot p4 passthrough large-1024-h2d PASS 203442.25057842094
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+pilot p5 passthrough small-32-resident PASS 8171.293419512389
+pilot p5 passthrough large-1024-h2d PASS 196036.23327266247
+{"before": "vfio-pci", "after": "nvidia"}
+
+pilot p5 flyt small-32-resident PASS 161.7097458995148
+pilot p5 flyt large-1024-h2d PASS 5138.436104978428
+pilot p5 vmweave small-32-resident PASS 778.1168046880238
+pilot p5 vmweave large-1024-h2d PASS 13342.03553703282
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b1 passthrough small-32-resident PASS 9401.168699212829
+formal b1 passthrough small-32-h2d PASS 8180.800359364902
+formal b1 passthrough small-1024-resident PASS 286571.5716873024
+formal b1 passthrough small-1024-h2d PASS 267589.4814840847
+formal b1 passthrough large-32-resident PASS 8517.562161155976
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b1 passthrough large-32-h2d PASS 11192.32825541418
+formal b1 passthrough large-1024-resident PASS 273367.1813673068
+formal b1 passthrough large-1024-h2d PASS 196565.34186126734
+formal b1 passthrough small-1024-roundtrip PASS 294611.66790932394
+formal b1 passthrough large-1024-roundtrip PASS 164181.56939115666
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal b1 vmweave small-32-resident PASS 763.8809695360287
+formal b1 vmweave small-32-h2d PASS 703.4838001193416
+formal b1 vmweave small-1024-resident PASS 24740.506060583717
+formal b1 vmweave small-1024-h2d PASS 22545.403125412675
+formal b1 vmweave large-32-resident PASS 743.372952914054
+formal b1 vmweave large-32-h2d PASS 685.7708684172756
+formal b1 vmweave large-1024-resident PASS 23494.106847532275
+formal b1 vmweave large-1024-h2d PASS 13159.191586270816
+formal b1 vmweave small-1024-roundtrip PASS 21167.045128939168
+formal b1 vmweave large-1024-roundtrip PASS 11674.8771156833
+formal b1 flyt small-32-resident PASS 166.96641696275879
+formal b1 flyt small-32-h2d PASS 160.3822934631816
+formal b1 flyt small-1024-resident PASS 6062.519129390017
+formal b1 flyt small-1024-h2d PASS 5184.339191956106
+formal b1 flyt large-32-resident PASS 204.20763888035182
+formal b1 flyt large-32-h2d PASS 164.1725161589428
+formal b1 flyt large-1024-resident PASS 5166.396736414137
+formal b1 flyt large-1024-h2d PASS 4689.207241697746
+formal b1 flyt small-1024-roundtrip PASS 5233.327332138302
+formal b1 flyt large-1024-roundtrip PASS 5143.020974822144
+formal b2 vmweave small-32-h2d PASS 704.8770797398004
+formal b2 vmweave small-1024-resident PASS 24864.786475136225
+formal b2 vmweave small-1024-h2d PASS 21928.103847042465
+formal b2 vmweave large-32-resident PASS 760.756661127076
+formal b2 vmweave large-32-h2d PASS 687.2380072659257
+formal b2 vmweave large-1024-resident PASS 23230.029760772028
+formal b2 vmweave large-1024-h2d PASS 13249.126633635042
+formal b2 vmweave small-1024-roundtrip PASS 22177.42544396361
+formal b2 vmweave large-1024-roundtrip PASS 11620.415346702806
+formal b2 vmweave small-32-resident PASS 793.3939568504846
+formal b2 flyt small-32-h2d PASS 184.59020712226547
+formal b2 flyt small-1024-resident PASS 5191.729520144573
+formal b2 flyt small-1024-h2d PASS 6216.9603106327095
+formal b2 flyt large-32-resident PASS 189.86995295163482
+formal b2 flyt large-32-h2d PASS 176.22112686275034
+formal b2 flyt large-1024-resident PASS 6872.811352547538
+formal b2 flyt large-1024-h2d PASS 5512.473024925723
+formal b2 flyt small-1024-roundtrip PASS 5722.794784213685
+formal b2 flyt large-1024-roundtrip PASS 4784.945110202468
+formal b2 flyt small-32-resident PASS 164.34852684361874
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b2 passthrough small-32-h2d PASS 7959.80392297848
+formal b2 passthrough small-1024-resident PASS 293879.9419946992
+formal b2 passthrough small-1024-h2d PASS 259924.98711460418
+formal b2 passthrough large-32-resident PASS 8207.835325100592
+formal b2 passthrough large-32-h2d PASS 8196.482292069135
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b2 passthrough large-1024-resident PASS 275716.60068293085
+formal b2 passthrough large-1024-h2d PASS 192405.1758382727
+formal b2 passthrough small-1024-roundtrip PASS 256495.9580383639
+formal b2 passthrough large-1024-roundtrip PASS 170960.11893169774
+formal b2 passthrough small-32-resident PASS 8746.366070560189
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal b3 flyt small-1024-resident PASS 5389.884786288149
+formal b3 flyt small-1024-h2d PASS 4714.760080622833
+formal b3 flyt large-32-resident PASS 180.6674635048833
+formal b3 flyt large-32-h2d PASS 172.58063334100936
+formal b3 flyt large-1024-resident PASS 5496.527394385926
+formal b3 flyt large-1024-h2d PASS 4504.6954824785225
+formal b3 flyt small-1024-roundtrip PASS 4657.710861778402
+formal b3 flyt large-1024-roundtrip PASS 4441.858260913973
+formal b3 flyt small-32-resident PASS 171.00340229137365
+formal b3 flyt small-32-h2d PASS 172.27183744357637
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b3 passthrough small-1024-resident PASS 259771.71569116044
+formal b3 passthrough small-1024-h2d PASS 257888.06501070946
+formal b3 passthrough large-32-resident PASS 8467.581514505919
+formal b3 passthrough large-32-h2d PASS 7670.864507052906
+formal b3 passthrough large-1024-resident PASS 297027.3221903274
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b3 passthrough large-1024-h2d PASS 192288.36193702172
+formal b3 passthrough small-1024-roundtrip PASS 270660.22922218434
+formal b3 passthrough large-1024-roundtrip PASS 173248.32591859144
+formal b3 passthrough small-32-resident PASS 9259.295357876628
+formal b3 passthrough small-32-h2d PASS 7531.277971085531
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal b3 vmweave small-1024-resident PASS 24760.643118943335
+formal b3 vmweave small-1024-h2d PASS 22560.45087131568
+formal b3 vmweave large-32-resident PASS 787.2438791027116
+formal b3 vmweave large-32-h2d PASS 692.4775619313781
+formal b3 vmweave large-1024-resident PASS 23529.77675326566
+formal b3 vmweave large-1024-h2d PASS 13381.69085091132
+formal b3 vmweave small-1024-roundtrip PASS 21184.25177058764
+formal b3 vmweave large-1024-roundtrip PASS 11644.416440892724
+formal b3 vmweave small-32-resident PASS 772.6427571781963
+formal b3 vmweave small-32-h2d PASS 702.2316825304009
+formal b4 flyt small-1024-h2d PASS 4781.914053571781
+formal b4 flyt large-32-resident PASS 197.45531025848322
+formal b4 flyt large-32-h2d PASS 168.4614153829735
+formal b4 flyt large-1024-resident PASS 5534.281832914141
+formal b4 flyt large-1024-h2d PASS 4735.355226539646
+formal b4 flyt small-1024-roundtrip PASS 5084.222775738816
+formal b4 flyt large-1024-roundtrip PASS 5746.135169402452
+formal b4 flyt small-32-resident PASS 215.45078753814303
+formal b4 flyt small-32-h2d PASS 171.89630589872803
+formal b4 flyt small-1024-resident PASS 7066.767164748203
+formal b4 vmweave small-1024-h2d PASS 22374.038086729764
+formal b4 vmweave large-32-resident PASS 765.0512302008806
+formal b4 vmweave large-32-h2d PASS 689.4489998597629
+formal b4 vmweave large-1024-resident PASS 23129.363042247245
+formal b4 vmweave large-1024-h2d PASS 13113.301471606386
+formal b4 vmweave small-1024-roundtrip PASS 21131.072235438045
+formal b4 vmweave large-1024-roundtrip PASS 11552.117777085537
+formal b4 vmweave small-32-resident PASS 787.6908411203887
+formal b4 vmweave small-32-h2d PASS 702.5671970606138
+formal b4 vmweave small-1024-resident PASS 24054.067444172597
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b4 passthrough small-1024-h2d PASS 262656.54335594963
+formal b4 passthrough large-32-resident PASS 8759.648644627037
+formal b4 passthrough large-32-h2d PASS 8315.004047431652
+formal b4 passthrough large-1024-resident PASS 266898.9489572978
+formal b4 passthrough large-1024-h2d PASS 182159.7244284486
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b4 passthrough small-1024-roundtrip PASS 283987.8084635803
+formal b4 passthrough large-1024-roundtrip PASS 173831.0801809767
+formal b4 passthrough small-32-resident PASS 8811.615250207764
+formal b4 passthrough small-32-h2d PASS 8148.62798821811
+formal b4 passthrough small-1024-resident PASS 282826.39936877997
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b5 passthrough large-32-resident PASS 9979.498655177566
+formal b5 passthrough large-32-h2d PASS 10234.466784012297
+formal b5 passthrough large-1024-resident PASS 275095.51880114083
+formal b5 passthrough large-1024-h2d PASS 194825.92261006293
+formal b5 passthrough small-1024-roundtrip PASS 261030.96494816558
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b5 passthrough large-1024-roundtrip PASS 161688.12547983447
+formal b5 passthrough small-32-resident PASS 8485.496747364603
+formal b5 passthrough small-32-h2d PASS 8031.4250267229645
+formal b5 passthrough small-1024-resident PASS 283245.85121704824
+formal b5 passthrough small-1024-h2d PASS 242312.12932318926
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal b5 flyt large-32-resident PASS 172.31734728456013
+formal b5 flyt large-32-h2d PASS 204.73925975381147
+formal b5 flyt large-1024-resident PASS 5678.490118783393
+formal b5 flyt large-1024-h2d PASS 4363.039841035941
+formal b5 flyt small-1024-roundtrip PASS 4717.0673687529015
+formal b5 flyt large-1024-roundtrip PASS 4850.901818893332
+formal b5 flyt small-32-resident PASS 185.125826588048
+formal b5 flyt small-32-h2d PASS 162.7144256021957
+formal b5 flyt small-1024-resident PASS 6098.5335418200875
+formal b5 flyt small-1024-h2d PASS 5066.629352133101
+formal b5 vmweave large-32-resident PASS 776.434271388806
+formal b5 vmweave large-32-h2d PASS 690.3910728350983
+formal b5 vmweave large-1024-resident PASS 23461.966536152122
+formal b5 vmweave large-1024-h2d PASS 13417.944623776073
+formal b5 vmweave small-1024-roundtrip PASS 21156.82096967317
+formal b5 vmweave large-1024-roundtrip PASS 11927.86540384643
+formal b5 vmweave small-32-resident PASS 785.7132824056388
+formal b5 vmweave small-32-h2d PASS 714.058016961701
+formal b5 vmweave small-1024-resident PASS 24338.313263038963
+formal b5 vmweave small-1024-h2d PASS 21840.411324364253
+formal b6 vmweave large-32-h2d PASS 672.4662059710416
+formal b6 vmweave large-1024-resident PASS 23219.28448923635
+formal b6 vmweave large-1024-h2d PASS 13375.331756039355
+formal b6 vmweave small-1024-roundtrip PASS 21231.790788019658
+formal b6 vmweave large-1024-roundtrip PASS 11731.799116278418
+formal b6 vmweave small-32-resident PASS 756.1313280192849
+formal b6 vmweave small-32-h2d PASS 702.5820168305054
+formal b6 vmweave small-1024-resident PASS 24500.18938185345
+formal b6 vmweave small-1024-h2d PASS 21659.45631795719
+formal b6 vmweave large-32-resident PASS 747.2720999834415
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b6 passthrough large-32-h2d PASS 8925.252081762763
+formal b6 passthrough large-1024-resident PASS 272083.40188348445
+formal b6 passthrough large-1024-h2d PASS 192770.7601495746
+formal b6 passthrough small-1024-roundtrip PASS 311177.8209786705
+formal b6 passthrough large-1024-roundtrip PASS 174106.4417289337
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b6 passthrough small-32-resident PASS 8202.556472596669
+formal b6 passthrough small-32-h2d PASS 8169.965549436992
+formal b6 passthrough small-1024-resident PASS 263324.127379301
+formal b6 passthrough small-1024-h2d PASS 262926.201874781
+formal b6 passthrough large-32-resident PASS 8557.37970613904
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal b6 flyt large-32-h2d PASS 190.98516815189717
+formal b6 flyt large-1024-resident PASS 5071.424911609903
+formal b6 flyt large-1024-h2d PASS 4777.830901848912
+formal b6 flyt small-1024-roundtrip PASS 5050.704416733612
+formal b6 flyt large-1024-roundtrip PASS 4893.795993117407
+formal b6 flyt small-32-resident PASS 200.90500342344322
+formal b6 flyt small-32-h2d PASS 175.33429019714308
+formal b6 flyt small-1024-resident PASS 6186.320413064609
+formal b6 flyt small-1024-h2d PASS 5148.561782684991
+formal b6 flyt large-32-resident PASS 163.895983064179
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b7 passthrough large-1024-resident PASS 273171.6489275914
+formal b7 passthrough large-1024-h2d PASS 195744.22926084153
+formal b7 passthrough small-1024-roundtrip PASS 267308.8918395722
+formal b7 passthrough large-1024-roundtrip PASS 175384.11971647805
+formal b7 passthrough small-32-resident PASS 8571.628957927096
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b7 passthrough small-32-h2d PASS 7564.280295658094
+formal b7 passthrough small-1024-resident PASS 266358.1996579086
+formal b7 passthrough small-1024-h2d PASS 245411.94107879832
+formal b7 passthrough large-32-resident PASS 8502.668647803272
+formal b7 passthrough large-32-h2d PASS 9104.198278342732
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal b7 vmweave large-1024-resident PASS 23225.85256917993
+formal b7 vmweave large-1024-h2d PASS 13270.330244614468
+formal b7 vmweave small-1024-roundtrip PASS 21048.587127728355
+formal b7 vmweave large-1024-roundtrip PASS 11630.511686689588
+formal b7 vmweave small-32-resident PASS 740.5320313556152
+formal b7 vmweave small-32-h2d PASS 706.0813598013307
+formal b7 vmweave small-1024-resident PASS 24302.668136415054
+formal b7 vmweave small-1024-h2d PASS 22034.514125528527
+formal b7 vmweave large-32-resident PASS 745.3542146151293
+formal b7 vmweave large-32-h2d PASS 680.4606283513126
+formal b7 flyt large-1024-resident PASS 5265.914501294358
+formal b7 flyt large-1024-h2d PASS 4707.026721953766
+formal b7 flyt small-1024-roundtrip PASS 4513.4109667508965
+formal b7 flyt large-1024-roundtrip PASS 5500.858130227569
+formal b7 flyt small-32-resident PASS 192.63434939638037
+formal b7 flyt small-32-h2d PASS 163.9561613377108
+formal b7 flyt small-1024-resident PASS 5636.7152864541395
+formal b7 flyt small-1024-h2d PASS 5138.73768900495
+formal b7 flyt large-32-resident PASS 177.11757664377484
+formal b7 flyt large-32-h2d PASS 158.1367865112524
+formal b8 vmweave large-1024-h2d PASS 13049.877099413214
+formal b8 vmweave small-1024-roundtrip PASS 21374.362743783535
+formal b8 vmweave large-1024-roundtrip PASS 11444.428394699049
+formal b8 vmweave small-32-resident PASS 758.3146301534889
+formal b8 vmweave small-32-h2d PASS 703.5750317542122
+formal b8 vmweave small-1024-resident PASS 23879.878384744745
+formal b8 vmweave small-1024-h2d PASS 21942.181758584367
+formal b8 vmweave large-32-resident PASS 769.5054581147742
+formal b8 vmweave large-32-h2d PASS 686.8674917059001
+formal b8 vmweave large-1024-resident PASS 23578.23888872538
+formal b8 flyt large-1024-h2d PASS 5117.258208126626
+formal b8 flyt small-1024-roundtrip PASS 5893.970932921038
+formal b8 flyt large-1024-roundtrip PASS 4715.6351392183415
+formal b8 flyt small-32-resident PASS 158.33033940557164
+formal b8 flyt small-32-h2d PASS 163.1997586278817
+formal b8 flyt small-1024-resident PASS 6174.947136286611
+formal b8 flyt small-1024-h2d PASS 6140.037269872199
+formal b8 flyt large-32-resident PASS 173.1188557794396
+formal b8 flyt large-32-h2d PASS 167.07302192649558
+formal b8 flyt large-1024-resident PASS 4795.859181258239
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b8 passthrough large-1024-h2d PASS 175936.422017825
+formal b8 passthrough small-1024-roundtrip PASS 253055.14839476766
+formal b8 passthrough large-1024-roundtrip PASS 154208.3950982287
+formal b8 passthrough small-32-resident PASS 8011.668349273527
+formal b8 passthrough small-32-h2d PASS 8174.617238261955
+{"before": "vfio-pci", "after": "nvidia"}
+
+{"before": "nvidia", "after": "vfio-pci"}
+
+formal b8 passthrough small-1024-resident PASS 278176.8542968749
+formal b8 passthrough small-1024-h2d PASS 264406.93948309973
+formal b8 passthrough large-32-resident PASS 8841.984318482573
+formal b8 passthrough large-32-h2d PASS 8513.673953251673
+formal b8 passthrough large-1024-resident PASS 266993.90711217426
+{"before": "vfio-pci", "after": "nvidia"}
+
+formal b9 flyt small-1024-roundtrip PASS 5432.911123135362
+formal b9 flyt large-1024-roundtrip PASS 5215.304564952406
+formal b9 flyt small-32-resident PASS 159.41050842164938
+formal b9 flyt small-32-h2d PASS 153.61419021485972
+formal b9 flyt small-1024-resident PASS 6503.846013276886
+formal b9 flyt small-1024-h2d PASS 5089.617088075571
+formal b9 flyt large-32-resident PASS 174.23873268805787
+formal b9 flyt large-32-h2d PASS 164.9763226565111
+formal b9 flyt large-1024-resident PASS 5057.479946797545
+formal b9 flyt large-1024-h2d PASS 4256.836245127042
+{"before": "nvidia", "after": "vfio-pci"}
+
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/campaign.py", line 46, in <module>
+    for mode in order:visit(mode,'b'+str(i+1),cases,'formal',protocol['steps'])
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/campaign.py", line 15, in visit
+    s=open_mode(mode,label+'-g'+str(group))
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/backends.py", line 26, in open_mode
+    s=start(name,ns);s.update(mode=mode,label=label)
+      ^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/lab.py", line 51, in start
+    v=wait(lambda:x if (x:=get('vmi',name,ns)) and x.get('status',{}).get('phase')=='Running' and x['status'].get('interfaces') and x['status']['interfaces'][0].get('ipAddress') else None)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/lab.py", line 23, in wait
+    raise TimeoutError('resource wait')
+TimeoutError: resource wait
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '-u', '/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/campaign.py']' returned non-zero exit status 1.

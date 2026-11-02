@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "model": "small",
+      "batch": 32,
+      "iteration": 0,
+      "h2d_bytes": 5120,
+      "d2h_bytes": 5120,
+      "output_sha256": "af1bc7bea951646a40882a463e70b1e816d53e71090c77986e719e8a11759f7c",
+      "passed": true
+    },
+    {
+      "model": "small",
+      "batch": 32,
+      "iteration": 1,
+      "h2d_bytes": 5120,
+      "d2h_bytes": 5120,
+      "output_sha256": "49b768893a463ae5c2de78977f95821fa8a8404b03cd4e1e15ac9182e66f5475",
+      "passed": true
+    },
+    {
+      "model": "small",
+      "batch": 32,
+      "iteration": 2,
+      "h2d_bytes": 5120,
+      "d2h_bytes": 5120,
+      "output_sha256": "3ac7732e5a5bc12cbb356bc5e4d7d0cf7ff300f2364b92ad506961d6a09793f1",
+      "passed": true
+    },
+    {
+      "model": "small",
+      "batch": 32,
+      "iteration": 3,
+      "h2d_bytes": 5120,
+      "d2h_bytes": 5120,
+      "output_sha256": "b6107aab062e2f6fdcdd171fa72bbdc745289bbeb5840304de9919a0f1f1edcd",
+      "passed": true
+    },
+    {
+      "model": "large",
+      "batch": 1024,
+      "iteration": 0,
+      "h2d_bytes": 12582912,
+      "d2h_bytes": 12582912,
+      "output_sha256": "f600e6fc285129137b467195ca632297ecce76a7fed58ebcb6fbdcc20ead8a9f",
+      "passed": true
+    },
+    {
+      "model": "large",
+      "batch": 1024,
+      "iteration": 1,
+      "h2d_bytes": 12582912,
+      "d2h_bytes": 12582912,
+      "output_sha256": "17041a4426182087eb8d22f3cf982ac9fdc425d6b49299087e07637dea4660da",
+      "passed": true
+    },
+    {
+      "model": "large",
+      "batch": 1024,
+      "iteration": 2,
+      "h2d_bytes": 12582912,
+      "d2h_bytes": 12582912,
+      "output_sha256": "a14975a0284725385052e68f5ca83f96e54ca10fa147155e5c5c516a9cef8c27",
+      "passed": true
+    },
+    {
+      "model": "large",
+      "batch": 1024,
+      "iteration": 3,
+      "h2d_bytes": 12582912,
+      "d2h_bytes": 12582912,
+      "output_sha256": "f4d968e881da0f83bffa348d0f425e268e3684446ef9d73267b51af48b06be32",
+      "passed": true
+    }
+  ],
+  "torch": "2.11.0+flyt.cu128",
+  "source_sha256": "9df4a9d0685627fe6b6825ca52492ac9df5935f77b41888f15a0b99992a9ec61",
+  "scope": "Changing payload H2D, in-place CUDA multiplication, D2H; no performance metric."
+}

@@ -1,0 +1,27 @@
+1793644267.279178 START ['python3', 'experiments/training-threeway/analyze.py']
+{"formal_runs": 300, "blocks": 10}
+1793644279.78605 START ['python3', '-u', 'experiments/training-threeway/check_transfers.py']
+HOST_CONTEXT_COLLECTED True
+{"before": "nvidia", "after": "vfio-pci"}
+
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/check_transfers.py", line 42, in <module>
+    if __name__=='__main__':run()
+                            ^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/check_transfers.py", line 15, in run
+    s=open_mode(mode,'transfer-validation')
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/backends.py", line 25, in open_mode
+    if mode=='passthrough':transition.transition('vfio-pci')
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/transition.py", line 58, in transition
+    if driver=='vfio-pci':wait(lambda:json.loads(k('get','node','gpu-4','-o','json'))['status'].get('allocatable',{}).get(RESOURCE)=='1',180)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/training-threeway/lab.py", line 23, in wait
+    raise TimeoutError('resource wait')
+TimeoutError: resource wait
+Traceback (most recent call last):
+  File "<stdin>", line 15, in <module>
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '-u', 'experiments/training-threeway/check_transfers.py']' returned non-zero exit status 1.

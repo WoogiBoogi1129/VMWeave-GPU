@@ -1,0 +1,212 @@
+{
+  "collected_utc": 1793644279.8821845,
+  "service": "http://10.103.23.115:9090",
+  "node_instance": "192.168.24.21:9100",
+  "start_utc": 1793616360,
+  "end_utc": 1793644170,
+  "step_seconds": 30,
+  "gpu_max_sample_age_seconds": 60,
+  "expected_evaluations": 928,
+  "preview": false,
+  "scope": "Existing Prometheus history, 30s query evaluations. GPU samples older than60s excluded. Values are resampled, not independent repeats. Exporter restarts cause gaps. Host CPU includes this experiment.",
+  "queries": {
+    "other_gpu_util_percent": {
+      "query": "DCGM_FI_DEV_GPU_UTIL{hostname=\"gpu-4\",UUID=~\"GPU-7d708c42-8d4a-16d5-0746-474567157aa3|GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a|GPU-1b4de6a0-88ae-4004-98b9-035906a2473f\"} and (time()-timestamp(DCGM_FI_DEV_GPU_UTIL{hostname=\"gpu-4\",UUID=~\"GPU-7d708c42-8d4a-16d5-0746-474567157aa3|GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a|GPU-1b4de6a0-88ae-4004-98b9-035906a2473f\"})<60)",
+      "series": 129,
+      "groups": {
+        "GPU-1b4de6a0-88ae-4004-98b9-035906a2473f": {
+          "min": 0.0,
+          "max": 0.0,
+          "resampled_values": 910,
+          "covered_evaluations": 910,
+          "coverage_fraction": 0.9806034482758621,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "GPU-7d708c42-8d4a-16d5-0746-474567157aa3": {
+          "min": 0.0,
+          "max": 0.0,
+          "resampled_values": 910,
+          "covered_evaluations": 910,
+          "coverage_fraction": 0.9806034482758621,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "GPU-c654d43e-43f8-c28e-77c2-1f17a0cbf46a": {
+          "min": 0.0,
+          "max": 0.0,
+          "resampled_values": 910,
+          "covered_evaluations": 910,
+          "coverage_fraction": 0.9806034482758621,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        }
+      },
+      "available": true
+    },
+    "host_load1": {
+      "query": "node_load1{instance=\"192.168.24.21:9100\"}",
+      "series": 1,
+      "groups": {
+        "all": {
+          "min": 3.74,
+          "max": 24.94,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        }
+      },
+      "available": true
+    },
+    "host_nonidle_cpu_percent": {
+      "query": "100*(1-avg(rate(node_cpu_seconds_total{instance=\"192.168.24.21:9100\",mode=\"idle\"}[1m])))",
+      "series": 1,
+      "groups": {
+        "all": {
+          "min": 6.425781250036378,
+          "max": 10.369791666671524,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        }
+      },
+      "available": true
+    },
+    "assigned_cpu_nonidle_percent": {
+      "query": "100*(1-rate(node_cpu_seconds_total{instance=\"192.168.24.21:9100\",mode=\"idle\",cpu=~\"0|1|2|3|4|5|6|7|8|9|10|11\"}[1m]))",
+      "series": 12,
+      "groups": {
+        "0": {
+          "min": 54.40000000099341,
+          "max": 92.26666666722546,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "1": {
+          "min": 17.633333333457514,
+          "max": 78.76666666629414,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "10": {
+          "min": 3.499999999379122,
+          "max": 17.533333332588274,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "11": {
+          "min": 3.500000000931325,
+          "max": 17.466666667411722,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "2": {
+          "min": 5.333333333643775,
+          "max": 88.73333333370587,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "3": {
+          "min": 3.2666666666045785,
+          "max": 76.36666666561118,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "4": {
+          "min": 3.533333333519595,
+          "max": 85.06666666672875,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "5": {
+          "min": 3.466666666790841,
+          "max": 96.39999999975166,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "6": {
+          "min": 3.566666666107876,
+          "max": 93.5333333335196,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "7": {
+          "min": 3.8333333330228925,
+          "max": 95.39999999882033,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "8": {
+          "min": 3.6999999995653843,
+          "max": 18.86666666716338,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        },
+        "9": {
+          "min": 3.466666666790841,
+          "max": 18.999999999068685,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        }
+      },
+      "available": true
+    },
+    "host_memory_available_bytes": {
+      "query": "node_memory_MemAvailable_bytes{instance=\"192.168.24.21:9100\"}",
+      "series": 1,
+      "groups": {
+        "all": {
+          "min": 566493614080.0,
+          "max": 587758989312.0,
+          "resampled_values": 928,
+          "covered_evaluations": 928,
+          "coverage_fraction": 1.0,
+          "overlap_evaluations": 0,
+          "invalid_values": 0
+        }
+      },
+      "available": true
+    }
+  },
+  "available": true
+}

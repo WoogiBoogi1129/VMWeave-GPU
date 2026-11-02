@@ -1,0 +1,42 @@
+{
+  "model": "large",
+  "batch": 1024,
+  "input": "h2d",
+  "steps": 240,
+  "warmup": 32,
+  "sync": 16,
+  "device": "cuda",
+  "correctness": false,
+  "out": "/tmp/training/formal-b7-large-1024-h2d-cuda",
+  "widths": [
+    2048,
+    4096,
+    1024
+  ],
+  "torch": "2.11.0+flyt.cu128",
+  "cuda": "12.8",
+  "fixture_sha256": "b48820e2d1d711c7b1511152342880a813badddac9b6fb4e009b26d6cdd59434",
+  "source_sha256": "5931e9c071ecfa64408af44648479fc553d67fb0c1fb47157f1ec1b48c85790a",
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "h2d_bytes_per_step": 12582912,
+  "d2h_bytes_per_step": 0,
+  "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "start_utc": 1793632026.4724772,
+  "end_utc": 1793632078.683939,
+  "elapsed_seconds": 52.21130333800002,
+  "samples_per_second": 4707.026721953766,
+  "step_seconds": 0.21754709724166676,
+  "guest_cpu_seconds": 10.782503999999996,
+  "final_loss": 1.0342001914978027,
+  "output_finite": true,
+  "completed": true
+}

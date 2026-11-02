@@ -1,0 +1,39 @@
+{
+  "start_utc": 1793616359.1661603,
+  "end_utc": 1793644184.0399108,
+  "baseline_before_formal": true,
+  "successful_observations": 1763,
+  "max_observation_gap_seconds": 16.266592264175415,
+  "api_errors": [],
+  "change_events": [
+    {
+      "utc": 1793618186.697517,
+      "changes": [
+        {
+          "namespace": "aap-lab",
+          "name": "jupyter-bactp1",
+          "before": {
+            "namespace": "aap-lab",
+            "name": "jupyter-bactp1",
+            "uid": "db7a6b42-17ee-4622-8be3-c910a0db6cb8",
+            "phase": "Running",
+            "containers": [
+              {
+                "name": "notebook",
+                "imageID": "aap.local/agent-lab@sha256:e850795f36ebaba51f4304765ccd9b4e3bcd2eaa01ebfb3767afd069c308f515",
+                "ready": true,
+                "restartCount": 0
+              }
+            ]
+          },
+          "after": null
+        }
+      ]
+    }
+  ],
+  "ignored_authorized_monitors": [
+    "kube-system/hami-device-plugin-*",
+    "gpu-operator/nvidia-dcgm-exporter-*"
+  ],
+  "scope": "Observer already excludes this experiment. Here only authorized monitor Pods are additionally excluded. Changes are observations, not causal attribution. No performance samples are excluded."
+}

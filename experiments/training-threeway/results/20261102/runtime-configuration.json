@@ -1,0 +1,43 @@
+{
+  "app": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_BULK_DIRECT": "1",
+    "VMWEAVE_NATIVE_MEMSET": "1",
+    "VMWEAVE_STATE_CACHE": "1",
+    "VMWEAVE_MATH_CACHE": "1",
+    "VMWEAVE_MIRROR_DEVICE_VA": "1",
+    "VMWEAVE_TRACE_REQUESTS": "0",
+    "VMWEAVE_BROKER_SOCKET": "/run/vmweave/gpu.sock"
+  },
+  "broker": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_BROKER_REUSE": "1",
+    "VMWEAVE_BROKER_GATHER": "1",
+    "VMWEAVE_BROKER_OWNER": "1"
+  },
+  "worker_expected": {
+    "VMWEAVE_WORKER_REUSE": "1",
+    "VMWEAVE_SESSION_ARENA": "1",
+    "VMWEAVE_SESSION_EVENTFD": "1",
+    "VMWEAVE_PINNED_POOL": "1"
+  },
+  "guest_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "backend_cpus": [
+    8,
+    9,
+    10,
+    11
+  ],
+  "memory_numa_binding": "not enforced",
+  "gpu_clock": "not locked; observed",
+  "torch_threads": 1
+}

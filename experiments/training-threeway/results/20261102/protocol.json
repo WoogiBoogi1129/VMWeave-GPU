@@ -1,0 +1,155 @@
+{
+  "created_utc": 1793616359.1661603,
+  "formal_blocks": 10,
+  "orders": [
+    [
+      "passthrough",
+      "vmweave",
+      "flyt"
+    ],
+    [
+      "vmweave",
+      "flyt",
+      "passthrough"
+    ],
+    [
+      "flyt",
+      "passthrough",
+      "vmweave"
+    ],
+    [
+      "flyt",
+      "vmweave",
+      "passthrough"
+    ],
+    [
+      "passthrough",
+      "flyt",
+      "vmweave"
+    ],
+    [
+      "vmweave",
+      "passthrough",
+      "flyt"
+    ],
+    [
+      "passthrough",
+      "vmweave",
+      "flyt"
+    ],
+    [
+      "vmweave",
+      "flyt",
+      "passthrough"
+    ],
+    [
+      "flyt",
+      "passthrough",
+      "vmweave"
+    ],
+    [
+      "flyt",
+      "vmweave",
+      "passthrough"
+    ]
+  ],
+  "steps": {
+    "small-32-resident": 304,
+    "small-32-h2d": 352,
+    "small-1024-resident": 304,
+    "small-1024-h2d": 320,
+    "large-32-resident": 336,
+    "large-32-h2d": 304,
+    "large-1024-resident": 304,
+    "large-1024-h2d": 240,
+    "small-1024-roundtrip": 272,
+    "large-1024-roundtrip": 256
+  },
+  "pilot_rule": {
+    "small-32-resident": {
+      "fastest_seconds_per_step": 0.0034008027812499897,
+      "slowest_seconds_per_step": 0.20687948346874974,
+      "steps": 304,
+      "expected_fast_seconds": 1.0338440454999969,
+      "expected_slow_seconds": 62.89136297449992
+    },
+    "small-32-h2d": {
+      "fastest_seconds_per_step": 0.003432949250000039,
+      "slowest_seconds_per_step": 0.1740827187187497,
+      "steps": 352,
+      "expected_fast_seconds": 1.2083981360000138,
+      "expected_slow_seconds": 61.27711698899989
+    },
+    "small-1024-resident": {
+      "fastest_seconds_per_step": 0.002615652499999843,
+      "slowest_seconds_per_step": 0.20503518778124974,
+      "steps": 304,
+      "expected_fast_seconds": 0.7951583599999523,
+      "expected_slow_seconds": 62.33069708549992
+    },
+    "small-1024-h2d": {
+      "fastest_seconds_per_step": 0.0035085667187502168,
+      "slowest_seconds_per_step": 0.19261779453124994,
+      "steps": 320,
+      "expected_fast_seconds": 1.1227413500000694,
+      "expected_slow_seconds": 61.63769424999998
+    },
+    "large-32-resident": {
+      "fastest_seconds_per_step": 0.0033926631562501974,
+      "slowest_seconds_per_step": 0.1873955216562493,
+      "steps": 336,
+      "expected_fast_seconds": 1.1399348205000663,
+      "expected_slow_seconds": 62.96489527649976
+    },
+    "large-32-h2d": {
+      "fastest_seconds_per_step": 0.0032805957499997263,
+      "slowest_seconds_per_step": 0.20785854853125008,
+      "steps": 304,
+      "expected_fast_seconds": 0.9973011079999168,
+      "expected_slow_seconds": 63.18899875350002
+    },
+    "large-1024-resident": {
+      "fastest_seconds_per_step": 0.0031303042812500514,
+      "slowest_seconds_per_step": 0.1977458287187499,
+      "steps": 304,
+      "expected_fast_seconds": 0.9516125015000156,
+      "expected_slow_seconds": 60.11473193049997
+    },
+    "large-1024-h2d": {
+      "fastest_seconds_per_step": 0.005033369406249655,
+      "slowest_seconds_per_step": 0.2569227376562502,
+      "steps": 240,
+      "expected_fast_seconds": 1.2080086574999171,
+      "expected_slow_seconds": 61.66145703750004
+    },
+    "small-1024-roundtrip": {
+      "fastest_seconds_per_step": 0.004051884374999926,
+      "slowest_seconds_per_step": 0.22155134368749962,
+      "steps": 272,
+      "expected_fast_seconds": 1.1021125499999798,
+      "expected_slow_seconds": 60.2619654829999
+    },
+    "large-1024-roundtrip": {
+      "fastest_seconds_per_step": 0.006492774812499658,
+      "slowest_seconds_per_step": 0.24544057971874977,
+      "steps": 256,
+      "expected_fast_seconds": 1.6621503519999123,
+      "expected_slow_seconds": 62.83278840799994
+    }
+  },
+  "sync": 16,
+  "warmup": 32,
+  "seed": 20261102,
+  "independent_unit": "paired block; mode-specific VMs reused across blocks, fresh VMI per <=5-condition visit, fresh application per condition",
+  "time_rule": "target 5s fastest subject to ~60s slowest and 4096-step cap; 32 minimum, multiples of16; disclose short fastest intervals",
+  "app_environment": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_BULK_DIRECT": "1",
+    "VMWEAVE_NATIVE_MEMSET": "1",
+    "VMWEAVE_STATE_CACHE": "1",
+    "VMWEAVE_MATH_CACHE": "1",
+    "VMWEAVE_MIRROR_DEVICE_VA": "1",
+    "VMWEAVE_TRACE_REQUESTS": "0",
+    "VMWEAVE_BROKER_SOCKET": "/run/vmweave/gpu.sock"
+  }
+}

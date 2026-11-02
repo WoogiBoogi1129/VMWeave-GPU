@@ -1,0 +1,66 @@
+START ['python3', '-u', 'experiments/training-threeway/lab.py', 'base'] 1793644781.651049
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+/opt/flyt-evidence/nvidia-580.173.02/pahole.sh: 66: exec: pahole: not found
+./scripts/pahole-flags.sh: 12: [: Illegal number: 
+./scripts/pahole-flags.sh: 16: [: Illegal number: 
+./scripts/pahole-flags.sh: 20: [: Illegal number: 
+./scripts/pahole-flags.sh: 23: [: Illegal number: 
+/opt/flyt-evidence/nvidia-580.173.02/pahole.sh: 66: exec: pahole: not found
+./scripts/pahole-flags.sh: 12: [: Illegal number: 
+./scripts/pahole-flags.sh: 16: [: Illegal number: 
+./scripts/pahole-flags.sh: 20: [: Illegal number: 
+./scripts/pahole-flags.sh: 23: [: Illegal number: 
+/opt/flyt-evidence/nvidia-580.173.02/pahole.sh: 66: exec: pahole: not found
+./scripts/pahole-flags.sh: 12: [: Illegal number: 
+./scripts/pahole-flags.sh: 16: [: Illegal number: 
+./scripts/pahole-flags.sh: 20: [: Illegal number: 
+./scripts/pahole-flags.sh: 23: [: Illegal number: 
+/opt/flyt-evidence/nvidia-580.173.02/nvidia/nv-pci.c: In function ‘nv_init_coherent_link_info’:
+/opt/flyt-evidence/nvidia-580.173.02/nvidia/nv-pci.c:428:9: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+  428 |         NvU64 gpu_mem_size;
+      |         ^~~~~
+/opt/flyt-evidence/nvidia-580.173.02/pahole.sh: 66: exec: pahole: not found
+./scripts/pahole-flags.sh: 12: [: Illegal number: 
+./scripts/pahole-flags.sh: 16: [: Illegal number: 
+./scripts/pahole-flags.sh: 20: [: Illegal number: 
+./scripts/pahole-flags.sh: 23: [: Illegal number: 
+/opt/flyt-evidence/nvidia-580.173.02/pahole.sh: 66: exec: pahole: not found
+./scripts/pahole-flags.sh: 12: [: Illegal number: 
+./scripts/pahole-flags.sh: 16: [: Illegal number: 
+./scripts/pahole-flags.sh: 20: [: Illegal number: 
+./scripts/pahole-flags.sh: 23: [: Illegal number: 
+Skipping BTF generation for /opt/flyt-evidence/nvidia-580.173.02/nvidia-peermem.ko due to unavailability of vmlinux
+Skipping BTF generation for /opt/flyt-evidence/nvidia-580.173.02/nvidia-drm.ko due to unavailability of vmlinux
+Skipping BTF generation for /opt/flyt-evidence/nvidia-580.173.02/nvidia-modeset.ko due to unavailability of vmlinux
+Skipping BTF generation for /opt/flyt-evidence/nvidia-580.173.02/nvidia.ko due to unavailability of vmlinux
+Skipping BTF generation for /opt/flyt-evidence/nvidia-580.173.02/nvidia-uvm.ko due to unavailability of vmlinux
+BASE_READY
+START ['python3', '-u', 'experiments/training-threeway/prepare.py'] 1793645031.779479
+{
+  "request": {
+    "name": "tt-vmweave-1102",
+    "uid": "a64755c9-a584-47d5-9b7e-438ed75535d1"
+  },
+  "channel": {
+    "name": "tt-vmweave-1102",
+    "uid": "93df2d58-ce5b-4c31-8cc5-7eec73b2d9e5"
+  }
+}
+Created symlink /etc/systemd/system/multi-user.target.wants/vmweave-guest-broker.service → /etc/systemd/system/vmweave-guest-broker.service.
+THREE_STOPPED_VMS_READY
+VALIDATION_ENVIRONMENT_REBUILT
+HOST_CONTEXT_COLLECTED True
+{"before": "nvidia", "after": "vfio-pci"}
+
+{"before": "vfio-pci", "after": "nvidia"}
+
+TRANSFER_VALIDATION_PASSED
+CLEANUP_COMPLETE
+{"formal_runs": 300, "blocks": 10}
+POSTPROCESS_COMPLETE

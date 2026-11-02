@@ -1,0 +1,42 @@
+{
+  "model": "small",
+  "batch": 32,
+  "input": "resident",
+  "steps": 32,
+  "warmup": 32,
+  "sync": 16,
+  "device": "cuda",
+  "correctness": false,
+  "out": "/tmp/training/pilot-p3-small-32-resident-cuda",
+  "widths": [
+    32,
+    64,
+    8
+  ],
+  "torch": "2.11.0+flyt.cu128",
+  "cuda": "12.8",
+  "fixture_sha256": "b3f40d039df9fd3ad9ab187b47579be92c288207a68ee78fb2ddd4aeb563bae6",
+  "source_sha256": "5931e9c071ecfa64408af44648479fc553d67fb0c1fb47157f1ec1b48c85790a",
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "h2d_bytes_per_step": 0,
+  "d2h_bytes_per_step": 0,
+  "device_name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "start_utc": 1793615065.379462,
+  "end_utc": 1793615066.7127364,
+  "elapsed_seconds": 1.3331244049999995,
+  "samples_per_second": 768.1203615802085,
+  "step_seconds": 0.041660137656249985,
+  "guest_cpu_seconds": 0.6174569999999999,
+  "final_loss": 1.1794568300247192,
+  "output_finite": true,
+  "completed": true
+}

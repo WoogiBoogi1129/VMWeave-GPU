@@ -1,0 +1,38 @@
+{
+  "orders": [
+    [
+      "passthrough",
+      "vmweave",
+      "flyt"
+    ],
+    [
+      "vmweave",
+      "flyt",
+      "passthrough"
+    ],
+    [
+      "flyt",
+      "passthrough",
+      "vmweave"
+    ],
+    [
+      "flyt",
+      "vmweave",
+      "passthrough"
+    ],
+    [
+      "passthrough",
+      "flyt",
+      "vmweave"
+    ]
+  ],
+  "first_block": "all 10 conditions",
+  "other_blocks": [
+    "small-32-resident",
+    "large-1024-h2d"
+  ],
+  "steps": 32,
+  "warmup": 32,
+  "formal_step_rule": "min(5/fastest_step,60/slowest_step,4096), rounded up to16, minimum32",
+  "formal_blocks": 10
+}

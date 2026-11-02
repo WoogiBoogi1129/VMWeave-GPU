@@ -1,0 +1,37 @@
+{
+  "vmweave_guest": {
+    "path": ".local/v055-release-20261027/published-guest/libvmweave_guest.so",
+    "bytes": 128264,
+    "sha256": "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5"
+  },
+  "flyt_guest": {
+    "path": ".local/flyt-compatibility-20261026/source/cpu/cricket-client.so",
+    "bytes": 1039616,
+    "sha256": "9550a433a750e2c35b632706aca142fc8f6d4aa8b62effa9005603789dd40d64"
+  },
+  "flyt_server": {
+    "path": ".local/flyt-compatibility-20261026/source-host/cpu/cricket-rpc-server",
+    "bytes": 400248,
+    "sha256": "3533300d4d7eef18aa55fdf2b7a01d2e892282422d7d0c264f4588538a4410c6"
+  },
+  "python_cuda_bundle": {
+    "path": ".local/thesis-isolation-20261012/guest-python-cuda.tgz",
+    "bytes": 1828353268,
+    "sha256": "d242f281efa068996e4c9893811d64b32a7965faaf16b58bc93cb957d78841ec"
+  },
+  "base_disk": {
+    "path": ".local/pytorch-path-20260922/guest-disk/disk.qcow2",
+    "bytes": 735445248,
+    "sha256": "353315d99bd203f9a666fc63d732d28692ed25ed9744737d0b13eb111790d0bc"
+  },
+  "release": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:bcb3e0accc420164bfb09d4c8851fa3c5f09f0f812b90328eb030c955c9356b2",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:62ee0936806d6d88a176f9dae472481a8bbafe959158fee6079d3e69cd99758b",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:9d8c205787b3dcdd62126748ff5cac27c420ba3c46138bc0671e735185886c17",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:b121e13c9a2278b1699120cd81d8398808494b3020ab2270cb4197745a76e9df"
+  },
+  "flyt_provenance": "experiments/thesis-isolation/evidence/20261026-flyt-compatibility/manifest.json"
+}
