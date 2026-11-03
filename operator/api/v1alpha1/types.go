@@ -229,7 +229,7 @@ type SharedMemoryChannelStatus struct {
 	Backend            string                                    `json:"backend,omitempty"`
 	ClaimName          string                                    `json:"claimName,omitempty"`
 	ClaimUID           string                                    `json:"claimUID,omitempty"`
-	Completion         SharedMemoryChannelStatusCompletion       `json:"completion,omitempty"`
+	Completion         *SharedMemoryChannelStatusCompletion      `json:"completion,omitempty"`
 }
 
 // +kubebuilder:object:root=true

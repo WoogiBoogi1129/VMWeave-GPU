@@ -11,7 +11,9 @@ def struct(name,schema):
  lines=[]
  for k,v in schema.get('properties',{}).items():
   t=v.get('type'); typ={'string':'string','integer':'int64','boolean':'bool'}.get(t)
-  if t=='object':typ=name+ident(k);struct(typ,v)
+  if t=='object':
+   typ=name+ident(k);struct(typ,v)
+   if v.get('nullable'):typ='*'+typ
   elif t=='array':
    if v['items'].get('type')=='object':typ='[]'+name+ident(k)+'Item';struct(typ[2:],v['items'])
    else:typ='[]string'
