@@ -42,7 +42,9 @@ Profile 승인·PVC 준비·VM 실행까지 대신하지 않습니다.
 
 ## VM과 함께 유지되는 채널
 
-위의 `Allocation` 예제는 기존 단발 smoke용입니다. 일반 사용 VM은 Guest에
+위의 `Allocation` 예제는 단발 smoke용입니다. v0.5.6부터 해당 VMI 종료 후
+분리·회수가 확인되면 Channel CR도 자동 삭제됩니다. 종료 증거는 drain 전에 시작한
+watch로 보존해야 합니다. 이 변경은 아래 `VM` 모드의 지속적인 연결 설정과 구분됩니다. 일반 사용 VM은 Guest에
 새 `guest-artifacts`의 `install_guest_broker.sh`를 실행하고 다음 부팅부터
 `vmweave-guest-broker.service`를 사용합니다. 영구 root disk에 설치해야 재시작 후에도
 유지됩니다. `cloudInitNoCloud.userData`는 inline 형식이어야 합니다.

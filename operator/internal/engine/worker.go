@@ -73,24 +73,15 @@ func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 	return a.Ensure(w, c)
 }
 func (a API) Drain(c *Obj, opts Options) error {
-	vm, e := a.Get("vms", S(c, "spec", "vmRef", "name"))
-	if e != nil {
+	if e := a.haltOwnedVM(c); e != nil {
 		return e
-	}
-	if vm != nil && string(vm.GetUID()) == S(c, "spec", "vmRef", "uid") && S(vm, "spec", "runStrategy") != "Halted" && (!persistent(c) || c.GetDeletionTimestamp() != nil || B(c, "spec", "drain")) {
-		spec := Get(vm, "spec").(map[string]interface{})
-		delete(spec, "running")
-		spec["runStrategy"] = "Halted"
-		if e = a.Update(vm); e != nil {
-			return e
-		}
 	}
 	if persistent(c) && S(c, "status", "allocation") == "" {
 		if c.GetDeletionTimestamp() != nil {
 			c.SetFinalizers(Remove(c.GetFinalizers(), Finalizer))
 			return a.Update(c)
 		}
-		return a.Status(c, Map{"phase": "Released", "reason": "NoAllocation"})
+		return a.recordCompletion(c, "Released")
 	}
 	w, e := a.Get("pods", ResourceName(c, "worker"))
 	if e != nil {
@@ -164,18 +155,7 @@ func (a API) Drain(c *Obj, opts Options) error {
 		return err
 	}
 	if persistent(c) && c.GetDeletionTimestamp() == nil && !B(c, "spec", "drain") {
-		return a.Status(c, Map{"phase": "Reclaimed", "reason": "BackingReclaimed"})
+		return a.recordCompletion(c, "Reclaimed")
 	}
-	if e = a.Status(c, Map{"phase": "Released", "reason": "DetachAndReclamationConfirmed"}); e != nil {
-		return e
-	}
-	if c.GetDeletionTimestamp() != nil {
-		fresh, e := a.Get("channels", c.GetName())
-		if e != nil || fresh == nil {
-			return e
-		}
-		fresh.SetFinalizers(Remove(fresh.GetFinalizers(), Finalizer))
-		return a.Update(fresh)
-	}
-	return nil
+	return a.recordCompletion(c, "Released")
 }

@@ -128,8 +128,11 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 	if opts.Mode == "review" {
 		return a.Review(c)
 	}
-	if S(c, "status", "phase") == "Released" && c.GetDeletionTimestamp() == nil {
-		return nil
+	if S(c, "status", "phase") == "Released" {
+		return a.finishReleased(c)
+	}
+	if done, err := a.allocationEnded(c); done || err != nil {
+		return err
 	}
 	if persistent(c) {
 		if done, err := a.PersistentPrelude(c); done || err != nil {
@@ -185,7 +188,7 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 			}
 			prefix += "-" + aid[:8]
 		}
-		return a.Status(c, Map{"phase": "Reserved", "backend": backend(p), "allocation": aid, "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": prefix})
+		return a.Status(c, Map{"phase": "Reserved", "completion": nil, "backend": backend(p), "allocation": aid, "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": prefix})
 	}
 	if N(c, "status", "requestGeneration") != q.GetGeneration() || N(c, "status", "profileGeneration") != p.GetGeneration() {
 		return invalid("frozen request/profile changed")

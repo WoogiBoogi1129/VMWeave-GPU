@@ -1,6 +1,8 @@
 """Fresh VMWeave allocations and processes, drained by UID after each session."""
 import gzip, hashlib, shutil, sys, threading
 from common import *
+sys.path.insert(0,str(ROOT/'scripts/operator'))
+from lifecycle_wait import ReleaseWatch
 CHAN='sharedmemorychannels.vmweave.io'
 IMAGES=json.loads((BASE/'images.json').read_text()) if (BASE/'images.json').exists() else {}
 
@@ -79,8 +81,9 @@ class Session:
    if current['metadata']['uid']!=self.uid:raise RuntimeError('Channel UID changed')
    if getattr(self,'worker',None):
     (self.out/'worker-output.txt').write_text(k('logs','-n',self.ns,self.worker,check=False))
-   k('patch',CHAN,self.name,'-n',self.ns,'--type=json','-p',json.dumps([{'op':'test','path':'/metadata/uid','value':self.uid},{'op':'add','path':'/spec/drain','value':True}]))
-   released=wait(lambda:(c if (c:=self.get(CHAN,self.name)).get('status',{}).get('phase')=='Released' else None))
+   with ReleaseWatch(current) as watch:
+    k('patch',CHAN,self.name,'-n',self.ns,'--type=json','-p',json.dumps([{'op':'test','path':'/metadata/uid','value':self.uid},{'op':'add','path':'/spec/drain','value':True}]))
+    released=watch.wait(600)
    save(self.out/'channel-released.json',released)
   else:
    if self.get('pod',self.name)['metadata']['uid']!=self.uid:raise RuntimeError('Pod UID changed')

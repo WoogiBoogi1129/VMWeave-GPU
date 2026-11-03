@@ -116,3 +116,14 @@ Upgrade existing allocations only while halted after `Released` is confirmed.
 Remove their VM binding annotations, install the broker artifacts, and create a
 new VM-named durable channel with a profile referencing the updated Worker
 image. Do not change an active channel's immutable lifecycle or image fields.
+
+## Operator v0.5.6 allocation finalization
+
+A recorded VMI UID ending triggers single-allocation drain. It does not prove
+detach. After detach, backing reclamation and DRA release, the Operator persists
+an identity-bound completion receipt and auto-deletes the Allocation Channel.
+Persistent VM channels still retain their binding as Stopped across boots.
+Released deletion does not re-enter runtime drain or recreate reclaim Pods.
+Legacy Released objects without receipts require independent verification.
+The post-reclaim/pre-status-write crash window and unstarted-Worker recovery
+are not solved by this change. See docs/getting-started/release-v0.5.6.md.

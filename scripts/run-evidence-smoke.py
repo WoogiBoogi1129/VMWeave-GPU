@@ -12,6 +12,8 @@ import sys
 import time
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/"scripts/operator"))
+from lifecycle_wait import ReleaseWatch
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--namespace',default='flyt-evidence');p.add_argument('--api-group',choices=['flyt.dev','vmweave.io'],default='flyt.dev');p.add_argument('--channel');p.add_argument('--resume',action='store_true',help='Resume a live Bound/Ready channel after an interrupted test runner');p.add_argument('--name',required=True);p.add_argument('--key',type=Path,required=True)
 p.add_argument('--artifacts',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
@@ -127,12 +129,13 @@ finally:
  except Exception as error:metrics['evidence_collection_error']=str(error)
  # Drain stops the VM and Worker, including a disconnected SSH workload.
  try:
-  k(['patch',channel_kind,channel,'-n',ns,'--type=merge','-p','{"spec":{"drain":true}}'])
-  event('DrainRequested')
-  def released():
-   c=get(channel_kind,channel)
-   return c if c and c.get('status',{}).get('phase')=='Released' else None
-  final=wait_for(released,'Channel did not release');save('channel-released.json',final);event('Released')
+  current=get(channel_kind,channel)
+  if not current or current['metadata']['uid']!=initial['metadata']['uid']:raise RuntimeError('Channel identity unavailable before drain')
+  with ReleaseWatch(current) as watch:
+   k(['patch',channel_kind,channel,'-n',ns,'--type=json','-p',json.dumps([{'op':'test','path':'/metadata/uid','value':initial['metadata']['uid']},{'op':'add','path':'/spec/drain','value':True}])])
+   event('DrainRequested')
+   final=watch.wait(a.timeout)
+  save('channel-released.json',final);event('Released')
   attachments=json.loads(k(['get',attachment_kind,'-n',ns,'-o','json']))
   save('attachments-final.json',{'items':[x for x in attachments['items'] if x['spec']['channelRef']['uid']==initial['metadata']['uid']]})
   metrics['released']=True

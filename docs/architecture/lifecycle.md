@@ -27,3 +27,15 @@ Guest와 Worker의 monotonic clock은 독립적이므로 두 시각을 빼 단�
 추적 옵션은 기능 확인에 사용하고 성능 측정 조건과 구분합니다.
 
 [API·추적 옵션](../reference/api.md) · [운영 점검](../guides/operations.md)
+
+## v0.5.6의 종료 범위
+
+`Allocation`은 기록된 VMI UID의 실행에 종속됩니다. 해당 VMI가 종료되면 drain을
+시작하고, 분리·backing 회수·DRA 해제가 확인된 실행 세대의 완료 기록을 저장한 뒤
+Channel CR을 자동 삭제합니다. `VM`은 VM의 지속적인 연결 설정이며 정상 정지 시
+실행 자원만 회수하고 같은 CR을 `Stopped`로 남깁니다.
+
+완료된 채널 삭제는 실행 중 자원의 drain과 별도 경로입니다. 과거 채널의 VM UID가
+현재 VM과 같다는 이유만으로 VM을 정지시키지 않습니다. 완료 기록이 없는 기존
+Released 채널은 보존하며, 누락된 VMI/Pod만으로 분리 완료를 추정하지 않습니다.
+[업그레이드·호환성·남은 제한](../getting-started/release-v0.5.6.md)을 참고합니다.

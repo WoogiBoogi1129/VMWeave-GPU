@@ -194,6 +194,19 @@ type SharedMemoryChannelStatusConditionsItem struct {
 	LastTransitionTime string `json:"lastTransitionTime"`
 	ObservedGeneration int64  `json:"observedGeneration"`
 }
+type SharedMemoryChannelStatusCompletion struct {
+	ChannelUID   string `json:"channelUID"`
+	VmUID        string `json:"vmUID"`
+	PvcUID       string `json:"pvcUID"`
+	Allocation   string `json:"allocation"`
+	Generation   string `json:"generation"`
+	VMIUID       string `json:"vmiUID"`
+	WorkerPodUID string `json:"workerPodUID"`
+	Backend      string `json:"backend"`
+	ClaimUID     string `json:"claimUID"`
+	ClaimName    string `json:"claimName"`
+	CompletedAt  string `json:"completedAt"`
+}
 type SharedMemoryChannelStatus struct {
 	Phase              string                                    `json:"phase,omitempty"`
 	Reason             string                                    `json:"reason,omitempty"`
@@ -216,6 +229,7 @@ type SharedMemoryChannelStatus struct {
 	Backend            string                                    `json:"backend,omitempty"`
 	ClaimName          string                                    `json:"claimName,omitempty"`
 	ClaimUID           string                                    `json:"claimUID,omitempty"`
+	Completion         SharedMemoryChannelStatusCompletion       `json:"completion,omitempty"`
 }
 
 // +kubebuilder:object:root=true

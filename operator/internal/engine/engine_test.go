@@ -177,10 +177,10 @@ func TestWorkerMappingUsesIntegerGeneration(t *testing.T) {
 	}
 }
 
-func TestReleasedDeletionRequiresConfirmedReclaim(t *testing.T) {
+func TestReleasedDeletionUsesRecordedCompletion(t *testing.T) {
 	c := channel("a")
 	c.SetFinalizers([]string{Finalizer})
-	Set(c, Map{"phase": "Released", "everBound": true, "generation": "g"}, "status")
+	Set(c, Map{"phase": "Released", "everBound": true, "generation": "g", "allocation": "a"}, "status")
 	objects := []client.Object{c}
 	for _, role := range []string{"guest", "worker"} {
 		att := obj("attachments", "a", "same-"+role, role)
@@ -192,6 +192,9 @@ func TestReleasedDeletionRequiresConfirmedReclaim(t *testing.T) {
 	Set(reclaim, "Succeeded", "status", "phase")
 	objects = append(objects, reclaim)
 	a := fakeAPI("a", objects...)
+	if e := a.recordCompletion(c, "Released"); e != nil {
+		t.Fatal(e)
+	}
 	if e := a.Delete(c); e != nil {
 		t.Fatal(e)
 	}

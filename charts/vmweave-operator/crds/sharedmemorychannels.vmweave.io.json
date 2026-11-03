@@ -283,6 +283,71 @@
                   },
                   "claimUID": {
                     "type": "string"
+                  },
+                  "completion": {
+                    "type": "object",
+                    "nullable": true,
+                    "description": "Controller-written completion receipt for this exact allocation after detach, backing reclamation and DRA release. Survives helper Pod GC.",
+                    "required": [
+                      "channelUID",
+                      "vmUID",
+                      "pvcUID",
+                      "allocation",
+                      "generation",
+                      "vmiUID",
+                      "workerPodUID",
+                      "backend",
+                      "claimUID",
+                      "claimName",
+                      "completedAt"
+                    ],
+                    "properties": {
+                      "channelUID": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "vmUID": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "pvcUID": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "allocation": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "generation": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "vmiUID": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "workerPodUID": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "backend": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "claimUID": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "claimName": {
+                        "type": "string",
+                        "maxLength": 2048
+                      },
+                      "completedAt": {
+                        "type": "string",
+                        "maxLength": 2048,
+                        "format": "date-time"
+                      }
+                    }
                   }
                 }
               }
