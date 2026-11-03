@@ -60,3 +60,16 @@ Regression tests cover deletion after helper Pod GC, VM rebinding, replaced
 VMI UIDs, completion identity mismatch, missing detach evidence, automatic
 Allocation deletion and persistent VM stop/restart behavior. Publication and
 live rollout evidence is recorded separately in `deploy/releases/v0.5.7.json`.
+
+## Deployment result
+
+Published and deployed on 2026-11-04 (KST). Central Helm release `vmweave` is
+revision 14 and the separate `nested` release is revision 3, both chart 0.5.7.
+Both Controller/Webhook pairs run the published Operator digest. The additive
+CRD was applied before rollout; management scope, TLS and runtime images were
+retained. Three existing VMIs and two active channel generations were preserved.
+
+[Deployment record](https://github.com/WoogiBoogi1129/VMWeave-GPU/blob/main/deploy/releases/v0.5.7.json) and
+[validation evidence](https://github.com/WoogiBoogi1129/VMWeave-GPU/blob/main/deploy/releases/evidence/v0.5.7/README.md) distinguish
+synthetic API tests from production readiness checks. v0.5.6 was a superseded
+candidate and was not deployed to these production releases.

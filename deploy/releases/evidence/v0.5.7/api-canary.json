@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "scope": "Real Kubernetes API and controller binary extracted from published v0.5.7 OCI image; synthetic status fixtures, no physical GPU detach or VM boot experiment.",
+  "checks": [
+    "completed Allocation auto-deleted",
+    "own binding removed from Halted VM",
+    "new VM binding preserved",
+    "legacy Released deletion held without re-drain",
+    "VMI absence starts drain but does not prove detach",
+    "persistent Stopped identity and spec retained",
+    "no reclaim/runtime Pods created"
+  ],
+  "published_artifact": {
+    "image_digest": "sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+    "runtime_manifest_digest": "sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+    "sourceRevision": "12c157e56f1a7bd1cf198ee7f0b9f91e47352647",
+    "manager_sha256": "79df91199cd9f1c4690f3b5374ef0dc4eecd77cec703f5742cdd403d8a9aff04",
+    "chart_sha256": "53a7fd5c975589e1e66bbe70bb4b39f215d3b50e413da4a6dde809942a1a90d8",
+    "chart_source_matches": true
+  },
+  "verifiedAtKST": "2026-11-04T04:44:32.048025+09:00"
+}

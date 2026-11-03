@@ -1,0 +1,132 @@
+{
+  "status": "PASS",
+  "timeKST": "2026-11-04T04:45:01.359669+09:00",
+  "deployments": [
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "pod_uid": "364bd751-2ca2-4058-9a48-e1f0aea02448",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "pod_uid": "4da083d5-ae07-4ddd-b563-6f42476fcd17",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "pod_uid": "6bba3947-cf33-48e8-9fe2-9c2ece8d913a",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "pod_uid": "9ddf4c11-70c9-4096-9d3f-80fd7469bda4",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:84f40620f8d4f5772cea1f5abd0646a1a40594cfd4741653f8e1c35976ae9347",
+      "ready": true
+    }
+  ],
+  "protected": [
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1",
+      "unchanged": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4",
+      "unchanged": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "b674c137-5bee-4e6c-bc03-29affd46b60f",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "8365e184-8715-42a3-954d-b82dc01e3a41",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7a10ddb6-eb22-4995-be06-c72700a2449f",
+      "unchanged": true
+    },
+    {
+      "kind": "sharedmemorychannels",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+      "unchanged": true
+    },
+    {
+      "kind": "sharedmemorychannels",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+      "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+      "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+      "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-test-a",
+      "name": "virt-launcher-vmweave-k8s-01-xpl2s",
+      "uid": "596335b3-7d91-426b-8c8b-49b2deb50a81",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21-worker",
+      "uid": "a378042c-6247-4e83-8adc-e7ba70fe91fb",
+      "unchanged": true
+    }
+  ],
+  "scope": "Controller/webhook deployments only; runtime Worker/Guest/HAMi/DRA unchanged. Readiness and UID/spec/restart checks, not an application SLA benchmark."
+}
