@@ -29,7 +29,8 @@ var kinds = map[string]schema.GroupVersionKind{
 	"requests": {Group: Group, Version: "v1alpha1", Kind: "GPURequest"}, "profiles": {Group: Group, Version: "v1alpha1", Kind: "GPUProfile"},
 	"vms": {Group: "kubevirt.io", Version: "v1", Kind: "VirtualMachine"}, "vmis": {Group: "kubevirt.io", Version: "v1", Kind: "VirtualMachineInstance"},
 	"pods": {Group: "", Version: "v1", Kind: "Pod"}, "pvcs": {Group: "", Version: "v1", Kind: "PersistentVolumeClaim"}, "pvs": {Group: "", Version: "v1", Kind: "PersistentVolume"},
-	"nodes": {Group: "", Version: "v1", Kind: "Node"}, "namespaces": {Group: "", Version: "v1", Kind: "Namespace"}, "serviceaccounts": {Group: "", Version: "v1", Kind: "ServiceAccount"},
+	"configmaps": {Group: "", Version: "v1", Kind: "ConfigMap"},
+	"nodes":      {Group: "", Version: "v1", Kind: "Node"}, "namespaces": {Group: "", Version: "v1", Kind: "Namespace"}, "serviceaccounts": {Group: "", Version: "v1", Kind: "ServiceAccount"},
 	"roles": {Group: "rbac.authorization.k8s.io", Version: "v1", Kind: "Role"}, "rolebindings": {Group: "rbac.authorization.k8s.io", Version: "v1", Kind: "RoleBinding"},
 }
 

@@ -348,6 +348,29 @@
                         "format": "date-time"
                       }
                     }
+                  },
+                  "reclamation": {
+                    "type": "object",
+                    "nullable": true,
+                    "required": [
+                      "journalName",
+                      "journalUID",
+                      "authorization"
+                    ],
+                    "properties": {
+                      "journalName": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "journalUID": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "authorization": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
                   }
                 }
               }

@@ -83,6 +83,9 @@ func (a API) Drain(c *Obj, opts Options) error {
 		}
 		return a.recordCompletion(c, "Released")
 	}
+	if Get(c, "status", "reclamation") != nil {
+		return a.resumeReclamation(c, opts)
+	}
 	w, e := a.Get("pods", ResourceName(c, "worker"))
 	if e != nil {
 		return e
@@ -102,19 +105,28 @@ func (a API) Drain(c *Obj, opts Options) error {
 			complete = true
 		}
 	}
+	evidence := Map{}
 	for _, role := range []string{"guest", "worker"} {
 		if persistent(c) && !B(c, "status", "everBound") && role == "guest" {
+			evidence[role] = "NeverBound"
 			continue
 		}
 		if persistent(c) && !B(c, "status", "everBound") && role == "worker" && w == nil && S(c, "status", "workerPodUID") == "" {
+			evidence[role] = "NeverCreated"
 			continue
 		}
 		att, e := a.Get("attachments", c.GetName()+"-"+role)
 		if e != nil {
 			return e
 		}
-		if att == nil || !Equal(Get(att, "spec", "channelRef"), Ref(c)) || S(att, "status", "phase") != "Detached" || N(att, "status", "observedGeneration") != att.GetGeneration() || S(att, "spec", "generation") != S(c, "status", "generation") {
+		holder := S(c, "status", "vmiUID")
+		if role == "worker" {
+			holder = S(c, "status", "workerPodUID")
+		}
+		if att == nil || holder == "" || S(att, "spec", "holderUID") != holder || S(att, "spec", "role") != role || S(att, "spec", "nodeName") != S(c, "status", "nodeName") || !Equal(Get(att, "spec", "channelRef"), Ref(c)) || S(att, "status", "phase") != "Detached" || N(att, "status", "observedGeneration") != att.GetGeneration() || S(att, "spec", "generation") != S(c, "status", "generation") {
 			complete = false
+		} else {
+			evidence[role] = Map{"uid": string(att.GetUID()), "generation": att.GetGeneration(), "spec": Get(att, "spec"), "status": Get(att, "status")}
 		}
 	}
 	if !complete {
@@ -129,33 +141,15 @@ func (a API) Drain(c *Obj, opts Options) error {
 			return a.Status(c, Map{"phase": "Draining", "reason": "AwaitingProvisionExit"})
 		}
 	}
-	cleanup, e := a.Get("pods", ResourceName(c, "reclaim"))
-	if e != nil {
-		return e
+	if w != nil {
+		return WaitError{"AwaitingReclamationWorkerDeletion"}
 	}
-	if cleanup == nil {
-		ns, e := a.Get("namespaces", a.Namespace)
-		if e != nil {
-			return e
-		}
-		if ns == nil || ns.GetDeletionTimestamp() != nil {
-			return a.Status(c, Map{"phase": "Draining", "reason": "NamespaceTerminatingReclaimBlocked"})
-		}
-		cleanup, e = a.Ensure(Pod(c, ResourceName(c, "reclaim"), S(c, "spec", "image"), controlCommand("reclaim.py", "--root", "/flyt-channel", "--allocation", S(c, "status", "allocation"), "--generation", S(c, "status", "generation")), opts), c)
-		if e != nil {
-			return e
-		}
-	} else if !Owned(cleanup, c) {
-		return invalid("foreign reclaim pod")
-	}
-	if S(cleanup, "status", "phase") != "Succeeded" {
-		return a.Status(c, Map{"phase": "Draining", "reason": "ReclamationPending"})
-	}
-	if err := a.releaseDRA(c); err != nil {
+	legacy, err := a.Get("pods", ResourceName(c, "reclaim"))
+	if err != nil {
 		return err
 	}
-	if persistent(c) && c.GetDeletionTimestamp() == nil && !B(c, "spec", "drain") {
-		return a.recordCompletion(c, "Reclaimed")
+	if legacy != nil {
+		return WaitError{"LegacyReclamationRequiresVerification"}
 	}
-	return a.recordCompletion(c, "Released")
+	return a.authorizeReclamation(c, evidence)
 }

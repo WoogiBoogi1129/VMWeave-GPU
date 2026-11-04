@@ -57,6 +57,9 @@ func (a API) finishReleased(c *Obj) error {
 		}
 		return WaitError{"ReleasedCompletionEvidenceRequired"}
 	}
+	if err := a.cleanupReclamation(c); err != nil {
+		return err
+	}
 	if err := a.clearCompletedBinding(c); err != nil {
 		return err
 	}

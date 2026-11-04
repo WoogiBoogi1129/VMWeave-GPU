@@ -73,6 +73,9 @@ func (a API) PersistentPrelude(c *Obj) (bool, error) {
 
 // Called only after durable detach evidence and successful backing reclamation.
 func (a API) FinishStop(c *Obj) error {
+	if err := a.cleanupReclamation(c); err != nil {
+		return err
+	}
 	for _, kind := range []string{"attachments", "pods", "rolebindings", "roles", "serviceaccounts"} {
 		xs, e := a.List(kind)
 		if e != nil {
@@ -87,7 +90,7 @@ func (a API) FinishStop(c *Obj) error {
 			}
 		}
 	}
-	return a.Status(c, Map{"phase": "Stopped", "completion": nil, "claimName": "", "claimUID": "", "backend": "", "reason": "RuntimeReclaimed", "allocation": "", "generation": "", "resourcePrefix": "", "vmiUID": "", "workerPodUID": "", "everBound": false, "sessions": []interface{}{}})
+	return a.Status(c, Map{"phase": "Stopped", "completion": nil, "reclamation": nil, "claimName": "", "claimUID": "", "backend": "", "reason": "RuntimeReclaimed", "allocation": "", "generation": "", "resourcePrefix": "", "vmiUID": "", "workerPodUID": "", "everBound": false, "sessions": []interface{}{}})
 }
 
 // Match provision.py's little-endian layout. cloud-init comments are available

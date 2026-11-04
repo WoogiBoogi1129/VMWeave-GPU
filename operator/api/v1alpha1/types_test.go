@@ -14,6 +14,9 @@ func TestOptionalCompletionIsOmittedFromEmptyTypedStatus(t *testing.T) {
 	if err = json.Unmarshal(b, &status); err != nil {
 		t.Fatal(err)
 	}
+	if _, ok := status["reclamation"]; ok {
+		t.Fatal("empty typed status emits reclamation authorization")
+	}
 	if _, ok := status["completion"]; ok {
 		t.Fatal("empty typed status emits an invalid completedAt timestamp")
 	}
@@ -24,5 +27,14 @@ func TestCompletionDeepCopyDoesNotAliasReceipt(t *testing.T) {
 	copy.Status.Completion.Allocation = "new"
 	if original.Status.Completion.Allocation != "original" {
 		t.Fatal("completion receipt alias")
+	}
+}
+
+func TestReclamationDeepCopyDoesNotAliasAuthorization(t *testing.T) {
+	original := &SharedMemoryChannel{Status: SharedMemoryChannelStatus{Reclamation: &SharedMemoryChannelStatusReclamation{Authorization: "original"}}}
+	copied := original.DeepCopy()
+	copied.Status.Reclamation.Authorization = "new"
+	if original.Status.Reclamation.Authorization != "original" {
+		t.Fatal("reclamation authorization alias")
 	}
 }

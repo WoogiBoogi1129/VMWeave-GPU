@@ -188,7 +188,7 @@ func (a API) Reconcile(c *Obj, opts Options) error {
 			}
 			prefix += "-" + aid[:8]
 		}
-		return a.Status(c, Map{"phase": "Reserved", "completion": nil, "backend": backend(p), "allocation": aid, "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": prefix})
+		return a.Status(c, Map{"phase": "Reserved", "completion": nil, "reclamation": nil, "backend": backend(p), "allocation": aid, "generation": randomID(), "sessions": sessions, "nodeName": S(p, "spec", "nodeName"), "gpuUUID": S(p, "spec", "gpuUUID"), "memoryMiB": m, "compute": N(q, "spec", "compute"), "requestGeneration": q.GetGeneration(), "profileGeneration": p.GetGeneration(), "resourcePrefix": prefix})
 	}
 	if N(c, "status", "requestGeneration") != q.GetGeneration() || N(c, "status", "profileGeneration") != p.GetGeneration() {
 		return invalid("frozen request/profile changed")

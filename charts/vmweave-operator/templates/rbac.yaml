@@ -40,7 +40,7 @@ rules:
   resources: [virtualmachines]
   verbs: [update, patch]
 - apiGroups: ['']
-  resources: [pods, serviceaccounts]
+  resources: [pods, serviceaccounts, configmaps]
   verbs: [get, list, watch, create, update, patch, delete]
 - apiGroups: [rbac.authorization.k8s.io]
   resources: [roles, rolebindings]

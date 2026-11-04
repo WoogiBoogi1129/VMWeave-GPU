@@ -207,6 +207,11 @@ type SharedMemoryChannelStatusCompletion struct {
 	ClaimName    string `json:"claimName"`
 	CompletedAt  string `json:"completedAt"`
 }
+type SharedMemoryChannelStatusReclamation struct {
+	JournalName   string `json:"journalName"`
+	JournalUID    string `json:"journalUID"`
+	Authorization string `json:"authorization"`
+}
 type SharedMemoryChannelStatus struct {
 	Phase              string                                    `json:"phase,omitempty"`
 	Reason             string                                    `json:"reason,omitempty"`
@@ -230,6 +235,7 @@ type SharedMemoryChannelStatus struct {
 	ClaimName          string                                    `json:"claimName,omitempty"`
 	ClaimUID           string                                    `json:"claimUID,omitempty"`
 	Completion         *SharedMemoryChannelStatusCompletion      `json:"completion,omitempty"`
+	Reclamation        *SharedMemoryChannelStatusReclamation     `json:"reclamation,omitempty"`
 }
 
 // +kubebuilder:object:root=true
