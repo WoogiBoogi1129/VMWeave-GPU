@@ -1,0 +1,230 @@
+[
+  {
+    "name": "vmweave-k8s-gpu",
+    "namespace": "vmweave-test-a",
+    "uid": "f311fcff-8c0c-4646-9f64-439ef1ace8f3",
+    "oldStatus": {
+      "allocation": "f02e1264f39f59dd8216f9e79163d710",
+      "compute": 50,
+      "everBound": true,
+      "generation": "7094e6c46916a19ccebed53e067b3acd",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Released",
+      "profileGeneration": 1,
+      "reason": "DetachAndReclamationConfirmed",
+      "requestGeneration": 1,
+      "resourcePrefix": "vmweave-k8s-gpu-f311fcff8c0c",
+      "sessions": [
+        "77ab89b666901801b5f3620461efaa7d"
+      ],
+      "vmiUID": "fe31a8c1-8969-495c-9d15-60682012bb83",
+      "workerPodUID": "7d8657f3-cddf-46d5-b854-59284a31705c"
+    },
+    "attachments": [
+      {
+        "uid": "880efae8-f926-47d6-b9bf-55f825021f0c",
+        "metadataGeneration": 1,
+        "spec": {
+          "channelRef": {
+            "name": "vmweave-k8s-gpu",
+            "uid": "f311fcff-8c0c-4646-9f64-439ef1ace8f3"
+          },
+          "generation": "7094e6c46916a19ccebed53e067b3acd",
+          "holderUID": "fe31a8c1-8969-495c-9d15-60682012bb83",
+          "nodeName": "gpu-4",
+          "role": "guest"
+        },
+        "status": {
+          "evidence": "KubeletTerminalLauncher",
+          "launcherPodUID": "778039fc-3a74-4e6e-b46e-bcf0f4d03980",
+          "observedGeneration": 1,
+          "phase": "Detached",
+          "reporterPodUID": "7d8657f3-cddf-46d5-b854-59284a31705c"
+        }
+      },
+      {
+        "uid": "f6fec88f-3fcf-444a-b3ef-c3029140c8ce",
+        "metadataGeneration": 1,
+        "spec": {
+          "channelRef": {
+            "name": "vmweave-k8s-gpu",
+            "uid": "f311fcff-8c0c-4646-9f64-439ef1ace8f3"
+          },
+          "generation": "7094e6c46916a19ccebed53e067b3acd",
+          "holderUID": "7d8657f3-cddf-46d5-b854-59284a31705c",
+          "nodeName": "gpu-4",
+          "role": "worker"
+        },
+        "status": {
+          "evidence": "ChildProcessesReaped",
+          "observedGeneration": 1,
+          "phase": "Detached",
+          "reporterPodUID": "7d8657f3-cddf-46d5-b854-59284a31705c"
+        }
+      }
+    ],
+    "backingAbsent": true,
+    "oldVMIAndWorkerAbsent": true,
+    "noDRAClaim": true,
+    "activeBindingDifferent": true,
+    "pvcUID": "884022bd-07b1-4a8b-b212-572f7b7ffcb0",
+    "pvUID": "0e397124-b658-430d-a74d-b6d19f7ec29f",
+    "observedBackingEntries": [
+      "736a0d218ccce1cab1c2132b86c4fb36"
+    ]
+  },
+  {
+    "name": "vmweave-k8s-postinstall",
+    "namespace": "vmweave-test-a",
+    "uid": "3c239bc0-2025-4a43-86cb-17623962b0ef",
+    "oldStatus": {
+      "allocation": "87d68cfbc6732efe36e0ba95ea884b29",
+      "compute": 50,
+      "everBound": true,
+      "generation": "03ee15a1ab714e73bf4451f02b0fdd06",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Released",
+      "profileGeneration": 1,
+      "reason": "DetachAndReclamationConfirmed",
+      "requestGeneration": 1,
+      "resourcePrefix": "vmweave-k8s-postinstall-3c239bc02025",
+      "sessions": [
+        "49c980f8716818efe4a34eb1e61ec77e"
+      ],
+      "vmiUID": "190095f5-5291-4e7a-aedf-c8b8463184fe",
+      "workerPodUID": "5ce7e9d6-1297-4b34-9757-e2ce42945dcf"
+    },
+    "attachments": [
+      {
+        "uid": "eb5c64da-36a8-4f43-88f3-be90648e9365",
+        "metadataGeneration": 1,
+        "spec": {
+          "channelRef": {
+            "name": "vmweave-k8s-postinstall",
+            "uid": "3c239bc0-2025-4a43-86cb-17623962b0ef"
+          },
+          "generation": "03ee15a1ab714e73bf4451f02b0fdd06",
+          "holderUID": "190095f5-5291-4e7a-aedf-c8b8463184fe",
+          "nodeName": "gpu-4",
+          "role": "guest"
+        },
+        "status": {
+          "evidence": "KubeletTerminalLauncher",
+          "launcherPodUID": "04168441-3c7d-4db2-9d24-3c002affa3f2",
+          "observedGeneration": 1,
+          "phase": "Detached",
+          "reporterPodUID": "5ce7e9d6-1297-4b34-9757-e2ce42945dcf"
+        }
+      },
+      {
+        "uid": "f993f2dc-bf19-4e4d-be7a-a2f45c35b2cb",
+        "metadataGeneration": 1,
+        "spec": {
+          "channelRef": {
+            "name": "vmweave-k8s-postinstall",
+            "uid": "3c239bc0-2025-4a43-86cb-17623962b0ef"
+          },
+          "generation": "03ee15a1ab714e73bf4451f02b0fdd06",
+          "holderUID": "5ce7e9d6-1297-4b34-9757-e2ce42945dcf",
+          "nodeName": "gpu-4",
+          "role": "worker"
+        },
+        "status": {
+          "evidence": "ChildProcessesReaped",
+          "observedGeneration": 1,
+          "phase": "Detached",
+          "reporterPodUID": "5ce7e9d6-1297-4b34-9757-e2ce42945dcf"
+        }
+      }
+    ],
+    "backingAbsent": true,
+    "oldVMIAndWorkerAbsent": true,
+    "noDRAClaim": true,
+    "activeBindingDifferent": true,
+    "pvcUID": "884022bd-07b1-4a8b-b212-572f7b7ffcb0",
+    "pvUID": "0e397124-b658-430d-a74d-b6d19f7ec29f",
+    "observedBackingEntries": [
+      "736a0d218ccce1cab1c2132b86c4fb36"
+    ]
+  },
+  {
+    "name": "vmweave-k8s-reconnect",
+    "namespace": "vmweave-test-a",
+    "uid": "6995de9a-d607-46de-84f2-1ebb0165e800",
+    "oldStatus": {
+      "allocation": "3d2d33de2441a139b0adffdf694d4529",
+      "compute": 50,
+      "everBound": true,
+      "generation": "974764e3700e2715d6845dad93a2b000",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Released",
+      "profileGeneration": 1,
+      "reason": "DetachAndReclamationConfirmed",
+      "requestGeneration": 1,
+      "resourcePrefix": "vmweave-k8s-reconnect-6995de9ad607",
+      "sessions": [
+        "671fb7dad8285dd5c7be11ef781cfdd7"
+      ],
+      "vmiUID": "7a92d14a-c228-499b-bfc9-ad52f152f503",
+      "workerPodUID": "2d2e6b57-cb5e-40bb-a4dd-67db67549e8f"
+    },
+    "attachments": [
+      {
+        "uid": "bbdf47a3-1676-4b25-a5be-9c7e2bd0fa23",
+        "metadataGeneration": 1,
+        "spec": {
+          "channelRef": {
+            "name": "vmweave-k8s-reconnect",
+            "uid": "6995de9a-d607-46de-84f2-1ebb0165e800"
+          },
+          "generation": "974764e3700e2715d6845dad93a2b000",
+          "holderUID": "7a92d14a-c228-499b-bfc9-ad52f152f503",
+          "nodeName": "gpu-4",
+          "role": "guest"
+        },
+        "status": {
+          "evidence": "KubeletTerminalLauncher",
+          "launcherPodUID": "c3e33b26-1d21-4837-9950-174a953dc252",
+          "observedGeneration": 1,
+          "phase": "Detached",
+          "reporterPodUID": "2d2e6b57-cb5e-40bb-a4dd-67db67549e8f"
+        }
+      },
+      {
+        "uid": "7b94100f-3c84-41f2-8c77-6d9ead15fcc1",
+        "metadataGeneration": 1,
+        "spec": {
+          "channelRef": {
+            "name": "vmweave-k8s-reconnect",
+            "uid": "6995de9a-d607-46de-84f2-1ebb0165e800"
+          },
+          "generation": "974764e3700e2715d6845dad93a2b000",
+          "holderUID": "2d2e6b57-cb5e-40bb-a4dd-67db67549e8f",
+          "nodeName": "gpu-4",
+          "role": "worker"
+        },
+        "status": {
+          "evidence": "ChildProcessesReaped",
+          "observedGeneration": 1,
+          "phase": "Detached",
+          "reporterPodUID": "2d2e6b57-cb5e-40bb-a4dd-67db67549e8f"
+        }
+      }
+    ],
+    "backingAbsent": true,
+    "oldVMIAndWorkerAbsent": true,
+    "noDRAClaim": true,
+    "activeBindingDifferent": true,
+    "pvcUID": "884022bd-07b1-4a8b-b212-572f7b7ffcb0",
+    "pvUID": "0e397124-b658-430d-a74d-b6d19f7ec29f",
+    "observedBackingEntries": [
+      "736a0d218ccce1cab1c2132b86c4fb36"
+    ]
+  }
+]

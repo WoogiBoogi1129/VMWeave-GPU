@@ -1,0 +1,142 @@
+{
+  "tag": "v0.5.8",
+  "sourceRevision": "1638fa63e3d53954e33d4a44c37e5f4485d39c46",
+  "operatorSourceRevision": "1638fa63e3d53954e33d4a44c37e5f4485d39c46",
+  "publishedDateKST": "2026-11-04",
+  "scope": "Durable temporary API reclamation journal; Controller/Webhook, additive Channel CRD schema and chart RBAC upgraded. Active Worker/Guest/helper image references retained; embedded new helper tested with retained helper image.",
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.5.8",
+    "digest": "sha256:28efef2ea543b083f539e20856439da1bb6d34447c0a99235989406a03b8f78d",
+    "packageSHA256": "5406fdd49bfdaabfd89afdbe9a1467d5d85f83cb809d492f73efad6286c27ca0"
+  },
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:c8a9f80e5169877c23b71902b5cb40e64bd740d4e49600f52a4849d15f23979a",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:e2139218e2abc9efa5b5537e8ca7d7567e5dbbe8bc9a40df42f89820894386ad",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:6e8099281376e250097850397a6e570932a867dd2e146b839045c8e87b9dacb6",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:01d380f987fe722b9067441a004f31c83356f4a20a50b2fe142e8407332f2f70",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:904a288e9434c3913bbc5e8799a1d4fea2fdcd5447587de177769cb3a703fc5e",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:e6d55fd8f62bf0c4ca5d086d72dce79342f25717a7872fcd52baa6947019620a"
+  },
+  "helmReleases": [
+    {
+      "name": "vmweave",
+      "namespace": "vmweave-system",
+      "version": 15,
+      "status": "deployed"
+    },
+    {
+      "name": "nested",
+      "namespace": "vmweave-nested-system",
+      "version": 4,
+      "status": "deployed"
+    }
+  ],
+  "deployments": [
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "pod_uid": "610b463f-d7f6-4a71-8def-3c79cc466c62",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "pod_uid": "18f7f76f-a322-482e-ad36-5cffde455fb0",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "pod_uid": "13e8d08f-c96c-4efe-966f-2ee9c8c42300",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "pod_uid": "65887ca2-3d9a-4a15-8303-540b75877d1c",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:564c14ea5e0043ee839039df3c5d770da438707d04e78ee76d6a752b1371f018",
+      "ready": true
+    }
+  ],
+  "validation": {
+    "operator": "CRD copy check, go vet and race-enabled API/engine tests passed. Covers completion API failure, detach identities, journal identity/absence, retry, DRA ordering, cleanup failure and persistent reset.",
+    "control": "129 Python control tests: 128 passed, 1 skipped. Includes 10 new journal tests with per-boundary interruption and API-write before/after-commit failure subcases.",
+    "deployment": "16 Python deployment tests and Helm lint passed. Rendering each existing release with its old values changes only intended ConfigMap permissions.",
+    "publishedArtifacts": "Operator OCI source label/digest and extracted manager hash verified; published chart matches source. All 7 published image source labels/digests verified.",
+    "apiFilesystemCanary": "Five scenarios passed using published manager, real API, local PV/PVC and helper Pods: normal, partial deletion, removed directory, completed journal, persistent stop. Fault Pods exit 99 at explicit checkpoints. Detach is synthetic, backing contains test files; no physical GPU mapping/VM boot claimed.",
+    "rbac": "Actual impersonated authorization checks deny Worker journal updates and restrict helper to its named ConfigMap. Both live controller identities can server-dry-run creation of the required scoped helper Role.",
+    "productionPreservation": "Existing 3 Running/Ready VMIs, 2 Ready channel identities/generations and runtime Pod UID/spec/restart counts preserved. Both webhooks accepted server dry-runs without persisting changes.",
+    "limits": [
+      "Node reboot, node/disk loss and administrative evidence deletion not covered.",
+      "Existing unproven Draining allocation remains unchanged.",
+      "Legacy in-progress reclaim Pods require individual verification; no automatic protocol migration.",
+      "Readiness and preservation are not an application-level uninterrupted-SLA measurement."
+    ]
+  },
+  "cleanup": {
+    "legacyReleasedChannelsRemoved": 3,
+    "ownedAttachmentsRemoved": 6,
+    "method": "Independent detached UID/generation proofs + absent old runtime/backing + current binding protection; UID/resourceVersion conditional DELETE/finalizer removal. No synthetic completion receipt written.",
+    "reclamationJournalsRemaining": 0,
+    "remainingChannels": [
+      {
+        "namespace": "vmweave-nested-k8s",
+        "name": "vw-k8s-worker-01",
+        "phase": "Ready"
+      },
+      {
+        "namespace": "vmweave-test-a",
+        "name": "vmweave-k8s-01",
+        "phase": "Ready"
+      },
+      {
+        "namespace": "vmweave-test-a",
+        "name": "vram-pair-v2-r1-ab-a",
+        "phase": "Draining"
+      }
+    ],
+    "retained": "Shared active VM/PV/PVC and unrelated Draining allocation; GPURequest history not removed."
+  },
+  "activeChannelImagesRetained": {
+    "worker": [
+      "ghcr.io/woogiboogi1129/vmweave-worker@sha256:7ff1a538da5eb5f7941f9f1f43d67deb5eab3438f766c18c2cef89ce9cd260da"
+    ],
+    "helper": [
+      "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574"
+    ],
+    "hook": [
+      "ghcr.io/woogiboogi1129/vmweave-hook@sha256:042cf711bdda5dc67b892dc87610ac11ace8b7f47f8b23a94e87cfba17861c05"
+    ]
+  },
+  "externalComponentsNotUpgraded": {
+    "vmweave-dra-driver/hami-dra-driver-kubelet-plugin": [
+      "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+    ],
+    "kube-system/hami-device-plugin": [
+      "docker.io/projecthami/hami:v2.10.0",
+      "docker.io/projecthami/hami:v2.10.0"
+    ]
+  },
+  "workflows": {
+    "v0.5.8:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783071970",
+    "v0.5.8:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783071942",
+    "v0.5.8:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783072021",
+    "v0.5.8:hami-dra-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783072013",
+    "v0.5.8:hami-runtime-image": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783071911",
+    "main:static-validation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783068222",
+    "main:deployment-chart": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783068169",
+    "main:Documentation": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783068118",
+    "main:CPU control plane": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783068174",
+    "main:deployment-images": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41783068171"
+  },
+  "evidence": "deploy/releases/evidence/v0.5.8"
+}

@@ -1,0 +1,139 @@
+{
+  "status": "PASS",
+  "admission": [
+    {
+      "namespace": "vmweave-test-a",
+      "channel": "vmweave-k8s-01",
+      "serverDryRunAccepted": true,
+      "notPersisted": true
+    },
+    {
+      "namespace": "vmweave-nested-k8s",
+      "channel": "vw-k8s-worker-01",
+      "serverDryRunAccepted": true,
+      "notPersisted": true
+    }
+  ],
+  "protected": [
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1",
+      "unchanged": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4",
+      "unchanged": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "b674c137-5bee-4e6c-bc03-29affd46b60f",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "8365e184-8715-42a3-954d-b82dc01e3a41",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7a10ddb6-eb22-4995-be06-c72700a2449f",
+      "unchanged": true
+    },
+    {
+      "kind": "sharedmemorychannels",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+      "unchanged": true
+    },
+    {
+      "kind": "sharedmemorychannels",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+      "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+      "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+      "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-test-a",
+      "name": "virt-launcher-vmweave-k8s-01-xpl2s",
+      "uid": "596335b3-7d91-426b-8c8b-49b2deb50a81",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21-worker",
+      "uid": "a378042c-6247-4e83-8adc-e7ba70fe91fb",
+      "unchanged": true
+    }
+  ],
+  "drainingAllocationUnchanged": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b",
+  "remainingChannels": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "phase": "Ready"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "phase": "Ready"
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-v2-r1-ab-a",
+      "phase": "Draining"
+    }
+  ],
+  "reclamationJournalsRemaining": 0,
+  "testNamespaceRemoved": true,
+  "externalComponentsNotUpgraded": {
+    "vmweave-dra-driver/hami-dra-driver-kubelet-plugin": [
+      "ghcr.io/woogiboogi1129/vmweave-hami-dra:v0.5.2@sha256:8f090c63aef50e60e810f1af18385c917bcb3a77b45ca9cfb47b671e236ec947"
+    ],
+    "kube-system/hami-device-plugin": [
+      "docker.io/projecthami/hami:v2.10.0",
+      "docker.io/projecthami/hami:v2.10.0"
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "status": "PASS",
+  "method": "Independent detached UID/generation proofs + absent old runtime/backing + current binding protection; UID/resourceVersion conditional DELETE/finalizer removal. No synthetic completion receipt written.",
+  "deletedChannels": [
+    {
+      "name": "vmweave-k8s-gpu",
+      "uid": "f311fcff-8c0c-4646-9f64-439ef1ace8f3"
+    },
+    {
+      "name": "vmweave-k8s-postinstall",
+      "uid": "3c239bc0-2025-4a43-86cb-17623962b0ef"
+    },
+    {
+      "name": "vmweave-k8s-reconnect",
+      "uid": "6995de9a-d607-46de-84f2-1ebb0165e800"
+    }
+  ],
+  "deletedOwnedAttachments": 6,
+  "retained": "Shared active VM/PV/PVC and unrelated Draining allocation; GPURequest history not removed.",
+  "protectedAfter": [
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1",
+      "unchanged": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4",
+      "unchanged": true
+    },
+    {
+      "kind": "vm",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "b674c137-5bee-4e6c-bc03-29affd46b60f",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "8365e184-8715-42a3-954d-b82dc01e3a41",
+      "unchanged": true
+    },
+    {
+      "kind": "vmi",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7a10ddb6-eb22-4995-be06-c72700a2449f",
+      "unchanged": true
+    },
+    {
+      "kind": "sharedmemorychannels",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+      "unchanged": true
+    },
+    {
+      "kind": "sharedmemorychannels",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "virt-launcher-vw-k8s-cp-01-g4x57",
+      "uid": "95c7b955-3073-4dbc-a68b-88710e2296f4",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+      "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-worker",
+      "uid": "07a45bd4-0891-4a96-9b9d-9fefe7283077",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-test-a",
+      "name": "virt-launcher-vmweave-k8s-01-xpl2s",
+      "uid": "596335b3-7d91-426b-8c8b-49b2deb50a81",
+      "unchanged": true
+    },
+    {
+      "kind": "pods",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21-worker",
+      "uid": "a378042c-6247-4e83-8adc-e7ba70fe91fb",
+      "unchanged": true
+    }
+  ]
+}

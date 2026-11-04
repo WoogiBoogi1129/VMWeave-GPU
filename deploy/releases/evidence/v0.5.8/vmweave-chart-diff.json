@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "changes": [
+    {
+      "kind": "ClusterRole",
+      "name": "vmweave-system-vmweave-controller",
+      "change": "add configmaps to existing namespace-scoped child resource permissions"
+    }
+  ],
+  "scope": "Same existing Helm values and old image digest; only intended ConfigMap permissions changed."
+}

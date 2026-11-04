@@ -83,3 +83,19 @@ recovery failure.
   this is not a physical GPU detach or VM boot benchmark.
 - Deployment evidence and checks against the published OCI binary/chart are
   recorded in `deploy/releases/v0.5.8.json` after rollout.
+
+## Deployment result
+
+Published and deployed on 2026-11-04 (KST). Helm `vmweave` is revision 15 and
+`nested` is revision 4, both chart 0.5.8. All four Controller/Webhook Deployments
+are Ready on the verified published Operator digest. Three existing VMIs and two
+active channel generations were preserved, with unchanged runtime Pod restart
+counts. No recovery journals or canary resources remain.
+
+The three historical Released channels were independently audited and finalized
+with UID/resourceVersion guards; six owned attachments were garbage-collected.
+No completion receipts were fabricated. Their shared active VM/PV/PVC remain.
+The unresolved Draining allocation and historical GPURequest objects remain.
+
+[Release and deployment record](https://github.com/WoogiBoogi1129/VMWeave-GPU/blob/main/deploy/releases/v0.5.8.json)
+and [validation evidence](https://github.com/WoogiBoogi1129/VMWeave-GPU/blob/main/deploy/releases/evidence/v0.5.8/README.md).

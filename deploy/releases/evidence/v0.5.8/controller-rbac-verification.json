@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "controller": "vmweave-system/vmweave-controller",
+      "workloadNamespace": "vmweave-test-a",
+      "namedJournalRoleCreationDryRun": "PASS"
+    },
+    {
+      "controller": "vmweave-nested-system/nested-controller",
+      "workloadNamespace": "vmweave-nested-k8s",
+      "namedJournalRoleCreationDryRun": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "scope": "Real Kubernetes API, filesystem, least-privilege helper Pods and controller. Synthetic detach evidence; no real GPU mapping or VM boot. Node reboot/storage loss not tested.",
+  "cases": [
+    {
+      "case": "normal",
+      "crashAfter": null,
+      "lifecycle": "Allocation",
+      "backingRemoved": true,
+      "journalAndCredentialsRemoved": true,
+      "vmUnchanged": true
+    },
+    {
+      "case": "partial",
+      "crashAfter": "unlinked_channel",
+      "lifecycle": "Allocation",
+      "backingRemoved": true,
+      "journalAndCredentialsRemoved": true,
+      "vmUnchanged": true
+    },
+    {
+      "case": "removed",
+      "crashAfter": "removed_directory",
+      "lifecycle": "Allocation",
+      "backingRemoved": true,
+      "journalAndCredentialsRemoved": true,
+      "vmUnchanged": true
+    },
+    {
+      "case": "completed",
+      "crashAfter": "complete",
+      "lifecycle": "Allocation",
+      "backingRemoved": true,
+      "journalAndCredentialsRemoved": true,
+      "vmUnchanged": true
+    },
+    {
+      "case": "persistent",
+      "crashAfter": "unlinked_layout.bin",
+      "lifecycle": "VM",
+      "backingRemoved": true,
+      "journalAndCredentialsRemoved": true,
+      "vmUnchanged": true
+    }
+  ],
+  "testedManagerSHA256": "90105a6ea45d4b6786c969497ce0e55bb6694ed6ab38cc9ee8ae1ee8d5ba36b9"
+}

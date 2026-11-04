@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "namespace": "vmweave-reclamation-canary",
+      "serviceAccount": "partial-recover",
+      "resource": "configmap/partial-recovery",
+      "verb": "update",
+      "allowed": true
+    },
+    {
+      "namespace": "vmweave-reclamation-canary",
+      "serviceAccount": "partial-recover",
+      "resource": "configmap/unrelated",
+      "verb": "update",
+      "allowed": false
+    },
+    {
+      "namespace": "vmweave-reclamation-canary",
+      "serviceAccount": "partial-recover",
+      "resource": "sharedmemorychannels/status",
+      "verb": "update",
+      "allowed": false
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "serviceAccount": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21-worker",
+      "resource": "configmaps",
+      "verb": "update",
+      "allowed": false
+    }
+  ]
+}
