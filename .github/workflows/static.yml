@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 scripts/check-repository.py
-      - name: Parse SHM Python and deployment JSON
+      - name: Parse maintained Python recursively and deployment JSON
         run: |
           python3 - <<'PYCODE'
           import ast, json
           from pathlib import Path
-          for root in ('runtime/shm/control', 'scripts'):
-              for p in Path(root).glob('*.py'):
+          for root in ('runtime/shm/control', 'scripts', 'tests', 'tools', 'operator/hack', 'operator/internal'):
+              for p in Path(root).rglob('*.py'):
                   ast.parse(p.read_text(), filename=str(p))
           for p in Path('deploy/shm').glob('*.json'):
               json.loads(p.read_text())

@@ -19,12 +19,13 @@ Flyt/Cricket 기반 실험에서 출발했으며, 현재 기본 실행 경로는
 전체 CUDA/PyTorch 호환성, 전체 장애 시험 및 HA 운영은 완료되지 않았습니다.
 
 2026-09-30 시작 실험에서 N/T/S를 경로별 5회·총 105개 구간 측정했습니다.
-**현재 SHM 경로는 8개 호출·전송 지표 모두 TCP 경로보다 평균 지연이 컸습니다.**
+**해당 실험 빌드의 SHM 경로는 8개 호출·전송 지표 모두 TCP 경로보다 평균 지연이 컸습니다.**
 단일 VM 상한 25·50·75는 각각 5회 모두 사전 이용률 기준을 초과했습니다.
 2026-10-01 공유 20쌍까지 완료했으며, 동시 실행 시 처리량 유지율은 약 49.4–50.1%였습니다.
 전체 실행 검증은 통과했지만 상한 제어 및 SHM 성능 우위가 입증된 결과는 아닙니다.
 전송 방식 외에 정책·실행기 차이가 포함되며, 상한 결과는 해당 빌드·GPU·부하 범위입니다.
-[지원·검증 현황](docs/overview/status.md)과 [새 성능 평가](docs/evaluation/resource-performance.md)를 확인하세요.
+이후 버전의 결과는 [지원·검증 현황](docs/overview/status.md)과 [평가 개요](docs/evaluation/index.md)를 확인하세요.
+과거 수치를 현재 릴리스 전체의 성능으로 확대하지 않습니다.
 
 ## 시작하기
 
@@ -36,7 +37,7 @@ python3 -m venv .local/docs-venv
 .local/docs-venv/bin/mkdocs serve
 ```
 
-- 최신 공개 릴리스: [v0.5.2 이미지·Helm 차트](docs/getting-started/release-v0.5.2.md)
+- 현재 릴리스: [배포 버전·산출물·검증 범위](docs/releases/index.md)
 - HAMi DRA 배포: [Driver·DeviceClass·GPUProfile 설정](docs/getting-started/hami-dra.md)
 - Deployment guide (English): [Deploying to another cluster](docs/getting-started/portable-deployment.en.md)
 - 다른 클러스터 배포: [배포 패키지·Helm·Guest·검증 절차](docs/getting-started/portable-deployment.md)
@@ -56,6 +57,7 @@ python3 -m venv .local/docs-venv
 | `runtime/shm/` | Guest, Worker, Python 호환 helper, SHM 계약·큐·CUDA 디스패처 |
 | `charts/`, `deploy/`, `images/` | Helm, CRD·예제, 이미지 빌드 |
 | `scripts/`, `tests/` | 빌드·설치·검증 도구 |
+| `tools/guest-smoke/` | 배포용 GPU smoke 소스와 출처·해시 |
 | `experiments/` | 실험 실행·수집·분석 및 원본 증거 |
 | `docs/` | 현재 문서 사이트의 원본 |
 | `legacy/` | 이전 RPC 구현과 역사 문서 |

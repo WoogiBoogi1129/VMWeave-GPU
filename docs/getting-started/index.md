@@ -1,5 +1,7 @@
 # 시작하기
 
+배포 버전과 이미지 선택은 [현재 릴리스 색인](../releases/index.md)을 먼저 확인합니다.
+
 VMWeave는 `vmweave-system`에 중앙 Go Controller와 Webhook을 설치합니다.
 사용자는 각자의 namespace에 VM, PVC와 `vmweave.io/v1alpha1` 리소스를 생성합니다.
 KubeVirt의 virt-launcher와 VMWeave Worker·prepare·reclaim Pod도 VM의 namespace에 생성됩니다.

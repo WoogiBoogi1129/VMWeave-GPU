@@ -1,0 +1,14 @@
+{"event":"CONDITIONS","seed":2028,"bytes":1048576,"elements":262144,"blocks":1024,"threads":256,"kernel_addend":19,"trace":true,"timing_experiment":false}
+{"event":"STEP","operation":"cudaGetDeviceCount","api_result":0,"utc_seconds":1790603674.234473944}
+{"event":"STEP","operation":"cudaMalloc_1MiB","api_result":0,"utc_seconds":1790603674.238520384}
+{"event":"STEP","operation":"cudaMemcpy_H2D_1MiB","api_result":0,"utc_seconds":1790603678.255916119}
+{"event":"STEP","operation":"cuModuleLoadData","api_result":0,"utc_seconds":1790603682.294303656}
+{"event":"STEP","operation":"cuModuleGetFunction","api_result":0,"utc_seconds":1790603682.297007322}
+{"event":"STEP","operation":"flytRegisterKernelABI","api_result":0,"utc_seconds":1790603682.297033310}
+{"event":"STEP","operation":"cuLaunchKernel_1024x256","api_result":0,"utc_seconds":1790603682.298722267}
+{"event":"STEP","operation":"cudaDeviceSynchronize","api_result":0,"utc_seconds":1790603682.300197124}
+{"event":"STEP","operation":"cudaMemcpy_D2H_1MiB","api_result":0,"utc_seconds":1790603686.311882496}
+{"event":"ACCURACY","checked_elements":262144,"checked_bytes":1048576,"mismatches":0,"criterion":"exact uint32 equality"}
+{"event":"STEP","operation":"cuModuleUnload","api_result":0,"utc_seconds":1790603691.690109253}
+{"event":"STEP","operation":"cudaFree","api_result":0,"utc_seconds":1790603691.692964077}
+{"event":"RESULT","status":"PASS","checked_elements":262144,"checked_bytes":1048576,"mismatches":0,"utc_seconds":1790603691.692987442}

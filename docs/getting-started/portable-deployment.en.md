@@ -31,8 +31,11 @@ driver to verify compatibility.
 
 ## 1. Obtain release artifacts
 
-Latest published version: [v0.5.2 artifacts and verification record](release-v0.5.2.md).
-Previous version: [v0.4.0](release-v0.4.0.md).
+See the [release index](../releases/index.md) for the current published version.
+**The commands below preserve the v0.5.2 procedure with chart 0.5.1.** They are not
+current-version installation or upgrade commands. Follow the [current installation guide](install.md),
+[upgrade guide](../guides/upgrade-uninstall.md), and release-specific instructions for a current deployment.
+[v0.5.2 verification record](release-v0.5.2.md) · [v0.4.0 record](release-v0.4.0.md).
 
 The [v0.5.2 release lock](../../deploy/releases/v0.5.2.json) lists seven public images
 and their digests. Classic HAMi uses `vmweave-hami`; DRA uses `vmweave-hami-dra`.

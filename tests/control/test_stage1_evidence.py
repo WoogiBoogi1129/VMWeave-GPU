@@ -11,7 +11,7 @@ from run_stage1 import validate
 
 class Stage1Evidence(unittest.TestCase):
     def setUp(self):
-        directory = ROOT/'experiments/evidence/results/2026-09-28-stage1/runs/evidence-s1r-0928-01'
+        directory = ROOT/'tests/fixtures/evidence/stage1'
         self.parts = [json.loads((directory/name).read_text()) for name in
                       ['applied.json', 'host-mapping.json', 'runtime-libraries.json', 'guest-bar.json']]
 

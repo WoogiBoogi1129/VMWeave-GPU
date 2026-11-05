@@ -43,6 +43,13 @@ docker build -f images/vmweave/Operator.Containerfile -t vmweave-operator:test .
 
 ## CI
 
+배포 이미지 workflow는 Containerfile이 읽는 소스·테스트·smoke 입력을 감지한다.
+`tests/deployment/test_repository_contracts.py`가 COPY 입력과 push/PR path filter의 대응,
+release/chart lock, fixture 변조 거부를 검증한다.
+CPU 제어·chart workflow의 기존 실행 범위는 필수 체크 이름과 동작 보존을 위해 유지한다.
+실행 시간 최적화를 위한 job 선택은 의존 목록·branch protection을 확인한 후 별도 적용한다.
+
+
 - 정적 검증: Python 구문·JSON 파싱·경로/CRD 일치 검사.
 - CPU 제어기: 단위 테스트·Helm lint·제어기 이미지 빌드.
 - 런타임 이미지: 관련 코드 main/PR 빌드 및 기존 `v*` 태그 게시 정책.

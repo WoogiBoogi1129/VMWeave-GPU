@@ -2,11 +2,23 @@
 """Validate deployment schema mirrors, migrated source paths and site figures."""
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def check_snapshot(root, manifest_path):
+    manifest = json.loads((root / manifest_path).read_text())
+    if not re.fullmatch(r'[0-9a-f]{40}', manifest['sourceRevision']):
+        raise ValueError(f'Invalid source revision: {manifest_path}')
+    for item in manifest['files']:
+        path = root / item['path']
+        if hashlib.sha256(path.read_bytes()).hexdigest() != item['sha256']:
+            raise ValueError(f'Snapshot hash mismatch: {item["path"]}')
+
 def main():
+    for manifest_path in ('tools/guest-smoke/provenance.json', 'tests/fixtures/evidence/provenance.json'):
+        check_snapshot(ROOT, manifest_path)
     for filename in ('channel-crds.json', 'flytgpuprofiles.json', 'flytgpurequests.json'):
         left = json.loads((ROOT / 'deploy/shm' / filename).read_text())
         right = json.loads((ROOT / 'charts/flyt-control-plane/crds' / filename).read_text())
@@ -23,6 +35,6 @@ def main():
             text = path.read_text()
             for old in ('experiments/' + 'shm-contract', 'experiments/' + 'shm-queue', 'experiments/' + 'cuda-dispatch'):
                 if old in text: raise SystemExit(f'Stale build path {old}: {path}')
-    print('PASS: CRD copies, migrated code references, evidence figure hashes')
+    print('PASS: CRD copies, migrated code references, evidence figure and snapshot hashes')
 
 if __name__ == '__main__': main()

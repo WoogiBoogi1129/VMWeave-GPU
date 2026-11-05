@@ -71,7 +71,7 @@ mkdir -p .local/guest-artifacts
 docker run --rm -v "$PWD:/repo:ro" -v "$PWD/.local/guest-artifacts:/out" \
   vmweave-runtime-build:local sh -ec '
     cp /opt/vmweave/lib/libvmweave_guest.so /out/
-    gcc -O2 -I/usr/local/cuda/include /repo/experiments/evidence/guest_gpu_smoke.c \
+    gcc -O2 -I/usr/local/cuda/include /repo/tools/guest-smoke/guest_gpu_smoke.c \
       -L/opt/vmweave/lib -Wl,-rpath,\$ORIGIN -lvmweave_guest -o /out/guest-gpu-smoke
     gcc -x c -O2 -I/usr/local/cuda/include /repo/experiments/evidence/memory_probe.cu \
       -L/opt/vmweave/lib -Wl,-rpath,\$ORIGIN -lvmweave_guest -o /out/memory-probe-guest

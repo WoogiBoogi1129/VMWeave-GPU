@@ -1,3 +1,7 @@
+# Deployment smoke is checked against its provenance manifest.
+tools/guest-smoke/guest_gpu_smoke.c -text
+# This campaign's checksum manifest covers source as well as results.
+experiments/training-threeway/** -text
 # Evidence hashes must survive checkout without EOL normalization. Captured
 # probe streams additionally preserve SSH's CRLF as originally observed.
 experiments/evidence/results/** -text

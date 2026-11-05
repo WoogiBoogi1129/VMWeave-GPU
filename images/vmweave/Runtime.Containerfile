@@ -15,7 +15,7 @@ RUN mkdir -p /tmp/vmweave-test-stubs \
     && CUDA_ROOT=/usr/local/cuda bash /src/tests/path_optimization/run_cuda_mock.sh \
     && rm -rf /tmp/vmweave-test-stubs
 
-COPY experiments/evidence/guest_gpu_smoke.c /src/guest_gpu_smoke.c
+COPY tools/guest-smoke/guest_gpu_smoke.c /src/guest_gpu_smoke.c
 RUN cc -O2 -I/usr/local/cuda/include /src/guest_gpu_smoke.c -L/opt/vmweave/lib \
     -Wl,-rpath,'$ORIGIN' -lvmweave_guest -o /opt/vmweave/lib/guest-gpu-smoke
 

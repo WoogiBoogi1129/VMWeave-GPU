@@ -14,7 +14,7 @@ from verify_stage2 import parse, correlate, verify
 
 class Stage2Evidence(unittest.TestCase):
     def setUp(self):
-        self.directory=ROOT/'experiments/evidence/results/2026-09-28-stage2/runs/evidence-s2-0928-01'
+        self.directory=ROOT/'tests/fixtures/evidence/stage2/evidence-s2-0928-01'
         self.guest=parse((self.directory/'guest-stderr.txt').read_text())
         self.worker=parse((self.directory/'worker-stderr.txt').read_text())
         self.binding=json.loads((self.directory/'trace-binding.json').read_text())

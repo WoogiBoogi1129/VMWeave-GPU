@@ -1,11 +1,11 @@
 name: deployment-images
 on:
   pull_request:
-    paths: ['images/**', 'runtime/shm/**', 'operator/**', 'experiments/evidence/guest_gpu_smoke.c', '.dockerignore', '.github/workflows/images.yml']
+    paths: ['images/**', 'runtime/shm/**', 'operator/**', 'tools/guest-smoke/**', 'tests/integration/**', 'tests/path_optimization/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/images.yml']
   push:
     branches: [main]
     tags: ['v*']
-    paths: ['images/**', 'runtime/shm/**', 'operator/**', 'experiments/evidence/guest_gpu_smoke.c', '.dockerignore', '.github/workflows/images.yml']
+    paths: ['images/**', 'runtime/shm/**', 'operator/**', 'tools/guest-smoke/**', 'tests/integration/**', 'tests/path_optimization/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/images.yml']
   workflow_dispatch:
 permissions:
   contents: read

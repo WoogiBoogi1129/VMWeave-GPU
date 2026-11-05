@@ -4,6 +4,12 @@ on:
     branches: [main]
     paths:
       - 'docs/**'
+      - 'README.md'
+      - 'experiments/README.md'
+      - 'deploy/releases/current.json'
+      - 'versions.lock.yaml'
+      - 'tools/guest-smoke/**'
+      - 'tests/fixtures/**'
       - 'legacy/docs/**'
       - 'mkdocs.yml'
       - 'requirements-docs.txt'

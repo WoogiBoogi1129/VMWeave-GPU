@@ -2,10 +2,18 @@
 
 현재 [실험·평가 문서](../docs/evaluation/index.md)에서 목적별 결과를 찾을 수 있습니다.
 
-- `h2d-diagnosis/`: 16MiB H2D의 재현·단계 계측·Guest 복사 제거 대조 실험.
-- `evidence/`: 실행·수집·분석·검증 도구 및 날짜별 결과 묶음.
-- 그 외 디렉터리: SHM 전환 당시 단계별 계약·검증 계획 기록.
-- 현재 빌드에서 사용하는 계약·큐·CUDA dispatcher는 `runtime/shm/`로 이동했습니다.
+| 영역 | 디렉터리·진입점 |
+|---|---|
+| 학습·애플리케이션 비교 | [training-threeway](training-threeway/README.md), [ai-passthrough](ai-passthrough/README.md), [pytorch-smoke](pytorch-smoke/README.md) |
+| VM 내부 Kubernetes | [nested-k8s-gpu](nested-k8s-gpu/README.md), [초기 k8s-gpu-pod](k8s-gpu-pod/) |
+| 자원 제한·격리 | [thesis-isolation](thesis-isolation/README.md), [vram-accounting](vram-accounting/README.md), [sm-core-limit](sm-core-limit/README.md) |
+| 성능·진단 실행 도구 | [performance](performance/README.md), [system-comparison](system-comparison/README.md), [shm-first-bundle](shm-first-bundle/README.md), [h2d-diagnosis](h2d-diagnosis/), [diagnostics](diagnostics/) |
+| 공통 증거·제어기 검증 | [evidence](evidence/README.md), [operator](operator/), [dra-smoke](dra-smoke/README.md) |
+| SHM 단계별 계약 이력 | [channel-controller](channel-controller/README.md), [vm-shm-channel](vm-shm-channel/README.md), [shm-cuda-core](shm-cuda-core/README.md), [shm-async](shm-async/README.md), [shm-compatibility](shm-compatibility/README.md), [shm-lifecycle](shm-lifecycle/README.md), [rpc-removal](rpc-removal/README.md) |
+
+현재 빌드의 계약·큐·CUDA dispatcher는 `runtime/shm/`, 배포용 smoke는 `tools/guest-smoke/`에 있다.
+새 campaign은 [새 실험 자료 규칙](../docs/evaluation/experiment-layout.md)을 따른다.
+과거 링크는 [경로 안내](../docs/history/link-map.md), 전체 결과는 [증거 색인](../docs/evaluation/catalog.md)을 확인한다.
 
 기존 결과의 내부 경로·해시·성공/실패 내역을 보존합니다.
 새 재실행은 새 결과 디렉터리를 사용합니다.
@@ -15,3 +23,5 @@
 - [2026-10-28 VM 내부 2노드 Kubernetes·GPU Pod 결과·캡처 및 향후 중앙 Operator 실습](nested-k8s-gpu/README.md)
 - [2026-10-29 Guest/Pod SGEMM 처리량](nested-k8s-gpu/results/20261029-sgemm-throughput/REPORT.md) · [VMWeave·Flyt·Passthrough 기존 결과 비교](nested-k8s-gpu/results/20261029-performance-comparison/REPORT.md)
 - [2026-10-30 내부 Kubernetes 전송 지연·대역폭 및 Rodinia 처리량 통합 보고서](nested-k8s-gpu/results/20261030-transfer-app-throughput/REPORT.md)
+
+- [2026-11-02~03 VMWeave·Flyt·Passthrough 학습 비교](training-threeway/results/20261102/REPORT.md)

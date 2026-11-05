@@ -49,7 +49,7 @@ def wait_for(function,label,timeout=None):
 initial=get(channel_kind,channel)
 if not initial or initial.get('status',{}).get('phase') not in (('BackingReady','Bound','Ready') if a.resume else ('BackingReady',)) or initial.get('spec',{}).get('drain') or initial['metadata'].get('deletionTimestamp'):raise ValueError('live channel in permitted initial phase required')
 save('channel-before.json',initial)
-files=[ROOT/'scripts/run-evidence-smoke.py',ROOT/'experiments/evidence/guest_gpu_smoke.c',ROOT/'experiments/evidence/memory_probe.cu',a.artifacts/'libvmweave_guest.so',a.artifacts/binary]
+files=[ROOT/'scripts/run-evidence-smoke.py',ROOT/'tools/guest-smoke/guest_gpu_smoke.c',ROOT/'experiments/evidence/memory_probe.cu',a.artifacts/'libvmweave_guest.so',a.artifacts/binary]
 if a.gpu_program=='compute':files.append(ROOT/'experiments/evidence/compute_probe.c')
 save('manifest.json',{'run_id':a.output.name,'phase':'development','namespace':ns,'channel_uid':initial['metadata']['uid'],
  'monotonic_origin_seconds':started,

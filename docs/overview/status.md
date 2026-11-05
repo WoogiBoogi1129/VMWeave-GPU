@@ -1,6 +1,16 @@
 # 지원·검증 현황
 
-**제어기 검증: 2026-09-30. 새 성능 측정: 2026-09-30 시작, 10월 1일 완료.**
+**현황 색인 갱신: 2026-11-05.** 현재 배포 버전은 [릴리스 색인](../releases/index.md)을 따릅니다.
+검증은 아래처럼 버전·실행별로 구분합니다. 일부 조건 성공을 전체 호환성·운영 안정성으로 확대하지 않습니다.
+
+| 후속 검증 | 확인 범위 | 근거 |
+|---|---|---|
+| 11/4 v0.5.8 회수 기록 | API/filesystem 중단 복구, CRD/RBAC, 배포 상태. 물리 GPU detach·새 VM 부팅 시험은 아님 | [릴리스](../getting-started/release-v0.5.8.md) |
+| 11/2~3 학습 비교 | VMWeave v0.5.5·Flyt·Passthrough의 제한된 합성 MLP, 정식 300회 | [보고서](../../experiments/training-threeway/results/20261102/REPORT.md) |
+| 10/28~30 내부 Kubernetes | 비특권 GPU Pod, Guest/Pod SGEMM·복사·Rodinia. 내부 Device Plugin 미사용 | [실험 색인](../../experiments/nested-k8s-gpu/README.md) |
+| 10/16 VRAM 계상 | 할당 경계·동시 조건·물리 메모리 관측 | [보고서](../../experiments/vram-accounting/README.md) |
+
+아래 표는 **9/30 제어기와 9/30~10/1 성능 실험 등 기존 증거**다. 각 수치는 당시 빌드와 조건에 한정한다.
 N/T/S 및 연산 상한은 새 Go Operator에서 측정했습니다. 기존 학습·메모리 실험은 별도 역사 기록입니다.
 [9월 30일 환경 정리](../history/cleanup-2026-09-30.md) 이후 기존 실험 namespace는 삭제했습니다.
 소스의 기능 존재, CPU 회귀 통과, 실제 GPU 실행은 서로 다른 검증 수준입니다.
@@ -22,7 +32,7 @@ N/T/S 및 연산 상한은 새 Go Operator에서 측정했습니다. 기존 학�
 
 - 임의 PyTorch 프로그램 및 전체 CUDA API 호환성.
 - 전체 CUDA Graph 연산/capture, cuBLASLt·cuDNN 전체 연산, NCCL/DDP 및 다중 장치.
-- 관측된 연산 이용률 상한 위반의 원인 규명 및 수정 검증. 상한은 처리량 비율 보장이 아님.
+- 과거 상한 위반 기록은 해당 빌드의 결과이며, 후속 검증은 [증거 색인](../evaluation/catalog.md)에서 구분한다. 모든 부하·GPU에 대한 상한 및 처리량 비율 보장은 하지 않는다.
 - 장애·재시작·강제 종료 전체 행렬, 투명 세션 복원, HA 운영.
 - 다른 워크로드·GPU로의 확대 및 전송 방식만의 효과를 분리하는 실험.
 

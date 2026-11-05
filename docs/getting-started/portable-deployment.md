@@ -27,8 +27,11 @@ sm_70을 사용하므로 대상 GPU·드라이버에서 이 PTX를 지원하는�
 
 ## 1. 릴리스 산출물 확보
 
-게시된 최신 버전: [v0.5.2 산출물·다운로드·검증 기록](release-v0.5.2.md).
-이전 버전: [v0.3.0](release-v0.3.0.md).
+현재 배포판은 [릴리스 색인](../releases/index.md)에서 확인합니다.
+**아래 명령은 v0.5.2 소스·이미지와 chart 0.5.1을 사용하는 당시 배포 절차입니다.**
+새 버전 설치·업그레이드 명령으로 그대로 사용하지 않습니다. 현행 설치는 [중앙 설치](install.md),
+기존 환경 업그레이드는 [업그레이드·제거](../guides/upgrade-uninstall.md)와 해당 릴리스 지침을 따릅니다.
+[v0.5.2 검증 기록](release-v0.5.2.md) · [v0.3.0 기록](release-v0.3.0.md).
 
 공개 이미지 7종과 digest는 [v0.5.2 release lock](../../deploy/releases/v0.5.2.json)에 있습니다.
 일반 HAMi는 `vmweave-hami`, DRA는 `vmweave-hami-dra`를 사용합니다.

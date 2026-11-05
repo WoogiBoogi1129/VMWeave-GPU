@@ -1,5 +1,8 @@
 # 중앙 VMWeave Operator 설치
 
+[현재 릴리스](../releases/index.md)의 image digest·chart·CRD 요구사항을 기준으로 준비합니다.
+과거 portable 배포 예제의 태그를 현행 버전으로 간주하지 않습니다.
+
 관리자용 절차입니다. Go Controller와 Webhook은 `vmweave-system`에 한 번 설치합니다.
 사용자 namespace에는 Controller를 설치하지 않습니다. 새 API는 `vmweave.io/v1alpha1`입니다.
 

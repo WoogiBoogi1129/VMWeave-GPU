@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check current install/run examples against CLI help and resource ownership."""
 from pathlib import Path
+import json
 import re
 import shlex
 import subprocess
@@ -9,7 +10,23 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def check_release_contract(root):
+    chart = yaml.safe_load((root / 'charts/vmweave-operator/Chart.yaml').read_text())
+    lock = yaml.safe_load((root / 'versions.lock.yaml').read_text())
+    if str(chart['version']) != str(lock['deployment']['chartVersion']):
+        raise ValueError('Chart version and versions.lock.yaml disagree')
+    current = json.loads((root / 'deploy/releases/current.json').read_text())
+    release = json.loads((root / current['record']).read_text())
+    if current['tag'] != release['tag']:
+        raise ValueError('Current release pointer disagrees with published record')
+    if not (root / current['guide']).is_file():
+        raise ValueError('Current release guide is missing')
+    index = (root / 'docs/releases/index.md').read_text()
+    if f"**{current['tag']}**" not in index:
+        raise ValueError('Release index disagrees with current release pointer')
+
 def main():
+    check_release_contract(ROOT)
     pages = [*ROOT.joinpath('docs/getting-started').glob('*.md'),
              *ROOT.joinpath('docs/guides').glob('*.md'),
              ROOT / 'docs/evaluation/new-experiments.md']

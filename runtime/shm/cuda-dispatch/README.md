@@ -3,7 +3,7 @@
 # 10-02: 전송 계층과 분리된 CUDA 실행 모듈
 
 아래 개발 단계 설명과 NOT_RUN은 당시 기록이다. 후속 SHM 연결·VM GPU 실행 및
-OOM 복구 검증의 현재 상태는 [2026-09-22 보고서](../evidence/IMPLEMENTATION_AND_VALIDATION_2026-09-22.md)를 따른다.
+OOM 복구 검증의 현재 상태는 [2026-09-22 보고서](../../../experiments/evidence/IMPLEMENTATION_AND_VALIDATION_2026-09-22.md)를 따른다.
 
 **기본 Runtime 실행 모듈 소스 작성 완료, 검증 NOT_RUN, runtime 미연결.**
 `stage/10-01-shm-contract`의 `1a35dce6e01539a4078429cb951f9ea517598301`에서

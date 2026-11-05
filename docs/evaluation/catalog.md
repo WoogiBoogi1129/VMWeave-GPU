@@ -4,6 +4,12 @@
 
 | 결과 묶음 | 내용 |
 |---|---|
+| [2026-11-02~03 학습 3방식 비교](../../experiments/training-threeway/README.md) | 제한된 MLP 정식 300회, 검산·실패·중단 기록 |
+| [2026-10-28~30 내부 Kubernetes](../../experiments/nested-k8s-gpu/README.md) | 비특권 GPU Pod 기능, SGEMM·복사·Rodinia; Device Plugin 미사용 |
+| [AI·passthrough 비교 campaign](../../experiments/ai-passthrough/README.md) | 실행별 학습·SGEMM·Rodinia 결과와 비교 조건 |
+| [다중 VM 격리·경합](../../experiments/thesis-isolation/README.md) | VRAM·성능 경합과 후속 조건별 증거 |
+| [SM/core 제한](../../experiments/sm-core-limit/README.md) | 단일·동시 조건의 상한 설정과 검증 범위 |
+| [HAMi DRA smoke](../../experiments/dra-smoke/README.md) | DRA 경로 검증, 일반 HAMi와 구분 |
 | [2026-10-16 VRAM 계상](../../experiments/vram-accounting/README.md) | 단일 10회·동시 10쌍·PyTorch 10회+추가 2회, 4 KiB 경계·물리 한도 초과·Grafana·원본 |
 | [2026-09-30 performance](../../experiments/evidence/results/2026-09-30-performance/) | 10월 1일 완료: 75세션·185구간·공유 20쌍, 중단 1쌍 보존, 원시 표본·Grafana·명령 이력 |
 | [2026-09-30 Operator](../../experiments/operator/2026-09-30/) | 중앙 Go Operator·두 namespace GPU smoke; 성능 재측정 아님 |
