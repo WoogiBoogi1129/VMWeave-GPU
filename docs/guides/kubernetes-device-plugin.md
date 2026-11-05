@@ -54,7 +54,8 @@ resources:
 
 이 조각 외에 CPU·메모리·권한 설정은 전체 예제를 따른다. 임의 CUDA/PyTorch image의
 자동 호환성이나 다중 GPU 프로세스를 보장하지 않는다. SGEMM 검산은 같은 workload image에서
-`command: ["/opt/vmweave/bin/sgemm"]`으로 실행한다.
+`command: ["/opt/vmweave/bin/sgemm"]`으로 실행한다. 선택 인자 `args: ["15"]`는
+CUDA 메모리 할당 후 15초 대기하여 idle client 상태를 검증한다(0~60초).
 
 자원이 하나뿐인 시험 클러스터에서는 A가 할당받은 동안 B는 Pending이다.
 A의 CUDA 작업만 끝나고 컨테이너가 계속 실행 중이면 자원은 계속 할당된 상태다.
