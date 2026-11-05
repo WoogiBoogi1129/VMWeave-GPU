@@ -35,6 +35,15 @@ jobs:
       shell: bash
       run: |
         set -euo pipefail
+        stage='image metadata'
+        report_failure() {
+          local rc=$?
+          echo "::error title=Device Plugin package build::Stage: $stage (exit $rc)"
+          tail -n 25 "$RUNNER_TEMP/device-plugin-build.log" | python3 -c 'import sys; text=sys.stdin.read().replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A"); print("::error title=Package build output::" + text)'
+          exit "$rc"
+        }
+        trap report_failure ERR
+        exec > >(tee "$RUNNER_TEMP/device-plugin-build.log") 2>&1
         owner="${GITHUB_REPOSITORY_OWNER,,}"
         tag="$GITHUB_SHA"
         if [[ "$GITHUB_REF" == refs/tags/device-plugin-v* ]]; then
@@ -43,13 +52,18 @@ jobs:
           test "$(helm show chart charts/vmweave-device-plugin | awk '/^version:/ {print $2}')" = "$version"
         fi
         prefix="ghcr.io/${owner}/vmweave-device-plugin"
+        stage='plugin image'
         docker build -f images/vmweave/DevicePlugin.Containerfile --label org.opencontainers.image.revision="$GITHUB_SHA" --label org.opencontainers.image.source="https://github.com/$GITHUB_REPOSITORY" -t "$prefix:$tag" .
+        stage='guest image and checksums'
         docker build -f images/vmweave/Runtime.Containerfile --target guest-artifacts --build-arg SOURCE_REVISION="$GITHUB_SHA" --label org.opencontainers.image.revision="$GITHUB_SHA" --label org.opencontainers.image.source="https://github.com/$GITHUB_REPOSITORY" -t "$prefix-guest:$tag" .
         docker run --rm "$prefix-guest:$tag" sh -ec 'cd /opt/vmweave/guest; sha256sum -c SHA256SUMS; test -f guest_status.py'
+        stage='workload image and executables'
         docker build -f images/vmweave/DevicePluginWorkload.Containerfile --build-arg GUEST_IMAGE="$prefix-guest:$tag" --label org.opencontainers.image.revision="$GITHUB_SHA" --label org.opencontainers.image.source="https://github.com/$GITHUB_REPOSITORY" -t "$prefix-workload:$tag" .
         docker run --rm --entrypoint sh "$prefix-workload:$tag" -ec 'test -x /opt/vmweave/bin/sgemm; test -x /opt/vmweave/bin/guest-gpu-smoke; test -r /opt/vmweave/lib/libvmweave_guest.so'
+        stage='chart package'
         helm package charts/vmweave-device-plugin --destination /tmp/plugin-chart
         if [[ "$GITHUB_REF" == refs/tags/device-plugin-v* ]]; then
+          stage='release publication'
           printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
           printf '%s' "$GHCR_TOKEN" | helm registry login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
           docker push "$prefix:$tag"
