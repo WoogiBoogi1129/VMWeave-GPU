@@ -30,4 +30,5 @@ devices = [p for p in Path('/sys/bus/pci/devices').iterdir()
 if len(devices) != 1:
     raise RuntimeError('exactly one ivshmem device required')
 os.environ['VMWEAVE_IVSHMEM_BDF'] = devices[0].name
-os.execv(sys.executable, [sys.executable, '/opt/vmweave/control/guest_broker.py'])
+os.execv(sys.executable, [sys.executable, '/opt/vmweave/control/guest_broker.py',
+                        '--status', '/run/vmweave-device-plugin/status.json'])

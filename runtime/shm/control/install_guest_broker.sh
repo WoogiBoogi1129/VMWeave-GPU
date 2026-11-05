@@ -21,7 +21,7 @@ install -m 0644 "$artifacts/libvmweave_guest.so" /opt/vmweave/lib/libvmweave_gue
 mv -f /opt/vmweave/lib/libvmweave_guest.so.new /opt/vmweave/lib/libvmweave_guest.so
 ln -sfn libvmweave_guest.so /opt/vmweave/lib/libcuda.so.1
 ln -sfn libvmweave_guest.so /opt/vmweave/lib/libflyt_guest.so
-for file in vmweave_env.py guest_broker.py guest_bootstrap.py; do
+for file in vmweave_env.py guest_broker.py guest_status.py guest_bootstrap.py; do
     install -m 0644 "$artifacts/$file" "/opt/vmweave/control/$file"
 done
 install -m 0644 "$artifacts/vmweave-guest-broker.service" /etc/systemd/system/

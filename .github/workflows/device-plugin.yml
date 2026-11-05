@@ -1,0 +1,61 @@
+name: VMWeave guest device plugin
+on:
+  pull_request:
+    paths: ['integrations/kubernetes-device-plugin/**', 'charts/vmweave-device-plugin/**', 'images/vmweave/DevicePlugin*.Containerfile', 'images/vmweave/Runtime.Containerfile', 'runtime/shm/**', 'tools/guest-smoke/**', 'tests/control/test_guest*.py', 'tests/integration/**', 'tests/path_optimization/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/device-plugin.yml']
+  push:
+    branches: [main]
+    tags: ['device-plugin-v*']
+    paths: ['integrations/kubernetes-device-plugin/**', 'charts/vmweave-device-plugin/**', 'images/vmweave/DevicePlugin*.Containerfile', 'images/vmweave/Runtime.Containerfile', 'runtime/shm/**', 'tools/guest-smoke/**', 'tests/control/test_guest*.py', 'tests/integration/**', 'tests/path_optimization/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/device-plugin.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version-file: integrations/kubernetes-device-plugin/go.mod
+        cache-dependency-path: integrations/kubernetes-device-plugin/go.sum
+    - uses: azure/setup-helm@v4.3.0
+    - name: Unit and socket lifecycle tests
+      working-directory: integrations/kubernetes-device-plugin
+      run: |
+        go test -race ./...
+        go vet ./...
+    - name: Broker status regression tests
+      run: python3 -m unittest discover -s tests/control -p 'test_guest*.py' -v
+    - name: Helm contract
+      run: |
+        helm lint charts/vmweave-device-plugin --set image.digest=sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --set librarySHA256=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa --set brokerGID=998
+        python3 integrations/kubernetes-device-plugin/tests/check-packaging.py
+    - name: Build and verify packages
+      shell: bash
+      run: |
+        set -euo pipefail
+        owner="${GITHUB_REPOSITORY_OWNER,,}"
+        tag="$GITHUB_SHA"
+        if [[ "$GITHUB_REF" == refs/tags/device-plugin-v* ]]; then
+          tag="$GITHUB_REF_NAME"
+          version="${tag#device-plugin-v}"
+          test "$(helm show chart charts/vmweave-device-plugin | awk '/^version:/ {print $2}')" = "$version"
+        fi
+        prefix="ghcr.io/${owner}/vmweave-device-plugin"
+        docker build -f images/vmweave/DevicePlugin.Containerfile --label org.opencontainers.image.revision="$GITHUB_SHA" -t "$prefix:$tag" .
+        docker build -f images/vmweave/Runtime.Containerfile --target guest-artifacts --build-arg SOURCE_REVISION="$GITHUB_SHA" --label org.opencontainers.image.revision="$GITHUB_SHA" -t "$prefix-guest:$tag" .
+        docker run --rm "$prefix-guest:$tag" sh -ec 'cd /opt/vmweave/guest; sha256sum -c SHA256SUMS; test -f guest_status.py'
+        docker build -f images/vmweave/DevicePluginWorkload.Containerfile --build-arg GUEST_IMAGE="$prefix-guest:$tag" --label org.opencontainers.image.revision="$GITHUB_SHA" -t "$prefix-workload:$tag" .
+        docker run --rm --entrypoint sh "$prefix-workload:$tag" -ec 'test -x /opt/vmweave/bin/sgemm; test -x /opt/vmweave/bin/guest-gpu-smoke; test -r /opt/vmweave/lib/libvmweave_guest.so'
+        helm package charts/vmweave-device-plugin --destination /tmp/plugin-chart
+        if [[ "$GITHUB_REF" == refs/tags/device-plugin-v* ]]; then
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          printf '%s' "$GHCR_TOKEN" | helm registry login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          docker push "$prefix:$tag"
+          docker push "$prefix-guest:$tag"
+          docker push "$prefix-workload:$tag"
+          helm push /tmp/plugin-chart/vmweave-device-plugin-*.tgz "oci://ghcr.io/${owner}/charts"
+        fi
+      env:
+        GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,60 @@
+{{- $digest := required "image.digest is required" .Values.image.digest -}}
+{{- if not (regexMatch "^sha256:[0-9a-f]{64}$" $digest) -}}
+{{- fail "image.digest must be a SHA256 digest" -}}
+{{- end -}}
+{{- if not (regexMatch "^[0-9a-f]{64}$" .Values.librarySHA256) -}}
+{{- fail "librarySHA256 must be the supported Guest library SHA256" -}}
+{{- end -}}
+{{- if le (int .Values.brokerGID) 0 -}}
+{{- fail "brokerGID must match the nonzero Guest vmweave group ID" -}}
+{{- end -}}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ .Release.Name }}
+  labels: {app.kubernetes.io/name: vmweave-device-plugin, app.kubernetes.io/instance: {{ .Release.Name }}}
+spec:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate: {maxUnavailable: 1}
+  selector:
+    matchLabels: {app.kubernetes.io/name: vmweave-device-plugin, app.kubernetes.io/instance: {{ .Release.Name }}}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/name: vmweave-device-plugin, app.kubernetes.io/instance: {{ .Release.Name }}}
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 10
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+      - name: plugin
+        image: {{ printf "%s@%s" .Values.image.repository $digest | quote }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        - --broker-gid={{ .Values.brokerGID }}
+        - --library-sha256={{ .Values.librarySHA256 }}
+        securityContext:
+          runAsUser: 0
+          runAsGroup: 0
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: {drop: [ALL]}
+          seccompProfile: {type: RuntimeDefault}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        volumeMounts:
+        - {name: kubelet, mountPath: /var/lib/kubelet/device-plugins}
+        - {name: broker, mountPath: /run/vmweave, readOnly: true}
+        - {name: status, mountPath: /run/vmweave-device-plugin, readOnly: true}
+      volumes:
+      - name: kubelet
+        hostPath: {path: /var/lib/kubelet/device-plugins, type: Directory}
+      - name: broker
+        hostPath: {path: /run/vmweave, type: Directory}
+      - name: status
+        hostPath: {path: /run/vmweave-device-plugin, type: Directory}

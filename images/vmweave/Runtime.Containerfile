@@ -30,10 +30,10 @@ ENTRYPOINT ["/usr/bin/tini","--","python3","/opt/vmweave/control/supervisor.py"]
 FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f AS guest-artifacts
 COPY --from=build /opt/vmweave/lib/libvmweave_guest.so /opt/vmweave/lib/guest-gpu-smoke /opt/vmweave/guest/
 RUN ln -s vmweave /opt/flyt && ln -s libvmweave_guest.so /opt/vmweave/guest/libflyt_guest.so && ln -s libvmweave_guest.so /opt/vmweave/guest/libcuda.so.1
-COPY runtime/shm/control/vmweave_env.py runtime/shm/control/guest_broker.py runtime/shm/control/guest_bootstrap.py runtime/shm/control/vmweave-guest-broker.service runtime/shm/control/install_guest_broker.sh /opt/vmweave/guest/
+COPY runtime/shm/control/vmweave_env.py runtime/shm/control/guest_broker.py runtime/shm/control/guest_status.py runtime/shm/control/guest_bootstrap.py runtime/shm/control/vmweave-guest-broker.service runtime/shm/control/install_guest_broker.sh /opt/vmweave/guest/
 # Link applications explicitly to this artifact or preload it into supported apps.
 # No native CUDA, ONC RPC, libtirpc, rpcbind or Manager binary is copied here.
 
 ARG SOURCE_REVISION=unknown
 RUN printf "%s\n" "$SOURCE_REVISION" > /opt/vmweave/guest/source-revision.txt \
-    && cd /opt/vmweave/guest && sha256sum libvmweave_guest.so libflyt_guest.so vmweave_env.py guest-gpu-smoke guest_broker.py guest_bootstrap.py vmweave-guest-broker.service install_guest_broker.sh source-revision.txt > SHA256SUMS
+    && cd /opt/vmweave/guest && sha256sum libvmweave_guest.so libflyt_guest.so vmweave_env.py guest-gpu-smoke guest_broker.py guest_status.py guest_bootstrap.py vmweave-guest-broker.service install_guest_broker.sh source-revision.txt > SHA256SUMS

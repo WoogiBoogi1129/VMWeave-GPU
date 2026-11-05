@@ -56,3 +56,6 @@ CPU 제어·chart workflow의 기존 실행 범위는 필수 체크 이름과 �
 - 문서: 엄격 빌드·사이트 링크 검사 후 `main`만 Pages에 배포.
 
 [문서 개발](documentation.md) · [구조와 이동 기록](repository.md)
+
+선택 설치하는 [VM 내부 Kubernetes Device Plugin](../guides/kubernetes-device-plugin.md)은
+`integrations/kubernetes-device-plugin/`의 독립 Go module과 전용 CI에서 관리한다.

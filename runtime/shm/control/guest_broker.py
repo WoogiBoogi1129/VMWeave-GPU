@@ -48,6 +48,7 @@ class Transport:
     owner_mode = False
     reuse = False
     parts = None
+    last_success = 0.0
     def __init__(self, library):
         # This process is the SHM owner, never a client of its own socket.
         env.pop('VMWEAVE_BROKER_SOCKET')
@@ -144,6 +145,8 @@ class Transport:
         out = self.buffer("output", capacity)
         got = ctypes.c_size_t()
         rc = self.call(api, data, len(data), out, capacity, ctypes.byref(got))
+        if rc == 0:
+            self.last_success = time.time()
         if got.value > capacity:
             raise RuntimeError('invalid transport output length')
         return rc, ctypes.string_at(out, got.value)
@@ -174,6 +177,8 @@ class Transport:
                                 output, capacity, ctypes.byref(got))
             else:
                 rc = self.call(CALL, request, request_size, output, capacity, ctypes.byref(got))
+            if rc == 0:
+                self.last_success = time.time()
             if got.value > capacity or (not rc and got.value != capacity):
                 raise RuntimeError('invalid bulk output length')
             return rc, got.value if not rc else 0
@@ -322,6 +327,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--library', default='/opt/vmweave/lib/libvmweave_guest.so')
     parser.add_argument('--socket', default='/run/vmweave/gpu.sock')
+    parser.add_argument('--status', default='', help='Optional atomic discovery file; bootstrap enables it')
     args = parser.parse_args()
     path = Path(args.socket)
     path.parent.mkdir(mode=0o750, parents=True, exist_ok=True)
@@ -333,6 +339,12 @@ def main():
     listener.bind(str(path))
     os.chmod(path, 0o660)
     listener.listen(8)
+    publisher = None
+    if args.status:
+        from guest_status import Publisher
+        publisher = Publisher(args.status, transport, args.library,
+                              env.require('VMWEAVE_LAYOUT'), args.socket)
+        publisher.start()
     print('VMWeave broker ready; no active CUDA job', flush=True)
     if not transport.owner_mode:
         while True:
@@ -361,6 +373,7 @@ def main():
             try: transport.serve(conn)
             finally: busy.release()
     finally:
+        if publisher: publisher.close()
         listener.close()
         while True:
             try: pending.get_nowait().close()

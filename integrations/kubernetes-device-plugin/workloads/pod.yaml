@@ -1,0 +1,24 @@
+# Replace the image digest and supplemental group with the tested installation.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vmweave-smoke
+spec:
+  restartPolicy: Never
+  automountServiceAccountToken: false
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    supplementalGroups: [998] # actual Guest vmweave GID, not a universal default
+    seccompProfile: {type: RuntimeDefault}
+  containers:
+  - name: smoke
+    image: ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:REPLACE_WITH_VERIFIED_DIGEST
+    args: ['23', '3']
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities: {drop: [ALL]}
+    resources:
+      requests: {cpu: 100m, memory: 64Mi}
+      limits: {cpu: '1', memory: 256Mi, vmweave.io/gpu: 1}
