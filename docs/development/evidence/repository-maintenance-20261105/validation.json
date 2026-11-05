@@ -1,0 +1,208 @@
+{
+  "sourceRevision": "45f1318b126aed3dee06908466ba1f638d9692c1",
+  "date": "2026-11-05",
+  "localBuild": {
+    "engine": "rootless Podman; Docker daemon socket unavailable to this account",
+    "containerfile": "images/vmweave/Runtime.Containerfile",
+    "network": "slirp4netns",
+    "images": {
+      "worker": {
+        "imageID": "323d6d869a9813a4e0b47a618c48c80d102bc754795fba0922493dd405039512",
+        "tag": "localhost/vmweave-worker:repo-45f1318b"
+      },
+      "guest-artifacts": {
+        "imageID": "3e3d7a14478a3e69661a7452124ab1d1fe0680aa26824378db984e10bc4fdfff",
+        "tag": "localhost/vmweave-guest-artifacts:repo-45f1318b"
+      }
+    },
+    "buildRegressionScripts": [
+      "scripts/test-shm-training.sh",
+      "tests/path_optimization/run_cuda_mock.sh"
+    ],
+    "guestPackageChecksums": "9 of 9 passed",
+    "sharedBuildStage": "compiled from source; reused for second target"
+  },
+  "artifactSHA256": {
+    "guest/libvmweave_guest.so": "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5",
+    "guest/guest-gpu-smoke": "6f78c510b3bc6a3a90c45edebd43f1715eca864c8053cead747943ab1162c9ec",
+    "guest/guest_broker.py": "bef4c93ac737b77f8dc1cd62e279349a6279010362861908188c39fd6f3e0fbc",
+    "bin/vmweave-shm-session-worker": "599176e9717d15b0258165f0643c51166ea4c13ac97d277962600935c76edc5c",
+    "bin/vmweave-shm-worker": "437dbe93b46826b8cac6516965d5dae548bc11aff6cde3fbb6268948a32813cc",
+    "file-backed-guest.c": "d6b82d32ac73b85e653d5060992fdb6807b419f5f6e3167aad521d9fb88800cc"
+  },
+  "gpuValidation": {
+    "status": "PASS",
+    "scope": "New Guest library, broker, smoke and session Worker binaries in two containers; real HAMi GPU; test-only file-backed mapping adapter replaces VM PCI BAR",
+    "excluded": [
+      "VM boot and real ivshmem PCI BAR",
+      "nested Kubernetes and Device Plugin",
+      "performance benchmark",
+      "new image deployment to existing VM channels"
+    ],
+    "fixtureAdapter": "file-backed-guest.c",
+    "basePodImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:e2139218e2abc9efa5b5537e8ca7d7567e5dbbe8bc9a40df42f89820894386ad",
+    "newArtifactsCopiedFromLocalImages": true,
+    "namespace": "vmweave-test-b",
+    "podUID": "d6737c69-0253-46bb-9cab-698921c197c1",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "hamiLimits": {
+      "gpu": 1,
+      "memoryMiB": 1024,
+      "coresPercent": 25
+    },
+    "guestNvidiaDevices": [],
+    "results": [
+      {
+        "status": "PASS",
+        "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+        "seed": 23,
+        "kernel_repeats": 1701,
+        "copy_bytes": 4096,
+        "active_seconds": 3.001158
+      },
+      {
+        "status": "PASS",
+        "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+        "seed": 71,
+        "kernel_repeats": 1733,
+        "copy_bytes": 4096,
+        "active_seconds": 3.000567
+      },
+      {
+        "status": "PASS",
+        "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+        "seed": 119,
+        "kernel_repeats": 1945,
+        "copy_bytes": 4096,
+        "active_seconds": 3.000633
+      },
+      {
+        "status": "PASS",
+        "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+        "seed": 187,
+        "kernel_repeats": 3039,
+        "copy_bytes": 4096,
+        "active_seconds": 5.000962
+      }
+    ],
+    "processes": [
+      {
+        "containerPID": 200,
+        "executable": "/validation/bin/vmweave-shm-session-worker",
+        "executableSHA256": "599176e9717d15b0258165f0643c51166ea4c13ac97d277962600935c76edc5c",
+        "hamiLoaded": true,
+        "guestLibraryLoaded": false,
+        "cgroup": "0::/\n"
+      },
+      {
+        "containerPID": 201,
+        "executable": "/validation/bin/vmweave-shm-session-worker",
+        "executableSHA256": "599176e9717d15b0258165f0643c51166ea4c13ac97d277962600935c76edc5c",
+        "hamiLoaded": true,
+        "guestLibraryLoaded": false,
+        "cgroup": "0::/\n"
+      }
+    ],
+    "gpuActiveObservations": {
+      "23": [
+        "GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 3080116, vmweave-shm-session-worker, 552 MiB"
+      ],
+      "71": [
+        "GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 3080407, vmweave-shm-session-worker, 552 MiB"
+      ],
+      "119": [
+        "GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 3080613, vmweave-shm-session-worker, 552 MiB"
+      ],
+      "187": [
+        "GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 3082353, vmweave-shm-session-worker, 552 MiB"
+      ]
+    },
+    "gpuMemoryMiBAfterWorkerExit": 0,
+    "testSetupFailures": [
+      "Initial synthetic sysfs mounts failed container creation",
+      "Read/write access to synthetic resource2 was denied by container security; switched to explicit test-only file mapping adapter without changing runtime source or security profile"
+    ],
+    "existingVMs": "Worker VMIs were Failed and channels Draining before validation; no recovery or mutation attempted"
+  },
+  "githubWorkflows": [
+    {
+      "id": 41975479295,
+      "name": "static-validation",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479295",
+      "head_sha": "45f1318b126aed3dee06908466ba1f638d9692c1"
+    },
+    {
+      "id": 41975479249,
+      "name": "deployment-chart",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479249",
+      "head_sha": "45f1318b126aed3dee06908466ba1f638d9692c1"
+    },
+    {
+      "id": 41975479424,
+      "name": "Documentation",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479424",
+      "head_sha": "45f1318b126aed3dee06908466ba1f638d9692c1"
+    },
+    {
+      "id": 41975479457,
+      "name": "CPU control plane",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479457",
+      "head_sha": "45f1318b126aed3dee06908466ba1f638d9692c1"
+    },
+    {
+      "id": 41975479252,
+      "name": "deployment-images",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479252",
+      "head_sha": "45f1318b126aed3dee06908466ba1f638d9692c1"
+    }
+  ],
+  "dockerImageJobs": [
+    {
+      "name": "build (guest-artifacts, Runtime.Containerfile, guest-artifacts)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479252/job/127073203844"
+    },
+    {
+      "name": "build (helper, Helper.Containerfile)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479252/job/127073203994"
+    },
+    {
+      "name": "build (worker, Runtime.Containerfile, worker)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479252/job/127073204134"
+    },
+    {
+      "name": "build (operator, Operator.Containerfile)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479252/job/127073204157"
+    },
+    {
+      "name": "build (hook, Hook.Containerfile)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479252/job/127073204209"
+    }
+  ],
+  "cleanup": {
+    "testPodDeleted": true,
+    "testConfigMapDeleted": true,
+    "gpuMemoryMiBAfter": 0,
+    "existingVMOrChannelMutated": false,
+    "cleanupMethod": "UID checked then normal Kubernetes deletion; no force or finalizer changes"
+  }
+}

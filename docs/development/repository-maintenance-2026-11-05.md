@@ -41,9 +41,49 @@ CPU 제어·chart workflow를 무조건 skip하는 최적화는 적용하지 않
 문서 검사 첫 시도는 같은 임시 사본에서 결과 디렉터리를 제외하는 CPU 검사와 겹쳐 링크 조회가 실패했다.
 CPU 검사 종료·디렉터리 복구 후 문서 검사를 순차 실행해 통과했다. 저장소 파일 누락으로 인한 실패는 아니다.
 
-CUDA 알고리즘과 Guest/broker/Worker 실행 코드는 변경하지 않았다. smoke는 소스 바이트 동일성과
-새 빌드 입력 경로를 검증했으며 Docker 이미지 전체 재빌드·실제 GPU/VM 실행은 이번에 수행하지 않았다.
-실행 중인 클러스터와 GitHub 배포에는 변경이 없다. 향후 모든 환경에서 문제가 없음을 보장하는 검증은 아니다.
+CUDA 알고리즘과 Guest/broker/Worker 실행 코드는 변경하지 않았다. 최초 구조 정리 단계에서는
+소스 바이트와 빌드 입력 경로만 검증했다. 이후 사용자가 이미지 재빌드·GPU 검증·GitHub push를
+요청하여 아래 후속 검증을 진행했다. 향후 모든 환경에서 문제가 없음을 보장하는 검증은 아니다.
 
 작업 로그·보존 대조·검증 사본 위치는 로컬 `.local/repository-optimization-20261105/`에 있다.
 이번 적용에는 Device Plugin 구현을 포함하지 않는다.
+
+
+## 이미지 재빌드·GPU 검증·GitHub 반영
+
+검증 소스는 [`45f1318b`](https://github.com/WoogiBoogi1129/VMWeave-GPU/commit/45f1318b126aed3dee06908466ba1f638d9692c1)이며
+이 커밋을 GitHub `main`에 push했다. 기존 사용자의 미커밋 수정과 미추적 자료는 포함하지 않았다.
+기계 판독 가능한 결과와 바이너리 hash는 [validation.json](evidence/repository-maintenance-20261105/validation.json)에 있다.
+
+| 검증 | 결과 |
+|---|---|
+| 로컬 이미지 | 변경 영향이 있는 Guest artifacts·Worker를 `Runtime.Containerfile`로 빌드, 성공 |
+| 빌드 방식 | Docker daemon 권한이 없어 rootless Podman 사용. 공통 runtime을 소스에서 컴파일하고 두 번째 target에서 해당 stage 재사용 |
+| 빌드 내 회귀 검사 | `test-shm-training.sh`, `run_cuda_mock.sh` 통과. Guest 패키지 9개 checksum 및 source revision 일치 |
+| GitHub Docker 빌드 | [deployment-images](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479252): operator·helper·worker·guest-artifacts·hook 5종 통과 |
+| 실제 GPU | HAMi 25% / 1,024 MiB 할당, seed 23·71·119·187의 4회 smoke 통과. 4,096-byte 왕복 복사 및 PTX 커널 합계 8,418회 결과 검증 |
+| 실행 바이너리 | Canary 내부 실행 중 Worker의 `/proc/PID/exe` SHA256이 새 로컬 이미지에서 추출한 바이너리와 일치. HAMi library 로드 확인 |
+| 정리 | Worker 종료 후 대상 GPU 0 MiB. UID를 확인하고 임시 Pod·ConfigMap 정상 삭제. 강제 삭제·finalizer 변경 없음 |
+
+GitHub의 [정적 검사](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479295),
+[CPU 제어 검사](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479457),
+[차트 검사](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479249),
+[문서 검사](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41975479424)도 통과했다.
+이번 main workflow는 이미지를 빌드·검증하며 GHCR 게시 조건은 기존 `v*` 태그 정책을 유지한다.
+새 릴리스 태그 생성이나 운영 이미지 교체는 수행하지 않았다. 변경 없는 HAMi·HAMi-DRA 이미지도 교체하지 않았다.
+
+**GPU 검증의 범위**
+
+기존 VMWeave Worker VMIs는 검증 시작 시 `Failed`, 관련 Channel은 `Draining`이었다.
+이 VM들을 재시작하거나 복구하지 않고 `vmweave-test-b`의 임시 Pod에서 검사했다.
+GPU가 없는 Guest 컨테이너에는 새 Guest library·Broker·smoke를, HAMi GPU를 할당받은 Worker
+컨테이너에는 새 session Worker 바이너리를 복사했다. Pod의 기본 이미지는 기존 v0.5.8 Worker이다.
+따라서 새 컨테이너 이미지 자체의 클러스터 배포 검증과도 구분한다.
+
+실제 VM의 PCI BAR를 대신하는 [테스트 전용 어댑터](evidence/repository-maintenance-20261105/file-backed-guest.c)가
+Guest library의 매핑 호출만 별도 공유 파일에 연결했다. CUDA 호출·공유 메모리 큐·Broker 세션·Worker·HAMi·물리 GPU 경로는 실제로 실행했다.
+초기 sysfs fixture 방식은 컨테이너 생성·파일 접근 제한에 막혀 사용하지 않았으며, 보안 설정을 완화하지 않았다.
+smoke 출력의 `Guest-SHM-HAMi-GPU` 문자열만으로 VM 검증을 주장하지 않는다.
+VM 부팅, 실제 ivshmem PCI BAR, VM 내부 Kubernetes, Device Plugin, 성능 회귀 검증은 포함하지 않는다.
+
+빌드 원본 로그와 canary 실행 자료는 로컬 `.local/repository-publication-20261105/`에 보관했다.
