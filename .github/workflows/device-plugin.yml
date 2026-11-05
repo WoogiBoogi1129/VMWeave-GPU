@@ -43,10 +43,10 @@ jobs:
           test "$(helm show chart charts/vmweave-device-plugin | awk '/^version:/ {print $2}')" = "$version"
         fi
         prefix="ghcr.io/${owner}/vmweave-device-plugin"
-        docker build -f images/vmweave/DevicePlugin.Containerfile --label org.opencontainers.image.revision="$GITHUB_SHA" -t "$prefix:$tag" .
-        docker build -f images/vmweave/Runtime.Containerfile --target guest-artifacts --build-arg SOURCE_REVISION="$GITHUB_SHA" --label org.opencontainers.image.revision="$GITHUB_SHA" -t "$prefix-guest:$tag" .
+        docker build -f images/vmweave/DevicePlugin.Containerfile --label org.opencontainers.image.revision="$GITHUB_SHA" --label org.opencontainers.image.source="https://github.com/$GITHUB_REPOSITORY" -t "$prefix:$tag" .
+        docker build -f images/vmweave/Runtime.Containerfile --target guest-artifacts --build-arg SOURCE_REVISION="$GITHUB_SHA" --label org.opencontainers.image.revision="$GITHUB_SHA" --label org.opencontainers.image.source="https://github.com/$GITHUB_REPOSITORY" -t "$prefix-guest:$tag" .
         docker run --rm "$prefix-guest:$tag" sh -ec 'cd /opt/vmweave/guest; sha256sum -c SHA256SUMS; test -f guest_status.py'
-        docker build -f images/vmweave/DevicePluginWorkload.Containerfile --build-arg GUEST_IMAGE="$prefix-guest:$tag" --label org.opencontainers.image.revision="$GITHUB_SHA" -t "$prefix-workload:$tag" .
+        docker build -f images/vmweave/DevicePluginWorkload.Containerfile --build-arg GUEST_IMAGE="$prefix-guest:$tag" --label org.opencontainers.image.revision="$GITHUB_SHA" --label org.opencontainers.image.source="https://github.com/$GITHUB_REPOSITORY" -t "$prefix-workload:$tag" .
         docker run --rm --entrypoint sh "$prefix-workload:$tag" -ec 'test -x /opt/vmweave/bin/sgemm; test -x /opt/vmweave/bin/guest-gpu-smoke; test -r /opt/vmweave/lib/libvmweave_guest.so'
         helm package charts/vmweave-device-plugin --destination /tmp/plugin-chart
         if [[ "$GITHUB_REF" == refs/tags/device-plugin-v* ]]; then
@@ -56,6 +56,41 @@ jobs:
           docker push "$prefix-guest:$tag"
           docker push "$prefix-workload:$tag"
           helm push /tmp/plugin-chart/vmweave-device-plugin-*.tgz "oci://ghcr.io/${owner}/charts"
+          mkdir -p /tmp/release
+          cp /tmp/plugin-chart/*.tgz /tmp/release/
+          docker inspect "$prefix:$tag" "$prefix-guest:$tag" "$prefix-workload:$tag" > /tmp/release/images.json
+          docker run --rm "$prefix-guest:$tag" sh -ec 'cd /opt/vmweave/guest; cat source-revision.txt; sha256sum libvmweave_guest.so' > /tmp/release/guest-identity.txt
+          docker save "$prefix:$tag" "$prefix-guest:$tag" "$prefix-workload:$tag" | gzip -1 > /tmp/release/images.docker.tar.gz
+          (cd /tmp/release; sha256sum images.json guest-identity.txt images.docker.tar.gz *.tgz > SHA256SUMS)
         fi
       env:
         GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/upload-artifact@v4
+      if: startsWith(github.ref, 'refs/tags/device-plugin-v')
+      with:
+        name: device-plugin-release
+        path: /tmp/release/*
+        retention-days: 14
+  release:
+    if: startsWith(github.ref, 'refs/tags/device-plugin-v')
+    needs: verify
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: device-plugin-release
+        path: release
+    - name: Publish portable verified packages
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+        RELEASE_TAG: ${{ github.ref_name }}
+      run: |
+        cat > /tmp/notes.md <<'NOTES'
+        Optional Kubernetes device plugin for VMWeave guests. Exposes one existing VM GPU quota as vmweave.io/gpu: 1; one concurrent CUDA client, no nested HAMi or quota subdivision.
+
+        The portable image archive and Helm chart support installation without registry credentials. Check SHA256SUMS before loading the archive. images.json records registry digests and source labels; guest-identity.txt records the compatible guest library hash. See docs/guides/kubernetes-device-plugin.md for installation and recovery requirements.
+        NOTES
+        gh release create "$RELEASE_TAG" --verify-tag --latest=false --title "VMWeave Device Plugin ${RELEASE_TAG#device-plugin-}" --notes-file /tmp/notes.md release/*

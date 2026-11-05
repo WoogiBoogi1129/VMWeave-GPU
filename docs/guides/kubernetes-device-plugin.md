@@ -24,6 +24,12 @@ Plugin 설치는 내부 클러스터 관리자 권한이 필요하며, 외부 �
 ## 관리자 설치
 
 아래의 이미지 digest와 hash는 실제 검증 산출물 값으로 교체한다.
+`device-plugin-v*` 릴리스는 이미지 digest·소스 label을 담은 `images.json`,
+`guest-identity.txt`, Helm chart 및 `images.docker.tar.gz`를 함께 제공한다.
+레지스트리 읽기 권한 없이 설치할 때는 릴리스 파일을 내려받아 `sha256sum -c SHA256SUMS`로
+검증하고 노드의 CRI image store에 archive를 가져온다. 가져오기 후 해당 런타임이 보고하는
+RepoDigest를 확인하여 chart와 workload에 사용한다. Docker/별도 Podman store에만 load하면
+kubelet이 이미지를 볼 수 없으므로 실제 CRI store를 확인한다.
 
 ```sh
 kubectl label node YOUR_GPU_VM vmweave.io/device-plugin=enabled
