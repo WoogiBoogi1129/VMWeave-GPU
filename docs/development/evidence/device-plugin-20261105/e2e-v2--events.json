@@ -1,0 +1,61 @@
+[
+  {
+    "name": "registered",
+    "at": 1793863321.9033856,
+    "resource": "1"
+  },
+  {
+    "name": "second-pod-pending",
+    "at": 1793863325.6373696,
+    "phase": "Pending",
+    "gpu": [
+      "GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 3400853, vmweave-shm-session-worker, 552 MiB"
+    ]
+  },
+  {
+    "name": "normal-release-and-reuse",
+    "at": 1793863353.5249212
+  },
+  {
+    "name": "idle-client-stays-healthy",
+    "at": 1793863376.938935,
+    "state": {
+      "schemaVersion": 1,
+      "brokerProtocol": 1,
+      "allocation": "a4a62f364579b637d5cb8295501525cc",
+      "generation": "84fdf4d7173f66c3840b663d91322559",
+      "bootID": "afaa6f35-a416-4a24-9495-607c6806d0fb",
+      "librarySHA256": "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5",
+      "maxClients": 1,
+      "ready": true,
+      "reason": "ready",
+      "observedAt": 1793863369.123107,
+      "transportObservedAt": 1793863368.7729185,
+      "activeClient": true
+    }
+  },
+  {
+    "name": "sigkill-reclaimed-and-reused",
+    "at": 1793863392.6894476
+  },
+  {
+    "name": "plugin-restart",
+    "at": 1793863425.180678
+  },
+  {
+    "name": "kubelet-restart",
+    "at": 1793863457.7068517
+  },
+  {
+    "name": "no-resource-rejected",
+    "at": 1793863461.6316986
+  },
+  {
+    "name": "wrong-gid-rejected",
+    "at": 1793863465.5365477
+  },
+  {
+    "name": "PASS-base-matrix",
+    "at": 1793863465.537327
+  }
+]

@@ -1,0 +1,58 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "normal-a",
+    "namespace": "dp-validation-v2"
+  },
+  "spec": {
+    "restartPolicy": "Never",
+    "automountServiceAccountToken": false,
+    "activeDeadlineSeconds": 180,
+    "terminationGracePeriodSeconds": 5,
+    "securityContext": {
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "runAsGroup": 1000,
+      "supplementalGroups": [
+        998
+      ],
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "containers": [
+      {
+        "name": "gpu",
+        "image": "localhost/vmweave-device-plugin-workload@sha256:c497336d3ceecec03b337d47a2147b14c57e7aef1d349d75e6f20bbf49dc1961",
+        "imagePullPolicy": "IfNotPresent",
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "64Mi"
+          },
+          "limits": {
+            "cpu": "1",
+            "memory": "256Mi",
+            "vmweave.io/gpu": 1
+          }
+        },
+        "command": [
+          "/bin/sh",
+          "-ec"
+        ],
+        "args": [
+          "/opt/vmweave/bin/guest-gpu-smoke 23 12; sleep 8"
+        ]
+      }
+    ]
+  }
+}

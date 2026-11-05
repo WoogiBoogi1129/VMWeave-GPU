@@ -1,0 +1,52 @@
+{
+  "implementationRevision": "f3ab8641933f224a6e27645b54b401d4007d1a64",
+  "releaseTag": "device-plugin-v0.1.0",
+  "date": "2026-11-05",
+  "status": "PASS-source-and-local-images",
+  "testVM": {
+    "namespace": "vmweave-test-b",
+    "name": "dp-dev-20261105",
+    "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d",
+    "innerKubernetes": "1.35.9",
+    "criO": "1.35.10",
+    "cilium": "1.20.2",
+    "brokerGID": 998,
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "computePercent": 25,
+    "memoryMiB": 1024,
+    "transport": "real VM ivshmem PCI BAR",
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:e2139218e2abc9efa5b5537e8ca7d7567e5dbbe8bc9a40df42f89820894386ad"
+  },
+  "librarySHA256": "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5",
+  "sourceTests": {
+    "goRace": "PASS",
+    "goVet": "PASS",
+    "control": {
+      "run": 136,
+      "pass": 135,
+      "skip": 1
+    },
+    "deployment": {
+      "pass": 20
+    },
+    "helmContract": "PASS",
+    "strictDocs": "PASS"
+  },
+  "sourceCI": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41987667691",
+  "localImages": {
+    "plugin": {
+      "repository": "localhost/vmweave-device-plugin",
+      "digest": "sha256:b9d8caeb8106290a9c990e371c4ee26196eb442af86690bd75e0d9475ccbb1d1"
+    },
+    "workload": "localhost/vmweave-device-plugin-workload@sha256:c497336d3ceecec03b337d47a2147b14c57e7aef1d349d75e6f20bbf49dc1961"
+  },
+  "publishedArtifactValidation": "PENDING",
+  "excluded": [
+    "nested HAMi",
+    "quota subdivision",
+    "simultaneous direct VM and Pod clients",
+    "arbitrary CUDA/PyTorch images",
+    "performance and sustained load",
+    "multiple GPU VMs"
+  ]
+}

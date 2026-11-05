@@ -59,3 +59,5 @@ CPU 제어·chart workflow의 기존 실행 범위는 필수 체크 이름과 �
 
 선택 설치하는 [VM 내부 Kubernetes Device Plugin](../guides/kubernetes-device-plugin.md)은
 `integrations/kubernetes-device-plugin/`의 독립 Go module과 전용 CI에서 관리한다.
+
+[Device Plugin v0.1 실제 VM 검증](device-plugin-validation-2026-11-05.md)
