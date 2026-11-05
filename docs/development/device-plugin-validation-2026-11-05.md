@@ -88,4 +88,9 @@ Docker archive를 Podman/CRI-O에 import하면 registry manifest digest가 재�
 [게시 이미지 실제 실행 증거](evidence/device-plugin-20261105/release-e2e--published-validation.json)를 참조한다.
 
 게시 태그 이후 `main`의 별도 재빌드 한 건은 package build 단계에서 실패했다.
-태그 릴리스 빌드는 성공했으며, CI에 실패 단계·마지막 출력 진단을 추가해 후속 빌드를 확인한다.
+태그 릴리스 빌드는 성공했고, CI에 실패 단계·마지막 출력 진단을 추가한 뒤
+[후속 main 빌드](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41989294201)와
+[개발 브랜치 빌드](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41989289174)가 모두 통과했다.
+첫 실패의 세부 원인은 확정하지 않았다. 제품 소스를 바꾸어 실패를 우회한 것은 아니다.
+기존 Operator·Helper·Hook·Worker·Guest 전체 이미지
+[Docker 빌드](https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41988401561)도 통과했다.
