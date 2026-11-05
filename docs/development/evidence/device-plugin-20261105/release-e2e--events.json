@@ -1,0 +1,55 @@
+[
+  {
+    "name": "published-image-IDs-match",
+    "at": 1793864439.0510688,
+    "images": {
+      "ghcr.io/woogiboogi1129/vmweave-device-plugin:device-plugin-v0.1.0": {
+        "imageID": "67a50bbc1c085cc4f8be5f654ccd01218d5977c924e9a4d12202bf9532f4a6ef",
+        "runtimeRepoDigest": "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:d18316f8aa7d04c124e80836d21ce562b18f003a79775e5354499cb4c337a12f",
+        "publishedRepoDigests": [
+          "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:cfb13e5f4fe665100bdc66d0e3473e3391821e4596e86a3e4dfac6980412c97f"
+        ]
+      },
+      "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest:device-plugin-v0.1.0": {
+        "imageID": "6afac69f2ea603d63b715f7ee74ec3315a3e582c5c393aae78aa7365b478b80f",
+        "runtimeRepoDigest": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:6cbcda0982116ac90fdd4b22a7cd044d466665801a814c6e066c05bb3f8bbbb6",
+        "publishedRepoDigests": [
+          "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4"
+        ]
+      },
+      "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload:device-plugin-v0.1.0": {
+        "imageID": "7eb9275946e88433b8433d5babdeeccb1f432843d34eb52041e361b20c059dae",
+        "runtimeRepoDigest": "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:56965c48cc86d8fdb295df843f36b1d72aa06e39e8f07bf6dda9233c333643ea",
+        "publishedRepoDigests": [
+          "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:fc6e6b9d9528c7bb80e10e8482ab9bd9aafa518af88f22575f55ded49b856983"
+        ]
+      }
+    }
+  },
+  {
+    "name": "published-serial-GPU-pods-pass",
+    "at": 1793864593.005729,
+    "pidMapping": [
+      {
+        "hostPID": 3504969,
+        "namespacePIDs": [
+          3504969,
+          206
+        ],
+        "matchesWorkerSession": true
+      }
+    ]
+  },
+  {
+    "name": "published-sgemm-pass",
+    "at": 1793864615.837526
+  },
+  {
+    "name": "published-sessions-reclaimed",
+    "at": 1793864616.9119406
+  },
+  {
+    "name": "PASS-published-artifacts-and-clean-stop",
+    "at": 1793864689.127192
+  }
+]

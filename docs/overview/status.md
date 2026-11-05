@@ -5,6 +5,7 @@
 
 | 후속 검증 | 확인 범위 | 근거 |
 |---|---|---|
+| 11/5 Device Plugin v0.1.0 | 실제 VM 내부 K8s GPU 예약·주입, 단일 client, SIGKILL/재시작/브로커 장애·VM 재기동, 공개 패키지 실행 | [검증](../development/device-plugin-validation-2026-11-05.md) |
 | 11/4 v0.5.8 회수 기록 | API/filesystem 중단 복구, CRD/RBAC, 배포 상태. 물리 GPU detach·새 VM 부팅 시험은 아님 | [릴리스](../getting-started/release-v0.5.8.md) |
 | 11/2~3 학습 비교 | VMWeave v0.5.5·Flyt·Passthrough의 제한된 합성 MLP, 정식 300회 | [보고서](../../experiments/training-threeway/results/20261102/REPORT.md) |
 | 10/28~30 내부 Kubernetes | 비특권 GPU Pod, Guest/Pod SGEMM·복사·Rodinia. 내부 Device Plugin 미사용 | [실험 색인](../../experiments/nested-k8s-gpu/README.md) |

@@ -29,3 +29,9 @@
 릴리스 시 `current.json`, 본문, chart, `versions.lock.yaml`을 함께 검토한다.
 개발 중 chart 버전은 공개 릴리스와 달라도 되지만 chart와 lock은 일치해야 한다.
 과거 릴리스 JSON·digest·증거는 수정하지 않는다.
+
+선택 설치 구성인 **Device Plugin v0.1.0**은 Operator와 독립 버전이다.
+[설치 안내](../guides/kubernetes-device-plugin.md),
+[이미지·chart digest](../../deploy/releases/device-plugin-v0.1.0.json),
+[실제 VM 검증](../development/device-plugin-validation-2026-11-05.md),
+[공개 릴리스](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.0)를 참조한다.

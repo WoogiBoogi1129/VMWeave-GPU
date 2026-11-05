@@ -4,6 +4,10 @@ VMWeave Guest의 기존 GPU quota를 내부 Kubernetes에서 예약하고 연결
 자원은 `vmweave.io/gpu: 1`, 지원 범위는 **할당 컨테이너당 동시 CUDA client 1개**다.
 이 값은 물리 GPU 1개나 추가 VRAM 할당을 의미하지 않는다.
 
+검증 릴리스는 [device-plugin-v0.1.0](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.0)이다.
+[배포물·digest 기록](../../deploy/releases/device-plugin-v0.1.0.json)과
+[실제 VM 검증 범위](../development/device-plugin-validation-2026-11-05.md)를 함께 확인한다.
+
 ## 설치 전 준비
 
 - 외부 VMWeave의 VM lifecycle 연결과 Guest Broker가 정상이어야 한다.
@@ -44,6 +48,22 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,GPU:.status.allocatable.
 Plugin DaemonSet은 선택한 노드에만 설치된다. 내부 클러스터의 admission 정책이
 관리용 hostPath와 root 실행을 허용하는 namespace를 사용한다. 일반 GPU workload는 non-root다.
 실제 GPU가 없는 노드에 임의의 상태 파일을 만들어 자원을 등록하지 않는다.
+
+v0.1.0의 공개 OCI chart 설치 예시는 다음과 같다. Guest package 준비와 실제 GID 확인 후 실행한다.
+
+```sh
+helm upgrade --install vmweave-device-plugin \
+  oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin --version 0.1.0 \
+  --namespace vmweave-device-plugin --create-namespace \
+  --set image.digest=sha256:cfb13e5f4fe665100bdc66d0e3473e3391821e4596e86a3e4dfac6980412c97f \
+  --set librarySHA256=32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5 \
+  --set brokerGID=YOUR_VMWEAVE_GID
+```
+
+Guest package 이미지:
+`ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4`.
+지원 workload 이미지:
+`ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:fc6e6b9d9528c7bb80e10e8482ab9bd9aafa518af88f22575f55ded49b856983`.
 
 ## 일반 사용자 실행
 

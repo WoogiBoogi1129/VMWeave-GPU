@@ -1,0 +1,64 @@
+{
+  "component": "VMWeave guest Kubernetes device plugin",
+  "version": "0.1.0",
+  "tag": "device-plugin-v0.1.0",
+  "sourceRevision": "97fa5b83e189ae4d1ed647815c9c76ab94350a94",
+  "releaseURL": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.0",
+  "workflow": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41988294255",
+  "guestLibrarySHA256": "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5",
+  "images": {
+    "plugin": {
+      "reference": "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:cfb13e5f4fe665100bdc66d0e3473e3391821e4596e86a3e4dfac6980412c97f",
+      "imageID": "sha256:67a50bbc1c085cc4f8be5f654ccd01218d5977c924e9a4d12202bf9532f4a6ef"
+    },
+    "guest": {
+      "reference": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4",
+      "imageID": "sha256:6afac69f2ea603d63b715f7ee74ec3315a3e582c5c393aae78aa7365b478b80f"
+    },
+    "workload": {
+      "reference": "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:fc6e6b9d9528c7bb80e10e8482ab9bd9aafa518af88f22575f55ded49b856983",
+      "imageID": "sha256:7eb9275946e88433b8433d5babdeeccb1f432843d34eb52041e361b20c059dae"
+    }
+  },
+  "chart": {
+    "version": "0.1.0",
+    "oci": "oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin",
+    "manifestDigest": "sha256:6d085f951ae8548e4aaba2726c1e17aee65958e729cd83396b3008512d83dd66",
+    "packageSHA256": "df888d678082b14a606f20c8d6b32cdf69381f0f609cba0fbccc328787d4f6bc"
+  },
+  "assets": {
+    "guest-identity.txt": {
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/download/device-plugin-v0.1.0/guest-identity.txt",
+      "sha256": "ffb35a9c3e09f278052083c83e247f39424a425069a1e6bfa2d9f22c0f9cfc62"
+    },
+    "images.docker.tar.gz": {
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/download/device-plugin-v0.1.0/images.docker.tar.gz",
+      "sha256": "d3652f990929fb583995a05b6b77b68a292149690f46850f969fda2ba4cf480e"
+    },
+    "images.json": {
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/download/device-plugin-v0.1.0/images.json",
+      "sha256": "1419b8a7ced94a20eeff09c6b4a91a92caf8ae36172c84116969af7f499f2d09"
+    },
+    "SHA256SUMS": {
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/download/device-plugin-v0.1.0/SHA256SUMS",
+      "sha256": "33f32cf303ea42730628fbbb795b2d4d6c74792c2684d086d018b3a92fbf990b"
+    },
+    "vmweave-device-plugin-0.1.0.tgz": {
+      "url": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/download/device-plugin-v0.1.0/vmweave-device-plugin-0.1.0.tgz",
+      "sha256": "df888d678082b14a606f20c8d6b32cdf69381f0f609cba0fbccc328787d4f6bc"
+    }
+  },
+  "validation": "docs/development/evidence/device-plugin-20261105/validation.json",
+  "operatorCompatibility": "Existing v0.5.8 Operator/Worker deployment retained in the test environment; Operator current.json is unchanged",
+  "scope": {
+    "resource": "vmweave.io/gpu",
+    "slotsPerVM": 1,
+    "concurrentCUDAClients": 1,
+    "guestKubernetes": "1.35.9",
+    "guestCRI": "CRI-O 1.35.10",
+    "workloads": [
+      "guest-gpu-smoke",
+      "2x2 SGEMM full-result validation"
+    ]
+  }
+}

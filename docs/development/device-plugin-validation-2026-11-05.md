@@ -67,4 +67,25 @@ VM root를 신뢰하지 않는 보안 격리를 제공하는 기능도 아니다
 
 기계 판독 결과와 선택 로그는 [validation.json](evidence/device-plugin-20261105/validation.json)에 있다.
 원본 전체 로그·검증 도구는 로컬 `.local/device-plugin-20261105/`에 보존한다.
-공개 패키지의 추가 실행 결과는 릴리스 게시 후 별도 갱신한다.
+
+## 공개 패키지 재검증과 종료
+
+[`device-plugin-v0.1.0`](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.0)은
+소스 `97fa5b83e189ae4d1ed647815c9c76ab94350a94`로 게시했다.
+Plugin·Guest·workload 이미지 3종과 OCI chart를 인증 정보 없이 직접 다운로드했다.
+릴리스 archive 체크섬, image ID, Guest source revision·library hash를 대조한 뒤
+정지 Broker를 업그레이드하고 VM을 정상 종료·재부팅해 fresh binding으로 검증했다.
+
+게시 이미지로 non-root Pod A/B 직렬 예약·PTX kernel·18초 idle SGEMM이 통과했다.
+물리 GPU PID `3504969`의 NSpid `206`이 해당 Worker의 session PID와 일치했다.
+작업 종료 뒤 세션·GPU 프로세스가 사라졌고, 최종 VM은 `Halted`, 채널은 `Stopped`다.
+이번 시험의 VM/PVC·디스크·SSH 진입점은 검토용으로 보존했으며 GPU 할당은 반환했다.
+
+Docker archive를 Podman/CRI-O에 import하면 registry manifest digest가 재계산될 수 있다.
+실제 import된 RepoDigest와 공개 digest를 각각 기록했으며 image ID의 동일성을 검증했다.
+공개 registry에서 직접 pull한 image ID도 같은 값이다.
+[배포 digest와 checksum 기록](../../deploy/releases/device-plugin-v0.1.0.json),
+[게시 이미지 실제 실행 증거](evidence/device-plugin-20261105/release-e2e--published-validation.json)를 참조한다.
+
+게시 태그 이후 `main`의 별도 재빌드 한 건은 package build 단계에서 실패했다.
+태그 릴리스 빌드는 성공했으며, CI에 실패 단계·마지막 출력 진단을 추가해 후속 빌드를 확인한다.

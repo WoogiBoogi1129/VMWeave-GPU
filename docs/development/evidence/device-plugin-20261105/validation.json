@@ -2,7 +2,7 @@
   "implementationRevision": "f3ab8641933f224a6e27645b54b401d4007d1a64",
   "releaseTag": "device-plugin-v0.1.0",
   "date": "2026-11-05",
-  "status": "PASS-source-and-local-images",
+  "status": "PASS",
   "testVM": {
     "namespace": "vmweave-test-b",
     "name": "dp-dev-20261105",
@@ -40,7 +40,7 @@
     },
     "workload": "localhost/vmweave-device-plugin-workload@sha256:c497336d3ceecec03b337d47a2147b14c57e7aef1d349d75e6f20bbf49dc1961"
   },
-  "publishedArtifactValidation": "PENDING",
+  "publishedArtifactValidation": "release-e2e--published-validation.json",
   "excluded": [
     "nested HAMi",
     "quota subdivision",
@@ -48,5 +48,7 @@
     "arbitrary CUDA/PyTorch images",
     "performance and sustained load",
     "multiple GPU VMs"
-  ]
+  ],
+  "publishedArtifactCI": "https://github.com/WoogiBoogi1129/VMWeave-GPU/actions/runs/41988294255",
+  "testVMFinalState": "Halted; channel Stopped; GPU processes empty; disk retained"
 }
