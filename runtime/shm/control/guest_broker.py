@@ -109,7 +109,7 @@ class Transport:
         self.owner_close = close
 
     def heartbeat(self):
-        if self.owner_mode and time.monotonic() - self.last_heartbeat >= 2:
+        if time.monotonic() - self.last_heartbeat >= 2:
             rc, _ = self.exchange(3, b'', 0)
             if rc:
                 self.failed = True
@@ -118,7 +118,20 @@ class Transport:
 
     def receive(self, conn, count, deadline):
         if not self.owner_mode:
-            return receive(conn, count)
+            if not getattr(self, 'discovery_enabled', False):
+                return receive(conn, count)
+            # Preserve legacy idle-client lifetime, while recording progress.
+            # This runs under the client lock, so the publisher cannot issue a
+            # competing heartbeat. No CUDA session is opened by HEARTBEAT.
+            data = bytearray()
+            while len(data) < count:
+                self.heartbeat()
+                if not select.select([conn], [], [], 0.1)[0]:
+                    continue
+                chunk = conn.recv(count - len(data))
+                if not chunk: raise EOFError()
+                data.extend(chunk)
+            return bytes(data)
         data = bytearray()
         while len(data) < count:
             self.heartbeat()
@@ -341,6 +354,7 @@ def main():
     listener.listen(8)
     publisher = None
     if args.status:
+        transport.discovery_enabled = True
         from guest_status import Publisher
         publisher = Publisher(args.status, transport, args.library,
                               env.require('VMWEAVE_LAYOUT'), args.socket)

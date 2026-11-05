@@ -51,6 +51,23 @@ class BrokerTests(unittest.TestCase):
         self.assertEqual(broker.RESPONSE.unpack(broker.receive(a,16)),(broker.MAGIC,46,0))
         self.assertTrue(t.lock.locked());self.assertEqual(t.events,[])
         a.close();t.lock.release()
+    def test_discovery_legacy_idle_receive_keeps_heartbeat_without_new_session(self):
+        import time
+        t=Fake();t.discovery_enabled=True;t.last_heartbeat=time.monotonic()-3
+        a,b=socket.socketpair();result=[];heartbeat=threading.Event()
+        original=t.exchange
+        def exchange(api,data,capacity):
+            out=original(api,data,capacity)
+            if api==3:heartbeat.set()
+            return out
+        t.exchange=exchange
+        thread=threading.Thread(target=lambda:result.append(t.receive(b,1,time.monotonic()+1)))
+        thread.start()
+        try:
+            self.assertTrue(heartbeat.wait(2))
+            a.sendall(b'x');thread.join(2)
+            self.assertEqual(result,[b'x']);self.assertEqual([x[0] for x in t.events],[3])
+        finally:a.close();b.close();thread.join(2)
     def test_failed_close_fences_future_clients_and_unlocks(self):
         t=Fake();t.close_error=True
         a,b=socket.socketpair();a.close()
