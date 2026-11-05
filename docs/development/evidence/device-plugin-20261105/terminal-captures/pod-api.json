@@ -1,0 +1,195 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "annotations": {
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"vmweave-sgemm\",\"namespace\":\"dp-capture-20261105\"},\"spec\":{\"activeDeadlineSeconds\":300,\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"45\"],\"command\":[\"/opt/vmweave/bin/sgemm\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:fc6e6b9d9528c7bb80e10e8482ab9bd9aafa518af88f22575f55ded49b856983\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"gpu\",\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"256Mi\",\"vmweave.io/gpu\":1},\"requests\":{\"cpu\":\"100m\",\"memory\":\"64Mi\"}},\"securityContext\":{\"allowPrivilegeEscalation\":false,\"capabilities\":{\"drop\":[\"ALL\"]}}}],\"restartPolicy\":\"Never\",\"securityContext\":{\"runAsGroup\":1000,\"runAsNonRoot\":true,\"runAsUser\":1000,\"seccompProfile\":{\"type\":\"RuntimeDefault\"},\"supplementalGroups\":[998]}}}\n"
+    },
+    "creationTimestamp": "2026-11-05T08:18:03Z",
+    "generation": 1,
+    "name": "vmweave-sgemm",
+    "namespace": "dp-capture-20261105",
+    "resourceVersion": "5515",
+    "uid": "7364c849-91e3-4eb9-b4d5-0dc337cb6c01"
+  },
+  "spec": {
+    "activeDeadlineSeconds": 300,
+    "automountServiceAccountToken": false,
+    "containers": [
+      {
+        "args": [
+          "45"
+        ],
+        "command": [
+          "/opt/vmweave/bin/sgemm"
+        ],
+        "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:fc6e6b9d9528c7bb80e10e8482ab9bd9aafa518af88f22575f55ded49b856983",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "gpu",
+        "resources": {
+          "limits": {
+            "cpu": "1",
+            "memory": "256Mi",
+            "vmweave.io/gpu": "1"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "64Mi",
+            "vmweave.io/gpu": "1"
+          }
+        },
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File"
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "dp-dev-20261105",
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Never",
+    "schedulerName": "default-scheduler",
+    "securityContext": {
+      "runAsGroup": 1000,
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      },
+      "supplementalGroups": [
+        998
+      ]
+    },
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-05T08:18:52Z",
+        "observedGeneration": 1,
+        "status": "False",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-05T08:18:04Z",
+        "observedGeneration": 1,
+        "reason": "PodCompleted",
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-05T08:18:51Z",
+        "observedGeneration": 1,
+        "reason": "PodCompleted",
+        "status": "False",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-05T08:18:51Z",
+        "observedGeneration": 1,
+        "reason": "PodCompleted",
+        "status": "False",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-05T08:18:04Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "100m",
+          "memory": "64Mi",
+          "vmweave.io/gpu": "1"
+        },
+        "containerID": "cri-o://6d0a8b17430f4ebb9695998c5b7ef13c81d7bf8872a156a4f4b43ded4c0524fe",
+        "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload:device-plugin-v0.1.0",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:56965c48cc86d8fdb295df843f36b1d72aa06e39e8f07bf6dda9233c333643ea",
+        "lastState": {},
+        "name": "gpu",
+        "ready": false,
+        "resources": {
+          "limits": {
+            "cpu": "1",
+            "memory": "256Mi",
+            "vmweave.io/gpu": "1"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "64Mi",
+            "vmweave.io/gpu": "1"
+          }
+        },
+        "restartCount": 0,
+        "started": false,
+        "state": {
+          "terminated": {
+            "containerID": "cri-o://6d0a8b17430f4ebb9695998c5b7ef13c81d7bf8872a156a4f4b43ded4c0524fe",
+            "exitCode": 0,
+            "finishedAt": "2026-11-05T08:18:50Z",
+            "reason": "Completed",
+            "startedAt": "2026-11-05T08:18:04Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 1000,
+            "supplementalGroups": [
+              1000,
+              998
+            ],
+            "uid": 1000
+          }
+        }
+      }
+    ],
+    "hostIP": "10.0.2.2",
+    "hostIPs": [
+      {
+        "ip": "10.0.2.2"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Succeeded",
+    "podIP": "10.242.0.179",
+    "podIPs": [
+      {
+        "ip": "10.242.0.179"
+      }
+    ],
+    "qosClass": "Burstable",
+    "startTime": "2026-11-05T08:18:04Z"
+  }
+}

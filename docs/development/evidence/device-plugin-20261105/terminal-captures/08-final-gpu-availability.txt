@@ -1,0 +1,20 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-05T08:20:53+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl wait --for=jsonpath='{.status.allocatable.vmweave\.io/gpu}'=1 node/dp-dev-20261105 --timeout=90s
+node/dp-dev-20261105 condition met
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n vmweave-device-plugin get daemonset,pods
+NAME                                   DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                      AGE
+daemonset.apps/vmweave-device-plugin   1         1         1       1            1           vmweave.io/device-plugin=enabled   3m7s
+
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/vmweave-device-plugin-sfnvh   1/1     Running   0          3m7s
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl get node dp-dev-20261105 -o 'custom-columns=NAME:.metadata.name,GPU-CAPACITY:.status.capacity.vmweave\.io/gpu,GPU-ALLOCATABLE:.status.a
+llocatable.vmweave\.io/gpu'
+NAME              GPU-CAPACITY   GPU-ALLOCATABLE
+dp-dev-20261105   1              1
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 get pod vmweave-sgemm
+NAME            READY   STATUS      RESTARTS   AGE
+vmweave-sgemm   0/1     Completed   0          2m53s
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 logs vmweave-sgemm
+{"status":"PASS","scope":"SGEMM 2x2 full result validation"}
+ubuntu@dp-dev-20261105:device-plugin-capture$

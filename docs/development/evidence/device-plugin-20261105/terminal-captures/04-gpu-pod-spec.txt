@@ -1,0 +1,34 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-05T08:17:58+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ cat gpu-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vmweave-sgemm
+  namespace: dp-capture-20261105
+spec:
+  restartPolicy: Never
+  automountServiceAccountToken: false
+  activeDeadlineSeconds: 300
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    supplementalGroups: [998]
+    seccompProfile: {type: RuntimeDefault}
+  containers:
+  - name: gpu
+    image: ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:fc6e6b9d9528c7bb80e10e8482ab9bd9aafa518af88f22575f55ded49b856983
+    imagePullPolicy: IfNotPresent
+    command: [/opt/vmweave/bin/sgemm]
+    args: ["45"]
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities: {drop: [ALL]}
+    resources:
+      requests: {cpu: 100m, memory: 64Mi}
+      limits:
+        cpu: "1"
+        memory: 256Mi
+        vmweave.io/gpu: 1
+ubuntu@dp-dev-20261105:device-plugin-capture$

@@ -1,0 +1,142 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "DaemonSet",
+  "metadata": {
+    "annotations": {
+      "deprecated.daemonset.template.generation": "1",
+      "meta.helm.sh/release-name": "vmweave-device-plugin",
+      "meta.helm.sh/release-namespace": "vmweave-device-plugin"
+    },
+    "creationTimestamp": "2026-11-05T08:17:48Z",
+    "generation": 1,
+    "labels": {
+      "app.kubernetes.io/instance": "vmweave-device-plugin",
+      "app.kubernetes.io/managed-by": "Helm",
+      "app.kubernetes.io/name": "vmweave-device-plugin"
+    },
+    "name": "vmweave-device-plugin",
+    "namespace": "vmweave-device-plugin",
+    "resourceVersion": "5383",
+    "uid": "46a7233a-9e33-4f31-ae26-c75f4e11deef"
+  },
+  "spec": {
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "app.kubernetes.io/instance": "vmweave-device-plugin",
+        "app.kubernetes.io/name": "vmweave-device-plugin"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app.kubernetes.io/instance": "vmweave-device-plugin",
+          "app.kubernetes.io/name": "vmweave-device-plugin"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "--broker-gid=998",
+              "--library-sha256=32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5"
+            ],
+            "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:cfb13e5f4fe665100bdc66d0e3473e3391821e4596e86a3e4dfac6980412c97f",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "plugin",
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "128Mi"
+              },
+              "requests": {
+                "cpu": "20m",
+                "memory": "32Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "readOnlyRootFilesystem": true,
+              "runAsGroup": 0,
+              "runAsUser": 0,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/kubelet/device-plugins",
+                "name": "kubelet"
+              },
+              {
+                "mountPath": "/run/vmweave",
+                "name": "broker",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/run/vmweave-device-plugin",
+                "name": "status",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "nodeSelector": {
+          "vmweave.io/device-plugin": "enabled"
+        },
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "terminationGracePeriodSeconds": 10,
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/var/lib/kubelet/device-plugins",
+              "type": "Directory"
+            },
+            "name": "kubelet"
+          },
+          {
+            "hostPath": {
+              "path": "/run/vmweave",
+              "type": "Directory"
+            },
+            "name": "broker"
+          },
+          {
+            "hostPath": {
+              "path": "/run/vmweave-device-plugin",
+              "type": "Directory"
+            },
+            "name": "status"
+          }
+        ]
+      }
+    },
+    "updateStrategy": {
+      "rollingUpdate": {
+        "maxSurge": 0,
+        "maxUnavailable": 1
+      },
+      "type": "RollingUpdate"
+    }
+  },
+  "status": {
+    "currentNumberScheduled": 1,
+    "desiredNumberScheduled": 1,
+    "numberAvailable": 1,
+    "numberMisscheduled": 0,
+    "numberReady": 1,
+    "observedGeneration": 1,
+    "updatedNumberScheduled": 1
+  }
+}

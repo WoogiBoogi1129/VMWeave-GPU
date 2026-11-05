@@ -1,0 +1,10 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-05T08:18:09+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 wait --for=jsonpath='{.status.phase}'=Succeeded pod/vmweave-sgemm --timeout=180s
+pod/vmweave-sgemm condition met
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 get pod vmweave-sgemm -o wide
+NAME            READY   STATUS      RESTARTS   AGE   IP             NODE              NOMINATED NODE   READINESS GATES
+vmweave-sgemm   0/1     Completed   0          50s   10.242.0.179   dp-dev-20261105   <none>           <none>
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 logs vmweave-sgemm
+{"status":"PASS","scope":"SGEMM 2x2 full result validation"}
+ubuntu@dp-dev-20261105:device-plugin-capture$

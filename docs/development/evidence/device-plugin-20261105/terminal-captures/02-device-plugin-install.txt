@@ -1,0 +1,26 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-05T08:17:43+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ cat device-plugin-values.yaml
+image:
+  repository: ghcr.io/woogiboogi1129/vmweave-device-plugin
+  digest: sha256:cfb13e5f4fe665100bdc66d0e3473e3391821e4596e86a3e4dfac6980412c97f
+brokerGID: 998
+librarySHA256: 32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl label node dp-dev-20261105 vmweave.io/device-plugin=enabled --overwrite
+node/dp-dev-20261105 not labeled
+ubuntu@dp-dev-20261105:device-plugin-capture$ helm upgrade --install vmweave-device-plugin \
+>   oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin --version 0.1.0 \
+>   --namespace vmweave-device-plugin --create-namespace -f device-plugin-values.yaml
+Release "vmweave-device-plugin" does not exist. Installing it now.
+Pulled: ghcr.io/woogiboogi1129/charts/vmweave-device-plugin:0.1.0
+Digest: sha256:6d085f951ae8548e4aaba2726c1e17aee65958e729cd83396b3008512d83dd66
+NAME: vmweave-device-plugin
+LAST DEPLOYED: Thu Nov  5 08:17:48 2026
+NAMESPACE: vmweave-device-plugin
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n vmweave-device-plugin rollout status ds/vmweave-device-plugin --timeout=120s
+Waiting for daemon set "vmweave-device-plugin" rollout to finish: 0 of 1 updated pods are available...
+daemon set "vmweave-device-plugin" successfully rolled out
+ubuntu@dp-dev-20261105:device-plugin-capture$

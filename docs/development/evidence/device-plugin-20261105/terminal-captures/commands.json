@@ -1,0 +1,260 @@
+[
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:17:36.325Z",
+    "finishedAt": "2026-11-05T08:17:36.774Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds; hostname; kubectl config current-context",
+    "startedAt": "2026-11-05T08:17:37.215Z",
+    "finishedAt": "2026-11-05T08:17:37.688Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl get nodes -o wide",
+    "startedAt": "2026-11-05T08:17:38.115Z",
+    "finishedAt": "2026-11-05T08:17:38.579Z",
+    "exitCode": 0
+  },
+  {
+    "command": "systemctl is-active vmweave-guest-broker; getent group vmweave",
+    "startedAt": "2026-11-05T08:17:38.979Z",
+    "finishedAt": "2026-11-05T08:17:39.463Z",
+    "exitCode": 0
+  },
+  {
+    "command": "cat /opt/vmweave/source-revision.txt",
+    "startedAt": "2026-11-05T08:17:39.877Z",
+    "finishedAt": "2026-11-05T08:17:40.310Z",
+    "exitCode": 0
+  },
+  {
+    "command": "sha256sum /opt/vmweave/lib/libvmweave_guest.so",
+    "startedAt": "2026-11-05T08:17:40.709Z",
+    "finishedAt": "2026-11-05T08:17:41.172Z",
+    "exitCode": 0
+  },
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:17:42.562Z",
+    "finishedAt": "2026-11-05T08:17:43.032Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds",
+    "startedAt": "2026-11-05T08:17:43.478Z",
+    "finishedAt": "2026-11-05T08:17:43.951Z",
+    "exitCode": 0
+  },
+  {
+    "command": "cat device-plugin-values.yaml",
+    "startedAt": "2026-11-05T08:17:44.386Z",
+    "finishedAt": "2026-11-05T08:17:44.865Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl label node dp-dev-20261105 vmweave.io/device-plugin=enabled --overwrite",
+    "startedAt": "2026-11-05T08:17:45.302Z",
+    "finishedAt": "2026-11-05T08:17:45.776Z",
+    "exitCode": 0
+  },
+  {
+    "command": "helm upgrade --install vmweave-device-plugin \\\n  oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin --version 0.1.0 \\\n  --namespace vmweave-device-plugin --create-namespace -f device-plugin-values.yaml",
+    "startedAt": "2026-11-05T08:17:46.209Z",
+    "finishedAt": "2026-11-05T08:17:48.538Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n vmweave-device-plugin rollout status ds/vmweave-device-plugin --timeout=120s",
+    "startedAt": "2026-11-05T08:17:48.918Z",
+    "finishedAt": "2026-11-05T08:17:49.319Z",
+    "exitCode": 0
+  },
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:17:50.788Z",
+    "finishedAt": "2026-11-05T08:17:51.236Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds",
+    "startedAt": "2026-11-05T08:17:51.644Z",
+    "finishedAt": "2026-11-05T08:17:52.137Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n vmweave-device-plugin get daemonset,pods -o wide",
+    "startedAt": "2026-11-05T08:17:52.589Z",
+    "finishedAt": "2026-11-05T08:17:53.021Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl get node dp-dev-20261105 -o 'custom-columns=NAME:.metadata.name,GPU-CAPACITY:.status.capacity.vmweave\\.io/gpu,GPU-ALLOCATABLE:.status.allocatable.vmweave\\.io/gpu'",
+    "startedAt": "2026-11-05T08:17:53.466Z",
+    "finishedAt": "2026-11-05T08:17:53.913Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n vmweave-device-plugin logs ds/vmweave-device-plugin --tail=10",
+    "startedAt": "2026-11-05T08:17:54.374Z",
+    "finishedAt": "2026-11-05T08:17:54.842Z",
+    "exitCode": 0
+  },
+  {
+    "command": "helm list -n vmweave-device-plugin",
+    "startedAt": "2026-11-05T08:17:55.283Z",
+    "finishedAt": "2026-11-05T08:17:55.761Z",
+    "exitCode": 0
+  },
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:17:57.210Z",
+    "finishedAt": "2026-11-05T08:17:57.689Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds",
+    "startedAt": "2026-11-05T08:17:58.145Z",
+    "finishedAt": "2026-11-05T08:17:58.620Z",
+    "exitCode": 0
+  },
+  {
+    "command": "cat gpu-pod.yaml",
+    "startedAt": "2026-11-05T08:17:59.066Z",
+    "finishedAt": "2026-11-05T08:17:59.558Z",
+    "exitCode": 0
+  },
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:18:01.013Z",
+    "finishedAt": "2026-11-05T08:18:01.444Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds",
+    "startedAt": "2026-11-05T08:18:01.902Z",
+    "finishedAt": "2026-11-05T08:18:02.373Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl create namespace dp-capture-20261105",
+    "startedAt": "2026-11-05T08:18:02.822Z",
+    "finishedAt": "2026-11-05T08:18:03.296Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl apply -f gpu-pod.yaml",
+    "startedAt": "2026-11-05T08:18:03.743Z",
+    "finishedAt": "2026-11-05T08:18:04.151Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 wait --for=condition=Ready pod/vmweave-sgemm --timeout=120s",
+    "startedAt": "2026-11-05T08:18:04.555Z",
+    "finishedAt": "2026-11-05T08:18:05.645Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 get pod vmweave-sgemm -o wide",
+    "startedAt": "2026-11-05T08:18:06.090Z",
+    "finishedAt": "2026-11-05T08:18:06.555Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 exec vmweave-sgemm -- sh -c 'id; printenv VMWEAVE_BROKER_SOCKET; ls -l /run/vmweave/gpu.sock; test ! -e /dev/nvidia0 && echo /dev/nvidia0=absent'",
+    "startedAt": "2026-11-05T08:18:07.004Z",
+    "finishedAt": "2026-11-05T08:18:07.412Z",
+    "exitCode": 0
+  },
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:18:08.854Z",
+    "finishedAt": "2026-11-05T08:18:09.317Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds",
+    "startedAt": "2026-11-05T08:18:09.731Z",
+    "finishedAt": "2026-11-05T08:18:10.153Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 wait --for=jsonpath='{.status.phase}'=Succeeded pod/vmweave-sgemm --timeout=180s",
+    "startedAt": "2026-11-05T08:18:10.606Z",
+    "finishedAt": "2026-11-05T08:18:53.069Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 get pod vmweave-sgemm -o wide",
+    "startedAt": "2026-11-05T08:18:53.508Z",
+    "finishedAt": "2026-11-05T08:18:53.974Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 logs vmweave-sgemm",
+    "startedAt": "2026-11-05T08:18:54.396Z",
+    "finishedAt": "2026-11-05T08:18:54.860Z",
+    "exitCode": 0
+  },
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:18:56.277Z",
+    "finishedAt": "2026-11-05T08:18:56.757Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds",
+    "startedAt": "2026-11-05T08:18:57.231Z",
+    "finishedAt": "2026-11-05T08:18:57.693Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 describe pod vmweave-sgemm",
+    "startedAt": "2026-11-05T08:18:58.138Z",
+    "finishedAt": "2026-11-05T08:18:58.611Z",
+    "exitCode": 0
+  },
+  {
+    "command": "clear",
+    "startedAt": "2026-11-05T08:20:52.266Z",
+    "finishedAt": "2026-11-05T08:20:52.743Z",
+    "exitCode": 0
+  },
+  {
+    "command": "date --iso-8601=seconds",
+    "startedAt": "2026-11-05T08:20:53.190Z",
+    "finishedAt": "2026-11-05T08:20:53.659Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl wait --for=jsonpath='{.status.allocatable.vmweave\\.io/gpu}'=1 node/dp-dev-20261105 --timeout=90s",
+    "startedAt": "2026-11-05T08:20:54.095Z",
+    "finishedAt": "2026-11-05T08:20:54.541Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n vmweave-device-plugin get daemonset,pods",
+    "startedAt": "2026-11-05T08:20:54.981Z",
+    "finishedAt": "2026-11-05T08:20:55.430Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl get node dp-dev-20261105 -o 'custom-columns=NAME:.metadata.name,GPU-CAPACITY:.status.capacity.vmweave\\.io/gpu,GPU-ALLOCATABLE:.status.allocatable.vmweave\\.io/gpu'",
+    "startedAt": "2026-11-05T08:20:55.871Z",
+    "finishedAt": "2026-11-05T08:20:56.334Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 get pod vmweave-sgemm",
+    "startedAt": "2026-11-05T08:20:56.740Z",
+    "finishedAt": "2026-11-05T08:20:57.164Z",
+    "exitCode": 0
+  },
+  {
+    "command": "kubectl -n dp-capture-20261105 logs vmweave-sgemm",
+    "startedAt": "2026-11-05T08:20:57.539Z",
+    "finishedAt": "2026-11-05T08:20:57.958Z",
+    "exitCode": 0
+  }
+]

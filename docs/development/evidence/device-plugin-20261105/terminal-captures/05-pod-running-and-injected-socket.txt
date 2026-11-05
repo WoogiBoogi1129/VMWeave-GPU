@@ -1,0 +1,18 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-05T08:18:01+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl create namespace dp-capture-20261105
+namespace/dp-capture-20261105 created
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl apply -f gpu-pod.yaml
+pod/vmweave-sgemm created
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 wait --for=condition=Ready pod/vmweave-sgemm --timeout=120s
+pod/vmweave-sgemm condition met
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 get pod vmweave-sgemm -o wide
+NAME            READY   STATUS    RESTARTS   AGE   IP             NODE              NOMINATED NODE   READINESS GATES
+vmweave-sgemm   1/1     Running   0          3s    10.242.0.179   dp-dev-20261105   <none>           <none>
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-capture-20261105 exec vmweave-sgemm -- sh -c 'id; printenv VMWEAVE_BROKER_SOCKET; ls -l /run/vmweave/gpu.sock; test ! -e /dev/nvi
+dia0 && echo /dev/nvidia0=absent'
+uid=1000(1000) gid=1000(1000) groups=1000(1000),998
+/run/vmweave/gpu.sock
+srw-rw---- 1 root 998 0 Nov  5 08:13 /run/vmweave/gpu.sock
+/dev/nvidia0=absent
+ubuntu@dp-dev-20261105:device-plugin-capture$
