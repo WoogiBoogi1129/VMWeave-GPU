@@ -1,0 +1,23 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds; hostname; kubectl config current-context
+2026-11-06T06:06:58+00:00
+dp-dev-20261105
+kubernetes-admin@vmweave-device-plugin-test
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n vmweave-device-plugin get daemonset,pods -o wide
+NAME                                   DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                      AGE   CONTAINERS   IMAGES
+                                                                            SELECTOR
+daemonset.apps/vmweave-device-plugin   1         1         1       1            1           vmweave.io/device-plugin=enabled   21h   plugin       ghcr.io/woogiboogi1129/vmweave-device-plugi
+n@sha256:cfb13e5f4fe665100bdc66d0e3473e3391821e4596e86a3e4dfac6980412c97f   app.kubernetes.io/instance=vmweave-device-plugin,app.kubernetes.io/name=vmweave-device-plugin
+
+NAME                              READY   STATUS    RESTARTS   AGE   IP            NODE              NOMINATED NODE   READINESS GATES
+pod/vmweave-device-plugin-sfnvh   1/1     Running   1          21h   10.242.0.72   dp-dev-20261105   <none>           <none>
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl get node dp-dev-20261105 -o 'custom-columns=NAME:.metadata.name,GPU-CAPACITY:.status.capacity.vmweave\.io/gpu,GPU-ALLOCATABLE:.status.a
+llocatable.vmweave\.io/gpu'
+NAME              GPU-CAPACITY   GPU-ALLOCATABLE
+dp-dev-20261105   1              1
+ubuntu@dp-dev-20261105:device-plugin-capture$ getent group vmweave; sha256sum /opt/vmweave/lib/libvmweave_guest.so
+vmweave:x:998:
+32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5  /opt/vmweave/lib/libvmweave_guest.so
+ubuntu@dp-dev-20261105:device-plugin-capture$ helm list -n vmweave-device-plugin
+NAME                    NAMESPACE               REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
+vmweave-device-plugin   vmweave-device-plugin   1               2026-11-05 08:17:48.084830919 +0000 UTC deployed        vmweave-device-plugin-0.1.0     0.1.0
+ubuntu@dp-dev-20261105:device-plugin-capture$

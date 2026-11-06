@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+  },
+  "spec": {
+    "runStrategy": "Always",
+    "domain": {
+      "cpu": {
+        "cores": 4
+      },
+      "devices": {
+        "disks": [
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "root"
+          },
+          {
+            "disk": {
+              "bus": "virtio"
+            },
+            "name": "cloudinit"
+          }
+        ],
+        "interfaces": [
+          {
+            "macAddress": "92:47:c8:12:65:01",
+            "masquerade": {},
+            "name": "default"
+          }
+        ]
+      },
+      "firmware": {
+        "serial": "896ede69-7974-4d91-9302-344326d08d2d",
+        "uuid": "35510481-e0a3-4add-8664-8740f60bcb56"
+      },
+      "machine": {
+        "type": "q35"
+      },
+      "resources": {
+        "requests": {
+          "memory": "8Gi"
+        }
+      }
+    }
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-06T05:51:51Z",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "message": "cannot migrate VMI: PVC dp-dev-20261105-root is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+        "reason": "DisksNotLiveMigratable",
+        "status": "False",
+        "type": "LiveMigratable"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": null,
+        "status": "True",
+        "type": "StorageLiveMigratable"
+      }
+    ],
+    "created": true,
+    "desiredGeneration": 19,
+    "observedGeneration": 19,
+    "printableStatus": "Running",
+    "ready": true,
+    "runStrategy": "Always",
+    "volumeSnapshotStatuses": [
+      {
+        "enabled": false,
+        "name": "root",
+        "reason": "No VolumeSnapshotClass: Volume snapshots are not configured for this StorageClass [] [root]"
+      },
+      {
+        "enabled": false,
+        "name": "cloudinit",
+        "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+      }
+    ]
+  }
+}

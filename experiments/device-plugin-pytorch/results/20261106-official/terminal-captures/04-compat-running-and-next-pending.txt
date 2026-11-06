@@ -1,0 +1,21 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-06T06:36:41+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 get pods -o wide
+NAME                    READY   STATUS      RESTARTS   AGE     IP             NODE              NOMINATED NODE   READINESS GATES
+torch-cpu               0/1     Completed   0          3m21s   10.242.0.175   dp-dev-20261105   <none>           <none>
+torch-gpu-compat        1/1     Running     0          67s     10.242.0.86    dp-dev-20261105   <none>           <none>
+torch-gpu-compat-next   0/1     Pending     0          54s     <none>         <none>            <none>           <none>
+torch-gpu-default       0/1     Error       0          3m7s    10.242.0.251   dp-dev-20261105   <none>           <none>
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs torch-gpu-compat -c pytorch | python3 -c 'import sys,json; rows=[json.loads(s) for s in sys.stdin if s.starts
+with("{")]; [print(json.dumps(r)) for r in rows if r["event"] in ["training-step-pass","holding"]]'
+{"event": "training-step-pass", "utc": 1793946943.6058495, "mode": "gpu", "profile": "compat", "step": 1, "loss": 1.100400686264038}
+{"event": "training-step-pass", "utc": 1793946943.8232925, "mode": "gpu", "profile": "compat", "step": 2, "loss": 1.096254587173462}
+{"event": "training-step-pass", "utc": 1793946943.9934254, "mode": "gpu", "profile": "compat", "step": 3, "loss": 1.0921761989593506}
+{"event": "training-step-pass", "utc": 1793946944.1416585, "mode": "gpu", "profile": "compat", "step": 4, "loss": 1.088163137435913}
+{"event": "training-step-pass", "utc": 1793946944.3009734, "mode": "gpu", "profile": "compat", "step": 5, "loss": 1.0842139720916748}
+{"event": "holding", "utc": 1793946944.3214154, "mode": "gpu", "profile": "compat", "seconds": 60, "pid": 1}
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 exec torch-gpu-compat -c pytorch -- sh -c 'id; printenv VMWEAVE_BROKER_SOCKET; ls -l /run/vmweave/gpu.sock'
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),998
+/run/vmweave/gpu.sock
+srw-rw---- 1 root 998 0 Nov  6 05:52 /run/vmweave/gpu.sock
+ubuntu@dp-dev-20261105:device-plugin-capture$

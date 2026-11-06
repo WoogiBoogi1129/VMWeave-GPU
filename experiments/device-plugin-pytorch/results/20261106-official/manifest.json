@@ -1,0 +1,88 @@
+{
+  "runID": "20261106-official",
+  "sourceRevision": "a2799e7549c6bffbf3859d162c8180fe0d37d097",
+  "baseRevision": "3c40709d828ecaade5fab9d17e81ffe54d7cd85d",
+  "verificationSourceRevision": "4ceebbe833e69ac3abeab1535c5acda2834330df",
+  "runtimeChanged": false,
+  "guestAndPluginSourceRevision": "97fa5b83e189ae4d1ed647815c9c76ab94350a94",
+  "workerRelease": "v0.5.8",
+  "image": {
+    "registry": "docker.io/pytorch/pytorch",
+    "tag": "2.11.0-cuda12.8-cudnn9-runtime",
+    "architecture": "amd64",
+    "manifestDigest": "sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+    "configDigest": "sha256:05e386c026b0e251378a79a93e878ed19829bbf556e57b90da61433cf6c7d43e",
+    "compressedBytes": 4261679795,
+    "registryMetadata": {
+      "creator": 10166898,
+      "id": 1109834376,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 4261679795,
+          "status": "active",
+          "last_pulled": "2026-11-06T05:36:54.448634974Z",
+          "last_pushed": "2026-03-23T20:32:56.468178248Z"
+        }
+      ],
+      "last_updated": "2026-03-23T20:32:56.670408Z",
+      "last_updater": 10166898,
+      "last_updater_username": "pytorchbot",
+      "name": "2.11.0-cuda12.8-cudnn9-runtime",
+      "repository": 1382894,
+      "full_size": 4261679795,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2026-11-06T05:36:54.448634974Z",
+      "tag_last_pushed": "2026-03-23T20:32:56.670408Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "content_type": "image",
+      "digest": "sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be"
+    },
+    "officialSource": "https://github.com/pytorch/pytorch#docker-image",
+    "resolvedAt": "2026-11-06T05:55:48.026398+00:00"
+  },
+  "protocol": {
+    "runID": "official-pytorch-20261106",
+    "namespace": "dp-torch-20261106",
+    "context": "kubernetes-admin@vmweave-device-plugin-test",
+    "node": "dp-dev-20261105",
+    "officialImage": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+    "guestImage": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4",
+    "guestLibrarySHA256": "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5",
+    "verificationSourceSHA256": "5d9879627e42f1136f1c2ff0fda624c19f013a512a719b0763c227327d5f1ea8",
+    "rtol": 0.0001,
+    "atol": 1e-06,
+    "benchmark": false,
+    "experimentSourceRevision": "4ceebbe833e69ac3abeab1535c5acda2834330df",
+    "runtimeSourceRevision": "97fa5b83e189ae4d1ed647815c9c76ab94350a94"
+  },
+  "caseNames": [
+    "torch-cpu",
+    "torch-gpu-default",
+    "torch-gpu-compat",
+    "torch-gpu-compat-next",
+    "torch-gpu-compat-kill",
+    "torch-gpu-compat-after-kill",
+    "linear-default-repro",
+    "linear-no-lt-repro",
+    "torch-gpu-no-lt-only"
+  ],
+  "physicalGPU": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "gpuQuota": {
+    "computePercent": 25,
+    "memoryMiB": 1024
+  },
+  "vm": "vmweave-test-b/dp-dev-20261105",
+  "namespace": "dp-torch-20261106",
+  "benchmark": false,
+  "performanceWarmupOrRepetitions": null,
+  "workload": "FP32 MLP 32-64-8, batch32, MSE, SGD 0.01, seed20261106, 5steps; full tensors at steps1/5",
+  "createdAt": "2026-11-06T06:45:29.158765+00:00"
+}

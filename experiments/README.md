@@ -5,7 +5,7 @@
 | 영역 | 디렉터리·진입점 |
 |---|---|
 | 학습·애플리케이션 비교 | [training-threeway](training-threeway/README.md), [ai-passthrough](ai-passthrough/README.md), [pytorch-smoke](pytorch-smoke/README.md) |
-| VM 내부 Kubernetes | [nested-k8s-gpu](nested-k8s-gpu/README.md), [초기 k8s-gpu-pod](k8s-gpu-pod/) |
+| VM 내부 Kubernetes | [공식 PyTorch·Device Plugin](device-plugin-pytorch/README.md), [nested-k8s-gpu](nested-k8s-gpu/README.md), [초기 k8s-gpu-pod](k8s-gpu-pod/) |
 | 자원 제한·격리 | [thesis-isolation](thesis-isolation/README.md), [vram-accounting](vram-accounting/README.md), [sm-core-limit](sm-core-limit/README.md) |
 | 성능·진단 실행 도구 | [performance](performance/README.md), [system-comparison](system-comparison/README.md), [shm-first-bundle](shm-first-bundle/README.md), [h2d-diagnosis](h2d-diagnosis/), [diagnostics](diagnostics/) |
 | 공통 증거·제어기 검증 | [evidence](evidence/README.md), [operator](operator/), [dra-smoke](dra-smoke/README.md) |
@@ -25,3 +25,5 @@
 - [2026-10-30 내부 Kubernetes 전송 지연·대역폭 및 Rodinia 처리량 통합 보고서](nested-k8s-gpu/results/20261030-transfer-app-throughput/REPORT.md)
 
 - [2026-11-02~03 VMWeave·Flyt·Passthrough 학습 비교](training-threeway/results/20261102/REPORT.md)
+
+- [2026-11-06 공식 PyTorch 이미지·Device Plugin 기능 검증과 실제 캡처](device-plugin-pytorch/results/20261106-official/REPORT.md)

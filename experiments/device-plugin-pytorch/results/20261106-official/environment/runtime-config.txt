@@ -1,0 +1,16 @@
+VMWEAVE_BULK_COPY=0
+# /etc/systemd/system/vmweave-guest-broker.service
+[Unit]
+Description=VMWeave persistent GPU session broker
+After=local-fs.target
+ConditionPathExists=/dev/disk/by-label/cidata
+[Service]
+Type=simple
+Group=vmweave
+EnvironmentFile=-/etc/vmweave/guest-broker.env
+ExecStart=/usr/bin/python3 /opt/vmweave/control/guest_bootstrap.py
+Restart=no
+UMask=0007
+TimeoutStopSec=25
+[Install]
+WantedBy=multi-user.target

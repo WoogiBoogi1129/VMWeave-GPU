@@ -1,0 +1,37 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-06T06:42:10+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 get pod torch-gpu-default linear-default-repro -o 'custom-columns=NAME:.metadata.name,PHASE:.status.phase,EXIT:.st
+atus.containerStatuses[0].state.terminated.exitCode'
+NAME                   PHASE    EXIT
+torch-gpu-default      Failed   139
+linear-default-repro   Failed   139
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs torch-gpu-default -c pytorch --tail=6
+{"event": "stage", "utc": 1793946835.4584439, "mode": "gpu", "profile": "default", "stage": "cuda-initialization"}
+{"event": "cuda-discovery", "utc": 1793946836.1461432, "mode": "gpu", "profile": "default", "available": true, "count": 1}
+{"event": "cuda-initialized", "utc": 1793946836.1692445, "mode": "gpu", "profile": "default", "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition"}
+{"event": "stage", "utc": 1793946836.170349, "mode": "gpu", "profile": "default", "stage": "gpu-operations"}
+{"event": "gpu-operations-pass", "utc": 1793946836.5000272, "mode": "gpu", "profile": "default", "device": "cuda:0", "result": [[0.21875, 0.265625], [0.59375, 0.765625], [0.96875, 1.265625]
+]}
+{"event": "stage", "utc": 1793946836.5010343, "mode": "gpu", "profile": "default", "stage": "training"}
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs linear-default-repro -c pytorch
+{"event": "before-linear", "disableLT": false, "torch": "2.11.0+cu128", "cuda": "12.8", "sourceSHA256": "0c3efa602a0e1472a545bc40196a55f0c6543dfdc5cbd8b6664da01626e65a52"}
+Fatal Python error: Segmentation fault
+
+Current thread 0x00007f5b11686800 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py", line 134 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1779 in _wrapped_call_impl
+  File "/work/repro_linear.py", line 29 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._d
+ynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special (total: 13)
+ubuntu@dp-dev-20261105:device-plugin-capture$ sudo journalctl -k -b --no-pager | grep -F 'in libcublasLt.so.12'
+Nov 06 06:33:58 dp-dev-20261105 kernel: traps: python[50082] general protection fault ip:7f28a016669d sp:7ffffffbdd90 error:0 in libcublasLt.so.12[7f289f200000+259a6000]
+Nov 06 06:38:37 dp-dev-20261105 kernel: traps: python[65507] general protection fault ip:7f5aded6669d sp:7ffd6d773b10 error:0 in libcublasLt.so.12[7f5adde00000+259a6000]
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs linear-no-lt-repro -c pytorch
+{"event": "before-linear", "disableLT": true, "torch": "2.11.0+cu128", "cuda": "12.8", "sourceSHA256": "0c3efa602a0e1472a545bc40196a55f0c6543dfdc5cbd8b6664da01626e65a52"}
+/work/repro_linear.py:33: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  'maxAbsError': float((answer.cpu()-reference).abs().max())}), flush=True)
+{"event": "PASS", "disableLT": true, "maxAbsError": 0.0}
+ubuntu@dp-dev-20261105:device-plugin-capture$

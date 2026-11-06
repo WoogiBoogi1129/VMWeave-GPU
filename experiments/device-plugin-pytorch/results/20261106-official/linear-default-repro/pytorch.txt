@@ -1,0 +1,10 @@
+{"event": "before-linear", "disableLT": false, "torch": "2.11.0+cu128", "cuda": "12.8", "sourceSHA256": "0c3efa602a0e1472a545bc40196a55f0c6543dfdc5cbd8b6664da01626e65a52"}
+Fatal Python error: Segmentation fault
+
+Current thread 0x00007f5b11686800 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py", line 134 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1779 in _wrapped_call_impl
+  File "/work/repro_linear.py", line 29 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special (total: 13)

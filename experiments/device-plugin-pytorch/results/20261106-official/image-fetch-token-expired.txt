@@ -1,0 +1,34 @@
+{"event": "prefixes-saved", "bytes": {"18dbadc1f2f937d7ebdfa4481fb1f6f43b26e93f5bdc4cef3cef98d7f0ae77aa": 30599062, "627649ff745632d292724b400f4d4d1880c8360b60a654ae286d5c264bd0838b": 38592727, "a4fc1a7e11cd1b8d5132cdc99c1b1c28d5b9c0e0214b5317e33c5ff6b5ca8276": 1328598499, "dfc23d5a2773f4a0387bd6209050b823250f01d21cd2c80dd1766d0b28558cdf": 25692596, "70516a22c83c8ffdac1a5dbb0df807b81fa1f03eccd8315a6a2324b0376d434e": 65767610, "bf35bf168c8de60d405b0704d3009587a04009e66ad6a3d67699abe245eed271": 99, "05e386c026b0e251378a79a93e878ed19829bbf556e57b90da61433cf6c7d43e": 0}}
+{"event": "download-progress", "downloadedBytes": 33554432, "seconds": 140.2}
+{"event": "download-progress", "downloadedBytes": 67108864, "seconds": 163.0}
+{"event": "download-progress", "downloadedBytes": 100663296, "seconds": 164.6}
+{"event": "download-progress", "downloadedBytes": 134217728, "seconds": 165.4}
+{"event": "download-progress", "downloadedBytes": 167772160, "seconds": 167.2}
+{"event": "download-progress", "downloadedBytes": 201326592, "seconds": 181.2}
+{"event": "download-progress", "downloadedBytes": 234881024, "seconds": 182.3}
+{"event": "download-progress", "downloadedBytes": 268435456, "seconds": 193.5}
+{"event": "download-progress", "downloadedBytes": 301989888, "seconds": 204.6}
+{"event": "download-progress", "downloadedBytes": 335544320, "seconds": 205.0}
+{"event": "download-progress", "downloadedBytes": 369098752, "seconds": 210.6}
+{"event": "download-progress", "downloadedBytes": 402653184, "seconds": 224.8}
+{"event": "download-progress", "downloadedBytes": 436207616, "seconds": 276.3}
+{"event": "download-progress", "downloadedBytes": 469762048, "seconds": 287.0}
+{"event": "download-progress", "downloadedBytes": 503316480, "seconds": 309.3}
+{"event": "download-progress", "downloadedBytes": 536870912, "seconds": 354.7}
+{"event": "download-progress", "downloadedBytes": 570425344, "seconds": 355.9}
+{"event": "download-progress", "downloadedBytes": 603979776, "seconds": 356.3}
+{"event": "download-progress", "downloadedBytes": 637534208, "seconds": 362.5}
+Traceback (most recent call last):
+  File "/home/ubuntu/fetch-official-20261106.py", line 56, in <module>
+    done+=future.result();print(json.dumps({'event':'download-progress','downloadedBytes':done,'seconds':round(time.monotonic()-started,1)}),flush=True)
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/ubuntu/fetch-official-20261106.py", line 42, in fetch
+    rr.raise_for_status()
+  File "/usr/lib/python3/dist-packages/requests/models.py", line 943, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://registry-1.docker.io/v2/pytorch/pytorch/blobs/sha256:a4fc1a7e11cd1b8d5132cdc99c1b1c28d5b9c0e0214b5317e33c5ff6b5ca8276

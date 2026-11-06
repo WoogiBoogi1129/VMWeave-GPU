@@ -1,0 +1,32 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-06T06:42:17+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 get pods -o wide
+NAME                          READY   STATUS      RESTARTS   AGE     IP             NODE              NOMINATED NODE   READINESS GATES
+linear-default-repro          0/1     Error       0          3m45s   10.242.0.32    dp-dev-20261105   <none>           <none>
+linear-no-lt-repro            0/1     Completed   0          3m32s   10.242.0.218   dp-dev-20261105   <none>           <none>
+torch-cpu                     0/1     Completed   0          8m57s   10.242.0.175   dp-dev-20261105   <none>           <none>
+torch-gpu-compat              0/1     Completed   0          6m43s   10.242.0.86    dp-dev-20261105   <none>           <none>
+torch-gpu-compat-after-kill   0/1     Completed   0          4m55s   10.242.0.232   dp-dev-20261105   <none>           <none>
+torch-gpu-compat-kill         0/1     Error       0          5m13s   10.242.0.242   dp-dev-20261105   <none>           <none>
+torch-gpu-compat-next         0/1     Completed   0          6m30s   10.242.0.65    dp-dev-20261105   <none>           <none>
+torch-gpu-default             0/1     Error       0          8m43s   10.242.0.251   dp-dev-20261105   <none>           <none>
+torch-gpu-no-lt-only          0/1     Completed   0          2m      10.242.0.160   dp-dev-20261105   <none>           <none>
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs torch-gpu-compat -c pytorch --tail=3
+{"event": "training-pass", "utc": 1793946944.320578, "mode": "gpu", "profile": "compat", "steps": 5, "parametersChanged": true, "rtol": 0.0001, "atol": 1e-06, "comparisons": [{"step": 1, "t
+ensor": "loss", "shape": [], "maxAbsError": 0.0}, {"step": 1, "tensor": "output", "shape": [32, 8], "maxAbsError": 1.1920928955078125e-07}, {"step": 1, "tensor": "weight/0.weight", "shape":
+ [64, 32], "maxAbsError": 7.450580596923828e-09}, {"step": 1, "tensor": "weight/0.bias", "shape": [64], "maxAbsError": 0.0}, {"step": 1, "tensor": "weight/2.weight", "shape": [8, 64], "maxA
+bsError": 1.862645149230957e-09}, {"step": 1, "tensor": "weight/2.bias", "shape": [8], "maxAbsError": 0.0}, {"step": 1, "tensor": "gradient/0.weight", "shape": [64, 32], "maxAbsError": 5.58
+7935447692871e-09}, {"step": 1, "tensor": "gradient/0.bias", "shape": [64], "maxAbsError": 1.862645149230957e-09}, {"step": 1, "tensor": "gradient/2.weight", "shape": [8, 64], "maxAbsError"
+: 7.450580596923828e-09}, {"step": 1, "tensor": "gradient/2.bias", "shape": [8], "maxAbsError": 1.1175870895385742e-08}, {"step": 5, "tensor": "loss", "shape": [], "maxAbsError": 0.0}, {"st
+ep": 5, "tensor": "output", "shape": [32, 8], "maxAbsError": 1.7881393432617188e-07}, {"step": 5, "tensor": "weight/0.weight", "shape": [64, 32], "maxAbsError": 7.450580596923828e-09}, {"st
+ep": 5, "tensor": "weight/0.bias", "shape": [64], "maxAbsError": 9.313225746154785e-10}, {"step": 5, "tensor": "weight/2.weight", "shape": [8, 64], "maxAbsError": 7.450580596923828e-09}, {"
+step": 5, "tensor": "weight/2.bias", "shape": [8], "maxAbsError": 0.0}, {"step": 5, "tensor": "gradient/0.weight", "shape": [64, 32], "maxAbsError": 5.587935447692871e-09}, {"step": 5, "ten
+sor": "gradient/0.bias", "shape": [64], "maxAbsError": 1.862645149230957e-09}, {"step": 5, "tensor": "gradient/2.weight", "shape": [8, 64], "maxAbsError": 7.450580596923828e-09}, {"step": 5
+, "tensor": "gradient/2.bias", "shape": [8], "maxAbsError": 3.725290298461914e-09}]}
+{"event": "holding", "utc": 1793946944.3214154, "mode": "gpu", "profile": "compat", "seconds": 60, "pid": 1}
+{"event": "PASS", "utc": 1793947004.327018, "mode": "gpu", "profile": "compat", "scope": "official PyTorch GPU functional validation"}
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs torch-gpu-compat-next -c pytorch --tail=1
+{"event": "PASS", "utc": 1793947015.4169588, "mode": "gpu", "profile": "compat", "scope": "official PyTorch GPU functional validation"}
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs torch-gpu-no-lt-only -c pytorch --tail=1
+{"event": "PASS", "utc": 1793947228.5356345, "mode": "gpu", "profile": "default", "scope": "official PyTorch GPU functional validation"}
+ubuntu@dp-dev-20261105:device-plugin-capture$

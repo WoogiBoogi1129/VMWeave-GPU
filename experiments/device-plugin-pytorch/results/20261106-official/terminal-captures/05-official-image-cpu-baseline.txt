@@ -1,0 +1,17 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-06T06:42:05+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 get pod torch-cpu -o wide
+NAME        READY   STATUS      RESTARTS   AGE     IP             NODE              NOMINATED NODE   READINESS GATES
+torch-cpu   0/1     Completed   0          8m45s   10.242.0.175   dp-dev-20261105   <none>           <none>
+ubuntu@dp-dev-20261105:device-plugin-capture$ kubectl -n dp-torch-20261106 logs torch-cpu -c pytorch
+{"event": "stage", "utc": 1793946802.7802248, "mode": "cpu", "profile": "default", "stage": "import"}
+{"event": "identity", "utc": 1793946808.306988, "mode": "cpu", "profile": "default", "torch": "2.11.0+cu128", "cuda": "12.8", "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+"torchPath": "/usr/local/lib/python3.12/dist-packages/torch", "uid": 1000, "groups": [4, 20, 24, 25, 27, 29, 30, 44, 46, 998, 1000], "files": {"/usr/local/lib/python3.12/dist-packages/torch
+/__init__.py": "0387d8b811b289287479c8bfdf4e1dac3a71b246f938d82da1331cf2dc8bf001", "/usr/local/lib/python3.12/dist-packages/torch/_C.cpython-312-x86_64-linux-gnu.so": "fc945c4168eb823fba967
+804a4243111a3824ef9eda1a443c252244fa6c623a5", "/usr/local/lib/python3.12/dist-packages/torch/version.py": "c5a512fcd13f6195c117da82802740abd5eafbec7b21709ed8d9babec6c9f5d9", "/usr/local/lib
+/python3.12/dist-packages/torch/lib/libtorch_cuda.so": "2aa4ad61474d40f1e385ba01de26695833b4de220124436aec104157051e860f", "/usr/local/lib/python3.12/dist-packages/torch/lib/libc10_cuda.so"
+: "0e54b1db72ce1999a5463ce8dd54793a7a89d26c780425c90723d5a74a985a50"}, "sourceSHA256": "5d9879627e42f1136f1c2ff0fda624c19f013a512a719b0763c227327d5f1ea8"}
+{"event": "stage", "utc": 1793946808.307952, "mode": "cpu", "profile": "default", "stage": "cpu-reference"}
+{"event": "cpu-pass", "utc": 1793946808.3122594, "mode": "cpu", "profile": "default", "result": [[0.21875, 0.265625], [0.59375, 0.765625], [0.96875, 1.265625]]}
+{"event": "PASS", "utc": 1793946808.3127239, "mode": "cpu", "profile": "default", "scope": "official image import and CPU reference only"}
+ubuntu@dp-dev-20261105:device-plugin-capture$

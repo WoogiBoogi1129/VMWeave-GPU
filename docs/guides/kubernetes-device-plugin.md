@@ -87,6 +87,24 @@ CUDA 메모리 할당 후 15초 대기하여 idle client 상태를 검증한다(
 A의 CUDA 작업만 끝나고 컨테이너가 계속 실행 중이면 자원은 계속 할당된 상태다.
 컨테이너 종료와 Kubernetes 자원 반환, Broker CUDA 세션 회수를 각각 확인한다.
 
+## 공식 PyTorch 이미지의 검증 조건
+
+공식 `pytorch/pytorch:2.11.0-cuda12.8-cudnn9-runtime`을 그대로 사용한
+[기능 검증](../../experiments/device-plugin-pytorch/results/20261106-official/REPORT.md)에서
+CUDA 인식·전송·덧셈·행렬곱과 작은 5-step FP32 MLP 학습이 통과했다.
+현재 조합의 기본 `Linear` 경로는 cuBLASLt에서 exit 139로 실패하므로,
+PyTorch import 전에 `DISABLE_ADDMM_CUDA_LT=1`을 적용한다. 이 조건에서 SGD 기본 옵션도 통과했다.
+
+Guest library는 공개 Guest 이미지의 initContainer가 emptyDir에 복사하고 hash를 확인한다.
+공식 PyTorch 컨테이너는 이를 읽기 전용 mount하며 `LD_PRELOAD`, adapter의 `LD_LIBRARY_PATH`,
+`VMWEAVE_MIRROR_DEVICE_VA=1`을 설정한다. Plugin이 broker 소켓을 주입한다.
+공식 wheel이나 CUDA library를 교체하지 않았다.
+
+[전체 Pod 선언](../../experiments/device-plugin-pytorch/manifests/gpu-pod-no-lt-only.yaml)과
+[실행 절차](../../experiments/device-plugin-pytorch/README.md)를 참조한다.
+선언의 namespace·node·GID는 시험 VM 값이므로 사용 환경에 맞춰 변경한다.
+선택한 이미지·작은 eager FP32 MLP의 검증 결과이며 임의 PyTorch workload의 호환성을 보장하지 않는다.
+
 ## 진단과 복구
 
 Plugin binary의 읽기 전용 진단:

@@ -1,0 +1,5 @@
+{"event": "before-linear", "disableLT": true, "torch": "2.11.0+cu128", "cuda": "12.8", "sourceSHA256": "0c3efa602a0e1472a545bc40196a55f0c6543dfdc5cbd8b6664da01626e65a52"}
+/work/repro_linear.py:33: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  'maxAbsError': float((answer.cpu()-reference).abs().max())}), flush=True)
+{"event": "PASS", "disableLT": true, "maxAbsError": 0.0}

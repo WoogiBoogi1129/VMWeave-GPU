@@ -1,0 +1,340 @@
+{
+  "kind": "actual interactive SSH terminal screenshot",
+  "edited": false,
+  "replayed": false,
+  "guest": "dp-dev-20261105",
+  "context": "kubernetes-admin@vmweave-device-plugin-test",
+  "release": "device-plugin-v0.1.0",
+  "browser": "Chromium 153.0.8010.12",
+  "ttyd": "ttyd version 1.7.7-40e79c7",
+  "captures": [
+    {
+      "name": "01-vm-and-device-plugin",
+      "capturedAt": "2026-11-06T06:07:03.225Z",
+      "width": 2300,
+      "height": 1050,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds; hostname; kubectl config current-context",
+          "startedAt": "2026-11-06T06:06:58.515Z",
+          "finishedAt": "2026-11-06T06:06:58.985Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n vmweave-device-plugin get daemonset,pods -o wide",
+          "startedAt": "2026-11-06T06:06:59.423Z",
+          "finishedAt": "2026-11-06T06:06:59.870Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl get node dp-dev-20261105 -o 'custom-columns=NAME:.metadata.name,GPU-CAPACITY:.status.capacity.vmweave\\.io/gpu,GPU-ALLOCATABLE:.status.allocatable.vmweave\\.io/gpu'",
+          "startedAt": "2026-11-06T06:07:00.312Z",
+          "finishedAt": "2026-11-06T06:07:00.756Z",
+          "exitCode": 0
+        },
+        {
+          "command": "getent group vmweave; sha256sum /opt/vmweave/lib/libvmweave_guest.so",
+          "startedAt": "2026-11-06T06:07:01.152Z",
+          "finishedAt": "2026-11-06T06:07:01.644Z",
+          "exitCode": 0
+        },
+        {
+          "command": "helm list -n vmweave-device-plugin",
+          "startedAt": "2026-11-06T06:07:02.081Z",
+          "finishedAt": "2026-11-06T06:07:02.530Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "02-official-pytorch-pod-spec-1",
+      "capturedAt": "2026-11-06T06:07:07.036Z",
+      "width": 2300,
+      "height": 1800,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:07:04.890Z",
+          "finishedAt": "2026-11-06T06:07:05.385Z",
+          "exitCode": 0
+        },
+        {
+          "command": "sed -n '1,56p' official-pytorch-pod.yaml",
+          "startedAt": "2026-11-06T06:07:05.809Z",
+          "finishedAt": "2026-11-06T06:07:06.282Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "03-official-pytorch-pod-spec-2",
+      "capturedAt": "2026-11-06T06:07:10.750Z",
+      "width": 2300,
+      "height": 1650,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:07:08.632Z",
+          "finishedAt": "2026-11-06T06:07:09.100Z",
+          "exitCode": 0
+        },
+        {
+          "command": "sed -n '57,120p' official-pytorch-pod.yaml",
+          "startedAt": "2026-11-06T06:07:09.536Z",
+          "finishedAt": "2026-11-06T06:07:10.008Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "04-compat-running-and-next-pending",
+      "capturedAt": "2026-11-06T06:36:45.102Z",
+      "width": 2300,
+      "height": 1200,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:36:41.400Z",
+          "finishedAt": "2026-11-06T06:36:41.882Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 get pods -o wide",
+          "startedAt": "2026-11-06T06:36:42.337Z",
+          "finishedAt": "2026-11-06T06:36:42.785Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-compat -c pytorch | python3 -c 'import sys,json; rows=[json.loads(s) for s in sys.stdin if s.startswith(\"{\")]; [print(json.dumps(r)) for r in rows if r[\"event\"] in [\"training-step-pass\",\"holding\"]]'",
+          "startedAt": "2026-11-06T06:36:43.221Z",
+          "finishedAt": "2026-11-06T06:36:43.669Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 exec torch-gpu-compat -c pytorch -- sh -c 'id; printenv VMWEAVE_BROKER_SOCKET; ls -l /run/vmweave/gpu.sock'",
+          "startedAt": "2026-11-06T06:36:44.022Z",
+          "finishedAt": "2026-11-06T06:36:44.396Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "05-official-image-cpu-baseline",
+      "capturedAt": "2026-11-06T06:42:08.734Z",
+      "width": 2300,
+      "height": 1300,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:42:05.727Z",
+          "finishedAt": "2026-11-06T06:42:06.213Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 get pod torch-cpu -o wide",
+          "startedAt": "2026-11-06T06:42:06.672Z",
+          "finishedAt": "2026-11-06T06:42:07.141Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-cpu -c pytorch",
+          "startedAt": "2026-11-06T06:42:07.550Z",
+          "finishedAt": "2026-11-06T06:42:08.016Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "06-default-failure-and-linear-repro",
+      "capturedAt": "2026-11-06T06:42:16.088Z",
+      "width": 2300,
+      "height": 1550,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:42:10.311Z",
+          "finishedAt": "2026-11-06T06:42:10.783Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 get pod torch-gpu-default linear-default-repro -o 'custom-columns=NAME:.metadata.name,PHASE:.status.phase,EXIT:.status.containerStatuses[0].state.terminated.exitCode'",
+          "startedAt": "2026-11-06T06:42:11.235Z",
+          "finishedAt": "2026-11-06T06:42:11.682Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-default -c pytorch --tail=6",
+          "startedAt": "2026-11-06T06:42:12.146Z",
+          "finishedAt": "2026-11-06T06:42:12.626Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs linear-default-repro -c pytorch",
+          "startedAt": "2026-11-06T06:42:13.074Z",
+          "finishedAt": "2026-11-06T06:42:13.555Z",
+          "exitCode": 0
+        },
+        {
+          "command": "sudo journalctl -k -b --no-pager | grep -F 'in libcublasLt.so.12'",
+          "startedAt": "2026-11-06T06:42:13.966Z",
+          "finishedAt": "2026-11-06T06:42:14.421Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs linear-no-lt-repro -c pytorch",
+          "startedAt": "2026-11-06T06:42:14.872Z",
+          "finishedAt": "2026-11-06T06:42:15.327Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "07-compat-training-and-reuse-completed",
+      "capturedAt": "2026-11-06T06:42:22.684Z",
+      "width": 2300,
+      "height": 1800,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:42:17.806Z",
+          "finishedAt": "2026-11-06T06:42:18.265Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 get pods -o wide",
+          "startedAt": "2026-11-06T06:42:18.678Z",
+          "finishedAt": "2026-11-06T06:42:19.164Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-compat -c pytorch --tail=3",
+          "startedAt": "2026-11-06T06:42:19.623Z",
+          "finishedAt": "2026-11-06T06:42:20.117Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-compat-next -c pytorch --tail=1",
+          "startedAt": "2026-11-06T06:42:20.529Z",
+          "finishedAt": "2026-11-06T06:42:20.975Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-no-lt-only -c pytorch --tail=1",
+          "startedAt": "2026-11-06T06:42:21.420Z",
+          "finishedAt": "2026-11-06T06:42:21.892Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "08-describe-completed-pod-1",
+      "capturedAt": "2026-11-06T06:42:26.559Z",
+      "width": 2300,
+      "height": 1900,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:42:24.353Z",
+          "finishedAt": "2026-11-06T06:42:24.831Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 describe pod torch-gpu-compat | sed -n '1,62p'",
+          "startedAt": "2026-11-06T06:42:25.308Z",
+          "finishedAt": "2026-11-06T06:42:25.784Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "09-describe-completed-pod-2",
+      "capturedAt": "2026-11-06T06:42:30.571Z",
+      "width": 2300,
+      "height": 1800,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:42:28.425Z",
+          "finishedAt": "2026-11-06T06:42:28.859Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 describe pod torch-gpu-compat | sed -n '63,160p'",
+          "startedAt": "2026-11-06T06:42:29.316Z",
+          "finishedAt": "2026-11-06T06:42:29.803Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "10-sigkill-recovery-and-resource-return",
+      "capturedAt": "2026-11-06T06:42:37.844Z",
+      "width": 2300,
+      "height": 1350,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:42:32.199Z",
+          "finishedAt": "2026-11-06T06:42:32.691Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 get pod torch-gpu-compat-kill torch-gpu-compat-after-kill -o 'custom-columns=NAME:.metadata.name,PHASE:.status.phase,EXIT:.status.containerStatuses[0].state.terminated.exitCode'",
+          "startedAt": "2026-11-06T06:42:33.097Z",
+          "finishedAt": "2026-11-06T06:42:33.557Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-compat-kill -c pytorch --tail=2",
+          "startedAt": "2026-11-06T06:42:33.968Z",
+          "finishedAt": "2026-11-06T06:42:34.447Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-compat-after-kill -c pytorch --tail=2",
+          "startedAt": "2026-11-06T06:42:34.878Z",
+          "finishedAt": "2026-11-06T06:42:35.338Z",
+          "exitCode": 0
+        },
+        {
+          "command": "sudo cat /run/vmweave-device-plugin/status.json | python3 -c 'import json,sys; s=json.load(sys.stdin); print(json.dumps({k:s[k] for k in [\"ready\",\"activeClient\",\"maxClients\",\"allocation\",\"generation\"]},indent=2))'",
+          "startedAt": "2026-11-06T06:42:35.752Z",
+          "finishedAt": "2026-11-06T06:42:36.222Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl get node dp-dev-20261105 -o 'custom-columns=NAME:.metadata.name,GPU-ALLOCATABLE:.status.allocatable.vmweave\\.io/gpu'",
+          "startedAt": "2026-11-06T06:42:36.672Z",
+          "finishedAt": "2026-11-06T06:42:37.139Z",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "name": "11-no-lt-only-tested-condition",
+      "capturedAt": "2026-11-06T06:42:42.586Z",
+      "width": 2300,
+      "height": 1500,
+      "commands": [
+        {
+          "command": "date --iso-8601=seconds",
+          "startedAt": "2026-11-06T06:42:39.585Z",
+          "finishedAt": "2026-11-06T06:42:40.075Z",
+          "exitCode": 0
+        },
+        {
+          "command": "sed -n '24,60p' official-pytorch-no-lt-pod.yaml",
+          "startedAt": "2026-11-06T06:42:40.491Z",
+          "finishedAt": "2026-11-06T06:42:40.986Z",
+          "exitCode": 0
+        },
+        {
+          "command": "kubectl -n dp-torch-20261106 logs torch-gpu-no-lt-only -c pytorch --tail=1",
+          "startedAt": "2026-11-06T06:42:41.410Z",
+          "finishedAt": "2026-11-06T06:42:41.825Z",
+          "exitCode": 0
+        }
+      ]
+    }
+  ]
+}

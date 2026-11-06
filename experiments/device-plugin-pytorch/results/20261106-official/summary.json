@@ -1,0 +1,719 @@
+{
+  "conclusion": "official image supports tested GPU operations and FP32 MLP with DISABLE_ADDMM_CUDA_LT=1; unmodified default Linear path fails with exit 139",
+  "cases": [
+    {
+      "pod": "torch-cpu",
+      "uid": "59f5577f-ad74-4506-b066-7272e5b04641",
+      "phase": "Succeeded",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T06:33:22Z",
+      "finishedAt": "2026-11-06T06:33:30Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": true,
+      "events": [
+        "stage",
+        "identity",
+        "stage",
+        "cpu-pass",
+        "PASS"
+      ],
+      "trainingComparisons": null
+    },
+    {
+      "pod": "torch-gpu-default",
+      "uid": "94a4f9d6-ad66-417f-be90-56cc2fbc40d5",
+      "phase": "Failed",
+      "exitCode": 139,
+      "startedAt": "2026-11-06T06:33:52Z",
+      "finishedAt": "2026-11-06T06:33:58Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": true,
+      "events": [
+        "stage",
+        "identity",
+        "stage",
+        "cpu-pass",
+        "stage",
+        "cuda-discovery",
+        "cuda-initialized",
+        "stage",
+        "gpu-operations-pass",
+        "stage"
+      ],
+      "trainingComparisons": null
+    },
+    {
+      "pod": "torch-gpu-compat",
+      "uid": "3ee0d0a1-230a-4766-a5bc-31b1f5ed8f9e",
+      "phase": "Succeeded",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T06:35:36Z",
+      "finishedAt": "2026-11-06T06:36:45Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": true,
+      "events": [
+        "stage",
+        "identity",
+        "stage",
+        "cpu-pass",
+        "stage",
+        "cuda-discovery",
+        "cuda-initialized",
+        "stage",
+        "gpu-operations-pass",
+        "stage",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-pass",
+        "holding",
+        "PASS"
+      ],
+      "trainingComparisons": [
+        {
+          "step": 1,
+          "tensor": "loss",
+          "shape": [],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "output",
+          "shape": [
+            32,
+            8
+          ],
+          "maxAbsError": 1.1920928955078125e-07
+        },
+        {
+          "step": 1,
+          "tensor": "weight/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 1,
+          "tensor": "weight/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "weight/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 1,
+          "tensor": "weight/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 5.587935447692871e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 1.1175870895385742e-08
+        },
+        {
+          "step": 5,
+          "tensor": "loss",
+          "shape": [],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 5,
+          "tensor": "output",
+          "shape": [
+            32,
+            8
+          ],
+          "maxAbsError": 1.7881393432617188e-07
+        },
+        {
+          "step": 5,
+          "tensor": "weight/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "weight/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 9.313225746154785e-10
+        },
+        {
+          "step": 5,
+          "tensor": "weight/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "weight/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 5.587935447692871e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 3.725290298461914e-09
+        }
+      ]
+    },
+    {
+      "pod": "torch-gpu-compat-next",
+      "uid": "c2d43d09-1dff-4453-922b-1bd31c05e6e5",
+      "phase": "Succeeded",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T06:36:47Z",
+      "finishedAt": "2026-11-06T06:36:56Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": true,
+      "events": [
+        "stage",
+        "identity",
+        "stage",
+        "cpu-pass",
+        "stage",
+        "cuda-discovery",
+        "cuda-initialized",
+        "stage",
+        "gpu-operations-pass",
+        "stage",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-pass",
+        "PASS"
+      ],
+      "trainingComparisons": [
+        {
+          "step": 1,
+          "tensor": "loss",
+          "shape": [],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "output",
+          "shape": [
+            32,
+            8
+          ],
+          "maxAbsError": 1.1920928955078125e-07
+        },
+        {
+          "step": 1,
+          "tensor": "weight/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 1,
+          "tensor": "weight/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "weight/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 1,
+          "tensor": "weight/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 5.587935447692871e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 1.1175870895385742e-08
+        },
+        {
+          "step": 5,
+          "tensor": "loss",
+          "shape": [],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 5,
+          "tensor": "output",
+          "shape": [
+            32,
+            8
+          ],
+          "maxAbsError": 1.7881393432617188e-07
+        },
+        {
+          "step": 5,
+          "tensor": "weight/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "weight/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 9.313225746154785e-10
+        },
+        {
+          "step": 5,
+          "tensor": "weight/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "weight/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 5.587935447692871e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 3.725290298461914e-09
+        }
+      ]
+    },
+    {
+      "pod": "torch-gpu-compat-kill",
+      "uid": "b77ff05b-2d0f-4dcf-aec1-082891bdf853",
+      "phase": "Failed",
+      "exitCode": 137,
+      "startedAt": "2026-11-06T06:37:06Z",
+      "finishedAt": "2026-11-06T06:37:14Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": true,
+      "events": [
+        "stage",
+        "identity",
+        "stage",
+        "cpu-pass",
+        "stage",
+        "cuda-discovery",
+        "cuda-initialized",
+        "stage",
+        "gpu-operations-pass",
+        "holding"
+      ],
+      "trainingComparisons": null
+    },
+    {
+      "pod": "torch-gpu-compat-after-kill",
+      "uid": "b5f2e4f5-e883-40e1-8c22-41376e77c642",
+      "phase": "Succeeded",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T06:37:24Z",
+      "finishedAt": "2026-11-06T06:37:29Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": true,
+      "events": [
+        "stage",
+        "identity",
+        "stage",
+        "cpu-pass",
+        "stage",
+        "cuda-discovery",
+        "cuda-initialized",
+        "stage",
+        "gpu-operations-pass",
+        "PASS"
+      ],
+      "trainingComparisons": null
+    },
+    {
+      "pod": "linear-default-repro",
+      "uid": "33364f83-d8ac-4f22-87e6-d67b994bd246",
+      "phase": "Failed",
+      "exitCode": 139,
+      "startedAt": "2026-11-06T06:38:34Z",
+      "finishedAt": "2026-11-06T06:38:38Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": null,
+      "events": [
+        "before-linear"
+      ],
+      "trainingComparisons": null
+    },
+    {
+      "pod": "linear-no-lt-repro",
+      "uid": "496fc471-836c-4287-a4b9-452123bc7293",
+      "phase": "Succeeded",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T06:38:47Z",
+      "finishedAt": "2026-11-06T06:38:51Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": null,
+      "events": [
+        "before-linear",
+        "PASS"
+      ],
+      "trainingComparisons": null
+    },
+    {
+      "pod": "torch-gpu-no-lt-only",
+      "uid": "09971d64-e97c-4ad2-81ed-7dd2dbbc04ff",
+      "phase": "Succeeded",
+      "exitCode": 0,
+      "startedAt": "2026-11-06T06:40:20Z",
+      "finishedAt": "2026-11-06T06:40:29Z",
+      "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+      "officialFilesMatchCPU": true,
+      "events": [
+        "stage",
+        "identity",
+        "stage",
+        "cpu-pass",
+        "stage",
+        "cuda-discovery",
+        "cuda-initialized",
+        "stage",
+        "gpu-operations-pass",
+        "stage",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-step-pass",
+        "training-pass",
+        "PASS"
+      ],
+      "trainingComparisons": [
+        {
+          "step": 1,
+          "tensor": "loss",
+          "shape": [],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "output",
+          "shape": [
+            32,
+            8
+          ],
+          "maxAbsError": 1.1920928955078125e-07
+        },
+        {
+          "step": 1,
+          "tensor": "weight/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 1,
+          "tensor": "weight/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "weight/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 1,
+          "tensor": "weight/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 5.587935447692871e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 1,
+          "tensor": "gradient/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 1.1175870895385742e-08
+        },
+        {
+          "step": 5,
+          "tensor": "loss",
+          "shape": [],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 5,
+          "tensor": "output",
+          "shape": [
+            32,
+            8
+          ],
+          "maxAbsError": 1.7881393432617188e-07
+        },
+        {
+          "step": 5,
+          "tensor": "weight/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "weight/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 9.313225746154785e-10
+        },
+        {
+          "step": 5,
+          "tensor": "weight/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "weight/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 0.0
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/0.weight",
+          "shape": [
+            64,
+            32
+          ],
+          "maxAbsError": 5.587935447692871e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/0.bias",
+          "shape": [
+            64
+          ],
+          "maxAbsError": 1.862645149230957e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/2.weight",
+          "shape": [
+            8,
+            64
+          ],
+          "maxAbsError": 7.450580596923828e-09
+        },
+        {
+          "step": 5,
+          "tensor": "gradient/2.bias",
+          "shape": [
+            8
+          ],
+          "maxAbsError": 3.725290298461914e-09
+        }
+      ]
+    }
+  ],
+  "normalSequentialReservation": true,
+  "sigkillExpectedExit": 137,
+  "sigkillRecovery": true,
+  "defaultSGDWorksWhenLTDisabled": true,
+  "benchmark": false,
+  "maxTrainingAbsoluteError": 1.7881393432617188e-07
+}

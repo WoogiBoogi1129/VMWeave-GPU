@@ -1,0 +1,51 @@
+ubuntu@dp-dev-20261105:device-plugin-capture$ date --iso-8601=seconds
+2026-11-06T06:07:08+00:00
+ubuntu@dp-dev-20261105:device-plugin-capture$ sed -n '57,120p' official-pytorch-pod.yaml
+    volumeMounts:
+    - name: code
+      mountPath: /work
+      readOnly: true
+    - name: results
+      mountPath: /results
+    - name: tmp
+      mountPath: /tmp
+    - name: adapter
+      mountPath: /opt/vmweave/adapter
+      readOnly: true
+  volumes:
+  - name: code
+    configMap:
+      name: verify-code
+  - name: results
+    emptyDir: {}
+  - name: tmp
+    emptyDir: {}
+  - name: adapter
+    emptyDir: {}
+  initContainers:
+  - name: guest-adapter
+    image: ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4
+    imagePullPolicy: IfNotPresent
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+        - ALL
+    command:
+    - sh
+    - -ec
+    args:
+    - cp /opt/vmweave/guest/libvmweave_guest.so /adapter/; cd /adapter; echo "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5  libvmweave_guest.so"
+      | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so
+    volumeMounts:
+    - name: adapter
+      mountPath: /adapter
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 200m
+        memory: 64Mi
+ubuntu@dp-dev-20261105:device-plugin-capture$

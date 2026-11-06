@@ -1,0 +1,76 @@
+Name:             torch-cpu
+Namespace:        dp-torch-20261106
+Priority:         0
+Service Account:  default
+Node:             dp-dev-20261105/10.0.2.2
+Start Time:       Fri, 06 Nov 2026 06:33:21 +0000
+Labels:           vmweave-experiment=official-pytorch-20261106
+Annotations:      <none>
+Status:           Succeeded
+SeccompProfile:   RuntimeDefault
+IP:               10.242.0.175
+IPs:
+  IP:  10.242.0.175
+Containers:
+  pytorch:
+    Container ID:  cri-o://6f497419878f329f77db9175ac0fbed26458bdaef61b610a4753154d62f85414
+    Image:         docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Image ID:      docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -ec
+    Args:
+      exec python -u /work/verify.py --mode cpu --profile default --hold-seconds 0
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Fri, 06 Nov 2026 06:33:22 +0000
+      Finished:     Fri, 06 Nov 2026 06:33:30 +0000
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     2
+      memory:  3Gi
+    Requests:
+      cpu:     500m
+      memory:  1Gi
+    Environment:
+      HOME:                     /tmp
+      PYTHONDONTWRITEBYTECODE:  1
+    Mounts:
+      /results from results (rw)
+      /tmp from tmp (rw)
+      /work from code (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  code:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      verify-code
+    Optional:  false
+  results:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  tmp:
+    Type:        EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:      
+    SizeLimit:   <unset>
+QoS Class:       Burstable
+Node-Selectors:  kubernetes.io/hostname=dp-dev-20261105
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  13s   default-scheduler  Successfully assigned dp-torch-20261106/torch-cpu to dp-dev-20261105
+  Normal  Pulled     12s   kubelet            spec.containers{pytorch}: Container image "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be" already present on machine and can be accessed by the pod
+  Normal  Created    12s   kubelet            spec.containers{pytorch}: Container created
+  Normal  Started    12s   kubelet            spec.containers{pytorch}: Container started

@@ -177,3 +177,15 @@ Node의 `vmweave.io/gpu` allocatable이 `1`이 될 때까지 `kubectl wait`한 �
 완료 Pod `dp-capture-20261105/vmweave-sgemm`과 `/home/ubuntu/device-plugin-capture/`의
 YAML은 VM 디스크에 보존했다. 다음 정상 부팅 후 같은 `kubectl describe` 명령으로 조회할 수 있다.
 [종료 기록](evidence/device-plugin-20261105/terminal-captures/cleanup.json)에 VM·Pod UID를 남겼다.
+
+## 공식 PyTorch 이미지 후속 기능 검증
+
+2026-11-06에 공식 `pytorch/pytorch:2.11.0-cuda12.8-cudnn9-runtime`을 수정하지 않고
+같은 시험 VM의 Kubernetes Pod로 실행했다. CUDA 기초 연산과 작은 5-step FP32 MLP 학습,
+Pod 순차 예약·정상 종료·SIGKILL 후 재사용을 확인했다. 성능 벤치마크는 수행하지 않았다.
+
+기본 `Linear` 경로는 cuBLASLt에서 exit 139로 실패했다. `DISABLE_ADDMM_CUDA_LT=1`을 적용하면
+SGD 기본 옵션으로도 학습·CPU 참조 검산이 통과했다. 기본 경로 실패와 호환 조건 성공을 구분한
+[상세 보고서와 11개 실제 터미널 PNG](../../experiments/device-plugin-pytorch/results/20261106-official/REPORT.md),
+[실행 도구·조건](../../experiments/device-plugin-pytorch/README.md)을 참조한다.
+기존 Plugin·Guest·Worker 이미지는 유지했으며, 실험 종료 후 VM Halt와 Channel Stopped를 확인했다.
