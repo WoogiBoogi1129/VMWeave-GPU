@@ -1,0 +1,10 @@
+prepared rnn-default-release-20261108
+pod/published-lstm created
+{"pod": "published-lstm", "phase": "Succeeded", "child": {"returncode": 0, "signal": null, "timeout": false}}
+pod/published-continuous created
+{"pod": "published-continuous", "phase": "Succeeded", "child": {"returncode": 0, "signal": null, "timeout": false}}
+Traceback (most recent call last):
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/rnn-release-20261108/verify_live.py", line 30, in <module>
+    assert proof,'No matched live GPU process observed'
+           ^^^^^
+AssertionError: No matched live GPU process observed

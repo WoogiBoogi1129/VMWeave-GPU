@@ -5,6 +5,7 @@
 
 | 후속 검증 | 확인 범위 | 근거 |
 |---|---|---|
+| 11/8 v0.5.9·Device Plugin v0.1.1 | 기본 cuDNN LSTM·cuBLASLt 학습, 공개 이미지로 128 step·CPU 검산·체크포인트 재개, 노드 업데이트 | [검증](../../deploy/releases/evidence/v0.5.9/README.md) |
 | 11/5 Device Plugin v0.1.0 | 실제 VM 내부 K8s GPU 예약·주입, 단일 client, SIGKILL/재시작/브로커 장애·VM 재기동, 공개 패키지 실행 | [검증](../development/device-plugin-validation-2026-11-05.md) |
 | 11/4 v0.5.8 회수 기록 | API/filesystem 중단 복구, CRD/RBAC, 배포 상태. 물리 GPU detach·새 VM 부팅 시험은 아님 | [릴리스](../getting-started/release-v0.5.8.md) |
 | 11/2~3 학습 비교 | VMWeave v0.5.5·Flyt·Passthrough의 제한된 합성 MLP, 정식 300회 | [보고서](../../experiments/training-threeway/results/20261102/REPORT.md) |

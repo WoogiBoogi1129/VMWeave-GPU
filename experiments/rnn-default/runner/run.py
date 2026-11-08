@@ -5,6 +5,7 @@ import base64
 import copy
 import hashlib
 import json
+import re
 from pathlib import Path
 import shlex
 import subprocess
@@ -23,10 +24,16 @@ def main():
     p.add_argument('--case', choices=['basic','lstm','mlp','continuous','resume'], default='lstm')
     p.add_argument('--checkpoint',type=Path)
     p.add_argument('--expected',type=Path)
-    p.add_argument('--guest-library',type=Path)
+    guest = p.add_mutually_exclusive_group()
+    guest.add_argument('--guest-library',type=Path)
+    guest.add_argument('--guest-image', help='Published Guest image pinned by digest')
+    p.add_argument('--library-sha256', help='Expected library hash for --guest-image')
     p.add_argument('--loader-trace', action='store_true')
     p.add_argument('--code-map', default='rnn-code')
     a = p.parse_args(); c = json.loads(a.connection.read_text()); a.results.mkdir(exist_ok=True, parents=True)
+    if a.guest_image and (not re.fullmatch(r'.+@sha256:[0-9a-f]{64}', a.guest_image) or
+                          not re.fullmatch(r'[0-9a-f]{64}', a.library_sha256 or '')):
+        p.error('--guest-image requires a pinned digest and --library-sha256')
     ns = c['namespace']; runid = c['runID']
     assert ns.startswith('rnn-default-') and runid.startswith('rnn-default-')
 
@@ -104,6 +111,10 @@ def main():
             init=spec['initContainers'][0]
             init['volumeMounts'].append(dict(name='candidate',mountPath='/candidate',readOnly=True))
             init['args']=['cp /candidate/libvmweave_guest.so /adapter/; cd /adapter; echo '+shlex.quote(digest+'  libvmweave_guest.so')+' | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so']
+        if a.guest_image and a.mode == 'gpu':
+            init = spec['initContainers'][0]
+            init['image'] = a.guest_image
+            init['args'] = ['cp /opt/vmweave/guest/libvmweave_guest.so /adapter/; cd /adapter; echo '+shlex.quote(a.library_sha256+'  libvmweave_guest.so')+' | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so']
         if a.mode == 'cpu':
             spec.pop('initContainers', None)
             spec['volumes'] = [v for v in spec['volumes'] if v['name'] != 'adapter']

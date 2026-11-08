@@ -18,12 +18,16 @@ def flatten(value, prefix=""):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--results", type=Path, default=Path(__file__).parent / "results/20261108")
+parser.add_argument("--published", action="store_true", help="Audit the published release's case names")
 args = parser.parse_args()
-pairs = [(name, f"{name}/cpu.pt", f"{name}/cuda.pt") for name in
-         ["candidate-v3b-lstm", "candidate-v3b-lstm-repeat", "candidate-v3b-mlp"]]
+prefix = "published" if args.published else "candidate-v3b"
+short_cases = [f"{prefix}-lstm", f"{prefix}-mlp"]
+if not args.published:
+    short_cases.insert(1, f"{prefix}-lstm-repeat")
+pairs = [(name, f"{name}/cpu.pt", f"{name}/cuda.pt") for name in short_cases]
 pairs += [
-    ("continuous", "candidate-v3b-continuous/cpu-continuous.pt", "candidate-v3b-continuous/cuda-continuous.pt"),
-    ("resume", "candidate-v3b-continuous/cuda-continuous.pt", "candidate-v3b-resume/cuda-continuous.pt"),
+    ("continuous", f"{prefix}-continuous/cpu-continuous.pt", f"{prefix}-continuous/cuda-continuous.pt"),
+    ("resume", f"{prefix}-continuous/cuda-continuous.pt", f"{prefix}-resume/cuda-continuous.pt"),
 ]
 checks = []
 for case, reference, actual in pairs:

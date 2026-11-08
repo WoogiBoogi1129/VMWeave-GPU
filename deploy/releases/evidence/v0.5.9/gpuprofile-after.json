@@ -1,0 +1,26 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "GPUProfile",
+  "metadata": {
+    "creationTimestamp": "2026-11-08T09:16:22Z",
+    "generation": 1,
+    "name": "dp-dev-20261105-v059",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "27293217",
+    "uid": "2fd4db64-e45b-4921-95f7-ecd86a35afed"
+  },
+  "spec": {
+    "approved": true,
+    "backend": "hami",
+    "cores": 25,
+    "draDeviceClass": "",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "hamiNamespace": "kube-system",
+    "maxClients": 1,
+    "memoryMiB": 1024,
+    "nodeName": "gpu-4",
+    "runtimeClass": "nvidia",
+    "schedulerName": "hami-scheduler",
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:efb17db71fbf9e1b497fce5cdd60e7a121d5e5d25d470bfda44cc38b34f926ca"
+  }
+}

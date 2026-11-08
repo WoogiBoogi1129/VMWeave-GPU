@@ -1,0 +1,295 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-11-08T09:18:57Z",
+        "generateName": "vmweave-device-plugin-",
+        "generation": 1,
+        "labels": {
+          "app.kubernetes.io/instance": "vmweave-device-plugin",
+          "app.kubernetes.io/name": "vmweave-device-plugin",
+          "controller-revision-hash": "74bc5cb4b8",
+          "pod-template-generation": "2"
+        },
+        "name": "vmweave-device-plugin-mp289",
+        "namespace": "vmweave-device-plugin",
+        "ownerReferences": [
+          {
+            "apiVersion": "apps/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "DaemonSet",
+            "name": "vmweave-device-plugin",
+            "uid": "46a7233a-9e33-4f31-ae26-c75f4e11deef"
+          }
+        ],
+        "resourceVersion": "17198",
+        "uid": "c15e8b49-e2c5-456b-8a67-1abb137e369c"
+      },
+      "spec": {
+        "affinity": {
+          "nodeAffinity": {
+            "requiredDuringSchedulingIgnoredDuringExecution": {
+              "nodeSelectorTerms": [
+                {
+                  "matchFields": [
+                    {
+                      "key": "metadata.name",
+                      "operator": "In",
+                      "values": [
+                        "dp-dev-20261105"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "--broker-gid=998",
+              "--library-sha256=3b3644f42ae3d075c08c22e2578e59553e29c5a446f65cf41f33ad68a070a4a9"
+            ],
+            "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:ed33b62fab091a5b64abfcd9fb1afbd3a0fa0919c314679e01f5d92baec37b16",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "plugin",
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "128Mi"
+              },
+              "requests": {
+                "cpu": "20m",
+                "memory": "32Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "readOnlyRootFilesystem": true,
+              "runAsGroup": 0,
+              "runAsUser": 0,
+              "seccompProfile": {
+                "type": "RuntimeDefault"
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/kubelet/device-plugins",
+                "name": "kubelet"
+              },
+              {
+                "mountPath": "/run/vmweave",
+                "name": "broker",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/run/vmweave-device-plugin",
+                "name": "status",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "dp-dev-20261105",
+        "nodeSelector": {
+          "vmweave.io/device-plugin": "enabled"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 10,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/disk-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/memory-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/pid-pressure",
+            "operator": "Exists"
+          },
+          {
+            "effect": "NoSchedule",
+            "key": "node.kubernetes.io/unschedulable",
+            "operator": "Exists"
+          }
+        ],
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/var/lib/kubelet/device-plugins",
+              "type": "Directory"
+            },
+            "name": "kubelet"
+          },
+          {
+            "hostPath": {
+              "path": "/run/vmweave",
+              "type": "Directory"
+            },
+            "name": "broker"
+          },
+          {
+            "hostPath": {
+              "path": "/run/vmweave-device-plugin",
+              "type": "Directory"
+            },
+            "name": "status"
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-08T09:18:58Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-08T09:18:57Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-08T09:18:58Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-08T09:18:58Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-08T09:18:57Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "allocatedResources": {
+              "cpu": "20m",
+              "memory": "32Mi"
+            },
+            "containerID": "cri-o://bebfd15aae6617b580fef74871d3c95424fac53ed3c2caaaa5bf549f45d505b4",
+            "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin:device-plugin-v0.1.1",
+            "imageID": "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:ed33b62fab091a5b64abfcd9fb1afbd3a0fa0919c314679e01f5d92baec37b16",
+            "lastState": {},
+            "name": "plugin",
+            "ready": true,
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "128Mi"
+              },
+              "requests": {
+                "cpu": "20m",
+                "memory": "32Mi"
+              }
+            },
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-11-08T09:18:58Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 0,
+                "supplementalGroups": [
+                  0
+                ],
+                "uid": 0
+              }
+            },
+            "volumeMounts": [
+              {
+                "mountPath": "/var/lib/kubelet/device-plugins",
+                "name": "kubelet"
+              },
+              {
+                "mountPath": "/run/vmweave",
+                "name": "broker",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              },
+              {
+                "mountPath": "/run/vmweave-device-plugin",
+                "name": "status",
+                "readOnly": true,
+                "recursiveReadOnly": "Disabled"
+              }
+            ]
+          }
+        ],
+        "hostIP": "10.0.2.2",
+        "hostIPs": [
+          {
+            "ip": "10.0.2.2"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.242.0.198",
+        "podIPs": [
+          {
+            "ip": "10.242.0.198"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-08T09:18:57Z"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

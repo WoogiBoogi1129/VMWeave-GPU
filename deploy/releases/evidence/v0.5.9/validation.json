@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "sourceRevision": "b0f73c16b84f65887953118f33ff08b82fc403af",
+  "guestLibrarySHA256": "3b3644f42ae3d075c08c22e2578e59553e29c5a446f65cf41f33ad68a070a4a9",
+  "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:efb17db71fbf9e1b497fce5cdd60e7a121d5e5d25d470bfda44cc38b34f926ca",
+  "guestImage": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:131bb669cc7bd092de6dc49f9ec2289cf19b3ea152614cad984e08da35407681",
+  "cases": {
+    "published-lstm": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "497b7d4d-f8c4-47f3-a0e5-6d80ce6e7254",
+      "tensors": 36,
+      "maxAbs": 3.516674041748047e-06
+    },
+    "published-continuous": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "69938baa-0337-4598-90e0-cb99682f8c3f",
+      "tensors": 7,
+      "maxAbs": 4.470348358154297e-07
+    },
+    "published-resume": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "41c88f29-9bd8-40fa-9ded-e7530e4d4754",
+      "tensors": 7,
+      "maxAbs": 0.0
+    },
+    "published-mlp": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "9b35156f-d812-48d8-aaae-a4ab3b70ab6b",
+      "tensors": 22,
+      "maxAbs": 4.284083843231201e-08
+    },
+    "published-basic": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "7c545a72-7e7e-4a74-9592-6bbe493c8fd5"
+    }
+  },
+  "testNamespaceRemoved": true,
+  "sessionsReclaimed": true,
+  "vmFinalState": "Running",
+  "channelFinalState": "Ready"
+}

@@ -1,0 +1,68 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-11-05T07:12:14Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 1,
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "dp-dev-20261105",
+        "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+      }
+    ],
+    "resourceVersion": "27291947",
+    "uid": "04f5fc84-21a7-4679-94c9-5085304627d4"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:6e8099281376e250097850397a6e570932a867dd2e146b839045c8e87b9dacb6",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:c8a9f80e5169877c23b71902b5cb40e64bd740d4e49600f52a4849d15f23979a",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "dp-dev-20261105-shm",
+      "uid": "2623b5bf-61c7-42c6-beb5-99c464ef63e7"
+    },
+    "requestRef": {
+      "name": "dp-dev-20261105",
+      "uid": "26a2352e-68f3-484e-8261-021a31abfbb3"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "dp-dev-20261105",
+      "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+    },
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:e2139218e2abc9efa5b5537e8ca7d7567e5dbbe8bc9a40df42f89820894386ad"
+  },
+  "status": {
+    "allocation": "",
+    "backend": "",
+    "claimName": "",
+    "claimUID": "",
+    "completion": null,
+    "compute": 25,
+    "everBound": false,
+    "generation": "",
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+    "memoryMiB": 1024,
+    "nodeName": "gpu-4",
+    "phase": "Stopped",
+    "profileGeneration": 1,
+    "reason": "RuntimeReclaimed",
+    "reclamation": null,
+    "requestGeneration": 1,
+    "resourcePrefix": "",
+    "sessions": [],
+    "vmiUID": "",
+    "workerPodUID": ""
+  }
+}

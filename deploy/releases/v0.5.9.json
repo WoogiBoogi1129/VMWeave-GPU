@@ -1,0 +1,137 @@
+{
+  "tag": "v0.5.9",
+  "sourceRevision": "b0f73c16b84f65887953118f33ff08b82fc403af",
+  "publishedDateKST": "2026-11-08",
+  "activeProfile": "vmweave-test-b/dp-dev-20261105-v059",
+  "activeRequest": "vmweave-test-b/dp-dev-20261105-v059",
+  "previousProfileAndRequestRetainedForRollback": true,
+  "scope": "Paired Guest/Worker default FP32 LSTM and cuBLASLt support; both central Helm releases and dp-dev-20261105 runtime upgraded.",
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.5.9",
+    "digest": "sha256:ad5dad28477f0cd7dde95c2aa60a482ff5542d2d4702482a8eb9784c78a96af5",
+    "packageSHA256": "577069135b9c71828af94a50bf1b996a0e33820785e5820b2e0e3fe81ef19d1d"
+  },
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:f096a1dc0620d129926a2c5ad368b6d189f91e0125accda65a20085b14031882",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:894d0e79a57fec4b26fb3280e6b395e9a296a3651787ccc732cd76b87093b375",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:13d6b6acf9b5980303892aaa7ab74495636384b31f1307d4ec4401823e08edd0",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:c07242c9990f85ea6b3883a59e009bc4075bd966ee29c90f0d968cc4d7f81f3b",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:efb17db71fbf9e1b497fce5cdd60e7a121d5e5d25d470bfda44cc38b34f926ca"
+  },
+  "helmReleases": [
+    {
+      "name": "nested",
+      "namespace": "vmweave-nested-system",
+      "revision": 5,
+      "status": "deployed",
+      "chartVersion": "0.5.9"
+    },
+    {
+      "name": "vmweave",
+      "namespace": "vmweave-system",
+      "revision": 16,
+      "status": "deployed",
+      "chartVersion": "0.5.9"
+    },
+    {
+      "name": "vmweave-device-plugin",
+      "namespace": "vmweave-device-plugin",
+      "revision": 2,
+      "status": "deployed",
+      "chartVersion": "0.1.1"
+    }
+  ],
+  "deployments": [
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "podUID": "b625d185-939b-4ac5-8de0-ccb1fd45b65d",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "podUID": "3f8e01b4-9192-4198-8c36-3c7c8671a5d7",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "podUID": "65a241eb-9459-4fca-9655-bc7f6e17b394",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "podUID": "ce9f947b-c37c-46bc-a175-c3f1c5153ff6",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:92a15261b473ec7226f2e914e804bb8ab2e1e25854dabee39e1796ad23f2dad5",
+      "ready": true
+    }
+  ],
+  "devicePluginRecord": "deploy/releases/device-plugin-v0.1.1.json",
+  "validation": "deploy/releases/evidence/v0.5.9/validation.json",
+  "evidence": "deploy/releases/evidence/v0.5.9/README.md",
+  "guestLibrarySHA256": "3b3644f42ae3d075c08c22e2578e59553e29c5a446f65cf41f33ad68a070a4a9",
+  "protectedRunningVMs": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "4f22227f-919f-431d-8ef4-0b84df438382",
+      "specUnchanged": true,
+      "phase": "Running"
+    }
+  ],
+  "preExistingUnresolvedChannels": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-v2-r1-ab-a",
+      "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    }
+  ],
+  "externalComponentsNotUpgraded": [
+    "Kubernetes",
+    "KubeVirt",
+    "HAMi device plugin",
+    "HAMi DRA driver",
+    "GPU Operator"
+  ],
+  "limits": [
+    "FP32 single-layer unidirectional MNIST LSTM tested; not full cuDNN/cuBLASLt support.",
+    "CUDA12.8 x86-64 Lt ABI only.",
+    "Functional correctness and checkpoint resume, not convergence or throughput benchmarking.",
+    "Three pre-existing Draining channels retained; no forced cleanup or runtime replacement.",
+    "Clean-cluster installation remains NOT_RUN."
+  ]
+}
