@@ -1,0 +1,55 @@
+{"stage": "environment", "torch": "2.11.0+cu128", "cudnn": 90800, "mode": "gpu", "case": "lstm"}
+{"stage": "model_to_start", "device": "cpu"}
+{"stage": "model_to_done", "device": "cpu"}
+{"stage": "input_ready", "device": "cpu", "step": 1}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 1}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 1}
+{"stage": "head_done", "device": "cpu", "step": 1}
+{"stage": "loss_done", "device": "cpu", "step": 1}
+{"stage": "backward_done", "device": "cpu", "step": 1}
+{"stage": "optimizer_done", "device": "cpu", "step": 1}
+{"stage": "input_ready", "device": "cpu", "step": 2}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 2}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 2}
+{"stage": "head_done", "device": "cpu", "step": 2}
+{"stage": "loss_done", "device": "cpu", "step": 2}
+{"stage": "backward_done", "device": "cpu", "step": 2}
+{"stage": "optimizer_done", "device": "cpu", "step": 2}
+{"stage": "input_ready", "device": "cpu", "step": 3}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 3}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 3}
+{"stage": "head_done", "device": "cpu", "step": 3}
+{"stage": "loss_done", "device": "cpu", "step": 3}
+{"stage": "backward_done", "device": "cpu", "step": 3}
+{"stage": "optimizer_done", "device": "cpu", "step": 3}
+{"stage": "input_ready", "device": "cpu", "step": 4}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 4}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 4}
+{"stage": "head_done", "device": "cpu", "step": 4}
+{"stage": "loss_done", "device": "cpu", "step": 4}
+{"stage": "backward_done", "device": "cpu", "step": 4}
+{"stage": "optimizer_done", "device": "cpu", "step": 4}
+{"stage": "input_ready", "device": "cpu", "step": 5}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 5}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 5}
+{"stage": "head_done", "device": "cpu", "step": 5}
+{"stage": "loss_done", "device": "cpu", "step": 5}
+{"stage": "backward_done", "device": "cpu", "step": 5}
+{"stage": "optimizer_done", "device": "cpu", "step": 5}
+{"stage": "model_to_start", "device": "cuda"}
+Fatal Python error: Segmentation fault
+
+Thread 0x00007ffa3d21d6c0 (most recent call first):
+  <no Python frame>
+
+Current thread 0x00007ffb68dd6800 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py", line 285 in flatten_parameters
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py", line 228 in _init_flat_weights
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py", line 304 in _apply
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 934 in _apply
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1384 in to
+  File "/work/probe.py", line 27 in train
+  File "/work/probe.py", line 50 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._generator, numpy.random._mt19937, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand (total: 22)
+RNN_EXIT {"returncode": -11, "signal": 11, "timeout": false}

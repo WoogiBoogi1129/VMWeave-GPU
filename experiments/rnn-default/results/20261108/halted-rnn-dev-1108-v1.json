@@ -1,0 +1,130 @@
+{
+  "apiVersion": "kubevirt.io/v1",
+  "kind": "VirtualMachine",
+  "metadata": {
+    "annotations": {
+      "kubevirt.io/latest-observed-api-version": "v1",
+      "kubevirt.io/storage-observed-api-version": "v1"
+    },
+    "creationTimestamp": "2026-11-08T08:12:29Z",
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize"
+    ],
+    "generation": 4,
+    "labels": {
+      "experiment": "rnn-default-20261108"
+    },
+    "name": "rnn-dev-1108-v1",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "27256647",
+    "uid": "e194bf18-8117-4ea2-854b-ac3ccebd8701"
+  },
+  "spec": {
+    "runStrategy": "Halted",
+    "template": {
+      "metadata": {
+        "annotations": {
+          "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:6e8099281376e250097850397a6e570932a867dd2e146b839045c8e87b9dacb6\",\"pvc\":{\"name\":\"dp-dev-20261105-shm\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+          "kubevirt.io/pci-topology-version": "v3",
+          "vmweave.io/shm-allocation": "8e25ec75dfbd308601c86dc38a785330",
+          "vmweave.io/shm-channel": "rnn-dev-1108-v1",
+          "vmweave.io/shm-channel-uid": "9a5a11c5-6fda-41de-9e36-efdbd637aaee",
+          "vmweave.io/shm-generation": "00d60cc8eed95d9b213a58802b696a82"
+        },
+        "labels": {
+          "experiment": "rnn-default-20261108"
+        }
+      },
+      "spec": {
+        "architecture": "amd64",
+        "domain": {
+          "cpu": {
+            "cores": 4
+          },
+          "devices": {
+            "disks": [
+              {
+                "disk": {
+                  "bus": "virtio"
+                },
+                "name": "root"
+              },
+              {
+                "disk": {
+                  "bus": "virtio"
+                },
+                "name": "cloudinit"
+              }
+            ],
+            "interfaces": [
+              {
+                "masquerade": {},
+                "name": "default"
+              }
+            ]
+          },
+          "firmware": {
+            "serial": "896ede69-7974-4d91-9302-344326d08d2d",
+            "uuid": "35510481-e0a3-4add-8664-8740f60bcb56"
+          },
+          "machine": {
+            "type": "q35"
+          },
+          "resources": {
+            "requests": {
+              "memory": "8Gi"
+            }
+          }
+        },
+        "networks": [
+          {
+            "name": "default",
+            "pod": {}
+          }
+        ],
+        "nodeSelector": {
+          "kubernetes.io/hostname": "gpu-4"
+        },
+        "volumes": [
+          {
+            "name": "root",
+            "persistentVolumeClaim": {
+              "claimName": "dp-dev-20261105-root"
+            }
+          },
+          {
+            "cloudInitNoCloud": {
+              "userData": "#cloud-config\nhostname: dp-dev-20261105\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKQ3HIwT6sWlQIpP1fLoMotzjqP+j3aUZil0lVXBsrjB ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n# vmweave-layout-b64: jiXsdd+9MIYByG3DinhTMADWDMju2V2bITpYgCtpaoIAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGT4r0Huzajffj+dB7LIz9MAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+            },
+            "name": "cloudinit"
+          }
+        ]
+      }
+    }
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": "2026-11-08T08:12:29Z",
+        "lastTransitionTime": "2026-11-08T08:12:29Z",
+        "message": "VMI does not exist",
+        "reason": "VMINotExists",
+        "status": "False",
+        "type": "Ready"
+      }
+    ],
+    "printableStatus": "Stopped",
+    "volumeSnapshotStatuses": [
+      {
+        "enabled": false,
+        "name": "root",
+        "reason": "No VolumeSnapshotClass: Volume snapshots are not configured for this StorageClass [] [root]"
+      },
+      {
+        "enabled": false,
+        "name": "cloudinit",
+        "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+      }
+    ]
+  }
+}

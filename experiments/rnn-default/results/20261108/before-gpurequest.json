@@ -1,0 +1,25 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "GPURequest",
+  "metadata": {
+    "creationTimestamp": "2026-11-05T07:12:14Z",
+    "generation": 1,
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "24672420",
+    "uid": "26a2352e-68f3-484e-8261-021a31abfbb3"
+  },
+  "spec": {
+    "compute": 25,
+    "count": 1,
+    "memory": "1024Mi",
+    "profileRef": {
+      "name": "dp-dev-20261105",
+      "uid": "54797369-b65d-48c2-959e-cddf41afd878"
+    },
+    "vmRef": {
+      "name": "dp-dev-20261105",
+      "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+    }
+  }
+}

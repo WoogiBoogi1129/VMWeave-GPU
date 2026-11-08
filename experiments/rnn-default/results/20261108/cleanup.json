@@ -1,0 +1,93 @@
+{
+  "originalVMRestored": true,
+  "sessionsReclaimed": true,
+  "candidateResourcesRemoved": true,
+  "innerNamespaceRemoved": true,
+  "originalSpecChecks": {
+    "vm": true,
+    "gpuprofile": true,
+    "gpurequest": true,
+    "sharedmemorychannel": true
+  },
+  "normalization": "Ignore controller-generated shm-allocation/shm-generation annotations and vmweave-layout-b64 cloud-init marker; all other spec fields must match.",
+  "removed": [
+    {
+      "kind": "GPURequest",
+      "name": "rnn-dev-1108-v1",
+      "uid": "fe557da5-449a-42f1-9ea0-fe142459e856"
+    },
+    {
+      "kind": "GPURequest",
+      "name": "rnn-dev-1108-v2",
+      "uid": "30926113-4720-4400-b3c1-5ea5919dbbd3"
+    },
+    {
+      "kind": "GPURequest",
+      "name": "rnn-dev-1108-v3",
+      "uid": "93785532-0b69-4a85-bab7-6df1b646d924"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "name": "rnn-dev-1108-v1",
+      "uid": "9a5a11c5-6fda-41de-9e36-efdbd637aaee"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "name": "rnn-dev-1108-v2",
+      "uid": "818ce1c0-8955-4ee3-82bb-8b01f29e0151"
+    },
+    {
+      "kind": "SharedMemoryChannel",
+      "name": "rnn-dev-1108-v3",
+      "uid": "fda3d3b5-d6b9-44af-9571-a28cdc954154"
+    },
+    {
+      "kind": "VirtualMachine",
+      "name": "rnn-dev-1108-v1",
+      "uid": "e194bf18-8117-4ea2-854b-ac3ccebd8701"
+    },
+    {
+      "kind": "VirtualMachine",
+      "name": "rnn-dev-1108-v2",
+      "uid": "c8e0d501-8438-4824-8f42-44adf8f73e74"
+    },
+    {
+      "kind": "VirtualMachine",
+      "name": "rnn-dev-1108-v3",
+      "uid": "cf1ec7f2-c1d1-4329-b715-512626631392"
+    },
+    {
+      "kind": "GPUProfile",
+      "name": "rnn-dev-1108-v1",
+      "uid": "7d3dfb76-cc20-42de-8420-1f963ec03015"
+    },
+    {
+      "kind": "GPUProfile",
+      "name": "rnn-dev-1108-v2",
+      "uid": "8039fed1-f666-4c66-8099-f2892acb3b54"
+    },
+    {
+      "kind": "GPUProfile",
+      "name": "rnn-dev-1108-v3",
+      "uid": "1966ffea-551f-4919-9c1c-c1c2361eb184"
+    },
+    {
+      "kind": "Service",
+      "name": "rnn-dev-1108-v1",
+      "uid": "db49743b-bd74-4f62-b040-6bb3d655d298"
+    },
+    {
+      "kind": "Service",
+      "name": "rnn-dev-1108-v2",
+      "uid": "0c5eaa2c-741f-4a49-88ae-104032eb8133"
+    },
+    {
+      "kind": "Service",
+      "name": "rnn-dev-1108-v3",
+      "uid": "39f1beb7-44e2-43a9-a399-4840c9f63e12"
+    }
+  ],
+  "originalRunStrategy": "Halted",
+  "originalChannelPhase": "Stopped",
+  "sharedPVCsPreserved": true
+}

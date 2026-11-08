@@ -1,11 +1,11 @@
 name: VMWeave guest device plugin
 on:
   pull_request:
-    paths: ['integrations/kubernetes-device-plugin/**', 'charts/vmweave-device-plugin/**', 'images/vmweave/DevicePlugin*.Containerfile', 'images/vmweave/Runtime.Containerfile', 'runtime/shm/**', 'tools/guest-smoke/**', 'tests/control/test_guest*.py', 'tests/integration/**', 'tests/path_optimization/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/device-plugin.yml']
+    paths: ['integrations/kubernetes-device-plugin/**', 'charts/vmweave-device-plugin/**', 'images/vmweave/DevicePlugin*.Containerfile', 'images/vmweave/Runtime.Containerfile', 'runtime/shm/**', 'tools/guest-smoke/**', 'tests/control/test_guest*.py', 'tests/integration/**', 'tests/path_optimization/**', 'tests/library_rpc/**', 'scripts/codegen/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/device-plugin.yml']
   push:
     branches: [main, 'device-plugin/**']
     tags: ['device-plugin-v*']
-    paths: ['integrations/kubernetes-device-plugin/**', 'charts/vmweave-device-plugin/**', 'images/vmweave/DevicePlugin*.Containerfile', 'images/vmweave/Runtime.Containerfile', 'runtime/shm/**', 'tools/guest-smoke/**', 'tests/control/test_guest*.py', 'tests/integration/**', 'tests/path_optimization/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/device-plugin.yml']
+    paths: ['integrations/kubernetes-device-plugin/**', 'charts/vmweave-device-plugin/**', 'images/vmweave/DevicePlugin*.Containerfile', 'images/vmweave/Runtime.Containerfile', 'runtime/shm/**', 'tools/guest-smoke/**', 'tests/control/test_guest*.py', 'tests/integration/**', 'tests/path_optimization/**', 'tests/library_rpc/**', 'scripts/codegen/**', 'scripts/test-shm-training.sh', '.dockerignore', '.github/workflows/device-plugin.yml']
   workflow_dispatch:
 permissions:
   contents: read

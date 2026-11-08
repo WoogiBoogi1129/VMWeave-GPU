@@ -4,6 +4,7 @@
 
 | 결과 묶음 | 내용 |
 |---|---|
+| [2026-11-08 기본 경로 LSTM](../../experiments/rnn-default/README.md) | 후보 cuDNN RNN v8·cuBLASLt 중계, 128-step 학습·CPU 검산·체크포인트 재개·회귀; 성능 비교 아님 |
 | [2026-11-06 공식 PyTorch·Device Plugin](../../experiments/device-plugin-pytorch/README.md) | 공식 이미지 GPU 연산·5-step 학습, cuBLASLt 실패·우회, 자원 회수·재사용, 실제 PNG |
 | [2026-11-02~03 학습 3방식 비교](../../experiments/training-threeway/README.md) | 제한된 MLP 정식 300회, 검산·실패·중단 기록 |
 | [2026-10-28~30 내부 Kubernetes](../../experiments/nested-k8s-gpu/README.md) | 비특권 GPU Pod 기능, SGEMM·복사·Rodinia; Device Plugin 미사용 |

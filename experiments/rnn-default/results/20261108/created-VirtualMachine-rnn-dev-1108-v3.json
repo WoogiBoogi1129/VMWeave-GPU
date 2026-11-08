@@ -1,0 +1,94 @@
+{
+  "apiVersion": "kubevirt.io/v1",
+  "kind": "VirtualMachine",
+  "metadata": {
+    "creationTimestamp": "2026-11-08T08:22:04Z",
+    "generation": 1,
+    "labels": {
+      "experiment": "rnn-default-20261108"
+    },
+    "name": "rnn-dev-1108-v3",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "27261182",
+    "uid": "cf1ec7f2-c1d1-4329-b715-512626631392"
+  },
+  "spec": {
+    "runStrategy": "Halted",
+    "template": {
+      "metadata": {
+        "annotations": {
+          "kubevirt.io/pci-topology-version": "v3"
+        },
+        "labels": {
+          "experiment": "rnn-default-20261108"
+        }
+      },
+      "spec": {
+        "architecture": "amd64",
+        "domain": {
+          "cpu": {
+            "cores": 4
+          },
+          "devices": {
+            "disks": [
+              {
+                "disk": {
+                  "bus": "virtio"
+                },
+                "name": "root"
+              },
+              {
+                "disk": {
+                  "bus": "virtio"
+                },
+                "name": "cloudinit"
+              }
+            ],
+            "interfaces": [
+              {
+                "macAddress": "92:47:c8:12:65:01",
+                "masquerade": {},
+                "name": "default"
+              }
+            ]
+          },
+          "firmware": {
+            "serial": "896ede69-7974-4d91-9302-344326d08d2d",
+            "uuid": "35510481-e0a3-4add-8664-8740f60bcb56"
+          },
+          "machine": {
+            "type": "q35"
+          },
+          "resources": {
+            "requests": {
+              "memory": "8Gi"
+            }
+          }
+        },
+        "networks": [
+          {
+            "name": "default",
+            "pod": {}
+          }
+        ],
+        "nodeSelector": {
+          "kubernetes.io/hostname": "gpu-4"
+        },
+        "volumes": [
+          {
+            "name": "root",
+            "persistentVolumeClaim": {
+              "claimName": "dp-dev-20261105-root"
+            }
+          },
+          {
+            "cloudInitNoCloud": {
+              "userData": "#cloud-config\nhostname: dp-dev-20261105\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKQ3HIwT6sWlQIpP1fLoMotzjqP+j3aUZil0lVXBsrjB ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n"
+            },
+            "name": "cloudinit"
+          }
+        ]
+      }
+    }
+  }
+}

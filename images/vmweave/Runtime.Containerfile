@@ -8,11 +8,14 @@ RUN cmake -S /src/runtime/shm -B /build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTA
 
 COPY tests/integration /src/tests/integration
 COPY tests/path_optimization /src/tests/path_optimization
+COPY tests/library_rpc /src/tests/library_rpc
+COPY scripts/codegen /src/scripts/codegen
 COPY scripts/test-shm-training.sh /src/scripts/test-shm-training.sh
 RUN mkdir -p /tmp/vmweave-test-stubs \
     && ln -s /usr/local/cuda/lib64/stubs/libcuda.so /tmp/vmweave-test-stubs/libcuda.so.1 \
     && LD_LIBRARY_PATH=/tmp/vmweave-test-stubs:/usr/local/cuda/lib64 bash /src/scripts/test-shm-training.sh /build \
     && CUDA_ROOT=/usr/local/cuda bash /src/tests/path_optimization/run_cuda_mock.sh \
+    && bash /src/tests/library_rpc/run.sh /build \
     && rm -rf /tmp/vmweave-test-stubs
 
 COPY tools/guest-smoke/guest_gpu_smoke.c /src/guest_gpu_smoke.c

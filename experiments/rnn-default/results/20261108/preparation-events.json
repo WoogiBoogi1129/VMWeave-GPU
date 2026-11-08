@@ -1,0 +1,17 @@
+[
+  {
+    "event": "live-worker-image-replacement",
+    "result": "WorkerEnded",
+    "resolution": "Normal Halt and controller reclamation completed; subsequent candidates use separate VM/Profile/Channel"
+  },
+  {
+    "event": "candidate-v1-image-digest",
+    "result": "RegistryUnavailable before GPU execution",
+    "resolution": "Use digest inspected from node container storage; archives can change manifest digest"
+  },
+  {
+    "event": "candidate-v2-network",
+    "result": "No SSH before tests",
+    "resolution": "Preserve existing guest disk MAC address and use vm.kubevirt.io/name service selector; normal reboot"
+  }
+]

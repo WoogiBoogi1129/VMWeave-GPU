@@ -1,0 +1,34 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-11-08T08:22:04Z",
+    "generation": 1,
+    "name": "rnn-dev-1108-v3",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "27261190",
+    "uid": "fda3d3b5-d6b9-44af-9571-a28cdc954154"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:6e8099281376e250097850397a6e570932a867dd2e146b839045c8e87b9dacb6",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:c8a9f80e5169877c23b71902b5cb40e64bd740d4e49600f52a4849d15f23979a",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "dp-dev-20261105-shm",
+      "uid": "2623b5bf-61c7-42c6-beb5-99c464ef63e7"
+    },
+    "requestRef": {
+      "name": "rnn-dev-1108-v3",
+      "uid": "93785532-0b69-4a85-bab7-6df1b646d924"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "rnn-dev-1108-v3",
+      "uid": "cf1ec7f2-c1d1-4329-b715-512626631392"
+    },
+    "workerImage": "localhost/vmweave-worker@sha256:fd06615ddb041284497fa6365920ba353ad316f9a10cfc63741b32d2a9195a48"
+  }
+}

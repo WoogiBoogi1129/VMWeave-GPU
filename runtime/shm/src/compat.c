@@ -1,4 +1,4 @@
-#include "vmweave_compat.h"
+#include "vmweave_library.h"
 #include <cuda_runtime_api.h>
 #include <cublas_v2.h>
 #include <cudnn.h>
@@ -15,7 +15,10 @@ static int matrix(struct vmweave_cuda_session *s,const uint8_t *p,int rows,int c
     if(elements>SIZE_MAX/4)return 0;struct vmweave_device_ref ref={vmweave_get(p,8),vmweave_get(p+8,8)};
     return vmweave_cuda_exec_resolve(s->exec,ref,(size_t)elements*4,out);
 }
+void *vmweave_compat_blas(uint64_t id){int i=lookup(id,BLAS);return i<0?NULL:handles[i].value;}
+void *vmweave_compat_dnn(uint64_t id){int i=lookup(id,DNN);return i<0?NULL:handles[i].value;}
 int vmweave_compat_dispatch(struct vmweave_cuda_session *s,const struct vmweave_shm_request *q,struct vmweave_shm_response *r){
+    if(q->api_id>=0x3300)return vmweave_library_dispatch(s,q,r);
     const uint8_t *p=q->input;size_t n=q->input_bytes;int i=-1;void *st=NULL;
     r->output_bytes=0;r->transport_status=0;r->api_result=0;r->result_domain=q->api_id>=0x3100?VMWEAVE_RESULT_LIBRARY:VMWEAVE_RESULT_CUDA_RUNTIME;
     if(q->payload_schema!=1)goto unsupported;
@@ -84,6 +87,7 @@ fail:r->result_domain=0;r->api_result=0;r->output_bytes=0;return 0;
 }
 int vmweave_compat_close(void){
     if(cudaDeviceSynchronize()!=cudaSuccess)return -1;
+    if(vmweave_library_close())return -1;
     for(int i=0;i<4096;i++)if(handles[i].id){int e=0;
         if(handles[i].kind==GRAPH)e=cudaGraphDestroy((cudaGraph_t)handles[i].value);
         if(handles[i].kind==GRAPH_EXEC)e=cudaGraphExecDestroy((cudaGraphExec_t)handles[i].value);

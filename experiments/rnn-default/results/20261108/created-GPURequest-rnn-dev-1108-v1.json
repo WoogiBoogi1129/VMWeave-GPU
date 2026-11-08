@@ -1,0 +1,25 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "GPURequest",
+  "metadata": {
+    "creationTimestamp": "2026-11-08T08:12:29Z",
+    "generation": 1,
+    "name": "rnn-dev-1108-v1",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "27255054",
+    "uid": "fe557da5-449a-42f1-9ea0-fe142459e856"
+  },
+  "spec": {
+    "compute": 25,
+    "count": 1,
+    "memory": "1024Mi",
+    "profileRef": {
+      "name": "rnn-dev-1108-v1",
+      "uid": "7d3dfb76-cc20-42de-8420-1f963ec03015"
+    },
+    "vmRef": {
+      "name": "rnn-dev-1108-v1",
+      "uid": "e194bf18-8117-4ea2-854b-ac3ccebd8701"
+    }
+  }
+}

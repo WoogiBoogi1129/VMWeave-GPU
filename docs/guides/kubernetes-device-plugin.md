@@ -105,6 +105,12 @@ Guest library는 공개 Guest 이미지의 initContainer가 emptyDir에 복사�
 선언의 namespace·node·GID는 시험 VM 값이므로 사용 환경에 맞춰 변경한다.
 선택한 이미지·작은 eager FP32 MLP의 검증 결과이며 임의 PyTorch workload의 호환성을 보장하지 않는다.
 
+2026-11-08 [기본 경로 LSTM 실험](../../experiments/rnn-default/results/20261108/REPORT.md)에서는
+cuDNN RNN v8·cuBLASLt 중계를 추가한 후보 Guest/Worker로 공식 PyTorch의 LSTM 학습이 통과했다.
+cuDNN을 활성화하고 `DISABLE_ADDMM_CUDA_LT`를 설정하지 않은 상태에서 128 step 학습,
+CPU 검산, 새 Pod의 체크포인트 재개와 MLP 회귀를 확인했다.
+이 결과는 수정된 후보 조합에 해당하며, 위 공개 이미지의 제약이나 CNN 검증 결과를 대체하지 않는다.
+
 ## 진단과 복구
 
 Plugin binary의 읽기 전용 진단:

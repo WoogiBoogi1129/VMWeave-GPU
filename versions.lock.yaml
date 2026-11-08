@@ -23,7 +23,8 @@ compatibility:
   graph: empty-node-lifecycle-only
   kernel: explicit-PTX-ABI-and-opt-in-fatbinary-packed-launch
   cuBLAS: float-SGEMM-subset
-  cuDNN: handle-and-version-only
+  cuDNN: FP32-unpacked-RNN-v8-subset
+  cuBLASLt: FP32-column-major-host-scalar-subset
 
 operator:
   sdk: v1.42.3
@@ -37,7 +38,7 @@ operator:
   installationChart: charts/vmweave-operator
 
 deployment:
-  chartVersion: 0.5.8
+  chartVersion: 0.5.9
   architecture: linux/amd64
   guestOS: Ubuntu 22.04
   kubevirtShim: quay.io/kubevirt/sidecar-shim:v1.9.0@sha256:8eb25c016c09366ea4b2bbd524dfbb4872184a9aea67cc34c60ff78a11cb2661

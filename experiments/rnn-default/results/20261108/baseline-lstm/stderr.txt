@@ -1,0 +1,15 @@
+Fatal Python error: Segmentation fault
+
+Thread 0x00007ffa3d21d6c0 (most recent call first):
+  <no Python frame>
+
+Current thread 0x00007ffb68dd6800 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py", line 285 in flatten_parameters
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py", line 228 in _init_flat_weights
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/rnn.py", line 304 in _apply
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 934 in _apply
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1384 in to
+  File "/work/probe.py", line 27 in train
+  File "/work/probe.py", line 50 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._generator, numpy.random._mt19937, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand (total: 22)

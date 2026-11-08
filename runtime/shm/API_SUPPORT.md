@@ -107,3 +107,24 @@ Return does not imply GPU completion. Use the appropriate stream/event/device
 synchronization before consuming results. This does not add pinned-host,
 managed-memory or per-thread-default-stream support. Actual-VM correctness and recovery have been validated for the combined option set.
 See docs/runtime/path-optimization.md for configuration and measured performance limits.
+
+
+## 기본 LSTM 경로의 라이브러리 중계 후보 (2026-11-08)
+
+`0x3300..0x3322` schema1은 cuDNN stream·tensor/dropout/RNN/RNNData descriptor,
+RNN v8 가중치 공간 조회·배치, forward·data/weight backward 및 cuBLASLt FP32 행렬곱을
+추가한다. 이전 MLP 보고서의 우회 설정을 소급 변경하지 않는다. 실제 완료 판정은
+[기본 LSTM 실험](../../experiments/rnn-default/README.md)을 따른다.
+
+- Guest/Worker의 `vmweave_library.h`와 opcode를 함께 배포해야 한다. 구 Worker는 미지원으로 거절한다.
+- 요청 4,608 byte·성공 응답 512 byte의 고정 상한, 정수는 little-endian이다.
+  descriptor는 세션 프로세스 내부의 타입별 ID이며 GPU 포인터는 allocation ID+offset이다.
+  Worker는 descriptor에 따른 buffer 범위를 다시 검사한다.
+- RNNData는 FP32·unpacked·batch≤1024, tensor rank≤8을 대상으로 한다.
+  cuBLASLt는 FP32 host scalar·열 우선 layout, 기본/bias epilogue와 허용한 속성만 지원한다.
+  cuBLAS handle을 Lt 연산에 사용하는 PyTorch의 alias 경로도 Worker에서 해석한다.
+- cuBLASLt algorithm/heuristic 구조체는 고정 CUDA12.8 x86-64 ABI로 전달한다.
+  다른 버전·ABI의 조합은 이번 계약에 포함되지 않는다.
+- 선택형 `VMWEAVE_LIBRARY_TRACE`는 실제 중계 API의 결과를 기록하는 기능 진단용이다.
+  성능 벤치마크에서 이 추적 비용을 학습 처리량과 혼동하지 않는다.
+- 선언 범위 밖의 라이브러리 전체, CNN, AMP, 분산 학습 또는 모든 RNN 설정의 지원을 뜻하지 않는다.

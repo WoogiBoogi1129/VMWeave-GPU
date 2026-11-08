@@ -1,0 +1,61 @@
+{"stage": "environment", "torch": "2.11.0+cu128", "cudnn": 90800, "mode": "gpu", "case": "lstm"}
+{"stage": "model_to_start", "device": "cpu"}
+{"stage": "model_to_done", "device": "cpu"}
+{"stage": "input_ready", "device": "cpu", "step": 1}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 1}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 1}
+{"stage": "head_done", "device": "cpu", "step": 1}
+{"stage": "loss_done", "device": "cpu", "step": 1}
+{"stage": "backward_done", "device": "cpu", "step": 1}
+{"stage": "optimizer_done", "device": "cpu", "step": 1}
+{"stage": "input_ready", "device": "cpu", "step": 2}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 2}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 2}
+{"stage": "head_done", "device": "cpu", "step": 2}
+{"stage": "loss_done", "device": "cpu", "step": 2}
+{"stage": "backward_done", "device": "cpu", "step": 2}
+{"stage": "optimizer_done", "device": "cpu", "step": 2}
+{"stage": "input_ready", "device": "cpu", "step": 3}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 3}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 3}
+{"stage": "head_done", "device": "cpu", "step": 3}
+{"stage": "loss_done", "device": "cpu", "step": 3}
+{"stage": "backward_done", "device": "cpu", "step": 3}
+{"stage": "optimizer_done", "device": "cpu", "step": 3}
+{"stage": "input_ready", "device": "cpu", "step": 4}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 4}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 4}
+{"stage": "head_done", "device": "cpu", "step": 4}
+{"stage": "loss_done", "device": "cpu", "step": 4}
+{"stage": "backward_done", "device": "cpu", "step": 4}
+{"stage": "optimizer_done", "device": "cpu", "step": 4}
+{"stage": "input_ready", "device": "cpu", "step": 5}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 5}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 5}
+{"stage": "head_done", "device": "cpu", "step": 5}
+{"stage": "loss_done", "device": "cpu", "step": 5}
+{"stage": "backward_done", "device": "cpu", "step": 5}
+{"stage": "optimizer_done", "device": "cpu", "step": 5}
+{"stage": "model_to_start", "device": "cuda"}
+{"stage": "model_to_done", "device": "cuda"}
+{"stage": "input_ready", "device": "cuda", "step": 1}
+{"stage": "rnn_forward_start", "device": "cuda", "step": 1}
+{"stage": "rnn_forward_done", "device": "cuda", "step": 1}
+{"stage": "head_done", "device": "cuda", "step": 1}
+{"stage": "loss_done", "device": "cuda", "step": 1}
+Traceback (most recent call last):
+  File "/work/probe.py", line 86, in <module>
+    gpu=train('cuda');errors=[]
+        ^^^^^^^^^^^^^
+  File "/work/probe.py", line 75, in train
+    loss.backward();sync();emit('backward_done',device=device,step=step)
+    ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_tensor.py", line 631, in backward
+    torch.autograd.backward(
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/__init__.py", line 381, in backward
+    _engine_run_backward(
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/graph.py", line 869, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: cuDNN error: CUDNN_STATUS_BAD_PARAM
+RNN_EXIT {"returncode": 1, "signal": null, "timeout": false}

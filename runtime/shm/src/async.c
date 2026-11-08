@@ -19,6 +19,7 @@ static struct object *find(uint64_t id,int kind){for(int i=0;i<4096;i++)if(objec
 static struct object *reserve(void){if(next==UINT64_MAX)return NULL;for(int i=0;i<4096;i++)if(!objects[i].id)return &objects[i];return NULL;}
 static int stream(uint64_t id,cudaStream_t *out){struct object *o;if(!id){*out=0;return 1;}o=find(id,STREAM);if(!o)return 0;*out=(cudaStream_t)o->pointer;return 1;}
 int vmweave_async_stream(uint64_t id,void **out){cudaStream_t s;if(!stream(id,&s))return 0;*out=s;return 1;}
+int vmweave_async_stream_id(void *pointer,uint64_t *id){if(!pointer){*id=0;return 1;}for(int i=0;i<4096;i++)if(objects[i].id&&objects[i].kind==STREAM&&objects[i].pointer==pointer){*id=objects[i].id;return 1;}return 0;}
 int vmweave_async_reap(void){
     for(int i=0;i<128;i++)if(stages[i].host&&stages[i].active){
         cudaError_t e=cudaEventQuery(stages[i].done);

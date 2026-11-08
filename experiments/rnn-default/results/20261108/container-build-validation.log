@@ -1,0 +1,114 @@
+STEP 1/12: FROM docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85 AS build
+STEP 2/12: RUN apt-get update && apt-get install -y --no-install-recommends build-essential cmake python3 && rm -rf /var/lib/apt/lists/*
+--> Using cache 6438dfe909057c759fc7a943681e7761fe81e1d08e0d2cda7ddd4c036307c1c2
+--> 6438dfe90905
+STEP 3/12: COPY runtime/shm /src/runtime/shm
+--> f98adb3eff5b
+STEP 4/12: RUN cmake -S /src/runtime/shm -B /build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/vmweave     && cmake --build /build --parallel 2 && cmake --install /build
+-- The C compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found CUDAToolkit: /usr/local/cuda/include (found suitable version "12.8.93", minimum required is "12.8") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /build
+[  3%] Building C object queue/CMakeFiles/vmweave_shm_queue.dir/src/queue.c.o
+[  6%] Building C object exec/CMakeFiles/vmweave_cuda_exec.dir/src/exec.c.o
+[ 10%] Linking C static library libvmweave_cuda_exec.a
+[ 10%] Built target vmweave_cuda_exec
+[ 13%] Building C object exec/CMakeFiles/vmweave_cuda_runtime.dir/src/runtime.c.o
+[ 16%] Building C object queue/CMakeFiles/vmweave_shm_queue.dir/src/perf.c.o
+[ 20%] Linking C static library libvmweave_cuda_runtime.a
+[ 20%] Built target vmweave_cuda_runtime
+[ 23%] Linking C static library libvmweave_shm_queue.a
+[ 23%] Built target vmweave_shm_queue
+[ 26%] Building C object CMakeFiles/vmweave_mapping.dir/src/mapping.c.o
+[ 30%] Linking C static library libvmweave_mapping.a
+[ 30%] Built target vmweave_mapping
+[ 33%] Building C object CMakeFiles/vmweave_dispatch.dir/src/dispatch.c.o
+[ 36%] Building C object CMakeFiles/vmweave_guest.dir/src/owner.c.o
+[ 40%] Building C object CMakeFiles/vmweave_guest.dir/src/broker_client.c.o
+[ 43%] Linking C static library libvmweave_dispatch.a
+[ 43%] Built target vmweave_dispatch
+[ 46%] Building C object CMakeFiles/vmweave_guest.dir/src/guest.c.o
+[ 50%] Building C object CMakeFiles/vmweave_guest.dir/src/guest_async.c.o
+[ 53%] Building C object CMakeFiles/vmweave_guest.dir/src/guest_compat.c.o
+[ 56%] Building C object CMakeFiles/vmweave_guest.dir/src/guest_library.c.o
+[ 60%] Building C object CMakeFiles/vmweave_guest.dir/src/guest_torch.c.o
+[ 63%] Building C object CMakeFiles/vmweave_async.dir/src/async.c.o
+[ 66%] Linking C shared library libvmweave_guest.so
+[ 66%] Built target vmweave_guest
+[ 70%] Building C object CMakeFiles/vmweave_async.dir/src/torch.c.o
+[ 73%] Linking C static library libvmweave_async.a
+[ 73%] Built target vmweave_async
+[ 76%] Building C object CMakeFiles/vmweave_compat.dir/src/compat.c.o
+[ 80%] Building C object CMakeFiles/vmweave_compat.dir/src/library.c.o
+[ 83%] Linking C static library libvmweave_compat.a
+[ 83%] Built target vmweave_compat
+[ 86%] Building C object CMakeFiles/vmweave-shm-worker.dir/src/worker.c.o
+[ 90%] Building C object CMakeFiles/vmweave-shm-session-worker.dir/src/worker_sessions.c.o
+[ 93%] Linking C executable vmweave-shm-worker
+[ 96%] Building C object CMakeFiles/vmweave-shm-session-worker.dir/src/session_ipc.c.o
+[ 96%] Built target vmweave-shm-worker
+[100%] Linking C executable vmweave-shm-session-worker
+[100%] Built target vmweave-shm-session-worker
+-- Install configuration: "Release"
+-- Installing: /opt/vmweave/bin/vmweave-shm-worker
+-- Set runtime path of "/opt/vmweave/bin/vmweave-shm-worker" to ""
+-- Installing: /opt/vmweave/lib/libvmweave_guest.so
+-- Installing: /opt/vmweave/bin/vmweave-shm-session-worker
+-- Set runtime path of "/opt/vmweave/bin/vmweave-shm-session-worker" to ""
+--> 6d87fe247b9b
+STEP 5/12: COPY tests/integration /src/tests/integration
+--> 7c7d4415b4b6
+STEP 6/12: COPY tests/path_optimization /src/tests/path_optimization
+--> a3447f14cc00
+STEP 7/12: COPY tests/library_rpc /src/tests/library_rpc
+--> 0726eb91e0ad
+STEP 8/12: COPY scripts/codegen /src/scripts/codegen
+--> 7bb193f57521
+STEP 9/12: COPY scripts/test-shm-training.sh /src/scripts/test-shm-training.sh
+--> cacbf9d6fc7c
+STEP 10/12: RUN mkdir -p /tmp/vmweave-test-stubs     && ln -s /usr/local/cuda/lib64/stubs/libcuda.so /tmp/vmweave-test-stubs/libcuda.so.1     && LD_LIBRARY_PATH=/tmp/vmweave-test-stubs:/usr/local/cuda/lib64 bash /src/scripts/test-shm-training.sh /build     && CUDA_ROOT=/usr/local/cuda bash /src/tests/path_optimization/run_cuda_mock.sh     && bash /src/tests/library_rpc/run.sh /build     && rm -rf /tmp/vmweave-test-stubs
+PASS: adjacent refs, bounds, VA collision preservation and exact reservation
+PASS: large sync/async copies, Default, offsets, all directions, Driver wrappers, preflight bounds/overlap/overflow, partial failure, short replies, old peers, small arenas
+PASS: large sync/async copies, Default, offsets, all directions, Driver wrappers, preflight bounds/overlap/overflow, partial failure, short replies, old peers, small arenas
+PASS: packed layout/count/length validation, unknown handles, upload capacity/order/completeness and cleanup
+PASS: async byte budget/backpressure, completion cleanup, large D2D, overlap/unknown handle/overflow rejection
+PASS: in-flight failure requests process retirement without unsafe free
+PASS: in-flight failure requests process retirement without unsafe free
+PASS: in-flight failure requests process retirement without unsafe free
+PASS: memory-info encoding, bounds, CUDA errors, inconsistent observations and closed/wrong-thread guards
+PASS: OOM preserves existing allocation, free, retry and clean shutdown
+PASS: non-OOM failure remains terminal and extensions reject the session
+PASS: private input/output borrowing, capacity preflight, ownership and bounds
+PASS: borrowed output failure poisons context without freeing caller buffer
+PASS: guarded payload tails, private snapshot, single pending, receive retry, corrupted offset and timeout
+PASS: guarded payload tails, private snapshot, single pending, receive retry, corrupted offset and timeout
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+OK
+PASS completed-only reuse, size class, live storage exclusion, cap, eviction, allocation/event/query failure
+PASS guest: routing, frozen option, bounds, errors/no replay, async unchanged, response length
+PASS guest: routing, frozen option, bounds, errors/no replay, async unchanged, response length
+PASS worker: native dispatch, canaries, bounds/schema/stream, errors, old async ABI
+PASS old worker: new opcode rejected without CUDA side effects
+PASS: malformed packets, descriptor round-trip, wrong/stale handles, unsupported types, cleanup
+PASS: optional size outputs, null-output rejection, truncated response preserves caller storage
+--> fa1d4daa8afc
+STEP 11/12: COPY tools/guest-smoke/guest_gpu_smoke.c /src/guest_gpu_smoke.c
+--> 225a8de5267b
+STEP 12/12: RUN cc -O2 -I/usr/local/cuda/include /src/guest_gpu_smoke.c -L/opt/vmweave/lib     -Wl,-rpath,'$ORIGIN' -lvmweave_guest -o /opt/vmweave/lib/guest-gpu-smoke
+COMMIT localhost/vmweave-rnn-builder:validated
+--> 2716c28b9dd0
+Successfully tagged localhost/vmweave-rnn-builder:validated
+2716c28b9dd0efaf51dce51047fa68661d7d25575c6c24b4b748ce23f6a48203

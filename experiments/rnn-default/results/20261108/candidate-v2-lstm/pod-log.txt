@@ -1,0 +1,61 @@
+{"stage": "environment", "torch": "2.11.0+cu128", "cudnn": 90800, "mode": "gpu", "case": "lstm"}
+{"stage": "model_to_start", "device": "cpu"}
+{"stage": "model_to_done", "device": "cpu"}
+{"stage": "input_ready", "device": "cpu", "step": 1}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 1}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 1}
+{"stage": "head_done", "device": "cpu", "step": 1}
+{"stage": "loss_done", "device": "cpu", "step": 1}
+{"stage": "backward_done", "device": "cpu", "step": 1}
+{"stage": "optimizer_done", "device": "cpu", "step": 1}
+{"stage": "input_ready", "device": "cpu", "step": 2}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 2}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 2}
+{"stage": "head_done", "device": "cpu", "step": 2}
+{"stage": "loss_done", "device": "cpu", "step": 2}
+{"stage": "backward_done", "device": "cpu", "step": 2}
+{"stage": "optimizer_done", "device": "cpu", "step": 2}
+{"stage": "input_ready", "device": "cpu", "step": 3}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 3}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 3}
+{"stage": "head_done", "device": "cpu", "step": 3}
+{"stage": "loss_done", "device": "cpu", "step": 3}
+{"stage": "backward_done", "device": "cpu", "step": 3}
+{"stage": "optimizer_done", "device": "cpu", "step": 3}
+{"stage": "input_ready", "device": "cpu", "step": 4}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 4}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 4}
+{"stage": "head_done", "device": "cpu", "step": 4}
+{"stage": "loss_done", "device": "cpu", "step": 4}
+{"stage": "backward_done", "device": "cpu", "step": 4}
+{"stage": "optimizer_done", "device": "cpu", "step": 4}
+{"stage": "input_ready", "device": "cpu", "step": 5}
+{"stage": "rnn_forward_start", "device": "cpu", "step": 5}
+{"stage": "rnn_forward_done", "device": "cpu", "step": 5}
+{"stage": "head_done", "device": "cpu", "step": 5}
+{"stage": "loss_done", "device": "cpu", "step": 5}
+{"stage": "backward_done", "device": "cpu", "step": 5}
+{"stage": "optimizer_done", "device": "cpu", "step": 5}
+{"stage": "model_to_start", "device": "cuda"}
+{"stage": "model_to_done", "device": "cuda"}
+{"stage": "input_ready", "device": "cuda", "step": 1}
+{"stage": "rnn_forward_start", "device": "cuda", "step": 1}
+{"stage": "rnn_forward_done", "device": "cuda", "step": 1}
+Traceback (most recent call last):
+  File "/work/probe.py", line 50, in <module>
+    gpu=train('cuda');errors=[]
+        ^^^^^^^^^^^^^
+  File "/work/probe.py", line 36, in train
+    logits=model.head(seq[:,-1,:]);extra={'seq':seq,'h':h,'c':c}
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: CUBLAS_STATUS_INVALID_VALUE when calling `cublasLtMatmulAlgoGetHeuristic( ltHandle, computeDesc.descriptor(), Adesc.descriptor(), Bdesc.descriptor(), Cdesc.descriptor(), Cdesc.descriptor(), preference.descriptor(), 1, &heuristicResult, &returnedResult)`
+RNN_EXIT {"returncode": 1, "signal": null, "timeout": false}

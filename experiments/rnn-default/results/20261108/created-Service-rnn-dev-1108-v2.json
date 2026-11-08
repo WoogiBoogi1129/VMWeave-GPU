@@ -1,0 +1,38 @@
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "creationTimestamp": "2026-11-08T08:15:37Z",
+    "name": "rnn-dev-1108-v2",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "27257024",
+    "uid": "0c5eaa2c-741f-4a49-88ae-104032eb8133"
+  },
+  "spec": {
+    "clusterIP": "10.107.255.229",
+    "clusterIPs": [
+      "10.107.255.229"
+    ],
+    "internalTrafficPolicy": "Cluster",
+    "ipFamilies": [
+      "IPv4"
+    ],
+    "ipFamilyPolicy": "SingleStack",
+    "ports": [
+      {
+        "name": "ssh",
+        "port": 22,
+        "protocol": "TCP",
+        "targetPort": 22
+      }
+    ],
+    "selector": {
+      "kubevirt.io/domain": "rnn-dev-1108-v2"
+    },
+    "sessionAffinity": "None",
+    "type": "ClusterIP"
+  },
+  "status": {
+    "loadBalancer": {}
+  }
+}
