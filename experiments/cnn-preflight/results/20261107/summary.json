@@ -1,0 +1,110 @@
+{
+  "evidenceAudit": "PASS",
+  "cnnTrainingSupported": false,
+  "podCount": 9,
+  "successfulPods": 3,
+  "failedDiagnosticPods": 6,
+  "results": [
+    {
+      "name": "cpu-reference",
+      "phase": "Succeeded",
+      "returncode": 0,
+      "lastStage": "complete",
+      "cpuReferences": [
+        "conv-forward",
+        "conv-train",
+        "conv-bn"
+      ],
+      "cnnGPUComparison": "NOT_APPLICABLE",
+      "cudnnReported": 91900
+    },
+    {
+      "name": "gpu-basic",
+      "phase": "Succeeded",
+      "returncode": 0,
+      "lastStage": "complete",
+      "cpuReferences": [],
+      "cnnGPUComparison": "NOT_APPLICABLE",
+      "cudnnReported": 90800
+    },
+    {
+      "name": "conv-forward",
+      "phase": "Failed",
+      "returncode": -11,
+      "lastStage": "cuda-forward-1",
+      "cpuReferences": [
+        "conv-forward"
+      ],
+      "cnnGPUComparison": "NOT_REACHED",
+      "cudnnReported": 90800
+    },
+    {
+      "name": "conv-train",
+      "phase": "Failed",
+      "returncode": -11,
+      "lastStage": "cuda-forward-1",
+      "cpuReferences": [
+        "conv-train"
+      ],
+      "cnnGPUComparison": "NOT_REACHED",
+      "cudnnReported": 90800
+    },
+    {
+      "name": "conv-bn",
+      "phase": "Failed",
+      "returncode": -11,
+      "lastStage": "cuda-forward-1",
+      "cpuReferences": [
+        "conv-bn"
+      ],
+      "cnnGPUComparison": "NOT_REACHED",
+      "cudnnReported": 90800
+    },
+    {
+      "name": "conv-forward-loader",
+      "phase": "Failed",
+      "returncode": -11,
+      "lastStage": "cuda-forward-1",
+      "cpuReferences": [
+        "conv-forward"
+      ],
+      "cnnGPUComparison": "NOT_REACHED",
+      "cudnnReported": 90800
+    },
+    {
+      "name": "conv-forward-calltrace",
+      "phase": "Failed",
+      "returncode": -11,
+      "lastStage": "cuda-forward-1",
+      "cpuReferences": [
+        "conv-forward"
+      ],
+      "cnnGPUComparison": "NOT_REACHED",
+      "cudnnReported": 90800
+    },
+    {
+      "name": "cudnn-stream-repro",
+      "phase": "Failed",
+      "returncode": -11,
+      "lastStage": "direct-cudnn-setstream",
+      "cpuReferences": [],
+      "cnnGPUComparison": "NOT_REACHED",
+      "cudnnReported": 90800
+    },
+    {
+      "name": "gpu-after-failures",
+      "phase": "Succeeded",
+      "returncode": 0,
+      "lastStage": "complete",
+      "cpuReferences": [],
+      "cnnGPUComparison": "NOT_APPLICABLE",
+      "cudnnReported": 90800
+    }
+  ],
+  "firstLocalizedFailure": "native cudnnSetStream called with remote cuDNN handle",
+  "versionObservation": {
+    "guestNative": 91900,
+    "workerReported": 90800
+  },
+  "cleanup": "Halted / Channel Stopped / original UID and configuration preserved; automatic session identity changed"
+}

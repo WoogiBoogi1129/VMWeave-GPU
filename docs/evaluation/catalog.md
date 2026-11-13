@@ -4,6 +4,9 @@
 
 | 결과 묶음 | 내용 |
 |---|---|
+| [2026-11-13 작은 CNN](../../experiments/cnn-model/README.md) | 두 Conv 블록·ReLU·MaxPool·Linear, MNIST80개 샘플, GPU80 step/1,040개 텐서·독립 검산; 기능 검사 |
+| [2026-11-13 Conv2d backward](../../experiments/cnn-training/README.md) | 입력/가중치 gradient·bias·SGD·누적, GPU216 step/1,302개 텐서 |
+| [2026-11-13 Conv2d forward](../../experiments/cnn-forward/README.md) | legacy forward198개 결과·기본 graph 실패·회귀·복원 |
 | [2026-11-08 기본 경로 LSTM](../../experiments/rnn-default/README.md) | 후보 cuDNN RNN v8·cuBLASLt 중계, 128-step 학습·CPU 검산·체크포인트 재개·회귀; 성능 비교 아님 |
 | [2026-11-06 공식 PyTorch·Device Plugin](../../experiments/device-plugin-pytorch/README.md) | 공식 이미지 GPU 연산·5-step 학습, cuBLASLt 실패·우회, 자원 회수·재사용, 실제 PNG |
 | [2026-11-02~03 학습 3방식 비교](../../experiments/training-threeway/README.md) | 제한된 MLP 정식 300회, 검산·실패·중단 기록 |

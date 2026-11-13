@@ -128,3 +128,64 @@ RNN v8 가중치 공간 조회·배치, forward·data/weight backward 및 cuBLAS
 - 선택형 `VMWEAVE_LIBRARY_TRACE`는 실제 중계 API의 결과를 기록하는 기능 진단용이다.
   성능 벤치마크에서 이 추적 비용을 학습 처리량과 혼동하지 않는다.
 - 선언 범위 밖의 라이브러리 전체, CNN, AMP, 분산 학습 또는 모든 RNN 설정의 지원을 뜻하지 않는다.
+
+## Conv2d forward 중계 후보 (2026-11-13, 첫 단계 VM 검증)
+
+`0x3323..0x3333` schema1은 filter/convolution descriptor의 수명·설정·조회,
+group/math 설정, output shape, forward algorithm count/heuristic, workspace 및
+native `cudnnConvolutionForward` 중계를 추가한다. 기존 opcode와 packet 크기는 유지한다.
+생성 소스는 `scripts/codegen/library_conv.py`이며 Guest/Worker를 함께 빌드해야 한다.
+
+- 현재 허용 범위는 FP32 contiguous NCHW, 2D cross-correlation, groups=1,
+  dilation=1, DEFAULT/FMA math다. heuristic 응답은 최대 8개이며 필드별로 인코딩한다.
+- Worker는 descriptor 타입·설정, allocation 범위·offset, workspace 크기를 다시 확인한다.
+  scalar는 host FP32만 사용한다. uninitialized/미지원 descriptor 조합은 거부한다.
+- PyTorch 검증 대상은 `TORCH_CUDNN_V8_API_DISABLED=1`, `benchmark=False`의 legacy
+  forward다. cuDNN graph/backend, autotuning Find, fused convolution, backward,
+  BatchNorm, NHWC/AMP/grouped/dilated convolution 지원을 추가하지 않는다.
+- 공식 PyTorch 2.11.0+cu128에서 legacy forward 198건이 CPU 참조와
+  rtol1e-4/atol1e-6으로 일치했다. bias on/off, stride1/2, padding0/1,
+  deterministic on/off, 기본·명시적 stream 및 새 Pod 재실행을 포함한다.
+  MLP와 LSTM의 5-step 학습 및 LSTM 새 Pod 회귀도 통과했다.
+- 기본 cuDNN graph 경로는 후보에서도 첫 forward에서 SIGSEGV가 재현됐다.
+  명시적 legacy 설정이 필수이며, CNN backward·전체 학습 지원을 의미하지 않는다.
+  후보 검증 후 공개 v0.5.9 구성으로 복원하며 자동 배포·릴리스하지 않는다.
+  [검증 증거](../../experiments/cnn-forward/results/20261113-vm/REPORT.md)를 따른다.
+
+## Conv2d backward·최소 학습 후보 (2026-11-13, 후속 단계)
+
+`scripts/codegen/library_conv_backward.py`는 위 forward 범위에
+`0x3334..0x333b`의 backward-data/filter algorithm count·heuristic·workspace·실행
+8개 command를 추가한다. 기존 공유메모리 전송, schema1, packet 크기를 유지한다.
+Guest/Worker는 함께 빌드해야 하며 공개 v0.5.9에는 포함되지 않은 후보다.
+
+- Data의 dx/weight/dy, Filter의 input/dw/dy를 공통 descriptor 슬롯으로 명시적으로
+  변환한다. Worker에서 descriptor 타입·shape, allocation 전체 범위·offset,
+  native workspace 요구량을 확인한 뒤 호출한다. native 오류는 그대로 전달한다.
+- 위와 같은 FP32 contiguous NCHW, groups=1, dilation=1 범위의 legacy 경로다.
+  `TORCH_CUDNN_V8_API_DISABLED=1`, `benchmark=False`가 필요하다.
+- 공식 PyTorch에서 입력/가중치 gradient 분리, bias gradient, 3-step SGD,
+  gradient 누적, 16개 bias·stride·padding·deterministic 설정과 기본·명시적
+  stream에서 216개 step, 1,302개 결과 텐서를 검증했다. bias gradient는 PyTorch reduction으로 계산하며
+  `cudnnConvolutionBackwardBias` API를 추가하지 않는다.
+- 기본 graph/backend, BatchNorm, AMP, NHWC, grouped/dilated convolution,
+  autotuning Find, ResNet/YOLO 등 전체 모델 지원과 성능 검증은 범위 밖이다.
+  검사용 GPU `abs/max` 표현식에서 발생한 오류와 검사 코드 수정도 증거에 남긴다.
+  [후속 검증 결과](../../experiments/cnn-training/results/20261113/REPORT.md)를 따른다.
+
+## 작은 CNN 조합 학습 검증 (2026-11-13)
+
+위 backward 후보와 동일한 Guest/Worker binary로 Conv→ReLU→MaxPool 블록 두 개,
+Flatten, Linear 분류기의 cross-entropy·backward·SGD 학습을 확인했다.
+이 단계에서 새 library command나 runtime 코드는 추가하지 않았다.
+
+- 합성 입력 `[8,3,32,32]`/파라미터11,642개의 CNN과 MNIST 입력
+  `[16,1,28,28]`/파라미터9,098개의 CNN을 검증했다.
+- MNIST는 기존 fixture의 처음 80개 학습 샘플을 사용한 5-step 기능 검사다.
+  전체 데이터셋 정확도·수렴이나 실제 규모의 처리량 검증을 의미하지 않는다.
+- 기본·명시적 stream, deterministic on/off, 새 Pod 재실행 및 단계별 ReLU/MaxPool
+  검사를 포함해 GPU80 step/1,040개 텐서가 CPU 참조와 일치했다.
+  수동 backward 수식·SGD를 이용한 독립 재검산도 통과했다.
+- legacy FP32 경로만 검증했다. 기본 graph, BatchNorm, AMP, ResNet/YOLO 지원은
+  여전히 범위 밖이며 공개 v0.5.9의 지원 범위가 변경된 것은 아니다.
+  [CNN 조합 학습 증거](../../experiments/cnn-model/results/20261113/REPORT.md)를 따른다.

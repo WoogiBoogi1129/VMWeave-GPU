@@ -1,0 +1,118 @@
+Name:             gpu-after-failures
+Namespace:        cnn-preflight-20261107
+Priority:         0
+Service Account:  default
+Node:             dp-dev-20261105/10.0.2.2
+Start Time:       Sat, 07 Nov 2026 06:09:26 +0000
+Labels:           vmweave-experiment=cnn-preflight-20261107
+Annotations:      <none>
+Status:           Succeeded
+SeccompProfile:   RuntimeDefault
+IP:               10.242.0.50
+IPs:
+  IP:  10.242.0.50
+Init Containers:
+  guest-adapter:
+    Container ID:  cri-o://12e4cddc125bae7b958f16be191e41846a6a9dc803bf5f9051e3da8acf893277
+    Image:         ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4
+    Image ID:      ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:6cbcda0982116ac90fdd4b22a7cd044d466665801a814c6e066c05bb3f8bbbb6
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -ec
+    Args:
+      cp /opt/vmweave/guest/libvmweave_guest.so /adapter/; cd /adapter; echo "32bf53906f6cd4fd681c7af9068aad6274ea8c972c31e57d5efaf009e74e1bc5  libvmweave_guest.so" | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sat, 07 Nov 2026 06:09:27 +0000
+      Finished:     Sat, 07 Nov 2026 06:09:27 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  64Mi
+    Requests:
+      cpu:        10m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /adapter from adapter (rw)
+Containers:
+  pytorch:
+    Container ID:  cri-o://74c3167c93f1428baf12afd5757ffd75867e03e86076640533dfe488619f2187
+    Image:         docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Image ID:      docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -ec
+    Args:
+      export LD_LIBRARY_PATH="/opt/vmweave/adapter${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"; exec python -u /work/supervise.py --mode gpu --case basic
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sat, 07 Nov 2026 06:09:27 +0000
+      Finished:     Sat, 07 Nov 2026 06:09:33 +0000
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:             2
+      memory:          3Gi
+      vmweave.io/gpu:  1
+    Requests:
+      cpu:             500m
+      memory:          1Gi
+      vmweave.io/gpu:  1
+    Environment:
+      HOME:                      /tmp
+      PYTHONDONTWRITEBYTECODE:   1
+      LD_PRELOAD:                /opt/vmweave/adapter/libvmweave_guest.so
+      VMWEAVE_MIRROR_DEVICE_VA:  1
+      CNN_LOADER_TRACE:          0
+      PYTHONFAULTHANDLER:        1
+    Mounts:
+      /opt/vmweave/adapter from adapter (ro)
+      /results from results (rw)
+      /tmp from tmp (rw)
+      /work from code (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  code:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      cnn-code
+    Optional:  false
+  results:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  adapter:
+    Type:        EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:      
+    SizeLimit:   <unset>
+QoS Class:       Burstable
+Node-Selectors:  kubernetes.io/hostname=dp-dev-20261105
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  13s   default-scheduler  Successfully assigned cnn-preflight-20261107/gpu-after-failures to dp-dev-20261105
+  Normal  Pulled     12s   kubelet            spec.initContainers{guest-adapter}: Container image "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4" already present on machine and can be accessed by the pod
+  Normal  Created    12s   kubelet            spec.initContainers{guest-adapter}: Container created
+  Normal  Started    12s   kubelet            spec.initContainers{guest-adapter}: Container started
+  Normal  Pulled     12s   kubelet            spec.containers{pytorch}: Container image "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be" already present on machine and can be accessed by the pod
+  Normal  Created    12s   kubelet            spec.containers{pytorch}: Container created
+  Normal  Started    12s   kubelet            spec.containers{pytorch}: Container started

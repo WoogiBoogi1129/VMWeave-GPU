@@ -1,0 +1,35 @@
+{"stage": "environment", "torch": "2.11.0+cu128", "cuda": "12.8", "cudnn": 90800, "mode": "gpu", "backend": "legacy", "case": "input-only", "rtol": 0.0001, "atol": 1e-06}
+{"stage": "configuration", "label": "b1-s1-p1-d1"}
+{"stage": "forward_start", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "forward_done", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "backward_start", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "backward_done", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "step_done", "device": "cpu", "step": 1, "optimizer_updated": false}
+{"stage": "forward_start", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "forward_done", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "backward_start", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "backward_done", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "step_done", "device": "cpu", "step": 2, "optimizer_updated": false}
+{"stage": "forward_start", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "forward_done", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "backward_start", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "backward_done", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "step_done", "device": "cpu", "step": 3, "optimizer_updated": false}
+{"stage": "forward_start", "device": "cuda", "step": 1, "micro": 0}
+{"stage": "forward_done", "device": "cuda", "step": 1, "micro": 0}
+{"stage": "backward_start", "device": "cuda", "step": 1, "micro": 0}
+{"stage": "backward_done", "device": "cuda", "step": 1, "micro": 0}
+Traceback (most recent call last):
+  File "/work/probe.py", line 88, in <module>
+    gpu=run(model,data,target,'cuda',stream)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/probe.py", line 55, in run
+    assert inp.grad is not None and inp.grad.abs().max().item()>0
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: SHM CUDA error; inspect Worker and Guest logs
+Search for `cudaErrorUnknown' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+CNN_EXIT {"returncode": 1, "signal": null, "timeout": false}

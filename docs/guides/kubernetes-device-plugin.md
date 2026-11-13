@@ -106,6 +106,13 @@ Guest library는 공개 Guest 이미지의 initContainer가 emptyDir에 복사�
 선언의 namespace·node·GID는 시험 VM 값이므로 사용 환경에 맞춰 변경한다.
 선택한 이미지·작은 eager FP32 MLP의 검증 결과이며 임의 PyTorch workload의 호환성을 보장하지 않는다.
 
+2026-11-07 [CNN 사전 진단](../../experiments/cnn-preflight/results/20261107/REPORT.md)에서는
+최소 Conv2d의 첫 forward가 cuDNN handle·stream 중계 누락으로 SIGSEGV를 일으켰다.
+당시 이미지·Guest 조합에서 CNN 학습은 지원되지 않았으며, Plugin의 GPU 예약 성공과 구분해야 한다.
+11/13 후속 후보에서는 [legacy Conv2d backward·SGD](../../experiments/cnn-training/README.md)와
+[작은 CNN·MNIST 일부 학습](../../experiments/cnn-model/README.md)이 통과했다.
+해당 기능은 호환 Guest/Worker 쌍과 명시적 `TORCH_CUDNN_V8_API_DISABLED=1`이 필요하다.
+
 2026-11-08 [기본 경로 LSTM 실험](../../experiments/rnn-default/results/20261108/REPORT.md)에서는
 cuDNN RNN v8·cuBLASLt 중계를 추가한 후보 Guest/Worker로 공식 PyTorch의 LSTM 학습이 통과했다.
 cuDNN을 활성화하고 `DISABLE_ADDMM_CUDA_LT`를 설정하지 않은 상태에서 128 step 학습,

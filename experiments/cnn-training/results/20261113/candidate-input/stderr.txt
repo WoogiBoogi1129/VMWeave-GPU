@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/work/probe.py", line 88, in <module>
+    gpu=run(model,data,target,'cuda',stream)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/probe.py", line 55, in run
+    assert inp.grad is not None and inp.grad.abs().max().item()>0
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: SHM CUDA error; inspect Worker and Guest logs
+Search for `cudaErrorUnknown' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

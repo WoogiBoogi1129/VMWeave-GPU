@@ -1,0 +1,11 @@
+Fatal Python error: Segmentation fault
+
+Current thread 0x00007fbbddab6800 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py", line 548 in _conv_forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py", line 553 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1779 in _wrapped_call_impl
+  File "/work/probe.py", line 73 in advance
+  File "/work/probe.py", line 124 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._generator, numpy.random._mt19937, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand (total: 22)

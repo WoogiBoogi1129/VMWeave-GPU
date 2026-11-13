@@ -1,0 +1,174 @@
+# 현재 SHM 실행 범위와 메모리 조회 확장
+
+실제 검증과 미실행 항목은
+[2026-09-22 보고서](../../experiments/evidence/IMPLEMENTATION_AND_VALIDATION_2026-09-22.md)를 따른다.
+함수 export 여부만으로 PyTorch 호환성을 판정하지 않는다.
+
+## 메모리 조회
+
+`VMWEAVE_API_RUNTIME_MEM_GET_INFO = 0x1013`을 추가했다. 기존 opcode와 layout을 바꾸지 않은
+추가 연산이며 CRD 변경은 없다. payload schema는 1, 요청 payload는 0 byte다.
+응답은 `free_bytes`와 `total_bytes`의 64-bit little-endian 정수 두 개, 총 16 byte다.
+
+Worker는 CUDA Runtime을 통해 HAMi 적용 후 실제 값을 조회한다. 응답 공간과 session을
+검증한 뒤 호출하며, 오류가 나면 CUDA Runtime 오류와 빈 payload를 반환한다. total=0 또는
+free>total인 모순된 성공 응답은 unknown 오류로 처리한다. 요청 quota를 조회값처럼 만들지 않는다.
+
+Guest의 `cudaMemGetInfo` 및 `cuMemGetInfo_v2`는 이 경로를 사용한다. 이전 Worker는
+새 opcode를 unsupported로 거절할 수 있으므로 Guest/Worker digest를 함께 고정한다.
+`tests/integration/memory_info_dispatch.c`는 인코딩, 호출 전 응답 크기 검사,
+CUDA 오류 전달과 모순된 반환값 거절을 검사한다. 실제 VM의 1 GiB·4 GiB 조회·경계 검사는
+보고서에 별도 기록한다.
+
+## OOM과 kernel 실행
+
+cudaMalloc의 일반 메모리 부족은 session의 치명적 오류가 아니다. 기존 allocation을 해제하고
+작은 요청을 재시도할 수 있어야 한다. 나머지 불확실한 CUDA 오류의 보수적 종료는 유지한다.
+`allocation_oom_recovery.c`와 실제 VM의 OOM 후 재할당으로 이 구분을 검증했다.
+
+기존 GPU smoke는 text PTX module과 `vmweaveRegisterKernelABI`로 명시한 인자를 사용한다.
+이 경로와 기존 opcode는 유지한다. 새 학습 경로는 아래의 명시적 opt-in을 사용한다.
+`scripts/audit-pytorch-shm-abi.py`는 정적 import coverage이며 실제 실행의 증거가 아니다.
+
+## FP32 eager 학습 경로
+
+지원 대상은 고정된 `torch-2.11.0+flyt.cu128-cp310-cp310-linux_x86_64.whl`,
+CUDA 12.8, x86-64 little-endian Guest/Worker, 단일 CUDA context/장치다.
+`VMWEAVE_MIRROR_DEVICE_VA=1`과 Guest `libvmweave_guest.so` preload가 필요하다.
+PyTorch의 명시적 `dlopen("libcuda.so.1")`도 Guest 중계 라이브러리에 연결하도록 같은
+디렉터리에 `libcuda.so.1 -> libvmweave_guest.so` 링크를 둔다.
+
+- Runtime fatbinary/function 등록을 Guest에 저장하고 첫 커널 호출 때 해당 fatbinary를
+  64 KiB chunk로 Worker에 보낸다. 하나의 미완료 업로드와 총 미완료 업로드는 512 MiB로 제한한다.
+- Worker가 `cuFuncGetParamInfo`로 실제 인자 크기를 조사한다. Guest가 보낸 인자 수·크기를
+  Worker가 다시 확인한다. 최대 64개 인자, 크기 표기를 포함한 32,764-byte payload 한도다.
+- 구조체 내부 포인터를 추측하거나 64-bit 정수 값을 포인터로 간주하지 않는다. opt-in
+  `cudaMalloc`은 Worker GPU 가상주소와 같은 주소를 Guest에 `PROT_NONE`으로 예약한다.
+  예약 충돌·비정렬 주소·주소 범위 초과는 실패하며 기존 CPU 매핑을 덮어쓰지 않는다.
+  GPU 실행 인자의 바이트를 보존하므로 내부 offset 및 구조체 안의 GPU 포인터도 유지된다.
+- 이 모드의 CUDA 할당 요청은 4 KiB로 올림한다. HAMi에는 올림한 실제 할당이 계상된다.
+  일반 복사·free·cuBLAS API는 계속 allocation ID와 offset을 검증한다.
+  인접 allocation의 시작 주소를 이전 allocation의 끝 주소보다 먼저 찾는다.
+- 장치 속성, 버전, primary context 상태, stream 우선순위와 memset을 Worker에서 조회·실행한다.
+  장치 속성은 필드별 little-endian 형식이며 native 구조체 padding을 전송하지 않는다.
+- cuBLAS SGEMM, stream/workspace 설정, math mode와 host pointer mode를 지원한다.
+  공통 학습 프로그램은 `DISABLE_ADDMM_CUDA_LT=1`, SGD `foreach=False`, `fused=False`를
+  모든 비교군에 동일하게 적용한다. 이 결과는 cuBLASLt 기본 경로의 검증이 아니다.
+- DtoH async 복사는 결과를 반환하기 전에 stream 완료를 기다리는 보수적 구현이다.
+  `VMWEAVE_TRACE_CALLS`는 개발 진단용이며 성능 실행에서는 제거한다.
+- 2026-10-23 구현 후보는 큰 CPU↔GPU 복사를 최대 16MiB 청크로 자동 분할하고,
+  큰 GPU↔GPU 복사는 제어 요청 하나로 실행한다. staging은 세션별 64MiB로 제한한다.
+  [동작·오류·구버전 호환성](../../docs/runtime/large-copies.md)을 따른다.
+  공개 v0.5.2에는 여전히 논리적 복사 16MiB 제한이 있으므로 후보와 구분한다.
+  2026-10-16의 큰 MLP `model.cuda()` 실패는 이 구버전 제한의 기록이며 VRAM OOM이 아니다.
+
+새 schema-1 opcode: 0x2040..0x2044는 바이너리 업로드·커널 layout·packed launch,
+0x2100..0x2107은 장치 속성·attribute·버전·device VA·memset·stream 우선순위·context 조회다.
+device VA 응답은 GPU 주소의 명시적 정수 표현이며 Worker의 CPU 버퍼 주소가 아니다.
+이 기능은 임의 Guest CPU 포인터, managed/registered host memory, multi-device context,
+PTDS, CUDA Graph capture, NCCL/DDP 또는 PyTorch 전체 API 지원을 의미하지 않는다.
+커널의 메모리 접근 자체에 대한 별도의 보안 격리를 입증하는 실험도 아니다.
+
+등록된 static device 데이터는 Worker가 읽는 fatbinary에 포함된다. Guest의
+`cudaGetSymbolAddress`는 명시적으로 미지원이다. 지원하지 않는 함수 주소를 native
+NVIDIA Driver 라이브러리에서 대신 찾아 반환하지 않는다.
+
+실제 학습 판정과 알려진 제약은
+[PyTorch 구현·검증 보고서](../../experiments/evidence/PYTORCH_IMPLEMENTATION_2026-09-22.md)를 따른다.
+
+## 요청별 선택형 추적
+
+Guest와 Worker 프로세스에 각각 `VMWEAVE_TRACE_REQUESTS=1`을 설정하면 stderr에
+`VMWEAVE_TRACE {JSON}` 레코드를 남긴다. 기본값은 꺼짐이며 `1` 이외의 값도 꺼짐이다.
+`allocation + generation + session_id + request_id`로 Guest submit/receive와
+Worker take/respond를 연결한다. submit/respond는 해당 큐 연산이 성공한 뒤에만 기록한다.
+응답 전 상태는 `null`이고, 응답의 transport 상태와 Runtime/Driver 반환값은 별도 필드다.
+malloc 크기·opaque handle·복사 방향/크기는 기록하되 데이터 내용이나 가상 주소는 기록하지 않는다.
+
+`monotonic_ns`는 각 endpoint의 로컬 시계다. Guest/Worker 시각을 빼서 전송 지연을
+계산하면 안 되며, 커널 launch 응답은 GPU 작업 완료를 뜻하지 않는다. 완료 확인에는
+별도 동기화가 필요하다. 추적 실행은 기능 시연용으로 사용한다.
+[2단계 실제 요청 추적·검산](../../experiments/evidence/results/2026-09-28-stage2/README.md)에
+독립 실행 원본과 검증 절차를 보존한다.
+# Experimental native memset (default off)
+
+In v0.5.5, `VMWEAVE_NATIVE_MEMSET=1` selects native backend
+`cudaMemset` for supported device allocations, using opcode `0x2108`. The option
+is read once on the first cudaMemset call; restart the process to change it.
+There is no legacy FLYT alias. Unset or any value other than `1` retains the
+existing async-memset plus device-synchronization path. cudaMemsetAsync is unchanged.
+
+The new request uses the existing 40-byte memset layout with stream and reserved
+fields both zero. Successful responses contain no output. A matching v0.5.5
+Worker is required; old Workers reject the opcode. No error triggers fallback or
+automatic replay. Existing opcodes retain their meaning and numbering.
+
+Return does not imply GPU completion. Use the appropriate stream/event/device
+synchronization before consuming results. This does not add pinned-host,
+managed-memory or per-thread-default-stream support. Actual-VM correctness and recovery have been validated for the combined option set.
+See docs/runtime/path-optimization.md for configuration and measured performance limits.
+
+
+## 기본 LSTM 경로의 라이브러리 중계 후보 (2026-11-08)
+
+`0x3300..0x3322` schema1은 cuDNN stream·tensor/dropout/RNN/RNNData descriptor,
+RNN v8 가중치 공간 조회·배치, forward·data/weight backward 및 cuBLASLt FP32 행렬곱을
+추가한다. 이전 MLP 보고서의 우회 설정을 소급 변경하지 않는다. 실제 완료 판정은
+[기본 LSTM 실험](../../experiments/rnn-default/README.md)을 따른다.
+
+- Guest/Worker의 `vmweave_library.h`와 opcode를 함께 배포해야 한다. 구 Worker는 미지원으로 거절한다.
+- 요청 4,608 byte·성공 응답 512 byte의 고정 상한, 정수는 little-endian이다.
+  descriptor는 세션 프로세스 내부의 타입별 ID이며 GPU 포인터는 allocation ID+offset이다.
+  Worker는 descriptor에 따른 buffer 범위를 다시 검사한다.
+- RNNData는 FP32·unpacked·batch≤1024, tensor rank≤8을 대상으로 한다.
+  cuBLASLt는 FP32 host scalar·열 우선 layout, 기본/bias epilogue와 허용한 속성만 지원한다.
+  cuBLAS handle을 Lt 연산에 사용하는 PyTorch의 alias 경로도 Worker에서 해석한다.
+- cuBLASLt algorithm/heuristic 구조체는 고정 CUDA12.8 x86-64 ABI로 전달한다.
+  다른 버전·ABI의 조합은 이번 계약에 포함되지 않는다.
+- 선택형 `VMWEAVE_LIBRARY_TRACE`는 실제 중계 API의 결과를 기록하는 기능 진단용이다.
+  성능 벤치마크에서 이 추적 비용을 학습 처리량과 혼동하지 않는다.
+- 선언 범위 밖의 라이브러리 전체, CNN, AMP, 분산 학습 또는 모든 RNN 설정의 지원을 뜻하지 않는다.
+
+## Conv2d forward 중계 후보 (2026-11-13, 첫 단계 VM 검증)
+
+`0x3323..0x3333` schema1은 filter/convolution descriptor의 수명·설정·조회,
+group/math 설정, output shape, forward algorithm count/heuristic, workspace 및
+native `cudnnConvolutionForward` 중계를 추가한다. 기존 opcode와 packet 크기는 유지한다.
+생성 소스는 `scripts/codegen/library_conv.py`이며 Guest/Worker를 함께 빌드해야 한다.
+
+- 현재 허용 범위는 FP32 contiguous NCHW, 2D cross-correlation, groups=1,
+  dilation=1, DEFAULT/FMA math다. heuristic 응답은 최대 8개이며 필드별로 인코딩한다.
+- Worker는 descriptor 타입·설정, allocation 범위·offset, workspace 크기를 다시 확인한다.
+  scalar는 host FP32만 사용한다. uninitialized/미지원 descriptor 조합은 거부한다.
+- PyTorch 검증 대상은 `TORCH_CUDNN_V8_API_DISABLED=1`, `benchmark=False`의 legacy
+  forward다. cuDNN graph/backend, autotuning Find, fused convolution, backward,
+  BatchNorm, NHWC/AMP/grouped/dilated convolution 지원을 추가하지 않는다.
+- 공식 PyTorch 2.11.0+cu128에서 legacy forward 198건이 CPU 참조와
+  rtol1e-4/atol1e-6으로 일치했다. bias on/off, stride1/2, padding0/1,
+  deterministic on/off, 기본·명시적 stream 및 새 Pod 재실행을 포함한다.
+  MLP와 LSTM의 5-step 학습 및 LSTM 새 Pod 회귀도 통과했다.
+- 기본 cuDNN graph 경로는 후보에서도 첫 forward에서 SIGSEGV가 재현됐다.
+  명시적 legacy 설정이 필수이며, CNN backward·전체 학습 지원을 의미하지 않는다.
+  후보 검증 후 공개 v0.5.9 구성으로 복원하며 자동 배포·릴리스하지 않는다.
+  [검증 증거](../../experiments/cnn-forward/results/20261113-vm/REPORT.md)를 따른다.
+
+## Conv2d backward·최소 학습 후보 (2026-11-13, 후속 단계)
+
+`scripts/codegen/library_conv_backward.py`는 위 forward 범위에
+`0x3334..0x333b`의 backward-data/filter algorithm count·heuristic·workspace·실행
+8개 command를 추가한다. 기존 공유메모리 전송, schema1, packet 크기를 유지한다.
+Guest/Worker는 함께 빌드해야 하며 공개 v0.5.9에는 포함되지 않은 후보다.
+
+- Data의 dx/weight/dy, Filter의 input/dw/dy를 공통 descriptor 슬롯으로 명시적으로
+  변환한다. Worker에서 descriptor 타입·shape, allocation 전체 범위·offset,
+  native workspace 요구량을 확인한 뒤 호출한다. native 오류는 그대로 전달한다.
+- 위와 같은 FP32 contiguous NCHW, groups=1, dilation=1 범위의 legacy 경로다.
+  `TORCH_CUDNN_V8_API_DISABLED=1`, `benchmark=False`가 필요하다.
+- 공식 PyTorch에서 입력/가중치 gradient 분리, bias gradient, 3-step SGD,
+  gradient 누적, 16개 bias·stride·padding·deterministic 설정과 기본·명시적
+  stream에서 216개 step, 1,302개 결과 텐서를 검증했다. bias gradient는 PyTorch reduction으로 계산하며
+  `cudnnConvolutionBackwardBias` API를 추가하지 않는다.
+- 기본 graph/backend, BatchNorm, AMP, NHWC, grouped/dilated convolution,
+  autotuning Find, ResNet/YOLO 등 전체 모델 지원과 성능 검증은 범위 밖이다.
+  검사용 GPU `abs/max` 표현식에서 발생한 오류와 검사 코드 수정도 증거에 남긴다.
+  [후속 검증 결과](../../experiments/cnn-training/results/20261113/REPORT.md)를 따른다.

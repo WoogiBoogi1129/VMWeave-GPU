@@ -5,14 +5,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-enum {TENSOR=1,DROPOUT,RNN,RNNDATA,LT,LAYOUT,MATMUL,PREF};
+enum {TENSOR=1,DROPOUT,RNN,RNNDATA,LT,LAYOUT,MATMUL,PREF,FILTER,CONV};
 static struct {uint64_t id;int kind;void *ptr;size_t bytes;struct vmweave_device_ref ref;} objects[4096];
 static uint64_t next_object=UINT64_C(0x5000000000000001);
 static int object_index(uint64_t id){for(int i=0;i<4096;i++)if(id&&objects[i].id==id)return i;return -1;}
 static void *get_object(uint64_t id,int kind){int i=object_index(id);return i>=0&&objects[i].kind==kind?objects[i].ptr:NULL;}
 static void drop_object(uint64_t id){int i=object_index(id);if(i>=0)memset(objects+i,0,sizeof(objects[i]));}
 static int destroy_object(int kind,void *ptr);
-static int save_object(int kind,void *ptr,uint8_t *out){if(next_object!=UINT64_MAX)for(int i=0;i<4096;i++)if(!objects[i].id){objects[i].id=next_object++;objects[i].kind=kind;objects[i].ptr=ptr;vmweave_put(out,objects[i].id,8);return 0;}destroy_object(kind,ptr);return kind>=LT?CUBLAS_STATUS_ALLOC_FAILED:CUDNN_STATUS_ALLOC_FAILED;}
+static int save_object(int kind,void *ptr,uint8_t *out){if(next_object!=UINT64_MAX)for(int i=0;i<4096;i++)if(!objects[i].id){objects[i].id=next_object++;objects[i].kind=kind;objects[i].ptr=ptr;vmweave_put(out,objects[i].id,8);return 0;}destroy_object(kind,ptr);return kind>=LT&&kind<=PREF?CUBLAS_STATUS_ALLOC_FAILED:CUDNN_STATUS_ALLOC_FAILED;}
 static size_t object_bytes(uint64_t id){int i=object_index(id);return i<0?SIZE_MAX:objects[i].bytes;}
 static void object_size(uint64_t id,size_t bytes){int i=object_index(id);if(i>=0)objects[i].bytes=bytes;}
 static int checked_rnn_bytes(uint64_t seq,uint64_t batch,uint64_t vector,size_t *bytes){if(!seq||!batch||!vector||seq>INT32_MAX||batch>1024||vector>INT32_MAX||seq>SIZE_MAX/batch||seq*batch>SIZE_MAX/vector||seq*batch*vector>SIZE_MAX/4)return 0;*bytes=seq*batch*vector*4;return 1;}
@@ -27,8 +27,47 @@ static int device_ptr(struct vmweave_cuda_session *s,const uint8_t *p,int index,
 #define DNN(i,v) void *v=vmweave_compat_dnn(A(i));if(!v) BAD
 #define STREAM(i,v) void *v=NULL;if(!vmweave_async_stream(A(i),&v)) BAD
 #define DEV(i,n,optional,v) void *v=NULL;if(!device_ptr(s,p,i,n,optional,&v)) BAD
-static int destroy_object(int kind,void *ptr){switch(kind){case TENSOR:return cudnnDestroyTensorDescriptor(ptr);case DROPOUT:return cudnnDestroyDropoutDescriptor(ptr);case RNN:return cudnnDestroyRNNDescriptor(ptr);case RNNDATA:return cudnnDestroyRNNDataDescriptor(ptr);case LT:return cublasLtDestroy(ptr);case LAYOUT:return cublasLtMatrixLayoutDestroy(ptr);case MATMUL:return cublasLtMatmulDescDestroy(ptr);case PREF:return cublasLtMatmulPreferenceDestroy(ptr);default:return -1;}}
+static int destroy_object(int kind,void *ptr){switch(kind){case TENSOR:return cudnnDestroyTensorDescriptor(ptr);case DROPOUT:return cudnnDestroyDropoutDescriptor(ptr);case RNN:return cudnnDestroyRNNDescriptor(ptr);case RNNDATA:return cudnnDestroyRNNDataDescriptor(ptr);case LT:return cublasLtDestroy(ptr);case LAYOUT:return cublasLtMatrixLayoutDestroy(ptr);case MATMUL:return cublasLtMatmulDescDestroy(ptr);case PREF:return cublasLtMatmulPreferenceDestroy(ptr);case FILTER:return cudnnDestroyFilterDescriptor(ptr);case CONV:return cudnnDestroyConvolutionDescriptor(ptr);default:return -1;}}
 int vmweave_library_close(void){int rc=0;for(int i=0;i<4096;i++)if(objects[i].id){if(destroy_object(objects[i].kind,objects[i].ptr))rc=-1;else memset(objects+i,0,sizeof(objects[i]));}return rc;}
+
+/* Re-query native descriptors: reject uninitialized/unsupported layouts before
+ * interpreting FP32 scalars or resolving any device allocation. */
+static size_t filter_bytes(void *w){
+    int n=0,dims[4];cudnnDataType_t type;cudnnTensorFormat_t format;
+    if(cudnnGetFilterNdDescriptor(w,4,&type,&format,&n,dims)||n!=4||
+       type!=CUDNN_DATA_FLOAT||format!=CUDNN_TENSOR_NCHW)return SIZE_MAX;
+    size_t bytes=4;
+    for(int i=0;i<4;i++){if(dims[i]<1||(size_t)dims[i]>SIZE_MAX/bytes)return SIZE_MAX;bytes*=dims[i];}
+    return bytes;
+}
+static int nchw_float(void *t){
+    int n=0,dims[4],strides[4];cudnnDataType_t type;
+    if(cudnnGetTensorNdDescriptor(t,4,&type,&n,dims,strides)||n!=4||type!=CUDNN_DATA_FLOAT)return 0;
+    size_t stride=1;
+    for(int i=3;i>=0;i--){
+        if(dims[i]<1||strides[i]<1||(size_t)strides[i]!=stride||(size_t)dims[i]>SIZE_MAX/stride)return 0;
+        stride*=dims[i];
+    }
+    return stride<=SIZE_MAX/4;
+}
+static int conv_input_valid(void *x,void *w,void *c){
+    int n=0,pad[2],stride[2],dilation[2],groups;
+    cudnnConvolutionMode_t mode;cudnnDataType_t type;cudnnMathType_t math;
+    if(!nchw_float(x)||filter_bytes(w)==SIZE_MAX||
+       cudnnGetConvolutionNdDescriptor(c,2,&n,pad,stride,dilation,&mode,&type)||
+       cudnnGetConvolutionGroupCount(c,&groups)||cudnnGetConvolutionMathType(c,&math))return 0;
+    return n==2&&pad[0]>=0&&pad[1]>=0&&stride[0]>0&&stride[1]>0&&
+        dilation[0]==1&&dilation[1]==1&&groups==1&&mode==CUDNN_CROSS_CORRELATION&&
+        type==CUDNN_DATA_FLOAT&&(math==CUDNN_DEFAULT_MATH||math==CUDNN_FMA_MATH);
+}
+static int conv_valid(void *x,void *w,void *c,void *y){
+    if(!conv_input_valid(x,w,c)||!nchw_float(y))return 0;
+    int expected[4],dims[4],strides[4],n;cudnnDataType_t type;
+    if(cudnnGetConvolutionNdForwardOutputDim(c,x,w,4,expected)||
+       cudnnGetTensorNdDescriptor(y,4,&type,&n,dims,strides))return 0;
+    for(int i=0;i<4;i++)if(expected[i]!=dims[i])return 0;
+    return 1;
+}
 
 
 static int layout_bytes(uint64_t rows,uint64_t cols,uint64_t ld,size_t *bytes){if(!rows||!cols||ld<rows||ld>INT64_MAX||cols>INT64_MAX||rows>INT64_MAX||ld>SIZE_MAX/cols||ld*cols>SIZE_MAX/4)return 0;*bytes=((cols-1)*ld+rows)*4;return 1;}
@@ -76,6 +115,31 @@ case VMWEAVE_LIB_cublasLtMatmulDescSetAttribute:{bad_value=CUBLAS_STATUS_INVALID
 case VMWEAVE_LIB_cublasLtMatmulPreferenceSetAttribute:{bad_value=CUBLAS_STATUS_INVALID_VALUE;unsupported_value=CUBLAS_STATUS_NOT_SUPPORTED;OBJ(0,PREF,d);if(!lt_preference(A(1),A(2))) UNSUP;rc=cublasLtMatmulPreferenceSetAttribute(d,A(1),p+32,A(2)); break;}
 case VMWEAVE_LIB_cublasLtMatmulAlgoGetHeuristic:{bad_value=CUBLAS_STATUS_INVALID_VALUE;unsupported_value=CUBLAS_STATUS_NOT_SUPPORTED;LT_HANDLE(0,h);OBJ(1,MATMUL,d);OBJ(2,LAYOUT,ad);OBJ(3,LAYOUT,bd);OBJ(4,LAYOUT,cd);OBJ(5,LAYOUT,dd);OBJ(6,PREF,pref);int count=A(7),returned=0;if(count<1||count>4||16+count*sizeof(cublasLtMatmulHeuristicResult_t)>VMWEAVE_LIBRARY_RESPONSE) BAD;cublasLtMatmulHeuristicResult_t results[4]={0};rc=cublasLtMatmulAlgoGetHeuristic(h,d,ad,bd,cd,dd,pref,count,results,&returned);if(!rc){if(returned<0||returned>count) BAD;OUT(0,returned);memcpy(out+16,results,returned*sizeof(*results));} break;}
 case VMWEAVE_LIB_cublasLtMatmul:{bad_value=CUBLAS_STATUS_INVALID_VALUE;unsupported_value=CUBLAS_STATUS_NOT_SUPPORTED;LT_HANDLE(0,h);OBJ(1,MATMUL,desc);OBJ(2,LAYOUT,ad);OBJ(3,LAYOUT,bd);OBJ(4,LAYOUT,cd);OBJ(5,LAYOUT,dd);STREAM(7,st);DEV(11,object_bytes(A(2)),0,a);DEV(13,object_bytes(A(3)),0,b);DEV(15,object_bytes(A(4)),0,c);DEV(17,object_bytes(A(5)),0,d);DEV(19,A(6),A(6)==0,ws);float alpha,beta;memcpy(&alpha,p+72,4);memcpy(&beta,p+80,4);if(!check_bias(s,A(1),dd)) BAD;cublasLtMatmulAlgo_t algo;memcpy(&algo,p+512,sizeof(algo));rc=cublasLtMatmul(h,desc,&alpha,a,ad,b,bd,&beta,c,cd,d,dd,A(8)?&algo:NULL,ws,A(6),st); break;}
+case VMWEAVE_LIB_cudnnCreateFilterDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;void *v=NULL; rc=cudnnCreateFilterDescriptor((cudnnFilterDescriptor_t*)&v); if(!rc) rc=save_object(FILTER,v,out); break;}
+case VMWEAVE_LIB_cudnnDestroyFilterDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,FILTER,d); rc=cudnnDestroyFilterDescriptor(d); if(!rc) drop_object(A(0)); break;}
+case VMWEAVE_LIB_cudnnCreateConvolutionDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;void *v=NULL; rc=cudnnCreateConvolutionDescriptor((cudnnConvolutionDescriptor_t*)&v); if(!rc) rc=save_object(CONV,v,out); break;}
+case VMWEAVE_LIB_cudnnDestroyConvolutionDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,d); rc=cudnnDestroyConvolutionDescriptor(d); if(!rc) drop_object(A(0)); break;}
+case VMWEAVE_LIB_cudnnSetFilterNdDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,FILTER,d);if(A(1)!=CUDNN_DATA_FLOAT||A(2)!=CUDNN_TENSOR_NCHW||A(3)!=4) UNSUP;int dims[4];size_t bytes=4;for(int i=0;i<4;i++){if(!A(4+i)||A(4+i)>INT32_MAX||A(4+i)>SIZE_MAX/bytes) BAD;dims[i]=A(4+i);bytes*=dims[i];}rc=cudnnSetFilterNdDescriptor(d,A(1),A(2),4,dims); break;}
+case VMWEAVE_LIB_cudnnGetFilterNdDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,FILTER,d);if(A(1)<4||A(1)>8) BAD;int n=0,dims[8]={0};cudnnDataType_t type;cudnnTensorFormat_t format;rc=cudnnGetFilterNdDescriptor(d,A(1),&type,&format,&n,dims);if(!rc){OUT(0,type);OUT(1,format);OUT(2,n);for(int i=0;i<A(1);i++)OUT(3+i,dims[i]);} break;}
+case VMWEAVE_LIB_cudnnSetConvolutionNdDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,d);if(A(1)!=2||A(2)!=CUDNN_CROSS_CORRELATION||A(3)!=CUDNN_DATA_FLOAT) UNSUP;int pad[2],stride[2],dilation[2];for(int i=0;i<2;i++){if(A(4+i)>INT32_MAX||!A(6+i)||A(6+i)>INT32_MAX) BAD;if(A(8+i)!=1) UNSUP;pad[i]=A(4+i);stride[i]=A(6+i);dilation[i]=1;}rc=cudnnSetConvolutionNdDescriptor(d,2,pad,stride,dilation,A(2),A(3)); break;}
+case VMWEAVE_LIB_cudnnGetConvolutionNdDescriptor:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,d);if(A(1)<2||A(1)>8) BAD;int n=0,pad[8]={0},stride[8]={0},dilation[8]={0};cudnnConvolutionMode_t mode;cudnnDataType_t type;rc=cudnnGetConvolutionNdDescriptor(d,A(1),&n,pad,stride,dilation,&mode,&type);if(!rc){OUT(0,n);OUT(1,mode);OUT(2,type);for(int i=0;i<A(1);i++){OUT(3+i,pad[i]);OUT(11+i,stride[i]);OUT(19+i,dilation[i]);}} break;}
+case VMWEAVE_LIB_cudnnSetConvolutionGroupCount:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,d);uint64_t value=A(1);if(!(value==1)) UNSUP;rc=cudnnSetConvolutionGroupCount(d,value); break;}
+case VMWEAVE_LIB_cudnnGetConvolutionGroupCount:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,d);int value;rc=cudnnGetConvolutionGroupCount(d,&value);if(!rc)OUT(0,value); break;}
+case VMWEAVE_LIB_cudnnSetConvolutionMathType:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,d);uint64_t value=A(1);if(!(value==CUDNN_DEFAULT_MATH||value==CUDNN_FMA_MATH)) UNSUP;rc=cudnnSetConvolutionMathType(d,value); break;}
+case VMWEAVE_LIB_cudnnGetConvolutionMathType:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,d);cudnnMathType_t value;rc=cudnnGetConvolutionMathType(d,&value);if(!rc)OUT(0,value); break;}
+case VMWEAVE_LIB_cudnnGetConvolutionNdForwardOutputDim:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;OBJ(0,CONV,c);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);if(A(3)!=4) BAD;int dims[4];if(!conv_input_valid(x,w,c)) UNSUP;rc=cudnnGetConvolutionNdForwardOutputDim(c,x,w,4,dims);if(!rc)for(int i=0;i<4;i++)OUT(i,dims[i]); break;}
+case VMWEAVE_LIB_cudnnGetConvolutionForwardAlgorithmMaxCount:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);int count;rc=cudnnGetConvolutionForwardAlgorithmMaxCount(h,&count);if(!rc){if(count<1||count>8) UNSUP;OUT(0,count);} break;}
+case VMWEAVE_LIB_cudnnGetConvolutionForwardAlgorithm_v7:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)<1||A(5)>8) BAD;int n=0;cudnnConvolutionFwdAlgoPerf_t perf[8]={0};rc=cudnnGetConvolutionForwardAlgorithm_v7(h,x,w,c,y,A(5),&n,perf);if(!rc){if(n<0||n>A(5)) BAD;OUT(0,n);for(int i=0;i<n;i++){OUT(1+6*i,perf[i].algo);OUT(2+6*i,perf[i].status);memcpy(out+8*(3+6*i),&perf[i].time,4);OUT(4+6*i,perf[i].memory);OUT(5+6*i,perf[i].determinism);OUT(6+6*i,perf[i].mathType);}} break;}
+case VMWEAVE_LIB_cudnnGetConvolutionForwardWorkspaceSize:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)>=CUDNN_CONVOLUTION_FWD_ALGO_COUNT) BAD;size_t bytes;rc=cudnnGetConvolutionForwardWorkspaceSize(h,x,w,c,y,A(5),&bytes);if(!rc)OUT(0,bytes); break;}
+case VMWEAVE_LIB_cudnnConvolutionForward:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)>=CUDNN_CONVOLUTION_FWD_ALGO_COUNT) BAD;size_t required=0;rc=cudnnGetConvolutionForwardWorkspaceSize(h,x,w,c,y,A(5),&required);if(rc)break;if(A(6)<required) BAD;DEV(9,tensor_bytes(x),0,input);DEV(11,filter_bytes(w),0,weights);DEV(13,tensor_bytes(y),0,output);DEV(15,A(6),A(6)==0,workspace);float alpha,beta;memcpy(&alpha,p+56,4);memcpy(&beta,p+64,4);rc=cudnnConvolutionForward(h,&alpha,x,input,w,weights,c,A(5),workspace,A(6),&beta,y,output); break;}
+case VMWEAVE_LIB_cudnnGetConvolutionBackwardDataAlgorithmMaxCount:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);int count;rc=cudnnGetConvolutionBackwardDataAlgorithmMaxCount(h,&count);if(!rc){if(count<1||count>8) UNSUP;OUT(0,count);} break;}
+case VMWEAVE_LIB_cudnnGetConvolutionBackwardDataAlgorithm_v7:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)<1||A(5)>8) BAD;int n=0;cudnnConvolutionBwdDataAlgoPerf_t perf[8]={0};rc=cudnnGetConvolutionBackwardDataAlgorithm_v7(h,w,y,c,x,A(5),&n,perf);if(!rc){if(n<0||n>A(5)) BAD;OUT(0,n);for(int i=0;i<n;i++){OUT(1+6*i,perf[i].algo);OUT(2+6*i,perf[i].status);memcpy(out+8*(3+6*i),&perf[i].time,4);OUT(4+6*i,perf[i].memory);OUT(5+6*i,perf[i].determinism);OUT(6+6*i,perf[i].mathType);}} break;}
+case VMWEAVE_LIB_cudnnGetConvolutionBackwardDataWorkspaceSize:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)>=CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT) BAD;size_t bytes;rc=cudnnGetConvolutionBackwardDataWorkspaceSize(h,w,y,c,x,A(5),&bytes);if(!rc)OUT(0,bytes); break;}
+case VMWEAVE_LIB_cudnnConvolutionBackwardData:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)>=CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT) BAD;size_t required=0;rc=cudnnGetConvolutionBackwardDataWorkspaceSize(h,w,y,c,x,A(5),&required);if(rc)break;if(A(6)<required) BAD;DEV(9,tensor_bytes(x),0,dx);DEV(11,filter_bytes(w),0,weights);DEV(13,tensor_bytes(y),0,dy);DEV(15,A(6),A(6)==0,workspace);float alpha,beta;memcpy(&alpha,p+56,4);memcpy(&beta,p+64,4);rc=cudnnConvolutionBackwardData(h,&alpha,w,weights,y,dy,c,A(5),workspace,A(6),&beta,x,dx); break;}
+case VMWEAVE_LIB_cudnnGetConvolutionBackwardFilterAlgorithmMaxCount:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);int count;rc=cudnnGetConvolutionBackwardFilterAlgorithmMaxCount(h,&count);if(!rc){if(count<1||count>8) UNSUP;OUT(0,count);} break;}
+case VMWEAVE_LIB_cudnnGetConvolutionBackwardFilterAlgorithm_v7:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)<1||A(5)>8) BAD;int n=0;cudnnConvolutionBwdFilterAlgoPerf_t perf[8]={0};rc=cudnnGetConvolutionBackwardFilterAlgorithm_v7(h,x,y,c,w,A(5),&n,perf);if(!rc){if(n<0||n>A(5)) BAD;OUT(0,n);for(int i=0;i<n;i++){OUT(1+6*i,perf[i].algo);OUT(2+6*i,perf[i].status);memcpy(out+8*(3+6*i),&perf[i].time,4);OUT(4+6*i,perf[i].memory);OUT(5+6*i,perf[i].determinism);OUT(6+6*i,perf[i].mathType);}} break;}
+case VMWEAVE_LIB_cudnnGetConvolutionBackwardFilterWorkspaceSize:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)>=CUDNN_CONVOLUTION_BWD_FILTER_ALGO_COUNT) BAD;size_t bytes;rc=cudnnGetConvolutionBackwardFilterWorkspaceSize(h,x,y,c,w,A(5),&bytes);if(!rc)OUT(0,bytes); break;}
+case VMWEAVE_LIB_cudnnConvolutionBackwardFilter:{bad_value=CUDNN_STATUS_BAD_PARAM;unsupported_value=CUDNN_STATUS_NOT_SUPPORTED;DNN(0,h);OBJ(1,TENSOR,x);OBJ(2,FILTER,w);OBJ(3,CONV,c);OBJ(4,TENSOR,y);if(!conv_valid(x,w,c,y)) UNSUP;if(A(5)>=CUDNN_CONVOLUTION_BWD_FILTER_ALGO_COUNT) BAD;size_t required=0;rc=cudnnGetConvolutionBackwardFilterWorkspaceSize(h,x,y,c,w,A(5),&required);if(rc)break;if(A(6)<required) BAD;DEV(9,tensor_bytes(x),0,input);DEV(11,filter_bytes(w),0,dw);DEV(13,tensor_bytes(y),0,dy);DEV(15,A(6),A(6)==0,workspace);float alpha,beta;memcpy(&alpha,p+56,4);memcpy(&beta,p+64,4);rc=cudnnConvolutionBackwardFilter(h,&alpha,x,input,y,dy,c,A(5),workspace,A(6),&beta,w,dw); break;}
 default: response->transport_status=VMWEAVE_SHM_UNSUPPORTED_API;return 0;
 } goto done;
 bad:rc=bad_value;goto done;

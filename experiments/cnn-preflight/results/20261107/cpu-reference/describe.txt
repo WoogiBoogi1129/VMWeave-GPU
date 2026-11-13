@@ -1,0 +1,78 @@
+Name:             cpu-reference
+Namespace:        cnn-preflight-20261107
+Priority:         0
+Service Account:  default
+Node:             dp-dev-20261105/10.0.2.2
+Start Time:       Sat, 07 Nov 2026 06:05:31 +0000
+Labels:           vmweave-experiment=cnn-preflight-20261107
+Annotations:      <none>
+Status:           Succeeded
+SeccompProfile:   RuntimeDefault
+IP:               10.242.0.194
+IPs:
+  IP:  10.242.0.194
+Containers:
+  pytorch:
+    Container ID:  cri-o://3616daaf4ad7324f72876c4789c2c9e4bd55bc9e878061bb360c5d214af442be
+    Image:         docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Image ID:      docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -ec
+    Args:
+      exec python -u /work/supervise.py --mode cpu --case all
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Sat, 07 Nov 2026 06:05:32 +0000
+      Finished:     Sat, 07 Nov 2026 06:05:46 +0000
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     2
+      memory:  3Gi
+    Requests:
+      cpu:     500m
+      memory:  1Gi
+    Environment:
+      HOME:                     /tmp
+      PYTHONDONTWRITEBYTECODE:  1
+      CNN_LOADER_TRACE:         0
+      PYTHONFAULTHANDLER:       1
+    Mounts:
+      /results from results (rw)
+      /tmp from tmp (rw)
+      /work from code (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  code:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      cnn-code
+    Optional:  false
+  results:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  tmp:
+    Type:        EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:      
+    SizeLimit:   <unset>
+QoS Class:       Burstable
+Node-Selectors:  kubernetes.io/hostname=dp-dev-20261105
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  20s   default-scheduler  Successfully assigned cnn-preflight-20261107/cpu-reference to dp-dev-20261105
+  Normal  Pulled     19s   kubelet            spec.containers{pytorch}: Container image "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be" already present on machine and can be accessed by the pod
+  Normal  Created    19s   kubelet            spec.containers{pytorch}: Container created
+  Normal  Started    19s   kubelet            spec.containers{pytorch}: Container started

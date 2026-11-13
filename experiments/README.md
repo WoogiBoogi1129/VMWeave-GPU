@@ -4,6 +4,7 @@
 
 | 영역 | 디렉터리·진입점 |
 |---|---|
+| CNN 단계별 학습 검증 | [사전 진단](cnn-preflight/README.md), [Conv2d forward](cnn-forward/README.md), [backward·SGD](cnn-training/README.md), [작은 CNN·MNIST 일부](cnn-model/README.md) |
 | 기본 라이브러리 경로 학습 | [LSTM 학습·정확성·체크포인트 검증](rnn-default/README.md) |
 | 학습·애플리케이션 비교 | [training-threeway](training-threeway/README.md), [ai-passthrough](ai-passthrough/README.md), [pytorch-smoke](pytorch-smoke/README.md) |
 | VM 내부 Kubernetes | [공식 PyTorch·Device Plugin](device-plugin-pytorch/README.md), [nested-k8s-gpu](nested-k8s-gpu/README.md), [초기 k8s-gpu-pod](k8s-gpu-pod/) |

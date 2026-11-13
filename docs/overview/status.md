@@ -1,10 +1,11 @@
 # 지원·검증 현황
 
-**현황 색인 갱신: 2026-11-05.** 현재 배포 버전은 [릴리스 색인](../releases/index.md)을 따릅니다.
+**현황 색인 갱신: 2026-11-13.** 현재 배포 버전은 [릴리스 색인](../releases/index.md)을 따릅니다.
 검증은 아래처럼 버전·실행별로 구분합니다. 일부 조건 성공을 전체 호환성·운영 안정성으로 확대하지 않습니다.
 
 | 후속 검증 | 확인 범위 | 근거 |
 |---|---|---|
+| 11/13 legacy CNN 후보 | Conv2d forward/backward, 두 Conv 블록·ReLU·MaxPool·Linear·SGD, MNIST 일부 기능 검사. 기본 graph·BatchNorm·AMP 제외 | [작은 CNN](../../experiments/cnn-model/README.md), [backward](../../experiments/cnn-training/README.md) |
 | 11/8 v0.5.9·Device Plugin v0.1.1 | 기본 cuDNN LSTM·cuBLASLt 학습, 공개 이미지로 128 step·CPU 검산·체크포인트 재개, 노드 업데이트 | [검증](../../deploy/releases/evidence/v0.5.9/README.md) |
 | 11/5 Device Plugin v0.1.0 | 실제 VM 내부 K8s GPU 예약·주입, 단일 client, SIGKILL/재시작/브로커 장애·VM 재기동, 공개 패키지 실행 | [검증](../development/device-plugin-validation-2026-11-05.md) |
 | 11/4 v0.5.8 회수 기록 | API/filesystem 중단 복구, CRD/RBAC, 배포 상태. 물리 GPU detach·새 VM 부팅 시험은 아님 | [릴리스](../getting-started/release-v0.5.8.md) |

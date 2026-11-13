@@ -34,3 +34,10 @@ experiments/device-plugin-pytorch/manifests/** -text
 experiments/device-plugin-pytorch/plans/** -text
 experiments/device-plugin-pytorch/results/** -text
 experiments/device-plugin-pytorch/results/**/*.txt -whitespace
+
+# CNN validation snapshots and tensor evidence are checksummed verbatim.
+experiments/cnn-preflight/results/** -text -whitespace
+experiments/cnn-forward/results/** -text -whitespace
+experiments/cnn-training/results/** -text -whitespace
+experiments/cnn-model/results/** -text -whitespace
+deploy/releases/evidence/v0.5.10/** -text -whitespace

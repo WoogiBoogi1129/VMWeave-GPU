@@ -1,0 +1,19 @@
+{"stage": "environment", "torch": "2.11.0+cu128", "cuda": "12.8", "mode": "cpu", "backend": "legacy", "case": "matrix", "rtol": 0.0001, "atol": 1e-06, "cudnn": 91900}
+{"stage": "cpu_reference", "config": "b0-s1-p0-d1", "output_shape": [2, 4, 6, 6]}
+{"stage": "cpu_reference", "config": "b0-s1-p0-d0", "output_shape": [2, 4, 6, 6]}
+{"stage": "cpu_reference", "config": "b0-s1-p1-d1", "output_shape": [2, 4, 8, 8]}
+{"stage": "cpu_reference", "config": "b0-s1-p1-d0", "output_shape": [2, 4, 8, 8]}
+{"stage": "cpu_reference", "config": "b0-s2-p0-d1", "output_shape": [2, 4, 3, 3]}
+{"stage": "cpu_reference", "config": "b0-s2-p0-d0", "output_shape": [2, 4, 3, 3]}
+{"stage": "cpu_reference", "config": "b0-s2-p1-d1", "output_shape": [2, 4, 4, 4]}
+{"stage": "cpu_reference", "config": "b0-s2-p1-d0", "output_shape": [2, 4, 4, 4]}
+{"stage": "cpu_reference", "config": "b1-s1-p0-d1", "output_shape": [2, 4, 6, 6]}
+{"stage": "cpu_reference", "config": "b1-s1-p0-d0", "output_shape": [2, 4, 6, 6]}
+{"stage": "cpu_reference", "config": "b1-s1-p1-d1", "output_shape": [2, 4, 8, 8]}
+{"stage": "cpu_reference", "config": "b1-s1-p1-d0", "output_shape": [2, 4, 8, 8]}
+{"stage": "cpu_reference", "config": "b1-s2-p0-d1", "output_shape": [2, 4, 3, 3]}
+{"stage": "cpu_reference", "config": "b1-s2-p0-d0", "output_shape": [2, 4, 3, 3]}
+{"stage": "cpu_reference", "config": "b1-s2-p1-d1", "output_shape": [2, 4, 4, 4]}
+{"stage": "cpu_reference", "config": "b1-s2-p1-d0", "output_shape": [2, 4, 4, 4]}
+{"stage": "PASS", "configs": 16, "gpu_comparisons": 0, "backward_executed": false}
+CNN_EXIT {"returncode": 0, "signal": null, "timeout": false}

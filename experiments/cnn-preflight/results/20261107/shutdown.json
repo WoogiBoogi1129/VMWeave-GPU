@@ -1,0 +1,245 @@
+{
+  "events": [
+    {
+      "utc": "2026-11-07T06:10:13.210210+00:00",
+      "strategy": "Halted",
+      "vmStatus": "Stopping",
+      "channelPhase": "Draining",
+      "vmiPresent": true
+    },
+    {
+      "utc": "2026-11-07T06:10:43.617685+00:00",
+      "strategy": "Halted",
+      "vmStatus": "Stopped",
+      "channelPhase": "Draining",
+      "vmiPresent": true
+    },
+    {
+      "utc": "2026-11-07T06:10:50.361445+00:00",
+      "strategy": "Halted",
+      "vmStatus": "Stopped",
+      "channelPhase": "Reclaimed",
+      "vmiPresent": false
+    },
+    {
+      "utc": "2026-11-07T06:11:17.375486+00:00",
+      "strategy": "Halted",
+      "vmStatus": "Stopped",
+      "channelPhase": "Stopped",
+      "vmiPresent": false
+    }
+  ],
+  "finalVM": {
+    "apiVersion": "kubevirt.io/v1",
+    "kind": "VirtualMachine",
+    "metadata": {
+      "annotations": {
+        "kubevirt.io/latest-observed-api-version": "v1",
+        "kubevirt.io/storage-observed-api-version": "v1"
+      },
+      "creationTimestamp": "2026-11-05T06:58:53Z",
+      "finalizers": [
+        "kubevirt.io/virtualMachineControllerFinalize"
+      ],
+      "generation": 23,
+      "name": "dp-dev-20261105",
+      "namespace": "vmweave-test-b",
+      "resourceVersion": "26336660",
+      "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+    },
+    "spec": {
+      "runStrategy": "Halted",
+      "template": {
+        "metadata": {
+          "annotations": {
+            "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:6e8099281376e250097850397a6e570932a867dd2e146b839045c8e87b9dacb6\",\"pvc\":{\"name\":\"dp-dev-20261105-shm\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+            "kubevirt.io/pci-topology-version": "v3",
+            "vmweave.io/shm-allocation": "52f84e282104af4789d49754e4a50dc4",
+            "vmweave.io/shm-channel": "dp-dev-20261105",
+            "vmweave.io/shm-channel-uid": "04f5fc84-21a7-4679-94c9-5085304627d4",
+            "vmweave.io/shm-generation": "7edb7a071287c034c183de88bb845912"
+          },
+          "labels": {
+            "device-plugin-test": "dp-dev-20261105"
+          }
+        },
+        "spec": {
+          "architecture": "amd64",
+          "domain": {
+            "cpu": {
+              "cores": 4
+            },
+            "devices": {
+              "disks": [
+                {
+                  "disk": {
+                    "bus": "virtio"
+                  },
+                  "name": "root"
+                },
+                {
+                  "disk": {
+                    "bus": "virtio"
+                  },
+                  "name": "cloudinit"
+                }
+              ],
+              "interfaces": [
+                {
+                  "macAddress": "92:47:c8:12:65:01",
+                  "masquerade": {},
+                  "name": "default"
+                }
+              ]
+            },
+            "firmware": {
+              "serial": "896ede69-7974-4d91-9302-344326d08d2d",
+              "uuid": "35510481-e0a3-4add-8664-8740f60bcb56"
+            },
+            "machine": {
+              "type": "q35"
+            },
+            "resources": {
+              "requests": {
+                "memory": "8Gi"
+              }
+            }
+          },
+          "networks": [
+            {
+              "name": "default",
+              "pod": {}
+            }
+          ],
+          "nodeSelector": {
+            "kubernetes.io/hostname": "gpu-4"
+          },
+          "volumes": [
+            {
+              "name": "root",
+              "persistentVolumeClaim": {
+                "claimName": "dp-dev-20261105-root"
+              }
+            },
+            {
+              "cloudInitNoCloud": {
+                "userData": "#cloud-config\nhostname: dp-dev-20261105\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKQ3HIwT6sWlQIpP1fLoMotzjqP+j3aUZil0lVXBsrjB ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n# vmweave-layout-b64: UvhOKCEEr0eJ1JdU5KUNxH7begcSh8A0wYPeiLuEWRIAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFtBt6hmtglnWk4wZp+vxfAAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+              },
+              "name": "cloudinit"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "conditions": [
+        {
+          "lastProbeTime": "2026-11-07T06:10:47Z",
+          "lastTransitionTime": "2026-11-07T06:10:47Z",
+          "message": "VMI does not exist",
+          "reason": "VMINotExists",
+          "status": "False",
+          "type": "Ready"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": null,
+          "message": "cannot migrate VMI: PVC dp-dev-20261105-root is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+          "reason": "DisksNotLiveMigratable",
+          "status": "False",
+          "type": "LiveMigratable"
+        },
+        {
+          "lastProbeTime": null,
+          "lastTransitionTime": null,
+          "status": "True",
+          "type": "StorageLiveMigratable"
+        }
+      ],
+      "desiredGeneration": 23,
+      "observedGeneration": 23,
+      "printableStatus": "Stopped",
+      "runStrategy": "Halted",
+      "volumeSnapshotStatuses": [
+        {
+          "enabled": false,
+          "name": "root",
+          "reason": "No VolumeSnapshotClass: Volume snapshots are not configured for this StorageClass [] [root]"
+        },
+        {
+          "enabled": false,
+          "name": "cloudinit",
+          "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+        }
+      ]
+    }
+  },
+  "finalChannel": {
+    "apiVersion": "vmweave.io/v1alpha1",
+    "kind": "SharedMemoryChannel",
+    "metadata": {
+      "creationTimestamp": "2026-11-05T07:12:14Z",
+      "finalizers": [
+        "vmweave.io/shm-detach"
+      ],
+      "generation": 1,
+      "name": "dp-dev-20261105",
+      "namespace": "vmweave-test-b",
+      "ownerReferences": [
+        {
+          "apiVersion": "kubevirt.io/v1",
+          "controller": true,
+          "kind": "VirtualMachine",
+          "name": "dp-dev-20261105",
+          "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+        }
+      ],
+      "resourceVersion": "26336971",
+      "uid": "04f5fc84-21a7-4679-94c9-5085304627d4"
+    },
+    "spec": {
+      "drain": false,
+      "gid": 107,
+      "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:6e8099281376e250097850397a6e570932a867dd2e146b839045c8e87b9dacb6",
+      "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:c8a9f80e5169877c23b71902b5cb40e64bd740d4e49600f52a4849d15f23979a",
+      "lifecycle": "VM",
+      "pvcRef": {
+        "name": "dp-dev-20261105-shm",
+        "uid": "2623b5bf-61c7-42c6-beb5-99c464ef63e7"
+      },
+      "requestRef": {
+        "name": "dp-dev-20261105",
+        "uid": "26a2352e-68f3-484e-8261-021a31abfbb3"
+      },
+      "sessions": 1,
+      "uid": 107,
+      "vmRef": {
+        "name": "dp-dev-20261105",
+        "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+      },
+      "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:e2139218e2abc9efa5b5537e8ca7d7567e5dbbe8bc9a40df42f89820894386ad"
+    },
+    "status": {
+      "allocation": "",
+      "backend": "",
+      "claimName": "",
+      "claimUID": "",
+      "completion": null,
+      "compute": 25,
+      "everBound": false,
+      "generation": "",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 1024,
+      "nodeName": "gpu-4",
+      "phase": "Stopped",
+      "profileGeneration": 1,
+      "reason": "RuntimeReclaimed",
+      "reclamation": null,
+      "requestGeneration": 1,
+      "resourcePrefix": "",
+      "sessions": [],
+      "vmiUID": "",
+      "workerPodUID": ""
+    }
+  }
+}

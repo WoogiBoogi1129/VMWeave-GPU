@@ -1,0 +1,238 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "creationTimestamp": "2026-11-13T06:42:13Z",
+    "generation": 1,
+    "labels": {
+      "task": "cnn-forward-20261113"
+    },
+    "name": "cnn-detach-observer-1113",
+    "namespace": "vmweave-system",
+    "resourceVersion": "30625215",
+    "uid": "7670a2d3-de6c-4822-a464-8e2bd08ec5e9"
+  },
+  "spec": {
+    "activeDeadlineSeconds": 3600,
+    "containers": [
+      {
+        "command": [
+          "python3",
+          "-c",
+          "import time; time.sleep(3500)"
+        ],
+        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "observer",
+        "resources": {},
+        "securityContext": {
+          "privileged": true,
+          "runAsGroup": 0,
+          "runAsUser": 0
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/host",
+            "name": "host",
+            "readOnly": true
+          },
+          {
+            "mountPath": "/evidence",
+            "name": "evidence",
+            "readOnly": true
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-j8ksm",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "hostPID": true,
+    "nodeName": "gpu-4",
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Never",
+    "schedulerName": "default-scheduler",
+    "securityContext": {},
+    "serviceAccount": "vmweave-controller",
+    "serviceAccountName": "vmweave-controller",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "hostPath": {
+          "path": "/",
+          "type": "Directory"
+        },
+        "name": "host"
+      },
+      {
+        "configMap": {
+          "defaultMode": 420,
+          "name": "cnn-detach-observer-1113"
+        },
+        "name": "evidence"
+      },
+      {
+        "name": "kube-api-access-j8ksm",
+        "projected": {
+          "defaultMode": 420,
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "expirationSeconds": 3607,
+                "path": "token"
+              }
+            },
+            {
+              "configMap": {
+                "items": [
+                  {
+                    "key": "ca.crt",
+                    "path": "ca.crt"
+                  }
+                ],
+                "name": "kube-root-ca.crt"
+              }
+            },
+            {
+              "downwardAPI": {
+                "items": [
+                  {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "metadata.namespace"
+                    },
+                    "path": "namespace"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T06:42:14Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T06:42:13Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T06:42:14Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T06:42:14Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T06:42:13Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "containerID": "cri-o://8c3012564877393f97c2ff8e5f117890f699d94e9d44114983414edd0e66857d",
+        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+        "lastState": {},
+        "name": "observer",
+        "ready": true,
+        "resources": {},
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-13T06:42:14Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/host",
+            "name": "host",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          },
+          {
+            "mountPath": "/evidence",
+            "name": "evidence",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-j8ksm",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "hostIP": "192.168.24.21",
+    "hostIPs": [
+      {
+        "ip": "192.168.24.21"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Running",
+    "podIP": "10.85.0.86",
+    "podIPs": [
+      {
+        "ip": "10.85.0.86"
+      }
+    ],
+    "qosClass": "BestEffort",
+    "resources": {},
+    "startTime": "2026-11-13T06:42:13Z"
+  }
+}

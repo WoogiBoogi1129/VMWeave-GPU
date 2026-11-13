@@ -1,0 +1,89 @@
+{
+  "baseRevision": "5aa12fa208a1d51ec6f7c59efe42ab7123f72d28",
+  "builderImage": "localhost/vmweave-rnn-builder:validated",
+  "builderImageID": "2716c28b9dd0efaf51dce51047fa68661d7d25575c6c24b4b748ce23f6a48203",
+  "sourceSHA256": {
+    "experiments/cnn-forward/runner/run.py": "9c229ac1169a92a19cfb4b4e7070fd698e0cafab9a6f0e31ee5508cc66fe1ebb",
+    "experiments/cnn-forward/workloads/probe.py": "a03d299f89f9a081f894e3a7cdb1c6889dc7b300a35054fadf9bf239b03f0ab0",
+    "experiments/cnn-preflight/workloads/supervise.py": "2fec70b5abf043f113c48f58d18cd51b4cfc23bacb9563e8aea821a901dcf49e",
+    "runtime/shm/include/vmweave_library.h": "d85fc7a6dab1a6a6cd140c1cec215c9dc0aa66f9b432616c0a995326c9aa9066",
+    "runtime/shm/src/guest_library.c": "f6f6dd5f536e3b930cd53c08c5d91b3edda087953b87f11dde4e8c13c1d62402",
+    "runtime/shm/src/library.c": "3271fc94712b5046d78be0093b1808368ffd11c63e2b8b3540206cc3b8a5ce49",
+    "scripts/codegen/library_conv.py": "8e447f7eb46d176310d29fd1682707e9b26a0cabd4885d4f5f021028f327b63d",
+    "scripts/codegen/library_lt.py": "99ddace94a42f6a481bed1659c49be3db348cf98bd3c69c98389679aedd3e2af",
+    "scripts/codegen/library_rpc.py": "571bf8db72e6c0fe80ea5df5c6c4d13cd503f000e16984123961df184f8bfdfa",
+    "scripts/codegen/library_worker.inc": "27582f8e91de429dad5bb53105de87982ba2235e3585613a542c8bf877ced49e",
+    "tests/library_rpc/conv_guest_validation.c": "fc5301c421581ec07da86663e107f2270bfcabea1df13f657782023704efd0ec",
+    "tests/library_rpc/conv_validation.c": "2ad4c1d21af3cc5abd5f515ae01206777ec31a40c20291954f28598d559a3ae6",
+    "tests/library_rpc/guest_validation.c": "1e9498149ad39df0adb0012d299e33ecf5f6d28d0f0f78c8d3a55200ab12b6ca",
+    "tests/library_rpc/run.sh": "7d04c360cb49843c2f7265b2236d35775af7ffabd844ba3548f0f3309008af28",
+    "tests/library_rpc/validation.c": "793c50062c6e0de7521a3321ed156e8eae0e50df073d905cebc24c6e08509ed4"
+  },
+  "evidenceSHA256": {
+    "attempts/host-regression-initial.log": "196d0c815cdec7c03a0a9014bcac1364f73a23776cc7045b3dddc66b064ba75c",
+    "attempts/library-initial.log": "268bc46ce83d08bc66a73b9187c8f0e28cddf5064643074abe007e3fc45f1808",
+    "baseline-legacy/channel.json": "c1d6712b300a73435b7079dd18ba72e6a874067abd2aa853dec1e84e140c89fd",
+    "baseline-legacy/code.json": "fcc6d260cc76de6b9cb87fabd0e5ce5d3d7a026332e7658ef670b38469756c6f",
+    "baseline-legacy/identity.json": "3be8aea04f0699c2f27891a188a012cfb38a9ec96b59536bc00b92b2d1efa910",
+    "baseline-legacy/preflight.json": "b943a1d869680d49a45be3231ee7274535fca9ac977190535fb87a48a3131528",
+    "baseline-legacy/submitted.json": "038261c8ce67b2e890114a9a93c9a18db9561615f7e082e78d464faf7268b334",
+    "build-final.log": "c9119487cbc53ab25a96e425b4ec7ff3605b348716f162594a93e2f4eb054b6f",
+    "build.log": "783f53c129bd45c6f48485a0812a827e4066c4357215b81d3e7621e01e9dc3ec",
+    "cpu-selfcheck/cpu.pt": "71c226706ff248f9f26c0644d62caf4083b9876c52f6bf64dfa80272d9a3b047",
+    "cpu-selfcheck.log": "d8ace1473cec2357903957a8082d095d411f280021cfc333af71074b7dd4b976",
+    "environment/after-channelattachments.json": "d996153a1a8169266cc74c7bb606274b42caeef93d0752a2ece70b16f213d9b0",
+    "environment/after-gpurequest.json": "bb75177148e0caed2463f44cf9d786b6afb2277bbafe76b25fbe380b8b0fa883",
+    "environment/after-pods.json": "9d6df166612dc8d91ab9679db17e551841053a2b559c85ea54d36abbe88e92f2",
+    "environment/after-sharedmemorychannel.json": "ff79357a849b003a231d3dc47f5f9f6423f0da467f19a81a92eaf0ebe753699e",
+    "environment/after-vm.json": "ae7c9acfaf89f4c4ce1627654a464aff9c0a064e91129c34b8287a005e479893",
+    "environment/after-vmi.json": "0b47d8a75af1323790569343d7e790cb0f0de161c0d8bda177d946dce29d377a",
+    "environment/before-channelattachments.json": "d996153a1a8169266cc74c7bb606274b42caeef93d0752a2ece70b16f213d9b0",
+    "environment/before-gpurequest.json": "bb75177148e0caed2463f44cf9d786b6afb2277bbafe76b25fbe380b8b0fa883",
+    "environment/before-pods.json": "9d6df166612dc8d91ab9679db17e551841053a2b559c85ea54d36abbe88e92f2",
+    "environment/before-sharedmemorychannel.json": "ff79357a849b003a231d3dc47f5f9f6423f0da467f19a81a92eaf0ebe753699e",
+    "environment/before-vm.json": "ae7c9acfaf89f4c4ce1627654a464aff9c0a064e91129c34b8287a005e479893",
+    "environment/before-vmi.json": "0b47d8a75af1323790569343d7e790cb0f0de161c0d8bda177d946dce29d377a",
+    "host-regression-final.log": "cb51a33869a6104551b84e4f143df12552101b667f033a7ddef9c1ddb488ac45",
+    "library-tests-final.log": "f6dcd98a8d39651ffe6ced3fa168150f59d6580374ecb97ecfe042e01825c628",
+    "sanitizers.log": "715a088e42d07db79d193c536eff4411e035568287dce9d2cdb655c02e51b593"
+  },
+  "candidateBinaries": {
+    "libvmweave_guest.so": {
+      "path": ".local/cnn-forward-20261113/build/libvmweave_guest.so",
+      "sha256": "78940a0460aa701684f3fa8ddbd85c402d5ae5f468895998fc7e12aca2efaea2"
+    },
+    "vmweave-shm-worker": {
+      "path": ".local/cnn-forward-20261113/build/vmweave-shm-worker",
+      "sha256": "9b06b77e286c19411202b33bc045308f403d15fbcfb76779a2328c0a4ff8ca0d"
+    },
+    "vmweave-shm-session-worker": {
+      "path": ".local/cnn-forward-20261113/build/vmweave-shm-session-worker",
+      "sha256": "251e90ff29a751b2ada7e24168a8bf5953588baeba63344878c2de5d3f981fb2"
+    }
+  },
+  "tests": {
+    "build": {
+      "exitCode": 0,
+      "scope": "Guest/Worker compilation"
+    },
+    "library": {
+      "exitCode": 0,
+      "scope": "CPU descriptors and mocked GPU execution"
+    },
+    "hostRegression": {
+      "exitCode": 0,
+      "scope": "host/mock only"
+    },
+    "sanitizers": {
+      "exitCode": 0,
+      "scope": "ASan/UBSan; detect_leaks=0"
+    },
+    "cpuSelfcheck": {
+      "exitCode": 0,
+      "scope": "local custom PyTorch CPU only"
+    }
+  },
+  "vmGPU": "BLOCKED",
+  "candidateDeployed": false,
+  "publicRelease": false
+}

@@ -1,0 +1,49 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "cnn-training-build-1113",
+    "namespace": "vmweave-test-b",
+    "labels": {
+      "experiment": "cnn-training-20261113"
+    }
+  },
+  "spec": {
+    "nodeName": "gpu-4",
+    "restartPolicy": "Never",
+    "automountServiceAccountToken": false,
+    "activeDeadlineSeconds": 14400,
+    "terminationGracePeriodSeconds": 1,
+    "containers": [
+      {
+        "name": "admin",
+        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+        "command": [
+          "python3",
+          "-c",
+          "import time; time.sleep(14300)"
+        ],
+        "securityContext": {
+          "privileged": true,
+          "runAsUser": 0,
+          "runAsGroup": 0
+        },
+        "volumeMounts": [
+          {
+            "name": "host",
+            "mountPath": "/host"
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "host",
+        "hostPath": {
+          "path": "/",
+          "type": "Directory"
+        }
+      }
+    ]
+  }
+}

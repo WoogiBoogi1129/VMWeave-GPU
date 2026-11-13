@@ -1,0 +1,107 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "annotations": {
+          "pv.kubernetes.io/bind-completed": "yes"
+        },
+        "creationTimestamp": "2026-11-05T06:58:52Z",
+        "finalizers": [
+          "kubernetes.io/pvc-protection"
+        ],
+        "name": "dp-dev-20261105-root",
+        "namespace": "vmweave-test-b",
+        "resourceVersion": "30663801",
+        "uid": "0997df1e-0fcc-4b7c-958b-a7041b5645c7"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "50Gi"
+          }
+        },
+        "storageClassName": "",
+        "volumeMode": "Filesystem",
+        "volumeName": "dp-dev-20261105-root"
+      },
+      "status": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "50Gi"
+        },
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T07:46:56Z",
+            "message": "A pod is currently referencing this PVC",
+            "reason": "PodUsingPVC",
+            "status": "False",
+            "type": "Unused"
+          }
+        ],
+        "phase": "Bound"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "PersistentVolumeClaim",
+      "metadata": {
+        "annotations": {
+          "pv.kubernetes.io/bind-completed": "yes"
+        },
+        "creationTimestamp": "2026-11-05T06:58:52Z",
+        "finalizers": [
+          "kubernetes.io/pvc-protection"
+        ],
+        "name": "dp-dev-20261105-shm",
+        "namespace": "vmweave-test-b",
+        "resourceVersion": "30663653",
+        "uid": "2623b5bf-61c7-42c6-beb5-99c464ef63e7"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "1Gi"
+          }
+        },
+        "storageClassName": "",
+        "volumeMode": "Filesystem",
+        "volumeName": "dp-dev-20261105-shm"
+      },
+      "status": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "capacity": {
+          "storage": "1Gi"
+        },
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T07:46:44Z",
+            "message": "A pod is currently referencing this PVC",
+            "reason": "PodUsingPVC",
+            "status": "False",
+            "type": "Unused"
+          }
+        ],
+        "phase": "Bound"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

@@ -1,0 +1,826 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-08T09:17:50Z",
+                "generation": 1,
+                "labels": {
+                    "vmweave.io/channel": "dp-dev-20261105"
+                },
+                "name": "dp-dev-20261105-a455a6d55dce-7ff6be79-prepare",
+                "namespace": "vmweave-test-b",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "vmweave.io/v1alpha1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "SharedMemoryChannel",
+                        "name": "dp-dev-20261105",
+                        "uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d"
+                    }
+                ],
+                "resourceVersion": "30570865",
+                "uid": "b8d84d73-037b-4d58-81d5-a0c7f6c0a101"
+            },
+            "spec": {
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "command": [
+                            "sh",
+                            "-ec",
+                            "if test -f /opt/vmweave/control/provision.py; then exec python3 /opt/vmweave/control/provision.py \"$@\"; else exec python3 /opt/flyt/control/provision.py \"$@\"; fi",
+                            "vmweave-control",
+                            "--root",
+                            "/flyt-channel",
+                            "--allocation",
+                            "7ff6be790c683170cf35fea97ac43594",
+                            "--generation",
+                            "db174209b64acadeec57080fd0fbec98",
+                            "--uid",
+                            "107",
+                            "--gid",
+                            "107",
+                            "--session",
+                            "7f0b46b4f13c099a42f2ca4cb2abd975"
+                        ],
+                        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "main",
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/flyt-channel",
+                                "name": "channel"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "gpu-4",
+                "nodeSelector": {
+                    "kubernetes.io/hostname": "gpu-4"
+                },
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Never",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 107,
+                    "runAsGroup": 107,
+                    "runAsUser": 107
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "channel",
+                        "persistentVolumeClaim": {
+                            "claimName": "dp-dev-20261105-shm"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-08T09:17:53Z",
+                        "message": "no pod sandbox exists",
+                        "observedGeneration": 1,
+                        "reason": "PodSandboxNotReady",
+                        "status": "False",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-08T09:17:50Z",
+                        "observedGeneration": 1,
+                        "reason": "PodCompleted",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-08T09:17:52Z",
+                        "observedGeneration": 1,
+                        "reason": "PodCompleted",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-08T09:17:52Z",
+                        "observedGeneration": 1,
+                        "reason": "PodCompleted",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-08T09:17:50Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "cri-o://5d7eeb53e1a1574e1b1eee6ef4cfea21810c14fbc7af9b93687939b7a515a3b2",
+                        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+                        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+                        "lastState": {},
+                        "name": "main",
+                        "ready": false,
+                        "resources": {},
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "terminated": {
+                                "containerID": "cri-o://5d7eeb53e1a1574e1b1eee6ef4cfea21810c14fbc7af9b93687939b7a515a3b2",
+                                "exitCode": 0,
+                                "finishedAt": "2026-11-08T09:17:52Z",
+                                "reason": "Completed",
+                                "startedAt": "2026-11-08T09:17:51Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 107,
+                                "supplementalGroups": [
+                                    107
+                                ],
+                                "uid": 107
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/flyt-channel",
+                                "name": "channel"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "192.168.24.21",
+                "hostIPs": [
+                    {
+                        "ip": "192.168.24.21"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Succeeded",
+                "qosClass": "BestEffort",
+                "resources": {},
+                "startTime": "2026-11-08T09:17:50Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "descheduler.alpha.kubernetes.io/request-evict-only": "",
+                    "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:f096a1dc0620d129926a2c5ad368b6d189f91e0125accda65a20085b14031882\",\"pvc\":{\"name\":\"dp-dev-20261105-shm\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+                    "istio.io/reroute-virtual-interfaces": "k6t-eth0",
+                    "kubectl.kubernetes.io/default-container": "compute",
+                    "kubevirt.io/domain": "dp-dev-20261105",
+                    "kubevirt.io/memory-overhead-bytes": "322961408",
+                    "kubevirt.io/migrationTransportUnix": "true",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/vm-generation": "34",
+                    "post.hook.backup.velero.io/command": "[\"/usr/bin/virt-freezer\", \"--unfreeze\", \"--name\", \"dp-dev-20261105\", \"--namespace\", \"vmweave-test-b\"]",
+                    "post.hook.backup.velero.io/container": "compute",
+                    "pre.hook.backup.velero.io/command": "[\"/usr/bin/virt-freezer\", \"--freeze\", \"--name\", \"dp-dev-20261105\", \"--namespace\", \"vmweave-test-b\"]",
+                    "pre.hook.backup.velero.io/container": "compute",
+                    "pre.hook.backup.velero.io/timeout": "60s",
+                    "traffic.sidecar.istio.io/kubevirtInterfaces": "k6t-eth0",
+                    "vmweave.io/detach-channel-uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d",
+                    "vmweave.io/shm-allocation": "7ff6be790c683170cf35fea97ac43594",
+                    "vmweave.io/shm-channel": "dp-dev-20261105",
+                    "vmweave.io/shm-channel-uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d",
+                    "vmweave.io/shm-generation": "db174209b64acadeec57080fd0fbec98"
+                },
+                "creationTimestamp": "2026-11-08T09:18:06Z",
+                "deletionGracePeriodSeconds": 0,
+                "deletionTimestamp": "2026-11-13T05:16:11Z",
+                "finalizers": [
+                    "vmweave.io/detach-observation"
+                ],
+                "generateName": "virt-launcher-dp-dev-20261105-",
+                "generation": 2,
+                "labels": {
+                    "device-plugin-test": "dp-dev-20261105",
+                    "kubevirt.io": "virt-launcher",
+                    "kubevirt.io/created-by": "bfda6bea-5eef-4bf3-bfc1-4072e11d4b91",
+                    "kubevirt.io/nodeName": "gpu-4",
+                    "vm.kubevirt.io/name": "dp-dev-20261105",
+                    "vmi.kubevirt.io/id": "dp-dev-20261105"
+                },
+                "name": "virt-launcher-dp-dev-20261105-gq4sq",
+                "namespace": "vmweave-test-b",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachineInstance",
+                        "name": "dp-dev-20261105",
+                        "uid": "bfda6bea-5eef-4bf3-bfc1-4072e11d4b91"
+                    }
+                ],
+                "resourceVersion": "30574064",
+                "uid": "533d2cc2-be6c-4717-80b2-a20aeda3aeed"
+            },
+            "spec": {
+                "affinity": {
+                    "nodeAffinity": {
+                        "requiredDuringSchedulingIgnoredDuringExecution": {
+                            "nodeSelectorTerms": [
+                                {
+                                    "matchExpressions": [
+                                        {
+                                            "key": "node-labeller.kubevirt.io/obsolete-host-model",
+                                            "operator": "DoesNotExist"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "command": [
+                            "/usr/bin/virt-launcher-monitor",
+                            "--qemu-timeout",
+                            "321s",
+                            "--name",
+                            "dp-dev-20261105",
+                            "--uid",
+                            "bfda6bea-5eef-4bf3-bfc1-4072e11d4b91",
+                            "--namespace",
+                            "vmweave-test-b",
+                            "--kubevirt-share-dir",
+                            "/var/run/kubevirt",
+                            "--ephemeral-disk-dir",
+                            "/var/run/kubevirt-ephemeral-disks",
+                            "--container-disk-dir",
+                            "/var/run/kubevirt/container-disks",
+                            "--grace-period-seconds",
+                            "45",
+                            "--hook-sidecars",
+                            "1",
+                            "--ovmf-path",
+                            "/usr/share/edk2/ovmf",
+                            "--disk-memory-limit",
+                            "2097152000",
+                            "--hypervisor",
+                            "kvm",
+                            "--run-as-nonroot",
+                            "--image-volume",
+                            "--libvirt-hook-server-and-client",
+                            "--upgrade-ordinal-ifaces"
+                        ],
+                        "env": [
+                            {
+                                "name": "XDG_CACHE_HOME",
+                                "value": "/var/run/kubevirt-private"
+                            },
+                            {
+                                "name": "XDG_CONFIG_HOME",
+                                "value": "/var/run/kubevirt-private"
+                            },
+                            {
+                                "name": "XDG_RUNTIME_DIR",
+                                "value": "/var/run"
+                            },
+                            {
+                                "name": "POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            }
+                        ],
+                        "image": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "compute",
+                        "resources": {
+                            "limits": {
+                                "devices.kubevirt.io/kvm": "1",
+                                "devices.kubevirt.io/tun": "1",
+                                "devices.kubevirt.io/vhost-net": "1"
+                            },
+                            "requests": {
+                                "cpu": "400m",
+                                "devices.kubevirt.io/kvm": "1",
+                                "devices.kubevirt.io/tun": "1",
+                                "devices.kubevirt.io/vhost-net": "1",
+                                "ephemeral-storage": "50M",
+                                "memory": "8500Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "add": [
+                                    "NET_BIND_SERVICE"
+                                ],
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "runAsGroup": 107,
+                            "runAsNonRoot": true,
+                            "runAsUser": 107
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "FallbackToLogsOnError",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/kubevirt-private",
+                                "name": "private"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt",
+                                "name": "public"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt-ephemeral-disks",
+                                "name": "ephemeral-disks"
+                            },
+                            {
+                                "mountPath": "/var/run/libvirt",
+                                "name": "libvirt-runtime"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt/sockets",
+                                "name": "sockets"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt-private/vmi-disks/root",
+                                "name": "root"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt-hooks",
+                                "name": "hook-sidecar-sockets"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt/hotplug-disks",
+                                "mountPropagation": "HostToContainer",
+                                "name": "hotplug-disks"
+                            },
+                            {
+                                "mountPath": "/var/run/flyt-channel",
+                                "name": "dp-dev-20261105-shm"
+                            }
+                        ]
+                    },
+                    {
+                        "args": [
+                            "--version",
+                            "v1alpha2"
+                        ],
+                        "env": [
+                            {
+                                "name": "XDG_CACHE_HOME",
+                                "value": "/var/run/kubevirt-private"
+                            },
+                            {
+                                "name": "XDG_CONFIG_HOME",
+                                "value": "/var/run/kubevirt-private"
+                            },
+                            {
+                                "name": "XDG_RUNTIME_DIR",
+                                "value": "/var/run"
+                            },
+                            {
+                                "name": "CONTAINER_NAME",
+                                "value": "hook-sidecar-0"
+                            }
+                        ],
+                        "image": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:f096a1dc0620d129926a2c5ad368b6d189f91e0125accda65a20085b14031882",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "hook-sidecar-0",
+                        "resources": {},
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "runAsGroup": 107,
+                            "runAsNonRoot": true,
+                            "runAsUser": 107
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "FallbackToLogsOnError",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/kubevirt-hooks",
+                                "name": "hook-sidecar-sockets",
+                                "subPath": "hook-sidecar-0"
+                            },
+                            {
+                                "mountPath": "/flyt-channel",
+                                "name": "dp-dev-20261105-shm"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": false,
+                "hostname": "dp-dev-20261105",
+                "initContainers": [
+                    {
+                        "args": [
+                            "--logfile",
+                            "/var/run/kubevirt-private/bfda6bea-5eef-4bf3-bfc1-4072e11d4b91/virt-serial0-log"
+                        ],
+                        "command": [
+                            "/usr/bin/virt-tail"
+                        ],
+                        "env": [
+                            {
+                                "name": "VIRT_LAUNCHER_LOG_VERBOSITY",
+                                "value": "2"
+                            }
+                        ],
+                        "image": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "guest-console-log",
+                        "resources": {
+                            "limits": {
+                                "cpu": "15m",
+                                "memory": "60M"
+                            },
+                            "requests": {
+                                "cpu": "5m",
+                                "memory": "35M"
+                            }
+                        },
+                        "restartPolicy": "Always",
+                        "securityContext": {
+                            "allowPrivilegeEscalation": false,
+                            "capabilities": {
+                                "drop": [
+                                    "ALL"
+                                ]
+                            },
+                            "runAsNonRoot": true,
+                            "runAsUser": 107
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/kubevirt-private",
+                                "name": "private",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "nodeName": "gpu-4",
+                "nodeSelector": {
+                    "kubernetes.io/arch": "amd64",
+                    "kubernetes.io/hostname": "gpu-4",
+                    "kubevirt.io/schedulable": "true",
+                    "machine-type.node.kubevirt.io/q35": "true"
+                },
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "readinessGates": [
+                    {
+                        "conditionType": "kubevirt.io/virtual-machine-unpaused"
+                    }
+                ],
+                "restartPolicy": "Never",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 107,
+                    "runAsGroup": 107,
+                    "runAsNonRoot": true,
+                    "runAsUser": 107
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 60,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "emptyDir": {},
+                        "name": "private"
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "public"
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "sockets"
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "virt-bin-share-dir"
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "libvirt-runtime"
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "ephemeral-disks"
+                    },
+                    {
+                        "name": "root",
+                        "persistentVolumeClaim": {
+                            "claimName": "dp-dev-20261105-root"
+                        }
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "hook-sidecar-sockets"
+                    },
+                    {
+                        "emptyDir": {},
+                        "name": "hotplug-disks"
+                    },
+                    {
+                        "name": "dp-dev-20261105-shm",
+                        "persistentVolumeClaim": {
+                            "claimName": "dp-dev-20261105-shm"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "allocatedResources": {
+                    "cpu": "405m",
+                    "devices.kubevirt.io/kvm": "1",
+                    "devices.kubevirt.io/tun": "1",
+                    "devices.kubevirt.io/vhost-net": "1",
+                    "ephemeral-storage": "50M",
+                    "memory": "8947896k"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": "2026-11-08T09:18:06Z",
+                        "lastTransitionTime": "2026-11-08T09:18:06Z",
+                        "message": "the virtual machine is not paused",
+                        "reason": "NotPaused",
+                        "status": "True",
+                        "type": "kubevirt.io/virtual-machine-unpaused"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T05:15:32Z",
+                        "message": "no pod sandbox exists",
+                        "observedGeneration": 1,
+                        "reason": "PodSandboxNotReady",
+                        "status": "False",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T05:15:32Z",
+                        "message": "containers with incomplete status: [guest-console-log]",
+                        "observedGeneration": 1,
+                        "reason": "ContainersNotInitialized",
+                        "status": "False",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T05:15:32Z",
+                        "observedGeneration": 1,
+                        "reason": "PodFailed",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T05:15:32Z",
+                        "observedGeneration": 1,
+                        "reason": "PodFailed",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T05:15:32Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "allocatedResourcesStatus": [
+                            {
+                                "name": "devices.kubevirt.io/tun",
+                                "resources": [
+                                    {
+                                        "health": "Healthy",
+                                        "resourceID": "tun970"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "devices.kubevirt.io/vhost-net",
+                                "resources": [
+                                    {
+                                        "health": "Healthy",
+                                        "resourceID": "vhost-net876"
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "devices.kubevirt.io/kvm",
+                                "resources": [
+                                    {
+                                        "health": "Healthy",
+                                        "resourceID": "kvm618"
+                                    }
+                                ]
+                            }
+                        ],
+                        "image": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "compute",
+                        "ready": false,
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "waiting": {
+                                "reason": "PodInitializing"
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/kubevirt-private",
+                                "name": "private"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt",
+                                "name": "public"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt-ephemeral-disks",
+                                "name": "ephemeral-disks"
+                            },
+                            {
+                                "mountPath": "/var/run/libvirt",
+                                "name": "libvirt-runtime"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt/sockets",
+                                "name": "sockets"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt-private/vmi-disks/root",
+                                "name": "root"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt-hooks",
+                                "name": "hook-sidecar-sockets"
+                            },
+                            {
+                                "mountPath": "/var/run/kubevirt/hotplug-disks",
+                                "name": "hotplug-disks"
+                            },
+                            {
+                                "mountPath": "/var/run/flyt-channel",
+                                "name": "dp-dev-20261105-shm"
+                            }
+                        ]
+                    },
+                    {
+                        "image": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:f096a1dc0620d129926a2c5ad368b6d189f91e0125accda65a20085b14031882",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "hook-sidecar-0",
+                        "ready": false,
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "waiting": {
+                                "reason": "PodInitializing"
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/kubevirt-hooks",
+                                "name": "hook-sidecar-sockets"
+                            },
+                            {
+                                "mountPath": "/flyt-channel",
+                                "name": "dp-dev-20261105-shm"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "192.168.24.21",
+                "hostIPs": [
+                    {
+                        "ip": "192.168.24.21"
+                    }
+                ],
+                "initContainerStatuses": [
+                    {
+                        "image": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "guest-console-log",
+                        "ready": false,
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "terminated": {
+                                "exitCode": 137,
+                                "finishedAt": null,
+                                "message": "The container could not be located when the pod was terminated",
+                                "reason": "ContainerStatusUnknown",
+                                "startedAt": null
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/kubevirt-private",
+                                "name": "private",
+                                "readOnly": true,
+                                "recursiveReadOnly": "Disabled"
+                            }
+                        ]
+                    }
+                ],
+                "message": "Pod was rejected: Allocate failed due to no healthy devices present; cannot allocate unhealthy devices devices.kubevirt.io/kvm, which is unexpected",
+                "observedGeneration": 1,
+                "phase": "Failed",
+                "qosClass": "Burstable",
+                "reason": "UnexpectedAdmissionError",
+                "resources": {
+                    "limits": {
+                        "cpu": "15m",
+                        "devices.kubevirt.io/kvm": "1",
+                        "devices.kubevirt.io/tun": "1",
+                        "devices.kubevirt.io/vhost-net": "1",
+                        "memory": "60M"
+                    },
+                    "requests": {
+                        "cpu": "405m",
+                        "devices.kubevirt.io/kvm": "1",
+                        "devices.kubevirt.io/tun": "1",
+                        "devices.kubevirt.io/vhost-net": "1",
+                        "ephemeral-storage": "50M",
+                        "memory": "8947896k"
+                    }
+                },
+                "startTime": "2026-11-08T09:18:06Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

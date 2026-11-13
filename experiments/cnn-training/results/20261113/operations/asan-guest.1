@@ -1,0 +1,32 @@
+==1==AddressSanitizer: failed to intercept '__isoc99_printf'
+'==1==AddressSanitizer: failed to intercept '__isoc99_sprintf'
+'==1==AddressSanitizer: failed to intercept '__isoc99_snprintf'
+'==1==AddressSanitizer: failed to intercept '__isoc99_fprintf'
+'==1==AddressSanitizer: failed to intercept '__isoc99_vprintf'
+'==1==AddressSanitizer: failed to intercept '__isoc99_vsprintf'
+'==1==AddressSanitizer: failed to intercept '__isoc99_vsnprintf'
+'==1==AddressSanitizer: failed to intercept '__isoc99_vfprintf'
+'==1==AddressSanitizer: failed to intercept 'pthread_mutexattr_getrobust_np'
+'==1==AddressSanitizer: failed to intercept 'xdr_quad_t'
+'==1==AddressSanitizer: failed to intercept 'xdr_u_quad_t'
+'==1==AddressSanitizer: failed to intercept 'xdr_destroy'
+'==1==AddressSanitizer: failed to intercept 'crypt'
+'==1==AddressSanitizer: failed to intercept 'crypt_r'
+'==1==AddressSanitizer: libc interceptors initialized
+|| `[0x10007fff8000, 0x7fffffffffff]` || HighMem    ||
+|| `[0x02008fff7000, 0x10007fff7fff]` || HighShadow ||
+|| `[0x00008fff7000, 0x02008fff6fff]` || ShadowGap  ||
+|| `[0x00007fff8000, 0x00008fff6fff]` || LowShadow  ||
+|| `[0x000000000000, 0x00007fff7fff]` || LowMem     ||
+MemToShadow(shadow): 0x00008fff7000 0x000091ff6dff 0x004091ff6e00 0x02008fff6fff
+redzone=16
+max_redzone=2048
+quarantine_size_mb=256M
+thread_local_quarantine_size_kb=1024K
+malloc_context_size=30
+SHADOW_SCALE: 3
+SHADOW_GRANULARITY: 8
+SHADOW_OFFSET: 0x7fff8000
+==1==Installed the sigaction for signal 11
+==1==Installed the sigaction for signal 7
+==1==Installed the sigaction for signal 8

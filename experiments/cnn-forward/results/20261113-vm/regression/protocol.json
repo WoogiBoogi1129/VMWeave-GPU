@@ -1,0 +1,32 @@
+{
+  "namespace": "rnn-default-cnn-20261113",
+  "runID": "rnn-default-cnn-20261113",
+  "template": "experiments/device-plugin-pytorch/results/20261106-official/torch-gpu-compat/submitted.json",
+  "templateSHA256": "1a8ee6d340ad543e7fdc4ab453e047dc70a4c4c407a955583dea4c042b2835fe",
+  "sourceSHA256": {
+    "supervise.py": "970464502baa09fce72e342a3c8d196e488772e4f6562069c5b40da1dfdffdbd",
+    "probe.py": "c518a2e5e9a9a1dc311103052de90d5f0c6781cf03e2083634f16e66185fe5f3",
+    "mnist.b64": "662119a6c5940892f4a3844aed29b9338c8f6aea69a19bf1960473b757115cb7"
+  },
+  "seed": 20261108,
+  "rtol": 0.0001,
+  "atol": 1e-06,
+  "inputShape": [
+    16,
+    28,
+    28
+  ],
+  "lstm": {
+    "hidden": 32,
+    "layers": 1
+  },
+  "steps": 5,
+  "cudnn": true,
+  "cublasLt": true,
+  "timeoutSeconds": 120,
+  "continuousTimeoutSeconds": 900,
+  "continuousSteps": 128,
+  "resumeStep": 32,
+  "benchmark": false,
+  "cpuFallback": false
+}

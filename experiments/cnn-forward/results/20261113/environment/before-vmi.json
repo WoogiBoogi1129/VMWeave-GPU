@@ -1,0 +1,240 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachineInstance",
+            "metadata": {
+                "annotations": {
+                    "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:f096a1dc0620d129926a2c5ad368b6d189f91e0125accda65a20085b14031882\",\"pvc\":{\"name\":\"dp-dev-20261105-shm\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/pci-topology-version": "v3",
+                    "kubevirt.io/storage-observed-api-version": "v1",
+                    "kubevirt.io/vm-generation": "34",
+                    "vmweave.io/shm-allocation": "7ff6be790c683170cf35fea97ac43594",
+                    "vmweave.io/shm-channel": "dp-dev-20261105",
+                    "vmweave.io/shm-channel-uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d",
+                    "vmweave.io/shm-generation": "db174209b64acadeec57080fd0fbec98"
+                },
+                "creationTimestamp": "2026-11-08T09:18:06Z",
+                "deletionGracePeriodSeconds": 0,
+                "deletionTimestamp": "2026-11-13T05:16:11Z",
+                "finalizers": [
+                    "kubevirt.io/foregroundDeleteVirtualMachine"
+                ],
+                "generation": 11,
+                "labels": {
+                    "device-plugin-test": "dp-dev-20261105",
+                    "kubevirt.io/nodeName": "gpu-4"
+                },
+                "name": "dp-dev-20261105",
+                "namespace": "vmweave-test-b",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "dp-dev-20261105",
+                        "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+                    }
+                ],
+                "resourceVersion": "30574071",
+                "uid": "bfda6bea-5eef-4bf3-bfc1-4072e11d4b91"
+            },
+            "spec": {
+                "architecture": "amd64",
+                "domain": {
+                    "cpu": {
+                        "cores": 4,
+                        "model": "host-model"
+                    },
+                    "devices": {
+                        "disks": [
+                            {
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "root"
+                            },
+                            {
+                                "disk": {
+                                    "bus": "virtio"
+                                },
+                                "name": "cloudinit"
+                            }
+                        ],
+                        "interfaces": [
+                            {
+                                "macAddress": "92:47:c8:12:65:01",
+                                "masquerade": {},
+                                "name": "default"
+                            }
+                        ]
+                    },
+                    "features": {
+                        "acpi": {
+                            "enabled": true
+                        }
+                    },
+                    "firmware": {
+                        "serial": "896ede69-7974-4d91-9302-344326d08d2d",
+                        "uuid": "35510481-e0a3-4add-8664-8740f60bcb56"
+                    },
+                    "machine": {
+                        "type": "q35"
+                    },
+                    "memory": {
+                        "guest": "8Gi",
+                        "maxGuest": "32Gi"
+                    },
+                    "resources": {
+                        "requests": {
+                            "memory": "8Gi"
+                        }
+                    }
+                },
+                "evictionStrategy": "None",
+                "networks": [
+                    {
+                        "name": "default",
+                        "pod": {}
+                    }
+                ],
+                "nodeSelector": {
+                    "kubernetes.io/hostname": "gpu-4"
+                },
+                "volumes": [
+                    {
+                        "name": "root",
+                        "persistentVolumeClaim": {
+                            "claimName": "dp-dev-20261105-root"
+                        }
+                    },
+                    {
+                        "cloudInitNoCloud": {
+                            "userData": "#cloud-config\nhostname: dp-dev-20261105\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKQ3HIwT6sWlQIpP1fLoMotzjqP+j3aUZil0lVXBsrjB ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n# vmweave-layout-b64: f/a+eQxoMXDPNf6pesQ1lNsXQgm2Ssre7FcID9D77JgAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH8LRrTxPAmaQvLKTLKr2XUAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+                        },
+                        "name": "cloudinit"
+                    }
+                ]
+            },
+            "status": {
+                "activePods": {
+                    "533d2cc2-be6c-4717-80b2-a20aeda3aeed": "gpu-4"
+                },
+                "conditions": [
+                    {
+                        "lastProbeTime": "2026-11-13T05:16:10Z",
+                        "lastTransitionTime": "2026-11-13T05:16:10Z",
+                        "message": "virt-launcher pod is terminating",
+                        "reason": "PodTerminating",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "cannot migrate VMI: PVC dp-dev-20261105-root is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+                        "reason": "DisksNotLiveMigratable",
+                        "status": "False",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "StorageLiveMigratable"
+                    }
+                ],
+                "currentCPUTopology": {
+                    "cores": 4
+                },
+                "guestOSInfo": {},
+                "interfaces": [
+                    {
+                        "infoSource": "domain",
+                        "ipAddress": "10.85.0.165",
+                        "ipAddresses": [
+                            "10.85.0.165"
+                        ],
+                        "linkState": "up",
+                        "mac": "92:47:c8:12:65:01",
+                        "name": "default",
+                        "podInterfaceName": "eth0",
+                        "queueCount": 1
+                    }
+                ],
+                "launcherContainerImageVersion": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+                "machine": {
+                    "type": "pc-q35-rhel9.8.0"
+                },
+                "memory": {
+                    "guestAtBoot": "8Gi",
+                    "guestCurrent": "8Gi",
+                    "guestRequested": "8Gi",
+                    "memoryOverhead": "308Mi"
+                },
+                "migrationMethod": "BlockMigration",
+                "migrationTransport": "Unix",
+                "nodeName": "gpu-4",
+                "phase": "Failed",
+                "phaseTransitionTimestamps": [
+                    {
+                        "phase": "Pending",
+                        "phaseTransitionTimestamp": "2026-11-08T09:18:06Z"
+                    },
+                    {
+                        "phase": "Scheduling",
+                        "phaseTransitionTimestamp": "2026-11-08T09:18:06Z"
+                    },
+                    {
+                        "phase": "Scheduled",
+                        "phaseTransitionTimestamp": "2026-11-08T09:18:10Z"
+                    },
+                    {
+                        "phase": "Running",
+                        "phaseTransitionTimestamp": "2026-11-08T09:18:13Z"
+                    },
+                    {
+                        "phase": "Failed",
+                        "phaseTransitionTimestamp": "2026-11-13T05:16:11Z"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "runtimeUser": 107,
+                "selinuxContext": "none",
+                "virtualMachineRevisionName": "revision-start-vm-8cb50e87-ceb8-4a35-a92b-fc997bcba16d-34",
+                "volumeStatus": [
+                    {
+                        "name": "cloudinit",
+                        "size": 1048576,
+                        "target": ""
+                    },
+                    {
+                        "name": "root",
+                        "persistentVolumeClaimInfo": {
+                            "accessModes": [
+                                "ReadWriteOnce"
+                            ],
+                            "capacity": {
+                                "storage": "50Gi"
+                            },
+                            "claimName": "dp-dev-20261105-root",
+                            "filesystemOverhead": "0.055",
+                            "requests": {
+                                "storage": "50Gi"
+                            },
+                            "volumeMode": "Filesystem"
+                        },
+                        "target": ""
+                    }
+                ]
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

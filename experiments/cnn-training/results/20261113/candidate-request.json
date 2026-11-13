@@ -1,0 +1,28 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "GPURequest",
+  "metadata": {
+    "creationTimestamp": "2026-11-13T07:39:36Z",
+    "generation": 1,
+    "labels": {
+      "experiment": "cnn-training-20261113"
+    },
+    "name": "dp-dev-20261105-cnntrain1113-candidate",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "30659280",
+    "uid": "d9cf3c09-1226-447b-aa56-b62f10673211"
+  },
+  "spec": {
+    "compute": 25,
+    "count": 1,
+    "memory": "1024Mi",
+    "profileRef": {
+      "name": "dp-dev-20261105-cnntrain1113-candidate",
+      "uid": "1acaae55-cfbc-4111-ba9d-46786f069ea6"
+    },
+    "vmRef": {
+      "name": "dp-dev-20261105",
+      "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+    }
+  }
+}

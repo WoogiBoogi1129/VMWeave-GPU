@@ -1,0 +1,413 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "creationTimestamp": "2026-11-13T08:19:40Z",
+    "generation": 1,
+    "labels": {
+      "vmweave-experiment": "cnn-model-20261113"
+    },
+    "name": "candidate-pool",
+    "namespace": "cnn-model-20261113",
+    "resourceVersion": "644640",
+    "uid": "9c84f4bb-4063-446b-8e03-3a8cef0c175a"
+  },
+  "spec": {
+    "activeDeadlineSeconds": 480,
+    "automountServiceAccountToken": false,
+    "containers": [
+      {
+        "args": [
+          "export LD_LIBRARY_PATH=\"/opt/vmweave/adapter${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}\"; exec python -u /work/supervise.py --mode gpu --backend legacy --case pool"
+        ],
+        "command": [
+          "/bin/sh",
+          "-ec"
+        ],
+        "env": [
+          {
+            "name": "HOME",
+            "value": "/tmp"
+          },
+          {
+            "name": "PYTHONDONTWRITEBYTECODE",
+            "value": "1"
+          },
+          {
+            "name": "LD_PRELOAD",
+            "value": "/opt/vmweave/adapter/libvmweave_guest.so"
+          },
+          {
+            "name": "VMWEAVE_MIRROR_DEVICE_VA",
+            "value": "1"
+          },
+          {
+            "name": "PYTHONFAULTHANDLER",
+            "value": "1"
+          },
+          {
+            "name": "CNN_LOADER_TRACE",
+            "value": "0"
+          },
+          {
+            "name": "PYTHONFAULTHANDLER",
+            "value": "1"
+          }
+        ],
+        "image": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "pytorch",
+        "resources": {
+          "limits": {
+            "cpu": "2",
+            "memory": "3Gi",
+            "vmweave.io/gpu": "1"
+          },
+          "requests": {
+            "cpu": "500m",
+            "memory": "1Gi",
+            "vmweave.io/gpu": "1"
+          }
+        },
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          },
+          "readOnlyRootFilesystem": true
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "code",
+            "readOnly": true
+          },
+          {
+            "mountPath": "/results",
+            "name": "results"
+          },
+          {
+            "mountPath": "/tmp",
+            "name": "tmp"
+          },
+          {
+            "mountPath": "/opt/vmweave/adapter",
+            "name": "adapter",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "initContainers": [
+      {
+        "args": [
+          "cp /candidate/libvmweave_guest.so /adapter/; cd /adapter; echo '8715f4dd369a4783cbbc4f33f0d4b9e4bc5cae238387adc962df58f3fc4fc1f7  libvmweave_guest.so' | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so"
+        ],
+        "command": [
+          "sh",
+          "-ec"
+        ],
+        "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:131bb669cc7bd092de6dc49f9ec2289cf19b3ea152614cad984e08da35407681",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "guest-adapter",
+        "resources": {
+          "limits": {
+            "cpu": "200m",
+            "memory": "64Mi"
+          },
+          "requests": {
+            "cpu": "10m",
+            "memory": "32Mi"
+          }
+        },
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          },
+          "readOnlyRootFilesystem": true
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/adapter",
+            "name": "adapter"
+          },
+          {
+            "mountPath": "/candidate",
+            "name": "candidate",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "nodeName": "dp-dev-20261105",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "dp-dev-20261105"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "restartPolicy": "Never",
+    "schedulerName": "default-scheduler",
+    "securityContext": {
+      "fsGroup": 1000,
+      "runAsGroup": 1000,
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      },
+      "supplementalGroups": [
+        998
+      ]
+    },
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "terminationGracePeriodSeconds": 10,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "configMap": {
+          "defaultMode": 420,
+          "name": "code-candidate-pool"
+        },
+        "name": "code"
+      },
+      {
+        "emptyDir": {},
+        "name": "results"
+      },
+      {
+        "emptyDir": {},
+        "name": "tmp"
+      },
+      {
+        "emptyDir": {},
+        "name": "adapter"
+      },
+      {
+        "configMap": {
+          "defaultMode": 420,
+          "name": "guest-candidate-pool"
+        },
+        "name": "candidate"
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T08:19:50Z",
+        "observedGeneration": 1,
+        "status": "False",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T08:19:41Z",
+        "observedGeneration": 1,
+        "reason": "PodCompleted",
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T08:19:49Z",
+        "observedGeneration": 1,
+        "reason": "PodCompleted",
+        "status": "False",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T08:19:49Z",
+        "observedGeneration": 1,
+        "reason": "PodCompleted",
+        "status": "False",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-13T08:19:40Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "500m",
+          "memory": "1Gi",
+          "vmweave.io/gpu": "1"
+        },
+        "containerID": "cri-o://a9b679f651a0f46000185c1c0ee82d6b7ed46c5eb77638fc40b2d02dbe06009f",
+        "image": "localhost/var/tmp/vmweave-official-20261106:latest",
+        "imageID": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+        "lastState": {},
+        "name": "pytorch",
+        "ready": false,
+        "resources": {
+          "limits": {
+            "cpu": "2",
+            "memory": "3Gi",
+            "vmweave.io/gpu": "1"
+          },
+          "requests": {
+            "cpu": "500m",
+            "memory": "1Gi",
+            "vmweave.io/gpu": "1"
+          }
+        },
+        "restartCount": 0,
+        "started": false,
+        "state": {
+          "terminated": {
+            "containerID": "cri-o://a9b679f651a0f46000185c1c0ee82d6b7ed46c5eb77638fc40b2d02dbe06009f",
+            "exitCode": 0,
+            "finishedAt": "2026-11-13T08:19:48Z",
+            "reason": "Completed",
+            "startedAt": "2026-11-13T08:19:41Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 1000,
+            "supplementalGroups": [
+              1000,
+              4,
+              20,
+              24,
+              25,
+              27,
+              29,
+              30,
+              44,
+              46,
+              998
+            ],
+            "uid": 1000
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "code",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          },
+          {
+            "mountPath": "/results",
+            "name": "results"
+          },
+          {
+            "mountPath": "/tmp",
+            "name": "tmp"
+          },
+          {
+            "mountPath": "/opt/vmweave/adapter",
+            "name": "adapter",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "hostIP": "10.0.2.2",
+    "hostIPs": [
+      {
+        "ip": "10.0.2.2"
+      }
+    ],
+    "initContainerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "10m",
+          "memory": "32Mi"
+        },
+        "containerID": "cri-o://7a37e8219468c57229ecc08d9b4019b8991a3067792eddcd7484ee7cf124d649",
+        "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest:device-plugin-v0.1.1",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:131bb669cc7bd092de6dc49f9ec2289cf19b3ea152614cad984e08da35407681",
+        "lastState": {},
+        "name": "guest-adapter",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "cpu": "200m",
+            "memory": "64Mi"
+          },
+          "requests": {
+            "cpu": "10m",
+            "memory": "32Mi"
+          }
+        },
+        "restartCount": 0,
+        "started": false,
+        "state": {
+          "terminated": {
+            "containerID": "cri-o://7a37e8219468c57229ecc08d9b4019b8991a3067792eddcd7484ee7cf124d649",
+            "exitCode": 0,
+            "finishedAt": "2026-11-13T08:19:40Z",
+            "reason": "Completed",
+            "startedAt": "2026-11-13T08:19:40Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 1000,
+            "supplementalGroups": [
+              1000,
+              998
+            ],
+            "uid": 1000
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/adapter",
+            "name": "adapter"
+          },
+          {
+            "mountPath": "/candidate",
+            "name": "candidate",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Succeeded",
+    "podIP": "10.242.0.16",
+    "podIPs": [
+      {
+        "ip": "10.242.0.16"
+      }
+    ],
+    "qosClass": "Burstable",
+    "startTime": "2026-11-13T08:19:40Z"
+  }
+}

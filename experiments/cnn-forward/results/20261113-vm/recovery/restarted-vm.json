@@ -1,0 +1,154 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "kubevirt.io/v1",
+            "kind": "VirtualMachine",
+            "metadata": {
+                "annotations": {
+                    "kubevirt.io/latest-observed-api-version": "v1",
+                    "kubevirt.io/storage-observed-api-version": "v1"
+                },
+                "creationTimestamp": "2026-11-05T06:58:53Z",
+                "finalizers": [
+                    "kubevirt.io/virtualMachineControllerFinalize"
+                ],
+                "generation": 37,
+                "name": "dp-dev-20261105",
+                "namespace": "vmweave-test-b",
+                "resourceVersion": "30626491",
+                "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+            },
+            "spec": {
+                "runStrategy": "Always",
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "hooks.kubevirt.io/hookSidecars": "[{\"args\":[\"--version\",\"v1alpha2\"],\"image\":\"ghcr.io/woogiboogi1129/vmweave-hook@sha256:f096a1dc0620d129926a2c5ad368b6d189f91e0125accda65a20085b14031882\",\"pvc\":{\"name\":\"dp-dev-20261105-shm\",\"sharedComputePath\":\"/var/run/flyt-channel\",\"volumePath\":\"/flyt-channel\"}}]",
+                            "kubevirt.io/pci-topology-version": "v3",
+                            "vmweave.io/shm-allocation": "618ebbc3e97bb4435a4e218f98404cb5",
+                            "vmweave.io/shm-channel": "dp-dev-20261105",
+                            "vmweave.io/shm-channel-uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d",
+                            "vmweave.io/shm-generation": "7d75456ac890a795b49c339820d6aa16"
+                        },
+                        "labels": {
+                            "device-plugin-test": "dp-dev-20261105"
+                        }
+                    },
+                    "spec": {
+                        "architecture": "amd64",
+                        "domain": {
+                            "cpu": {
+                                "cores": 4
+                            },
+                            "devices": {
+                                "disks": [
+                                    {
+                                        "disk": {
+                                            "bus": "virtio"
+                                        },
+                                        "name": "root"
+                                    },
+                                    {
+                                        "disk": {
+                                            "bus": "virtio"
+                                        },
+                                        "name": "cloudinit"
+                                    }
+                                ],
+                                "interfaces": [
+                                    {
+                                        "macAddress": "92:47:c8:12:65:01",
+                                        "masquerade": {},
+                                        "name": "default"
+                                    }
+                                ]
+                            },
+                            "firmware": {
+                                "serial": "896ede69-7974-4d91-9302-344326d08d2d",
+                                "uuid": "35510481-e0a3-4add-8664-8740f60bcb56"
+                            },
+                            "machine": {
+                                "type": "q35"
+                            },
+                            "resources": {
+                                "requests": {
+                                    "memory": "8Gi"
+                                }
+                            }
+                        },
+                        "networks": [
+                            {
+                                "name": "default",
+                                "pod": {}
+                            }
+                        ],
+                        "nodeSelector": {
+                            "kubernetes.io/hostname": "gpu-4"
+                        },
+                        "volumes": [
+                            {
+                                "name": "root",
+                                "persistentVolumeClaim": {
+                                    "claimName": "dp-dev-20261105-root"
+                                }
+                            },
+                            {
+                                "cloudInitNoCloud": {
+                                    "userData": "#cloud-config\nhostname: dp-dev-20261105\nmanage_etc_hosts: true\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n    ssh_authorized_keys:\n      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKQ3HIwT6sWlQIpP1fLoMotzjqP+j3aUZil0lVXBsrjB ubuntu@gpu-4\ngrowpart:\n  mode: auto\n  devices: [\"/\"]\nresize_rootfs: true\n# vmweave-layout-b64: YY67w+l7tENaTiGPmEBMtX11RWrIkKeVtJwzmCDWqhYAAAAEAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJUqTwgZGA8iwexOXh3nxvwAEAAAAAAAAEAAAAAAAAAAgDAAAAAAAABAAAAAAAAAAABRAAAAAAAAAAAQAQAAAAAAURABAAAAAAAAEAEAAAAA\n"
+                                },
+                                "name": "cloudinit"
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T06:44:07Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "message": "cannot migrate VMI: PVC dp-dev-20261105-root is not shared, live migration requires that all PVCs must be shared (using ReadWriteMany access mode)",
+                        "reason": "DisksNotLiveMigratable",
+                        "status": "False",
+                        "type": "LiveMigratable"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": null,
+                        "status": "True",
+                        "type": "StorageLiveMigratable"
+                    }
+                ],
+                "created": true,
+                "desiredGeneration": 37,
+                "observedGeneration": 37,
+                "printableStatus": "Running",
+                "ready": true,
+                "runStrategy": "Always",
+                "volumeSnapshotStatuses": [
+                    {
+                        "enabled": false,
+                        "name": "root",
+                        "reason": "No VolumeSnapshotClass: Volume snapshots are not configured for this StorageClass [] [root]"
+                    },
+                    {
+                        "enabled": false,
+                        "name": "cloudinit",
+                        "reason": "Snapshot is not supported for this volumeSource type [cloudinit]"
+                    }
+                ]
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

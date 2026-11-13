@@ -293,3 +293,203 @@ cublasStatus_t cublasLtMatmul(cublasLtHandle_t handle,cublasLtMatmulDesc_t desc,
  if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
  done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
 }
+cudnnStatus_t cudnnCreateFilterDescriptor(cudnnFilterDescriptor_t *desc){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!desc) BAD;
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnCreateFilterDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*desc=(cudnnFilterDescriptor_t)(uintptr_t)GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnDestroyFilterDescriptor(cudnnFilterDescriptor_t desc){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ PUT(0,desc);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnDestroyFilterDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnCreateConvolutionDescriptor(cudnnConvolutionDescriptor_t *desc){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!desc) BAD;
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnCreateConvolutionDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*desc=(cudnnConvolutionDescriptor_t)(uintptr_t)GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnDestroyConvolutionDescriptor(cudnnConvolutionDescriptor_t desc){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ PUT(0,desc);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnDestroyConvolutionDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnSetFilterNdDescriptor(cudnnFilterDescriptor_t desc,cudnnDataType_t type,cudnnTensorFormat_t format,int n,const int dims[]){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!dims) BAD; if(type!=CUDNN_DATA_FLOAT||format!=CUDNN_TENSOR_NCHW||n!=4) UNSUP; PUT(0,desc);PUT(1,type);PUT(2,format);PUT(3,n);for(int i=0;i<4;i++){if(dims[i]<1) BAD;PUT(4+i,dims[i]);}
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnSetFilterNdDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetFilterNdDescriptor(cudnnFilterDescriptor_t desc,int requested,cudnnDataType_t *type,cudnnTensorFormat_t *format,int *n,int dims[]){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(requested<4||requested>8||!type||!format||!n||!dims) BAD;PUT(0,desc);PUT(1,requested);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetFilterNdDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*type=GET(0);*format=GET(1);*n=GET(2);for(int i=0;i<requested;i++)dims[i]=GET(3+i);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnSetConvolutionNdDescriptor(cudnnConvolutionDescriptor_t desc,int n,const int pad[],const int stride[],const int dilation[],cudnnConvolutionMode_t mode,cudnnDataType_t type){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!pad||!stride||!dilation) BAD;if(n!=2||mode!=CUDNN_CROSS_CORRELATION||type!=CUDNN_DATA_FLOAT) UNSUP;PUT(0,desc);PUT(1,n);PUT(2,mode);PUT(3,type);for(int i=0;i<2;i++){if(pad[i]<0||stride[i]<1) BAD;if(dilation[i]!=1) UNSUP;PUT(4+i,pad[i]);PUT(6+i,stride[i]);PUT(8+i,dilation[i]);}
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnSetConvolutionNdDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionNdDescriptor(cudnnConvolutionDescriptor_t desc,int requested,int *n,int pad[],int stride[],int dilation[],cudnnConvolutionMode_t *mode,cudnnDataType_t *type){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(requested<2||requested>8||!n||!pad||!stride||!dilation||!mode||!type) BAD;PUT(0,desc);PUT(1,requested);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionNdDescriptor,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*n=GET(0);*mode=GET(1);*type=GET(2);for(int i=0;i<requested;i++){pad[i]=GET(3+i);stride[i]=GET(11+i);dilation[i]=GET(19+i);};}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnSetConvolutionGroupCount(cudnnConvolutionDescriptor_t desc,int value){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!(value==1)) UNSUP;PUT(0,desc);PUT(1,value);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnSetConvolutionGroupCount,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionGroupCount(cudnnConvolutionDescriptor_t desc,int *value){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!value) BAD;PUT(0,desc);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionGroupCount,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*value=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnSetConvolutionMathType(cudnnConvolutionDescriptor_t desc,cudnnMathType_t value){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!(value==CUDNN_DEFAULT_MATH||value==CUDNN_FMA_MATH)) UNSUP;PUT(0,desc);PUT(1,value);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnSetConvolutionMathType,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionMathType(cudnnConvolutionDescriptor_t desc,cudnnMathType_t *value){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!value) BAD;PUT(0,desc);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionMathType,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*value=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionNdForwardOutputDim(cudnnConvolutionDescriptor_t conv,cudnnTensorDescriptor_t x,cudnnFilterDescriptor_t w,int n,int dims[]){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(n!=4||!dims) BAD;PUT(0,conv);PUT(1,x);PUT(2,w);PUT(3,n);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionNdForwardOutputDim,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}for(int i=0;i<4;i++)dims[i]=GET(i);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionForwardAlgorithmMaxCount(cudnnHandle_t handle,int *count){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!count) BAD;PUT(0,handle);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionForwardAlgorithmMaxCount,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*count=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionForwardAlgorithm_v7(cudnnHandle_t handle,cudnnTensorDescriptor_t xd,cudnnFilterDescriptor_t wd,cudnnConvolutionDescriptor_t cd,cudnnTensorDescriptor_t yd,int requested,int *returned,cudnnConvolutionFwdAlgoPerf_t perf[]){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(requested<1||requested>8||!returned||!perf) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,requested);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionForwardAlgorithm_v7,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}if(GET(0)>(uint64_t)requested) BAD;*returned=GET(0);for(int i=0;i<*returned;i++){memset(&perf[i],0,sizeof(perf[i]));perf[i].algo=GET(1+6*i);perf[i].status=GET(2+6*i);memcpy(&perf[i].time,out+8*(3+6*i),4);perf[i].memory=GET(4+6*i);perf[i].determinism=GET(5+6*i);perf[i].mathType=GET(6+6*i);};}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionForwardWorkspaceSize(cudnnHandle_t handle,cudnnTensorDescriptor_t xd,cudnnFilterDescriptor_t wd,cudnnConvolutionDescriptor_t cd,cudnnTensorDescriptor_t yd,cudnnConvolutionFwdAlgo_t algo,size_t *bytes){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!bytes) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,algo);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionForwardWorkspaceSize,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*bytes=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnConvolutionForward(cudnnHandle_t handle,const void *alpha,cudnnTensorDescriptor_t xd,const void *input,cudnnFilterDescriptor_t wd,const void *weights,cudnnConvolutionDescriptor_t cd,cudnnConvolutionFwdAlgo_t algo,void *workspace,size_t bytes,const void *beta,cudnnTensorDescriptor_t yd,void *output){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!alpha||!beta) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,algo);PUT(6,bytes);memcpy(p+56,alpha,4);memcpy(p+64,beta,4);REF(9,input,0);REF(11,weights,0);REF(13,output,0);REF(15,workspace,bytes);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnConvolutionForward,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionBackwardDataAlgorithmMaxCount(cudnnHandle_t handle,int *count){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!count) BAD;PUT(0,handle);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionBackwardDataAlgorithmMaxCount,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*count=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionBackwardDataAlgorithm_v7(cudnnHandle_t handle,cudnnFilterDescriptor_t wd,cudnnTensorDescriptor_t yd,cudnnConvolutionDescriptor_t cd,cudnnTensorDescriptor_t xd,int requested,int *returned,cudnnConvolutionBwdDataAlgoPerf_t perf[]){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(requested<1||requested>8||!returned||!perf) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,requested);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionBackwardDataAlgorithm_v7,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}if(GET(0)>(uint64_t)requested) BAD;*returned=GET(0);for(int i=0;i<*returned;i++){memset(&perf[i],0,sizeof(perf[i]));perf[i].algo=GET(1+6*i);perf[i].status=GET(2+6*i);memcpy(&perf[i].time,out+8*(3+6*i),4);perf[i].memory=GET(4+6*i);perf[i].determinism=GET(5+6*i);perf[i].mathType=GET(6+6*i);};}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionBackwardDataWorkspaceSize(cudnnHandle_t handle,cudnnFilterDescriptor_t wd,cudnnTensorDescriptor_t yd,cudnnConvolutionDescriptor_t cd,cudnnTensorDescriptor_t xd,cudnnConvolutionBwdDataAlgo_t algo,size_t *bytes){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!bytes) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,algo);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionBackwardDataWorkspaceSize,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*bytes=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnConvolutionBackwardData(cudnnHandle_t handle,const void *alpha,cudnnFilterDescriptor_t wd,const void *weights,cudnnTensorDescriptor_t yd,const void *dy,cudnnConvolutionDescriptor_t cd,cudnnConvolutionBwdDataAlgo_t algo,void *workspace,size_t bytes,const void *beta,cudnnTensorDescriptor_t xd,void *dx){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!alpha||!beta) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,algo);PUT(6,bytes);memcpy(p+56,alpha,4);memcpy(p+64,beta,4);REF(9,dx,0);REF(11,weights,0);REF(13,dy,0);REF(15,workspace,bytes);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnConvolutionBackwardData,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionBackwardFilterAlgorithmMaxCount(cudnnHandle_t handle,int *count){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!count) BAD;PUT(0,handle);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionBackwardFilterAlgorithmMaxCount,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*count=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionBackwardFilterAlgorithm_v7(cudnnHandle_t handle,cudnnTensorDescriptor_t xd,cudnnTensorDescriptor_t yd,cudnnConvolutionDescriptor_t cd,cudnnFilterDescriptor_t wd,int requested,int *returned,cudnnConvolutionBwdFilterAlgoPerf_t perf[]){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(requested<1||requested>8||!returned||!perf) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,requested);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionBackwardFilterAlgorithm_v7,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}if(GET(0)>(uint64_t)requested) BAD;*returned=GET(0);for(int i=0;i<*returned;i++){memset(&perf[i],0,sizeof(perf[i]));perf[i].algo=GET(1+6*i);perf[i].status=GET(2+6*i);memcpy(&perf[i].time,out+8*(3+6*i),4);perf[i].memory=GET(4+6*i);perf[i].determinism=GET(5+6*i);perf[i].mathType=GET(6+6*i);};}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnGetConvolutionBackwardFilterWorkspaceSize(cudnnHandle_t handle,cudnnTensorDescriptor_t xd,cudnnTensorDescriptor_t yd,cudnnConvolutionDescriptor_t cd,cudnnFilterDescriptor_t wd,cudnnConvolutionBwdFilterAlgo_t algo,size_t *bytes){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!bytes) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,algo);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnGetConvolutionBackwardFilterWorkspaceSize,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}*bytes=GET(0);}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}
+cudnnStatus_t cudnnConvolutionBackwardFilter(cudnnHandle_t handle,const void *alpha,cudnnTensorDescriptor_t xd,const void *input,cudnnTensorDescriptor_t yd,const void *dy,cudnnConvolutionDescriptor_t cd,cudnnConvolutionBwdFilterAlgo_t algo,void *workspace,size_t bytes,const void *beta,cudnnFilterDescriptor_t wd,void *dw){
+ uint8_t p[VMWEAVE_LIBRARY_REQUEST]={0},out[VMWEAVE_LIBRARY_RESPONSE];size_t got=0;int rc=0,bad=CUDNN_STATUS_BAD_PARAM,unsupported=CUDNN_STATUS_NOT_SUPPORTED;pthread_mutex_lock(&vmweave_guest_lock);
+ if(!alpha||!beta) BAD;PUT(0,handle);PUT(1,xd);PUT(2,wd);PUT(3,cd);PUT(4,yd);PUT(5,algo);PUT(6,bytes);memcpy(p+56,alpha,4);memcpy(p+64,beta,4);REF(9,input,0);REF(11,dw,0);REF(13,dy,0);REF(15,workspace,bytes);
+ rc=vmweave_guest_exchange(VMWEAVE_LIB_cudnnConvolutionBackwardFilter,p,sizeof(p),out,sizeof(out),&got);
+ if(rc==999)rc=CUDNN_STATUS_INTERNAL_ERROR;else if(rc==801)rc=unsupported;
+ if(!rc){if(got!=sizeof(out)){rc=bad;goto done;}}
+ done:pthread_mutex_unlock(&vmweave_guest_lock);return rc;
+}

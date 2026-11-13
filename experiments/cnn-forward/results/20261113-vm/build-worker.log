@@ -1,0 +1,8 @@
+STEP 1/3: FROM ghcr.io/woogiboogi1129/vmweave-worker@sha256:efb17db71fbf9e1b497fce5cdd60e7a121d5e5d25d470bfda44cc38b34f926ca
+STEP 2/3: COPY vmweave-shm-worker vmweave-shm-session-worker /opt/vmweave/bin/
+--> ce0183991eb8
+STEP 3/3: ENV VMWEAVE_LIBRARY_TRACE=1
+COMMIT localhost/vmweave-worker:cnn-forward-20261113-v1
+--> ace675423037
+Successfully tagged localhost/vmweave-worker:cnn-forward-20261113-v1
+ace675423037197c1942437d791e1ddac10fe60799ab97322ad9783568bc77d8

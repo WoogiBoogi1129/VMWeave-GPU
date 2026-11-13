@@ -1,0 +1,10 @@
+Fatal Python error: Segmentation fault
+
+Current thread 0x00007ffb14bbe800 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py", line 548 in _conv_forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py", line 553 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1779 in _wrapped_call_impl
+  File "/work/probe.py", line 101 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special (total: 13)

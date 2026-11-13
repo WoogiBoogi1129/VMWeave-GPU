@@ -41,3 +41,58 @@ jobs:
           owner="${GITHUB_REPOSITORY_OWNER,,}"
           printf '%s' "$GH_TOKEN" | helm registry login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
           helm push /tmp/charts/*.tgz "oci://ghcr.io/${owner}/charts"
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: chart
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4.3.0
+        with: {version: v3.17.3}
+      - name: Collect published images and chart
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v skopeo || { sudo apt-get update; sudo apt-get install -y skopeo; }
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          printf '%s' "$GH_TOKEN" | skopeo login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          printf '%s' "$GH_TOKEN" | helm registry login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          mkdir -p /tmp/release
+          # Image workflows run independently; require every digest to identify this commit.
+          for attempt in $(seq 1 120); do
+            if python3 scripts/operator/release-manifest.py --repository "ghcr.io/$owner" \
+              --tag "$RELEASE_TAG" --source-revision "$GITHUB_SHA" --include-dra \
+              --output /tmp/release/images.json; then break; fi
+            sleep 15
+          done
+          test -s /tmp/release/images.json
+          helm pull "oci://ghcr.io/$owner/charts/vmweave-operator" \
+            --version "${RELEASE_TAG#v}" --destination /tmp/release \
+            > /tmp/release/chart-pull.txt 2>&1
+          (cd /tmp/release; sha256sum images.json chart-pull.txt *.tgz > SHA256SUMS)
+      - name: Publish verified runtime release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          guide="docs/getting-started/release-${RELEASE_TAG}.md"
+          test -s "$guide"
+          {
+            echo "Published paired VMWeave Guest/Worker images and Operator Helm chart."
+            echo
+            echo "Installation, scope and limitations: https://github.com/$GH_REPO/blob/$GITHUB_SHA/$guide"
+            echo
+            echo "images.json pins all image digests and their source revision. Verify SHA256SUMS. Live deployment validation is recorded separately in deploy/releases/."
+          } > /tmp/notes.md
+          gh release create "$RELEASE_TAG" --verify-tag --latest \
+            --title "VMWeave $RELEASE_TAG" --notes-file /tmp/notes.md /tmp/release/*

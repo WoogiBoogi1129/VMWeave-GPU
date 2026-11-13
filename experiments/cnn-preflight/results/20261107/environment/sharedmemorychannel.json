@@ -1,0 +1,70 @@
+{
+    "apiVersion": "vmweave.io/v1alpha1",
+    "kind": "SharedMemoryChannel",
+    "metadata": {
+        "creationTimestamp": "2026-11-05T07:12:14Z",
+        "finalizers": [
+            "vmweave.io/shm-detach"
+        ],
+        "generation": 1,
+        "name": "dp-dev-20261105",
+        "namespace": "vmweave-test-b",
+        "ownerReferences": [
+            {
+                "apiVersion": "kubevirt.io/v1",
+                "controller": true,
+                "kind": "VirtualMachine",
+                "name": "dp-dev-20261105",
+                "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+            }
+        ],
+        "resourceVersion": "26332315",
+        "uid": "04f5fc84-21a7-4679-94c9-5085304627d4"
+    },
+    "spec": {
+        "drain": false,
+        "gid": 107,
+        "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:6e8099281376e250097850397a6e570932a867dd2e146b839045c8e87b9dacb6",
+        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:c8a9f80e5169877c23b71902b5cb40e64bd740d4e49600f52a4849d15f23979a",
+        "lifecycle": "VM",
+        "pvcRef": {
+            "name": "dp-dev-20261105-shm",
+            "uid": "2623b5bf-61c7-42c6-beb5-99c464ef63e7"
+        },
+        "requestRef": {
+            "name": "dp-dev-20261105",
+            "uid": "26a2352e-68f3-484e-8261-021a31abfbb3"
+        },
+        "sessions": 1,
+        "uid": 107,
+        "vmRef": {
+            "name": "dp-dev-20261105",
+            "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+        },
+        "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:e2139218e2abc9efa5b5537e8ca7d7567e5dbbe8bc9a40df42f89820894386ad"
+    },
+    "status": {
+        "allocation": "52f84e282104af4789d49754e4a50dc4",
+        "backend": "hami",
+        "claimName": "",
+        "claimUID": "",
+        "completion": null,
+        "compute": 25,
+        "everBound": true,
+        "generation": "7edb7a071287c034c183de88bb845912",
+        "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+        "memoryMiB": 1024,
+        "nodeName": "gpu-4",
+        "phase": "Ready",
+        "profileGeneration": 1,
+        "reason": "MappingACK",
+        "reclamation": null,
+        "requestGeneration": 1,
+        "resourcePrefix": "dp-dev-20261105-04f5fc8421a7-52f84e28",
+        "sessions": [
+            "5b41b7a866b609675a4e30669fafc5f0"
+        ],
+        "vmiUID": "d2025e7e-2d54-4ed8-8337-872ceb2b76e7",
+        "workerPodUID": "ba5c1d43-c27c-40ff-a410-560162ecbab9"
+    }
+}

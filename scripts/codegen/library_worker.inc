@@ -5,14 +5,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-enum {TENSOR=1,DROPOUT,RNN,RNNDATA,LT,LAYOUT,MATMUL,PREF};
+enum {TENSOR=1,DROPOUT,RNN,RNNDATA,LT,LAYOUT,MATMUL,PREF,FILTER,CONV};
 static struct {uint64_t id;int kind;void *ptr;size_t bytes;struct vmweave_device_ref ref;} objects[4096];
 static uint64_t next_object=UINT64_C(0x5000000000000001);
 static int object_index(uint64_t id){for(int i=0;i<4096;i++)if(id&&objects[i].id==id)return i;return -1;}
 static void *get_object(uint64_t id,int kind){int i=object_index(id);return i>=0&&objects[i].kind==kind?objects[i].ptr:NULL;}
 static void drop_object(uint64_t id){int i=object_index(id);if(i>=0)memset(objects+i,0,sizeof(objects[i]));}
 static int destroy_object(int kind,void *ptr);
-static int save_object(int kind,void *ptr,uint8_t *out){if(next_object!=UINT64_MAX)for(int i=0;i<4096;i++)if(!objects[i].id){objects[i].id=next_object++;objects[i].kind=kind;objects[i].ptr=ptr;vmweave_put(out,objects[i].id,8);return 0;}destroy_object(kind,ptr);return kind>=LT?CUBLAS_STATUS_ALLOC_FAILED:CUDNN_STATUS_ALLOC_FAILED;}
+static int save_object(int kind,void *ptr,uint8_t *out){if(next_object!=UINT64_MAX)for(int i=0;i<4096;i++)if(!objects[i].id){objects[i].id=next_object++;objects[i].kind=kind;objects[i].ptr=ptr;vmweave_put(out,objects[i].id,8);return 0;}destroy_object(kind,ptr);return kind>=LT&&kind<=PREF?CUBLAS_STATUS_ALLOC_FAILED:CUDNN_STATUS_ALLOC_FAILED;}
 static size_t object_bytes(uint64_t id){int i=object_index(id);return i<0?SIZE_MAX:objects[i].bytes;}
 static void object_size(uint64_t id,size_t bytes){int i=object_index(id);if(i>=0)objects[i].bytes=bytes;}
 static int checked_rnn_bytes(uint64_t seq,uint64_t batch,uint64_t vector,size_t *bytes){if(!seq||!batch||!vector||seq>INT32_MAX||batch>1024||vector>INT32_MAX||seq>SIZE_MAX/batch||seq*batch>SIZE_MAX/vector||seq*batch*vector>SIZE_MAX/4)return 0;*bytes=seq*batch*vector*4;return 1;}
@@ -27,8 +27,47 @@ static int device_ptr(struct vmweave_cuda_session *s,const uint8_t *p,int index,
 #define DNN(i,v) void *v=vmweave_compat_dnn(A(i));if(!v) BAD
 #define STREAM(i,v) void *v=NULL;if(!vmweave_async_stream(A(i),&v)) BAD
 #define DEV(i,n,optional,v) void *v=NULL;if(!device_ptr(s,p,i,n,optional,&v)) BAD
-static int destroy_object(int kind,void *ptr){switch(kind){case TENSOR:return cudnnDestroyTensorDescriptor(ptr);case DROPOUT:return cudnnDestroyDropoutDescriptor(ptr);case RNN:return cudnnDestroyRNNDescriptor(ptr);case RNNDATA:return cudnnDestroyRNNDataDescriptor(ptr);case LT:return cublasLtDestroy(ptr);case LAYOUT:return cublasLtMatrixLayoutDestroy(ptr);case MATMUL:return cublasLtMatmulDescDestroy(ptr);case PREF:return cublasLtMatmulPreferenceDestroy(ptr);default:return -1;}}
+static int destroy_object(int kind,void *ptr){switch(kind){case TENSOR:return cudnnDestroyTensorDescriptor(ptr);case DROPOUT:return cudnnDestroyDropoutDescriptor(ptr);case RNN:return cudnnDestroyRNNDescriptor(ptr);case RNNDATA:return cudnnDestroyRNNDataDescriptor(ptr);case LT:return cublasLtDestroy(ptr);case LAYOUT:return cublasLtMatrixLayoutDestroy(ptr);case MATMUL:return cublasLtMatmulDescDestroy(ptr);case PREF:return cublasLtMatmulPreferenceDestroy(ptr);case FILTER:return cudnnDestroyFilterDescriptor(ptr);case CONV:return cudnnDestroyConvolutionDescriptor(ptr);default:return -1;}}
 int vmweave_library_close(void){int rc=0;for(int i=0;i<4096;i++)if(objects[i].id){if(destroy_object(objects[i].kind,objects[i].ptr))rc=-1;else memset(objects+i,0,sizeof(objects[i]));}return rc;}
+
+/* Re-query native descriptors: reject uninitialized/unsupported layouts before
+ * interpreting FP32 scalars or resolving any device allocation. */
+static size_t filter_bytes(void *w){
+    int n=0,dims[4];cudnnDataType_t type;cudnnTensorFormat_t format;
+    if(cudnnGetFilterNdDescriptor(w,4,&type,&format,&n,dims)||n!=4||
+       type!=CUDNN_DATA_FLOAT||format!=CUDNN_TENSOR_NCHW)return SIZE_MAX;
+    size_t bytes=4;
+    for(int i=0;i<4;i++){if(dims[i]<1||(size_t)dims[i]>SIZE_MAX/bytes)return SIZE_MAX;bytes*=dims[i];}
+    return bytes;
+}
+static int nchw_float(void *t){
+    int n=0,dims[4],strides[4];cudnnDataType_t type;
+    if(cudnnGetTensorNdDescriptor(t,4,&type,&n,dims,strides)||n!=4||type!=CUDNN_DATA_FLOAT)return 0;
+    size_t stride=1;
+    for(int i=3;i>=0;i--){
+        if(dims[i]<1||strides[i]<1||(size_t)strides[i]!=stride||(size_t)dims[i]>SIZE_MAX/stride)return 0;
+        stride*=dims[i];
+    }
+    return stride<=SIZE_MAX/4;
+}
+static int conv_input_valid(void *x,void *w,void *c){
+    int n=0,pad[2],stride[2],dilation[2],groups;
+    cudnnConvolutionMode_t mode;cudnnDataType_t type;cudnnMathType_t math;
+    if(!nchw_float(x)||filter_bytes(w)==SIZE_MAX||
+       cudnnGetConvolutionNdDescriptor(c,2,&n,pad,stride,dilation,&mode,&type)||
+       cudnnGetConvolutionGroupCount(c,&groups)||cudnnGetConvolutionMathType(c,&math))return 0;
+    return n==2&&pad[0]>=0&&pad[1]>=0&&stride[0]>0&&stride[1]>0&&
+        dilation[0]==1&&dilation[1]==1&&groups==1&&mode==CUDNN_CROSS_CORRELATION&&
+        type==CUDNN_DATA_FLOAT&&(math==CUDNN_DEFAULT_MATH||math==CUDNN_FMA_MATH);
+}
+static int conv_valid(void *x,void *w,void *c,void *y){
+    if(!conv_input_valid(x,w,c)||!nchw_float(y))return 0;
+    int expected[4],dims[4],strides[4],n;cudnnDataType_t type;
+    if(cudnnGetConvolutionNdForwardOutputDim(c,x,w,4,expected)||
+       cudnnGetTensorNdDescriptor(y,4,&type,&n,dims,strides))return 0;
+    for(int i=0;i<4;i++)if(expected[i]!=dims[i])return 0;
+    return 1;
+}
 
 
 static int layout_bytes(uint64_t rows,uint64_t cols,uint64_t ld,size_t *bytes){if(!rows||!cols||ld<rows||ld>INT64_MAX||cols>INT64_MAX||rows>INT64_MAX||ld>SIZE_MAX/cols||ld*cols>SIZE_MAX/4)return 0;*bytes=((cols-1)*ld+rows)*4;return 1;}

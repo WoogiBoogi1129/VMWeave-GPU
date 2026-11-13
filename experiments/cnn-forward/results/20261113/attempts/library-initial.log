@@ -1,0 +1,4 @@
+PASS: malformed packets, descriptor round-trip, wrong/stale handles, unsupported types, cleanup
+PASS: optional size outputs, null-output rejection, truncated response preserves caller storage
+library-conv-test: tests/library_rpc/conv_validation.c:66: main: Assertion `CALL(cudnnGetConvolutionNdDescriptor)==0' failed.
+tests/library_rpc/run.sh: line 12:    28 Aborted                 (core dumped) "$build/library-conv-test"

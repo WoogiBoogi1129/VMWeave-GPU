@@ -1,0 +1,34 @@
+{"stage": "environment", "torch": "2.11.0+cu128", "cuda": "12.8", "cudnn": 90800, "mode": "gpu", "backend": "legacy", "case": "minimal", "rtol": 0.0001, "atol": 1e-06}
+{"stage": "configuration", "label": "b1-s1-p1-d1"}
+{"stage": "forward_start", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "forward_done", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "backward_start", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "backward_done", "device": "cpu", "step": 1, "micro": 0}
+{"stage": "step_done", "device": "cpu", "step": 1, "optimizer_updated": true}
+{"stage": "forward_start", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "forward_done", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "backward_start", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "backward_done", "device": "cpu", "step": 2, "micro": 0}
+{"stage": "step_done", "device": "cpu", "step": 2, "optimizer_updated": true}
+{"stage": "forward_start", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "forward_done", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "backward_start", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "backward_done", "device": "cpu", "step": 3, "micro": 0}
+{"stage": "step_done", "device": "cpu", "step": 3, "optimizer_updated": true}
+{"stage": "forward_start", "device": "cuda", "step": 1, "micro": 0}
+{"stage": "forward_done", "device": "cuda", "step": 1, "micro": 0}
+{"stage": "backward_start", "device": "cuda", "step": 1, "micro": 0}
+Fatal Python error: Segmentation fault
+
+Current thread 0x00007f248fbb76c0 (most recent call first):
+  <no Python frame>
+
+Thread 0x00007f25bae15800 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/graph.py", line 869 in _engine_run_backward
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/__init__.py", line 381 in backward
+  File "/usr/local/lib/python3.12/dist-packages/torch/_tensor.py", line 631 in backward
+  File "/work/probe.py", line 50 in run
+  File "/work/probe.py", line 88 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._pcg64, numpy.random._generator, numpy.random._mt19937, numpy.random._philox, numpy.random._sfc64, numpy.random.mtrand (total: 22)
+CNN_EXIT {"returncode": -11, "signal": 11, "timeout": false}

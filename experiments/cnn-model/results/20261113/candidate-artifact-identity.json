@@ -1,0 +1,31 @@
+{
+  "baseCommit": "5aa12fa208a1d51ec6f7c59efe42ab7123f72d28",
+  "workerImage": "localhost/vmweave-worker@sha256:3160d982083b45d47b5c81cdb0899798b838f20f59175320a4de631b599828f2",
+  "guestLibrarySHA256": "8715f4dd369a4783cbbc4f33f0d4b9e4bc5cae238387adc962df58f3fc4fc1f7",
+  "binarySHA256": {
+    "libvmweave_guest.so": "8715f4dd369a4783cbbc4f33f0d4b9e4bc5cae238387adc962df58f3fc4fc1f7",
+    "vmweave-shm-worker": "0df17fc728d2bd676fc7a159b6a869b8dc8cfdd5d56dabae01a24252a5504aa7",
+    "vmweave-shm-session-worker": "87eb6c98182f7ef8eec74c2da079df18e62346c6fec8d72948a1a864ff0952ea"
+  },
+  "sourceSHA256": {
+    "scripts/codegen/library_conv_backward.py": "75134cce0ee51260f1395adc27ec11149a210193c04f60f6c86e4cdd47a267b0",
+    "scripts/codegen/library_conv.py": "8e447f7eb46d176310d29fd1682707e9b26a0cabd4885d4f5f021028f327b63d",
+    "scripts/codegen/library_rpc.py": "a7a22f2ba8bb1cb972ddc888cf7b457bfbae2ffdf3a64a2df40a493dd5d9e5b6",
+    "scripts/codegen/library_worker.inc": "27582f8e91de429dad5bb53105de87982ba2235e3585613a542c8bf877ced49e",
+    "runtime/shm/src/guest_library.c": "72125fdd02d2e42784fb78927b2c14f5a1894b61ed5cd5c01ef07d102cf085f7",
+    "runtime/shm/src/library.c": "5ee32d27a47ac3c281c7ac4efc136d8131b02687a798d694f52bf2a409f78e33",
+    "runtime/shm/include/vmweave_library.h": "3d985899d23b8e2cbac87663a42ef9ee43c8701e1c37ea6144d64cbe51e5034f",
+    "tests/library_rpc/conv_backward_validation.c": "fa1f5441dd3bdc69f6f25b7fce2d423139e337067292900a450290d32bb1fb33",
+    "tests/library_rpc/conv_guest_validation.c": "5b34454827103af5dfaaed893809fcfec59c7c64c42c1f5a2b4beb5943fed00b",
+    "tests/library_rpc/conv_validation.c": "2ad4c1d21af3cc5abd5f515ae01206777ec31a40c20291954f28598d559a3ae6",
+    "tests/library_rpc/run.sh": "c09e251e9e0526c54824c6ecc8bc5659d5bedc8d91a36d181ceee25b11ebe8f8",
+    "experiments/cnn-training/workloads/probe.py": "75a53fa3cc20cb8124cc97e95d73e91befe651cf7d6e16a0e59f6fc31c28661d",
+    "experiments/cnn-training/workloads/supervise.py": "aa99acfe59ebff7ba9152d6418b6fa573936f6966d37f3cafca935c280dce679",
+    "experiments/cnn-training/runner/run.py": "2ad4c55f66f2810e0aa0665a7cf2f87c4cf3b3cafc3616f0abb0598d6a294f11",
+    "experiments/cnn-forward/runner/run.py": "f2cf6af70cba7e41cd9d85da35ca99eeaca0903ed4dfa2521c6003886155d6a1",
+    "experiments/cnn-training/audit_tensors.py": "5ce43f9517d5160340077ea2c0102dae0dc3d122eae7380cace09f8a59ce2493",
+    "experiments/cnn-training/validate.py": "0b58d0175a5fbe9b840faa482b3cce8d20193b91e0ca2f5ede5046d753192ad8",
+    "experiments/cnn-training/README.md": "5decbe50866f4c5c2f788e4f66d8b91a619ba64bb01be699e858e27a1d4a4357",
+    "runtime/shm/API_SUPPORT.md": "fa89651050fe7c8f75dfe1535b1d49196978d564eedc815f9a6bc987807c5d5e"
+  }
+}

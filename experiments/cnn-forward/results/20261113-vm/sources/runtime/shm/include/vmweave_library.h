@@ -1,0 +1,65 @@
+#ifndef VMWEAVE_LIBRARY_H
+#define VMWEAVE_LIBRARY_H
+#include "vmweave_compat.h"
+#define VMWEAVE_LIBRARY_REQUEST 4608u
+#define VMWEAVE_LIBRARY_RESPONSE 512u
+void *vmweave_compat_dnn(uint64_t id);
+void *vmweave_compat_blas(uint64_t id);
+int vmweave_async_stream_id(void *stream,uint64_t *id);
+int vmweave_library_dispatch(struct vmweave_cuda_session *,const struct vmweave_shm_request *,struct vmweave_shm_response *);
+int vmweave_library_close(void);
+enum {
+VMWEAVE_LIB_cudnnCreateTensorDescriptor=0x3300,
+VMWEAVE_LIB_cudnnDestroyTensorDescriptor=0x3301,
+VMWEAVE_LIB_cudnnCreateDropoutDescriptor=0x3302,
+VMWEAVE_LIB_cudnnDestroyDropoutDescriptor=0x3303,
+VMWEAVE_LIB_cudnnCreateRNNDescriptor=0x3304,
+VMWEAVE_LIB_cudnnDestroyRNNDescriptor=0x3305,
+VMWEAVE_LIB_cudnnCreateRNNDataDescriptor=0x3306,
+VMWEAVE_LIB_cudnnDestroyRNNDataDescriptor=0x3307,
+VMWEAVE_LIB_cudnnSetStream=0x3308,
+VMWEAVE_LIB_cudnnGetStream=0x3309,
+VMWEAVE_LIB_cudnnSetTensorNdDescriptor=0x330a,
+VMWEAVE_LIB_cudnnGetTensorNdDescriptor=0x330b,
+VMWEAVE_LIB_cudnnSetDropoutDescriptor=0x330c,
+VMWEAVE_LIB_cudnnRestoreDropoutDescriptor=0x330d,
+VMWEAVE_LIB_cudnnDropoutGetStatesSize=0x330e,
+VMWEAVE_LIB_cudnnSetRNNDescriptor_v8=0x330f,
+VMWEAVE_LIB_cudnnSetRNNDataDescriptor=0x3310,
+VMWEAVE_LIB_cudnnGetRNNWeightSpaceSize=0x3311,
+VMWEAVE_LIB_cudnnGetRNNTempSpaceSizes=0x3312,
+VMWEAVE_LIB_cudnnGetRNNWeightParams=0x3313,
+VMWEAVE_LIB_cudnnRNNForward=0x3314,
+VMWEAVE_LIB_cudnnRNNBackwardData_v8=0x3315,
+VMWEAVE_LIB_cudnnRNNBackwardWeights_v8=0x3316,
+VMWEAVE_LIB_cublasLtCreate=0x3317,
+VMWEAVE_LIB_cublasLtDestroy=0x3318,
+VMWEAVE_LIB_cublasLtMatrixLayoutDestroy=0x3319,
+VMWEAVE_LIB_cublasLtMatmulDescDestroy=0x331a,
+VMWEAVE_LIB_cublasLtMatmulPreferenceDestroy=0x331b,
+VMWEAVE_LIB_cublasLtMatrixLayoutCreate=0x331c,
+VMWEAVE_LIB_cublasLtMatmulDescCreate=0x331d,
+VMWEAVE_LIB_cublasLtMatmulPreferenceCreate=0x331e,
+VMWEAVE_LIB_cublasLtMatmulDescSetAttribute=0x331f,
+VMWEAVE_LIB_cublasLtMatmulPreferenceSetAttribute=0x3320,
+VMWEAVE_LIB_cublasLtMatmulAlgoGetHeuristic=0x3321,
+VMWEAVE_LIB_cublasLtMatmul=0x3322,
+VMWEAVE_LIB_cudnnCreateFilterDescriptor=0x3323,
+VMWEAVE_LIB_cudnnDestroyFilterDescriptor=0x3324,
+VMWEAVE_LIB_cudnnCreateConvolutionDescriptor=0x3325,
+VMWEAVE_LIB_cudnnDestroyConvolutionDescriptor=0x3326,
+VMWEAVE_LIB_cudnnSetFilterNdDescriptor=0x3327,
+VMWEAVE_LIB_cudnnGetFilterNdDescriptor=0x3328,
+VMWEAVE_LIB_cudnnSetConvolutionNdDescriptor=0x3329,
+VMWEAVE_LIB_cudnnGetConvolutionNdDescriptor=0x332a,
+VMWEAVE_LIB_cudnnSetConvolutionGroupCount=0x332b,
+VMWEAVE_LIB_cudnnGetConvolutionGroupCount=0x332c,
+VMWEAVE_LIB_cudnnSetConvolutionMathType=0x332d,
+VMWEAVE_LIB_cudnnGetConvolutionMathType=0x332e,
+VMWEAVE_LIB_cudnnGetConvolutionNdForwardOutputDim=0x332f,
+VMWEAVE_LIB_cudnnGetConvolutionForwardAlgorithmMaxCount=0x3330,
+VMWEAVE_LIB_cudnnGetConvolutionForwardAlgorithm_v7=0x3331,
+VMWEAVE_LIB_cudnnGetConvolutionForwardWorkspaceSize=0x3332,
+VMWEAVE_LIB_cudnnConvolutionForward=0x3333,
+};
+#endif

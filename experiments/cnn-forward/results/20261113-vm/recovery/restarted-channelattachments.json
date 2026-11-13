@@ -1,0 +1,92 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "vmweave.io/v1alpha1",
+            "kind": "ChannelAttachment",
+            "metadata": {
+                "creationTimestamp": "2026-11-13T06:44:04Z",
+                "generation": 1,
+                "labels": {
+                    "vmweave.io/channel": "dp-dev-20261105"
+                },
+                "name": "dp-dev-20261105-guest",
+                "namespace": "vmweave-test-b",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "vmweave.io/v1alpha1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "SharedMemoryChannel",
+                        "name": "dp-dev-20261105",
+                        "uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d"
+                    }
+                ],
+                "resourceVersion": "30626634",
+                "uid": "38a8b308-fd46-417e-a106-c033dabe6559"
+            },
+            "spec": {
+                "channelRef": {
+                    "name": "dp-dev-20261105",
+                    "uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d"
+                },
+                "generation": "7d75456ac890a795b49c339820d6aa16",
+                "holderUID": "919e78ee-181c-4983-b2fb-f8c6ed235b0f",
+                "nodeName": "gpu-4",
+                "role": "guest"
+            },
+            "status": {
+                "evidence": "GuestHELLOReceived",
+                "launcherPodUID": "7dbf3029-241d-45b8-b066-86979527fe67",
+                "observedGeneration": 1,
+                "phase": "Mapped",
+                "reporterPodUID": "f4e142bb-6bac-4394-a601-b7596d0dcfe8"
+            }
+        },
+        {
+            "apiVersion": "vmweave.io/v1alpha1",
+            "kind": "ChannelAttachment",
+            "metadata": {
+                "creationTimestamp": "2026-11-13T06:43:52Z",
+                "generation": 1,
+                "labels": {
+                    "vmweave.io/channel": "dp-dev-20261105"
+                },
+                "name": "dp-dev-20261105-worker",
+                "namespace": "vmweave-test-b",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "vmweave.io/v1alpha1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "SharedMemoryChannel",
+                        "name": "dp-dev-20261105",
+                        "uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d"
+                    }
+                ],
+                "resourceVersion": "30626280",
+                "uid": "5ae4c538-28ab-4743-9237-9142c624944c"
+            },
+            "spec": {
+                "channelRef": {
+                    "name": "dp-dev-20261105",
+                    "uid": "a455a6d5-5dce-4cf3-a52d-b60515678d5d"
+                },
+                "generation": "7d75456ac890a795b49c339820d6aa16",
+                "holderUID": "f4e142bb-6bac-4394-a601-b7596d0dcfe8",
+                "nodeName": "gpu-4",
+                "role": "worker"
+            },
+            "status": {
+                "evidence": "QueueOpenAndGuard",
+                "observedGeneration": 1,
+                "phase": "Mapped",
+                "reporterPodUID": "f4e142bb-6bac-4394-a601-b7596d0dcfe8"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

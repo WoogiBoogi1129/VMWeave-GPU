@@ -1,0 +1,975 @@
+Nov 07 06:03:31 dp-dev-20261105 kernel: Linux version 5.15.0-202-generic (buildd@lcy02-amd64-106) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #212-Ubuntu SMP Thu Oct 15 16:49:38 UTC 2026 (Ubuntu 5.15.0-202.212-generic 5.15.222)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-202-generic root=UUID=26550111-a61e-4581-9cc3-1a554050d4f3 ro console=tty1 console=ttyS0
+Nov 07 06:03:31 dp-dev-20261105 kernel: KERNEL supported cpus:
+Nov 07 06:03:31 dp-dev-20261105 kernel:   Intel GenuineIntel
+Nov 07 06:03:31 dp-dev-20261105 kernel:   AMD AuthenticAMD
+Nov 07 06:03:31 dp-dev-20261105 kernel:   Hygon HygonGenuine
+Nov 07 06:03:31 dp-dev-20261105 kernel:   Centaur CentaurHauls
+Nov 07 06:03:31 dp-dev-20261105 kernel:   zhaoxin   Shanghai  
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/split lock detection: #DB: warning on user-space bus_locks
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-provided physical RAM map:
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007ffdcfff] usable
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x000000007ffdd000-0x000000007fffffff] reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x00000000b0000000-0x00000000bfffffff] reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x00000000fed1c000-0x00000000fed1ffff] reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: BIOS-e820: [mem 0x0000000100000000-0x000000027fffffff] usable
+Nov 07 06:03:31 dp-dev-20261105 kernel: NX (Execute Disable) protection: active
+Nov 07 06:03:31 dp-dev-20261105 kernel: SMBIOS 2.8 present.
+Nov 07 06:03:31 dp-dev-20261105 kernel: DMI: KubeVirt None/RHEL, BIOS 1.16.3-4.el9 04/01/2014
+Nov 07 06:03:31 dp-dev-20261105 kernel: Hypervisor detected: KVM
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-clock: Using msrs 4b564d01 and 4b564d00
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-clock: cpu 0, msr 59601001, primary cpu clock
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-clock: using sched offset of 2411642758 cycles
+Nov 07 06:03:31 dp-dev-20261105 kernel: clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+Nov 07 06:03:31 dp-dev-20261105 kernel: tsc: Detected 2100.000 MHz processor
+Nov 07 06:03:31 dp-dev-20261105 kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: e820: remove [mem 0x000a0000-0x000fffff] usable
+Nov 07 06:03:31 dp-dev-20261105 kernel: last_pfn = 0x280000 max_arch_pfn = 0x10000000000
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+Nov 07 06:03:31 dp-dev-20261105 kernel: last_pfn = 0x7ffdd max_arch_pfn = 0x10000000000
+Nov 07 06:03:31 dp-dev-20261105 kernel: found SMP MP-table at [mem 0x000f53f0-0x000f53ff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: Using GB pages for direct mapping
+Nov 07 06:03:31 dp-dev-20261105 kernel: RAMDISK: [mem 0x33ebf000-0x35f56fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Early table checksum verification disabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: RSDP 0x00000000000F5170 000014 (v00 BOCHS )
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: RSDT 0x000000007FFE3024 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: FACP 0x000000007FFE2D2C 0000F4 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: DSDT 0x000000007FFE0040 002CEC (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: FACS 0x000000007FFE0000 000040
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: APIC 0x000000007FFE2E20 000090 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: SRAT 0x000000007FFE2EB0 000110 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: MCFG 0x000000007FFE2FC0 00003C (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: WAET 0x000000007FFE2FFC 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Reserving FACP table memory at [mem 0x7ffe2d2c-0x7ffe2e1f]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Reserving DSDT table memory at [mem 0x7ffe0040-0x7ffe2d2b]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Reserving FACS table memory at [mem 0x7ffe0000-0x7ffe003f]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Reserving APIC table memory at [mem 0x7ffe2e20-0x7ffe2eaf]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Reserving SRAT table memory at [mem 0x7ffe2eb0-0x7ffe2fbf]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Reserving MCFG table memory at [mem 0x7ffe2fc0-0x7ffe2ffb]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Reserving WAET table memory at [mem 0x7ffe2ffc-0x7ffe3023]
+Nov 07 06:03:31 dp-dev-20261105 kernel: SRAT: PXM 0 -> APIC 0x00 -> Node 0
+Nov 07 06:03:31 dp-dev-20261105 kernel: SRAT: PXM 0 -> APIC 0x01 -> Node 0
+Nov 07 06:03:31 dp-dev-20261105 kernel: SRAT: PXM 0 -> APIC 0x02 -> Node 0
+Nov 07 06:03:31 dp-dev-20261105 kernel: SRAT: PXM 0 -> APIC 0x03 -> Node 0
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: SRAT: Node 0 PXM 0 [mem 0x00000000-0x0009ffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: SRAT: Node 0 PXM 0 [mem 0x00100000-0x7fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: SRAT: Node 0 PXM 0 [mem 0x100000000-0x27fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: SRAT: Node 0 PXM 0 [mem 0x280000000-0x87fffffff] hotplug
+Nov 07 06:03:31 dp-dev-20261105 kernel: NUMA: Node 0 [mem 0x00000000-0x0009ffff] + [mem 0x00100000-0x7fffffff] -> [mem 0x00000000-0x7fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: NUMA: Node 0 [mem 0x00000000-0x7fffffff] + [mem 0x100000000-0x27fffffff] -> [mem 0x00000000-0x27fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: NODE_DATA(0) allocated [mem 0x27ffd4000-0x27fffdfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: Zone ranges:
+Nov 07 06:03:31 dp-dev-20261105 kernel:   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel:   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel:   Normal   [mem 0x0000000100000000-0x000000027fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel:   Device   empty
+Nov 07 06:03:31 dp-dev-20261105 kernel: Movable zone start for each node
+Nov 07 06:03:31 dp-dev-20261105 kernel: Early memory node ranges
+Nov 07 06:03:31 dp-dev-20261105 kernel:   node   0: [mem 0x0000000000001000-0x000000000009efff]
+Nov 07 06:03:31 dp-dev-20261105 kernel:   node   0: [mem 0x0000000000100000-0x000000007ffdcfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel:   node   0: [mem 0x0000000100000000-0x000000027fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: Initmem setup node 0 [mem 0x0000000000001000-0x000000027fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: On node 0, zone DMA: 1 pages in unavailable ranges
+Nov 07 06:03:31 dp-dev-20261105 kernel: On node 0, zone DMA: 97 pages in unavailable ranges
+Nov 07 06:03:31 dp-dev-20261105 kernel: On node 0, zone Normal: 35 pages in unavailable ranges
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PM-Timer IO Port: 0x608
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+Nov 07 06:03:31 dp-dev-20261105 kernel: IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Using ACPI (MADT) for SMP configuration information
+Nov 07 06:03:31 dp-dev-20261105 kernel: TSC deadline timer available
+Nov 07 06:03:31 dp-dev-20261105 kernel: smpboot: Allowing 4 CPUs, 0 hotplug CPUs
+Nov 07 06:03:31 dp-dev-20261105 kernel: PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x000fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: PM: hibernation: Registered nosave memory: [mem 0x7ffdd000-0xffffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: [mem 0xc0000000-0xfed1bfff] available for PCI devices
+Nov 07 06:03:31 dp-dev-20261105 kernel: Booting paravirtualized kernel on KVM
+Nov 07 06:03:31 dp-dev-20261105 kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+Nov 07 06:03:31 dp-dev-20261105 kernel: setup_percpu: NR_CPUS:8192 nr_cpumask_bits:4 nr_cpu_ids:4 nr_node_ids:1
+Nov 07 06:03:31 dp-dev-20261105 kernel: percpu: Embedded 62 pages/cpu s217088 r8192 d28672 u524288
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcpu-alloc: s217088 r8192 d28672 u524288 alloc=1*2097152
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcpu-alloc: [0] 0 1 2 3 
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: setup async PF for cpu 0
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: stealtime: cpu 0, msr 277c34080
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: PV spinlocks enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: PV qspinlock hash table entries: 256 (order: 0, 4096 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Built 1 zonelists, mobility grouping on.  Total pages: 2064093
+Nov 07 06:03:31 dp-dev-20261105 kernel: Policy zone: Normal
+Nov 07 06:03:31 dp-dev-20261105 kernel: Kernel command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-202-generic root=UUID=26550111-a61e-4581-9cc3-1a554050d4f3 ro console=tty1 console=ttyS0
+Nov 07 06:03:31 dp-dev-20261105 kernel: Dentry cache hash table entries: 1048576 (order: 11, 8388608 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Inode-cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: mem auto-init: stack:off, heap alloc:on, heap free:off
+Nov 07 06:03:31 dp-dev-20261105 kernel: Memory: 8084524K/8388076K available (16393K kernel code, 4403K rwdata, 11012K rodata, 3296K init, 18764K bss, 303348K reserved, 0K cma-reserved)
+Nov 07 06:03:31 dp-dev-20261105 kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+Nov 07 06:03:31 dp-dev-20261105 kernel: ftrace: allocating 50958 entries in 200 pages
+Nov 07 06:03:31 dp-dev-20261105 kernel: ftrace: allocated 200 pages with 3 groups
+Nov 07 06:03:31 dp-dev-20261105 kernel: rcu: Hierarchical RCU implementation.
+Nov 07 06:03:31 dp-dev-20261105 kernel: rcu:         RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=4.
+Nov 07 06:03:31 dp-dev-20261105 kernel:         Rude variant of Tasks RCU enabled.
+Nov 07 06:03:31 dp-dev-20261105 kernel:         Tracing variant of Tasks RCU enabled.
+Nov 07 06:03:31 dp-dev-20261105 kernel: rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+Nov 07 06:03:31 dp-dev-20261105 kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+Nov 07 06:03:31 dp-dev-20261105 kernel: NR_IRQS: 524544, nr_irqs: 456, preallocated irqs: 16
+Nov 07 06:03:31 dp-dev-20261105 kernel: random: crng init done
+Nov 07 06:03:31 dp-dev-20261105 kernel: Console: colour VGA+ 80x25
+Nov 07 06:03:31 dp-dev-20261105 kernel: printk: console [tty1] enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: printk: console [ttyS0] enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Core revision 20210730
+Nov 07 06:03:31 dp-dev-20261105 kernel: APIC: Switch to symmetric I/O mode setup
+Nov 07 06:03:31 dp-dev-20261105 kernel: x2apic enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: Switched APIC routing to physical x2apic.
+Nov 07 06:03:31 dp-dev-20261105 kernel: clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x1e4530a99b6, max_idle_ns: 440795257976 ns
+Nov 07 06:03:31 dp-dev-20261105 kernel: Calibrating delay loop (skipped) preset value.. 4200.00 BogoMIPS (lpj=8400000)
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/cpu: User Mode Instruction Prevention (UMIP) activated
+Nov 07 06:03:31 dp-dev-20261105 kernel: Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+Nov 07 06:03:31 dp-dev-20261105 kernel: Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+Nov 07 06:03:31 dp-dev-20261105 kernel: Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+Nov 07 06:03:31 dp-dev-20261105 kernel: Spectre V2 : Mitigation: Enhanced / Automatic IBRS
+Nov 07 06:03:31 dp-dev-20261105 kernel: Spectre V2 : Spectre v2 / PBRSB-eIBRS: Retire a single CALL on VMEXIT
+Nov 07 06:03:31 dp-dev-20261105 kernel: Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+Nov 07 06:03:31 dp-dev-20261105 kernel: Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl and seccomp
+Nov 07 06:03:31 dp-dev-20261105 kernel: TAA: Mitigation: TSX disabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x020: 'AVX-512 opmask'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x040: 'AVX-512 Hi256'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x080: 'AVX-512 ZMM_Hi256'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x200: 'Protection Keys User registers'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x20000: 'AMX Tile config'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Supporting XSAVE feature 0x40000: 'AMX Tile data'
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: xstate_offset[5]:  832, xstate_sizes[5]:   64
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: xstate_offset[6]:  896, xstate_sizes[6]:  512
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: xstate_offset[7]: 1408, xstate_sizes[7]: 1024
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: xstate_offset[9]: 2432, xstate_sizes[9]:    8
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: xstate_offset[17]: 2496, xstate_sizes[17]:   64
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: xstate_offset[18]: 2560, xstate_sizes[18]: 8192
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/fpu: Enabled xstate features 0x602e7, context size is 10752 bytes, using 'compacted' format.
+Nov 07 06:03:31 dp-dev-20261105 kernel: Freeing SMP alternatives memory: 44K
+Nov 07 06:03:31 dp-dev-20261105 kernel: pid_max: default: 32768 minimum: 301
+Nov 07 06:03:31 dp-dev-20261105 kernel: LSM: Security Framework initializing
+Nov 07 06:03:31 dp-dev-20261105 kernel: landlock: Up and running.
+Nov 07 06:03:31 dp-dev-20261105 kernel: Yama: becoming mindful.
+Nov 07 06:03:31 dp-dev-20261105 kernel: AppArmor: AppArmor initialized
+Nov 07 06:03:31 dp-dev-20261105 kernel: Mount-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Mountpoint-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: smpboot: CPU0: Intel Xeon Processor (GraniteRapids) (family: 0x6, model: 0xad, stepping: 0x0)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Performance Events: unsupported p6 CPU model 173 no PMU driver, software events only.
+Nov 07 06:03:31 dp-dev-20261105 kernel: signal: max sigframe size: 11952
+Nov 07 06:03:31 dp-dev-20261105 kernel: rcu: Hierarchical SRCU implementation.
+Nov 07 06:03:31 dp-dev-20261105 kernel: NMI watchdog: Perf NMI watchdog permanently disabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: smp: Bringing up secondary CPUs ...
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86: Booting SMP configuration:
+Nov 07 06:03:31 dp-dev-20261105 kernel: .... node  #0, CPUs:      #1
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-clock: cpu 1, msr 59601041, secondary cpu clock
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: setup async PF for cpu 1
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: stealtime: cpu 1, msr 277cb4080
+Nov 07 06:03:31 dp-dev-20261105 kernel:  #2
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-clock: cpu 2, msr 59601081, secondary cpu clock
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: setup async PF for cpu 2
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: stealtime: cpu 2, msr 277d34080
+Nov 07 06:03:31 dp-dev-20261105 kernel:  #3
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-clock: cpu 3, msr 596010c1, secondary cpu clock
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: setup async PF for cpu 3
+Nov 07 06:03:31 dp-dev-20261105 kernel: kvm-guest: stealtime: cpu 3, msr 277db4080
+Nov 07 06:03:31 dp-dev-20261105 kernel: smp: Brought up 1 node, 4 CPUs
+Nov 07 06:03:31 dp-dev-20261105 kernel: smpboot: Max logical packages: 1
+Nov 07 06:03:31 dp-dev-20261105 kernel: smpboot: Total of 4 processors activated (16800.00 BogoMIPS)
+Nov 07 06:03:31 dp-dev-20261105 kernel: devtmpfs: initialized
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/mm: Memory block size: 128MB
+Nov 07 06:03:31 dp-dev-20261105 kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+Nov 07 06:03:31 dp-dev-20261105 kernel: futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: pinctrl core: initialized pinctrl subsystem
+Nov 07 06:03:31 dp-dev-20261105 kernel: PM: RTC time: 06:03:25, date: 2026-11-07
+Nov 07 06:03:31 dp-dev-20261105 kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+Nov 07 06:03:31 dp-dev-20261105 kernel: DMA: preallocated 1024 KiB GFP_KERNEL pool for atomic allocations
+Nov 07 06:03:31 dp-dev-20261105 kernel: DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+Nov 07 06:03:31 dp-dev-20261105 kernel: DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+Nov 07 06:03:31 dp-dev-20261105 kernel: audit: initializing netlink subsys (disabled)
+Nov 07 06:03:31 dp-dev-20261105 kernel: audit: type=2000 audit(1794031404.840:1): state=initialized audit_enabled=0 res=1
+Nov 07 06:03:31 dp-dev-20261105 kernel: thermal_sys: Registered thermal governor 'fair_share'
+Nov 07 06:03:31 dp-dev-20261105 kernel: thermal_sys: Registered thermal governor 'bang_bang'
+Nov 07 06:03:31 dp-dev-20261105 kernel: thermal_sys: Registered thermal governor 'step_wise'
+Nov 07 06:03:31 dp-dev-20261105 kernel: thermal_sys: Registered thermal governor 'user_space'
+Nov 07 06:03:31 dp-dev-20261105 kernel: thermal_sys: Registered thermal governor 'power_allocator'
+Nov 07 06:03:31 dp-dev-20261105 kernel: cpuidle: using governor ladder
+Nov 07 06:03:31 dp-dev-20261105 kernel: cpuidle: using governor menu
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: bus type PCI registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xb0000000-0xbfffffff] (base 0xb0000000)
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: MMCONFIG at [mem 0xb0000000-0xbfffffff] reserved in E820
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: Using configuration type 1 for base access
+Nov 07 06:03:31 dp-dev-20261105 kernel: kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+Nov 07 06:03:31 dp-dev-20261105 kernel: HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+Nov 07 06:03:31 dp-dev-20261105 kernel: HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Added _OSI(Module Device)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Added _OSI(Processor Device)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Added _OSI(Processor Aggregator Device)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Added _OSI(Linux-Dell-Video)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Added _OSI(Linux-Lenovo-NV-HDMI-Audio)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Added _OSI(Linux-HPI-Hybrid-Graphics)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: 1 ACPI AML tables successfully acquired and loaded
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Interpreter enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PM: (supports S0 S5)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Using IOAPIC for interrupt routing
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: Using E820 reservations for host bridge windows
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: Enabled 2 GPEs in block 00 to 3F
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug LTR DPC]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpi PNP0A08:00: _OSC: OS now controls [SHPCHotplug PME AER PCIeCapability]
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI host bridge to bus 0000:00
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: root bus resource [mem 0x80000000-0xafffffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: root bus resource [mem 0x380000000000-0x388003ffffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: root bus resource [bus 00-ff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: [1234:1111] type 00 class 0x030000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: reg 0x10: [mem 0xfb000000-0xfbffffff pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: reg 0x18: [mem 0xfea10000-0xfea10fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: reg 0x30: [mem 0xfea00000-0xfea0ffff pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: reg 0x10: [mem 0xfea11000-0xfea11fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: reg 0x10: [mem 0xfea12000-0xfea12fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: reg 0x10: [mem 0xfea13000-0xfea13fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: reg 0x10: [mem 0xfea14000-0xfea14fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: reg 0x10: [mem 0xfea15000-0xfea15fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: reg 0x10: [mem 0xfea16000-0xfea16fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: reg 0x10: [mem 0xfea17000-0xfea17fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: reg 0x10: [mem 0xfea18000-0xfea18fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: reg 0x10: [mem 0xfea19000-0xfea19fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: reg 0x10: [mem 0xfea1a000-0xfea1afff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: reg 0x10: [mem 0xfea1b000-0xfea1bfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: reg 0x10: [mem 0xfea1c000-0xfea1cfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: reg 0x10: [mem 0xfea1d000-0xfea1dfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: reg 0x10: [mem 0xfea1e000-0xfea1efff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: reg 0x10: [mem 0xfea1f000-0xfea1ffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: [1b36:000c] type 01 class 0x060400
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: reg 0x10: [mem 0xfea20000-0xfea20fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1e.0: [1af4:1110] type 00 class 0x050000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1e.0: reg 0x10: [mem 0xfea21000-0xfea210ff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1e.0: reg 0x18: [mem 0x388000000000-0x388003ffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1f.0: [8086:2918] type 00 class 0x060100
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1f.0: quirk: [io  0x0600-0x067f] claimed by ICH6 ACPI/GPIO/TCO
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1f.2: [8086:2922] type 00 class 0x010601
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1f.2: reg 0x20: [io  0xc040-0xc05f]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1f.2: reg 0x24: [mem 0xfea22000-0xfea22fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1f.3: [8086:2930] type 00 class 0x0c0500
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:1f.3: reg 0x20: [io  0x0700-0x073f]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:01:00.0: [1af4:1041] type 00 class 0x020000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:01:00.0: reg 0x14: [mem 0xfe800000-0xfe800fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:01:00.0: reg 0x20: [mem 0x387800000000-0x387800003fff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:01:00.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: PCI bridge to [bus 01]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0:   bridge window [mem 0xfe800000-0xfe9fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0:   bridge window [mem 0x387800000000-0x387fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-2] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: PCI bridge to [bus 02]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1:   bridge window [mem 0xfe600000-0xfe7fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1:   bridge window [mem 0x387000000000-0x3877ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-3] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: PCI bridge to [bus 03]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2:   bridge window [mem 0xfe400000-0xfe5fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2:   bridge window [mem 0x386800000000-0x386fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-4] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: PCI bridge to [bus 04]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3:   bridge window [mem 0xfe200000-0xfe3fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3:   bridge window [mem 0x386000000000-0x3867ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-5] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:05:00.0: [1af4:1048] type 00 class 0x010000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:05:00.0: reg 0x14: [mem 0xfe000000-0xfe000fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:05:00.0: reg 0x20: [mem 0x385800000000-0x385800003fff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:05:00.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: PCI bridge to [bus 05]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4:   bridge window [mem 0xfe000000-0xfe1fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4:   bridge window [mem 0x385800000000-0x385fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-6] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:06:00.0: [1af4:1043] type 00 class 0x078000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:06:00.0: reg 0x14: [mem 0xfde00000-0xfde00fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:06:00.0: reg 0x20: [mem 0x385000000000-0x385000003fff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:06:00.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: PCI bridge to [bus 06]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5:   bridge window [mem 0xfde00000-0xfdffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5:   bridge window [mem 0x385000000000-0x3857ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-7] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:07:00.0: [1af4:1042] type 00 class 0x010000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:07:00.0: reg 0x14: [mem 0xfdc00000-0xfdc00fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:07:00.0: reg 0x20: [mem 0x384800000000-0x384800003fff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:07:00.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: PCI bridge to [bus 07]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6:   bridge window [mem 0xfdc00000-0xfddfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6:   bridge window [mem 0x384800000000-0x384fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-8] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:08:00.0: [1af4:1042] type 00 class 0x010000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:08:00.0: reg 0x14: [mem 0xfda00000-0xfda00fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:08:00.0: reg 0x20: [mem 0x384000000000-0x384000003fff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:08:00.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: PCI bridge to [bus 08]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7:   bridge window [mem 0xfda00000-0xfdbfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7:   bridge window [mem 0x384000000000-0x3847ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-9] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:09:00.0: [1af4:1045] type 00 class 0x00ff00
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:09:00.0: reg 0x14: [mem 0xfd800000-0xfd800fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:09:00.0: reg 0x20: [mem 0x383800000000-0x383800003fff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:09:00.0: enabling Extended Tags
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: PCI bridge to [bus 09]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0:   bridge window [mem 0xfd800000-0xfd9fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0:   bridge window [mem 0x383800000000-0x383fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-10] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: PCI bridge to [bus 0a]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1:   bridge window [mem 0xfd600000-0xfd7fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1:   bridge window [mem 0x383000000000-0x3837ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-11] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: PCI bridge to [bus 0b]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2:   bridge window [mem 0xfd400000-0xfd5fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2:   bridge window [mem 0x382800000000-0x382fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-12] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: PCI bridge to [bus 0c]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3:   bridge window [mem 0xfd200000-0xfd3fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3:   bridge window [mem 0x382000000000-0x3827ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-13] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: PCI bridge to [bus 0d]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4:   bridge window [mem 0xfd000000-0xfd1fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4:   bridge window [mem 0x381800000000-0x381fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-14] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: PCI bridge to [bus 0e]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5:   bridge window [mem 0xfce00000-0xfcffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5:   bridge window [mem 0x381000000000-0x3817ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-15] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: PCI bridge to [bus 0f]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6:   bridge window [mem 0xfcc00000-0xfcdfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6:   bridge window [mem 0x380800000000-0x380fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: acpiphp: Slot [0-16] registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: PCI bridge to [bus 10]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7:   bridge window [mem 0xfca00000-0xfcbfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7:   bridge window [mem 0x380000000000-0x3807ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKE configured for IRQ 10
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKF configured for IRQ 10
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKG configured for IRQ 11
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link LNKH configured for IRQ 11
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSIA configured for IRQ 16
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSIB configured for IRQ 17
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSIC configured for IRQ 18
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSID configured for IRQ 19
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSIE configured for IRQ 20
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSIF configured for IRQ 21
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSIG configured for IRQ 22
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: PCI: Interrupt link GSIH configured for IRQ 23
+Nov 07 06:03:31 dp-dev-20261105 kernel: iommu: Default domain type: Translated 
+Nov 07 06:03:31 dp-dev-20261105 kernel: iommu: DMA domain TLB invalidation policy: lazy mode 
+Nov 07 06:03:31 dp-dev-20261105 kernel: SCSI subsystem initialized
+Nov 07 06:03:31 dp-dev-20261105 kernel: libata version 3.00 loaded.
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: vgaarb: setting as boot VGA device
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:01.0: vgaarb: bridge control possible
+Nov 07 06:03:31 dp-dev-20261105 kernel: vgaarb: loaded
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: bus type USB registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: usbcore: registered new interface driver usbfs
+Nov 07 06:03:31 dp-dev-20261105 kernel: usbcore: registered new interface driver hub
+Nov 07 06:03:31 dp-dev-20261105 kernel: usbcore: registered new device driver usb
+Nov 07 06:03:31 dp-dev-20261105 kernel: pps_core: LinuxPPS API ver. 1 registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+Nov 07 06:03:31 dp-dev-20261105 kernel: PTP clock support registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: EDAC MC: Ver: 3.0.0
+Nov 07 06:03:31 dp-dev-20261105 kernel: NetLabel: Initializing
+Nov 07 06:03:31 dp-dev-20261105 kernel: NetLabel:  domain hash size = 128
+Nov 07 06:03:31 dp-dev-20261105 kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+Nov 07 06:03:31 dp-dev-20261105 kernel: NetLabel:  unlabeled traffic allowed by default
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: Using ACPI for IRQ routing
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: pci_cache_line_size set to 64 bytes
+Nov 07 06:03:31 dp-dev-20261105 kernel: e820: reserve RAM buffer [mem 0x0009fc00-0x0009ffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: e820: reserve RAM buffer [mem 0x7ffdd000-0x7fffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: clocksource: Switched to clocksource kvm-clock
+Nov 07 06:03:31 dp-dev-20261105 kernel: VFS: Disk quotas dquot_6.6.0
+Nov 07 06:03:31 dp-dev-20261105 kernel: VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+Nov 07 06:03:31 dp-dev-20261105 kernel: AppArmor: AppArmor Filesystem Enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: pnp: PnP ACPI init
+Nov 07 06:03:31 dp-dev-20261105 kernel: system 00:04: [mem 0xb0000000-0xbfffffff window] has been reserved
+Nov 07 06:03:31 dp-dev-20261105 kernel: pnp: PnP ACPI: found 5 devices
+Nov 07 06:03:31 dp-dev-20261105 kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+Nov 07 06:03:31 dp-dev-20261105 kernel: NET: Registered PF_INET protocol family
+Nov 07 06:03:31 dp-dev-20261105 kernel: IP idents hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: tcp_listen_portaddr_hash hash table entries: 4096 (order: 4, 65536 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: TCP established hash table entries: 65536 (order: 7, 524288 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: TCP bind hash table entries: 65536 (order: 8, 1048576 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: TCP: Hash tables configured (established 65536 bind 65536)
+Nov 07 06:03:31 dp-dev-20261105 kernel: MPTCP token hash table entries: 8192 (order: 6, 196608 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: UDP hash table entries: 4096 (order: 5, 131072 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: UDP-Lite hash table entries: 4096 (order: 5, 131072 bytes, linear)
+Nov 07 06:03:31 dp-dev-20261105 kernel: NET: Registered PF_UNIX/PF_LOCAL protocol family
+Nov 07 06:03:31 dp-dev-20261105 kernel: NET: Registered PF_XDP protocol family
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: bridge window [io  0x1000-0x0fff] to [bus 01] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: bridge window [io  0x1000-0x0fff] to [bus 02] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: bridge window [io  0x1000-0x0fff] to [bus 03] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: bridge window [io  0x1000-0x0fff] to [bus 04] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: bridge window [io  0x1000-0x0fff] to [bus 05] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: bridge window [io  0x1000-0x0fff] to [bus 06] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: bridge window [io  0x1000-0x0fff] to [bus 07] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: bridge window [io  0x1000-0x0fff] to [bus 08] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: bridge window [io  0x1000-0x0fff] to [bus 09] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: bridge window [io  0x1000-0x0fff] to [bus 0a] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: bridge window [io  0x1000-0x0fff] to [bus 0b] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: bridge window [io  0x1000-0x0fff] to [bus 0c] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: bridge window [io  0x1000-0x0fff] to [bus 0d] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: bridge window [io  0x1000-0x0fff] to [bus 0e] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: bridge window [io  0x1000-0x0fff] to [bus 0f] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: bridge window [io  0x1000-0x0fff] to [bus 10] add_size 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: BAR 13: assigned [io  0x1000-0x1fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: BAR 13: assigned [io  0x2000-0x2fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: BAR 13: assigned [io  0x3000-0x3fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: BAR 13: assigned [io  0x4000-0x4fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: BAR 13: assigned [io  0x5000-0x5fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: BAR 13: assigned [io  0x6000-0x6fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: BAR 13: assigned [io  0x7000-0x7fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: BAR 13: assigned [io  0x8000-0x8fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: BAR 13: assigned [io  0x9000-0x9fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: BAR 13: assigned [io  0xa000-0xafff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: BAR 13: assigned [io  0xb000-0xbfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: BAR 13: assigned [io  0xd000-0xdfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: BAR 13: assigned [io  0xe000-0xefff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: BAR 13: assigned [io  0xf000-0xffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: BAR 13: no space for [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: BAR 13: failed to assign [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: BAR 13: no space for [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: BAR 13: failed to assign [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: BAR 13: assigned [io  0x1000-0x1fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: BAR 13: assigned [io  0x2000-0x2fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: BAR 13: assigned [io  0x3000-0x3fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: BAR 13: assigned [io  0x4000-0x4fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: BAR 13: assigned [io  0x5000-0x5fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: BAR 13: assigned [io  0x6000-0x6fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: BAR 13: assigned [io  0x7000-0x7fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: BAR 13: assigned [io  0x8000-0x8fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: BAR 13: assigned [io  0x9000-0x9fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: BAR 13: assigned [io  0xa000-0xafff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: BAR 13: assigned [io  0xb000-0xbfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: BAR 13: assigned [io  0xd000-0xdfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: BAR 13: assigned [io  0xe000-0xefff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: BAR 13: assigned [io  0xf000-0xffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: BAR 13: no space for [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: BAR 13: failed to assign [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: BAR 13: no space for [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: BAR 13: failed to assign [io  size 0x1000]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0: PCI bridge to [bus 01]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0:   bridge window [mem 0xfe800000-0xfe9fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.0:   bridge window [mem 0x387800000000-0x387fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1: PCI bridge to [bus 02]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1:   bridge window [mem 0xfe600000-0xfe7fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.1:   bridge window [mem 0x387000000000-0x3877ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2: PCI bridge to [bus 03]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2:   bridge window [io  0xf000-0xffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2:   bridge window [mem 0xfe400000-0xfe5fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.2:   bridge window [mem 0x386800000000-0x386fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3: PCI bridge to [bus 04]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3:   bridge window [io  0xe000-0xefff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3:   bridge window [mem 0xfe200000-0xfe3fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.3:   bridge window [mem 0x386000000000-0x3867ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4: PCI bridge to [bus 05]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4:   bridge window [io  0xd000-0xdfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4:   bridge window [mem 0xfe000000-0xfe1fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.4:   bridge window [mem 0x385800000000-0x385fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5: PCI bridge to [bus 06]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5:   bridge window [io  0xb000-0xbfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5:   bridge window [mem 0xfde00000-0xfdffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.5:   bridge window [mem 0x385000000000-0x3857ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6: PCI bridge to [bus 07]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6:   bridge window [io  0xa000-0xafff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6:   bridge window [mem 0xfdc00000-0xfddfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.6:   bridge window [mem 0x384800000000-0x384fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7: PCI bridge to [bus 08]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7:   bridge window [io  0x9000-0x9fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7:   bridge window [mem 0xfda00000-0xfdbfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:02.7:   bridge window [mem 0x384000000000-0x3847ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0: PCI bridge to [bus 09]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0:   bridge window [io  0x8000-0x8fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0:   bridge window [mem 0xfd800000-0xfd9fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.0:   bridge window [mem 0x383800000000-0x383fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1: PCI bridge to [bus 0a]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1:   bridge window [io  0x7000-0x7fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1:   bridge window [mem 0xfd600000-0xfd7fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.1:   bridge window [mem 0x383000000000-0x3837ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2: PCI bridge to [bus 0b]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2:   bridge window [io  0x6000-0x6fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2:   bridge window [mem 0xfd400000-0xfd5fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.2:   bridge window [mem 0x382800000000-0x382fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3: PCI bridge to [bus 0c]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3:   bridge window [io  0x5000-0x5fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3:   bridge window [mem 0xfd200000-0xfd3fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.3:   bridge window [mem 0x382000000000-0x3827ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4: PCI bridge to [bus 0d]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4:   bridge window [io  0x4000-0x4fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4:   bridge window [mem 0xfd000000-0xfd1fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.4:   bridge window [mem 0x381800000000-0x381fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5: PCI bridge to [bus 0e]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5:   bridge window [io  0x3000-0x3fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5:   bridge window [mem 0xfce00000-0xfcffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.5:   bridge window [mem 0x381000000000-0x3817ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6: PCI bridge to [bus 0f]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6:   bridge window [io  0x2000-0x2fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6:   bridge window [mem 0xfcc00000-0xfcdfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.6:   bridge window [mem 0x380800000000-0x380fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7: PCI bridge to [bus 10]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7:   bridge window [io  0x1000-0x1fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7:   bridge window [mem 0xfca00000-0xfcbfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci 0000:00:03.7:   bridge window [mem 0x380000000000-0x3807ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: resource 7 [mem 0x80000000-0xafffffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: resource 8 [mem 0xc0000000-0xfebfffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:00: resource 9 [mem 0x380000000000-0x388003ffffff window]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:01: resource 1 [mem 0xfe800000-0xfe9fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:01: resource 2 [mem 0x387800000000-0x387fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:02: resource 1 [mem 0xfe600000-0xfe7fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:02: resource 2 [mem 0x387000000000-0x3877ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:03: resource 0 [io  0xf000-0xffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:03: resource 1 [mem 0xfe400000-0xfe5fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:03: resource 2 [mem 0x386800000000-0x386fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:04: resource 0 [io  0xe000-0xefff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:04: resource 1 [mem 0xfe200000-0xfe3fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:04: resource 2 [mem 0x386000000000-0x3867ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:05: resource 0 [io  0xd000-0xdfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:05: resource 1 [mem 0xfe000000-0xfe1fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:05: resource 2 [mem 0x385800000000-0x385fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:06: resource 0 [io  0xb000-0xbfff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:06: resource 1 [mem 0xfde00000-0xfdffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:06: resource 2 [mem 0x385000000000-0x3857ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:07: resource 0 [io  0xa000-0xafff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:07: resource 1 [mem 0xfdc00000-0xfddfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:07: resource 2 [mem 0x384800000000-0x384fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:08: resource 0 [io  0x9000-0x9fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:08: resource 1 [mem 0xfda00000-0xfdbfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:08: resource 2 [mem 0x384000000000-0x3847ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:09: resource 0 [io  0x8000-0x8fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:09: resource 1 [mem 0xfd800000-0xfd9fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:09: resource 2 [mem 0x383800000000-0x383fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0a: resource 0 [io  0x7000-0x7fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0a: resource 1 [mem 0xfd600000-0xfd7fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0a: resource 2 [mem 0x383000000000-0x3837ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0b: resource 0 [io  0x6000-0x6fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0b: resource 1 [mem 0xfd400000-0xfd5fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0b: resource 2 [mem 0x382800000000-0x382fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0c: resource 0 [io  0x5000-0x5fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0c: resource 1 [mem 0xfd200000-0xfd3fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0c: resource 2 [mem 0x382000000000-0x3827ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0d: resource 0 [io  0x4000-0x4fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0d: resource 1 [mem 0xfd000000-0xfd1fffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0d: resource 2 [mem 0x381800000000-0x381fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0e: resource 0 [io  0x3000-0x3fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0e: resource 1 [mem 0xfce00000-0xfcffffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0e: resource 2 [mem 0x381000000000-0x3817ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0f: resource 0 [io  0x2000-0x2fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0f: resource 1 [mem 0xfcc00000-0xfcdfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:0f: resource 2 [mem 0x380800000000-0x380fffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:10: resource 0 [io  0x1000-0x1fff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:10: resource 1 [mem 0xfca00000-0xfcbfffff]
+Nov 07 06:03:31 dp-dev-20261105 kernel: pci_bus 0000:10: resource 2 [mem 0x380000000000-0x3807ffffffff 64bit pref]
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI: CLS 0 bytes, default 64
+Nov 07 06:03:31 dp-dev-20261105 kernel: PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Trying to unpack rootfs image as initramfs...
+Nov 07 06:03:31 dp-dev-20261105 kernel: software IO TLB: mapped [mem 0x000000007bfdd000-0x000000007ffdd000] (64MB)
+Nov 07 06:03:31 dp-dev-20261105 kernel: clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x1e4530a99b6, max_idle_ns: 440795257976 ns
+Nov 07 06:03:31 dp-dev-20261105 kernel: Initialise system trusted keyrings
+Nov 07 06:03:31 dp-dev-20261105 kernel: Key type blacklist registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: workingset: timestamp_bits=36 max_order=21 bucket_order=0
+Nov 07 06:03:31 dp-dev-20261105 kernel: zbud: loaded
+Nov 07 06:03:31 dp-dev-20261105 kernel: squashfs: version 4.0 (2009/01/31) Phillip Lougher
+Nov 07 06:03:31 dp-dev-20261105 kernel: fuse: init (API version 7.34)
+Nov 07 06:03:31 dp-dev-20261105 kernel: integrity: Platform Keyring initialized
+Nov 07 06:03:31 dp-dev-20261105 kernel: Key type asymmetric registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: Asymmetric key parser 'x509' registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 243)
+Nov 07 06:03:31 dp-dev-20261105 kernel: io scheduler mq-deadline registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: \_SB_.GSIG: Enabled at IRQ 22
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.0: PME: Signaling with IRQ 24
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.0: AER: enabled with IRQ 24
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.1: PME: Signaling with IRQ 25
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.1: AER: enabled with IRQ 25
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.2: PME: Signaling with IRQ 26
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.2: AER: enabled with IRQ 26
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.3: PME: Signaling with IRQ 27
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.3: AER: enabled with IRQ 27
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.4: PME: Signaling with IRQ 28
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.4: AER: enabled with IRQ 28
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.5: PME: Signaling with IRQ 29
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.5: AER: enabled with IRQ 29
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.6: PME: Signaling with IRQ 30
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.6: AER: enabled with IRQ 30
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.7: PME: Signaling with IRQ 31
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:02.7: AER: enabled with IRQ 31
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: \_SB_.GSIH: Enabled at IRQ 23
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.0: PME: Signaling with IRQ 32
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.0: AER: enabled with IRQ 32
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.1: PME: Signaling with IRQ 33
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.1: AER: enabled with IRQ 33
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.2: PME: Signaling with IRQ 34
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.2: AER: enabled with IRQ 34
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.3: PME: Signaling with IRQ 35
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.3: AER: enabled with IRQ 35
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.4: PME: Signaling with IRQ 36
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.4: AER: enabled with IRQ 36
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.5: PME: Signaling with IRQ 37
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.5: AER: enabled with IRQ 37
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.6: PME: Signaling with IRQ 38
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.6: AER: enabled with IRQ 38
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.7: PME: Signaling with IRQ 39
+Nov 07 06:03:31 dp-dev-20261105 kernel: pcieport 0000:00:03.7: AER: enabled with IRQ 39
+Nov 07 06:03:31 dp-dev-20261105 kernel: shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+Nov 07 06:03:31 dp-dev-20261105 kernel: input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: button: Power Button [PWRF]
+Nov 07 06:03:31 dp-dev-20261105 kernel: Free page reporting enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: 00:00: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+Nov 07 06:03:31 dp-dev-20261105 kernel: Linux agpgart interface v0.103
+Nov 07 06:03:31 dp-dev-20261105 kernel: loop: module loaded
+Nov 07 06:03:31 dp-dev-20261105 kernel: tun: Universal TUN/TAP device driver, 1.6
+Nov 07 06:03:31 dp-dev-20261105 kernel: PPP generic driver version 2.4.2
+Nov 07 06:03:31 dp-dev-20261105 kernel: VFIO - User Level meta-driver version: 0.3
+Nov 07 06:03:31 dp-dev-20261105 kernel: ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: ehci-pci: EHCI PCI platform driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: ehci-platform: EHCI generic platform driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: ohci-pci: OHCI PCI platform driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: ohci-platform: OHCI generic platform driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: uhci_hcd: USB Universal Host Controller Interface driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+Nov 07 06:03:31 dp-dev-20261105 kernel: serio: i8042 KBD port at 0x60,0x64 irq 1
+Nov 07 06:03:31 dp-dev-20261105 kernel: serio: i8042 AUX port at 0x60,0x64 irq 12
+Nov 07 06:03:31 dp-dev-20261105 kernel: mousedev: PS/2 mouse device common for all mice
+Nov 07 06:03:31 dp-dev-20261105 kernel: rtc_cmos 00:03: RTC can wake from S4
+Nov 07 06:03:31 dp-dev-20261105 kernel: input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+Nov 07 06:03:31 dp-dev-20261105 kernel: rtc_cmos 00:03: registered as rtc0
+Nov 07 06:03:31 dp-dev-20261105 kernel: rtc_cmos 00:03: setting system clock to 2026-11-07T06:03:26 UTC (1794031406)
+Nov 07 06:03:31 dp-dev-20261105 kernel: rtc_cmos 00:03: alarms up to one day, y3k, 242 bytes nvram
+Nov 07 06:03:31 dp-dev-20261105 kernel: i2c_dev: i2c /dev entries driver
+Nov 07 06:03:31 dp-dev-20261105 kernel: device-mapper: core: CONFIG_IMA_DISABLE_HTABLE is disabled. Duplicate IMA measurements will not be recorded in the IMA log.
+Nov 07 06:03:31 dp-dev-20261105 kernel: device-mapper: uevent: version 1.0.3
+Nov 07 06:03:31 dp-dev-20261105 kernel: device-mapper: ioctl: 4.45.0-ioctl (2021-03-22) initialised: dm-devel@redhat.com
+Nov 07 06:03:31 dp-dev-20261105 kernel: intel_pstate: CPU model not supported
+Nov 07 06:03:31 dp-dev-20261105 kernel: ledtrig-cpu: registered to indicate activity on CPUs
+Nov 07 06:03:31 dp-dev-20261105 kernel: drop_monitor: Initializing network drop monitor service
+Nov 07 06:03:31 dp-dev-20261105 kernel: NET: Registered PF_INET6 protocol family
+Nov 07 06:03:31 dp-dev-20261105 kernel: Freeing initrd memory: 33376K
+Nov 07 06:03:31 dp-dev-20261105 kernel: Segment Routing with IPv6
+Nov 07 06:03:31 dp-dev-20261105 kernel: In-situ OAM (IOAM) with IPv6
+Nov 07 06:03:31 dp-dev-20261105 kernel: NET: Registered PF_PACKET protocol family
+Nov 07 06:03:31 dp-dev-20261105 kernel: Key type dns_resolver registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: IPI shorthand broadcast: enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: sched_clock: Marking stable (1937837740, 192495762)->(2312183645, -181850143)
+Nov 07 06:03:31 dp-dev-20261105 kernel: registered taskstats version 1
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loading compiled-in X.509 certificates
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 763fa699b123786e18395918bd0b2e4595411ee1'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Live Patch Signing 2025 Kmod: d541cef61dc7e793b7eb7e899970a2eef0b5dc8c'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Live Patch Signing: 14df34d1a87cf37625abec039ef2bf521249b969'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Kernel Module Signing 2025 Kmod: 4627603d2357a2a3f81006370894c221175893e9'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Kernel Module Signing: 88f752e560a1e0737e31163a466ad7b70a850c19'
+Nov 07 06:03:31 dp-dev-20261105 kernel: blacklist: Loading compiled-in revocation X.509 certificates
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing: 61482aa2830d0ab2ad5af10b7250da9033ddcef0'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing (2017): 242ade75ac4a15e50d50c84b0d45ff3eae707a03'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing (ESM 2018): 365188c1d374d6b07c3c8f240f8ef722433d6a8b'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing (2019): c0746fd6c5da3ae827864651ad66ae47fe24b3e8'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing (2021 v1): a8d54bbb3825cfb94fa13c9f8a594a195c107b8d'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing (2021 v2): 4cf046892d6fd3c9a5b03f98d845f90851dc6a8c'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing (2021 v3): 100437bb6de6e469b581e61cd66bce3ef4ed53af'
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Canonical Ltd. Secure Boot Signing (Ubuntu Core 2019): c1d57b8f6b743f23ee41f4f7ee292f06eecadfb9'
+Nov 07 06:03:31 dp-dev-20261105 kernel: zswap: loaded using pool lzo/zbud
+Nov 07 06:03:31 dp-dev-20261105 kernel: Key type .fscrypt registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: Key type fscrypt-provisioning registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: Key type encrypted registered
+Nov 07 06:03:31 dp-dev-20261105 kernel: AppArmor: AppArmor sha1 policy hashing enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: ima: No TPM chip found, activating TPM-bypass!
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loading compiled-in module X.509 certificates
+Nov 07 06:03:31 dp-dev-20261105 kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 763fa699b123786e18395918bd0b2e4595411ee1'
+Nov 07 06:03:31 dp-dev-20261105 kernel: ima: Allocated hash algorithm: sha1
+Nov 07 06:03:31 dp-dev-20261105 kernel: ima: No architecture policies found
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: Initialising EVM extended attributes:
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.selinux
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.SMACK64
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.SMACK64EXEC
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.SMACK64TRANSMUTE
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.SMACK64MMAP
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.apparmor
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.ima
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: security.capability
+Nov 07 06:03:31 dp-dev-20261105 kernel: evm: HMAC attrs: 0x1
+Nov 07 06:03:31 dp-dev-20261105 kernel: PM:   Magic number: 2:703:63
+Nov 07 06:03:31 dp-dev-20261105 kernel: RAS: Correctable Errors collector initialized.
+Nov 07 06:03:31 dp-dev-20261105 kernel: clk: Disabling unused clocks
+Nov 07 06:03:31 dp-dev-20261105 kernel: Freeing unused decrypted memory: 2036K
+Nov 07 06:03:31 dp-dev-20261105 kernel: Freeing unused kernel image (initmem) memory: 3296K
+Nov 07 06:03:31 dp-dev-20261105 kernel: Write protecting the kernel read-only data: 30720k
+Nov 07 06:03:31 dp-dev-20261105 kernel: Freeing unused kernel image (text/rodata gap) memory: 2036K
+Nov 07 06:03:31 dp-dev-20261105 kernel: Freeing unused kernel image (rodata/data gap) memory: 1276K
+Nov 07 06:03:31 dp-dev-20261105 kernel: x86/mm: Checked W+X mappings: passed, no W+X pages found.
+Nov 07 06:03:31 dp-dev-20261105 kernel: Run /init as init process
+Nov 07 06:03:31 dp-dev-20261105 kernel:   with arguments:
+Nov 07 06:03:31 dp-dev-20261105 kernel:     /init
+Nov 07 06:03:31 dp-dev-20261105 kernel:   with environment:
+Nov 07 06:03:31 dp-dev-20261105 kernel:     HOME=/
+Nov 07 06:03:31 dp-dev-20261105 kernel:     TERM=linux
+Nov 07 06:03:31 dp-dev-20261105 kernel: ahci 0000:00:1f.2: version 3.0
+Nov 07 06:03:31 dp-dev-20261105 kernel: ACPI: \_SB_.GSIA: Enabled at IRQ 16
+Nov 07 06:03:31 dp-dev-20261105 kernel: virtio_blk virtio3: [vda] 104857600 512-byte logical blocks (53.7 GB/50.0 GiB)
+Nov 07 06:03:31 dp-dev-20261105 kernel: cryptd: max_cpu_qlen set to 1000
+Nov 07 06:03:31 dp-dev-20261105 kernel: ahci 0000:00:1f.2: AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
+Nov 07 06:03:31 dp-dev-20261105 kernel: ahci 0000:00:1f.2: flags: 64bit ncq only 
+Nov 07 06:03:31 dp-dev-20261105 kernel: scsi host0: Virtio SCSI HBA
+Nov 07 06:03:31 dp-dev-20261105 kernel: AVX2 version of gcm_enc/dec engaged.
+Nov 07 06:03:31 dp-dev-20261105 kernel: AES CTR mode by8 optimization enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel:  vda: vda1 vda14 vda15
+Nov 07 06:03:31 dp-dev-20261105 kernel: scsi host1: ahci
+Nov 07 06:03:31 dp-dev-20261105 kernel: virtio_blk virtio4: [vdb] 2048 512-byte logical blocks (1.05 MB/1.00 MiB)
+Nov 07 06:03:31 dp-dev-20261105 kernel: scsi host2: ahci
+Nov 07 06:03:31 dp-dev-20261105 kernel: scsi host3: ahci
+Nov 07 06:03:31 dp-dev-20261105 kernel: scsi host4: ahci
+Nov 07 06:03:31 dp-dev-20261105 kernel: virtio_net virtio0 enp1s0: renamed from eth0
+Nov 07 06:03:31 dp-dev-20261105 kernel: scsi host5: ahci
+Nov 07 06:03:31 dp-dev-20261105 kernel: scsi host6: ahci
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata1: SATA max UDMA/133 abar m4096@0xfea22000 port 0xfea22100 irq 56
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata2: SATA max UDMA/133 abar m4096@0xfea22000 port 0xfea22180 irq 56
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata3: SATA max UDMA/133 abar m4096@0xfea22000 port 0xfea22200 irq 56
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata4: SATA max UDMA/133 abar m4096@0xfea22000 port 0xfea22280 irq 56
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata5: SATA max UDMA/133 abar m4096@0xfea22000 port 0xfea22300 irq 56
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata6: SATA max UDMA/133 abar m4096@0xfea22000 port 0xfea22380 irq 56
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata5: SATA link down (SStatus 0 SControl 300)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata4: SATA link down (SStatus 0 SControl 300)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata1: SATA link down (SStatus 0 SControl 300)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata2: SATA link down (SStatus 0 SControl 300)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata3: SATA link down (SStatus 0 SControl 300)
+Nov 07 06:03:31 dp-dev-20261105 kernel: ata6: SATA link down (SStatus 0 SControl 300)
+Nov 07 06:03:31 dp-dev-20261105 kernel: input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input3
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx512x4 gen() 20971 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx512x4 xor()  4407 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx512x2 gen() 21124 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx512x2 xor() 22534 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx512x1 gen() 17749 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx512x1 xor() 21939 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx2x4   gen() 20629 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx2x4   xor()  4229 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx2x2   gen() 20020 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx2x2   xor() 18540 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx2x1   gen() 15164 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: avx2x1   xor() 12323 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: sse2x4   gen() 13569 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: sse2x4   xor()  2799 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: sse2x2   gen() 13511 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: sse2x2   xor()  9988 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: sse2x1   gen() 12190 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: sse2x1   xor()  9002 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: using algorithm avx512x2 gen() 21124 MB/s
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: .... xor() 22534 MB/s, rmw enabled
+Nov 07 06:03:31 dp-dev-20261105 kernel: raid6: using avx512x2 recovery algorithm
+Nov 07 06:03:31 dp-dev-20261105 kernel: xor: automatically using best checksumming function   avx       
+Nov 07 06:03:31 dp-dev-20261105 kernel: async_tx: api initialized (async)
+Nov 07 06:03:31 dp-dev-20261105 kernel: Btrfs loaded, crc32c=crc32c-intel, zoned=yes, fsverity=yes
+Nov 07 06:03:31 dp-dev-20261105 kernel: EXT4-fs (vda1): mounted filesystem with ordered data mode. Opts: (null). Quota mode: none.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Inserted module 'autofs4'
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: systemd 249.11-0ubuntu3.23 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY -P11KIT -QRENCODE +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified)
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Detected virtualization kvm.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Detected architecture x86-64.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Hostname set to <dp-dev-20261105>.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Configuration file /run/systemd/system/netplan-ovs-cleanup.service is marked world-inaccessible. This has no effect as configuration data is accessible via APIs without restrictions. Proceeding anyway.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: /lib/systemd/system/snapd.service:23: Unknown key name 'RestartMode' in section 'Service', ignoring.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Queued start job for default target Graphical Interface.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Created slice Slice /system/modprobe.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Created slice Slice /system/serial-getty.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Created slice Slice /system/systemd-fsck.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Created slice User and Session Slice.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Reached target Slice Units.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Reached target Mounting snaps.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Reached target Swaps.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Reached target Local Verity Protected Volumes.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on Device-mapper event daemon FIFOs.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on LVM2 poll daemon socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on multipathd control socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on Syslog Socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on fsck to fsckd communication Socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on initctl Compatibility Named Pipe.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on Journal Audit Socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on Journal Socket (/dev/log).
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on Journal Socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on Network Service Netlink Socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on udev Control Socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Listening on udev Kernel Socket.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounting Huge Pages File System...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounting POSIX Message Queue File System...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounting Kernel Debug File System...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounting Kernel Trace File System...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Journal Service...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Set the console keyboard layout...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Create List of Static Device Nodes...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Condition check resulted in LXD - agent being skipped.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Load Kernel Module configfs...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Load Kernel Module drm...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Load Kernel Module efi_pstore...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Load Kernel Module fuse...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Condition check resulted in OpenVSwitch configuration for cleanup being skipped.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Condition check resulted in File System Check on Root Device being skipped.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Load Kernel Modules...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Remount Root and Kernel File Systems...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Coldplug All udev Devices...
+Nov 07 06:03:31 dp-dev-20261105 kernel: EXT4-fs (vda1): re-mounted. Opts: discard,errors=remount-ro. Quota mode: none.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounted Huge Pages File System.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounted POSIX Message Queue File System.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounted Kernel Debug File System.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounted Kernel Trace File System.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Create List of Static Device Nodes.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: modprobe@configfs.service: Deactivated successfully.
+Nov 07 06:03:31 dp-dev-20261105 kernel: bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Load Kernel Module configfs.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: modprobe@drm.service: Deactivated successfully.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Load Kernel Module drm.
+Nov 07 06:03:31 dp-dev-20261105 kernel: Bridge firewalling registered
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: modprobe@efi_pstore.service: Deactivated successfully.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Load Kernel Module efi_pstore.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: modprobe@fuse.service: Deactivated successfully.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Load Kernel Module fuse.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Load Kernel Modules.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Finished Remount Root and Kernel File Systems.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounting FUSE Control File System...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Mounting Kernel Configuration File System...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Device-Mapper Multipath Device Controller...
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Condition check resulted in Platform Persistent Storage Archival being skipped.
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Load/Save Random Seed...
+Nov 07 06:03:31 dp-dev-20261105 kernel: alua: device handler registered
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Apply Kernel Variables...
+Nov 07 06:03:31 dp-dev-20261105 kernel: emc: device handler registered
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Starting Create System Users...
+Nov 07 06:03:31 dp-dev-20261105 kernel: rdac: device handler registered
+Nov 07 06:03:31 dp-dev-20261105 systemd[1]: Started Journal Service.
+Nov 07 06:03:31 dp-dev-20261105 kernel: loop0: detected capacity change from 0 to 151512
+Nov 07 06:03:31 dp-dev-20261105 kernel: loop1: detected capacity change from 0 to 236152
+Nov 07 06:03:31 dp-dev-20261105 kernel: loop2: detected capacity change from 0 to 102952
+Nov 07 06:03:31 dp-dev-20261105 kernel: loop3: detected capacity change from 0 to 66584
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.040:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe" pid=551 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.040:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe//kmod" pid=551 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.040:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="lsb_release" pid=550 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.052:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="ubuntu_pro_apt_news" pid=553 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.060:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/bin/man" pid=559 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.060:7): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_filter" pid=559 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.060:8): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_groff" pid=559 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.060:9): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-client.action" pid=552 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.060:10): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-helper" pid=552 comm="apparmor_parser"
+Nov 07 06:03:32 dp-dev-20261105 kernel: audit: type=1400 audit(1794031412.060:11): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/connman/scripts/dhclient-script" pid=552 comm="apparmor_parser"
+Nov 07 06:03:33 dp-dev-20261105 kernel: ISO 9660 Extensions: Microsoft Joliet Level 3
+Nov 07 06:03:33 dp-dev-20261105 kernel: ISO 9660 Extensions: RRIP_1991A
+Nov 07 06:03:35 dp-dev-20261105 kernel: ISO 9660 Extensions: Microsoft Joliet Level 3
+Nov 07 06:03:35 dp-dev-20261105 kernel: ISO 9660 Extensions: RRIP_1991A
+Nov 07 06:03:36 dp-dev-20261105 kernel: loop4: detected capacity change from 0 to 8
+Nov 07 06:03:38 dp-dev-20261105 kernel: overlayfs: idmapped layers are currently not supported
+Nov 07 06:03:49 dp-dev-20261105 kernel: Initializing XFRM netlink socket
+Nov 07 06:03:51 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): cilium_host: link becomes ready
+Nov 07 06:03:51 dp-dev-20261105 kernel: eth0: renamed from tmp5da5d
+Nov 07 06:03:51 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:03:51 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc4f8ca08e9729: link becomes ready
+Nov 07 06:03:51 dp-dev-20261105 kernel: eth0: renamed from tmp3f0ba
+Nov 07 06:03:51 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:03:51 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc1cb4355a434b: link becomes ready
+Nov 07 06:03:52 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): cilium: link becomes ready
+Nov 07 06:03:52 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc_health: link becomes ready
+Nov 07 06:03:53 dp-dev-20261105 kernel: cilium_vxlan: Caught tx_queue_len zero misconfig
+Nov 07 06:03:54 dp-dev-20261105 kernel: cilium_net: Caught tx_queue_len zero misconfig
+Nov 07 06:03:56 dp-dev-20261105 kernel: eth0: renamed from tmpe51f6
+Nov 07 06:03:56 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:03:56 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc988ac65d0f50: link becomes ready
+Nov 07 06:05:08 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/compat4279082257/lower1' does not support file handles, falling back to xino=off.
+Nov 07 06:05:08 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/metacopy-check3647665459/l1' does not support file handles, falling back to xino=off.
+Nov 07 06:05:08 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/opaque-bug-check3680286973/l2' does not support file handles, falling back to xino=off.
+Nov 07 06:05:31 dp-dev-20261105 kernel: eth0: renamed from tmp87014
+Nov 07 06:05:31 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:05:31 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxcc402832af285: link becomes ready
+Nov 07 06:06:25 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/compat2466326132/lower1' does not support file handles, falling back to xino=off.
+Nov 07 06:06:25 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/metacopy-check117627160/l1' does not support file handles, falling back to xino=off.
+Nov 07 06:06:25 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/opaque-bug-check137698789/l2' does not support file handles, falling back to xino=off.
+Nov 07 06:06:27 dp-dev-20261105 kernel: eth0: renamed from tmpd2709
+Nov 07 06:06:27 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:06:27 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc803b919b4b50: link becomes ready
+Nov 07 06:06:53 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/compat3936616967/lower1' does not support file handles, falling back to xino=off.
+Nov 07 06:06:53 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/metacopy-check2948417925/l1' does not support file handles, falling back to xino=off.
+Nov 07 06:06:53 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/opaque-bug-check2150991352/l2' does not support file handles, falling back to xino=off.
+Nov 07 06:06:55 dp-dev-20261105 kernel: eth0: renamed from tmp3a0f2
+Nov 07 06:06:55 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:06:55 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc3420da92ad98: link becomes ready
+Nov 07 06:07:17 dp-dev-20261105 kernel: eth0: renamed from tmp46ccf
+Nov 07 06:07:17 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:07:17 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc60db22bad092: link becomes ready
+Nov 07 06:07:52 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/compat3847222537/lower1' does not support file handles, falling back to xino=off.
+Nov 07 06:07:52 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/metacopy-check4287320073/l1' does not support file handles, falling back to xino=off.
+Nov 07 06:07:52 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/opaque-bug-check782609687/l2' does not support file handles, falling back to xino=off.
+Nov 07 06:07:54 dp-dev-20261105 kernel: eth0: renamed from tmp50fb9
+Nov 07 06:07:54 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:07:54 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxcd308444931a3: link becomes ready
+Nov 07 06:08:06 dp-dev-20261105 kernel: eth0: renamed from tmp76f69
+Nov 07 06:08:06 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:08:06 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxcd38d44f3de7a: link becomes ready
+Nov 07 06:08:34 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/compat3973927997/lower1' does not support file handles, falling back to xino=off.
+Nov 07 06:08:34 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/metacopy-check3348985525/l1' does not support file handles, falling back to xino=off.
+Nov 07 06:08:34 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/opaque-bug-check457327208/l2' does not support file handles, falling back to xino=off.
+Nov 07 06:08:51 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/compat124941835/lower1' does not support file handles, falling back to xino=off.
+Nov 07 06:08:51 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/metacopy-check4225675860/l1' does not support file handles, falling back to xino=off.
+Nov 07 06:08:51 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/opaque-bug-check101418457/l2' does not support file handles, falling back to xino=off.
+Nov 07 06:08:52 dp-dev-20261105 kernel: eth0: renamed from tmpba25a
+Nov 07 06:08:52 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:08:52 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxcdd96b66078cb: link becomes ready
+Nov 07 06:09:05 dp-dev-20261105 kernel: eth0: renamed from tmp4f784
+Nov 07 06:09:05 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:09:05 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc66491be90c85: link becomes ready
+Nov 07 06:09:27 dp-dev-20261105 kernel: eth0: renamed from tmpc63c9
+Nov 07 06:09:27 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Nov 07 06:09:27 dp-dev-20261105 kernel: IPv6: ADDRCONF(NETDEV_CHANGE): lxc263b1c8cc7af: link becomes ready
+Nov 07 06:09:51 dp-dev-20261105 kernel: overlayfs: fs on '/home/ubuntu/.local/share/containers/storage/overlay/compat2494705004/lower1' does not support file handles, falling back to xino=off.
