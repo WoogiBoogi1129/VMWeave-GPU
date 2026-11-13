@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "sourceRevision": "76ce090f8d5498f8ecd76d77e6fafd173c0e83ef",
+  "guestLibrarySHA256": "08ccac5fb763451e448a68700f6156a6e0eba62950614913fb07c62ba966cfa0",
+  "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:f313b3434f1209f8b0c3fd5785cdf58409cb83d01d572e97c121dbb8ee818b0a",
+  "guestImage": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:e07b0250f7d045841326b5b55c56184a01ab3d9ee99c5a12cda6bd21c3264d35",
+  "cnnSteps": 80,
+  "cnnTensors": 1040,
+  "independentCNNAudit": "PASS",
+  "cases": {
+    "published-relu": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "69a9c2a8-d5b7-4eb0-91da-e1050421e1f6",
+      "tensors": 70,
+      "maxAbs": 5.960464477539062e-07
+    },
+    "published-pool": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "3438c70d-cb1e-42ae-b4e7-6e0ab09f4690",
+      "tensors": 70,
+      "maxAbs": 7.152557373046875e-07
+    },
+    "published-cnn": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "13b3850e-7bcd-428e-a11a-01623b61c3d5",
+      "tensors": 300,
+      "maxAbs": 2.384185791015625e-07
+    },
+    "published-cnn-repeat": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "78e1b99e-0038-41e8-b733-0beb9b2d9f84",
+      "tensors": 300,
+      "maxAbs": 2.384185791015625e-07
+    },
+    "published-mnist": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "152e0034-18b8-4907-877b-8af0d7560eb0",
+      "tensors": 300,
+      "maxAbs": 2.384185791015625e-07
+    },
+    "published-mlp": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "8c915d3f-5ee7-4a27-8eeb-d793b5fd04a2",
+      "tensors": 22,
+      "maxAbs": 4.284083843231201e-08
+    },
+    "published-lstm": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "95cdf593-67b5-41be-b8b9-166017f94799",
+      "tensors": 36,
+      "maxAbs": 3.516674041748047e-06
+    },
+    "published-basic": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "b45236f4-abe1-4ca7-8cd2-cdbd5a4e8a39"
+    }
+  },
+  "testNamespacesRemoved": true,
+  "sessionsReclaimed": true,
+  "idleProbes": [
+    {
+      "name": "published-idle",
+      "podUID": "84824a55-e7e6-4310-aac2-41a0f7cb6549",
+      "status": "PASS",
+      "idleSeconds": 30,
+      "namespaceRemoved": true
+    },
+    {
+      "name": "published-idle-host",
+      "podUID": "7b6949ba-967e-4905-a5c0-b8c2e7d933c9",
+      "status": "PASS",
+      "idleSeconds": 30,
+      "namespaceRemoved": true
+    }
+  ]
+}

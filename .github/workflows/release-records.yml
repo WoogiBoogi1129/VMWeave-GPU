@@ -1,0 +1,59 @@
+name: published-release-records
+on:
+  push:
+    branches: [main]
+    paths:
+      - deploy/releases/current.json
+      - deploy/releases/v*.json
+      - deploy/releases/device-plugin-v*.json
+      - .github/workflows/release-records.yml
+permissions:
+  contents: write
+jobs:
+  notes:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Render verified deployment notes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, re, subprocess
+          root=pathlib.Path('.')
+          current=json.loads((root/'deploy/releases/current.json').read_text())
+          release=json.loads((root/current['record']).read_text())
+          plugin=json.loads((root/release['devicePluginRecord']).read_text())
+          tag=release['tag']; ptag=plugin['tag']; source=release['sourceRevision']
+          assert re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+',tag)
+          assert re.fullmatch(r'device-plugin-v[0-9]+\.[0-9]+\.[0-9]+',ptag)
+          assert re.fullmatch(r'[a-f0-9]{40}',source) and plugin['sourceRevision']==source
+          assert json.loads((root/release['validation']).read_text())['status']=='PASS'
+          subprocess.run(['python3',f'deploy/releases/evidence/{tag}/validate.py'],check=True)
+          repo=os.environ['GITHUB_REPOSITORY']; revision=os.environ['GITHUB_SHA']
+          body=(f"Paired VMWeave Guest/Worker release {tag}, Operator chart {release['chart']['version']}, "
+                f"Device Plugin {plugin['version']}.\n\n"
+                f"Build source: `{source}`. Guest library SHA256: `{release['guestLibrarySHA256']}`.\n\n"
+                f"Verified deployment and limitations: https://github.com/{repo}/blob/{revision}/{release['evidence']}\n\n"
+                f"Installation: https://github.com/{repo}/blob/{revision}/{current['guide']}\n\n"
+                "CNN requires `TORCH_CUDNN_V8_API_DISABLED=1` and the documented FP32 legacy scope. "
+                "The small CNN tests establish functional correctness, not full-dataset accuracy or throughput.\n\n"
+                "Verify SHA256SUMS before using release assets. Image digests and chart records are in deploy/releases/.")
+          pathlib.Path('/tmp/runtime-notes.md').write_text(body+'\n')
+          pathlib.Path('/tmp/plugin-notes.md').write_text(body+'\n\nThe portable image archive and chart are attached to this release.\n')
+          with open(os.environ['GITHUB_ENV'],'a') as env:
+              env.write(f'RELEASE_TAG={tag}\nPLUGIN_TAG={ptag}\nBUILD_REVISION={source}\n')
+          PY
+      - name: Match existing tags and update notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG" "refs/tags/$PLUGIN_TAG:refs/tags/$PLUGIN_TAG"
+          test "$(git rev-parse "$RELEASE_TAG^{}")" = "$BUILD_REVISION"
+          test "$(git rev-parse "$PLUGIN_TAG^{}")" = "$BUILD_REVISION"
+          gh release view "$RELEASE_TAG" >/dev/null
+          gh release view "$PLUGIN_TAG" >/dev/null
+          gh release edit "$RELEASE_TAG" --notes-file /tmp/runtime-notes.md --latest
+          gh release edit "$PLUGIN_TAG" --notes-file /tmp/plugin-notes.md --latest=false

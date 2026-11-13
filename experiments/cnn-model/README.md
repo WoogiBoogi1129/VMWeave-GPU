@@ -54,3 +54,6 @@ optimizer를 호출하지 않고 SGD를 수동 갱신하여 저장된 CPU·GPU �
 [2026-11-13 결과](results/20261113/REPORT.md).
 증거 검증은 `python3 experiments/cnn-model/validate.py`, 원시 텐서 감사는
 CPU PyTorch 환경에서 `python3 experiments/cnn-model/audit_tensors.py`로 실행한다.
+
+후속 [v0.5.10·Plugin0.1.2 공개 배포물 검증](../../deploy/releases/evidence/v0.5.10/README.md)에서
+게시된 Guest/Worker와 Helm을 적용해 확인했다. 이 디렉터리의 후보 결과·해시는 당시 기록으로 보존한다.

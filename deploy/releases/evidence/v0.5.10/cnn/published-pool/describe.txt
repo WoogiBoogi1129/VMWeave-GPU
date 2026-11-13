@@ -1,0 +1,119 @@
+Name:             published-pool
+Namespace:        cnn-model-release-20261113
+Priority:         0
+Service Account:  default
+Node:             dp-dev-20261105/10.0.2.2
+Start Time:       Fri, 13 Nov 2026 08:46:30 +0000
+Labels:           vmweave-experiment=cnn-model-release-20261113
+Annotations:      <none>
+Status:           Succeeded
+SeccompProfile:   RuntimeDefault
+IP:               10.242.0.109
+IPs:
+  IP:  10.242.0.109
+Init Containers:
+  guest-adapter:
+    Container ID:  cri-o://e3e960f68fb8de2cb4849dac5f894c374b3ddf4a0195b20f7b86d559ac9fd0a6
+    Image:         ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:e07b0250f7d045841326b5b55c56184a01ab3d9ee99c5a12cda6bd21c3264d35
+    Image ID:      ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:e07b0250f7d045841326b5b55c56184a01ab3d9ee99c5a12cda6bd21c3264d35
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sh
+      -ec
+    Args:
+      cp /opt/vmweave/guest/libvmweave_guest.so /adapter/; cd /adapter; echo '08ccac5fb763451e448a68700f6156a6e0eba62950614913fb07c62ba966cfa0  libvmweave_guest.so' | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Fri, 13 Nov 2026 08:46:30 +0000
+      Finished:     Fri, 13 Nov 2026 08:46:30 +0000
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  64Mi
+    Requests:
+      cpu:        10m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /adapter from adapter (rw)
+Containers:
+  pytorch:
+    Container ID:  cri-o://02dfe47d247cffb6c9df442cb46b35f91c6fdbe9a144b9ca89e6dfd2fd2c3f09
+    Image:         docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Image ID:      docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+      -ec
+    Args:
+      export LD_LIBRARY_PATH="/opt/vmweave/adapter${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"; exec python -u /work/supervise.py --mode gpu --backend legacy --case pool
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Fri, 13 Nov 2026 08:46:31 +0000
+      Finished:     Fri, 13 Nov 2026 08:46:40 +0000
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:             2
+      memory:          3Gi
+      vmweave.io/gpu:  1
+    Requests:
+      cpu:             500m
+      memory:          1Gi
+      vmweave.io/gpu:  1
+    Environment:
+      HOME:                      /tmp
+      PYTHONDONTWRITEBYTECODE:   1
+      LD_PRELOAD:                /opt/vmweave/adapter/libvmweave_guest.so
+      VMWEAVE_MIRROR_DEVICE_VA:  1
+      PYTHONFAULTHANDLER:        1
+      CNN_LOADER_TRACE:          0
+      PYTHONFAULTHANDLER:        1
+    Mounts:
+      /opt/vmweave/adapter from adapter (ro)
+      /results from results (rw)
+      /tmp from tmp (rw)
+      /work from code (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  code:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      code-published-pool
+    Optional:  false
+  results:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  tmp:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+  adapter:
+    Type:        EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:      
+    SizeLimit:   <unset>
+QoS Class:       Burstable
+Node-Selectors:  kubernetes.io/hostname=dp-dev-20261105
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  15s   default-scheduler  Successfully assigned cnn-model-release-20261113/published-pool to dp-dev-20261105
+  Normal  Pulled     15s   kubelet            spec.initContainers{guest-adapter}: Container image "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:e07b0250f7d045841326b5b55c56184a01ab3d9ee99c5a12cda6bd21c3264d35" already present on machine and can be accessed by the pod
+  Normal  Created    15s   kubelet            spec.initContainers{guest-adapter}: Container created
+  Normal  Started    15s   kubelet            spec.initContainers{guest-adapter}: Container started
+  Normal  Pulled     14s   kubelet            spec.containers{pytorch}: Container image "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be" already present on machine and can be accessed by the pod
+  Normal  Created    14s   kubelet            spec.containers{pytorch}: Container created
+  Normal  Started    14s   kubelet            spec.containers{pytorch}: Container started

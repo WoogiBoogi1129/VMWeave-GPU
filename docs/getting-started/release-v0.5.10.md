@@ -36,8 +36,10 @@ Profile/Request/Channel 생성 → VM 시작 → Plugin hash/image 갱신 → GP
 - [작은 CNN 조합 학습](../../experiments/cnn-model/results/20261113/REPORT.md): GPU80 step/1,040개 텐서,
   합성 입력과 MNIST80개 샘플, 수동 역전파·SGD를 이용한 독립 검산.
 
-위 자료는 게시 전 후보 binary의 검증이다. 공개 이미지의 digest·Guest hash와
-실제 적용 상태는 게시 후 `deploy/releases/`의 해당 버전 기록에 별도로 남긴다.
+위 자료는 게시 전 후보 binary의 검증이다. 후속 [공개 배포물 검증](../../deploy/releases/evidence/v0.5.10/README.md)에서
+게시된 Guest/Worker로 CNN80 step/1,040개 텐서와 MLP/LSTM 회귀를 다시 확인했다.
+[릴리스 JSON](../../deploy/releases/v0.5.10.json)과
+[Plugin0.1.2 기록](../../deploy/releases/device-plugin-v0.1.2.json)에 공개 digest·Guest hash·실제 적용 상태를 기록했다.
 현재 공개 버전의 판정은 [current.json](../../deploy/releases/current.json)을 따른다.
 
 기본 cuDNN graph, BatchNorm, AMP, NHWC, grouped/dilated convolution, autotuning Find,

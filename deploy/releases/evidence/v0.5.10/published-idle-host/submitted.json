@@ -1,0 +1,61 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "published-idle-host",
+    "namespace": "cnn-release-idle-20261113",
+    "labels": {
+      "vmweave-experiment": "cnn-release-idle-20261113"
+    }
+  },
+  "spec": {
+    "restartPolicy": "Never",
+    "automountServiceAccountToken": false,
+    "securityContext": {
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "runAsGroup": 1000,
+      "supplementalGroups": [
+        998
+      ],
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "containers": [
+      {
+        "name": "smoke",
+        "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:7a4c1df632f3c4078bb5605350e5a7ecf02db6ce4f4c1ce0f844e47352760383",
+        "args": [
+          "30"
+        ],
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "64Mi"
+          },
+          "limits": {
+            "cpu": "1",
+            "memory": "256Mi",
+            "vmweave.io/gpu": 1
+          }
+        },
+        "command": [
+          "/opt/vmweave/bin/sgemm"
+        ]
+      }
+    ],
+    "activeDeadlineSeconds": 120,
+    "nodeSelector": {
+      "kubernetes.io/hostname": "dp-dev-20261105"
+    }
+  }
+}

@@ -9,6 +9,7 @@ import base64
 import hashlib
 import json
 from pathlib import Path
+import re
 import shlex
 import subprocess
 import time
@@ -38,14 +39,22 @@ def main(workload_root=HERE, namespace_prefix='cnn-forward-',
     p.add_argument('--mode', choices=['cpu', 'gpu'], default='gpu')
     p.add_argument('--backend', choices=['legacy', 'default'], required=True)
     p.add_argument('--case', choices=cases, default='minimal')
-    p.add_argument('--guest-library', type=Path)
-    p.add_argument('--worker-image', help='Required with candidate Guest; exact paired Worker image')
+    guest_args=p.add_mutually_exclusive_group()
+    guest_args.add_argument('--guest-library', type=Path)
+    guest_args.add_argument('--guest-image', help='Published Guest image pinned by digest')
+    p.add_argument('--library-sha256', help='Verified library hash for --guest-image')
+    p.add_argument('--worker-image', help='Required with explicit Guest; exact paired Worker image')
     p.add_argument('--loader-trace', action='store_true')
     a = p.parse_args()
-    if a.guest_library and not a.worker_image:
-        p.error('candidate Guest requires --worker-image')
-    if a.worker_image and not a.guest_library:
-        p.error('--worker-image requires a paired --guest-library')
+    if (a.guest_library or a.guest_image) and not a.worker_image:
+        p.error('explicit Guest requires --worker-image')
+    if a.worker_image and not (a.guest_library or a.guest_image):
+        p.error('--worker-image requires a paired --guest-library or --guest-image')
+    if a.guest_image and (not re.fullmatch(r'.+@sha256:[0-9a-f]{64}',a.guest_image) or
+                          not re.fullmatch(r'[0-9a-f]{64}',a.library_sha256 or '')):
+        p.error('--guest-image requires a pinned digest and --library-sha256')
+    if a.library_sha256 and not a.guest_image:
+        p.error('--library-sha256 requires --guest-image')
     c = json.loads(a.connection.read_text())
     ns = c['namespace']; runid = c['runID']
     assert ns.startswith(namespace_prefix) and runid.startswith(namespace_prefix)
@@ -110,6 +119,10 @@ def main(workload_root=HERE, namespace_prefix='cnn-forward-',
         init=spec['initContainers'][0]
         init['volumeMounts'].append(dict(name='candidate',mountPath='/candidate',readOnly=True))
         init['args']=['cp /candidate/libvmweave_guest.so /adapter/; cd /adapter; echo '+shlex.quote(digest+'  libvmweave_guest.so')+' | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so']
+    elif a.guest_image and a.mode=='gpu':
+        digest=a.library_sha256
+        init=spec['initContainers'][0];init['image']=a.guest_image
+        init['args']=['cp /opt/vmweave/guest/libvmweave_guest.so /adapter/; cd /adapter; echo '+shlex.quote(digest+'  libvmweave_guest.so')+' | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so']
     else:
         digest=json.loads((REPO/'deploy/releases/v0.5.9.json').read_text())['guestLibrarySHA256']
     if a.mode=='cpu':

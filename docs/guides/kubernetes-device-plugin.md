@@ -4,10 +4,11 @@ VMWeave Guest의 기존 GPU quota를 내부 Kubernetes에서 예약하고 연결
 자원은 `vmweave.io/gpu: 1`, 지원 범위는 **할당 컨테이너당 동시 CUDA client 1개**다.
 이 값은 물리 GPU 1개나 추가 VRAM 할당을 의미하지 않는다.
 
-현재 검증 릴리스는 [device-plugin-v0.1.1](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.1)이다.
-[배포물·digest 기록](../../deploy/releases/device-plugin-v0.1.1.json)과
-[공개 배포물의 실제 VM 검증](../../deploy/releases/evidence/v0.5.9/README.md)을 함께 확인한다.
-기본 LSTM 경로에는 v0.5.9 Worker와 새 Guest package를 함께 사용한다.
+현재 검증 릴리스는 [device-plugin-v0.1.2](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.2)이다.
+[배포물·digest 기록](../../deploy/releases/device-plugin-v0.1.2.json)과
+[공개 배포물의 실제 VM 검증](../../deploy/releases/evidence/v0.5.10/README.md)을 함께 확인한다.
+legacy CNN 경로에는 v0.5.10 Worker와 새 Guest package를 함께 사용한다.
+CNN은 import 전에 `TORCH_CUDNN_V8_API_DISABLED=1`을 명시한다.
 
 ## 설치 전 준비
 
@@ -50,21 +51,21 @@ Plugin DaemonSet은 선택한 노드에만 설치된다. 내부 클러스터의 
 관리용 hostPath와 root 실행을 허용하는 namespace를 사용한다. 일반 GPU workload는 non-root다.
 실제 GPU가 없는 노드에 임의의 상태 파일을 만들어 자원을 등록하지 않는다.
 
-v0.1.1의 공개 OCI chart 설치 예시는 다음과 같다. Guest package 준비와 실제 GID 확인 후 실행한다.
+v0.1.2의 공개 OCI chart 설치 예시는 다음과 같다. Guest package 준비와 실제 GID 확인 후 실행한다.
 
 ```sh
 helm upgrade --install vmweave-device-plugin \
-  oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin --version 0.1.1 \
+  oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin --version 0.1.2 \
   --namespace vmweave-device-plugin --create-namespace \
-  --set image.digest=sha256:dafbc657529fc135709394f7f109a260e150cb5c18e455c004278adf45176c04 \
-  --set librarySHA256=3b3644f42ae3d075c08c22e2578e59553e29c5a446f65cf41f33ad68a070a4a9 \
+  --set image.digest=sha256:7678b58da304091cc9708363e1982970833053d97080cec32f9d6f5a53269b79 \
+  --set librarySHA256=08ccac5fb763451e448a68700f6156a6e0eba62950614913fb07c62ba966cfa0 \
   --set brokerGID=YOUR_VMWEAVE_GID
 ```
 
 Guest package 이미지:
-`ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:9cbbfb6c1501c84103f5e0f2fc921f384b11eea168a0f6971d7beb67b5384411`.
+`ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:314b16387117e07c4a39f762a08486c059715b98e5cb69f29740b91410aeced1`.
 지원 workload 이미지:
-`ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:0277bb187c613a943e7568a1acfc6f4d6e76e95273742c144ae38dffc4cfdbdb`.
+`ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:af074af45484bdd113154b4fa8c42241036ffe0ba556a18a805fe914ac148e5d`.
 
 ## 일반 사용자 실행
 
@@ -94,7 +95,7 @@ A의 CUDA 작업만 끝나고 컨테이너가 계속 실행 중이면 자원은 
 [기능 검증](../../experiments/device-plugin-pytorch/results/20261106-official/REPORT.md)에서
 CUDA 인식·전송·덧셈·행렬곱과 작은 5-step FP32 MLP 학습이 통과했다.
 당시 v0.1.0 조합의 기본 `Linear` 경로는 cuBLASLt에서 exit 139로 실패하므로,
-PyTorch import 전에 `DISABLE_ADDMM_CUDA_LT=1`을 적용한다. 이 조건에서 SGD 기본 옵션도 통과했다.
+PyTorch import 전에 `DISABLE_ADDMM_CUDA_LT=1`을 적용했던 기록이다. 현재 공개 버전에는 이 우회가 필요하지 않다. 이 조건에서 SGD 기본 옵션도 통과했다.
 
 Guest library는 공개 Guest 이미지의 initContainer가 emptyDir에 복사하고 hash를 확인한다.
 공식 PyTorch 컨테이너는 이를 읽기 전용 mount하며 `LD_PRELOAD`, adapter의 `LD_LIBRARY_PATH`,
@@ -157,3 +158,7 @@ Plugin·workload의 library hash와 ABI 호환성을 함께 맞춘다.
 소스·모의 검증과 실제 VM 검증은 별도로 기록하며, 공개 릴리스의 증거를 확인한 뒤 사용한다.
 
 [개발 계약과 단위 검사](../../integrations/kubernetes-device-plugin/README.md)
+
+2026-11-13 [v0.5.10·Device Plugin0.1.2 공개 배포물 검증](../../deploy/releases/evidence/v0.5.10/README.md)에서
+legacy FP32 작은 CNN·MNIST 일부 GPU80 step/1,040개 텐서와 MLP·LSTM 회귀가 통과했다.
+기본 graph·BatchNorm·AMP·ResNet/YOLO와 전체 데이터셋 성능을 검증한 것은 아니다.

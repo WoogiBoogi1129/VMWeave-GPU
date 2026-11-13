@@ -75,3 +75,6 @@ VM 증거 검증: `python3 experiments/cnn-forward/validate_vm.py`.
 최초 호스트 단계 증거 검증: `python3 experiments/cnn-forward/validate.py`.
 실제 VM 검증은 공식 `2.11.0+cu128` 이미지다. 최초 CPU self-check와 후속 독립 텐서
 재검산만 로컬 `2.11.0+flyt.cu128`의 CPU 기능을 사용했다.
+
+후속 [v0.5.10·Plugin0.1.2 공개 배포물 검증](../../deploy/releases/evidence/v0.5.10/README.md)에서
+게시된 Guest/Worker와 Helm을 적용해 확인했다. 이 디렉터리의 후보 결과·해시는 당시 기록으로 보존한다.

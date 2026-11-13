@@ -6,6 +6,7 @@ from pathlib import Path
 import torch
 import torch.nn.functional as F
 p=argparse.ArgumentParser();p.add_argument('--results',type=Path,default=Path(__file__).resolve().parent/'results/20261113')
+p.add_argument('--run-prefix',default='candidate-',help='Prefix for the five archived run names')
 a=p.parse_args();torch.set_num_threads(1);records=[]
 def load(root,name):return torch.load(root/name,map_location='cpu',weights_only=True)
 def replay(c):
@@ -50,6 +51,7 @@ def replay(c):
 
 for run,count in [('candidate-relu',70),('candidate-pool',70),('candidate-cnn',300),
                   ('candidate-cnn-repeat',300),('candidate-mnist',300)]:
+    run=a.run_prefix+run.removeprefix('candidate-')
     root=a.results/run;c=load(root,'initial.pt');cpu=load(root,'cpu.pt');gpu=load(root,'gpu.pt')
     expected=replay(c)
     keys={'d1','d0'} if c['case'] in ('cnn','mnist') else {'d1'}

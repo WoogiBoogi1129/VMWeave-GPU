@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "auditTorch": "2.11.0+flyt.cu128",
+  "tensors": 1040,
+  "rtol": 0.0001,
+  "atol": 1e-06,
+  "method": "manual Conv/ReLU/MaxPool/Linear/loss backward and SGD; no autograd backward",
+  "max_abs": 4.76837158203125e-07
+}

@@ -1,6 +1,10 @@
 # 현재 SHM 실행 범위와 메모리 조회 확장
 
-실제 검증과 미실행 항목은
+현행 v0.5.10의 legacy CNN·MLP·LSTM 공개 배포물 검증은
+[릴리스 증거](../../deploy/releases/evidence/v0.5.10/README.md)를 따른다.
+아래 후보 단계의 기록과 공개 binary의 hash를 구분한다.
+
+초기 구현의 실제 검증과 미실행 항목은
 [2026-09-22 보고서](../../experiments/evidence/IMPLEMENTATION_AND_VALIDATION_2026-09-22.md)를 따른다.
 함수 export 여부만으로 PyTorch 호환성을 판정하지 않는다.
 

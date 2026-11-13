@@ -1,0 +1,175 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "published-cnn-repeat",
+    "namespace": "cnn-model-release-20261113",
+    "labels": {
+      "vmweave-experiment": "cnn-model-release-20261113"
+    }
+  },
+  "spec": {
+    "restartPolicy": "Never",
+    "automountServiceAccountToken": false,
+    "activeDeadlineSeconds": 480,
+    "terminationGracePeriodSeconds": 10,
+    "nodeSelector": {
+      "kubernetes.io/hostname": "dp-dev-20261105"
+    },
+    "securityContext": {
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "runAsGroup": 1000,
+      "fsGroup": 1000,
+      "supplementalGroups": [
+        998
+      ],
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "containers": [
+      {
+        "name": "pytorch",
+        "image": "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+        "imagePullPolicy": "IfNotPresent",
+        "command": [
+          "/bin/sh",
+          "-ec"
+        ],
+        "args": [
+          "export LD_LIBRARY_PATH=\"/opt/vmweave/adapter${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}\"; exec python -u /work/supervise.py --mode gpu --backend legacy --case cnn"
+        ],
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "readOnlyRootFilesystem": true,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "env": [
+          {
+            "name": "HOME",
+            "value": "/tmp"
+          },
+          {
+            "name": "PYTHONDONTWRITEBYTECODE",
+            "value": "1"
+          },
+          {
+            "name": "LD_PRELOAD",
+            "value": "/opt/vmweave/adapter/libvmweave_guest.so"
+          },
+          {
+            "name": "VMWEAVE_MIRROR_DEVICE_VA",
+            "value": "1"
+          },
+          {
+            "name": "PYTHONFAULTHANDLER",
+            "value": "1"
+          },
+          {
+            "name": "CNN_LOADER_TRACE",
+            "value": "0"
+          },
+          {
+            "name": "PYTHONFAULTHANDLER",
+            "value": "1"
+          }
+        ],
+        "resources": {
+          "requests": {
+            "cpu": "500m",
+            "memory": "1Gi"
+          },
+          "limits": {
+            "cpu": "2",
+            "memory": "3Gi",
+            "vmweave.io/gpu": 1
+          }
+        },
+        "volumeMounts": [
+          {
+            "name": "code",
+            "mountPath": "/work",
+            "readOnly": true
+          },
+          {
+            "name": "results",
+            "mountPath": "/results"
+          },
+          {
+            "name": "tmp",
+            "mountPath": "/tmp"
+          },
+          {
+            "name": "adapter",
+            "mountPath": "/opt/vmweave/adapter",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "code",
+        "configMap": {
+          "name": "code-published-cnn-repeat"
+        }
+      },
+      {
+        "name": "results",
+        "emptyDir": {}
+      },
+      {
+        "name": "tmp",
+        "emptyDir": {}
+      },
+      {
+        "name": "adapter",
+        "emptyDir": {}
+      }
+    ],
+    "initContainers": [
+      {
+        "name": "guest-adapter",
+        "image": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:e07b0250f7d045841326b5b55c56184a01ab3d9ee99c5a12cda6bd21c3264d35",
+        "imagePullPolicy": "IfNotPresent",
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "readOnlyRootFilesystem": true,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "command": [
+          "sh",
+          "-ec"
+        ],
+        "args": [
+          "cp /opt/vmweave/guest/libvmweave_guest.so /adapter/; cd /adapter; echo '08ccac5fb763451e448a68700f6156a6e0eba62950614913fb07c62ba966cfa0  libvmweave_guest.so' | sha256sum -c -; ln -s libvmweave_guest.so libcuda.so.1; chmod 0555 libvmweave_guest.so"
+        ],
+        "volumeMounts": [
+          {
+            "name": "adapter",
+            "mountPath": "/adapter"
+          }
+        ],
+        "resources": {
+          "requests": {
+            "cpu": "10m",
+            "memory": "32Mi"
+          },
+          "limits": {
+            "cpu": "200m",
+            "memory": "64Mi"
+          }
+        }
+      }
+    ]
+  }
+}

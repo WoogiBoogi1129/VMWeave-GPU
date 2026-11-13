@@ -52,3 +52,6 @@ Pod 제한은 360초, 자식 프로세스 제한은 300초다. Pod 상태·이�
 후보 검증 후 기존 공개 런타임 복원과 시험 리소스 정리까지 확인한다.
 후속 단계의 두 Conv 블록·ReLU·MaxPool·Linear 및 MNIST 일부 학습 검증은
 [cnn-model](../cnn-model/README.md)에 기록한다.
+
+후속 [v0.5.10·Plugin0.1.2 공개 배포물 검증](../../deploy/releases/evidence/v0.5.10/README.md)에서
+게시된 Guest/Worker와 Helm을 적용해 확인했다. 이 디렉터리의 후보 결과·해시는 당시 기록으로 보존한다.

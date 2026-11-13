@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "protectedRunningVMs": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "16079a7e-3df1-41da-958a-7a48d154988f",
+      "specUnchanged": true,
+      "phase": "Running"
+    }
+  ],
+  "preExistingUnresolvedChannels": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-v2-r1-ab-a",
+      "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    }
+  ],
+  "adminPodRemoved": true,
+  "previousProfileRequestPVCIdentitiesAndSpecsPreserved": true,
+  "vmSpecPreservedExceptSessionBindingAndHookImage": true,
+  "helmValuesPreservedExceptPublishedImageAndGuestHash": true,
+  "externalComponentsNotUpgraded": [
+    "Kubernetes",
+    "KubeVirt",
+    "HAMi device plugin",
+    "HAMi DRA driver",
+    "GPU Operator"
+  ]
+}
