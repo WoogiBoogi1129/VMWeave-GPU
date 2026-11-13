@@ -36,7 +36,10 @@ Channel sessions는 immutable이므로 개수 변경은 기존 binding 회수와
 [발행 전 실제 GPU 실험](../../experiments/fixed-slots/results/20261113/REPORT.md)에서는
 1슬롯 회귀, 2개 Pod의 동시 SGEMM 및 정답, 세 번째 Pod Pending, Plugin 재시작,
 정상 종료·실제 회수 확인 후 재사용, Broker 부분 장애 시 peer 지속 실행을 확인했다.
-이 기록은 작업 트리 후보의 검증이다. 공개 산출물·배포 검증은 별도 릴리스 기록으로 제공한다.
+이 기록은 작업 트리 후보의 검증이다. 후속 [공개 산출물·배포 검증](../../deploy/releases/evidence/v0.5.11/README.md)에서
+게시한 Guest 제어 파일이 후보 소스와 일치함을 확인하고, 두 중앙 Operator 및 기존 1슬롯 VM을 갱신했다.
+게시된 패키지의 CNN·MLP·LSTM·SGEMM 회귀와 자원 회수를 확인했다.
+[Runtime 기록](../../deploy/releases/v0.5.11.json), [Plugin 기록](../../deploy/releases/device-plugin-v0.1.3.json)을 참조한다.
 
 - 강제 Pod 삭제 직후에는 기존 client가 살아 있어 새 접속이 `busy(46)`로 거부될 수 있다.
   실제 CUDA child 회수 확인 또는 새 애플리케이션 실행의 재시도가 필요하다.

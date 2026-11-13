@@ -1,0 +1,142 @@
+{
+  "tag": "v0.5.11",
+  "sourceRevision": "f6c6ab7acc28fc91d409110a7539a0d22b759ce2",
+  "publishedDateKST": "2026-11-13",
+  "releaseURL": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/v0.5.11",
+  "activeProfile": "vmweave-test-b/dp-dev-20261105-v0511",
+  "activeRequest": "vmweave-test-b/dp-dev-20261105-v0511",
+  "previousProfileAndRequestRetainedForRollback": true,
+  "scope": "Fixed one/two GPU slots and safe unscheduled-worker reclamation; public artifacts deployed with single-slot CNN/MLP/LSTM and SGEMM regression. Two-slot GPU behavior is recorded in the matching source candidate experiment.",
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.5.11",
+    "digest": "sha256:0c90b1deb897ec9239841dff5d645bc15eadb05e10c8f354046aa211457c3fb8",
+    "packageSHA256": "162ae5a01e329e8b5c529353864b6c0547fec0f56bd234705c9212032d11572c"
+  },
+  "images": {
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:19fb714be9d73c55464a4a179d200f9a483ab4fed33b417cf61f372b6c41e749",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:4ccd9e67935afbf8bdd06561895d31d3329dee21bda0a99ea58b47786a615e41",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:e425c374fb3396f5e8a7d7d89f0a301f2abd0ffca5ca8a7e26f2107fd513da73",
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:8cb0c5e4a5cd06b000f7b10659dc162e630bf3aceb617f543591ad5fa783fb61",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:39117f22a194c7ededa389d1c49224eed9aa42d2ee63f0b5a5cdd96d2ea74713",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:92f04e5903bf194cb6d56389949793ea64034a514178156de91f07a917a2defc"
+  },
+  "helmReleases": [
+    {
+      "name": "nested",
+      "namespace": "vmweave-nested-system",
+      "revision": 7,
+      "status": "deployed",
+      "chartVersion": "0.5.11"
+    },
+    {
+      "name": "vmweave",
+      "namespace": "vmweave-system",
+      "revision": 18,
+      "status": "deployed",
+      "chartVersion": "0.5.11"
+    },
+    {
+      "name": "vmweave-device-plugin",
+      "namespace": "vmweave-device-plugin",
+      "revision": 4,
+      "status": "deployed",
+      "chartVersion": "0.1.3"
+    }
+  ],
+  "deployments": [
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "podUID": "9f8008a3-d329-4e6d-b8b0-74e7939741b8",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-nested-system",
+      "deployment": "nested-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "podUID": "8bda7a6b-e474-47a9-b5fc-fc1575cfa208",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "podUID": "7421a509-cff3-4083-a1a9-a7ff6a968ed7",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "podUID": "e62e1392-401e-428e-ac76-ce1972b1d5ab",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "ready": true
+    }
+  ],
+  "devicePluginRecord": "deploy/releases/device-plugin-v0.1.3.json",
+  "validation": "deploy/releases/evidence/v0.5.11/validation.json",
+  "evidence": "deploy/releases/evidence/v0.5.11/README.md",
+  "guestLibrarySHA256": "08ccac5fb763451e448a68700f6156a6e0eba62950614913fb07c62ba966cfa0",
+  "protectedRunningVMs": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "16079a7e-3df1-41da-958a-7a48d154988f",
+      "specUnchanged": true,
+      "phase": "Running"
+    }
+  ],
+  "preExistingUnresolvedChannels": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-v2-r1-ab-a",
+      "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b",
+      "beforePhase": "Draining",
+      "afterPhase": "Draining",
+      "reason": "AwaitingDetachEvidence",
+      "specUnchanged": true
+    }
+  ],
+  "externalComponentsNotUpgraded": [
+    "Kubernetes",
+    "KubeVirt",
+    "HAMi device plugin",
+    "HAMi DRA driver",
+    "GPU Operator"
+  ],
+  "limits": [
+    "Fixed slots share VM GPU quota; no per-Pod VRAM/compute guarantee.",
+    "Immediate replacement after forced Pod deletion can be rejected with busy(46) until the prior CUDA child is reaped.",
+    "A killed broker leaves its host CUDA child allocated until VM shutdown; no automatic restart on consumed rings.",
+    "Two-slot real GPU evidence is the pre-publication source candidate; published control files match that source. Current persistent deployment retains one slot.",
+    "CNN requires TORCH_CUDNN_V8_API_DISABLED=1, FP32 contiguous NCHW, groups=1, dilation=1, benchmark=False.",
+    "Small CNN and MNIST 80-example correctness; no full-dataset accuracy/convergence or throughput claim.",
+    "Default cuDNN graph, BatchNorm, AMP, ResNet/YOLO and arbitrary GPU operations not validated.",
+    "Pre-existing Draining channels retained without forced cleanup.",
+    "Clean-cluster installation remains NOT_RUN."
+  ]
+}

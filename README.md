@@ -18,6 +18,9 @@ Flyt/Cricket 기반 실험에서 출발했으며, 현재 기본 실행 경로는
 두 VM의 서로 다른 메모리 한도와 정상 회수를 검증했습니다.
 후속으로 기본 cuDNN LSTM·cuBLASLt와 명시적 legacy FP32 Conv2d의 forward/backward,
 작은 CNN·MNIST 일부 학습을 검증했습니다. [CNN 검증 범위](experiments/cnn-model/README.md)를 확인하세요.
+VM 내부 Kubernetes의 고정 2슬롯·동시 GPU Pod 실행과 종료 후 재사용도 검증했습니다.
+[v0.5.11 배포 기록](deploy/releases/evidence/v0.5.11/README.md)을 참고하세요.
+Pod들은 VM GPU 예산을 공유하며 Pod별 VRAM·compute를 보장하지 않습니다.
 전체 CUDA/PyTorch 호환성, 전체 장애 시험 및 HA 운영은 완료되지 않았습니다.
 
 2026-09-30 시작 실험에서 N/T/S를 경로별 5회·총 105개 구간 측정했습니다.

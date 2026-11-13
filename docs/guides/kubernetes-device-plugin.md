@@ -4,17 +4,17 @@ VMWeave Guest의 기존 GPU quota를 내부 Kubernetes에서 예약하고 연결
 자원은 `vmweave.io/gpu: 1`, 지원 범위는 **할당 컨테이너당 동시 CUDA client 1개**다.
 이 값은 물리 GPU 1개나 추가 VRAM 할당을 의미하지 않는다.
 
-현재 검증 릴리스는 [device-plugin-v0.1.2](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.2)이다.
-[배포물·digest 기록](../../deploy/releases/device-plugin-v0.1.2.json)과
-[공개 배포물의 실제 VM 검증](../../deploy/releases/evidence/v0.5.10/README.md)을 함께 확인한다.
-legacy CNN 경로에는 v0.5.10 Worker와 새 Guest package를 함께 사용한다.
+현재 검증 릴리스는 [device-plugin-v0.1.3](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.3)이다.
+[배포물·digest 기록](../../deploy/releases/device-plugin-v0.1.3.json)과
+[공개 배포물의 실제 VM 검증](../../deploy/releases/evidence/v0.5.11/README.md)을 함께 확인한다.
+legacy CNN 경로에는 v0.5.11 Worker와 새 Guest package를 함께 사용한다.
 CNN은 import 전에 `TORCH_CUDNN_V8_API_DISABLED=1`을 명시한다.
 
-## 소스 후보의 고정 2슬롯 모드
+## 고정 2슬롯 모드 (v0.1.3)
 
-현재 작업 트리에는 VM 전체 quota를 공유하는 2슬롯 후보 구현이 있다.
-공개 v0.1.2는 여전히 1슬롯이며, 아래 설정만 공개 바이너리에 적용해서는 동작하지 않는다.
-같은 후보 소스의 Operator·Guest control package·Plugin을 함께 준비해야 한다.
+v0.1.3은 VM 전체 quota를 공유하는 2슬롯을 지원한다.
+Operator v0.5.11·호환 Guest control package·Plugin v0.1.3을 함께 준비해야 한다.
+이전 v0.1.2 바이너리는 1슬롯이며 설정만 추가해서는 동작하지 않는다.
 
 - 외부 `GPUProfile.maxClients >= 2`, `SharedMemoryChannel.spec.sessions: 2`를 사용한다.
 - 내부 Plugin chart에는 `slotCount: 2`를 설정한다. Guest는 실제 부팅 layout의 개수를 사용한다.
@@ -75,21 +75,21 @@ Plugin DaemonSet은 선택한 노드에만 설치된다. 내부 클러스터의 
 관리용 hostPath와 root 실행을 허용하는 namespace를 사용한다. 일반 GPU workload는 non-root다.
 실제 GPU가 없는 노드에 임의의 상태 파일을 만들어 자원을 등록하지 않는다.
 
-v0.1.2의 공개 OCI chart 설치 예시는 다음과 같다. Guest package 준비와 실제 GID 확인 후 실행한다.
+v0.1.3의 공개 OCI chart 설치 예시는 다음과 같다. Guest package 준비와 실제 GID 확인 후 실행한다.
 
 ```sh
 helm upgrade --install vmweave-device-plugin \
-  oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin --version 0.1.2 \
+  oci://ghcr.io/woogiboogi1129/charts/vmweave-device-plugin --version 0.1.3 \
   --namespace vmweave-device-plugin --create-namespace \
-  --set image.digest=sha256:7678b58da304091cc9708363e1982970833053d97080cec32f9d6f5a53269b79 \
+  --set image.digest=sha256:4db4afad90d8136b8f658c16a696d447e0f3177041bb05ae9da9687034a00209 \
   --set librarySHA256=08ccac5fb763451e448a68700f6156a6e0eba62950614913fb07c62ba966cfa0 \
   --set brokerGID=YOUR_VMWEAVE_GID
 ```
 
 Guest package 이미지:
-`ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:314b16387117e07c4a39f762a08486c059715b98e5cb69f29740b91410aeced1`.
+`ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:22a0622c2cd3e69d509d244245d06ea7b4aa77a1fdbe06194eabfe8d5cd55e4b`.
 지원 workload 이미지:
-`ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:af074af45484bdd113154b4fa8c42241036ffe0ba556a18a805fe914ac148e5d`.
+`ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:b06c9a274ede9c119987668bf92ce75f38269883bd75ecbdde7ddf72f4df2fe5`.
 
 ## 일반 사용자 실행
 
@@ -183,6 +183,6 @@ Plugin·workload의 library hash와 ABI 호환성을 함께 맞춘다.
 
 [개발 계약과 단위 검사](../../integrations/kubernetes-device-plugin/README.md)
 
-2026-11-13 [v0.5.10·Device Plugin0.1.2 공개 배포물 검증](../../deploy/releases/evidence/v0.5.10/README.md)에서
+2026-11-13 [v0.5.10·Device Plugin0.1.2 공개 배포물 검증](../../deploy/releases/evidence/v0.5.11/README.md)에서
 legacy FP32 작은 CNN·MNIST 일부 GPU80 step/1,040개 텐서와 MLP·LSTM 회귀가 통과했다.
 기본 graph·BatchNorm·AMP·ResNet/YOLO와 전체 데이터셋 성능을 검증한 것은 아니다.

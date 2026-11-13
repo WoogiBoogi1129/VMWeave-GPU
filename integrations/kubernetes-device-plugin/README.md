@@ -7,9 +7,10 @@ Each allocated container supports one CUDA client. Physical GPUs, additional
 VRAM, per-Pod memory/compute guarantees, HAMi nesting and direct-Guest/Pod
 arbitration are outside this contract.
 
-The published v0.1.2 release remains single-slot. Two slots require the matching
-candidate Operator, Guest control package and Plugin from this working tree;
-setting a chart value alone cannot upgrade released binaries.
+Release v0.1.3 supports fixed slots with Operator v0.5.11 and the matching Guest
+control package. Older v0.1.2 binaries remain single-slot; a chart value alone
+cannot upgrade them. Published artifact and deployment records are in
+[the v0.5.11 evidence](../../deploy/releases/evidence/v0.5.11/README.md).
 
 [Installation and limits](../../docs/guides/kubernetes-device-plugin.md)
 

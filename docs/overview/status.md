@@ -5,6 +5,7 @@
 
 | 후속 검증 | 확인 범위 | 근거 |
 |---|---|---|
+| 11/13 v0.5.11·Device Plugin0.1.3 | 고정 2슬롯 후보 GPU 검증·미배치 Worker 회수 수정, 공개 패키지 1슬롯 회귀와 Helm 적용 | [배포 검증](../../deploy/releases/evidence/v0.5.11/README.md) |
 | 11/13 v0.5.10·Device Plugin0.1.2 | 공개 Guest/Worker·Helm 적용, CNN80 step/1,040개 텐서·수동 검산, MLP/LSTM·세션 회수 | [공개 검증](../../deploy/releases/evidence/v0.5.10/README.md) |
 | 11/13 legacy CNN 후보 | Conv2d forward/backward, 두 Conv 블록·ReLU·MaxPool·Linear·SGD, MNIST 일부 기능 검사. 기본 graph·BatchNorm·AMP 제외 | [작은 CNN](../../experiments/cnn-model/README.md), [backward](../../experiments/cnn-training/README.md) |
 | 11/8 v0.5.9·Device Plugin v0.1.1 | 기본 cuDNN LSTM·cuBLASLt 학습, 공개 이미지로 128 step·CPU 검산·체크포인트 재개, 노드 업데이트 | [검증](../../deploy/releases/evidence/v0.5.9/README.md) |

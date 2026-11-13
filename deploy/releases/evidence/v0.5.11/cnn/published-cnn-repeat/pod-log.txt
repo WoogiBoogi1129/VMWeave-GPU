@@ -1,0 +1,365 @@
+{"stage": "environment", "torch": "2.11.0+cu128", "cuda": "12.8", "cudnn": 90800, "case": "cnn", "backend": "legacy", "mode": "gpu", "parameters": 11642, "architecture": ["Conv2d", "ReLU", "MaxPool2d", "Conv2d", "ReLU", "MaxPool2d", "Flatten", "Linear"], "dataset": "synthetic", "rtol": 0.0001, "atol": 1e-06}
+{"stage": "configuration", "key": "d1"}
+{"stage": "forward_start", "device": "cpu", "step": 1}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 1}
+{"stage": "backward_done", "device": "cpu", "step": 1}
+{"stage": "step_done", "device": "cpu", "step": 1, "loss": 2.3094468116760254}
+{"stage": "forward_start", "device": "cpu", "step": 2}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 2}
+{"stage": "backward_done", "device": "cpu", "step": 2}
+{"stage": "step_done", "device": "cpu", "step": 2, "loss": 2.5548434257507324}
+{"stage": "forward_start", "device": "cpu", "step": 3}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 3}
+{"stage": "backward_done", "device": "cpu", "step": 3}
+{"stage": "step_done", "device": "cpu", "step": 3, "loss": 2.3884387016296387}
+{"stage": "forward_start", "device": "cpu", "step": 4}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 4}
+{"stage": "backward_done", "device": "cpu", "step": 4}
+{"stage": "step_done", "device": "cpu", "step": 4, "loss": 2.374229907989502}
+{"stage": "forward_start", "device": "cpu", "step": 5}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 5}
+{"stage": "backward_done", "device": "cpu", "step": 5}
+{"stage": "step_done", "device": "cpu", "step": 5, "loss": 2.333346128463745}
+{"stage": "forward_start", "device": "cuda", "step": 1}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 1}
+{"stage": "backward_done", "device": "cuda", "step": 1}
+{"stage": "step_done", "device": "cuda", "step": 1, "loss": 2.3094468116760254}
+{"stage": "forward_start", "device": "cuda", "step": 2}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 2}
+{"stage": "backward_done", "device": "cuda", "step": 2}
+{"stage": "step_done", "device": "cuda", "step": 2, "loss": 2.5548434257507324}
+{"stage": "forward_start", "device": "cuda", "step": 3}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 3}
+{"stage": "backward_done", "device": "cuda", "step": 3}
+{"stage": "step_done", "device": "cuda", "step": 3, "loss": 2.3884387016296387}
+{"stage": "forward_start", "device": "cuda", "step": 4}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 4}
+{"stage": "backward_done", "device": "cuda", "step": 4}
+{"stage": "step_done", "device": "cuda", "step": 4, "loss": 2.374230146408081}
+{"stage": "forward_start", "device": "cuda", "step": 5}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 5}
+{"stage": "backward_done", "device": "cuda", "step": 5}
+{"stage": "step_done", "device": "cuda", "step": 5, "loss": 2.333346128463745}
+{"stage": "forward_start", "device": "cuda", "step": 1}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 1}
+{"stage": "backward_done", "device": "cuda", "step": 1}
+{"stage": "step_done", "device": "cuda", "step": 1, "loss": 2.3094468116760254}
+{"stage": "forward_start", "device": "cuda", "step": 2}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 2}
+{"stage": "backward_done", "device": "cuda", "step": 2}
+{"stage": "step_done", "device": "cuda", "step": 2, "loss": 2.5548434257507324}
+{"stage": "forward_start", "device": "cuda", "step": 3}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 3}
+{"stage": "backward_done", "device": "cuda", "step": 3}
+{"stage": "step_done", "device": "cuda", "step": 3, "loss": 2.3884387016296387}
+{"stage": "forward_start", "device": "cuda", "step": 4}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 4}
+{"stage": "backward_done", "device": "cuda", "step": 4}
+{"stage": "step_done", "device": "cuda", "step": 4, "loss": 2.374230146408081}
+{"stage": "forward_start", "device": "cuda", "step": 5}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 5}
+{"stage": "backward_done", "device": "cuda", "step": 5}
+{"stage": "step_done", "device": "cuda", "step": 5, "loss": 2.333346128463745}
+{"stage": "configuration", "key": "d0"}
+{"stage": "forward_start", "device": "cpu", "step": 1}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 1}
+{"stage": "backward_done", "device": "cpu", "step": 1}
+{"stage": "step_done", "device": "cpu", "step": 1, "loss": 2.3094468116760254}
+{"stage": "forward_start", "device": "cpu", "step": 2}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 2}
+{"stage": "backward_done", "device": "cpu", "step": 2}
+{"stage": "step_done", "device": "cpu", "step": 2, "loss": 2.5548434257507324}
+{"stage": "forward_start", "device": "cpu", "step": 3}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 3}
+{"stage": "backward_done", "device": "cpu", "step": 3}
+{"stage": "step_done", "device": "cpu", "step": 3, "loss": 2.3884387016296387}
+{"stage": "forward_start", "device": "cpu", "step": 4}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 4}
+{"stage": "backward_done", "device": "cpu", "step": 4}
+{"stage": "step_done", "device": "cpu", "step": 4, "loss": 2.374229907989502}
+{"stage": "forward_start", "device": "cpu", "step": 5}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cpu", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cpu", "step": 5}
+{"stage": "backward_done", "device": "cpu", "step": 5}
+{"stage": "step_done", "device": "cpu", "step": 5, "loss": 2.333346128463745}
+{"stage": "forward_start", "device": "cuda", "step": 1}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 1}
+{"stage": "backward_done", "device": "cuda", "step": 1}
+{"stage": "step_done", "device": "cuda", "step": 1, "loss": 2.3094468116760254}
+{"stage": "forward_start", "device": "cuda", "step": 2}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 2}
+{"stage": "backward_done", "device": "cuda", "step": 2}
+{"stage": "step_done", "device": "cuda", "step": 2, "loss": 2.5548431873321533}
+{"stage": "forward_start", "device": "cuda", "step": 3}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 3}
+{"stage": "backward_done", "device": "cuda", "step": 3}
+{"stage": "step_done", "device": "cuda", "step": 3, "loss": 2.3884387016296387}
+{"stage": "forward_start", "device": "cuda", "step": 4}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 4}
+{"stage": "backward_done", "device": "cuda", "step": 4}
+{"stage": "step_done", "device": "cuda", "step": 4, "loss": 2.374229907989502}
+{"stage": "forward_start", "device": "cuda", "step": 5}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 5}
+{"stage": "backward_done", "device": "cuda", "step": 5}
+{"stage": "step_done", "device": "cuda", "step": 5, "loss": 2.333346128463745}
+{"stage": "forward_start", "device": "cuda", "step": 1}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 1}
+{"stage": "backward_done", "device": "cuda", "step": 1}
+{"stage": "step_done", "device": "cuda", "step": 1, "loss": 2.3094468116760254}
+{"stage": "forward_start", "device": "cuda", "step": 2}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 2}
+{"stage": "backward_done", "device": "cuda", "step": 2}
+{"stage": "step_done", "device": "cuda", "step": 2, "loss": 2.5548431873321533}
+{"stage": "forward_start", "device": "cuda", "step": 3}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 3}
+{"stage": "backward_done", "device": "cuda", "step": 3}
+{"stage": "step_done", "device": "cuda", "step": 3, "loss": 2.3884387016296387}
+{"stage": "forward_start", "device": "cuda", "step": 4}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 4}
+{"stage": "backward_done", "device": "cuda", "step": 4}
+{"stage": "step_done", "device": "cuda", "step": 4, "loss": 2.374229907989502}
+{"stage": "forward_start", "device": "cuda", "step": 5}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 0, "kind": "Conv2d", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 1, "kind": "ReLU", "shape": [8, 8, 32, 32]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 2, "kind": "MaxPool2d", "shape": [8, 8, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 3, "kind": "Conv2d", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 4, "kind": "ReLU", "shape": [8, 16, 16, 16]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 5, "kind": "MaxPool2d", "shape": [8, 16, 8, 8]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 6, "kind": "Flatten", "shape": [8, 1024]}
+{"stage": "layer_forward_done", "device": "cuda", "layer": 7, "kind": "Linear", "shape": [8, 10]}
+{"stage": "loss_done", "device": "cuda", "step": 5}
+{"stage": "backward_done", "device": "cuda", "step": 5}
+{"stage": "step_done", "device": "cuda", "step": 5, "loss": 2.333346128463745}
+{"stage": "PASS", "gpu_training_steps": 20, "compared_tensors": 300}
+CNN_EXIT {"returncode": 0, "signal": null, "timeout": false}

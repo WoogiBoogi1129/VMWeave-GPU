@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "observationScope": "host PID namespace",
+  "phase": "published-regression",
+  "utc": "2026-11-13T10:33:51Z",
+  "workerPod": "dp-dev-20261105-502a8c193b60-a6b5aa1c-worker",
+  "workerUID": "ebb27ef7-d723-4446-8144-54bf514d944a",
+  "sessions": [
+    {
+      "pid": 229,
+      "command": "vmweave-shm-session-worker --session-events 6 7 8 9 "
+    }
+  ],
+  "gpu": [
+    "GPU-7d708c42-8d4a-16d5-0746-474567157aa3, 1155030, vmweave-shm-session-worker, 108 MiB"
+  ],
+  "hostProcessStatus": {
+    "1155030": "Name:\texe\nPid:\t1155030\nNSpid:\t1155030\t229"
+  }
+}

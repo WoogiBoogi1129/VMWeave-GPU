@@ -1,0 +1,343 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Node",
+      "metadata": {
+        "annotations": {
+          "node.alpha.kubernetes.io/ttl": "0",
+          "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+        },
+        "creationTimestamp": "2026-11-05T07:06:44Z",
+        "labels": {
+          "beta.kubernetes.io/arch": "amd64",
+          "beta.kubernetes.io/os": "linux",
+          "kubernetes.io/arch": "amd64",
+          "kubernetes.io/hostname": "dp-dev-20261105",
+          "kubernetes.io/os": "linux",
+          "node-role.kubernetes.io/control-plane": "",
+          "node.kubernetes.io/exclude-from-external-load-balancers": "",
+          "vmweave.io/device-plugin": "enabled"
+        },
+        "name": "dp-dev-20261105",
+        "resourceVersion": "659575",
+        "uid": "26dfdf91-8413-4248-b8eb-2a2fe71e6735"
+      },
+      "spec": {
+        "podCIDR": "10.242.0.0/24",
+        "podCIDRs": [
+          "10.242.0.0/24"
+        ]
+      },
+      "status": {
+        "addresses": [
+          {
+            "address": "10.0.2.2",
+            "type": "InternalIP"
+          },
+          {
+            "address": "dp-dev-20261105",
+            "type": "Hostname"
+          }
+        ],
+        "allocatable": {
+          "cpu": "4",
+          "ephemeral-storage": "46651590989",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "8024400Ki",
+          "pods": "110",
+          "vmweave.io/gpu": "1"
+        },
+        "capacity": {
+          "cpu": "4",
+          "ephemeral-storage": "50620216Ki",
+          "hugepages-1Gi": "0",
+          "hugepages-2Mi": "0",
+          "memory": "8126800Ki",
+          "pods": "110",
+          "vmweave.io/gpu": "1"
+        },
+        "conditions": [
+          {
+            "lastHeartbeatTime": "2026-11-05T07:11:10Z",
+            "lastTransitionTime": "2026-11-05T07:11:10Z",
+            "message": "Cilium is running on this node",
+            "reason": "CiliumIsUp",
+            "status": "False",
+            "type": "NetworkUnavailable"
+          },
+          {
+            "lastHeartbeatTime": "2026-11-13T10:33:29Z",
+            "lastTransitionTime": "2026-11-05T07:06:43Z",
+            "message": "kubelet has sufficient memory available",
+            "reason": "KubeletHasSufficientMemory",
+            "status": "False",
+            "type": "MemoryPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-11-13T10:33:29Z",
+            "lastTransitionTime": "2026-11-05T07:06:43Z",
+            "message": "kubelet has no disk pressure",
+            "reason": "KubeletHasNoDiskPressure",
+            "status": "False",
+            "type": "DiskPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-11-13T10:33:29Z",
+            "lastTransitionTime": "2026-11-05T07:06:43Z",
+            "message": "kubelet has sufficient PID available",
+            "reason": "KubeletHasSufficientPID",
+            "status": "False",
+            "type": "PIDPressure"
+          },
+          {
+            "lastHeartbeatTime": "2026-11-13T10:33:29Z",
+            "lastTransitionTime": "2026-11-05T07:07:18Z",
+            "message": "kubelet is posting ready status",
+            "reason": "KubeletReady",
+            "status": "True",
+            "type": "Ready"
+          }
+        ],
+        "daemonEndpoints": {
+          "kubeletEndpoint": {
+            "Port": 10250
+          }
+        },
+        "features": {
+          "supplementalGroupsPolicy": true
+        },
+        "images": [
+          {
+            "names": [
+              "docker.io/pytorch/pytorch@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+              "localhost/var/tmp/vmweave-official-20261106@sha256:eee11b3b3872a8c838e35ef48f08b2d5def2080902c7f666831310ca1a0ef2be",
+              "localhost/var/tmp/vmweave-official-20261106:latest"
+            ],
+            "sizeBytes": 7778279736
+          },
+          {
+            "names": [
+              "quay.io/cilium/cilium@sha256:2939231d0d3e3ebddcd80fffa168b7ddcc78fdf0dc864d1c8c126ff523c54f01",
+              "quay.io/cilium/cilium@sha256:9d308e3f7f05972b0b0604c40d2b0f08fa2f6a55084fef1e1aaadb469e430639"
+            ],
+            "sizeBytes": 731989591
+          },
+          {
+            "names": [
+              "quay.io/cilium/cilium-envoy@sha256:33b00117d392f24ee5161f66242d12f58ceb62bf80a2bdd66eaf505d77933cb0",
+              "quay.io/cilium/cilium-envoy@sha256:af7382699576b9e65e9184efa52eeca0b58aea70ad6e511bf260c91d9f740463"
+            ],
+            "sizeBytes": 203243690
+          },
+          {
+            "names": [
+              "quay.io/cilium/operator-generic@sha256:5bb0f9d871dd7b80461f8e3056896daa51e7d9b70ffe51c3e2126b4c35c02b5e",
+              "quay.io/cilium/operator-generic@sha256:64d8798350e8569b8e7622563fed6e44dce2625f311e4651b774816516c744fc"
+            ],
+            "sizeBytes": 128174906
+          },
+          {
+            "names": [
+              "registry.k8s.io/kube-apiserver@sha256:32abf8e4e2ae679b35c719a04902c2ae1a98a5b8648ac034a4672e39660f8a73",
+              "registry.k8s.io/kube-apiserver@sha256:d331d5b4dfaa6f7076e8d40a77f0721020aaae918cdcd0928e477a5c8a24990d",
+              "registry.k8s.io/kube-apiserver:v1.35.9"
+            ],
+            "sizeBytes": 92311150
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:3a00dcb5073553456789647834805014fcae3c2769f156a5d06d9e02e883a5d9",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest:device-plugin-v0.1.3"
+            ],
+            "sizeBytes": 80899153
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:e07b0250f7d045841326b5b55c56184a01ab3d9ee99c5a12cda6bd21c3264d35",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest:device-plugin-v0.1.2"
+            ],
+            "sizeBytes": 80895054
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:25d00e34ebba7beb6871b02ec336ef16de9e6925be390265b2ab66e12ade79c5",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload:device-plugin-v0.1.3"
+            ],
+            "sizeBytes": 80873643
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:7a4c1df632f3c4078bb5605350e5a7ecf02db6ce4f4c1ce0f844e47352760383",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload:device-plugin-v0.1.2"
+            ],
+            "sizeBytes": 80873643
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:131bb669cc7bd092de6dc49f9ec2289cf19b3ea152614cad984e08da35407681",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:9cbbfb6c1501c84103f5e0f2fc921f384b11eea168a0f6971d7beb67b5384411",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest:device-plugin-v0.1.1"
+            ],
+            "sizeBytes": 80866493
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:b597ac5b700ee7cd1dd43a068b47955df302f576a41e0de223c99d8f5634d1f1",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload:device-plugin-v0.1.1"
+            ],
+            "sizeBytes": 80843435
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:6cbcda0982116ac90fdd4b22a7cd044d466665801a814c6e066c05bb3f8bbbb6",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:79d6c83dc938caf9e6d17b5ee06f4214170b63589b8f6bd635b9f6827559ece4",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest:device-plugin-v0.1.0"
+            ],
+            "sizeBytes": 80823996
+          },
+          {
+            "names": [
+              "localhost/vmweave-device-plugin-workload@sha256:c497336d3ceecec03b337d47a2147b14c57e7aef1d349d75e6f20bbf49dc1961",
+              "localhost/vmweave-device-plugin-workload:dev"
+            ],
+            "sizeBytes": 80807223
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:56965c48cc86d8fdb295df843f36b1d72aa06e39e8f07bf6dda9233c333643ea",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload@sha256:fc6e6b9d9528c7bb80e10e8482ab9bd9aafa518af88f22575f55ded49b856983",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin-workload:device-plugin-v0.1.0"
+            ],
+            "sizeBytes": 80802332
+          },
+          {
+            "names": [
+              "registry.k8s.io/coredns/coredns@sha256:246e7333fde10251c693b68f13d21d6d64c7dbad866bbfa11bd49315e3f725a7",
+              "registry.k8s.io/coredns/coredns@sha256:9b9128672209474da07c91439bf15ed704ae05ad918dd6454e5b6ae14e35fee6",
+              "registry.k8s.io/coredns/coredns:v1.13.1"
+            ],
+            "sizeBytes": 79193994
+          },
+          {
+            "names": [
+              "registry.k8s.io/kube-controller-manager@sha256:d7e4983f79ee763f7c56226395ab9c55261ff6035df5ed23eef9bd26b63eb140",
+              "registry.k8s.io/kube-controller-manager@sha256:e2fe2b4a2d6986800a61c95741ff491b401be53053af2dbc2c5fc5444d53343e",
+              "registry.k8s.io/kube-controller-manager:v1.35.9"
+            ],
+            "sizeBytes": 78245332
+          },
+          {
+            "names": [
+              "registry.k8s.io/kube-proxy@sha256:80fd2dbab0211ccc3a4af58c8181de3f7d7659b4e19251a3722a9febf04046a6",
+              "registry.k8s.io/kube-proxy@sha256:d08adb0c8c2c68075f1e6fa6c4c82880c5af54c1686ac20d22af612082c32a31",
+              "registry.k8s.io/kube-proxy:v1.35.9"
+            ],
+            "sizeBytes": 74996121
+          },
+          {
+            "names": [
+              "registry.k8s.io/etcd@sha256:5279f56db4f32772bb41e47ca44c553f5c87a08fdf339d74c23a4cdc3c388d6a",
+              "registry.k8s.io/etcd@sha256:60a30b5d81b2217555e2cfb9537f655b7ba97220b99c39ee2e162a7127225890",
+              "registry.k8s.io/etcd:3.6.6-0"
+            ],
+            "sizeBytes": 63582405
+          },
+          {
+            "names": [
+              "registry.k8s.io/kube-scheduler@sha256:d96574ba699bc887eeefcc05d9f7828b4df5ba75feac6f20b98097aa85d1ed22",
+              "registry.k8s.io/kube-scheduler@sha256:efa1dc74136bc3c8826e3163f091284af85f817fd92916217cea1152628b941e",
+              "registry.k8s.io/kube-scheduler:v1.35.9"
+            ],
+            "sizeBytes": 53607892
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:f85abcc4fa74a834d5a5a016a694eabef337f076a02010c73b1439a1139714f5",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin:device-plugin-v0.1.3"
+            ],
+            "sizeBytes": 13878779
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:cfb13e5f4fe665100bdc66d0e3473e3391821e4596e86a3e4dfac6980412c97f",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:d18316f8aa7d04c124e80836d21ce562b18f003a79775e5354499cb4c337a12f",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin:device-plugin-v0.1.0"
+            ],
+            "sizeBytes": 13862230
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:509f6c4deca63931b33ce0b6bad3c1cd1a27e462ad99e80d1895bada47a074cf",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin:device-plugin-v0.1.2"
+            ],
+            "sizeBytes": 13858299
+          },
+          {
+            "names": [
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin@sha256:ed33b62fab091a5b64abfcd9fb1afbd3a0fa0919c314679e01f5d92baec37b16",
+              "ghcr.io/woogiboogi1129/vmweave-device-plugin:device-plugin-v0.1.1"
+            ],
+            "sizeBytes": 13858291
+          },
+          {
+            "names": [
+              "localhost/vmweave-device-plugin@sha256:b9d8caeb8106290a9c990e371c4ee26196eb442af86690bd75e0d9475ccbb1d1",
+              "localhost/vmweave-device-plugin:dev"
+            ],
+            "sizeBytes": 13858273
+          },
+          {
+            "names": [
+              "registry.k8s.io/pause@sha256:278fb9dbcca9518083ad1e11276933a2e96f23de604a3a08cc3c80002767d24c",
+              "registry.k8s.io/pause@sha256:e5b941ef8f71de54dc3a13398226c269ba217d06650a21bd3afcf9d890cf1f41",
+              "registry.k8s.io/pause:3.10.1"
+            ],
+            "sizeBytes": 742092
+          }
+        ],
+        "nodeInfo": {
+          "architecture": "amd64",
+          "bootID": "fbf95279-278f-497e-94e1-da58ea02d462",
+          "containerRuntimeVersion": "cri-o://1.35.10",
+          "kernelVersion": "5.15.0-203-generic",
+          "kubeProxyVersion": "",
+          "kubeletVersion": "v1.35.9",
+          "machineID": "35510481e0a34add86648740f60bcb56",
+          "operatingSystem": "linux",
+          "osImage": "Ubuntu 22.04.5 LTS",
+          "systemUUID": "35510481-e0a3-4add-8664-8740f60bcb56"
+        },
+        "runtimeHandlers": [
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": "crun"
+          },
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": ""
+          },
+          {
+            "features": {
+              "recursiveReadOnlyMounts": true,
+              "userNamespaces": true
+            },
+            "name": "runc"
+          }
+        ]
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}
