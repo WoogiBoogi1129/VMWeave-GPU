@@ -1,0 +1,87 @@
+{
+  "existingVMsAndVMIs": [
+    {
+      "kind": "VirtualMachine",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1",
+      "specUnchanged": true,
+      "statusBefore": "Running",
+      "statusAfter": "Running"
+    },
+    {
+      "kind": "VirtualMachine",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4",
+      "specUnchanged": true,
+      "statusBefore": "Stopped",
+      "statusAfter": "Stopped"
+    },
+    {
+      "kind": "VirtualMachine",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121",
+      "specUnchanged": true,
+      "statusBefore": "Stopped",
+      "statusAfter": "Stopped"
+    },
+    {
+      "kind": "VirtualMachine",
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-v2-r1-ab-a",
+      "uid": "78b679b9-9212-4dec-aa57-2857292d4adc",
+      "specUnchanged": true,
+      "statusBefore": "Stopped",
+      "statusAfter": "Stopped"
+    },
+    {
+      "kind": "VirtualMachine",
+      "namespace": "vmweave-test-b",
+      "name": "dp-dev-20261105",
+      "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d",
+      "specUnchanged": true,
+      "statusBefore": "Running",
+      "statusAfter": "Running"
+    },
+    {
+      "kind": "VirtualMachineInstance",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-cp-01",
+      "uid": "16079a7e-3df1-41da-958a-7a48d154988f",
+      "specUnchanged": true,
+      "statusBefore": "Running",
+      "statusAfter": "Running"
+    },
+    {
+      "kind": "VirtualMachineInstance",
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "uid": "8365e184-8715-42a3-954d-b82dc01e3a41",
+      "specUnchanged": true,
+      "statusBefore": "Failed",
+      "statusAfter": "Failed"
+    },
+    {
+      "kind": "VirtualMachineInstance",
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "uid": "7a10ddb6-eb22-4995-be06-c72700a2449f",
+      "specUnchanged": true,
+      "statusBefore": "Failed",
+      "statusAfter": "Failed"
+    },
+    {
+      "kind": "VirtualMachineInstance",
+      "namespace": "vmweave-test-b",
+      "name": "dp-dev-20261105",
+      "uid": "c3735483-1b41-49f2-b658-f41f0eb38373",
+      "specUnchanged": true,
+      "statusBefore": "Running",
+      "statusAfter": "Running"
+    }
+  ],
+  "existingGPUProfilesUnchanged": 7,
+  "testNamespacesAbsent": true
+}

@@ -103,7 +103,7 @@ jobs:
         RELEASE_TAG: ${{ github.ref_name }}
       run: |
         cat > /tmp/notes.md <<'NOTES'
-        Optional Kubernetes device plugin for VMWeave guests. Exposes one existing VM GPU quota as vmweave.io/gpu: 1; one concurrent CUDA client, no nested HAMi or quota subdivision.
+        Optional Kubernetes device plugin for VMWeave guests. Exposes one or two fixed broker slots as vmweave.io/gpu allocations, sharing the existing VM GPU quota. One CUDA client per slot; no nested HAMi or per-Pod memory/compute guarantee. Two slots require the matching Guest package, Operator approval and slotCount=2.
 
         The portable image archive and Helm chart support installation without registry credentials. Check SHA256SUMS before loading the archive. images.json records registry digests and source labels; guest-identity.txt records the compatible guest library hash. See docs/guides/kubernetes-device-plugin.md for installation and recovery requirements.
         NOTES

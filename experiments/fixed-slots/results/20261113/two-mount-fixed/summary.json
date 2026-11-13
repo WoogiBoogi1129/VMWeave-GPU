@@ -1,0 +1,17 @@
+{
+  "slots": 2,
+  "scope": "fixed slots sharing VM quota; no per-Pod memory/compute guarantee",
+  "checks": {
+    "concurrentDistinctSlots": "PASS",
+    "socketBoundaryAndDuplicateClient": "PASS",
+    "pluginRestart": "PASS",
+    "thirdPodPending": "PASS",
+    "gracefulReleaseAndReuse": "PASS"
+  },
+  "mapping": {
+    "a": 0,
+    "b": 1
+  },
+  "status": "FAIL",
+  "error": "d finished before readiness"
+}

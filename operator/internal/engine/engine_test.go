@@ -243,3 +243,74 @@ func TestChildNamesDoNotCollideWithPreservedHistory(t *testing.T) {
 		t.Fatal("historical object changed")
 	}
 }
+
+func TestFixedPersistentSlotsAdmission(t *testing.T) {
+	for _, n := range []int64{0, 1, 2, 3} {
+		c := channel("a")
+		Set(c, "VM", "spec", "lifecycle")
+		Set(c, n, "spec", "sessions")
+		q := obj("requests", "a", "same", "request-a")
+		Set(q, Map{"vmRef": Get(c, "spec", "vmRef"), "profileRef": Map{"name": "p", "uid": "p"}}, "spec")
+		p := obj("profiles", "a", "p", "p")
+		Set(p, Map{"approved": true, "maxClients": int64(2), "workerImage": "candidate"}, "spec")
+		Set(c, "candidate", "spec", "workerImage")
+		a := fakeAPI("a", q, p)
+		raw, _ := json.Marshal(c.Object)
+		r := admissionv1.AdmissionRequest{Namespace: "a", Kind: metav1.GroupVersionKind{Kind: "SharedMemoryChannel"}, Object: runtime.RawExtension{Raw: raw}}
+		err := a.Validate(r, "system", "controller")
+		if (err == nil) != (n == 1 || n == 2) {
+			t.Fatalf("slots %d: %v", n, err)
+		}
+		if n == 2 {
+			Set(p, int64(1), "spec", "maxClients")
+			a = fakeAPI("a", q, p)
+			if a.Validate(r, "system", "controller") == nil {
+				t.Fatal("profile slot limit bypassed")
+			}
+		}
+	}
+}
+
+func TestDeletingUnscheduledWorkerReclaimsWithoutNodeExecution(t *testing.T) {
+	for _, scenario := range []string{"unscheduled", "failed-unscheduled", "scheduled", "observed", "foreign", "not-deleting", "wrong-uid"} {
+		t.Run(scenario, func(t *testing.T) {
+			c := channel("a")
+			Set(c, "g", "status", "generation")
+			p := Child("pods", ResourceName(c, "worker"), c)
+			p.SetUID("worker-a")
+			p.SetFinalizers([]string{DetachFinalizer})
+			p.SetAnnotations(map[string]string{DetachChannel: string(c.GetUID())})
+			stamp := metav1.Now()
+			p.SetDeletionTimestamp(&stamp)
+			if scenario == "not-deleting" {
+				p.SetDeletionTimestamp(nil)
+			}
+			if scenario == "wrong-uid" {
+				p.SetUID("different-worker")
+			}
+			Set(p, "Pending", "status", "phase")
+			if scenario == "failed-unscheduled" {
+				Set(p, "Failed", "status", "phase")
+			}
+			if scenario == "scheduled" {
+				Set(p, "node", "spec", "nodeName")
+			}
+			if scenario == "observed" {
+				Set(p, []interface{}{Map{"containerID": "old"}}, "status", "containerStatuses")
+			}
+			if scenario == "foreign" {
+				p.SetOwnerReferences(nil)
+			}
+			att := obj("attachments", "a", c.GetName()+"-worker", "att")
+			Set(att, Map{"channelRef": Ref(c), "generation": "g", "holderUID": "worker-a", "role": "worker", "nodeName": "node"}, "spec")
+			a := fakeAPI("a", c, p, att)
+			if _, err := a.Observe(c); err != nil {
+				t.Fatal(err)
+			}
+			got, _ := a.Get("attachments", att.GetName())
+			if (S(got, "status", "phase") == "Detached") != (scenario == "unscheduled" || scenario == "failed-unscheduled") {
+				t.Fatal(scenario, got)
+			}
+		})
+	}
+}

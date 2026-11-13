@@ -20,8 +20,8 @@ func (a API) Validate(r admissionv1.AdmissionRequest, controllerNS, controllerSA
 	switch r.Kind.Kind {
 	case "SharedMemoryChannel":
 		if persistent(o) {
-			if N(o, "spec", "sessions") != 1 {
-				return invalid("VM lifecycle currently requires one broker slot")
+			if n := N(o, "spec", "sessions"); n < 1 || n > 2 {
+				return invalid("VM lifecycle supports one or two fixed broker slots")
 			}
 			if o.GetName() != S(o, "spec", "vmRef", "name") {
 				return invalid("durable channel name must equal VM name")

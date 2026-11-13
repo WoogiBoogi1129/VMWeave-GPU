@@ -2,6 +2,7 @@
 
 ## 구현
 
+- [VM 내부 다중 GPU Pod 개발 계획](multi-pod-gpu-plan.md): 다중 SHM 슬롯, Guest Broker·Device Plugin 확장과 Pod별 메모리 정책.
 - [Go Operator 전환 검증](operator-validation.md)의 미완료 항목: HA 장애 행렬, Node fencing, Go helper 후속 이전.
 - CUDA Graph·라이브러리 연산·비동기 의미의 지원 범위 확대.
 - Guest 환경 배포와 장치 매핑 자동화 개선.

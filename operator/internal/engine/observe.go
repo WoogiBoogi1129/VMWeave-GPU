@@ -188,6 +188,21 @@ func (a API) Observe(c *Obj) (bool, error) {
 				p = matches[0].DeepCopy()
 			}
 		}
+		// Deletion fences scheduler binding. An unassigned worker with no
+		// container observations never reached a kubelet or mapped the backing.
+		// Preserve UID/ownership checks; missing/scheduled workers need evidence.
+		if role == "worker" && p != nil && Owned(p, c) && p.GetDeletionTimestamp() != nil &&
+			S(p, "spec", "nodeName") == "" && Has([]string{"Pending", "Failed"}, S(p, "status", "phase")) &&
+			emptyContainerObservations(p) {
+			if err := a.Status(att, Map{"phase": "Detached", "observedGeneration": att.GetGeneration(),
+				"reporterPodUID": string(p.GetUID()), "evidence": "DeletedUnscheduledWorker"}); err != nil {
+				return false, err
+			}
+			if err := a.release(p, c); err != nil {
+				return false, err
+			}
+			continue
+		}
 		if p == nil || S(p, "spec", "nodeName") != S(att, "spec", "nodeName") {
 			continue
 		}
@@ -243,4 +258,16 @@ func (a API) Observe(c *Obj) (bool, error) {
 		}
 	}
 	return guestProtected, nil
+}
+
+func emptyContainerObservations(p *Obj) bool {
+	for _, key := range []string{"containerStatuses", "initContainerStatuses", "ephemeralContainerStatuses"} {
+		if value := Get(p, "status", key); value != nil {
+			items, ok := value.([]interface{})
+			if !ok || len(items) != 0 {
+				return false
+			}
+		}
+	}
+	return true
 }

@@ -1,0 +1,130 @@
+[
+  {
+    "time": 1794565048.0970032,
+    "phase": "Draining",
+    "reason": "AwaitingDetachEvidence",
+    "status": {
+      "allocation": "6d0d35cfd04b7f04a45d48c5e9eb2b3c",
+      "backend": "hami",
+      "compute": 25,
+      "everBound": true,
+      "generation": "bf970efdece94d9f47bc2b39a46cb577",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Draining",
+      "profileGeneration": 1,
+      "reason": "AwaitingDetachEvidence",
+      "requestGeneration": 1,
+      "resourcePrefix": "fixed-slots-01-26c6aabe273d-6d0d35cf",
+      "sessions": [
+        "6b89e0a5228f98b273c7d467f77d2896",
+        "b4bb8d36de8a1521646976c11b36d507"
+      ],
+      "vmiUID": "4e57a587-c7cf-4d6c-a9e5-ba22c92fc366",
+      "workerPodUID": "64f31963-bab6-4089-8952-db2a6214da98"
+    }
+  },
+  {
+    "time": 1794565075.7394907,
+    "phase": "Draining",
+    "reason": "ReclamationAuthorized",
+    "status": {
+      "allocation": "6d0d35cfd04b7f04a45d48c5e9eb2b3c",
+      "backend": "hami",
+      "compute": 25,
+      "everBound": true,
+      "generation": "bf970efdece94d9f47bc2b39a46cb577",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Draining",
+      "profileGeneration": 1,
+      "reason": "ReclamationAuthorized",
+      "reclamation": {
+        "authorization": "{\"authorizedAt\":\"2026-11-13T10:17:55.310209951Z\",\"detachEvidence\":{\"guest\":{\"generation\":1,\"spec\":{\"channelRef\":{\"name\":\"fixed-slots-01\",\"uid\":\"26c6aabe-273d-455f-8136-7c9ffff13cfa\"},\"generation\":\"bf970efdece94d9f47bc2b39a46cb577\",\"holderUID\":\"4e57a587-c7cf-4d6c-a9e5-ba22c92fc366\",\"nodeName\":\"gpu-4\",\"role\":\"guest\"},\"status\":{\"evidence\":\"KubeletTerminalLauncher\",\"launcherPodUID\":\"13be5b8a-eb85-48ce-b811-0eb83d86acb3\",\"observedGeneration\":1,\"phase\":\"Detached\",\"reporterPodUID\":\"64f31963-bab6-4089-8952-db2a6214da98\"},\"uid\":\"2f0ab3ff-97e5-4f95-a7c7-adfd575b64ee\"},\"worker\":{\"generation\":1,\"spec\":{\"channelRef\":{\"name\":\"fixed-slots-01\",\"uid\":\"26c6aabe-273d-455f-8136-7c9ffff13cfa\"},\"generation\":\"bf970efdece94d9f47bc2b39a46cb577\",\"holderUID\":\"64f31963-bab6-4089-8952-db2a6214da98\",\"nodeName\":\"gpu-4\",\"role\":\"worker\"},\"status\":{\"evidence\":\"ChildProcessesReaped\",\"observedGeneration\":1,\"phase\":\"Detached\",\"reporterPodUID\":\"64f31963-bab6-4089-8952-db2a6214da98\"},\"uid\":\"17d02ed5-f76f-48f2-b3e2-f9dfc8bd8375\"}},\"identity\":{\"allocation\":\"6d0d35cfd04b7f04a45d48c5e9eb2b3c\",\"backend\":\"hami\",\"channelUID\":\"26c6aabe-273d-455f-8136-7c9ffff13cfa\",\"claimName\":\"\",\"claimUID\":\"\",\"generation\":\"bf970efdece94d9f47bc2b39a46cb577\",\"pvcUID\":\"82ed08af-45ce-40ff-8ac7-f9da91f52565\",\"vmUID\":\"2c22bb57-35eb-4de0-a16a-cdbb20625589\",\"vmiUID\":\"4e57a587-c7cf-4d6c-a9e5-ba22c92fc366\",\"workerPodUID\":\"64f31963-bab6-4089-8952-db2a6214da98\"}}",
+        "journalName": "fixed-slots-01-26c6aabe273d-6d0d35cf-recovery",
+        "journalUID": "35ae4fd5-e224-4d03-bd6e-892cb453a099"
+      },
+      "requestGeneration": 1,
+      "resourcePrefix": "fixed-slots-01-26c6aabe273d-6d0d35cf",
+      "sessions": [
+        "6b89e0a5228f98b273c7d467f77d2896",
+        "b4bb8d36de8a1521646976c11b36d507"
+      ],
+      "vmiUID": "4e57a587-c7cf-4d6c-a9e5-ba22c92fc366",
+      "workerPodUID": "64f31963-bab6-4089-8952-db2a6214da98"
+    }
+  },
+  {
+    "time": 1794565077.8720317,
+    "phase": "Reclaimed",
+    "reason": "DetachAndReclamationConfirmed",
+    "status": {
+      "allocation": "6d0d35cfd04b7f04a45d48c5e9eb2b3c",
+      "backend": "hami",
+      "completion": {
+        "allocation": "6d0d35cfd04b7f04a45d48c5e9eb2b3c",
+        "backend": "hami",
+        "channelUID": "26c6aabe-273d-455f-8136-7c9ffff13cfa",
+        "claimName": "",
+        "claimUID": "",
+        "completedAt": "2026-11-13T10:17:57.636807427Z",
+        "generation": "bf970efdece94d9f47bc2b39a46cb577",
+        "pvcUID": "82ed08af-45ce-40ff-8ac7-f9da91f52565",
+        "vmUID": "2c22bb57-35eb-4de0-a16a-cdbb20625589",
+        "vmiUID": "4e57a587-c7cf-4d6c-a9e5-ba22c92fc366",
+        "workerPodUID": "64f31963-bab6-4089-8952-db2a6214da98"
+      },
+      "compute": 25,
+      "everBound": true,
+      "generation": "bf970efdece94d9f47bc2b39a46cb577",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Reclaimed",
+      "profileGeneration": 1,
+      "reason": "DetachAndReclamationConfirmed",
+      "reclamation": {
+        "authorization": "{\"authorizedAt\":\"2026-11-13T10:17:55.310209951Z\",\"detachEvidence\":{\"guest\":{\"generation\":1,\"spec\":{\"channelRef\":{\"name\":\"fixed-slots-01\",\"uid\":\"26c6aabe-273d-455f-8136-7c9ffff13cfa\"},\"generation\":\"bf970efdece94d9f47bc2b39a46cb577\",\"holderUID\":\"4e57a587-c7cf-4d6c-a9e5-ba22c92fc366\",\"nodeName\":\"gpu-4\",\"role\":\"guest\"},\"status\":{\"evidence\":\"KubeletTerminalLauncher\",\"launcherPodUID\":\"13be5b8a-eb85-48ce-b811-0eb83d86acb3\",\"observedGeneration\":1,\"phase\":\"Detached\",\"reporterPodUID\":\"64f31963-bab6-4089-8952-db2a6214da98\"},\"uid\":\"2f0ab3ff-97e5-4f95-a7c7-adfd575b64ee\"},\"worker\":{\"generation\":1,\"spec\":{\"channelRef\":{\"name\":\"fixed-slots-01\",\"uid\":\"26c6aabe-273d-455f-8136-7c9ffff13cfa\"},\"generation\":\"bf970efdece94d9f47bc2b39a46cb577\",\"holderUID\":\"64f31963-bab6-4089-8952-db2a6214da98\",\"nodeName\":\"gpu-4\",\"role\":\"worker\"},\"status\":{\"evidence\":\"ChildProcessesReaped\",\"observedGeneration\":1,\"phase\":\"Detached\",\"reporterPodUID\":\"64f31963-bab6-4089-8952-db2a6214da98\"},\"uid\":\"17d02ed5-f76f-48f2-b3e2-f9dfc8bd8375\"}},\"identity\":{\"allocation\":\"6d0d35cfd04b7f04a45d48c5e9eb2b3c\",\"backend\":\"hami\",\"channelUID\":\"26c6aabe-273d-455f-8136-7c9ffff13cfa\",\"claimName\":\"\",\"claimUID\":\"\",\"generation\":\"bf970efdece94d9f47bc2b39a46cb577\",\"pvcUID\":\"82ed08af-45ce-40ff-8ac7-f9da91f52565\",\"vmUID\":\"2c22bb57-35eb-4de0-a16a-cdbb20625589\",\"vmiUID\":\"4e57a587-c7cf-4d6c-a9e5-ba22c92fc366\",\"workerPodUID\":\"64f31963-bab6-4089-8952-db2a6214da98\"}}",
+        "journalName": "fixed-slots-01-26c6aabe273d-6d0d35cf-recovery",
+        "journalUID": "35ae4fd5-e224-4d03-bd6e-892cb453a099"
+      },
+      "requestGeneration": 1,
+      "resourcePrefix": "fixed-slots-01-26c6aabe273d-6d0d35cf",
+      "sessions": [
+        "6b89e0a5228f98b273c7d467f77d2896",
+        "b4bb8d36de8a1521646976c11b36d507"
+      ],
+      "vmiUID": "4e57a587-c7cf-4d6c-a9e5-ba22c92fc366",
+      "workerPodUID": "64f31963-bab6-4089-8952-db2a6214da98"
+    }
+  },
+  {
+    "time": 1794565105.590692,
+    "phase": "Stopped",
+    "reason": "RuntimeReclaimed",
+    "status": {
+      "allocation": "",
+      "backend": "",
+      "claimName": "",
+      "claimUID": "",
+      "completion": null,
+      "compute": 25,
+      "everBound": false,
+      "generation": "",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Stopped",
+      "profileGeneration": 1,
+      "reason": "RuntimeReclaimed",
+      "reclamation": null,
+      "requestGeneration": 1,
+      "resourcePrefix": "",
+      "sessions": [],
+      "vmiUID": "",
+      "workerPodUID": ""
+    }
+  }
+]

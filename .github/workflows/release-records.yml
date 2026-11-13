@@ -35,8 +35,9 @@ jobs:
                 f"Build source: `{source}`. Guest library SHA256: `{release['guestLibrarySHA256']}`.\n\n"
                 f"Verified deployment and limitations: https://github.com/{repo}/blob/{revision}/{release['evidence']}\n\n"
                 f"Installation: https://github.com/{repo}/blob/{revision}/{current['guide']}\n\n"
-                "CNN requires `TORCH_CUDNN_V8_API_DISABLED=1` and the documented FP32 legacy scope. "
-                "The small CNN tests establish functional correctness, not full-dataset accuracy or throughput.\n\n"
+                f"Scope: {release['scope']}\n\n"
+                + "\n".join("- " + limit for limit in release.get('limits', [])) + "\n\n"
+                +
                 "Verify SHA256SUMS before using release assets. Image digests and chart records are in deploy/releases/.")
           pathlib.Path('/tmp/runtime-notes.md').write_text(body+'\n')
           pathlib.Path('/tmp/plugin-notes.md').write_text(body+'\n\nThe portable image archive and chart are attached to this release.\n')

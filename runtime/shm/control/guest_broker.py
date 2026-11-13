@@ -357,7 +357,8 @@ def main():
         transport.discovery_enabled = True
         from guest_status import Publisher
         publisher = Publisher(args.status, transport, args.library,
-                              env.require('VMWEAVE_LAYOUT'), args.socket)
+                              env.require('VMWEAVE_LAYOUT'), args.socket,
+                              slot=int(env.get('VMWEAVE_SLOT', '0')))
         publisher.start()
     print('VMWeave broker ready; no active CUDA job', flush=True)
     if not transport.owner_mode:

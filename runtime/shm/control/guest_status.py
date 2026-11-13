@@ -13,21 +13,37 @@ import threading
 import time
 
 
+def read_layout(path):
+    """Read the fixed boot binding; transport validates ring geometry itself."""
+    data = Path(path).read_bytes()
+    if len(data) < 64:
+        raise ValueError('truncated layout')
+    count = struct.unpack_from('<I', data, 40)[0]
+    if count not in (1, 2) or len(data) != 64 + 80 * count:
+        raise ValueError('one or two complete layout slots required')
+    ids = [data[64 + 80*i:80 + 80*i].hex() for i in range(count)]
+    if not any(data[:16]) or not any(data[16:32]) or '0'*32 in ids or len(set(ids)) != count:
+        raise ValueError('invalid binding identity')
+    return data[:16].hex(), data[16:32].hex(), ids
+
+
 class Publisher:
-    def __init__(self, path, transport, library, layout, socket_path):
+    def __init__(self, path, transport, library, layout, socket_path, slot=0):
         self.path = Path(path)
         self.transport = transport
         self.socket_path = Path(socket_path)
-        data = Path(layout).read_bytes()
-        if len(data) < 64 or struct.unpack_from('<I', data, 40)[0] != 1:
-            raise ValueError('plugin discovery requires one layout slot')
+        allocation, generation, sessions = read_layout(layout)
+        if not 0 <= slot < len(sessions):
+            raise ValueError('invalid discovery slot')
         self.identity = {
-            'schemaVersion': 1, 'brokerProtocol': 1,
-            'allocation': data[:16].hex(), 'generation': data[16:32].hex(),
+            'schemaVersion': 1 if len(sessions) == 1 else 2, 'brokerProtocol': 1,
+            'allocation': allocation, 'generation': generation,
             'bootID': Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
             'librarySHA256': hashlib.sha256(Path(library).read_bytes()).hexdigest(),
             'maxClients': 1,
         }
+        if len(sessions) > 1:
+            self.identity.update(slotIndex=slot, slotCount=len(sessions), sessionID=sessions[slot])
         self.stop = threading.Event()
         self.thread = None
         self.path.parent.mkdir(mode=0o755, parents=True, exist_ok=True)

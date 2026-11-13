@@ -10,6 +10,30 @@ VMWeave Guest의 기존 GPU quota를 내부 Kubernetes에서 예약하고 연결
 legacy CNN 경로에는 v0.5.10 Worker와 새 Guest package를 함께 사용한다.
 CNN은 import 전에 `TORCH_CUDNN_V8_API_DISABLED=1`을 명시한다.
 
+## 소스 후보의 고정 2슬롯 모드
+
+현재 작업 트리에는 VM 전체 quota를 공유하는 2슬롯 후보 구현이 있다.
+공개 v0.1.2는 여전히 1슬롯이며, 아래 설정만 공개 바이너리에 적용해서는 동작하지 않는다.
+같은 후보 소스의 Operator·Guest control package·Plugin을 함께 준비해야 한다.
+
+- 외부 `GPUProfile.maxClients >= 2`, `SharedMemoryChannel.spec.sessions: 2`를 사용한다.
+- 내부 Plugin chart에는 `slotCount: 2`를 설정한다. Guest는 실제 부팅 layout의 개수를 사용한다.
+- 각 Pod 컨테이너는 기존과 같이 `vmweave.io/gpu: 1`을 요청한다. 두 컨테이너가 사용 중이면 세 번째는 대기한다.
+- 슬롯마다 독립 Broker와 CUDA client를 사용하지만 VRAM·compute는 VM 전체 예산을 공유한다.
+  Pod별 용량 보장이나 공정한 연산 분배를 제공하지 않는다.
+- 개수는 Channel 생성 시 고정된다. 변경하려면 VM을 Halted로 전환하고 Channel의 Stopped 및
+  backing 회수를 확인한 뒤 이전 Channel을 삭제한다. 정지 VM의 이전 Channel annotation을 정리하고
+  새 Channel을 생성해야 한다. 기존 binding 식별자를 남긴 채 Channel만 교체하면 연결이 거부된다.
+- 강제 Pod 삭제 직후에는 기존 프로세스가 아직 종료 중일 수 있다. 실제 client/CUDA child 회수가
+  끝나기 전 새 접속은 `busy(46)`로 거부한다. 정상 종료를 우선하고 강제 종료 시 회수 확인 또는
+  애플리케이션의 새 실행 재시도가 필요하다. API 객체 삭제만으로 슬롯 회수가 끝났다고 판단하지 않는다.
+- Broker 하나가 고장 나면 해당 슬롯의 신규 할당을 차단하고 정상 슬롯은 유지한다.
+  고장 Broker를 같은 ring에서 재시작하지 말고 VM을 정상 정지·회수한 뒤 새 binding으로 부팅한다.
+  고장 슬롯의 Host CUDA child와 VRAM은 VM 정지 전까지 남을 수 있다.
+
+[개발 계획](../development/multi-pod-gpu-plan.md)과
+[실제 VM 검증 절차·결과](../../experiments/fixed-slots/README.md)를 참조한다.
+
 ## 설치 전 준비
 
 - 외부 VMWeave의 VM lifecycle 연결과 Guest Broker가 정상이어야 한다.

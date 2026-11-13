@@ -1,8 +1,12 @@
 package plugin
 
 import (
+	"bytes"
 	"context"
+	"encoding/binary"
+	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"google.golang.org/grpc"
 	api "k8s.io/kubelet/pkg/apis/deviceplugin/v1beta1"
 	"net"
@@ -204,6 +208,173 @@ func TestKubeletLifecycle(t *testing.T) {
 			t.Fatal(e)
 		}
 	case <-time.After(5 * time.Second):
+		t.Fatal("shutdown timeout")
+	}
+}
+
+func multiFixture(t *testing.T) (Config, []Discovery) {
+	c, d := fixture(t)
+	c.SlotCount = 2
+	layout := make([]byte, 224)
+	copy(layout[:16], bytes.Repeat([]byte{0x11}, 16))
+	copy(layout[16:32], bytes.Repeat([]byte{0x22}, 16))
+	binary.LittleEndian.PutUint32(layout[40:44], 2)
+	records := []Discovery{}
+	for slot := 0; slot < 2; slot++ {
+		copy(layout[64+80*slot:80+80*slot], bytes.Repeat([]byte{byte(0x33 + slot)}, 16))
+		dir := c.brokerPath(slot)
+		state := filepath.Join(filepath.Dir(c.StatusFile), "slots", fmt.Sprint(slot))
+		if e := os.MkdirAll(dir, 0755); e != nil {
+			t.Fatal(e)
+		}
+		if e := os.MkdirAll(state, 0755); e != nil {
+			t.Fatal(e)
+		}
+		l, e := net.Listen("unix", filepath.Join(dir, "gpu.sock"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		t.Cleanup(func() { l.Close() })
+		os.Chmod(filepath.Join(dir, "gpu.sock"), 0660)
+		x := d
+		x.SchemaVersion = 2
+		x.SlotCount = 2
+		i := slot
+		x.SlotIndex = &i
+		x.SessionID = hex.EncodeToString(layout[64+80*slot : 80+80*slot])
+		records = append(records, x)
+		sc := c
+		sc.StatusFile = filepath.Join(state, "status.json")
+		write(t, sc, x)
+	}
+	if e := os.WriteFile(filepath.Join(c.BrokerDir, "layout.bin"), layout, 0644); e != nil {
+		t.Fatal(e)
+	}
+	return c, records
+}
+func TestFixedSlotsBindingAndMounts(t *testing.T) {
+	c, records := multiFixture(t)
+	s := &Server{Config: c}
+	request := &api.AllocateRequest{ContainerRequests: []*api.ContainerAllocateRequest{{DevicesIds: []string{"vmweave-slot-0"}}, {DevicesIds: []string{"vmweave-slot-1"}}}}
+	for i := 0; i < 2; i++ {
+		r, e := s.Allocate(context.Background(), request)
+		if e != nil {
+			t.Fatal(e)
+		}
+		for slot, cr := range r.ContainerResponses {
+			if cr.Mounts[0].HostPath != c.brokerPath(slot) || len(cr.Devices) != 0 {
+				t.Fatal(cr)
+			}
+		}
+	}
+	sc := c
+	sc.StatusFile = filepath.Join(filepath.Dir(c.StatusFile), "slots", "1", "status.json")
+	for name, mutate := range map[string]func(*Discovery){
+		"wrong-slot": func(d *Discovery) { i := 0; d.SlotIndex = &i }, "missing-slot": func(d *Discovery) { d.SlotIndex = nil },
+		"generation": func(d *Discovery) { d.Generation = strings.Repeat("a", 32) }, "session": func(d *Discovery) { d.SessionID = records[0].SessionID },
+		"count": func(d *Discovery) { d.SlotCount = 1 }, "stalled": func(d *Discovery) { d.TransportObservedAt -= 20 },
+	} {
+		t.Run(name, func(t *testing.T) {
+			bad := records[1]
+			mutate(&bad)
+			write(t, sc, bad)
+			if _, e := c.CheckSlot(time.Now(), 1); e == nil {
+				t.Fatal("accepted bad slot")
+			}
+			if _, e := c.CheckSlot(time.Now(), 0); e != nil {
+				t.Fatal("peer failed", e)
+			}
+			if _, e := s.Allocate(context.Background(), request); e == nil {
+				t.Fatal("allocated failed slot")
+			}
+		})
+	}
+	write(t, sc, records[1])
+	os.Remove(sc.StatusFile)
+	if _, e := c.CheckSlot(time.Now(), 1); e == nil {
+		t.Fatal("missing status accepted")
+	}
+	if _, e := c.CheckSlot(time.Now(), 0); e != nil {
+		t.Fatal(e)
+	}
+}
+func TestLayoutAndPathFencing(t *testing.T) {
+	for _, scenario := range []string{"count", "duplicate", "layout-symlink", "directory-symlink", "writable"} {
+		t.Run(scenario, func(t *testing.T) {
+			c, _ := multiFixture(t)
+			path := filepath.Join(c.BrokerDir, "layout.bin")
+			switch scenario {
+			case "count", "duplicate":
+				b, _ := os.ReadFile(path)
+				if scenario == "count" {
+					binary.LittleEndian.PutUint32(b[40:44], 1)
+				} else {
+					copy(b[144:160], b[64:80])
+				}
+				os.WriteFile(path, b, 0644)
+			case "layout-symlink":
+				os.Rename(path, path+".real")
+				os.Symlink(path+".real", path)
+			case "directory-symlink":
+				dir := c.brokerPath(1)
+				os.Rename(dir, dir+".real")
+				os.Symlink(dir+".real", dir)
+			case "writable":
+				os.Chmod(filepath.Join(c.BrokerDir, "slots"), 0777)
+			}
+			if _, e := c.CheckSlot(time.Now(), 1); e == nil {
+				t.Fatal("untrusted layout/path accepted")
+			}
+		})
+	}
+}
+
+func TestTwoSlotHealthNotifications(t *testing.T) {
+	c, records := multiFixture(t)
+	if c.BrokerGID == 0 {
+		c.BrokerGID = 1000
+		for i := 0; i < 2; i++ {
+			if e := os.Chown(filepath.Join(c.brokerPath(i), "gpu.sock"), 0, 1000); e != nil {
+				t.Fatal(e)
+			}
+		}
+	}
+	_, r := fakeKubelet(t, c)
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	done := make(chan error, 1)
+	go func() { done <- Run(ctx, c, t.Logf) }()
+	registration(t, r)
+	dial, stop := context.WithTimeout(ctx, 4*time.Second)
+	defer stop()
+	conn, e := Dial(dial, filepath.Join(c.PluginDir, "vmweave.sock"))
+	if e != nil {
+		t.Fatal(e)
+	}
+	defer conn.Close()
+	stream, e := api.NewDevicePluginClient(conn).ListAndWatch(dial, &api.Empty{})
+	if e != nil {
+		t.Fatal(e)
+	}
+	first, e := stream.Recv()
+	if e != nil || len(first.Devices) != 2 || first.Devices[0].Health != api.Healthy || first.Devices[1].Health != api.Healthy {
+		t.Fatal(first, e)
+	}
+	sc := c
+	sc.StatusFile = filepath.Join(filepath.Dir(c.StatusFile), "slots", "1", "status.json")
+	records[1].Ready = false
+	write(t, sc, records[1])
+	next, e := stream.Recv()
+	if e != nil || next.Devices[0].Health != api.Healthy || next.Devices[1].Health != api.Unhealthy {
+		t.Fatal(next, e)
+	}
+	cancel()
+	select {
+	case e := <-done:
+		if e != nil {
+			t.Fatal(e)
+		}
+	case <-time.After(3 * time.Second):
 		t.Fatal("shutdown timeout")
 	}
 }

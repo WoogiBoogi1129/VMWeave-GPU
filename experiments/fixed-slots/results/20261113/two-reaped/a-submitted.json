@@ -1,0 +1,62 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "a",
+    "namespace": "fixed-slots-two-reaped",
+    "labels": {
+      "vmweave-experiment": "fixed-slots-two-reaped"
+    }
+  },
+  "spec": {
+    "nodeSelector": {
+      "kubernetes.io/hostname": "fixed-slots-01"
+    },
+    "restartPolicy": "Never",
+    "automountServiceAccountToken": false,
+    "activeDeadlineSeconds": 360,
+    "terminationGracePeriodSeconds": 2,
+    "securityContext": {
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "runAsGroup": 1000,
+      "supplementalGroups": [
+        998
+      ],
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "containers": [
+      {
+        "name": "gpu",
+        "image": "localhost/vmweave-fixed-slots-workload@sha256:c63a1fd372563f9ddefbb862f12f9fcd3aaeabe714532272200df83053ce7d7e",
+        "imagePullPolicy": "IfNotPresent",
+        "args": [
+          "3",
+          "240",
+          "1794564951"
+        ],
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        },
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "128Mi"
+          },
+          "limits": {
+            "cpu": "1",
+            "memory": "512Mi",
+            "vmweave.io/gpu": 1
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,10 +1,15 @@
 # VMWeave guest Kubernetes device plugin
 
 Optional node integration, installed by the administrator of Kubernetes **inside**
-a VMWeave guest. It advertises `vmweave.io/gpu: 1`: exclusive access to the VM's
-existing quota, not a physical GPU or a new allocation from the outer cluster.
-One CUDA client per allocated container is supported. HAMi nesting, multiple
-concurrent GPU clients and direct-Guest/Pod arbitration are outside v0.1.
+a VMWeave guest. Each `vmweave.io/gpu: 1` allocation grants one broker slot.
+The source supports one or two fixed slots sharing the VM's existing GPU quota.
+Each allocated container supports one CUDA client. Physical GPUs, additional
+VRAM, per-Pod memory/compute guarantees, HAMi nesting and direct-Guest/Pod
+arbitration are outside this contract.
+
+The published v0.1.2 release remains single-slot. Two slots require the matching
+candidate Operator, Guest control package and Plugin from this working tree;
+setting a chart value alone cannot upgrade released binaries.
 
 [Installation and limits](../../docs/guides/kubernetes-device-plugin.md)
 
@@ -22,9 +27,10 @@ registration, ListAndWatch transitions, kubelet socket replacement, duplicate
 plugin exclusion, invalid Allocate requests and untrusted/stale discovery. They
 never connect to a real broker or open a CUDA session.
 
-## Contract v1
+## Fixed-slot contract
 
-- One stable device ID `vmweave-slot-0`. The boot/allocation/generation describe
+- Stable device IDs `vmweave-slot-0` (and `vmweave-slot-1` in two-slot mode).
+  The boot/allocation/generation describe
   the runtime binding, not additional devices. A new binding is not restoration
   of an old CUDA context; applications must restart after VM/runtime replacement.
 - Register the server only after listening. Re-register on kubelet or plugin
@@ -37,11 +43,33 @@ never connect to a real broker or open a CUDA session.
 - Busy is not Unhealthy. A direct VM client is outside kubelet accounting and
   can contend with a scheduled Pod. Initial operation requires no concurrent
   direct GPU client; this is an operating condition, not an isolation guarantee.
-- Status JSON is atomically replaced at `/run/vmweave-device-plugin/status.json`.
+- Single-slot mode retains schema v1 at `/run/vmweave-device-plugin/status.json`.
+  Two-slot mode uses one schema v2 record per
+  `/run/vmweave-device-plugin/slots/{0,1}/status.json`, with `slotIndex`,
+  `slotCount: 2` and `sessionID`. The Plugin checks these and allocation/generation
+  against the root-owned boot layout; it does not infer capacity from file count.
+  Records are replaced atomically.
   Its parent/file must be owned by root and not group/world writable. Symlink
   files, unsupported schema/protocol, stale/future timestamps, wrong boot,
   invalid allocation/generation, library mismatch and wrong socket GID/mode
-  fail closed. `maxClients` must equal 1.
+  fail closed. `maxClients` must equal 1 per broker. Each slot has independent
+  health; loss of one record does not withdraw the other device.
+- Set Channel `spec.sessions: 2`, an approving Profile with `maxClients >= 2`,
+  and chart `slotCount: 2` (CLI `--slot-count=2`). The Guest reads the actual
+  boot layout and starts separate broker processes with distinct `VMWEAVE_SLOT`.
+  There is no session-manager CRD/database or dynamic resize. Session IDs and
+  client epochs retain their existing lifetime semantics.
+- Two-slot Allocate mounts only `/run/vmweave/slots/i` at `/run/vmweave`.
+  Several container requests are accepted, each requesting exactly one distinct
+  device. A container requesting two slots or duplicate device IDs is rejected.
+- Forced Pod deletion does not confirm process termination. An immediately
+  scheduled replacement can receive `busy(46)` while the old client is alive.
+  Verify actual client/CUDA-child retirement before reuse, or retry a fresh
+  application execution. Busy remains healthy and never permits duplicate access.
+- A dead broker is not restarted on consumed SHM rings. Its peer continues;
+  restoring the dead slot requires a fresh VM binding. Its host CUDA child and
+  memory may remain reserved until VM shutdown reclaims the binding. Normal client exit
+  reclaims its CUDA child and permits reuse without restarting the broker.
 - `observedAt` and `transportObservedAt` are Unix seconds on the same guest.
   Both expire after 10 seconds (future tolerance 1 second). A long/stalled CUDA
   request can temporarily make new allocations unhealthy; existing execution

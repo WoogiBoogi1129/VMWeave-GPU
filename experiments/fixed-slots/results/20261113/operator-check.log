@@ -1,0 +1,10 @@
+make -C operator check
+make[1]: Entering directory '/home/ubuntu/taeuk/flyt-k8s-poc-github/operator'
+python3 hack/check-crds.py
+PASS: VMWeave API group, scope and chart schema copies
+go vet ./api/... ./internal/... ./cmd/...
+go test -race ./api/... ./internal/... ./cmd/...
+ok  	github.com/WoogiBoogi1129/VMWeave-GPU/operator/api/v1alpha1	(cached)
+ok  	github.com/WoogiBoogi1129/VMWeave-GPU/operator/internal/engine	2.389s
+?   	github.com/WoogiBoogi1129/VMWeave-GPU/operator/cmd	[no test files]
+make[1]: Leaving directory '/home/ubuntu/taeuk/flyt-k8s-poc-github/operator'

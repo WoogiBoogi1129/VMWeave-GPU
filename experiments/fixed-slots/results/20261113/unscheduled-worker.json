@@ -1,0 +1,656 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-13T09:56:08Z",
+                "generation": 1,
+                "labels": {
+                    "vmweave.io/channel": "fixed-slots-01"
+                },
+                "name": "fixed-slots-01-bb15bd27dd08-5cfca2f4-prepare",
+                "namespace": "vmweave-fixed-slots-exp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "vmweave.io/v1alpha1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "SharedMemoryChannel",
+                        "name": "fixed-slots-01",
+                        "uid": "bb15bd27-dd08-491c-8db5-ac37c883683e"
+                    }
+                ],
+                "resourceVersion": "30740641",
+                "uid": "e2a8ceca-abbe-4942-aad1-9b552c641747"
+            },
+            "spec": {
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "command": [
+                            "sh",
+                            "-ec",
+                            "if test -f /opt/vmweave/control/provision.py; then exec python3 /opt/vmweave/control/provision.py \"$@\"; else exec python3 /opt/flyt/control/provision.py \"$@\"; fi",
+                            "vmweave-control",
+                            "--root",
+                            "/flyt-channel",
+                            "--allocation",
+                            "5cfca2f4c4616f5c0e9ddb437d10d9a6",
+                            "--generation",
+                            "901a3bebe870d826d4ed8523725bd74a",
+                            "--uid",
+                            "107",
+                            "--gid",
+                            "107",
+                            "--session",
+                            "e1999f3085ae3f0eb7da0627dae4c1b4"
+                        ],
+                        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:1f4480631892f2fcb8b0aff434b2b7745d4f6b1fd0813be55762bfefcdde6694",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "main",
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/flyt-channel",
+                                "name": "channel"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "gpu-4",
+                "nodeSelector": {
+                    "kubernetes.io/hostname": "gpu-4"
+                },
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Never",
+                "schedulerName": "default-scheduler",
+                "securityContext": {
+                    "fsGroup": 107,
+                    "runAsGroup": 107,
+                    "runAsUser": 107
+                },
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "channel",
+                        "persistentVolumeClaim": {
+                            "claimName": "fixed-slots-01-shm"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:56:11Z",
+                        "message": "pod sandbox is not ready",
+                        "observedGeneration": 1,
+                        "reason": "PodSandboxNotReady",
+                        "status": "False",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:56:08Z",
+                        "observedGeneration": 1,
+                        "reason": "PodCompleted",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:56:09Z",
+                        "observedGeneration": 1,
+                        "reason": "PodCompleted",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:56:09Z",
+                        "observedGeneration": 1,
+                        "reason": "PodCompleted",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:56:08Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "cri-o://751237f395cfa23074eeb4608f862963c52234c470e1e86c1397839499cb840d",
+                        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:1f4480631892f2fcb8b0aff434b2b7745d4f6b1fd0813be55762bfefcdde6694",
+                        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:1f4480631892f2fcb8b0aff434b2b7745d4f6b1fd0813be55762bfefcdde6694",
+                        "lastState": {},
+                        "name": "main",
+                        "ready": false,
+                        "resources": {},
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "terminated": {
+                                "containerID": "cri-o://751237f395cfa23074eeb4608f862963c52234c470e1e86c1397839499cb840d",
+                                "exitCode": 0,
+                                "finishedAt": "2026-11-13T09:56:09Z",
+                                "reason": "Completed",
+                                "startedAt": "2026-11-13T09:56:09Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 107,
+                                "supplementalGroups": [
+                                    107
+                                ],
+                                "uid": 107
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/flyt-channel",
+                                "name": "channel"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "192.168.24.21",
+                "hostIPs": [
+                    {
+                        "ip": "192.168.24.21"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Succeeded",
+                "podIP": "10.85.0.142",
+                "podIPs": [
+                    {
+                        "ip": "10.85.0.142"
+                    }
+                ],
+                "qosClass": "BestEffort",
+                "resources": {},
+                "startTime": "2026-11-13T09:56:08Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "nvidia.com/use-gpuuuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+                    "vmweave.io/detach-channel-uid": "bb15bd27-dd08-491c-8db5-ac37c883683e"
+                },
+                "creationTimestamp": "2026-11-13T09:56:11Z",
+                "finalizers": [
+                    "vmweave.io/detach-observation"
+                ],
+                "generation": 1,
+                "labels": {
+                    "vmweave.io/channel": "fixed-slots-01"
+                },
+                "name": "fixed-slots-01-bb15bd27dd08-5cfca2f4-worker",
+                "namespace": "vmweave-fixed-slots-exp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "vmweave.io/v1alpha1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "SharedMemoryChannel",
+                        "name": "fixed-slots-01",
+                        "uid": "bb15bd27-dd08-491c-8db5-ac37c883683e"
+                    }
+                ],
+                "resourceVersion": "30740655",
+                "uid": "521f9c85-678a-4c5a-a6e2-84b7be0f53bb"
+            },
+            "spec": {
+                "automountServiceAccountToken": true,
+                "containers": [
+                    {
+                        "command": [
+                            "sh",
+                            "-ec",
+                            "if test -f /opt/vmweave/control/supervisor.py; then exec python3 /opt/vmweave/control/supervisor.py \"$@\"; else exec python3 /opt/flyt/control/supervisor.py \"$@\"; fi",
+                            "vmweave-control"
+                        ],
+                        "env": [
+                            {
+                                "name": "VMWEAVE_PERSISTENT",
+                                "value": "1"
+                            },
+                            {
+                                "name": "VMWEAVE_ALLOCATION",
+                                "value": "5cfca2f4c4616f5c0e9ddb437d10d9a6"
+                            },
+                            {
+                                "name": "FLYT_ALLOCATION",
+                                "value": "5cfca2f4c4616f5c0e9ddb437d10d9a6"
+                            },
+                            {
+                                "name": "VMWEAVE_MEMORY_BYTES",
+                                "value": "2147483648"
+                            },
+                            {
+                                "name": "FLYT_MEMORY_BYTES",
+                                "value": "2147483648"
+                            },
+                            {
+                                "name": "VMWEAVE_CHANNEL_UID",
+                                "value": "bb15bd27-dd08-491c-8db5-ac37c883683e"
+                            },
+                            {
+                                "name": "FLYT_CHANNEL_UID",
+                                "value": "bb15bd27-dd08-491c-8db5-ac37c883683e"
+                            },
+                            {
+                                "name": "VMWEAVE_NAMESPACE",
+                                "value": "vmweave-fixed-slots-exp"
+                            },
+                            {
+                                "name": "FLYT_NAMESPACE",
+                                "value": "vmweave-fixed-slots-exp"
+                            },
+                            {
+                                "name": "VMWEAVE_API_GROUP",
+                                "value": "vmweave.io"
+                            },
+                            {
+                                "name": "VMWEAVE_GPU_UUID",
+                                "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+                            },
+                            {
+                                "name": "FLYT_GPU_UUID",
+                                "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+                            },
+                            {
+                                "name": "VMWEAVE_RESOURCE_BACKEND",
+                                "value": "hami"
+                            },
+                            {
+                                "name": "FLYT_RESOURCE_BACKEND",
+                                "value": "hami"
+                            },
+                            {
+                                "name": "VMWEAVE_SESSIONS",
+                                "value": "1"
+                            },
+                            {
+                                "name": "FLYT_SESSIONS",
+                                "value": "1"
+                            },
+                            {
+                                "name": "VMWEAVE_CHANNEL_NAME",
+                                "value": "fixed-slots-01"
+                            },
+                            {
+                                "name": "FLYT_CHANNEL_NAME",
+                                "value": "fixed-slots-01"
+                            },
+                            {
+                                "name": "VMWEAVE_GENERATION",
+                                "value": "901a3bebe870d826d4ed8523725bd74a"
+                            },
+                            {
+                                "name": "FLYT_GENERATION",
+                                "value": "901a3bebe870d826d4ed8523725bd74a"
+                            },
+                            {
+                                "name": "VMWEAVE_POD_UID",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.uid"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "FLYT_POD_UID",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.uid"
+                                    }
+                                }
+                            }
+                        ],
+                        "image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:f313b3434f1209f8b0c3fd5785cdf58409cb83d01d572e97c121dbb8ee818b0a",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "main",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "sh",
+                                    "-ec",
+                                    "test -f /tmp/vmweave-worker-ready || test -f /tmp/flyt-worker-ready"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 2,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {
+                            "limits": {
+                                "nvidia.com/gpu": "1",
+                                "nvidia.com/gpucores": "25",
+                                "nvidia.com/gpumem": "2048"
+                            },
+                            "requests": {
+                                "nvidia.com/gpu": "1",
+                                "nvidia.com/gpucores": "25",
+                                "nvidia.com/gpumem": "2048"
+                            }
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/flyt-channel",
+                                "name": "channel"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-fwjq8",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeSelector": {
+                    "kubernetes.io/hostname": "gpu-4"
+                },
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Never",
+                "runtimeClassName": "nvidia",
+                "schedulerName": "hami-scheduler",
+                "securityContext": {
+                    "fsGroup": 107,
+                    "runAsGroup": 107,
+                    "runAsUser": 107
+                },
+                "serviceAccount": "fixed-slots-01-bb15bd27dd08-5cfca2f4-worker",
+                "serviceAccountName": "fixed-slots-01-bb15bd27dd08-5cfca2f4-worker",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "channel",
+                        "persistentVolumeClaim": {
+                            "claimName": "fixed-slots-01-shm"
+                        }
+                    },
+                    {
+                        "name": "kube-api-access-fwjq8",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:56:11Z",
+                        "message": "0/1 nodes are available: 1 3/3 CardUuidMismatch. preemption: 0/1 nodes are available: 1 No preemption victims found for incoming pod.",
+                        "observedGeneration": 1,
+                        "reason": "Unschedulable",
+                        "status": "False",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "phase": "Pending",
+                "qosClass": "BestEffort"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "creationTimestamp": "2026-11-13T09:50:15Z",
+                "generation": 1,
+                "labels": {
+                    "vmweave-experiment": "fixed-slots-20261113"
+                },
+                "name": "fixed-slots-admin",
+                "namespace": "vmweave-fixed-slots-exp",
+                "resourceVersion": "30736896",
+                "uid": "8ad35110-2c5d-400b-98a8-ed63bc9b2425"
+            },
+            "spec": {
+                "activeDeadlineSeconds": 14400,
+                "automountServiceAccountToken": false,
+                "containers": [
+                    {
+                        "command": [
+                            "python3",
+                            "-c",
+                            "import time; time.sleep(14300)"
+                        ],
+                        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "admin",
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": true,
+                            "runAsGroup": 0,
+                            "runAsUser": 0
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/host",
+                                "name": "host"
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "gpu-4",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Never",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 1,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "hostPath": {
+                            "path": "/",
+                            "type": "Directory"
+                        },
+                        "name": "host"
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:50:16Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:50:15Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:50:16Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:50:16Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-11-13T09:50:15Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "cri-o://80f51b83fb42c2fc6fb421ef6e3436b99fb46f61bb2fc781216237a956768043",
+                        "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+                        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:a3ee3beb41957bfe4496dba4130c8a1841a1df4a1754615e223d1bd369b01089",
+                        "lastState": {},
+                        "name": "admin",
+                        "ready": true,
+                        "resources": {},
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-11-13T09:50:16Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 0,
+                                "supplementalGroups": [
+                                    0
+                                ],
+                                "uid": 0
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/host",
+                                "name": "host"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "192.168.24.21",
+                "hostIPs": [
+                    {
+                        "ip": "192.168.24.21"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Running",
+                "podIP": "10.85.0.27",
+                "podIPs": [
+                    {
+                        "ip": "10.85.0.27"
+                    }
+                ],
+                "qosClass": "BestEffort",
+                "resources": {},
+                "startTime": "2026-11-13T09:50:15Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

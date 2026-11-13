@@ -1,0 +1,108 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "vmweave.io/v1alpha1",
+            "kind": "SharedMemoryChannel",
+            "metadata": {
+                "creationTimestamp": "2026-11-13T09:56:07Z",
+                "finalizers": [
+                    "vmweave.io/shm-detach"
+                ],
+                "generation": 1,
+                "name": "fixed-slots-01",
+                "namespace": "vmweave-fixed-slots-exp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "kubevirt.io/v1",
+                        "controller": true,
+                        "kind": "VirtualMachine",
+                        "name": "fixed-slots-01",
+                        "uid": "2c22bb57-35eb-4de0-a16a-cdbb20625589"
+                    }
+                ],
+                "resourceVersion": "30743033",
+                "uid": "bb15bd27-dd08-491c-8db5-ac37c883683e"
+            },
+            "spec": {
+                "drain": false,
+                "gid": 107,
+                "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:351ae9433e7855ef245456eafe9006379d98bee844b0e9a76eed3cb7c4df3999",
+                "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:1f4480631892f2fcb8b0aff434b2b7745d4f6b1fd0813be55762bfefcdde6694",
+                "lifecycle": "VM",
+                "pvcRef": {
+                    "name": "fixed-slots-01-shm",
+                    "uid": "82ed08af-45ce-40ff-8ac7-f9da91f52565"
+                },
+                "requestRef": {
+                    "name": "fixed-slots-01",
+                    "uid": "04ed2b61-cb05-4914-adea-6ea29004ba6d"
+                },
+                "sessions": 1,
+                "uid": 107,
+                "vmRef": {
+                    "name": "fixed-slots-01",
+                    "uid": "2c22bb57-35eb-4de0-a16a-cdbb20625589"
+                },
+                "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:f313b3434f1209f8b0c3fd5785cdf58409cb83d01d572e97c121dbb8ee818b0a"
+            },
+            "status": {
+                "allocation": "5cfca2f4c4616f5c0e9ddb437d10d9a6",
+                "backend": "hami",
+                "completion": {
+                    "allocation": "5cfca2f4c4616f5c0e9ddb437d10d9a6",
+                    "backend": "hami",
+                    "channelUID": "bb15bd27-dd08-491c-8db5-ac37c883683e",
+                    "claimName": "",
+                    "claimUID": "",
+                    "completedAt": "2026-11-13T09:59:50.992513191Z",
+                    "generation": "901a3bebe870d826d4ed8523725bd74a",
+                    "pvcUID": "82ed08af-45ce-40ff-8ac7-f9da91f52565",
+                    "vmUID": "2c22bb57-35eb-4de0-a16a-cdbb20625589",
+                    "vmiUID": "",
+                    "workerPodUID": "521f9c85-678a-4c5a-a6e2-84b7be0f53bb"
+                },
+                "compute": 25,
+                "generation": "901a3bebe870d826d4ed8523725bd74a",
+                "gpuUUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+                "memoryMiB": 2048,
+                "nodeName": "gpu-4",
+                "phase": "Reclaimed",
+                "profileGeneration": 1,
+                "reason": "DetachAndReclamationConfirmed",
+                "reclamation": {
+                    "authorization": "{\"authorizedAt\":\"2026-11-13T09:59:48.482863923Z\",\"detachEvidence\":{\"guest\":\"NeverBound\",\"worker\":{\"generation\":1,\"spec\":{\"channelRef\":{\"name\":\"fixed-slots-01\",\"uid\":\"bb15bd27-dd08-491c-8db5-ac37c883683e\"},\"generation\":\"901a3bebe870d826d4ed8523725bd74a\",\"holderUID\":\"521f9c85-678a-4c5a-a6e2-84b7be0f53bb\",\"nodeName\":\"gpu-4\",\"role\":\"worker\"},\"status\":{\"evidence\":\"DeletedUnscheduledWorker\",\"observedGeneration\":1,\"phase\":\"Detached\",\"reporterPodUID\":\"521f9c85-678a-4c5a-a6e2-84b7be0f53bb\"},\"uid\":\"322a76ee-0344-49a4-8756-3f6ddfcb2a50\"}},\"identity\":{\"allocation\":\"5cfca2f4c4616f5c0e9ddb437d10d9a6\",\"backend\":\"hami\",\"channelUID\":\"bb15bd27-dd08-491c-8db5-ac37c883683e\",\"claimName\":\"\",\"claimUID\":\"\",\"generation\":\"901a3bebe870d826d4ed8523725bd74a\",\"pvcUID\":\"82ed08af-45ce-40ff-8ac7-f9da91f52565\",\"vmUID\":\"2c22bb57-35eb-4de0-a16a-cdbb20625589\",\"vmiUID\":\"\",\"workerPodUID\":\"521f9c85-678a-4c5a-a6e2-84b7be0f53bb\"}}",
+                    "journalName": "fixed-slots-01-bb15bd27dd08-5cfca2f4-recovery",
+                    "journalUID": "053eb5db-9932-4d09-96b5-cc0cfeb461f0"
+                },
+                "requestGeneration": 1,
+                "resourcePrefix": "fixed-slots-01-bb15bd27dd08-5cfca2f4",
+                "sessions": [
+                    "e1999f3085ae3f0eb7da0627dae4c1b4"
+                ],
+                "workerPodUID": "521f9c85-678a-4c5a-a6e2-84b7be0f53bb"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "data": {
+                "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIIXMauFLuAP/YwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE\nAxMKa3ViZXJuZXRlczAeFw0yNjA5MjExNDAzMTFaFw0zNjA5MTgxNDA4MTFaMBUx\nEzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQDn0KB7qrLLcwEWdE5PG1U7E35TfhSh+QPmQpxJDVIzERf4vxOejy0wXWcD\nEA6L1qEQ3rKh1yLo5BWhfZLolRJC9r+n6aVxt8z+4M1lz2wC9E224rH6/NcZDFrr\nKBJIzi/kXl5f9iAWjoO8Ew5ZQjj0I/Qkr9BIi3Ej6aGDLdph/brrLHPAMgUiYskz\nsc6qVggA15KSWdaTwIJc2Q0GUckab2Zf0PfOuOVqNd5xI4i9+n9h316+W76xPEeo\n7DsDpZqi+hL21TLWyCd57x+2Db4JDvXqrQcBQd9M+6O8uqYqAx9FgGNw4CeJwWi5\nb6YXTS/rVwe5OpR1OxO+VBjTyrZ/AgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP\nBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBQZK5tRYOZuLkjGNo7UIN5FZjQkoDAV\nBgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQByy+7VL7FD\nENnwoOaAD6cQWBHl8Vl0mc0211ICj78pTP1/aqxTctwx1WTA+sq1vZ5BFP8JwbR8\nNnuuYeFNP/mdKVjT9jXkfj08iu2odvJj5DhIxmzzENUFKFLhFgHC2P86olfbwKWz\nrJsvejmEhO1gIqEu71m4vHzXLvkj+M+Eq1zgu2361jCgKrDIw+5ZGAzcdTgVjQnp\nEz4+dMgQTDdFvuwkoKjOR092+UZup5GHcQqFiD0MaohxiBaC7PUiPSBlJSsabvkh\noP3QNLRMT8FhQli6WT0MjfepJDdXb7Ognzgsu5rb3bF9rTLIrSG5d4nq5qyP/XtR\nFPNdmxjMni0E\n-----END CERTIFICATE-----\n"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+                },
+                "creationTimestamp": "2026-11-13T09:48:48Z",
+                "name": "kube-root-ca.crt",
+                "namespace": "vmweave-fixed-slots-exp",
+                "resourceVersion": "30735966",
+                "uid": "55f33695-48c9-4f62-8743-e0ebf10c1ee6"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

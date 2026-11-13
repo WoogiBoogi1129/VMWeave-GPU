@@ -13,4 +13,6 @@ assert 'mountPath: /run/vmweave, readOnly: true' in r.stdout
 assert 'kind: ClusterRole' not in r.stdout and 'privileged: true' not in r.stdout
 for overrides in [[],values+['--set','brokerGID=0'],values+['--set','image.digest=latest'],values+['--set','librarySHA256=unknown']]:
  assert subprocess.run(base+overrides,capture_output=True).returncode!=0
+assert '--slot-count=2' in subprocess.check_output(base+values+['--set','slotCount=2'],text=True)
+assert subprocess.run(base+values+['--set','slotCount=3'],capture_output=True).returncode!=0
 print('PASS chart required values, opt-in selector, mounts and privilege boundaries')

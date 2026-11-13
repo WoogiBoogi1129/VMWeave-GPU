@@ -46,6 +46,19 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(self.read()['generation'],'2'*32)
         self.assertEqual(self.read()['allocation'],'1'*32)
         self.assertEqual(p.path.stat().st_mode & 0o777,0o644)
-    def test_multiple_slots_rejected(self):
+    def test_two_slots_have_distinct_binding(self):
         layout,_=make_layout('1'*32,'2'*32,['3'*32,'4'*32]);(self.root/'layout').write_bytes(layout)
-        with self.assertRaises(ValueError):self.publisher(Fake())
+        for slot in (0,1):
+            p=Publisher(self.root/f'state/{slot}/status.json',Fake(),self.root/'library',self.root/'layout',self.root/'gpu.sock',slot)
+            p.tick(); d=json.loads(p.path.read_text())
+            self.assertEqual((d['schemaVersion'],d['slotCount'],d['slotIndex']),(2,2,slot))
+            self.assertEqual(d['sessionID'],str(slot+3)*32)
+        with self.assertRaises(ValueError):
+            Publisher(self.root/'invalid',Fake(),self.root/'library',self.root/'layout',self.root/'gpu.sock',2)
+    def test_invalid_layouts_rejected(self):
+        from guest_status import read_layout
+        layout,_=make_layout('1'*32,'2'*32,['3'*32,'4'*32])
+        bad=list([layout[:-1],layout+b'x',layout[:144]+layout[64:144],b''])
+        for data in bad:
+            (self.root/'layout').write_bytes(data)
+            with self.assertRaises(ValueError):read_layout(self.root/'layout')

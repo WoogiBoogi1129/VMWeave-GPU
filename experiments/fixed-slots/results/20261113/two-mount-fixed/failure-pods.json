@@ -1,0 +1,592 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-11-13T10:13:54Z",
+        "generation": 1,
+        "labels": {
+          "vmweave-experiment": "fixed-slots-two-mount"
+        },
+        "name": "a",
+        "namespace": "fixed-slots-two-mount",
+        "resourceVersion": "1777",
+        "uid": "cbab22e6-7cad-4083-aedd-2057de01bf1d"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 360,
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "3",
+              "240",
+              "1794564848"
+            ],
+            "image": "localhost/vmweave-fixed-slots-workload@sha256:c63a1fd372563f9ddefbb862f12f9fcd3aaeabe714532272200df83053ce7d7e",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "gpu",
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi",
+                "vmweave.io/gpu": "1"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi",
+                "vmweave.io/gpu": "1"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File"
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "fixed-slots-01",
+        "nodeSelector": {
+          "kubernetes.io/hostname": "fixed-slots-01"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Never",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "runAsGroup": 1000,
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          },
+          "supplementalGroups": [
+            998
+          ]
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 2,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:30Z",
+            "observedGeneration": 1,
+            "status": "False",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:13:54Z",
+            "observedGeneration": 1,
+            "reason": "PodCompleted",
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:29Z",
+            "observedGeneration": 1,
+            "reason": "PodCompleted",
+            "status": "False",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:29Z",
+            "observedGeneration": 1,
+            "reason": "PodCompleted",
+            "status": "False",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:13:54Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "allocatedResources": {
+              "cpu": "100m",
+              "memory": "128Mi",
+              "vmweave.io/gpu": "1"
+            },
+            "containerID": "cri-o://c8b85b4630a1455f65db8e06e9ffbd68972427f9b18be8f90e9c70d374f03043",
+            "image": "localhost/vmweave-fixed-slots-workload:20261113",
+            "imageID": "localhost/vmweave-fixed-slots-workload@sha256:c63a1fd372563f9ddefbb862f12f9fcd3aaeabe714532272200df83053ce7d7e",
+            "lastState": {},
+            "name": "gpu",
+            "ready": false,
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi",
+                "vmweave.io/gpu": "1"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi",
+                "vmweave.io/gpu": "1"
+              }
+            },
+            "restartCount": 0,
+            "started": false,
+            "state": {
+              "terminated": {
+                "containerID": "cri-o://c8b85b4630a1455f65db8e06e9ffbd68972427f9b18be8f90e9c70d374f03043",
+                "exitCode": 0,
+                "finishedAt": "2026-11-13T10:14:28Z",
+                "reason": "Completed",
+                "startedAt": "2026-11-13T10:13:54Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 1000,
+                "supplementalGroups": [
+                  1000,
+                  998
+                ],
+                "uid": 1000
+              }
+            }
+          }
+        ],
+        "hostIP": "10.0.2.2",
+        "hostIPs": [
+          {
+            "ip": "10.0.2.2"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Succeeded",
+        "podIP": "10.242.0.189",
+        "podIPs": [
+          {
+            "ip": "10.242.0.189"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-13T10:13:54Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-11-13T10:13:54Z",
+        "generation": 1,
+        "labels": {
+          "vmweave-experiment": "fixed-slots-two-mount"
+        },
+        "name": "b",
+        "namespace": "fixed-slots-two-mount",
+        "resourceVersion": "1688",
+        "uid": "c1b0db32-9a0a-4c8d-9ba1-432fb1c1dbd3"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 360,
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "11",
+              "240",
+              "1794564848"
+            ],
+            "image": "localhost/vmweave-fixed-slots-workload@sha256:c63a1fd372563f9ddefbb862f12f9fcd3aaeabe714532272200df83053ce7d7e",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "gpu",
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi",
+                "vmweave.io/gpu": "1"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi",
+                "vmweave.io/gpu": "1"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File"
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "fixed-slots-01",
+        "nodeSelector": {
+          "kubernetes.io/hostname": "fixed-slots-01"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Never",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "runAsGroup": 1000,
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          },
+          "supplementalGroups": [
+            998
+          ]
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 2,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:13:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:13:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:13:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:13:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:13:55Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "allocatedResources": {
+              "cpu": "100m",
+              "memory": "128Mi",
+              "vmweave.io/gpu": "1"
+            },
+            "containerID": "cri-o://ccbdf613a76263fcc0c273b11afe929d3e609cca88f5600792a2c792fac994d9",
+            "image": "localhost/vmweave-fixed-slots-workload:20261113",
+            "imageID": "localhost/vmweave-fixed-slots-workload@sha256:c63a1fd372563f9ddefbb862f12f9fcd3aaeabe714532272200df83053ce7d7e",
+            "lastState": {},
+            "name": "gpu",
+            "ready": true,
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi",
+                "vmweave.io/gpu": "1"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi",
+                "vmweave.io/gpu": "1"
+              }
+            },
+            "restartCount": 0,
+            "started": true,
+            "state": {
+              "running": {
+                "startedAt": "2026-11-13T10:13:55Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 1000,
+                "supplementalGroups": [
+                  1000,
+                  998
+                ],
+                "uid": 1000
+              }
+            }
+          }
+        ],
+        "hostIP": "10.0.2.2",
+        "hostIPs": [
+          {
+            "ip": "10.0.2.2"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.242.0.221",
+        "podIPs": [
+          {
+            "ip": "10.242.0.221"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-13T10:13:55Z"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "creationTimestamp": "2026-11-13T10:14:36Z",
+        "generation": 1,
+        "labels": {
+          "vmweave-experiment": "fixed-slots-two-mount"
+        },
+        "name": "d",
+        "namespace": "fixed-slots-two-mount",
+        "resourceVersion": "1815",
+        "uid": "85cb347d-c6d4-429f-ae70-5711e08c9d9f"
+      },
+      "spec": {
+        "activeDeadlineSeconds": 360,
+        "automountServiceAccountToken": false,
+        "containers": [
+          {
+            "args": [
+              "37",
+              "180",
+              "0"
+            ],
+            "image": "localhost/vmweave-fixed-slots-workload@sha256:c63a1fd372563f9ddefbb862f12f9fcd3aaeabe714532272200df83053ce7d7e",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "gpu",
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi",
+                "vmweave.io/gpu": "1"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi",
+                "vmweave.io/gpu": "1"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File"
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "fixed-slots-01",
+        "nodeSelector": {
+          "kubernetes.io/hostname": "fixed-slots-01"
+        },
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Never",
+        "schedulerName": "default-scheduler",
+        "securityContext": {
+          "runAsGroup": 1000,
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          },
+          "supplementalGroups": [
+            998
+          ]
+        },
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 2,
+        "tolerations": [
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/not-ready",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          },
+          {
+            "effect": "NoExecute",
+            "key": "node.kubernetes.io/unreachable",
+            "operator": "Exists",
+            "tolerationSeconds": 300
+          }
+        ]
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:38Z",
+            "observedGeneration": 1,
+            "status": "False",
+            "type": "PodReadyToStartContainers"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:36Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "Initialized"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:36Z",
+            "observedGeneration": 1,
+            "reason": "PodFailed",
+            "status": "False",
+            "type": "Ready"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:36Z",
+            "observedGeneration": 1,
+            "reason": "PodFailed",
+            "status": "False",
+            "type": "ContainersReady"
+          },
+          {
+            "lastProbeTime": null,
+            "lastTransitionTime": "2026-11-13T10:14:36Z",
+            "observedGeneration": 1,
+            "status": "True",
+            "type": "PodScheduled"
+          }
+        ],
+        "containerStatuses": [
+          {
+            "allocatedResources": {
+              "cpu": "100m",
+              "memory": "128Mi",
+              "vmweave.io/gpu": "1"
+            },
+            "containerID": "cri-o://3cda5e454c1cbe987f6176f5be851e430c9f4739c68eab33b9eb8983c04d0075",
+            "image": "localhost/vmweave-fixed-slots-workload:20261113",
+            "imageID": "localhost/vmweave-fixed-slots-workload@sha256:c63a1fd372563f9ddefbb862f12f9fcd3aaeabe714532272200df83053ce7d7e",
+            "lastState": {},
+            "name": "gpu",
+            "ready": false,
+            "resources": {
+              "limits": {
+                "cpu": "1",
+                "memory": "512Mi",
+                "vmweave.io/gpu": "1"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi",
+                "vmweave.io/gpu": "1"
+              }
+            },
+            "restartCount": 0,
+            "started": false,
+            "state": {
+              "terminated": {
+                "containerID": "cri-o://3cda5e454c1cbe987f6176f5be851e430c9f4739c68eab33b9eb8983c04d0075",
+                "exitCode": 1,
+                "finishedAt": "2026-11-13T10:14:36Z",
+                "reason": "Error",
+                "startedAt": "2026-11-13T10:14:36Z"
+              }
+            },
+            "user": {
+              "linux": {
+                "gid": 1000,
+                "supplementalGroups": [
+                  1000,
+                  998
+                ],
+                "uid": 1000
+              }
+            }
+          }
+        ],
+        "hostIP": "10.0.2.2",
+        "hostIPs": [
+          {
+            "ip": "10.0.2.2"
+          }
+        ],
+        "observedGeneration": 1,
+        "phase": "Failed",
+        "podIP": "10.242.0.138",
+        "podIPs": [
+          {
+            "ip": "10.242.0.138"
+          }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-13T10:14:36Z"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

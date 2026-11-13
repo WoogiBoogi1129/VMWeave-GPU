@@ -8,6 +8,9 @@
 {{- if le (int .Values.brokerGID) 0 -}}
 {{- fail "brokerGID must match the nonzero Guest vmweave group ID" -}}
 {{- end -}}
+{{- if not (has (int .Values.slotCount) (list 1 2)) -}}
+{{- fail "slotCount must be 1 or 2" -}}
+{{- end -}}
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -36,6 +39,7 @@ spec:
         image: {{ printf "%s@%s" .Values.image.repository $digest | quote }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         args:
+        - --slot-count={{ .Values.slotCount }}
         - --broker-gid={{ .Values.brokerGID }}
         - --library-sha256={{ .Values.librarySHA256 }}
         securityContext:

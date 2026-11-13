@@ -1,8 +1,10 @@
-// Package plugin exposes one existing VMWeave broker slot to the guest kubelet.
+// Package plugin exposes fixed VMWeave broker slots to the guest kubelet.
 package plugin
 
 import (
 	"context"
+	"encoding/binary"
+	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -31,13 +33,24 @@ var hex64 = regexp.MustCompile(`^[0-9a-f]{64}$`)
 type Config struct {
 	PluginDir, StatusFile, BrokerDir, LibrarySHA256 string
 	BrokerGID                                       int
+	SlotCount                                       int
 	OwnerUID                                        uint32
 	BootID                                          string
 	MaxAge                                          time.Duration
 	Poll                                            time.Duration
 }
 
+func (c Config) slots() int {
+	if c.SlotCount == 0 {
+		return 1
+	}
+	return c.SlotCount
+}
+
 func (c Config) Validate() error {
+	if c.slots() < 1 || c.slots() > 2 {
+		return errors.New("one or two fixed slots required")
+	}
 	if !hex64.MatchString(c.LibrarySHA256) || c.BrokerGID <= 0 || c.BootID == "" || c.MaxAge <= 0 || c.Poll <= 0 {
 		return errors.New("library SHA256, positive broker GID, boot ID and positive timeouts required")
 	}
@@ -53,6 +66,9 @@ func (c Config) Validate() error {
 }
 
 type Discovery struct {
+	SlotIndex           *int    `json:"slotIndex,omitempty"`
+	SlotCount           int     `json:"slotCount,omitempty"`
+	SessionID           string  `json:"sessionID,omitempty"`
 	SchemaVersion       int     `json:"schemaVersion"`
 	BrokerProtocol      int     `json:"brokerProtocol"`
 	Allocation          string  `json:"allocation"`
@@ -71,7 +87,63 @@ func trusted(info os.FileInfo, uid uint32) bool {
 	st, ok := info.Sys().(*syscall.Stat_t)
 	return ok && st.Uid == uid && info.Mode().Perm()&0022 == 0
 }
-func (c Config) Check(now time.Time) (Discovery, error) {
+func (c Config) Check(now time.Time) (Discovery, error) { return c.CheckSlot(now, 0) }
+
+func trustedDir(path string, uid uint32) error {
+	info, err := os.Lstat(path)
+	if err != nil {
+		return err
+	}
+	if !info.IsDir() || !trusted(info, uid) {
+		return errors.New("untrusted binding directory")
+	}
+	return nil
+}
+func (c Config) brokerPath(slot int) string {
+	if c.slots() == 1 {
+		return c.BrokerDir
+	}
+	return filepath.Join(c.BrokerDir, "slots", fmt.Sprint(slot))
+}
+func (c Config) CheckSlot(now time.Time, slot int) (Discovery, error) {
+	if slot < 0 || slot >= c.slots() || c.slots() > 2 {
+		return Discovery{}, errors.New("unknown slot")
+	}
+	var binding []byte
+	if c.slots() > 1 {
+		for _, dir := range []string{c.BrokerDir, filepath.Join(c.BrokerDir, "slots"), c.brokerPath(slot), filepath.Dir(c.StatusFile), filepath.Join(filepath.Dir(c.StatusFile), "slots")} {
+			if err := trustedDir(dir, c.OwnerUID); err != nil {
+				return Discovery{}, err
+			}
+		}
+		fd, err := syscall.Open(filepath.Join(c.BrokerDir, "layout.bin"), syscall.O_RDONLY|syscall.O_NOFOLLOW|syscall.O_CLOEXEC, 0)
+		if err != nil {
+			return Discovery{}, err
+		}
+		f := os.NewFile(uintptr(fd), "layout.bin")
+		defer f.Close()
+		info, err := f.Stat()
+		if err != nil {
+			return Discovery{}, err
+		}
+		if !info.Mode().IsRegular() || !trusted(info, c.OwnerUID) || info.Size() != int64(64+80*c.slots()) {
+			return Discovery{}, errors.New("untrusted boot layout")
+		}
+		binding, err = io.ReadAll(io.LimitReader(f, 225))
+		if err != nil || len(binding) != 64+80*c.slots() || binary.LittleEndian.Uint32(binding[40:44]) != uint32(c.slots()) {
+			return Discovery{}, errors.New("layout slot count mismatch")
+		}
+		first := hex.EncodeToString(binding[64:80])
+		second := hex.EncodeToString(binding[144:160])
+		if first == second || first == strings.Repeat("0", 32) || second == strings.Repeat("0", 32) {
+			return Discovery{}, errors.New("invalid layout sessions")
+		}
+		c.StatusFile = filepath.Join(filepath.Dir(c.StatusFile), "slots", fmt.Sprint(slot), "status.json")
+		c.BrokerDir = c.brokerPath(slot)
+	}
+	return c.checkRecord(now, slot, binding)
+}
+func (c Config) checkRecord(now time.Time, slot int, binding []byte) (Discovery, error) {
 	var d Discovery
 	parent, e := os.Lstat(filepath.Dir(c.StatusFile))
 	if e != nil {
@@ -101,11 +173,20 @@ func (c Config) Check(now time.Time) (Discovery, error) {
 	if dec.Decode(&extra) != io.EOF {
 		return d, errors.New("trailing discovery data")
 	}
-	if d.SchemaVersion != 1 || d.BrokerProtocol != 1 || d.MaxClients != 1 || !d.Ready {
+	version := 1
+	if len(binding) != 0 {
+		version = 2
+	}
+	if d.SchemaVersion != version || d.BrokerProtocol != 1 || d.MaxClients != 1 || !d.Ready {
 		return d, fmt.Errorf("broker unavailable or unsupported: %s", d.Reason)
 	}
 	if !hex32.MatchString(d.Allocation) || !hex32.MatchString(d.Generation) || d.Allocation == strings.Repeat("0", 32) || d.Generation == strings.Repeat("0", 32) {
 		return d, errors.New("invalid binding identity")
+	}
+	if len(binding) != 0 && (d.SlotIndex == nil || *d.SlotIndex != slot || d.SlotCount != c.slots() ||
+		d.SessionID != hex.EncodeToString(binding[64+80*slot:80+80*slot]) ||
+		d.Allocation != hex.EncodeToString(binding[:16]) || d.Generation != hex.EncodeToString(binding[16:32])) {
+		return d, errors.New("discovery does not match boot slot binding")
 	}
 	if d.BootID != c.BootID || d.LibrarySHA256 != c.LibrarySHA256 {
 		return d, errors.New("boot or library mismatch")
@@ -140,15 +221,21 @@ func (s *Server) ListAndWatch(_ *api.Empty, stream api.DevicePlugin_ListAndWatch
 	defer tick.Stop()
 	previous := ""
 	for {
-		health := api.Healthy
-		if _, e := s.Config.Check(time.Now()); e != nil {
-			health = api.Unhealthy
+		devices := []*api.Device{}
+		signature := ""
+		for slot := 0; slot < s.Config.slots(); slot++ {
+			health := api.Healthy
+			if _, e := s.Config.CheckSlot(time.Now(), slot); e != nil {
+				health = api.Unhealthy
+			}
+			devices = append(devices, &api.Device{ID: fmt.Sprintf("vmweave-slot-%d", slot), Health: health})
+			signature += health + "/"
 		}
-		if health != previous {
-			if e := stream.Send(&api.ListAndWatchResponse{Devices: []*api.Device{{ID: DeviceID, Health: health}}}); e != nil {
+		if signature != previous {
+			if e := stream.Send(&api.ListAndWatchResponse{Devices: devices}); e != nil {
 				return e
 			}
-			previous = health
+			previous = signature
 		}
 		select {
 		case <-stream.Context().Done():
@@ -158,17 +245,36 @@ func (s *Server) ListAndWatch(_ *api.Empty, stream api.DevicePlugin_ListAndWatch
 	}
 }
 func (s *Server) Allocate(ctx context.Context, req *api.AllocateRequest) (*api.AllocateResponse, error) {
-	if req == nil || len(req.ContainerRequests) != 1 || req.ContainerRequests[0] == nil || len(req.ContainerRequests[0].DevicesIds) != 1 || req.ContainerRequests[0].DevicesIds[0] != DeviceID {
-		return nil, status.Error(codes.InvalidArgument, "exactly one known slot in one container required")
+	if req == nil || len(req.ContainerRequests) == 0 {
+		return nil, status.Error(codes.InvalidArgument, "container requests required")
 	}
-	if _, e := s.Config.Check(time.Now()); e != nil {
-		return nil, status.Error(codes.Unavailable, e.Error())
+	result := &api.AllocateResponse{}
+	seen := map[int]bool{}
+	for _, request := range req.ContainerRequests {
+		if request == nil || len(request.DevicesIds) != 1 {
+			return nil, status.Error(codes.InvalidArgument, "one known slot per container required")
+		}
+		slot := -1
+		for i := 0; i < s.Config.slots(); i++ {
+			if request.DevicesIds[0] == fmt.Sprintf("vmweave-slot-%d", i) {
+				slot = i
+			}
+		}
+		if slot < 0 || seen[slot] {
+			return nil, status.Error(codes.InvalidArgument, "unknown or repeated slot")
+		}
+		seen[slot] = true
+		if _, e := s.Config.CheckSlot(time.Now(), slot); e != nil {
+			return nil, status.Error(codes.Unavailable, e.Error())
+		}
+		result.ContainerResponses = append(result.ContainerResponses, &api.ContainerAllocateResponse{
+			Envs:   map[string]string{"VMWEAVE_BROKER_SOCKET": "/run/vmweave/gpu.sock"},
+			Mounts: []*api.Mount{{HostPath: s.Config.brokerPath(slot), ContainerPath: "/run/vmweave", ReadOnly: true}},
+		})
 	}
-	return &api.AllocateResponse{ContainerResponses: []*api.ContainerAllocateResponse{{
-		Envs:   map[string]string{"VMWEAVE_BROKER_SOCKET": "/run/vmweave/gpu.sock"},
-		Mounts: []*api.Mount{{HostPath: s.Config.BrokerDir, ContainerPath: "/run/vmweave", ReadOnly: true}},
-	}}}, nil
+	return result, nil
 }
+
 func (s *Server) GetPreferredAllocation(context.Context, *api.PreferredAllocationRequest) (*api.PreferredAllocationResponse, error) {
 	return &api.PreferredAllocationResponse{}, nil
 }

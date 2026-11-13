@@ -1,0 +1,4 @@
+ARG BASE
+FROM ${BASE}
+COPY concurrent /opt/vmweave/bin/concurrent
+ENTRYPOINT ["/opt/vmweave/bin/concurrent"]
