@@ -1,0 +1,102 @@
+{
+  "apiVersion": "admissionregistration.k8s.io/v1",
+  "kind": "ValidatingWebhookConfiguration",
+  "metadata": {
+    "annotations": {
+      "meta.helm.sh/release-name": "vmweave",
+      "meta.helm.sh/release-namespace": "vmweave-system"
+    },
+    "creationTimestamp": "2026-09-30T08:46:14Z",
+    "generation": 3,
+    "labels": {
+      "app.kubernetes.io/managed-by": "Helm"
+    },
+    "name": "vmweave-system-vmweave",
+    "resourceVersion": "32215952",
+    "uid": "35677963-6c7e-4826-8c12-58cf2bc999bf"
+  },
+  "webhooks": [
+    {
+      "admissionReviewVersions": [
+        "v1"
+      ],
+      "clientConfig": {
+        "service": {
+          "name": "vmweave-webhook",
+          "namespace": "vmweave-system",
+          "path": "/validate",
+          "port": 443
+        }
+      },
+      "failurePolicy": "Fail",
+      "matchPolicy": "Equivalent",
+      "name": "validate.vmweave.io",
+      "namespaceSelector": {
+        "matchExpressions": [
+          {
+            "key": "kubernetes.io/metadata.name",
+            "operator": "In",
+            "values": [
+              "vmweave-test-a",
+              "vmweave-test-b",
+              "vmweave-nested-k8s"
+            ]
+          }
+        ]
+      },
+      "objectSelector": {},
+      "rules": [
+        {
+          "apiGroups": [
+            "vmweave.io"
+          ],
+          "apiVersions": [
+            "v1alpha1"
+          ],
+          "operations": [
+            "CREATE",
+            "UPDATE"
+          ],
+          "resources": [
+            "sharedmemorychannels"
+          ],
+          "scope": "Namespaced"
+        },
+        {
+          "apiGroups": [
+            "vmweave.io"
+          ],
+          "apiVersions": [
+            "v1alpha1"
+          ],
+          "operations": [
+            "UPDATE"
+          ],
+          "resources": [
+            "channelattachments/status"
+          ],
+          "scope": "Namespaced"
+        },
+        {
+          "apiGroups": [
+            "kubevirt.io"
+          ],
+          "apiVersions": [
+            "v1"
+          ],
+          "operations": [
+            "CREATE",
+            "UPDATE"
+          ],
+          "resources": [
+            "virtualmachineinstances",
+            "virtualmachineinstancemigrations"
+          ],
+          "scope": "Namespaced"
+        }
+      ],
+      "sideEffects": "None",
+      "timeoutSeconds": 10
+    }
+  ]
+}

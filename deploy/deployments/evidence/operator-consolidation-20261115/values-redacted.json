@@ -1,0 +1,32 @@
+{
+  "activeModeAcknowledged": true,
+  "controller": {
+    "replicas": 1
+  },
+  "image": {
+    "digest": "sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+    "pullPolicy": "IfNotPresent",
+    "repository": "ghcr.io/woogiboogi1129/vmweave-operator"
+  },
+  "maintenance": {
+    "enabled": false
+  },
+  "management": {
+    "namespaces": [
+      "vmweave-test-a",
+      "vmweave-test-b",
+      "vmweave-nested-k8s"
+    ]
+  },
+  "mode": "active",
+  "nodeSelector": {
+    "kubernetes.io/hostname": "gpu-4"
+  },
+  "tls": {
+    "caBundleSHA256": "a39ef69b80e892dd6a8359b8b2f970710cc44a2c3884dd9b66021bbc15394c4c",
+    "existingSecret": "vmweave-webhook-tls"
+  },
+  "webhook": {
+    "registrationEnabled": true
+  }
+}

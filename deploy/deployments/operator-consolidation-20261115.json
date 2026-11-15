@@ -1,0 +1,38 @@
+{
+  "evidence": "deploy/deployments/evidence/operator-consolidation-20261115",
+  "helmRelease": {
+    "app_version": "0.5.11",
+    "chart": "vmweave-operator-0.5.11",
+    "name": "vmweave",
+    "namespace": "vmweave-system",
+    "revision": "21",
+    "status": "deployed",
+    "updated": "2026-11-15 13:30:42.241111403 +0900 KST"
+  },
+  "managementNamespaces": [
+    "vmweave-test-a",
+    "vmweave-test-b",
+    "vmweave-nested-k8s"
+  ],
+  "node": "gpu-4",
+  "observedAtUTC": "2026-11-15T04:33:36.020898+00:00",
+  "operatorImage": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+  "release": "v0.5.11",
+  "removed": {
+    "helmRelease": "nested",
+    "namespace": "vmweave-nested-system",
+    "oldRBACAndWebhookAbsent": true
+  },
+  "repositoryRevisionBeforeChange": "cb75bd20d45e280e558776b617123655a31c43cd",
+  "scope": "Consolidation of existing controllers at unchanged chart, image, CRD, TLS and workload specs. No VM or Worker restart.",
+  "sourceRevision": "f6c6ab7acc28fc91d409110a7539a0d22b759ce2",
+  "validation": {
+    "admissionChecksPassed": 10,
+    "existingDrainingChannelsPreserved": 3,
+    "gpuSGEMM": "PASS",
+    "gpuSmokeNamespaceRemoved": true,
+    "newVMCreation": "NOT_RUN",
+    "twoSlotGPURegression": "NOT_RUN",
+    "workloadObjectsPreserved": 47
+  }
+}

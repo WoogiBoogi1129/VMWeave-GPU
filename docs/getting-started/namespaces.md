@@ -4,6 +4,10 @@
 같은 목록으로 cache 범위, Webhook selector, RoleBinding을 생성합니다.
 중앙 ServiceAccount가 대상 namespace의 권한을 받으며 별도 Controller는 생성하지 않습니다.
 
+VM 내부에서 일반 ML 프로세스를 실행하거나 Kubernetes GPU Pod를 실행하더라도 같은
+중앙 Operator가 관리합니다. 실제 세 namespace 통합 결과는
+[중앙 Operator 통합 기록](../guides/operator-consolidation.md)을 참조합니다.
+
 새 설치에서는 `team-a`, `team-b` 등을 먼저 만들고 설치 values에 지정합니다.
 사용자에게 Profile 승인 권한이나 system namespace의 SA를 부여하지 않습니다.
 

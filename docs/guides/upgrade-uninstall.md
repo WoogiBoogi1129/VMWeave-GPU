@@ -22,6 +22,10 @@ DRA 할당이 남아 있는 상태에서 DRA 미지원 Operator로 롤백하지 
 
 ## 관리 목록 또는 모드 변경
 
+같은 버전의 여러 설치를 하나로 합쳐 기존 객체의 관리 책임만 이전한 사례는
+[중앙 Operator 통합 기록](operator-consolidation.md)에 있습니다.
+아래는 관리 대상 제외·모드 변경에 사용하는 회수 절차입니다.
+
 설치 도구는 scope/mode 변경을 거부합니다. chart 0.2.1부터 `maintenance.enabled=true`로
 Controller만 중지하고 Webhook을 유지할 수 있습니다. `controller.replicas`는 정상 재개할 값(기본 1)으로 둡니다.
 이 설정은 drain을 자동 수행하지 않습니다. 아래 명령은 기존 release 이름이 `vmweave`, system namespace가

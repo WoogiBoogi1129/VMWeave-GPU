@@ -1,0 +1,964 @@
+[
+  {
+    "finalizers": [],
+    "name": "vw-k8s-worker-01-guest",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vw-k8s-worker-01",
+        "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "a63b7c639a13caee42d88b22d4634fdd740f4b138d2e925b30f78cd84ea43f36",
+    "status": {
+      "evidence": "GuestHELLOReceived",
+      "launcherPodUID": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0",
+      "observedGeneration": 1,
+      "phase": "Mapped",
+      "reporterPodUID": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+    },
+    "uid": "65b3ca86-9f08-495f-be6d-cabb08567583"
+  },
+  {
+    "finalizers": [],
+    "name": "vw-k8s-worker-01-worker",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vw-k8s-worker-01",
+        "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "03a8b08f7fbb908f305e758705441270fc94827d44442c30811f714a705b982e",
+    "status": {
+      "evidence": "KubeletTerminalWorker",
+      "observedGeneration": 1,
+      "phase": "Detached",
+      "reporterPodUID": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+    },
+    "uid": "d50f77d5-2460-46f4-8404-90a00d083248"
+  },
+  {
+    "finalizers": [],
+    "name": "nested-50-2048",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "333ee24435d93c8932ecd0c8fc83dcd462b702b3e451610a1694da200a97a67d",
+    "uid": "d4244585-b89e-4a47-8c9e-d00319ac196a"
+  },
+  {
+    "finalizers": [],
+    "name": "vw-k8s-worker-01",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "4cd86b8c10b9dedd24eeff8c74268902f30a82b45ebadace64512807393db530",
+    "uid": "ad412d97-8836-43d1-a3af-c7faca5ac649"
+  },
+  {
+    "containers": [
+      {
+        "containerID": "cri-o://e611d0640dab01f4603bfcf6a5fea74febd445ca58f32d08d74bc87c5e5b1949",
+        "imageID": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+        "name": "compute",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-13T05:16:14Z"
+          }
+        }
+      }
+    ],
+    "finalizers": [],
+    "name": "virt-launcher-vw-k8s-cp-01-jvl6k",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-cp-01",
+        "uid": "16079a7e-3df1-41da-958a-7a48d154988f"
+      }
+    ],
+    "phase": "Running",
+    "resource": "pods",
+    "specSHA256": "b6b45711c9fad34a2ffc873fb28c5c616a400c04f5d8392e6a092d7429188398",
+    "uid": "6d4c3308-dc4d-4a5d-b1e7-ea0c600f4bf1"
+  },
+  {
+    "containers": [
+      {
+        "containerID": null,
+        "imageID": "",
+        "name": "compute",
+        "ready": false,
+        "restartCount": 0,
+        "state": {
+          "waiting": {
+            "reason": "PodInitializing"
+          }
+        }
+      },
+      {
+        "containerID": null,
+        "imageID": "",
+        "name": "hook-sidecar-0",
+        "ready": false,
+        "restartCount": 0,
+        "state": {
+          "waiting": {
+            "reason": "PodInitializing"
+          }
+        }
+      }
+    ],
+    "finalizers": [
+      "vmweave.io/detach-observation"
+    ],
+    "name": "virt-launcher-vw-k8s-worker-01-gr5gw",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachineInstance",
+        "name": "vw-k8s-worker-01",
+        "uid": "8365e184-8715-42a3-954d-b82dc01e3a41"
+      }
+    ],
+    "phase": "Failed",
+    "resource": "pods",
+    "specSHA256": "12e2e037874e15f0806f929c9da81ea08f33a6a561f241f91b5303539a83a42c",
+    "uid": "e8c0cdab-de2a-4640-ab87-dd5fa84f78f0"
+  },
+  {
+    "containers": [
+      {
+        "containerID": "cri-o://e774ba3c381cb316dcab82bb3352bac46a13136ef0c02c80caa5f9b1d680b650",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574",
+        "name": "main",
+        "ready": false,
+        "restartCount": 0,
+        "state": {
+          "terminated": {
+            "containerID": "cri-o://e774ba3c381cb316dcab82bb3352bac46a13136ef0c02c80caa5f9b1d680b650",
+            "exitCode": 0,
+            "finishedAt": "2026-10-28T09:32:47Z",
+            "reason": "Completed",
+            "startedAt": "2026-10-28T09:32:46Z"
+          }
+        }
+      }
+    ],
+    "finalizers": [],
+    "name": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2-prepare",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vw-k8s-worker-01",
+        "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5"
+      }
+    ],
+    "phase": "Succeeded",
+    "resource": "pods",
+    "specSHA256": "07592ebc067b7dbece1672576264a947d104f8b7de85ae1f3b9373c285836396",
+    "uid": "783e19c3-1b3b-4ab5-81d1-a7e4cd3c03d7"
+  },
+  {
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "name": "vw-k8s-worker-01",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      }
+    ],
+    "resource": "sharedmemorychannels",
+    "specSHA256": "894b71ce85e18078ccb7b9b576033d8fd1d143bbe14d5350cd9db94f8df70432",
+    "status": {
+      "allocation": "1fcaa4a2ead715e40bbbf494ea64d5da",
+      "backend": "hami",
+      "claimName": "",
+      "claimUID": "",
+      "compute": 50,
+      "everBound": true,
+      "generation": "bb091f4d777bcb1e42c5cd4159d725c9",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Draining",
+      "profileGeneration": 1,
+      "reason": "AwaitingDetachEvidence",
+      "requestGeneration": 1,
+      "resourcePrefix": "vw-k8s-worker-01-71b4f671a1d3-1fcaa4a2",
+      "sessions": [
+        "2c8e46d70a9b040b6e311df2ed7266f0"
+      ],
+      "vmiUID": "8365e184-8715-42a3-954d-b82dc01e3a41",
+      "workerPodUID": "07a45bd4-0891-4a96-9b9d-9fefe7283077"
+    },
+    "uid": "71b4f671-a1d3-4993-9af0-080c8fd50ff5"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize"
+    ],
+    "name": "vw-k8s-cp-01",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [],
+    "resource": "vm",
+    "specSHA256": "3e1d41fe8927c5044eed5c78c2321d07798d9547bd894a4539dc30366aeca6f3",
+    "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize"
+    ],
+    "name": "vw-k8s-worker-01",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [],
+    "resource": "vm",
+    "specSHA256": "babdd5393a97ebffd14f39ece0b66bbf064a36c8f80f1b8e7c5f61556690f194",
+    "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize",
+      "kubevirt.io/foregroundDeleteVirtualMachine"
+    ],
+    "name": "vw-k8s-cp-01",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-cp-01",
+        "uid": "888c008b-a71e-4f19-a9a5-a3e074bf0bf1"
+      }
+    ],
+    "phase": "Running",
+    "resource": "vmi",
+    "specSHA256": "f5e1110a61652bb386f893f671aba761c470b6cff5a99a20a10446489d5d4c52",
+    "uid": "16079a7e-3df1-41da-958a-7a48d154988f"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/foregroundDeleteVirtualMachine"
+    ],
+    "name": "vw-k8s-worker-01",
+    "namespace": "vmweave-nested-k8s",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "vw-k8s-worker-01",
+        "uid": "d5fb5dad-f845-4ba7-8dbb-5508efb459b4"
+      }
+    ],
+    "phase": "Failed",
+    "resource": "vmi",
+    "specSHA256": "f2528d2c77a8c2b95e027b780aa205dd784c57a1d532cdb63d755b1b21699fec",
+    "uid": "8365e184-8715-42a3-954d-b82dc01e3a41"
+  },
+  {
+    "finalizers": [],
+    "name": "vmweave-k8s-01-guest",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vmweave-k8s-01",
+        "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "31de7bee580f109cb13aac1e96151e951302a05051d74eba3e705da904290435",
+    "status": {
+      "evidence": "GuestHELLOReceived",
+      "launcherPodUID": "596335b3-7d91-426b-8c8b-49b2deb50a81",
+      "observedGeneration": 1,
+      "phase": "Mapped",
+      "reporterPodUID": "a378042c-6247-4e83-8adc-e7ba70fe91fb"
+    },
+    "uid": "bfb9f038-0b28-49fc-969a-7edac6cc8a90"
+  },
+  {
+    "finalizers": [],
+    "name": "vmweave-k8s-01-worker",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vmweave-k8s-01",
+        "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "e2c1f32fec6408b1d6945a5631e38a87bf5aede7f10048868a127a50a994ba9e",
+    "status": {
+      "evidence": "KubeletTerminalWorker",
+      "observedGeneration": 1,
+      "phase": "Detached",
+      "reporterPodUID": "a378042c-6247-4e83-8adc-e7ba70fe91fb"
+    },
+    "uid": "0bb073ff-1ebc-47e2-9c32-85dee9c79a4a"
+  },
+  {
+    "finalizers": [],
+    "name": "vram-pair-v2-r1-ab-a-guest",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vram-pair-v2-r1-ab-a",
+        "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "eade99afa6870764db31db7095213ebec66ee1c26ee8cecbc43d34847dbb2163",
+    "status": {
+      "evidence": "KubeletTerminalLauncher",
+      "launcherPodUID": "bf1ecf63-5b40-402e-b623-d98ba5e2e536",
+      "observedGeneration": 1,
+      "phase": "Detached"
+    },
+    "uid": "d7c84441-8141-485b-814b-79fa35ca3008"
+  },
+  {
+    "finalizers": [],
+    "name": "vram-pair-v2-r1-ab-a-worker",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vram-pair-v2-r1-ab-a",
+        "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "63c5b25501e1c23f93aec6bbd2a5ae9d1d6362d5ea62d41457f3a8ac47f2bb48",
+    "status": {},
+    "uid": "c4e3a405-47a1-4bad-a449-2caf015f0c83"
+  },
+  {
+    "finalizers": [],
+    "name": "isolation-50-2048",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "af9f0905c84ab06ced611758ee42f12070ffd1b0ca84ef9bdda40c29fed17ff6",
+    "uid": "07d65fff-5911-4bc8-8160-18e0d43ef790"
+  },
+  {
+    "finalizers": [],
+    "name": "persistent-50-2048-v055",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "333ee24435d93c8932ecd0c8fc83dcd462b702b3e451610a1694da200a97a67d",
+    "uid": "8ce53aee-f63a-47f8-8e9b-ff038626a361"
+  },
+  {
+    "finalizers": [],
+    "name": "vram-current-50-1024",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "d4c78ff20476c9e9774680292a3eadfa0da8ef841661c255aeecc136c4f14087",
+    "uid": "f76b1b44-01d1-4247-9350-407de09b996f"
+  },
+  {
+    "finalizers": [],
+    "name": "vmweave-k8s-01-v055",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "1a044307e5eba84d51c0ad4100c1e70c2a80047d9f92295388925229d8ec7720",
+    "uid": "9fa807ad-5838-4d9e-9f86-9049bc31743e"
+  },
+  {
+    "finalizers": [],
+    "name": "vmweave-k8s-gpu",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "641bcbc1cb286a392a3afb73f4ea13a8a703e5206e3b0a6e8e61a71fac5850e2",
+    "uid": "290f903e-b1f9-4906-b521-f805bebd2ab0"
+  },
+  {
+    "finalizers": [],
+    "name": "vmweave-k8s-postinstall",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "641bcbc1cb286a392a3afb73f4ea13a8a703e5206e3b0a6e8e61a71fac5850e2",
+    "uid": "46bcd285-0c57-4070-ab88-912ea920e97a"
+  },
+  {
+    "finalizers": [],
+    "name": "vmweave-k8s-reconnect",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "641bcbc1cb286a392a3afb73f4ea13a8a703e5206e3b0a6e8e61a71fac5850e2",
+    "uid": "babec4d0-b120-41dc-b620-8595cf974a13"
+  },
+  {
+    "finalizers": [],
+    "name": "vram-pair-v2-r1-ab-a",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "514f32006f8e15462c917f713a22d59a216c7aef77df26a88e920970315baa29",
+    "uid": "20f4e6f5-f157-483f-b5e2-7a7f0d220f4e"
+  },
+  {
+    "containers": [
+      {
+        "containerID": null,
+        "imageID": "",
+        "name": "compute",
+        "ready": false,
+        "restartCount": 0,
+        "state": {
+          "waiting": {
+            "reason": "PodInitializing"
+          }
+        }
+      },
+      {
+        "containerID": null,
+        "imageID": "",
+        "name": "hook-sidecar-0",
+        "ready": false,
+        "restartCount": 0,
+        "state": {
+          "waiting": {
+            "reason": "PodInitializing"
+          }
+        }
+      }
+    ],
+    "finalizers": [
+      "vmweave.io/detach-observation"
+    ],
+    "name": "virt-launcher-vmweave-k8s-01-xpl2s",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachineInstance",
+        "name": "vmweave-k8s-01",
+        "uid": "7a10ddb6-eb22-4995-be06-c72700a2449f"
+      }
+    ],
+    "phase": "Failed",
+    "resource": "pods",
+    "specSHA256": "9a28d24a6aa6d36e967e3b75207e48431ec782b4832d9c4ddfb33e2b410c0f80",
+    "uid": "596335b3-7d91-426b-8c8b-49b2deb50a81"
+  },
+  {
+    "containers": [
+      {
+        "containerID": "cri-o://57d80635b148d1d28bc9b0ac250ff7df96869ae77aade3510bbb51a99e6e3d23",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:b91c9ae55c717fcbbfd2655bbf20e1e2ba637c88ae04dcddb12e0952c5bdb574",
+        "name": "main",
+        "ready": false,
+        "restartCount": 0,
+        "state": {
+          "terminated": {
+            "containerID": "cri-o://57d80635b148d1d28bc9b0ac250ff7df96869ae77aade3510bbb51a99e6e3d23",
+            "exitCode": 0,
+            "finishedAt": "2026-10-27T12:07:45Z",
+            "reason": "Completed",
+            "startedAt": "2026-10-27T12:07:45Z"
+          }
+        }
+      }
+    ],
+    "finalizers": [],
+    "name": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21-prepare",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vmweave-k8s-01",
+        "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6"
+      }
+    ],
+    "phase": "Succeeded",
+    "resource": "pods",
+    "specSHA256": "515d54afe330e1531a1eb60c471bd756ffa0c0e3dd8edc61f6720b7fa8c3af96",
+    "uid": "86c61d95-6a71-4c61-bac7-7c43f01b9df1"
+  },
+  {
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "name": "vmweave-k8s-01",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "vmweave-k8s-01",
+        "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121"
+      }
+    ],
+    "resource": "sharedmemorychannels",
+    "specSHA256": "94106b91911ab4b9f73c9b5b74eff991602b5b495bc3d2badcb090fb8c6cd2d2",
+    "status": {
+      "allocation": "736a0d218ccce1cab1c2132b86c4fb36",
+      "backend": "hami",
+      "compute": 50,
+      "everBound": true,
+      "generation": "17190b8cb6e2a9d21a2b4ccb1b836281",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 2048,
+      "nodeName": "gpu-4",
+      "phase": "Draining",
+      "profileGeneration": 1,
+      "reason": "AwaitingDetachEvidence",
+      "requestGeneration": 1,
+      "resourcePrefix": "vmweave-k8s-01-dcd6f6ea2dff-736a0d21",
+      "sessions": [
+        "c8e2b9aeab3f16455e9e72dbf9b012e5"
+      ],
+      "vmiUID": "7a10ddb6-eb22-4995-be06-c72700a2449f",
+      "workerPodUID": "a378042c-6247-4e83-8adc-e7ba70fe91fb"
+    },
+    "uid": "dcd6f6ea-2dff-4308-ba9f-3f9abb1204d6"
+  },
+  {
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "name": "vram-pair-v2-r1-ab-a",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "sharedmemorychannels",
+    "specSHA256": "12d51242ce13f889366ce2bf38cca67784a7830eac484c7c828e9d672d981c13",
+    "status": {
+      "allocation": "c72b09dfb6e5c9f784748682f978d303",
+      "compute": 50,
+      "everBound": true,
+      "generation": "36cd0792fc4a39f83cbef7540e235d5e",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 1024,
+      "nodeName": "gpu-4",
+      "phase": "Draining",
+      "profileGeneration": 1,
+      "reason": "AwaitingDetachEvidence",
+      "requestGeneration": 1,
+      "resourcePrefix": "vram-pair-v2-r1-ab-a-27b9c3330493",
+      "sessions": [
+        "a07fc1a4ff073b48c0dceab7861fd81b"
+      ],
+      "vmiUID": "bdfadae0-094a-4aa0-89c0-e446c0c28881",
+      "workerPodUID": "851d22b4-6400-41af-bdbe-771cbebd3ec8"
+    },
+    "uid": "27b9c333-0493-4e8f-9f7a-1d8e594b8f0b"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize"
+    ],
+    "name": "vmweave-k8s-01",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "vm",
+    "specSHA256": "f1b13ae9466083f4f60cc1e46f8f4cbece3f88ec2ec734cc97c51ad5af0e1fc7",
+    "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize"
+    ],
+    "name": "vram-pair-v2-r1-ab-a",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [],
+    "resource": "vm",
+    "specSHA256": "ede1b6207ed6b77a8e43b84740735d52c4c78f59229c7476e570f102bfec9db7",
+    "uid": "78b679b9-9212-4dec-aa57-2857292d4adc"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/foregroundDeleteVirtualMachine"
+    ],
+    "name": "vmweave-k8s-01",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "vmweave-k8s-01",
+        "uid": "7c130b93-4bca-4264-827d-1c6e7a02a121"
+      }
+    ],
+    "phase": "Failed",
+    "resource": "vmi",
+    "specSHA256": "8e7675236f34d452d986e36d05e71aca837f4689285e2a4695ee56c550a196fa",
+    "uid": "7a10ddb6-eb22-4995-be06-c72700a2449f"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-guest",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "dp-dev-20261105",
+        "uid": "502a8c19-3b60-4200-99d0-d2a298dbc2a6"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "240c1e0c44e04d17885fde3d6bee1b7b732fdad7e697e1357769969c95fe70f8",
+    "status": {
+      "evidence": "GuestHELLOReceived",
+      "launcherPodUID": "e017feb3-09cd-4e5c-bee1-43c75a6b2b27",
+      "observedGeneration": 1,
+      "phase": "Mapped",
+      "reporterPodUID": "ebb27ef7-d723-4446-8144-54bf514d944a"
+    },
+    "uid": "3ecccdbb-a6fa-4575-8bde-aaa8e465e4df"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-worker",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "dp-dev-20261105",
+        "uid": "502a8c19-3b60-4200-99d0-d2a298dbc2a6"
+      }
+    ],
+    "resource": "channelattachments",
+    "specSHA256": "0a0400a5b4a83728ee5959fab7b7af9b9918651adbe34a2978e7cf665e644eb0",
+    "status": {
+      "evidence": "QueueOpenAndGuard",
+      "observedGeneration": 1,
+      "phase": "Mapped",
+      "reporterPodUID": "ebb27ef7-d723-4446-8144-54bf514d944a"
+    },
+    "uid": "2933cde8-5bfe-48f1-93f7-3044a2451707"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "274a0c2e9a5b474994e80957892d433abdd33766f344aa9ffd1edddc736ab2f2",
+    "uid": "54797369-b65d-48c2-959e-cddf41afd878"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-v0510",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "b33af2dc39309df130ad82b7d5d5dcc06e7706553b57b3d562c646f70587eaa8",
+    "uid": "039b01ed-114f-4701-908d-7b180407e533"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-v0511",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "06a0a545f7dcee578b0f95668c9e11b414de40763b7fe0379ec3ff0a405268a8",
+    "uid": "5fc962a6-c10a-44d1-a70a-5d7fc7f63f3b"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-v059",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpuprofiles",
+    "specSHA256": "f23d8b5cd7e29f36cae28de978a8ae94b79ec4e1965c81b161a0aeff9966922c",
+    "uid": "2fd4db64-e45b-4921-95f7-ecd86a35afed"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "948bde9f73784ee55b744e164e53755042bf388ed2de6b589a7982c65bdc9595",
+    "uid": "26a2352e-68f3-484e-8261-021a31abfbb3"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-v0510",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "8d689e1f0c81f4f65365d004dc8fa37ef0634aa8b24f1f56b1c44ed52ed80b41",
+    "uid": "6bd47f12-ccef-48b4-9332-ca9bfe1b6019"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-v0511",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "9b2ce2d25fbb3a949d3254dcc9d25fdbab35c3902ec9355c8de527bd9d5219ff",
+    "uid": "c90e8d34-3c1f-4667-9a91-27de408927da"
+  },
+  {
+    "finalizers": [],
+    "name": "dp-dev-20261105-v059",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "gpurequests",
+    "specSHA256": "f8fa1adc53ceb403f490fa64a6f7d7e956a525d24c764ce9ba93d56e2d43b0e4",
+    "uid": "1fc96371-7056-462e-a062-7826b67c148d"
+  },
+  {
+    "containers": [
+      {
+        "containerID": "cri-o://eca98977ae626927c9966989dee29420774bc70089af8d53f26c9271d3533ab7",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:e425c374fb3396f5e8a7d7d89f0a301f2abd0ffca5ca8a7e26f2107fd513da73",
+        "name": "main",
+        "ready": false,
+        "restartCount": 0,
+        "state": {
+          "terminated": {
+            "containerID": "cri-o://eca98977ae626927c9966989dee29420774bc70089af8d53f26c9271d3533ab7",
+            "exitCode": 0,
+            "finishedAt": "2026-11-13T10:32:25Z",
+            "reason": "Completed",
+            "startedAt": "2026-11-13T10:32:25Z"
+          }
+        }
+      }
+    ],
+    "finalizers": [],
+    "name": "dp-dev-20261105-502a8c193b60-a6b5aa1c-prepare",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "dp-dev-20261105",
+        "uid": "502a8c19-3b60-4200-99d0-d2a298dbc2a6"
+      }
+    ],
+    "phase": "Succeeded",
+    "resource": "pods",
+    "specSHA256": "aaa3b4c50db1dcc21f41d1771a665bda552ce3b68498f82f6938d6582ce7788d",
+    "uid": "5540cc96-1b2e-4609-8c74-a2da5b81e396"
+  },
+  {
+    "containers": [
+      {
+        "containerID": "cri-o://04414f39ac0cc65d7fa62b3af6946aac6975699c108e4af91df3df79394a3980",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:92f04e5903bf194cb6d56389949793ea64034a514178156de91f07a917a2defc",
+        "name": "main",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-13T10:32:29Z"
+          }
+        }
+      }
+    ],
+    "finalizers": [
+      "vmweave.io/detach-observation"
+    ],
+    "name": "dp-dev-20261105-502a8c193b60-a6b5aa1c-worker",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "dp-dev-20261105",
+        "uid": "502a8c19-3b60-4200-99d0-d2a298dbc2a6"
+      }
+    ],
+    "phase": "Running",
+    "resource": "pods",
+    "specSHA256": "75746c6800be5b33c4d1ef56ce72cc8375c77acdc80f3adfcc0cb085b81e8849",
+    "uid": "ebb27ef7-d723-4446-8144-54bf514d944a"
+  },
+  {
+    "containers": [
+      {
+        "containerID": "cri-o://a2a4186d0368ec80fc7b2968adc16686cc31c7aa1d78957aa1b8f116750ec1a8",
+        "imageID": "localhost/flyt-virt-launcher@sha256:3a63c98b5a178af7f58f8979e09cbd11182f7220e5826f5048efb22a2d7b7935",
+        "name": "compute",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-13T10:32:43Z"
+          }
+        }
+      },
+      {
+        "containerID": "cri-o://7066ddfea80e80d87ed7a6c86ee830f5344d9f186b2166b023ce3f4a59f63284",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:19fb714be9d73c55464a4a179d200f9a483ab4fed33b417cf61f372b6c41e749",
+        "name": "hook-sidecar-0",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-13T10:32:43Z"
+          }
+        }
+      }
+    ],
+    "finalizers": [
+      "vmweave.io/detach-observation"
+    ],
+    "name": "virt-launcher-dp-dev-20261105-z9qc5",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachineInstance",
+        "name": "dp-dev-20261105",
+        "uid": "8c159fbf-0a6d-4ca2-9026-d13f4f5f0e09"
+      }
+    ],
+    "phase": "Running",
+    "resource": "pods",
+    "specSHA256": "4d12cfe45ea2f336f43a3eeeb2b631b1d74135eaba2d537a71e43c7d3ba55d34",
+    "uid": "e017feb3-09cd-4e5c-bee1-43c75a6b2b27"
+  },
+  {
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "dp-dev-20261105",
+        "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+      }
+    ],
+    "resource": "sharedmemorychannels",
+    "specSHA256": "8f0b0755c18e8102574bb05cbe67bd4852cb5b367a4fbc5161ca6ebe6009c880",
+    "status": {
+      "allocation": "a6b5aa1c408db9ba9faa4a913a7a7a93",
+      "backend": "hami",
+      "compute": 25,
+      "everBound": true,
+      "generation": "514bfc1406de159ec76793f4b329d191",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 1024,
+      "nodeName": "gpu-4",
+      "phase": "Ready",
+      "profileGeneration": 1,
+      "reason": "MappingACK",
+      "requestGeneration": 1,
+      "resourcePrefix": "dp-dev-20261105-502a8c193b60-a6b5aa1c",
+      "sessions": [
+        "60f3ee41f1d10a9f5b58f08b8e2179f2"
+      ],
+      "vmiUID": "8c159fbf-0a6d-4ca2-9026-d13f4f5f0e09",
+      "workerPodUID": "ebb27ef7-d723-4446-8144-54bf514d944a"
+    },
+    "uid": "502a8c19-3b60-4200-99d0-d2a298dbc2a6"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize"
+    ],
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [],
+    "resource": "vm",
+    "specSHA256": "7f6dd53a978368f279def58c93b8d5af82c29e6291911729f04751a4f33e84c9",
+    "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+  },
+  {
+    "finalizers": [
+      "kubevirt.io/virtualMachineControllerFinalize",
+      "kubevirt.io/foregroundDeleteVirtualMachine"
+    ],
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "dp-dev-20261105",
+        "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+      }
+    ],
+    "phase": "Running",
+    "resource": "vmi",
+    "specSHA256": "cfb66a1938ca11a0702da185fb8ba9b2a93927ba0e8dfe67522d0c45dbbc9e58",
+    "uid": "8c159fbf-0a6d-4ca2-9026-d13f4f5f0e09"
+  }
+]

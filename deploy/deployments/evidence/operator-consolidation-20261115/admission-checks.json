@@ -1,0 +1,184 @@
+[
+  {
+    "name": "controller-rbac-vmweave-test-a",
+    "command": [
+      "kubectl",
+      "auth",
+      "can-i",
+      "update",
+      "channelattachments/status",
+      "-n",
+      "vmweave-test-a",
+      "--as=system:serviceaccount:vmweave-system:vmweave-controller"
+    ],
+    "returncode": 0,
+    "stdout": "yes\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "webhook-channel-vmweave-test-a",
+    "command": [
+      "kubectl",
+      "annotate",
+      "sharedmemorychannel",
+      "vmweave-k8s-01",
+      "-n",
+      "vmweave-test-a",
+      "vmweave.io/consolidation-check=passed",
+      "--overwrite",
+      "--dry-run=server"
+    ],
+    "returncode": 0,
+    "stdout": "sharedmemorychannel.vmweave.io/vmweave-k8s-01 annotated (server dry run)\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "controller-rbac-vmweave-test-b",
+    "command": [
+      "kubectl",
+      "auth",
+      "can-i",
+      "update",
+      "channelattachments/status",
+      "-n",
+      "vmweave-test-b",
+      "--as=system:serviceaccount:vmweave-system:vmweave-controller"
+    ],
+    "returncode": 0,
+    "stdout": "yes\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "webhook-channel-vmweave-test-b",
+    "command": [
+      "kubectl",
+      "annotate",
+      "sharedmemorychannel",
+      "dp-dev-20261105",
+      "-n",
+      "vmweave-test-b",
+      "vmweave.io/consolidation-check=passed",
+      "--overwrite",
+      "--dry-run=server"
+    ],
+    "returncode": 0,
+    "stdout": "sharedmemorychannel.vmweave.io/dp-dev-20261105 annotated (server dry run)\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "controller-rbac-vmweave-nested-k8s",
+    "command": [
+      "kubectl",
+      "auth",
+      "can-i",
+      "update",
+      "channelattachments/status",
+      "-n",
+      "vmweave-nested-k8s",
+      "--as=system:serviceaccount:vmweave-system:vmweave-controller"
+    ],
+    "returncode": 0,
+    "stdout": "yes\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "webhook-channel-vmweave-nested-k8s",
+    "command": [
+      "kubectl",
+      "annotate",
+      "sharedmemorychannel",
+      "vw-k8s-worker-01",
+      "-n",
+      "vmweave-nested-k8s",
+      "vmweave.io/consolidation-check=passed",
+      "--overwrite",
+      "--dry-run=server"
+    ],
+    "returncode": 0,
+    "stdout": "sharedmemorychannel.vmweave.io/vw-k8s-worker-01 annotated (server dry run)\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "outside-scope-denied",
+    "command": [
+      "kubectl",
+      "auth",
+      "can-i",
+      "create",
+      "pods",
+      "-n",
+      "default",
+      "--as=system:serviceaccount:vmweave-system:vmweave-controller"
+    ],
+    "returncode": 1,
+    "stdout": "no\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "new-controller-attachment",
+    "command": [
+      "kubectl",
+      "patch",
+      "channelattachment",
+      "dp-dev-20261105-worker",
+      "-n",
+      "vmweave-test-b",
+      "--subresource=status",
+      "--type=merge",
+      "-p",
+      "{\"status\":{\"phase\":\"Mapped\"}}",
+      "--dry-run=server",
+      "--as=system:serviceaccount:vmweave-system:vmweave-controller"
+    ],
+    "returncode": 0,
+    "stdout": "channelattachment.vmweave.io/dp-dev-20261105-worker patched (no change)\n",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "old-controller-attachment-denied",
+    "command": [
+      "kubectl",
+      "patch",
+      "channelattachment",
+      "vw-k8s-worker-01-worker",
+      "-n",
+      "vmweave-nested-k8s",
+      "--subresource=status",
+      "--type=merge",
+      "-p",
+      "{\"status\":{\"phase\":\"Detached\"}}",
+      "--dry-run=server",
+      "--as=system:serviceaccount:vmweave-nested-system:nested-controller"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error from server (Forbidden): admission webhook \"validate.vmweave.io\" denied the request: unauthorized attachment reporter\n",
+    "passed": true
+  },
+  {
+    "name": "immutable-vmi-binding",
+    "command": [
+      "kubectl",
+      "annotate",
+      "vmi",
+      "dp-dev-20261105",
+      "-n",
+      "vmweave-test-b",
+      "vmweave.io/shm-generation=consolidation-invalid",
+      "--overwrite",
+      "--dry-run=server"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error from server (Forbidden): admission webhook \"validate.vmweave.io\" denied the request: active VMI binding immutable\n",
+    "passed": true
+  }
+]

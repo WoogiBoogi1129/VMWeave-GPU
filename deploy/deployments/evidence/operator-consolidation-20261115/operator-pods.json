@@ -1,0 +1,142 @@
+[
+  {
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "100m",
+          "memory": "96Mi"
+        },
+        "containerID": "cri-o://044a71a1c178f0db0d78f7d19a3122d716b63241ade7fdf5e9ac1286ea749f55",
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+        "lastState": {},
+        "name": "controller",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "memory": "512Mi"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "96Mi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-15T04:30:46Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 65532,
+            "supplementalGroups": [
+              65532
+            ],
+            "uid": 65532
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-szr5t",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "containers": [
+      {
+        "args": [
+          "--component=controller",
+          "--mode=active",
+          "--namespaces=vmweave-test-a,vmweave-test-b,vmweave-nested-k8s",
+          "--system-namespace=vmweave-system",
+          "--controller-service-account=vmweave-controller",
+          "--leader-elect=true"
+        ],
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+        "name": "controller"
+      }
+    ],
+    "name": "vmweave-controller-867ddc65dd-l9zbg",
+    "namespace": "vmweave-system",
+    "node": "gpu-4",
+    "uid": "8a222ce8-dea3-4c2b-b673-b76b86d2fe67"
+  },
+  {
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "100m",
+          "memory": "96Mi"
+        },
+        "containerID": "cri-o://c1f5e17742982de540a9eff44081fa227e8bd007d254d73bd336c431f3552c9e",
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+        "lastState": {},
+        "name": "webhook",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "memory": "512Mi"
+          },
+          "requests": {
+            "cpu": "100m",
+            "memory": "96Mi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-15T04:30:00Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 65532,
+            "supplementalGroups": [
+              65532
+            ],
+            "uid": 65532
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/tls",
+            "name": "tls",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-49m2j",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "containers": [
+      {
+        "args": [
+          "--component=webhook",
+          "--mode=active",
+          "--namespaces=vmweave-test-a,vmweave-test-b,vmweave-nested-k8s",
+          "--system-namespace=vmweave-system",
+          "--controller-service-account=vmweave-controller",
+          "--leader-elect=true"
+        ],
+        "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+        "name": "webhook"
+      }
+    ],
+    "name": "vmweave-webhook-6897bcc95f-mrqk2",
+    "namespace": "vmweave-system",
+    "node": "gpu-4",
+    "uid": "91d52d24-2484-47b3-aa36-d0701535d9c8"
+  }
+]

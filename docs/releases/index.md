@@ -4,6 +4,11 @@
 [릴리스 기록](../../deploy/releases/v0.5.11.json)과 [검증 원본](../../deploy/releases/evidence/v0.5.11/README.md)에 있다.
 기계 판독 진입점은 [current.json](../../deploy/releases/current.json)이다.
 
+2026-11-15 현재 운영 배포는 `vmweave-system`의 Operator 하나로 통합됐다.
+세 관리 namespace와 검증 결과는 [통합 기록](../guides/operator-consolidation.md),
+기계 판독 상태는 [현재 배포](../../deploy/deployments/current.json)를 참조한다.
+릴리스 당시의 배포 스냅샷과 이후 운영 변경 기록은 별도로 보존한다.
+
 | 목적 | 확인할 자료 |
 |---|---|
 | v0.5.11 고정 GPU 슬롯·미배치 Worker 회수 | [릴리스 안내](../getting-started/release-v0.5.11.md) |
