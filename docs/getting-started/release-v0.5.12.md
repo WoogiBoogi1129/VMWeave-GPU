@@ -38,3 +38,28 @@ Guest library와 Plugin의 `librarySHA256`을 함께 갱신하며 기존 슬롯 
 기존 동기 경로를 사용할 수 있다. HAMi/DRA/KubeVirt 등 공용 인프라 업그레이드는 필요하지 않다.
 
 게시된 digest와 실제 배포 검증은 [릴리스 목록](../releases/index.md)의 기록으로 확인한다.
+
+## 이번 노드의 적용 설정
+
+중앙 Operator 1개와 유휴 GPU VM `dp-dev-20261105`의 paired runtime을 갱신한다.
+기존 GPU2·25% compute·1GiB·1슬롯 할당을 보존한다. GPU1에서 수행한 앞선
+성능 실험과 달리 이 VM에서는 기존 할당을 이용한 배포 정답 검증만 수행한다.
+Broker에는 다음의 검증된 경로 최적화를 적용한다.
+
+```ini
+VMWEAVE_BULK_COPY=1
+VMWEAVE_BROKER_REUSE=1
+VMWEAVE_BROKER_GATHER=1
+VMWEAVE_BROKER_OWNER=1
+```
+
+애플리케이션/Pod는 아래 환경 변수를 명시해야 bulk/direct 경로를 사용한다.
+커널 배치는 지원 범위에 맞는 워크로드만 선택한다. Plugin은 소켓을 할당하며
+이 성능 옵션들을 모든 Pod에 자동 주입하지 않는다.
+
+```yaml
+env:
+  - {name: VMWEAVE_BULK_COPY, value: "1"}
+  - {name: VMWEAVE_BULK_DIRECT, value: "1"}
+  - {name: VMWEAVE_KERNEL_BATCH, value: "1"} # 선택 사항; 생략하면 비활성화
+```

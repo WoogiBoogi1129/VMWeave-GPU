@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "sourceRevision": "2cd0fe428f2ee2b99fa43777b2967854904966ac",
+  "librarySHA256": "796bdd694f4af59b3b6bfe5d9d9dc8765781e08853d7038d5f193053cefefac1",
+  "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59",
+  "testBinarySHA256": "509f8d54dafed95ac50d81e270a8b7e6086fbc8b6f3d8e837af15d6a89d844d7",
+  "ptxSHA256": "6870e0d0305f39a1f9801c47363af1f4d7a2b855bf79fa42b3791d482cf7ba6d",
+  "cases": [
+    {
+      "name": "0-0-normal",
+      "batchEnabled": false,
+      "mode": "normal",
+      "returncode": 0,
+      "brokerIdle": true
+    },
+    {
+      "name": "1-1-normal",
+      "batchEnabled": true,
+      "mode": "normal",
+      "returncode": 0,
+      "brokerIdle": true
+    },
+    {
+      "name": "2-1-error",
+      "batchEnabled": true,
+      "mode": "error",
+      "returncode": 0,
+      "brokerIdle": true
+    },
+    {
+      "name": "3-1-normal",
+      "batchEnabled": true,
+      "mode": "normal",
+      "returncode": 0,
+      "brokerIdle": true
+    }
+  ],
+  "scope": "Correctness and recovery on the persistent VM existing GPU allocation; no performance measurement"
+}

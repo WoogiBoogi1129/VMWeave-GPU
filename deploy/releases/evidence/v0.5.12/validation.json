@@ -1,0 +1,99 @@
+{
+  "status": "PASS",
+  "sourceRevision": "2cd0fe428f2ee2b99fa43777b2967854904966ac",
+  "guestLibrarySHA256": "796bdd694f4af59b3b6bfe5d9d9dc8765781e08853d7038d5f193053cefefac1",
+  "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59",
+  "guestImage": "ghcr.io/woogiboogi1129/vmweave-device-plugin-guest@sha256:e5f264cfa099aa7b8afcb6175d665e6f7a721750c28f29b3586e3f9f982582e9",
+  "cnnSteps": 80,
+  "cnnTensors": 1040,
+  "independentCNNAudit": "PASS",
+  "cases": {
+    "published-relu": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "4664eade-6356-45fd-bb24-6418a154f91b",
+      "tensors": 70,
+      "maxAbs": 5.960464477539062e-07
+    },
+    "published-pool": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "98022b69-1d27-499a-af53-ee923ee94422",
+      "tensors": 70,
+      "maxAbs": 7.152557373046875e-07
+    },
+    "published-cnn": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "51bf97ab-1520-4671-808d-f9ebe633db16",
+      "tensors": 300,
+      "maxAbs": 2.384185791015625e-07
+    },
+    "published-cnn-repeat": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "f9a59f00-f064-413d-a8db-784ee0571c90",
+      "tensors": 300,
+      "maxAbs": 2.384185791015625e-07
+    },
+    "published-mnist": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "63fd1573-c11e-4622-9281-06be25486956",
+      "tensors": 300,
+      "maxAbs": 2.384185791015625e-07
+    },
+    "published-mlp": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "6c261e4d-5f9e-4610-916c-9abe04cad015",
+      "tensors": 22,
+      "maxAbs": 4.284083843231201e-08
+    },
+    "published-lstm": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "7ccc2c16-c0d0-4dae-9365-55162dc58d56",
+      "tensors": 36,
+      "maxAbs": 3.516674041748047e-06
+    },
+    "published-basic": {
+      "exit": {
+        "returncode": 0,
+        "signal": null,
+        "timeout": false
+      },
+      "podUID": "1bd69e9a-eacd-4532-b639-c53a23afd665"
+    }
+  },
+  "testNamespacesRemoved": true,
+  "sessionsReclaimed": true,
+  "batchValidation": "batch/validation.json",
+  "preservation": "preservation.json",
+  "deploymentOperatorCount": 1,
+  "physicalGPUIndex": 2,
+  "performanceMeasurement": false,
+  "brokerOptimizationsEnabled": true,
+  "batchDefaultEnabled": false
+}

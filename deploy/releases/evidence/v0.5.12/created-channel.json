@@ -1,0 +1,34 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-11-18T12:04:40Z",
+    "generation": 1,
+    "name": "dp-dev-20261105",
+    "namespace": "vmweave-test-b",
+    "resourceVersion": "34832076",
+    "uid": "1cf49804-0d9a-46c2-a9da-fbb9f492710b"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:0b5d884b82d407a271f25884281e4679179477ba40f34c0fff8bee85c7a53168",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:991a28b2d0d5f9b4834d49c7b76a1a12ba1a5bfced853a3ebed2fb7ac023d0e7",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "dp-dev-20261105-shm",
+      "uid": "2623b5bf-61c7-42c6-beb5-99c464ef63e7"
+    },
+    "requestRef": {
+      "name": "dp-dev-20261105-v0512",
+      "uid": "5a4a41bb-7b89-4a17-bfcb-9687243e314c"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "dp-dev-20261105",
+      "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+    },
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59"
+  }
+}
