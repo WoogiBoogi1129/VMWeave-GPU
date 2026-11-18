@@ -84,7 +84,7 @@ CUresult cuLaunchKernel(CUfunction f,unsigned gx,unsigned gy,unsigned gz,unsigne
             if(vmweave_guest_ref(ptr,0,&r)){e=CUDA_ERROR_INVALID_VALUE;goto done;}vmweave_put(p+8,r.handle,8);vmweave_put(p+16,r.offset,8);}
         else memcpy(p+8,params[j],size);
     }
-    e=vmweave_guest_exchange(VMWEAVE_KERNEL_LAUNCH,in,48+24*count,NULL,0,&got);
+    e=vmweave_guest_kernel_submit(in,48+24*count);
 done:pthread_mutex_unlock(&vmweave_guest_lock);return (CUresult)e;
 }
 

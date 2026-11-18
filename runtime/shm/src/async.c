@@ -62,11 +62,53 @@ static int pool_acquire(size_t bytes,int *slot){
         if(pending<0||cudaEventSynchronize(stages[pending].done)!=cudaSuccess)return -1;
     }
 }
+/* Decode without CUDA side effects. Used twice by a batch so a malformed later
+ * record cannot execute a valid prefix. Session object state is single-owner. */
+static int typed_kernel(struct vmweave_cuda_session *s,const uint8_t *p,size_t n,int execute,uint32_t *result){
+    struct object *o;cudaStream_t st;
+    if(!p||n<48||(o=find(vmweave_get(p,8),FUNCTION))==NULL||!stream(vmweave_get(p+8,8),&st))return 0;
+    uint32_t count=(uint32_t)vmweave_get(p+44,4);
+    if(count>64||n!=48+24*(size_t)count)return 0;
+    void *params[64];unsigned char values[64][16];size_t pos=48;
+    for(unsigned i=0;i<count;i++,pos+=24){
+        unsigned type=(unsigned)vmweave_get(p+pos,4),size=(unsigned)vmweave_get(p+pos+4,4);
+        if(!size||size>16)return 0;
+        if(type==1){void *address;struct vmweave_device_ref a={vmweave_get(p+pos+8,8),vmweave_get(p+pos+16,8)};
+            if(size!=8||!vmweave_cuda_exec_resolve(s->exec,a,0,&address))return 0;memcpy(values[i],&address,8);
+        }else if(type==0)memcpy(values[i],p+pos+8,size);else return 0;
+        params[i]=values[i];
+    }
+    if(execute)*result=cuLaunchKernel((CUfunction)o->pointer,(unsigned)vmweave_get(p+16,4),(unsigned)vmweave_get(p+20,4),(unsigned)vmweave_get(p+24,4),
+        (unsigned)vmweave_get(p+28,4),(unsigned)vmweave_get(p+32,4),(unsigned)vmweave_get(p+36,4),(unsigned)vmweave_get(p+40,4),(CUstream)st,params,NULL);
+    return 1;
+}
 int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_shm_request *q,struct vmweave_shm_response *r){
     const uint8_t *p=q->input;size_t n=q->input_bytes;struct object *o=NULL;cudaStream_t st=0;uint64_t id=0;
     r->output_bytes=0;r->api_result=0;r->result_domain=VMWEAVE_RESULT_CUDA_RUNTIME;r->transport_status=0;
     if(q->payload_schema!=1)goto unsupported;
     switch(q->api_id){
+    case VMWEAVE_KERNEL_BATCH_CAPS:
+        if(n||r->output_capacity<16||!r->output)goto invalid;
+        vmweave_put(r->output,1,4);vmweave_put(r->output+4,VMWEAVE_KERNEL_BATCH_MAX,4);
+        vmweave_put(r->output+8,VMWEAVE_KERNEL_BATCH_BYTES,4);vmweave_put(r->output+12,1,4);
+        r->output_bytes=16;break;
+    case VMWEAVE_KERNEL_BATCH:{
+        r->result_domain=VMWEAVE_RESULT_CUDA_DRIVER;
+        if(!p||n<8||n>VMWEAVE_KERNEL_BATCH_BYTES||vmweave_get(p,4)!=1)goto invalid;
+        unsigned count=(unsigned)vmweave_get(p+4,4);
+        if(!count||count>VMWEAVE_KERNEL_BATCH_MAX)goto invalid;
+        for(int execute=0;execute<2;execute++){
+            size_t pos=8;
+            for(unsigned i=0;i<count;i++){
+                if(n-pos<4)goto invalid;size_t bytes=(size_t)vmweave_get(p+pos,4);pos+=4;
+                if(bytes<48||bytes>VMWEAVE_KERNEL_RECORD_MAX||bytes>n-pos||vmweave_get(p+pos+8,8)||
+                   !typed_kernel(s,p+pos,bytes,execute,&r->api_result))goto invalid;
+                if(r->api_result)return 0; /* No replay; session client becomes terminal. */
+                pos+=bytes;
+            }
+            if(pos!=n)goto invalid;
+        }
+        break;}
     case VMWEAVE_STREAM_PRIORITY_CREATE: {
         if(n!=8||r->output_capacity<8||!r->output)goto invalid;o=reserve();if(!o)goto internal;
         cudaStream_t v=NULL;r->api_result=cudaStreamCreateWithPriority(&v,(unsigned)vmweave_get(p,4),(int)vmweave_get(p+4,4));
@@ -200,21 +242,10 @@ int vmweave_async_dispatch(struct vmweave_cuda_session *s,const struct vmweave_s
         struct object *m=find(vmweave_get(p,8),MODULE);if(!m)goto invalid;o=reserve();if(!o)goto internal;
         CUfunction f=NULL;r->api_result=cuModuleGetFunction(&f,(CUmodule)m->pointer,(const char *)p+8);
         if(!r->api_result){o->id=next++;o->kind=FUNCTION;o->parent=m->id;o->pointer=f;vmweave_put(r->output,o->id,8);r->output_bytes=8;}break;}
-    case VMWEAVE_KERNEL_LAUNCH:{
-        r->result_domain=VMWEAVE_RESULT_CUDA_DRIVER;if(n<48||(o=find(vmweave_get(p,8),FUNCTION))==NULL||!stream(vmweave_get(p+8,8),&st))goto invalid;
-        uint32_t count=(uint32_t)vmweave_get(p+44,4);if(count>64)goto invalid;
-        void *params[64];unsigned char values[64][16];size_t pos=48;
-        for(unsigned i=0;i<count;i++){
-            if(n-pos<24)goto invalid;unsigned type=(unsigned)vmweave_get(p+pos,4),size=(unsigned)vmweave_get(p+pos+4,4);
-            if(!size||size>16)goto invalid;
-            if(type==1){void *address;struct vmweave_device_ref a={vmweave_get(p+pos+8,8),vmweave_get(p+pos+16,8)};
-                if(size!=8||!vmweave_cuda_exec_resolve(s->exec,a,0,&address))goto invalid;memcpy(values[i],&address,8);}
-            else if(type==0)memcpy(values[i],p+pos+8,size);else goto invalid;
-            params[i]=values[i];pos+=24;
-        }
-        if(pos!=n)goto invalid;
-        r->api_result=cuLaunchKernel((CUfunction)o->pointer,(unsigned)vmweave_get(p+16,4),(unsigned)vmweave_get(p+20,4),(unsigned)vmweave_get(p+24,4),
-            (unsigned)vmweave_get(p+28,4),(unsigned)vmweave_get(p+32,4),(unsigned)vmweave_get(p+36,4),(unsigned)vmweave_get(p+40,4),(CUstream)st,params,NULL);break;}
+    case VMWEAVE_KERNEL_LAUNCH:
+        r->result_domain=VMWEAVE_RESULT_CUDA_DRIVER;
+        if(!typed_kernel(s,p,n,1,&r->api_result))goto invalid;
+        break;
     default:goto unsupported;
     }
     return 0;

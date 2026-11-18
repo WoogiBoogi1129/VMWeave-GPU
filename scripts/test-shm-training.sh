@@ -21,6 +21,16 @@ cc -O2 "${includes[@]}" tests/integration/kernel_wire_validation.c \
   -L"$cuda_root/lib64" -Wl,-rpath,"$cuda_root/lib64" \
   -L"$cuda_root/lib64/stubs" -lcudart -lcuda -o "$build/kernel-wire-test"
 "$build/kernel-wire-test"
+cc -O2 "${includes[@]}" tests/integration/kernel_batch_worker.c \
+  -L"$cuda_root/lib64" -Wl,-rpath,"$cuda_root/lib64" \
+  -L"$cuda_root/lib64/stubs" -lcudart -lcuda -o "$build/kernel-batch-worker-test"
+"$build/kernel-batch-worker-test"
+cc -O2 "${includes[@]}" tests/integration/kernel_batch_guest.c \
+  "$build/libvmweave_mapping.a" "$build/queue/libvmweave_shm_queue.a" \
+  -lpthread -o "$build/kernel-batch-guest-test"
+"$build/kernel-batch-guest-test"
+"$build/kernel-batch-guest-test" off
+"$build/kernel-batch-guest-test" old
 cc -O2 "${includes[@]}" tests/integration/large_copy_async.c \
   -L"$cuda_root/lib64" -Wl,-rpath,"$cuda_root/lib64" \
   -L"$cuda_root/lib64/stubs" -lcudart -lcuda -o "$build/large-copy-async-test"

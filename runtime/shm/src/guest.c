@@ -97,9 +97,13 @@ static void *io_main(void *unused){
 }
 extern int vmweave_broker_exchange(uint32_t,const void*,size_t,void*,size_t,size_t*);
 extern void vmweave_broker_close(void);
+static int kernel_batch_flush(void);
 int vmweave_guest_exchange_parts(uint32_t api,const void *input,size_t bytes,const void *tail,size_t tail_bytes,void *output,size_t capacity,size_t *received){
     if(received)*received=0;
     if((bytes&&!input)||(tail_bytes&&!tail)||(capacity&&!output)||tail_bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES||bytes>VMWEAVE_SHM_MAX_MESSAGE_BYTES-tail_bytes)return 1;
+    /* Every other remote operation is an ordering boundary, including copies,
+     * stream/event operations, free, module unload and device synchronization. */
+    if(api!=VMWEAVE_KERNEL_BATCH&&api!=VMWEAVE_KERNEL_BATCH_CAPS){int e=kernel_batch_flush();if(e)return e;}
     if(tail_bytes&&vmweave_getenv("VMWEAVE_BROKER_SOCKET"))return 801;
     if(vmweave_getenv("VMWEAVE_BROKER_SOCKET")){size_t ignored;return vmweave_broker_exchange(api,input,bytes,output,capacity,received?received:&ignored);}
     if(owner_pid&&owner_pid!=getpid())return 999;
@@ -120,7 +124,9 @@ int vmweave_guest_exchange_parts(uint32_t api,const void *input,size_t bytes,con
 int vmweave_guest_exchange(uint32_t api,const void *input,size_t bytes,void *output,size_t capacity,size_t *received){
     return vmweave_guest_exchange_parts(api,input,bytes,NULL,0,output,capacity,received);
 }
+#include "guest_batch.inc"
 __attribute__((destructor)) static void shutdown_guest(void){
+    kernel_batch_shutdown();
     if(vmweave_getenv("VMWEAVE_BROKER_SOCKET")){vmweave_broker_close();return;}
     if(!started||owner_pid!=getpid()||pthread_mutex_trylock(&vmweave_guest_lock))return;
     size_t ignored;if(!broken)vmweave_guest_exchange(VMWEAVE_GOODBYE,NULL,0,NULL,0,&ignored);
@@ -247,7 +253,9 @@ int vmweave_guest_copy(void *dst,const void *src,size_t n,int kind,uint64_t stre
     if((kind==cudaMemcpyHostToDevice&&sh)||(kind==cudaMemcpyDeviceToHost&&dh))return 1;
     if(kind==cudaMemcpyDeviceToDevice&&n&&d.handle==s.handle&&
        (d.offset>=s.offset?d.offset-s.offset:s.offset-d.offset)<n)return 1;
-    int e=copy_limits();if(e)return e;
+    /* Direct bulk copies bypass vmweave_guest_exchange. */
+    int e=kernel_batch_flush();if(e)return e;
+    e=copy_limits();if(e)return e;
     if(n>VMWEAVE_COPY_CHUNK_BYTES&&!copy_large)return 801;
     size_t limit=kind==cudaMemcpyHostToDevice?copy_h2d_limit:copy_d2h_limit;
     if(kind==cudaMemcpyDeviceToDevice)limit=n;
