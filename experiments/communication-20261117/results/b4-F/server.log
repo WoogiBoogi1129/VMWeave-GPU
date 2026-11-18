@@ -1,0 +1,58 @@
+[HAMI-core Msg(50:136867062089536:multiprocess_memory_limit.c:862)]: Cleanup on exit for PID 50
+[HAMI-core Msg(50:136867062089536:multiprocess_memory_limit.c:898)]: Exit cleanup complete for PID 50
+GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-772181af-05a4-0c24-de59-8487bd37c142)
+[HAMI-core Msg(53:137558757971776:multiprocess_memory_limit.c:862)]: Cleanup on exit for PID 53
+[HAMI-core Msg(53:137558757971776:multiprocess_memory_limit.c:898)]: Exit cleanup complete for PID 53
+[2026-11-18T03:41:44Z INFO  flyt_node_manager::virt_server_manager] message path: /tmp/flyt-servernode-queue, key: 1110580881 id: 0 proj_id: 66
+[2026-11-18T03:41:44Z INFO  flyt_node_manager] Connected to resource manager
+[2026-11-18T03:41:44Z INFO  flyt_node_manager::resource_manager_handler] Got send gpu info command
+[HAMI-core Msg(65:138223772590080:libvgpu.c:832)]: Initializing.....
+[HAMI-core Msg(65:138223772590080:libvgpu.c:868)]: Initialized
+[2026-11-18T03:41:56Z INFO  flyt_node_manager::resource_manager_handler] Got allocate virt server command
+[2026-11-18T03:41:56Z INFO  flyt_node_manager::resource_manager_handler] Allocating virt server: gpu_id: 0, num_cores: 188, memory: 102641958912
+[2026-11-18T03:41:56Z INFO  flyt_node_manager::virt_server_manager] Starting virt server with rpc_id: 1
+[2026-11-18T03:41:56Z INFO  flyt_node_manager::virt_server_manager] Executing command: CUDA_MPS_ENABLE_PER_CTX_DEVICE_MULTIPROCESSOR_PARTITIONING="1" CUDA_VISIBLE_DEVICES="0" "/opt/flyt/bin/cricket-rpc-server" "1" "0" "188" "102641958912" "0"
+[HAMI-core Msg(78:138221773426688:libvgpu.c:832)]: Initializing.....
+prg 99 cricker 1 gpu 0 sm 188 mem 102641958912 mode 0
+welcome to cricket!
+Initialize Metrics called
+[HAMI-core Msg(78:138221773426688:libvgpu.c:868)]: Initialized
++00:00:00.000043 [34mINFO[0m:	using TCP...
++00:00:00.000958 [34mINFO[0m:	listening on port 63129
++00:00:00.001099 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:382[0m
++00:00:00.344659 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:388[0m
++00:00:00.344675 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:394[0m
++00:00:00.344678 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:400[0m
++00:00:00.344685 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:422[0m
++00:00:00.344688 [1m[31mERROR[0m:	send_type = 4294967296
+
++00:00:00.344940 [34mINFO[0m: GPU affinitySupport: 1	in [4mcpu-server-resource-controller.c:82[0m
++00:00:00.475848 [34mINFO[0m: get_next_client resource mgt_get_element returned NULL 	in [4mcpu-server-client-mgr.c:394[0m
++00:00:00.475870 [34mINFO[0m: get_next_client resource mgt_get_element returned NULL 	in [4mcpu-server-client-mgr.c:394[0m
++00:00:00.475873 [34mINFO[0m: Changed SM cores to 188	in [4mcpu-server-resource-controller.c:105[0m
++00:00:00.475904 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:429[0m
++00:00:00.475911 [34mINFO[0m: initializing server_runtime.	in [4mcpu-server.c:437[0m
++00:00:00.475916 [34mINFO[0m:	waiting for RPC requests...
+[2026-11-18T03:41:56Z INFO  flyt_node_manager::virt_server_manager] Virt server initialized with rpc_id: 1
+[2026-11-18T03:41:56Z INFO  flyt_node_manager::resource_manager_handler] Virt server created: 1
+cricket-rpc-server: unexpected event in svc_run
+: No such file or directory
++00:00:00.475927 [34mINFO[0m: mqueue_id = 0 type 4294967296 data 3355443200
+	in [4mcpu-server-mgr-listener.c:172[0m
+set mode = 50
+eventfd created 67
+get mode = 50
++00:00:00.485412 [34mINFO[0m:	RPC init requested 68
++00:00:00.485493 [34mINFO[0m: added client for pid 1759
+	in [4mcpu-server-client-mgr.c:141[0m
++00:00:00.860526 [34mINFO[0m: cudaMalloc 0x302000000: size: 0x4000000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:00:00.861885 [34mINFO[0m: cudaMalloc 0x7db38da00000: size: 0x200000
+	in [4mcpu-server-dev-mem.c:136[0m
++00:10:43.447115 [34mINFO[0m:	RPC deinit requested.
++00:10:43.447181 [34mINFO[0m: Client with xp_fd 68 being removed	in [4mcpu-server-client-mgr.c:306[0m
++00:10:43.447188 [34mINFO[0m: removing client ptr from 1759 
+	in [4mcpu-server-client-mgr.c:233[0m
+[HAMI-core Msg(78:138221773426688:multiprocess_memory_limit.c:862)]: Cleanup on exit for PID 78
+[HAMI-core Msg(78:138221773426688:multiprocess_memory_limit.c:898)]: Exit cleanup complete for PID 78
+[HAMI-core Warn(78:138221773426688:multiprocess_memory_limit.c:628)]: Process slot not found for pid 78

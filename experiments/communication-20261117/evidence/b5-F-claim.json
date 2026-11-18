@@ -1,0 +1,86 @@
+{
+  "apiVersion": "resource.k8s.io/v1",
+  "kind": "ResourceClaim",
+  "metadata": {
+    "creationTimestamp": "2026-11-18T04:40:12Z",
+    "finalizers": [
+      "resource.kubernetes.io/delete-protection"
+    ],
+    "labels": {
+      "experiment.vmweave.io/campaign": "comm-20261117"
+    },
+    "name": "flyt-server",
+    "namespace": "comm-20261117",
+    "resourceVersion": "34583757",
+    "uid": "c9bb2b8c-9101-49eb-a726-daf5679de22a"
+  },
+  "spec": {
+    "devices": {
+      "requests": [
+        {
+          "exactly": {
+            "allocationMode": "ExactCount",
+            "capacity": {
+              "requests": {
+                "cores": "100",
+                "memory": "97887Mi"
+              }
+            },
+            "count": 1,
+            "deviceClassName": "vmweave-hami-dra",
+            "selectors": [
+              {
+                "cel": {
+                  "expression": "device.attributes[\"hami-core-gpu.project-hami.io\"].uuid == \"GPU-772181af-05a4-0c24-de59-8487bd37c142\""
+                }
+              }
+            ]
+          },
+          "name": "gpu"
+        }
+      ]
+    }
+  },
+  "status": {
+    "allocation": {
+      "allocationTimestamp": "2026-11-18T04:40:12Z",
+      "devices": {
+        "results": [
+          {
+            "consumedCapacity": {
+              "cores": "100",
+              "memory": "97887Mi"
+            },
+            "device": "hami-gpu-1",
+            "driver": "hami-core-gpu.project-hami.io",
+            "pool": "gpu-4",
+            "request": "gpu",
+            "shareID": "f9d528ea-0a85-4a7f-aa58-2292f586ee46"
+          }
+        ]
+      },
+      "nodeSelector": {
+        "nodeSelectorTerms": [
+          {
+            "matchFields": [
+              {
+                "key": "metadata.name",
+                "operator": "In",
+                "values": [
+                  "gpu-4"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "reservedFor": [
+      {
+        "name": "flyt-server",
+        "resource": "pods",
+        "uid": "121feea7-5062-459a-beb6-fe800f5c36b5"
+      }
+    ]
+  }
+}

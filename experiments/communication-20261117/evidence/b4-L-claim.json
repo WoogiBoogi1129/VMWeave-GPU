@@ -1,0 +1,86 @@
+{
+  "apiVersion": "resource.k8s.io/v1",
+  "kind": "ResourceClaim",
+  "metadata": {
+    "creationTimestamp": "2026-11-18T04:05:00Z",
+    "finalizers": [
+      "resource.kubernetes.io/delete-protection"
+    ],
+    "labels": {
+      "experiment.vmweave.io/campaign": "comm-20261117"
+    },
+    "name": "lupine-server",
+    "namespace": "comm-20261117",
+    "resourceVersion": "34563936",
+    "uid": "41e74eeb-cc7b-4eb1-b924-6d7e3f67a491"
+  },
+  "spec": {
+    "devices": {
+      "requests": [
+        {
+          "exactly": {
+            "allocationMode": "ExactCount",
+            "capacity": {
+              "requests": {
+                "cores": "100",
+                "memory": "97887Mi"
+              }
+            },
+            "count": 1,
+            "deviceClassName": "vmweave-hami-dra",
+            "selectors": [
+              {
+                "cel": {
+                  "expression": "device.attributes[\"hami-core-gpu.project-hami.io\"].uuid == \"GPU-772181af-05a4-0c24-de59-8487bd37c142\""
+                }
+              }
+            ]
+          },
+          "name": "gpu"
+        }
+      ]
+    }
+  },
+  "status": {
+    "allocation": {
+      "allocationTimestamp": "2026-11-18T04:05:00Z",
+      "devices": {
+        "results": [
+          {
+            "consumedCapacity": {
+              "cores": "100",
+              "memory": "97887Mi"
+            },
+            "device": "hami-gpu-1",
+            "driver": "hami-core-gpu.project-hami.io",
+            "pool": "gpu-4",
+            "request": "gpu",
+            "shareID": "5e5adfd7-d7d1-48d6-bb51-96848b506cec"
+          }
+        ]
+      },
+      "nodeSelector": {
+        "nodeSelectorTerms": [
+          {
+            "matchFields": [
+              {
+                "key": "metadata.name",
+                "operator": "In",
+                "values": [
+                  "gpu-4"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "reservedFor": [
+      {
+        "name": "lupine-server",
+        "resource": "pods",
+        "uid": "266bda27-17a9-42aa-a4af-c45c860db175"
+      }
+    ]
+  }
+}

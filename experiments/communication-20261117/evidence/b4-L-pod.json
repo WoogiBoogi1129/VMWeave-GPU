@@ -1,0 +1,239 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "creationTimestamp": "2026-11-18T04:05:00Z",
+    "generation": 1,
+    "labels": {
+      "experiment.vmweave.io/campaign": "comm-20261117"
+    },
+    "name": "lupine-server",
+    "namespace": "comm-20261117",
+    "resourceVersion": "34563957",
+    "uid": "266bda27-17a9-42aa-a4af-c45c860db175"
+  },
+  "spec": {
+    "automountServiceAccountToken": false,
+    "containers": [
+      {
+        "command": [
+          "taskset",
+          "-c",
+          "12-15",
+          "/opt/lupine/bin/lupine_driver_server"
+        ],
+        "env": [
+          {
+            "name": "LUPINE_PORT",
+            "value": "14833"
+          },
+          {
+            "name": "LD_LIBRARY_PATH",
+            "value": "/usr/lib/x86_64-linux-gnu:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64"
+          }
+        ],
+        "image": "ghcr.io/lupinemachines/lupine-server:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:dbb0febb22f8fb054fe5ac2150df316df366aba5d0ed8649e43ed35e7890e494",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "main",
+        "resources": {
+          "claims": [
+            {
+              "name": "gpu"
+            }
+          ],
+          "limits": {
+            "cpu": "4",
+            "memory": "16Gi"
+          },
+          "requests": {
+            "cpu": "1",
+            "memory": "1Gi"
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "work"
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "gpu-4",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "resourceClaims": [
+      {
+        "name": "gpu",
+        "resourceClaimName": "lupine-server"
+      }
+    ],
+    "restartPolicy": "Never",
+    "runtimeClassName": "nvidia",
+    "schedulerName": "default-scheduler",
+    "securityContext": {},
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "terminationGracePeriodSeconds": 10,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "hostPath": {
+          "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/communication-20261117/artifacts",
+          "type": "Directory"
+        },
+        "name": "work"
+      }
+    ]
+  },
+  "status": {
+    "allocatedResources": {
+      "cpu": "1",
+      "memory": "1Gi"
+    },
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T04:05:01Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T04:05:00Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T04:05:02Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T04:05:02Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T04:05:00Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "1",
+          "memory": "1Gi"
+        },
+        "allocatedResourcesStatus": [
+          {
+            "name": "claim:gpu",
+            "resources": [
+              {
+                "health": "Unknown",
+                "resourceID": "k8s.hami-core-gpu.project-hami.io/claim=41e74eeb-cc7b-4eb1-b924-6d7e3f67a491-hami-gpu-1"
+              }
+            ]
+          }
+        ],
+        "containerID": "cri-o://32bc007feb4d8975a940b6e2726abd4ac70b058f2968c1b74aa79e0079dbfc8f",
+        "image": "ghcr.io/lupinemachines/lupine-server@sha256:dbb0febb22f8fb054fe5ac2150df316df366aba5d0ed8649e43ed35e7890e494",
+        "imageID": "ghcr.io/lupinemachines/lupine-server@sha256:4205336e431d0c292d06eca828b4923b3dd70252b755e81e0cf463f7e11d1229",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "claims": [
+            {
+              "name": "gpu"
+            }
+          ],
+          "limits": {
+            "cpu": "4",
+            "memory": "16Gi"
+          },
+          "requests": {
+            "cpu": "1",
+            "memory": "1Gi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-18T04:05:02Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "work"
+          }
+        ]
+      }
+    ],
+    "hostIP": "192.168.24.21",
+    "hostIPs": [
+      {
+        "ip": "192.168.24.21"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Running",
+    "podIP": "10.85.0.117",
+    "podIPs": [
+      {
+        "ip": "10.85.0.117"
+      }
+    ],
+    "qosClass": "Burstable",
+    "resources": {
+      "limits": {
+        "cpu": "4",
+        "memory": "16Gi"
+      },
+      "requests": {
+        "cpu": "1",
+        "memory": "1Gi"
+      }
+    },
+    "startTime": "2026-11-18T04:05:00Z"
+  }
+}

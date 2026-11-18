@@ -1,0 +1,17 @@
+/opt/lupine/bin/lupine_driver_server: symbol lookup error: /opt/lupine/bin/lupine_driver_server: undefined symbol: cuGraphNodeGetContainingGraph
+command terminated with exit code 127
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/communication-20261117/scripts/common.py", line 14, in k
+    def k(*a,**kw):return call(['kubectl','--request-timeout=30s',*a],**kw)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/taeuk/flyt-k8s-poc-github/experiments/communication-20261117/scripts/common.py", line 13, in call
+    def call(a,**kw):return S.check_output(list(map(str,a)),text=True,timeout=kw.pop('timeout',180),**kw)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['kubectl', '--request-timeout=30s', 'exec', '-n', 'comm-20261117', 'lupine-server', '--', 'sh', '-c', 'ldd /opt/lupine/bin/lupine_driver_server; timeout 8 /opt/lupine/bin/lupine_driver_server']' returned non-zero exit status 127.
+

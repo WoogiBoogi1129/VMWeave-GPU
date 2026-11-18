@@ -1,0 +1,66 @@
+{
+  "remaining_experiment_gpu_pids": [],
+  "unreadable_gpu_pid_cgroups": [],
+  "experiment_gpu_processes_absent": true,
+  "utc": 1794978932.7443671,
+  "preexisting_running_pods": 125,
+  "pod_changes": [
+    {
+      "pod": "aap-serving/gpt-oss-20b-kserve-867c5985d9-hl7fp",
+      "change": "UID no longer present"
+    },
+    {
+      "pod": "aap-serving/llama33-70b-kserve-556d8fb5bd-zpnf5",
+      "change": "UID no longer present"
+    },
+    {
+      "pod": "aap-serving/qwen25-72b-kserve-56fb565557-d72k2",
+      "change": "UID no longer present"
+    },
+    {
+      "pod": "aap-serving/qwen35-27b-kserve-c865555f8-hk2br",
+      "change": "UID no longer present"
+    }
+  ],
+  "configuration_changes": [
+    {
+      "kind": "deployments",
+      "namespace": "aap-lifecycle",
+      "name": "lifecycle-controller",
+      "change": "missing or spec changed"
+    },
+    {
+      "kind": "deployments",
+      "namespace": "aap-serving",
+      "name": "gpt-oss-20b-kserve",
+      "change": "missing or spec changed"
+    },
+    {
+      "kind": "deployments",
+      "namespace": "aap-serving",
+      "name": "llama33-70b-kserve",
+      "change": "missing or spec changed"
+    },
+    {
+      "kind": "deployments",
+      "namespace": "aap-serving",
+      "name": "mistral-small-32-kserve",
+      "change": "missing or spec changed"
+    },
+    {
+      "kind": "deployments",
+      "namespace": "aap-serving",
+      "name": "qwen25-72b-kserve",
+      "change": "missing or spec changed"
+    },
+    {
+      "kind": "deployments",
+      "namespace": "aap-serving",
+      "name": "qwen35-27b-kserve",
+      "change": "missing or spec changed"
+    }
+  ],
+  "hami_values_unchanged": true,
+  "gpu1_compute_idle": true,
+  "restoration_scope": "Only experiment-created resources; HAMi 2.11.0 upgrade retained. No shared configuration mutation was required."
+}

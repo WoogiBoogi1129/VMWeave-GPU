@@ -1,0 +1,70 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-11-17T13:55:55Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 1,
+    "name": "comm-20261117-shm",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "comm-20261117-shm",
+        "uid": "987cc02b-a0ab-46d2-bb14-e076942eef97"
+      }
+    ],
+    "resourceVersion": "34597083",
+    "uid": "abfa635a-fc6a-4456-9a91-1dfbe5ba54f9"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:19fb714be9d73c55464a4a179d200f9a483ab4fed33b417cf61f372b6c41e749",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:e425c374fb3396f5e8a7d7d89f0a301f2abd0ffca5ca8a7e26f2107fd513da73",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "comm-20261117-backing",
+      "uid": "7af8e7ba-b7ae-436e-9b31-09019bcae0fa"
+    },
+    "requestRef": {
+      "name": "comm-20261117-shm",
+      "uid": "19bda520-b532-40b9-adb8-9cc84e99c3d8"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "comm-20261117-shm",
+      "uid": "987cc02b-a0ab-46d2-bb14-e076942eef97"
+    },
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:92f04e5903bf194cb6d56389949793ea64034a514178156de91f07a917a2defc"
+  },
+  "status": {
+    "allocation": "5856e2e5fe085713a3384b4f396da913",
+    "backend": "hami-dra",
+    "claimName": "comm-20261117-shm-abfa635afc6a-5856e2e5-gpu",
+    "claimUID": "974cec98-97b7-4475-b266-6fc1d475c369",
+    "completion": null,
+    "compute": 100,
+    "everBound": true,
+    "generation": "88ed75af41df1ba613b404da1396977e",
+    "gpuUUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+    "memoryMiB": 97887,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "reclamation": null,
+    "requestGeneration": 1,
+    "resourcePrefix": "comm-20261117-shm-abfa635afc6a-5856e2e5",
+    "sessions": [
+      "9b128044a133c2b3572de6236bf79d0f"
+    ],
+    "vmiUID": "72613d46-b9aa-47aa-ba39-d07eda6e780a",
+    "workerPodUID": "3a8732f9-958a-413c-bc5c-f95ebe42089b"
+  }
+}

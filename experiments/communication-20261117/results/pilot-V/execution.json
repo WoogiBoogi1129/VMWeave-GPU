@@ -1,0 +1,25 @@
+{
+  "mode": "V",
+  "label": "pilot-V",
+  "order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "pilot": true,
+  "command": "sudo timeout -k 15 1800 env -u LD_PRELOAD LD_LIBRARY_PATH=/opt/comm/artifacts/V VMWEAVE_BROKER_SOCKET=/run/vmweave/gpu.sock VMWEAVE_BULK_COPY=0 /opt/comm/artifacts/V/probe /opt/comm/artifacts/sequence.cubin /tmp/comm/pilot-V 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 30 0 1",
+  "status": "running"
+}

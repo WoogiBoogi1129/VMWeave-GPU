@@ -1,0 +1,79 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "lupine-server",
+    "namespace": "comm-20261117",
+    "labels": {
+      "experiment.vmweave.io/campaign": "comm-20261117"
+    }
+  },
+  "spec": {
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "runtimeClassName": "nvidia",
+    "schedulerName": "default-scheduler",
+    "restartPolicy": "Never",
+    "terminationGracePeriodSeconds": 10,
+    "automountServiceAccountToken": false,
+    "resourceClaims": [
+      {
+        "name": "gpu",
+        "resourceClaimName": "lupine-server"
+      }
+    ],
+    "containers": [
+      {
+        "name": "main",
+        "image": "ghcr.io/lupinemachines/lupine-server:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:dbb0febb22f8fb054fe5ac2150df316df366aba5d0ed8649e43ed35e7890e494",
+        "command": [
+          "taskset",
+          "-c",
+          "12-15",
+          "/opt/lupine/bin/lupine_driver_server"
+        ],
+        "resources": {
+          "claims": [
+            {
+              "name": "gpu"
+            }
+          ],
+          "requests": {
+            "cpu": "1",
+            "memory": "1Gi"
+          },
+          "limits": {
+            "cpu": "4",
+            "memory": "16Gi"
+          }
+        },
+        "env": [
+          {
+            "name": "LUPINE_PORT",
+            "value": "14833"
+          },
+          {
+            "name": "LD_LIBRARY_PATH",
+            "value": "/usr/lib/x86_64-linux-gnu:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64"
+          }
+        ],
+        "volumeMounts": [
+          {
+            "name": "work",
+            "mountPath": "/work"
+          }
+        ]
+      }
+    ],
+    "volumes": [
+      {
+        "name": "work",
+        "hostPath": {
+          "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/communication-20261117/artifacts",
+          "type": "Directory"
+        }
+      }
+    ]
+  }
+}

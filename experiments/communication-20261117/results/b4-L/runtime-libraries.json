@@ -1,0 +1,32 @@
+[
+  {
+    "label": "server",
+    "pid": 2032550,
+    "comm": "lupine_driver_s",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/opt/lupine/bin/lupine_driver_server": "f47d42c1851a9f1956bdbb4f33c77f120c4d1eb62e1ce1203d297e587c8df5a9",
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4",
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/usr/lib/x86_64-linux-gnu:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64",
+      "NVIDIA_VISIBLE_DEVICES": "void"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 2033328,
+    "comm": "lupine_driver_s",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/opt/lupine/bin/lupine_driver_server": "f47d42c1851a9f1956bdbb4f33c77f120c4d1eb62e1ce1203d297e587c8df5a9",
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4",
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/usr/lib/x86_64-linux-gnu:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64",
+      "NVIDIA_VISIBLE_DEVICES": "void"
+    }
+  }
+]

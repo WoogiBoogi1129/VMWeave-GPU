@@ -1,0 +1,252 @@
+[
+  {
+    "name": "compiler",
+    "image": "docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85",
+    "status": [
+      {
+        "allocatedResources": {
+          "cpu": "2",
+          "memory": "8Gi"
+        },
+        "containerID": "cri-o://bbab2d26ffc91e04e401cd61680c0c71243e930472e066579dc969bd184eee65",
+        "image": "docker.io/nvidia/cuda@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85",
+        "imageID": "docker.io/nvidia/cuda@sha256:61f6c08f2b59036cb935e56d1e31a6b64e3ae2c7ddb86d33fa0b044c7917b719",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "cpu": "2",
+            "memory": "8Gi"
+          },
+          "requests": {
+            "cpu": "2",
+            "memory": "8Gi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-17T13:45:31Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "workspace"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "lupine-client-image",
+    "image": "ghcr.io/lupinemachines/lupine-client:cuda-13.3.1-ubuntu24.04@sha256:fe0e8c283fe29b0c8bfb4bbe2a81fac4fabd3a477fe694f31b5a97a996fb028e",
+    "status": [
+      {
+        "allocatedResources": {
+          "cpu": "2",
+          "memory": "8Gi"
+        },
+        "containerID": "cri-o://c9a319d31e912dd08a16a264fe80f2900159e345cc2a5aef11ab118241f184ff",
+        "image": "ghcr.io/lupinemachines/lupine-client@sha256:fe0e8c283fe29b0c8bfb4bbe2a81fac4fabd3a477fe694f31b5a97a996fb028e",
+        "imageID": "ghcr.io/lupinemachines/lupine-client@sha256:00348b5db6b95110c46de6d3412433766367ce12168f8486a963cd185eacadac",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "cpu": "2",
+            "memory": "8Gi"
+          },
+          "requests": {
+            "cpu": "2",
+            "memory": "8Gi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-17T13:46:57Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "workspace"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "lupine-server-image",
+    "image": "ghcr.io/lupinemachines/lupine-server:cuda-13.3.1-ubuntu24.04@sha256:79f023523ed0ea8704b6e3634c5831ed2d4210a0a8c7ed700a3bcdbbf7c9e1a3",
+    "status": [
+      {
+        "allocatedResources": {
+          "cpu": "2",
+          "memory": "8Gi"
+        },
+        "containerID": "cri-o://1fb3a9e2fce579b81c3b5e3c9b96e231329f8a7987e510b366803dc6dd26e662",
+        "image": "ghcr.io/lupinemachines/lupine-server@sha256:79f023523ed0ea8704b6e3634c5831ed2d4210a0a8c7ed700a3bcdbbf7c9e1a3",
+        "imageID": "ghcr.io/lupinemachines/lupine-server@sha256:79f023523ed0ea8704b6e3634c5831ed2d4210a0a8c7ed700a3bcdbbf7c9e1a3",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "cpu": "2",
+            "memory": "8Gi"
+          },
+          "requests": {
+            "cpu": "2",
+            "memory": "8Gi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-17T13:55:22Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "workspace"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "lupine-client-compatible",
+    "image": "ghcr.io/lupinemachines/lupine-client:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:b8b57e2f612f224d5ac158bb05b15df48323ed6a66a809f4749f5368104601b3",
+    "status": [
+      {
+        "allocatedResources": {
+          "cpu": "2",
+          "memory": "8Gi"
+        },
+        "containerID": "cri-o://e27eeb8182e419de339f3961fb38e5a6b68e59d23d3eb2a641f15e5c117ee92b",
+        "image": "ghcr.io/lupinemachines/lupine-client@sha256:b8b57e2f612f224d5ac158bb05b15df48323ed6a66a809f4749f5368104601b3",
+        "imageID": "ghcr.io/lupinemachines/lupine-client@sha256:68d3af132b1dafa9f272c084ee0b3f1136ba4f219bdcb83c038dfacd4fac4222",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "cpu": "2",
+            "memory": "8Gi"
+          },
+          "requests": {
+            "cpu": "2",
+            "memory": "8Gi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-17T14:06:33Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "workspace"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "lupine-server-compatible",
+    "image": "ghcr.io/lupinemachines/lupine-server:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:dbb0febb22f8fb054fe5ac2150df316df366aba5d0ed8649e43ed35e7890e494",
+    "status": [
+      {
+        "allocatedResources": {
+          "cpu": "2",
+          "memory": "8Gi"
+        },
+        "containerID": "cri-o://64092d84467956a3b08e4abc3891178a49426a7d00e33ff770bfcfa7311304a9",
+        "image": "ghcr.io/lupinemachines/lupine-server@sha256:dbb0febb22f8fb054fe5ac2150df316df366aba5d0ed8649e43ed35e7890e494",
+        "imageID": "ghcr.io/lupinemachines/lupine-server@sha256:4205336e431d0c292d06eca828b4923b3dd70252b755e81e0cf463f7e11d1229",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "limits": {
+            "cpu": "2",
+            "memory": "8Gi"
+          },
+          "requests": {
+            "cpu": "2",
+            "memory": "8Gi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-17T14:11:28Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "workspace"
+          }
+        ]
+      }
+    ]
+  }
+]

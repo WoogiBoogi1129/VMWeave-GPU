@@ -1,0 +1,16 @@
+{
+  "detected_utc": 1794973213.7332604,
+  "last_recorded_result_utc": 1794934828.3603277,
+  "completed_blocks_retained": [
+    1,
+    2,
+    3
+  ],
+  "valid_intervals_retained": 192,
+  "excluded_logged_intervals": 24,
+  "excluded_scope": "Entire interrupted block 4, including its completed Flyt session and partial Native session. One additional Native raw file lacks a RESULT event.",
+  "cause": "Local campaign, probe, metadata collector and finalizer were no longer running after the conversation execution was interrupted. Exact OS termination signal was not recorded.",
+  "state_at_detection": "GPU1 idle; Native Pod and exclusive claim remained; observer was still running. Observer stopped and owned runtime resources released.",
+  "recovery": "Rerun all of block 4 and block 5 without changing frozen benchmark sources, timings or conditions. Launch supervisor as a transient user systemd service independent of the interactive tool session.",
+  "publication": "Excluded attempts preserved outside analysis glob; final matrix remains 5 x 4 x 16."
+}

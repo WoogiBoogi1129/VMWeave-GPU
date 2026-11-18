@@ -1,0 +1,57 @@
++00:00:00.721582 [34mINFO[0m:	connection to host "10.85.0.41"
++00:00:00.721896 [34mINFO[0m:	connecting via TCP...
+{"event":"TRANSPORT","socktype":1,"connection_is_local":0,"shm_enabled":1}
+[rpc] cuModuleLoadData(0x5be376be61c0) = 0, result 0x5e83e22a3ac0
+[rpc] cuModuleGetFunction(0x5e83e22a3ac0, comm_sequence) = 0, result 103920528148464
+{"event":"SETUP","pid":1703,"timer_min_ns":43,"device_count":1,"input_seed":20261117}
+{"event":"WARMUP_START","id":0,"utc_ns":1794924014628488834}
+{"event":"START","id":0,"utc_ns":1794924014643227288}
+{"event":"RESULT","id":0,"direction":"kernel","bytes":8,"K":1,"completed":30,"elapsed_ns":12467943,"client_cpu_ns":1444685,"start_utc_ns":1794924014643248974,"end_utc_ns":1794924014655719718,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":1,"utc_ns":1794924014659806081}
+{"event":"START","id":1,"utc_ns":1794924014670785644}
+{"event":"RESULT","id":1,"direction":"H2D","bytes":4,"K":0,"completed":30,"elapsed_ns":31243316,"client_cpu_ns":3397435,"start_utc_ns":1794924014670804670,"end_utc_ns":1794924014702052878,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":2,"utc_ns":1794924014705531819}
+{"event":"START","id":2,"utc_ns":1794924014709184984}
+{"event":"RESULT","id":2,"direction":"H2D","bytes":4096,"K":0,"completed":30,"elapsed_ns":7336964,"client_cpu_ns":2058816,"start_utc_ns":1794924014709201364,"end_utc_ns":1794924014716540822,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":3,"utc_ns":1794924014723293526}
+{"event":"START","id":3,"utc_ns":1794924014741147030}
+{"event":"RESULT","id":3,"direction":"H2D","bytes":65536,"K":0,"completed":30,"elapsed_ns":60690672,"client_cpu_ns":7188305,"start_utc_ns":1794924014741171237,"end_utc_ns":1794924014801867377,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":4,"utc_ns":1794924014822897454}
+{"event":"START","id":4,"utc_ns":1794924014858265798}
+{"event":"RESULT","id":4,"direction":"H2D","bytes":1048576,"K":0,"completed":30,"elapsed_ns":94665734,"client_cpu_ns":25434027,"start_utc_ns":1794924014858320054,"end_utc_ns":1794924014952992738,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":5,"utc_ns":1794924015058117894}
+{"event":"START","id":5,"utc_ns":1794924015252670508}
+{"event":"RESULT","id":5,"direction":"H2D","bytes":16777216,"K":0,"completed":30,"elapsed_ns":398965880,"client_cpu_ns":215244725,"start_utc_ns":1794924015252757221,"end_utc_ns":1794924015651729673,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":6,"utc_ns":1794924016173143981}
+{"event":"START","id":6,"utc_ns":1794924017257578674}
+{"event":"RESULT","id":6,"direction":"H2D","bytes":67108864,"K":0,"completed":30,"elapsed_ns":2624166739,"client_cpu_ns":1141800538,"start_utc_ns":1794924017257615601,"end_utc_ns":1794924019881790975,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":7,"utc_ns":1794924020052040515}
+{"event":"START","id":7,"utc_ns":1794924020071648693}
+{"event":"RESULT","id":7,"direction":"D2H","bytes":4,"K":0,"completed":30,"elapsed_ns":48956842,"client_cpu_ns":5476315,"start_utc_ns":1794924020071673016,"end_utc_ns":1794924020120634431,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":8,"utc_ns":1794924020123084713}
+{"event":"START","id":8,"utc_ns":1794924020144131785}
+{"event":"RESULT","id":8,"direction":"D2H","bytes":4096,"K":0,"completed":30,"elapsed_ns":61640420,"client_cpu_ns":6552610,"start_utc_ns":1794924020144155181,"end_utc_ns":1794924020205800871,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":9,"utc_ns":1794924020210762805}
+{"event":"START","id":9,"utc_ns":1794924020235709336}
+{"event":"RESULT","id":9,"direction":"D2H","bytes":65536,"K":0,"completed":30,"elapsed_ns":74968340,"client_cpu_ns":9364376,"start_utc_ns":1794924020235734629,"end_utc_ns":1794924020310708213,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":10,"utc_ns":1794924020319268909}
+{"event":"START","id":10,"utc_ns":1794924020353611889}
+{"event":"RESULT","id":10,"direction":"D2H","bytes":1048576,"K":0,"completed":30,"elapsed_ns":97457640,"client_cpu_ns":23866859,"start_utc_ns":1794924020353639345,"end_utc_ns":1794924020451101949,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":11,"utc_ns":1794924020508318197}
+{"event":"START","id":11,"utc_ns":1794924020664154082}
+{"event":"RESULT","id":11,"direction":"D2H","bytes":16777216,"K":0,"completed":30,"elapsed_ns":462538442,"client_cpu_ns":188760885,"start_utc_ns":1794924020664176948,"end_utc_ns":1794924021126719918,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":12,"utc_ns":1794924021389973932}
+{"event":"START","id":12,"utc_ns":1794924022866186001}
+{"event":"RESULT","id":12,"direction":"D2H","bytes":67108864,"K":0,"completed":30,"elapsed_ns":4393305915,"client_cpu_ns":1148188192,"start_utc_ns":1794924022866251434,"end_utc_ns":1794924027259604506,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":13,"utc_ns":1794924027297035865}
+{"event":"START","id":13,"utc_ns":1794924027412254171}
+{"event":"RESULT","id":13,"direction":"kernel","bytes":8,"K":10,"completed":30,"elapsed_ns":340232342,"client_cpu_ns":33381181,"start_utc_ns":1794924027412286811,"end_utc_ns":1794924027752527980,"final_sequence":451,"total_launches":451,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":14,"utc_ns":1794924027862528316}
+{"event":"START","id":14,"utc_ns":1794924028615964051}
+{"event":"RESULT","id":14,"direction":"kernel","bytes":8,"K":100,"completed":30,"elapsed_ns":2455643898,"client_cpu_ns":255000232,"start_utc_ns":1794924028615988491,"end_utc_ns":1794924031071638292,"final_sequence":4551,"total_launches":4551,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":15,"utc_ns":1794924031167725047}
+{"event":"START","id":15,"utc_ns":1794924039090608445}
+{"event":"RESULT","id":15,"direction":"kernel","bytes":8,"K":1000,"completed":30,"elapsed_ns":19620954404,"client_cpu_ns":2076984945,"start_utc_ns":1794924039090690249,"end_utc_ns":1794924058711651204,"final_sequence":45551,"total_launches":45551,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
++00:00:45.210775 [34mINFO[0m:	api-call-cnt: 1247
++00:00:45.210816 [34mINFO[0m:	memcpy-cnt: -1194561052
++00:00:45.213382 [34mINFO[0m: completed deinit request and response	in [4mcpu-client-mgr-handler.c:222[0m

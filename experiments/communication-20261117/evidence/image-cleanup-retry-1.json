@@ -1,0 +1,36 @@
+[
+  {
+    "image": "docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85",
+    "status": "already_absent"
+  },
+  {
+    "image": "ghcr.io/lupinemachines/lupine-client:cuda-13.3.1-ubuntu24.04@sha256:fe0e8c283fe29b0c8bfb4bbe2a81fac4fabd3a477fe694f31b5a97a996fb028e",
+    "status": "already_absent"
+  },
+  {
+    "image": "ghcr.io/lupinemachines/lupine-server:cuda-13.3.1-ubuntu24.04@sha256:79f023523ed0ea8704b6e3634c5831ed2d4210a0a8c7ed700a3bcdbbf7c9e1a3",
+    "status": "already_absent"
+  },
+  {
+    "image": "ghcr.io/lupinemachines/lupine-client:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:b8b57e2f612f224d5ac158bb05b15df48323ed6a66a809f4749f5368104601b3",
+    "status": "already_absent"
+  },
+  {
+    "image": "ghcr.io/lupinemachines/lupine-server:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:dbb0febb22f8fb054fe5ac2150df316df366aba5d0ed8649e43ed35e7890e494",
+    "status": "already_absent"
+  },
+  {
+    "image": "localhost/flyt-gpu-cell@sha256:0b21e0df1222f5861b522994a80416e243870663372d3cd2a886d36a221efbbd",
+    "remove_reference": "localhost/flyt-gpu-cell@sha256:0b21e0df1222f5861b522994a80416e243870663372d3cd2a886d36a221efbbd",
+    "id": "dc1831cdbef2124ebd0d5e32f8ff21774b47ef99e285cd021c66e1daf4529c80",
+    "status": "removed",
+    "detail": "Deleted: localhost/flyt-gpu-cell:overhead-20260929\n"
+  },
+  {
+    "image": "localhost/flyt-cluster-manager@sha256:7789348f62da6f2d9fa1ee031d323be1cf7f6e1b44c563d104745e0deca9a0b8",
+    "remove_reference": "localhost/flyt-cluster-manager@sha256:7789348f62da6f2d9fa1ee031d323be1cf7f6e1b44c563d104745e0deca9a0b8",
+    "id": "105ec34b19b39eccce3d558341b6fade4fb50e29cfd3fcce82f43f0ae848068a",
+    "status": "removed",
+    "detail": "Deleted: localhost/flyt-cluster-manager:dev\n"
+  }
+]

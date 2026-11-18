@@ -1,0 +1,339 @@
+{
+  "schema": 1,
+  "frozen_utc": 1794925077.3441606,
+  "git_head": "84eecb1d8b9f5d9dd4ae3792480ab3949acd7457",
+  "gpu_index": 1,
+  "gpu_uuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+  "allocator": "vmweave-hami-dra; hami-core-gpu.project-hami.io",
+  "capacity": {
+    "cores": 100,
+    "memory": "97887Mi"
+  },
+  "hami_policy": "default same full-capacity DRA injection; no GPU_CORE_UTILIZATION_POLICY override",
+  "cpu": {
+    "guest_vcpu": 4,
+    "guest_memory": "16Gi",
+    "qemu": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "native": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "server": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "dedicated": false,
+    "strict_memory_numa_binding": false
+  },
+  "images": {
+    "vmweave": {
+      "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:19fb714be9d73c55464a4a179d200f9a483ab4fed33b417cf61f372b6c41e749",
+      "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:4ccd9e67935afbf8bdd06561895d31d3329dee21bda0a99ea58b47786a615e41",
+      "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:e425c374fb3396f5e8a7d7d89f0a301f2abd0ffca5ca8a7e26f2107fd513da73",
+      "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:896415e6e5cdeecab8b96d55880fff1eae10fc7ccdf58f2d180d8e9f79cb9e66",
+      "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:8cb0c5e4a5cd06b000f7b10659dc162e630bf3aceb617f543591ad5fa783fb61",
+      "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:39117f22a194c7ededa389d1c49224eed9aa42d2ee63f0b5a5cdd96d2ea74713",
+      "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:92f04e5903bf194cb6d56389949793ea64034a514178156de91f07a917a2defc"
+    },
+    "lupine_client": "ghcr.io/lupinemachines/lupine-client:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:b8b57e2f612f224d5ac158bb05b15df48323ed6a66a809f4749f5368104601b3",
+    "lupine_server": "ghcr.io/lupinemachines/lupine-server:v2.1.0-cuda-12.9.1-ubuntu24.04@sha256:dbb0febb22f8fb054fe5ac2150df316df366aba5d0ed8649e43ed35e7890e494",
+    "compiler": "docker.io/nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04@sha256:ad6d59a3bbf3e82c1c849c9ac09cfc2a3e0bbb8655042fd899be6681b3fe2a85",
+    "flyt_cell": "localhost/flyt-gpu-cell@sha256:0b21e0df1222f5861b522994a80416e243870663372d3cd2a886d36a221efbbd"
+  },
+  "sources": {
+    "experiments/communication-20261117/src/probe.c": "41a5e3498f54011bdbae861ef4a6974b6bcf92bbc00b7c3de33c7ec4b973ae7a",
+    "experiments/communication-20261117/src/sequence.ptx": "977ea32f7353a8620a4d902a6e108229df57cf6480f599438c07e159d498ca2f",
+    "experiments/communication-20261117/scripts/common.py": "831640af00e6c3dec58096b0b98f7b75a6e8c7558f8e4807e08d7d606f78066b",
+    "experiments/communication-20261117/scripts/infra.py": "16acf28ba3f3da3d582fa77279773339e3d6952c31b39f6ef88dfa73e918f7c3",
+    "experiments/communication-20261117/scripts/backends.py": "41ed9ae60609487a9c434bbecf50ba3a11c82d2d5e84e6132991816f90d531f7",
+    "experiments/communication-20261117/scripts/flyt.py": "e76649028f305781e516ec90450e0298a23b98f8680cf45413a93256008a808b",
+    "experiments/communication-20261117/scripts/artifacts.py": "aaff33fb2db9ee641228bbda18d7c1a19ccadb1c6fbe2ceba5c5fee9d4d968c1",
+    "experiments/communication-20261117/scripts/run_session.py": "49f8afe4ae830b30ec7e32a7f160f0671bb9148baef1d38e582dfd5bb1338688",
+    "experiments/communication-20261117/scripts/observe.py": "89ca62b35b5cf5d83508da8527b5cdf05d53f662a7b81be2b52f756578c087e0",
+    "experiments/communication-20261117/scripts/runtime.py": "754a98b414df94ad230b43755efc6aa8c0b52e34263cada3f52e52cbaf535f57"
+  },
+  "artifacts": {
+    "sequence.ptx": "977ea32f7353a8620a4d902a6e108229df57cf6480f599438c07e159d498ca2f",
+    "sequence.cubin": "3853d8c0d29ec0f5cd675d099faf3f5b933f46e73da426031a203c755788adfd",
+    "L/libnvshmem_host.so.3": "17f7f0433d67e66c94ea56e70c49c2f1bee5000b12e57c188679f7393f61a6fe",
+    "L/probe": "d44559cbdcf6bb1811078be83f0072847934aec39c9e507d0d15ab834b7f6731",
+    "L/libcuda.so.1": "737df15b74bcdcb0a32156765a87c2a8a6e61a7b747ab5c5cc3e23f8c6241073",
+    "L/libnvshmem_host.so": "17f7f0433d67e66c94ea56e70c49c2f1bee5000b12e57c188679f7393f61a6fe",
+    "L/libnccl.so.2": "e7341afa9396b0436d08c19404dccc716125ae0be85208963c9db95ef962a4a9",
+    "L/libamdhip64.so.7": "77c6aca8abbdf1579e511a01fbeb94363464fb183149cf41d4fe4ae0b2591828",
+    "L/libnccl.so": "e7341afa9396b0436d08c19404dccc716125ae0be85208963c9db95ef962a4a9",
+    "L/libnvidia-ml.so.1": "a613adfd0635471e263f186bf643839df619c010c407dbf8f4b480148813a3a5",
+    "L/libamdhip64.so.1": "77c6aca8abbdf1579e511a01fbeb94363464fb183149cf41d4fe4ae0b2591828",
+    "L/libcudart.so.12": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+    "F/probe": "43fb21abc4f2aebeea46df913362b50dc5dbd97c9e024fcc8f15898f4aa0fb4e",
+    "F/libtirpc.so.3.0.0": "e1edca8c831b2c2f6c986c570987676ec2fda6b3857ccafb7b739f503ec5755f",
+    "F/flyt-client-manager": "6941195fb754413ac0b27f96a65e9a358b4524b8b2dc8d79807284c1a0a06b01",
+    "F/cricket-client.so": "6fbe79545c575ac44ea9d528982f583fcbf70558bfd747ba8f2348acfa08e857",
+    "N/probe": "d44559cbdcf6bb1811078be83f0072847934aec39c9e507d0d15ab834b7f6731",
+    "N/libcudart.so.12": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+    "V/probe": "7e13a7f9d53c53c76b3d0fcfe822adf83563634a52abb843b1767ded28fb1465",
+    "V/guest_broker.py": "3a3a63c86c5e0677ecad84ddb8eff1e598791a878885650c6a19393e416cf03a",
+    "V/image-reference.txt": "961a857c01ee0a525c0cee728386e7eb14fad2d73282fb242486a365ab4160aa",
+    "V/guest-gpu-smoke": "a8e56f1ea458eadd7d8b28aec71caea9597c9f0cecdc13c0f7a4af2c6379b95a",
+    "V/vmweave-guest-broker.service": "a0bc235a8c35bd28a2bf99d689f89dfe760b454f79dc12ef34829535eaf12214",
+    "V/guest_bootstrap.py": "7d748074daf0f53368f2e8890a2c6b480b5b77401bbdf4bf1e12427f9bf92bbd",
+    "V/vmweave_env.py": "eff3a02a2ffa64b146e25c7ba8498b55f38a91da3d205442f75b896256254dbd",
+    "V/libvmweave_guest.so": "08ccac5fb763451e448a68700f6156a6e0eba62950614913fb07c62ba966cfa0",
+    "V/guest_status.py": "79023b64dbfea7cb91a25bd15d6cda72fa7540f26f66da2b76921e1847d3662e",
+    "V/install_guest_broker.sh": "dcae88060e61264b916f46a7c471179e7abf148469b0d7466b1ab451cf4a3aa6",
+    "V/SHA256SUMS": "2c57271ecc51fc3e6000b9542a0a7c44ec84370a6569313cb50ff111d8297a98",
+    "V/source-revision.txt": "5f5775a9cf3f6f2ce3fb19252cf91a1c335cf32185563828343c0b07cd1920b9"
+  },
+  "pilots": {
+    "N": "pilot-N-final",
+    "V": "pilot-V2",
+    "F": "pilot-F-final",
+    "L": "pilot-L2"
+  },
+  "blocks": [
+    {
+      "block": 1,
+      "backend_order": [
+        "N",
+        "V",
+        "F",
+        "L"
+      ],
+      "condition_order": [
+        9,
+        11,
+        2,
+        4,
+        13,
+        10,
+        8,
+        7,
+        14,
+        15,
+        3,
+        12,
+        0,
+        1,
+        5,
+        6
+      ]
+    },
+    {
+      "block": 2,
+      "backend_order": [
+        "V",
+        "L",
+        "N",
+        "F"
+      ],
+      "condition_order": [
+        1,
+        10,
+        13,
+        5,
+        6,
+        12,
+        2,
+        7,
+        4,
+        0,
+        3,
+        9,
+        14,
+        8,
+        11,
+        15
+      ]
+    },
+    {
+      "block": 3,
+      "backend_order": [
+        "L",
+        "F",
+        "V",
+        "N"
+      ],
+      "condition_order": [
+        13,
+        11,
+        0,
+        15,
+        5,
+        7,
+        10,
+        1,
+        12,
+        2,
+        3,
+        4,
+        6,
+        8,
+        9,
+        14
+      ]
+    },
+    {
+      "block": 4,
+      "backend_order": [
+        "F",
+        "N",
+        "L",
+        "V"
+      ],
+      "condition_order": [
+        11,
+        3,
+        7,
+        14,
+        2,
+        6,
+        8,
+        0,
+        10,
+        13,
+        1,
+        9,
+        12,
+        15,
+        4,
+        5
+      ]
+    },
+    {
+      "block": 5,
+      "backend_order": [
+        "N",
+        "F",
+        "L",
+        "V"
+      ],
+      "condition_order": [
+        2,
+        8,
+        15,
+        4,
+        5,
+        3,
+        1,
+        11,
+        13,
+        12,
+        0,
+        9,
+        14,
+        6,
+        10,
+        7
+      ]
+    }
+  ],
+  "duration_s": 30,
+  "warmup_min_s": 10,
+  "warmup_min_operations": 10,
+  "p95_min_samples": 1000,
+  "conditions": [
+    {
+      "id": 0,
+      "type": "kernel",
+      "K": 1
+    },
+    {
+      "id": 1,
+      "type": "H2D",
+      "bytes": 4
+    },
+    {
+      "id": 2,
+      "type": "H2D",
+      "bytes": 4096
+    },
+    {
+      "id": 3,
+      "type": "H2D",
+      "bytes": 65536
+    },
+    {
+      "id": 4,
+      "type": "H2D",
+      "bytes": 1048576
+    },
+    {
+      "id": 5,
+      "type": "H2D",
+      "bytes": 16777216
+    },
+    {
+      "id": 6,
+      "type": "H2D",
+      "bytes": 67108864
+    },
+    {
+      "id": 7,
+      "type": "D2H",
+      "bytes": 4
+    },
+    {
+      "id": 8,
+      "type": "D2H",
+      "bytes": 4096
+    },
+    {
+      "id": 9,
+      "type": "D2H",
+      "bytes": 65536
+    },
+    {
+      "id": 10,
+      "type": "D2H",
+      "bytes": 1048576
+    },
+    {
+      "id": 11,
+      "type": "D2H",
+      "bytes": 16777216
+    },
+    {
+      "id": 12,
+      "type": "D2H",
+      "bytes": 67108864
+    },
+    {
+      "id": 13,
+      "type": "kernel",
+      "K": 10
+    },
+    {
+      "id": 14,
+      "type": "kernel",
+      "K": 100
+    },
+    {
+      "id": 15,
+      "type": "kernel",
+      "K": 1000
+    }
+  ],
+  "input": "xorshift32 seed 20261117; pre-generated reusable pageable host buffers",
+  "correctness": "full transfer buffer pre/post; increment accumulator plus final sequence for kernels; CUDA status checked on every call",
+  "elapsed": "CLOCK_MONOTONIC; stop new operations at >=30s, drain last submitted batch; throughput denominator includes loop and sample-storage overhead",
+  "raw": "one uint64 little-endian elapsed_ns per completed operation/batch, gzip lossless after timing",
+  "statistics": "5 block values; paired V/F and V/L geometric ratios with log-scale t CI df4; arithmetic t CI for block metrics; no pooled-call inference",
+  "exclusions": "CUDA failure or incorrect output, foreign target-GPU process, node pressure or newly observed hardware/thermal slowdown. Preserve raw; no replacement based on performance rank/variance. Missing p95/CPU remains N/A.",
+  "limits": [
+    "single client/default stream/pageable",
+    "same-node VM-to-Pod virtual network",
+    "Lupine standalone backend, not HAMi integrated scheduler result",
+    "N is Pod baseline, not a VM transport-only control",
+    "F uses same PTX source assembled offline; N/V/L use driver PTX JIT outside timing",
+    "shared CPU, DRAM and PCIe host load remains"
+  ]
+}

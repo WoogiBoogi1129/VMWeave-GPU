@@ -1,0 +1,62 @@
+[HAMI-core Msg(51:128288471504704:multiprocess_memory_limit.c:862)]: Cleanup on exit for PID 51
+[HAMI-core Msg(51:128288471504704:multiprocess_memory_limit.c:898)]: Exit cleanup complete for PID 51
+[HAMI-core Msg(55:136896213741568:libvgpu.c:832)]: Initializing.....
+[HAMI-core Msg(55:136896213741568:libvgpu.c:868)]: Initialized
+[HAMI-core Msg(55:136896213741568:multiprocess_memory_limit.c:862)]: Cleanup on exit for PID 55
+[HAMI-core Msg(55:136896213741568:multiprocess_memory_limit.c:898)]: Exit cleanup complete for PID 55
+[HAMI-core Warn(55:136896213741568:multiprocess_memory_limit.c:628)]: Process slot not found for pid 55
+[{'pid': 3830487, 'comm': 'sleep', 'cpus': [8, 9, 10, 11]}]
+GPU-772181af-05a4-0c24-de59-8487bd37c142, 97887 MiB
+
+{"allocationTimestamp":"2026-11-17T13:49:31Z","devices":{"results":[{"consumedCapacity":{"cores":"100","memory":"97887Mi"},"device":"hami-gpu-1","driver":"hami-core-gpu.project-hami.io","pool":"gpu-4","request":"gpu","shareID":"db2ad9b1-320b-4f02-8d28-85254f95639a"}]},"nodeSelector":{"nodeSelectorTerms":[{"matchFields":[{"key":"metadata.name","operator":"In","values":["gpu-4"]}]}]}}
+{"event":"SETUP","pid":55,"timer_min_ns":23,"device_count":1,"input_seed":20261117}
+{"event":"WARMUP_START","id":0,"utc_ns":1794923375526428151}
+{"event":"START","id":0,"utc_ns":1794923375526544386}
+{"event":"RESULT","id":0,"direction":"kernel","bytes":8,"K":1,"completed":30,"elapsed_ns":283487,"client_cpu_ns":285842,"start_utc_ns":1794923375526551174,"end_utc_ns":1794923375526835340,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":1,"utc_ns":1794923375526967972}
+{"event":"START","id":1,"utc_ns":1794923375527057465}
+{"event":"RESULT","id":1,"direction":"H2D","bytes":4,"K":0,"completed":30,"elapsed_ns":252024,"client_cpu_ns":252806,"start_utc_ns":1794923375527059666,"end_utc_ns":1794923375527312320,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":2,"utc_ns":1794923375527391360}
+{"event":"START","id":2,"utc_ns":1794923375527523377}
+{"event":"RESULT","id":2,"direction":"H2D","bytes":4096,"K":0,"completed":30,"elapsed_ns":344119,"client_cpu_ns":344719,"start_utc_ns":1794923375527526792,"end_utc_ns":1794923375527871352,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":3,"utc_ns":1794923375528075951}
+{"event":"START","id":3,"utc_ns":1794923375528695526}
+{"event":"RESULT","id":3,"direction":"H2D","bytes":65536,"K":0,"completed":30,"elapsed_ns":1623566,"client_cpu_ns":1624906,"start_utc_ns":1794923375528703489,"end_utc_ns":1794923375530328348,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":4,"utc_ns":1794923375532370528}
+{"event":"START","id":4,"utc_ns":1794923375534745152}
+{"event":"RESULT","id":4,"direction":"H2D","bytes":1048576,"K":0,"completed":30,"elapsed_ns":5657706,"client_cpu_ns":5659790,"start_utc_ns":1794923375534756293,"end_utc_ns":1794923375540414929,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":5,"utc_ns":1794923375569073515}
+{"event":"START","id":5,"utc_ns":1794923375605052146}
+{"event":"RESULT","id":5,"direction":"H2D","bytes":16777216,"K":0,"completed":30,"elapsed_ns":71973213,"client_cpu_ns":73653684,"start_utc_ns":1794923375605062017,"end_utc_ns":1794923375677038236,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":6,"utc_ns":1794923375763514377}
+{"event":"START","id":6,"utc_ns":1794923375869105408}
+{"event":"RESULT","id":6,"direction":"H2D","bytes":67108864,"K":0,"completed":30,"elapsed_ns":186222494,"client_cpu_ns":187938396,"start_utc_ns":1794923375869119099,"end_utc_ns":1794923376055344579,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":7,"utc_ns":1794923376070378471}
+{"event":"START","id":7,"utc_ns":1794923376070493987}
+{"event":"RESULT","id":7,"direction":"D2H","bytes":4,"K":0,"completed":30,"elapsed_ns":320943,"client_cpu_ns":322949,"start_utc_ns":1794923376070497964,"end_utc_ns":1794923376070819682,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":8,"utc_ns":1794923376070912966}
+{"event":"START","id":8,"utc_ns":1794923376071064766}
+{"event":"RESULT","id":8,"direction":"D2H","bytes":4096,"K":0,"completed":30,"elapsed_ns":318272,"client_cpu_ns":319303,"start_utc_ns":1794923376071068922,"end_utc_ns":1794923376071388042,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":9,"utc_ns":1794923376071479077}
+{"event":"START","id":9,"utc_ns":1794923376071695921}
+{"event":"RESULT","id":9,"direction":"D2H","bytes":65536,"K":0,"completed":30,"elapsed_ns":586903,"client_cpu_ns":587666,"start_utc_ns":1794923376071698794,"end_utc_ns":1794923376072286420,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":10,"utc_ns":1794923376072682764}
+{"event":"START","id":10,"utc_ns":1794923376074283902}
+{"event":"RESULT","id":10,"direction":"D2H","bytes":1048576,"K":0,"completed":30,"elapsed_ns":4097707,"client_cpu_ns":4099617,"start_utc_ns":1794923376074289325,"end_utc_ns":1794923376078388713,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":11,"utc_ns":1794923376083849299}
+{"event":"START","id":11,"utc_ns":1794923376104728529}
+{"event":"RESULT","id":11,"direction":"D2H","bytes":16777216,"K":0,"completed":30,"elapsed_ns":50789855,"client_cpu_ns":50793088,"start_utc_ns":1794923376104735244,"end_utc_ns":1794923376155527043,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":12,"utc_ns":1794923376181329483}
+{"event":"START","id":12,"utc_ns":1794923376260495377}
+{"event":"RESULT","id":12,"direction":"D2H","bytes":67108864,"K":0,"completed":30,"elapsed_ns":192057234,"client_cpu_ns":193831317,"start_utc_ns":1794923376260502260,"end_utc_ns":1794923376452561858,"final_sequence":41,"total_launches":41,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":13,"utc_ns":1794923376467711072}
+{"event":"START","id":13,"utc_ns":1794923376468040674}
+{"event":"RESULT","id":13,"direction":"kernel","bytes":8,"K":10,"completed":30,"elapsed_ns":918266,"client_cpu_ns":1455712,"start_utc_ns":1794923376468044581,"end_utc_ns":1794923376468963856,"final_sequence":451,"total_launches":451,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":14,"utc_ns":1794923376469277054}
+{"event":"START","id":14,"utc_ns":1794923376471596430}
+{"event":"RESULT","id":14,"direction":"kernel","bytes":8,"K":100,"completed":30,"elapsed_ns":6746368,"client_cpu_ns":6747184,"start_utc_ns":1794923376471598174,"end_utc_ns":1794923376478345168,"final_sequence":4551,"total_launches":4551,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+{"event":"WARMUP_START","id":15,"utc_ns":1794923376480607418}
+{"event":"START","id":15,"utc_ns":1794923376502769062}
+{"event":"RESULT","id":15,"direction":"kernel","bytes":8,"K":1000,"completed":30,"elapsed_ns":69343574,"client_cpu_ns":69345861,"start_utc_ns":1794923376502771569,"end_utc_ns":1794923376572115982,"final_sequence":45551,"total_launches":45551,"correctness":"PASS","raw_format":"little-endian uint64 nanoseconds"}
+
+

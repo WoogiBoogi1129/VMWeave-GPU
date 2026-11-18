@@ -1,0 +1,94 @@
+[
+  {
+    "label": "server",
+    "pid": 214642,
+    "comm": "bash",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+      "NVIDIA_VISIBLE_DEVICES": "void"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 214786,
+    "comm": "rpcbind",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+      "NVIDIA_VISIBLE_DEVICES": "void"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 214793,
+    "comm": "nvidia-cuda-mps",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/opt/flyt/bin:/usr/local/cuda/lib64:/usr/local/cuda/lib64",
+      "CUDA_VISIBLE_DEVICES": "0",
+      "NVIDIA_VISIBLE_DEVICES": "void",
+      "CUDA_MPS_PIPE_DIRECTORY": "/run/flyt-mps/pipe"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 214795,
+    "comm": "flyt-node-manag",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4",
+      "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/opt/flyt/bin:/usr/local/cuda/lib64:/usr/local/cuda/lib64",
+      "CUDA_VISIBLE_DEVICES": "0",
+      "NVIDIA_VISIBLE_DEVICES": "void",
+      "CUDA_MPS_PIPE_DIRECTORY": "/run/flyt-mps/pipe"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 214798,
+    "comm": "nvidia-cuda-mps",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4",
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/opt/flyt/bin:/usr/local/cuda/lib64:/usr/local/cuda/lib64",
+      "CUDA_VISIBLE_DEVICES": "0",
+      "NVIDIA_VISIBLE_DEVICES": "void",
+      "CUDA_MPS_PIPE_DIRECTORY": "/run/flyt-mps/pipe"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 215827,
+    "comm": "cricket-rpc-ser",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/opt/flyt/bin/cricket-rpc-server": "76bef9c6243ba32e13865e2a9f946d2f0632ee8a169134d611c3001ca7a8a28c",
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4",
+      "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/opt/flyt/bin:/usr/local/cuda/lib64:/usr/local/cuda/lib64",
+      "CUDA_VISIBLE_DEVICES": "0",
+      "NVIDIA_VISIBLE_DEVICES": "void",
+      "CUDA_MPS_PIPE_DIRECTORY": "/run/flyt-mps/pipe"
+    }
+  }
+]

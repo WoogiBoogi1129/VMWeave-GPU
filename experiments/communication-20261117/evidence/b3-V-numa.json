@@ -1,0 +1,184 @@
+{
+  "utc": 1794932402.9073842,
+  "note": "Per-process numa_maps page sums; not deduplicated physical footprint. Default memory placement; no strict binding.",
+  "processes": [
+    {
+      "pid": 137404,
+      "role": "server",
+      "comm": "python3",
+      "mapped_pages_by_node": {
+        "N3": 1370,
+        "N1": 3483,
+        "N2": 431,
+        "N0": 1
+      },
+      "mapping_policies": {
+        "default": 98
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 137521,
+      "role": "server",
+      "comm": "vmweave-shm-ses",
+      "mapped_pages_by_node": {
+        "N2": 543,
+        "N1": 23467,
+        "N3": 15352
+      },
+      "mapping_policies": {
+        "default": 99
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 138603,
+      "role": "qemu",
+      "comm": "virt-tail",
+      "mapped_pages_by_node": {
+        "N1": 1744,
+        "N2": 756,
+        "N0": 41,
+        "N3": 51
+      },
+      "mapping_policies": {
+        "default": 78
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 138810,
+      "role": "qemu",
+      "comm": "virt-launcher-m",
+      "mapped_pages_by_node": {
+        "N0": 1624,
+        "N1": 8,
+        "N3": 807,
+        "N2": 387
+      },
+      "mapping_policies": {
+        "default": 76
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 138864,
+      "role": "qemu",
+      "comm": "virt-launcher",
+      "mapped_pages_by_node": {
+        "N0": 9717,
+        "N1": 418,
+        "N2": 4840,
+        "N3": 3497
+      },
+      "mapping_policies": {
+        "default": 504
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 138910,
+      "role": "qemu",
+      "comm": "sidecar-shim",
+      "mapped_pages_by_node": {
+        "N3": 4693,
+        "N0": 1606,
+        "N2": 166,
+        "N1": 124
+      },
+      "mapping_policies": {
+        "default": 205
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 138994,
+      "role": "qemu",
+      "comm": "virtqemud",
+      "mapped_pages_by_node": {
+        "N2": 5513,
+        "N0": 261,
+        "N1": 1996,
+        "N3": 510
+      },
+      "mapping_policies": {
+        "default": 361
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 138995,
+      "role": "qemu",
+      "comm": "virtlogd",
+      "mapped_pages_by_node": {
+        "N2": 3463,
+        "N3": 482,
+        "N0": 70
+      },
+      "mapping_policies": {
+        "default": 267
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 139276,
+      "role": "qemu",
+      "comm": "qemu-kvm",
+      "mapped_pages_by_node": {
+        "N1": 39624,
+        "N2": 69224,
+        "N0": 54564,
+        "N3": 100082
+      },
+      "mapping_policies": {
+        "default": 555
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 140924,
+      "role": "server",
+      "comm": "exe",
+      "mapped_pages_by_node": {
+        "N1": 52359,
+        "N2": 589,
+        "N0": 4303,
+        "N3": 19275
+      },
+      "mapping_policies": {
+        "default": 164
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    }
+  ]
+}

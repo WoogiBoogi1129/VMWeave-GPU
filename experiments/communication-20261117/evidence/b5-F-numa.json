@@ -1,0 +1,201 @@
+{
+  "utc": 1794976825.3949442,
+  "note": "Per-process numa_maps page sums; not deduplicated physical footprint. Default memory placement; no strict binding.",
+  "processes": [
+    {
+      "pid": 2139090,
+      "role": "qemu",
+      "comm": "virt-tail",
+      "mapped_pages_by_node": {
+        "N1": 1570,
+        "N0": 556,
+        "N2": 437
+      },
+      "mapping_policies": {
+        "default": 78
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2139250,
+      "role": "qemu",
+      "comm": "virt-launcher-m",
+      "mapped_pages_by_node": {
+        "N0": 1700,
+        "N1": 772,
+        "N2": 379
+      },
+      "mapping_policies": {
+        "default": 82
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2139261,
+      "role": "qemu",
+      "comm": "virt-launcher",
+      "mapped_pages_by_node": {
+        "N0": 9775,
+        "N1": 4258,
+        "N2": 4013,
+        "N3": 493
+      },
+      "mapping_policies": {
+        "default": 502
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2139304,
+      "role": "qemu",
+      "comm": "virtlogd",
+      "mapped_pages_by_node": {
+        "N2": 3437,
+        "N1": 478,
+        "N0": 79
+      },
+      "mapping_policies": {
+        "default": 267
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2139305,
+      "role": "qemu",
+      "comm": "virtqemud",
+      "mapped_pages_by_node": {
+        "N2": 4384,
+        "N1": 548,
+        "N0": 851,
+        "N3": 2424
+      },
+      "mapping_policies": {
+        "default": 361
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2139527,
+      "role": "qemu",
+      "comm": "qemu-kvm",
+      "mapped_pages_by_node": {
+        "N1": 56622,
+        "N0": 165820,
+        "N3": 2732,
+        "N2": 567
+      },
+      "mapping_policies": {
+        "default": 574
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2142541,
+      "role": "server",
+      "comm": "bash",
+      "mapped_pages_by_node": {
+        "N2": 420,
+        "N0": 219,
+        "N3": 378,
+        "N1": 32
+      },
+      "mapping_policies": {
+        "default": 35
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2142635,
+      "role": "server",
+      "comm": "rpcbind",
+      "mapped_pages_by_node": {
+        "N2": 499,
+        "N0": 121,
+        "N3": 378,
+        "N1": 91
+      },
+      "mapping_policies": {
+        "default": 129
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2142642,
+      "role": "server",
+      "comm": "nvidia-cuda-mps",
+      "mapped_pages_by_node": {
+        "N1": 64,
+        "N0": 112,
+        "N2": 123,
+        "N3": 302
+      },
+      "mapping_policies": {
+        "default": 54
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2142644,
+      "role": "server",
+      "comm": "flyt-node-manag",
+      "mapped_pages_by_node": {
+        "N1": 189,
+        "N3": 4800,
+        "N0": 7450,
+        "N2": 284
+      },
+      "mapping_policies": {
+        "default": 97
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2142647,
+      "role": "server",
+      "comm": "nvidia-cuda-mps",
+      "mapped_pages_by_node": {
+        "N1": 52,
+        "N0": 14174,
+        "N2": 189,
+        "N3": 4166
+      },
+      "mapping_policies": {
+        "default": 105
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    }
+  ]
+}

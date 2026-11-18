@@ -1,0 +1,300 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "creationTimestamp": "2026-11-17T15:43:36Z",
+    "generation": 1,
+    "labels": {
+      "experiment.vmweave.io/campaign": "comm-20261117"
+    },
+    "name": "flyt-server",
+    "namespace": "comm-20261117",
+    "resourceVersion": "34159225",
+    "uid": "12698bd5-452f-4afa-9c51-b9df58fee870"
+  },
+  "spec": {
+    "automountServiceAccountToken": false,
+    "containers": [
+      {
+        "command": [
+          "taskset",
+          "-c",
+          "12-15",
+          "/usr/local/bin/flyt-gpu-cell-entrypoint"
+        ],
+        "env": [
+          {
+            "name": "FLYT_ALLOWED_GPU_UUIDS",
+            "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+          },
+          {
+            "name": "FLYT_NODE_MANAGER_CONFIG",
+            "value": "/etc/flyt/node-mgr.toml"
+          },
+          {
+            "name": "RUST_LOG",
+            "value": "info"
+          }
+        ],
+        "image": "localhost/flyt-gpu-cell@sha256:0b21e0df1222f5861b522994a80416e243870663372d3cd2a886d36a221efbbd",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "main",
+        "resources": {
+          "claims": [
+            {
+              "name": "gpu"
+            }
+          ],
+          "limits": {
+            "cpu": "4",
+            "memory": "16Gi"
+          },
+          "requests": {
+            "cpu": "1",
+            "memory": "1Gi"
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "work"
+          },
+          {
+            "mountPath": "/etc/flyt",
+            "name": "cfg",
+            "readOnly": true
+          },
+          {
+            "mountPath": "/run/flyt-mps",
+            "name": "mps"
+          },
+          {
+            "mountPath": "/var/log/flyt-mps",
+            "name": "mps-log"
+          },
+          {
+            "mountPath": "/dev/shm",
+            "name": "shm"
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "gpu-4",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "resourceClaims": [
+      {
+        "name": "gpu",
+        "resourceClaimName": "flyt-server"
+      }
+    ],
+    "restartPolicy": "Never",
+    "runtimeClassName": "nvidia",
+    "schedulerName": "default-scheduler",
+    "securityContext": {},
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "terminationGracePeriodSeconds": 10,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "hostPath": {
+          "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/communication-20261117/artifacts",
+          "type": "Directory"
+        },
+        "name": "work"
+      },
+      {
+        "hostPath": {
+          "path": "/home/ubuntu/taeuk/flyt-k8s-poc-github/.local/communication-20261117/flyt-config",
+          "type": "Directory"
+        },
+        "name": "cfg"
+      },
+      {
+        "emptyDir": {},
+        "name": "mps"
+      },
+      {
+        "emptyDir": {},
+        "name": "mps-log"
+      },
+      {
+        "emptyDir": {
+          "medium": "Memory",
+          "sizeLimit": "2Gi"
+        },
+        "name": "shm"
+      }
+    ]
+  },
+  "status": {
+    "allocatedResources": {
+      "cpu": "1",
+      "memory": "1Gi"
+    },
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-17T15:43:37Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-17T15:43:36Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-17T15:43:37Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-17T15:43:37Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-17T15:43:36Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResources": {
+          "cpu": "1",
+          "memory": "1Gi"
+        },
+        "allocatedResourcesStatus": [
+          {
+            "name": "claim:gpu",
+            "resources": [
+              {
+                "health": "Unknown",
+                "resourceID": "k8s.hami-core-gpu.project-hami.io/claim=7758c2e5-6a90-4191-8dc6-8546e7e270f0-hami-gpu-1"
+              }
+            ]
+          }
+        ],
+        "containerID": "cri-o://aac4c62618e0f756c801251643dbba076a0451d6a9e12cb4f1db44cfd11a7f7c",
+        "image": "localhost/flyt-gpu-cell:overhead-20260929",
+        "imageID": "localhost/flyt-gpu-cell@sha256:0b21e0df1222f5861b522994a80416e243870663372d3cd2a886d36a221efbbd",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "claims": [
+            {
+              "name": "gpu"
+            }
+          ],
+          "limits": {
+            "cpu": "4",
+            "memory": "16Gi"
+          },
+          "requests": {
+            "cpu": "1",
+            "memory": "1Gi"
+          }
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-17T15:43:37Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 0,
+            "supplementalGroups": [
+              0
+            ],
+            "uid": 0
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/work",
+            "name": "work"
+          },
+          {
+            "mountPath": "/etc/flyt",
+            "name": "cfg",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          },
+          {
+            "mountPath": "/run/flyt-mps",
+            "name": "mps"
+          },
+          {
+            "mountPath": "/var/log/flyt-mps",
+            "name": "mps-log"
+          },
+          {
+            "mountPath": "/dev/shm",
+            "name": "shm"
+          }
+        ]
+      }
+    ],
+    "hostIP": "192.168.24.21",
+    "hostIPs": [
+      {
+        "ip": "192.168.24.21"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Running",
+    "podIP": "10.85.0.236",
+    "podIPs": [
+      {
+        "ip": "10.85.0.236"
+      }
+    ],
+    "qosClass": "Burstable",
+    "resources": {
+      "limits": {
+        "cpu": "4",
+        "memory": "16Gi"
+      },
+      "requests": {
+        "cpu": "1",
+        "memory": "1Gi"
+      }
+    },
+    "startTime": "2026-11-17T15:43:36Z"
+  }
+}

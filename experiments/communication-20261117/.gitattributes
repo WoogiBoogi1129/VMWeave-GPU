@@ -1,0 +1,6 @@
+# Preserve all source/evidence bytes covered by SHA256SUMS across checkouts.
+* -text
+results/** -whitespace
+evidence/** -whitespace
+# CSV exports use the standard csv.writer CRLF record terminator.
+analysis/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

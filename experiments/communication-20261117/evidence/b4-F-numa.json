@@ -1,0 +1,216 @@
+{
+  "utc": 1794973316.5851526,
+  "note": "Per-process numa_maps page sums; not deduplicated physical footprint. Default memory placement; no strict binding.",
+  "processes": [
+    {
+      "pid": 1962844,
+      "role": "qemu",
+      "comm": "virt-tail",
+      "mapped_pages_by_node": {
+        "N1": 1682,
+        "N2": 785,
+        "N3": 123
+      },
+      "mapping_policies": {
+        "default": 82
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1963042,
+      "role": "qemu",
+      "comm": "virt-launcher-m",
+      "mapped_pages_by_node": {
+        "N0": 1645,
+        "N1": 24,
+        "N2": 1130,
+        "N3": 1
+      },
+      "mapping_policies": {
+        "default": 76
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1963052,
+      "role": "qemu",
+      "comm": "virt-launcher",
+      "mapped_pages_by_node": {
+        "N0": 10125,
+        "N1": 3226,
+        "N2": 4021,
+        "N3": 1114
+      },
+      "mapping_policies": {
+        "default": 503
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1963098,
+      "role": "qemu",
+      "comm": "virtqemud",
+      "mapped_pages_by_node": {
+        "N2": 6330,
+        "N1": 1159,
+        "N3": 551,
+        "N0": 181
+      },
+      "mapping_policies": {
+        "default": 361
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1963099,
+      "role": "qemu",
+      "comm": "virtlogd",
+      "mapped_pages_by_node": {
+        "N2": 3329,
+        "N1": 489,
+        "N0": 55
+      },
+      "mapping_policies": {
+        "default": 267
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1963349,
+      "role": "qemu",
+      "comm": "qemu-kvm",
+      "mapped_pages_by_node": {
+        "N1": 104655,
+        "N0": 33354,
+        "N2": 64778,
+        "N3": 51834
+      },
+      "mapping_policies": {
+        "default": 509
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1966245,
+      "role": "server",
+      "comm": "bash",
+      "mapped_pages_by_node": {
+        "N2": 407,
+        "N1": 246,
+        "N3": 356
+      },
+      "mapping_policies": {
+        "default": 35
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1966370,
+      "role": "server",
+      "comm": "rpcbind",
+      "mapped_pages_by_node": {
+        "N2": 512,
+        "N1": 188,
+        "N3": 365
+      },
+      "mapping_policies": {
+        "default": 129
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1966376,
+      "role": "server",
+      "comm": "nvidia-cuda-mps",
+      "mapped_pages_by_node": {
+        "N1": 176,
+        "N2": 121,
+        "N3": 293
+      },
+      "mapping_policies": {
+        "default": 54
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1966378,
+      "role": "server",
+      "comm": "flyt-node-manag",
+      "mapped_pages_by_node": {
+        "N1": 7645,
+        "N3": 4821,
+        "N0": 21,
+        "N2": 287
+      },
+      "mapping_policies": {
+        "default": 105
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1966381,
+      "role": "server",
+      "comm": "nvidia-cuda-mps",
+      "mapped_pages_by_node": {
+        "N1": 14235,
+        "N2": 189,
+        "N3": 4222
+      },
+      "mapping_policies": {
+        "default": 108
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 1967321,
+      "role": "server",
+      "comm": "cricket-rpc-ser",
+      "mapped_pages_by_node": {
+        "N1": 65185,
+        "N2": 876,
+        "N3": 19285,
+        "N0": 99
+      },
+      "mapping_policies": {
+        "default": 218
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t12-15",
+        "Mems_allowed_list:\t0-3"
+      ]
+    }
+  ]
+}

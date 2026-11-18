@@ -1,0 +1,204 @@
+{
+  "observed_utc": 1794979028.8171353,
+  "changes": [
+    {
+      "namespace": "aap-lifecycle",
+      "name": "lifecycle-controller",
+      "same_uid": true,
+      "diff": [
+        {
+          "path": "spec.replicas",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "field_managers": [
+        {
+          "manager": "kubectl-client-side-apply",
+          "operation": "Update",
+          "time": "2026-10-27T14:32:50Z",
+          "subresource": null
+        },
+        {
+          "manager": "kubectl-patch",
+          "operation": "Update",
+          "time": "2026-11-08T16:54:04Z",
+          "subresource": null
+        },
+        {
+          "manager": "kubectl-rollout",
+          "operation": "Update",
+          "time": "2026-11-08T16:54:04Z",
+          "subresource": null
+        },
+        {
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:22Z",
+          "subresource": "status"
+        }
+      ]
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "gpt-oss-20b-kserve",
+      "same_uid": true,
+      "diff": [
+        {
+          "path": "spec.replicas",
+          "before": 1,
+          "after": 0
+        },
+        {
+          "path": "spec.template.metadata.annotations"
+        },
+        {
+          "path": "spec.template.spec.containers"
+        },
+        {
+          "path": "spec.template.spec.nodeSelector"
+        },
+        {
+          "path": "spec.template.spec.resourceClaims"
+        },
+        {
+          "path": "spec.template.spec.schedulerName"
+        }
+      ],
+      "field_managers": [
+        {
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:23Z",
+          "subresource": "status"
+        },
+        {
+          "manager": "manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:23Z",
+          "subresource": null
+        }
+      ]
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "llama33-70b-kserve",
+      "same_uid": true,
+      "diff": [
+        {
+          "path": "spec.replicas",
+          "before": 1,
+          "after": 0
+        }
+      ],
+      "field_managers": [
+        {
+          "manager": "manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:24Z",
+          "subresource": null
+        },
+        {
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:41Z",
+          "subresource": "status"
+        }
+      ]
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "mistral-small-32-kserve",
+      "same_uid": true,
+      "diff": [
+        {
+          "path": "spec.replicas",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "field_managers": [
+        {
+          "manager": "manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:52Z",
+          "subresource": null
+        },
+        {
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:44:12Z",
+          "subresource": "status"
+        }
+      ]
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "qwen25-72b-kserve",
+      "same_uid": true,
+      "diff": [
+        {
+          "path": "spec.replicas",
+          "before": 1,
+          "after": 0
+        }
+      ],
+      "field_managers": [
+        {
+          "manager": "manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:25Z",
+          "subresource": null
+        },
+        {
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:42Z",
+          "subresource": "status"
+        }
+      ]
+    },
+    {
+      "namespace": "aap-serving",
+      "name": "qwen35-27b-kserve",
+      "same_uid": true,
+      "diff": [
+        {
+          "path": "spec.replicas",
+          "before": 1,
+          "after": 0
+        },
+        {
+          "path": "spec.template.metadata.annotations"
+        },
+        {
+          "path": "spec.template.spec.containers"
+        },
+        {
+          "path": "spec.template.spec.nodeSelector"
+        },
+        {
+          "path": "spec.template.spec.resourceClaims"
+        },
+        {
+          "path": "spec.template.spec.schedulerName"
+        }
+      ],
+      "field_managers": [
+        {
+          "manager": "kube-controller-manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:20Z",
+          "subresource": "status"
+        },
+        {
+          "manager": "manager",
+          "operation": "Update",
+          "time": "2026-11-18T04:38:20Z",
+          "subresource": null
+        }
+      ]
+    }
+  ],
+  "handling": "Read-only inspection. No aap Deployment/Pod mutation or rollback by this experiment. Kubernetes managedFields manager labels do not identify the human actor."
+}

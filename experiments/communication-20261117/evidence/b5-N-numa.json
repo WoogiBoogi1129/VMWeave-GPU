@@ -1,0 +1,41 @@
+{
+  "utc": 1794976104.6215088,
+  "note": "Per-process numa_maps page sums; not deduplicated physical footprint. Default memory placement; no strict binding.",
+  "processes": [
+    {
+      "pid": 2104408,
+      "role": "server",
+      "comm": "sleep",
+      "mapped_pages_by_node": {
+        "N3": 267,
+        "N1": 61,
+        "N2": 118
+      },
+      "mapping_policies": {
+        "default": 29
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    },
+    {
+      "pid": 2105016,
+      "role": "server",
+      "comm": "probe",
+      "mapped_pages_by_node": {
+        "N1": 52802,
+        "N3": 4667,
+        "N0": 28500,
+        "N2": 189
+      },
+      "mapping_policies": {
+        "default": 133
+      },
+      "affinity": [
+        "Cpus_allowed_list:\t8-11",
+        "Mems_allowed_list:\t0-3"
+      ]
+    }
+  ]
+}
