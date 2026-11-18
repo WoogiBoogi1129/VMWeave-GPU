@@ -7,7 +7,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -30,7 +30,16 @@ jobs:
           cmake -S runtime/shm/cuda-dispatch -B .local/dispatch-build
           cmake --build .local/dispatch-build
       - name: CPU runtime regression tests
+        shell: bash
         run: |
+          set -euo pipefail
+          report_failure() {
+            rc=$?
+            tail -n 30 "$RUNNER_TEMP/cpu-runtime.log" | python3 -c 'import sys; print("::error title=CPU runtime regression::" + sys.stdin.read().replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A"))'
+            exit "$rc"
+          }
+          trap report_failure ERR
+          exec > >(tee "$RUNNER_TEMP/cpu-runtime.log") 2>&1
           cc -O2 -Wall -Wextra -Werror -pthread -Iruntime/shm/shm-queue/include -Iruntime/shm/shm-contract/include tests/integration/queue_payload_bounds.c runtime/shm/shm-queue/src/perf.c -o .local/queue-payload-test
           VMWEAVE_COPY_MODE=legacy .local/queue-payload-test
           VMWEAVE_COPY_MODE=optimized VMWEAVE_WAIT_MODE=bounded .local/queue-payload-test
