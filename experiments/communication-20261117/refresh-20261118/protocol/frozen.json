@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "frozen_utc": 1795004987.3115606,
+  "release": "v0.5.12",
+  "source_revision": "2cd0fe428f2ee2b99fa43777b2967854904966ac",
+  "gpu_uuid": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+  "gpu_index": 1,
+  "main_profile": "ON",
+  "seconds": 30,
+  "warmup_seconds": 10,
+  "blocks": 5,
+  "formal_intervals": 100,
+  "schedule": [
+    {
+      "block": 1,
+      "profile": "OFF",
+      "label": "b1-OFF",
+      "conditions": [
+        13,
+        14,
+        15,
+        0
+      ]
+    },
+    {
+      "block": 1,
+      "profile": "ON",
+      "label": "b1-ON",
+      "conditions": [
+        9,
+        11,
+        2,
+        4,
+        13,
+        10,
+        8,
+        7,
+        14,
+        15,
+        3,
+        12,
+        0,
+        1,
+        5,
+        6
+      ]
+    },
+    {
+      "block": 2,
+      "profile": "ON",
+      "label": "b2-ON",
+      "conditions": [
+        1,
+        10,
+        13,
+        5,
+        6,
+        12,
+        2,
+        7,
+        4,
+        0,
+        3,
+        9,
+        14,
+        8,
+        11,
+        15
+      ]
+    },
+    {
+      "block": 2,
+      "profile": "OFF",
+      "label": "b2-OFF",
+      "conditions": [
+        13,
+        0,
+        14,
+        15
+      ]
+    },
+    {
+      "block": 3,
+      "profile": "OFF",
+      "label": "b3-OFF",
+      "conditions": [
+        13,
+        0,
+        15,
+        14
+      ]
+    },
+    {
+      "block": 3,
+      "profile": "ON",
+      "label": "b3-ON",
+      "conditions": [
+        13,
+        11,
+        0,
+        15,
+        5,
+        7,
+        10,
+        1,
+        12,
+        2,
+        3,
+        4,
+        6,
+        8,
+        9,
+        14
+      ]
+    },
+    {
+      "block": 4,
+      "profile": "ON",
+      "label": "b4-ON",
+      "conditions": [
+        11,
+        3,
+        7,
+        14,
+        2,
+        6,
+        8,
+        0,
+        10,
+        13,
+        1,
+        9,
+        12,
+        15,
+        4,
+        5
+      ]
+    },
+    {
+      "block": 4,
+      "profile": "OFF",
+      "label": "b4-OFF",
+      "conditions": [
+        14,
+        0,
+        13,
+        15
+      ]
+    },
+    {
+      "block": 5,
+      "profile": "OFF",
+      "label": "b5-OFF",
+      "conditions": [
+        15,
+        13,
+        0,
+        14
+      ]
+    },
+    {
+      "block": 5,
+      "profile": "ON",
+      "label": "b5-ON",
+      "conditions": [
+        2,
+        8,
+        15,
+        4,
+        5,
+        3,
+        1,
+        11,
+        13,
+        12,
+        0,
+        9,
+        14,
+        6,
+        10,
+        7
+      ]
+    }
+  ],
+  "images": {
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:991a28b2d0d5f9b4834d49c7b76a1a12ba1a5bfced853a3ebed2fb7ac023d0e7",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:0b5d884b82d407a271f25884281e4679179477ba40f34c0fff8bee85c7a53168",
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:47094f3c604481cf238ba82081226639ad432240499fc7c9e0f896051779fbe2",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:029dbdbe48c4433400437d14546d3dc809dc32e810fc3ddd9776cde873f4aeb8",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:4b0b1d96ddbed1d120a2a43de9e6a028930a710177fe0c00f5bc78395f337400",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:0f2c1b925caf72806ce1a1b28af3f0ed3365c7616ed5b387f3b3d36f52350fa3",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59"
+  },
+  "guest_sha256": "796bdd694f4af59b3b6bfe5d9d9dc8765781e08853d7038d5f193053cefefac1",
+  "probe_sha256": "7e13a7f9d53c53c76b3d0fcfe822adf83563634a52abb843b1767ded28fb1465",
+  "ptx_sha256": "977ea32f7353a8620a4d902a6e108229df57cf6480f599438c07e159d498ca2f",
+  "broker_environment": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_BROKER_REUSE": "1",
+    "VMWEAVE_BROKER_GATHER": "1",
+    "VMWEAVE_BROKER_OWNER": "1"
+  },
+  "application_environment": {
+    "ON": {
+      "VMWEAVE_BULK_COPY": "1",
+      "VMWEAVE_BULK_DIRECT": "1",
+      "VMWEAVE_KERNEL_BATCH": "1",
+      "LD_LIBRARY_PATH": "/opt/comm/artifacts/V"
+    },
+    "OFF": {
+      "VMWEAVE_BULK_COPY": "1",
+      "VMWEAVE_BULK_DIRECT": "1",
+      "VMWEAVE_KERNEL_BATCH": "0",
+      "LD_LIBRARY_PATH": "/opt/comm/artifacts/V"
+    }
+  },
+  "gpu_capacity": {
+    "cores": 100,
+    "memory": "97887Mi"
+  },
+  "cpu": {
+    "guest_vcpu": 4,
+    "guest_memory": "16Gi",
+    "qemu": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "native": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "server": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "dedicated": false,
+    "strict_memory_numa_binding": false
+  },
+  "lifecycle": "Fresh VM boot and DRA binding for each block. ON and OFF use fresh client processes and CUDA children within that boot; alternating order. Main ON repeats the original 16-condition order. OFF repeats only the four kernel conditions.",
+  "statistics": "5 independent blocks; arithmetic block means and t4 CI. OFF/ON paired log-ratios only within refreshed blocks. Historical N/F/L comparisons are descriptive cross-campaign point ratios, never paired block CI.",
+  "historical_comparison": "Native/Flyt/Lupine frozen results unchanged; no current paired experiment with them.",
+  "sources": {
+    "scripts/audit_resources.py": "0151fbaa10a7f19d11b335938a4422c0fe269bd05bd05cd0e97c01e303230591",
+    "scripts/backends.py": "62e9ec7288cb65d8247486b48a25054ed2dd9327b50259f066c2ae7d5c43ce9e",
+    "scripts/campaign.py": "2083b0337c8198b031122126b1b19ac84285fb0bd84f8ac3962a743e774a304f",
+    "scripts/cleanup.py": "f1678d47f78a030dfded24d8d53614d9db55bbf71c33874e79b956ff7ad84490",
+    "scripts/client_runtime.py": "b5a4cca03344a10e98df5d911d5fc8e6dd46bd766faf1ed9405edaae581485e4",
+    "scripts/common.py": "03c4b1be90cf5cc36cbf9805297c5eee9dcf7ee0cb8dea23ad587273b252e5cf",
+    "scripts/infra.py": "16acf28ba3f3da3d582fa77279773339e3d6952c31b39f6ef88dfa73e918f7c3",
+    "scripts/observe.py": "89ca62b35b5cf5d83508da8527b5cdf05d53f662a7b81be2b52f756578c087e0",
+    "scripts/prepare.py": "3d3bb077011a5e70f1a7d6c24969079f0d9292fca6c6ee0245f903ed0c753724",
+    "scripts/profiles.py": "b64663dc4bcaa6f37a81796096bb150958504a3a78f2c003b6302e0bb103a035",
+    "scripts/run_session.py": "bd6baf29e74e212f329b1e34975a60186bb1ae101058de447e2e54c44aad0ed8",
+    "scripts/runtime.py": "754a98b414df94ad230b43755efc6aa8c0b52e34263cada3f52e52cbaf535f57",
+    "scripts/setup_recovery.py": "b4cddd2bbc54a7b8513117f176c0ffff28f45ab28098b9021f1efce5266a58d0"
+  },
+  "historical_frozen_sha256": "19f076cb71fd818316c489e8708e21e113d027d1ddf812882ffc05c7eb7f8ccc"
+}

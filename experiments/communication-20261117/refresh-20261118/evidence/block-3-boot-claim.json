@@ -1,0 +1,99 @@
+{
+  "apiVersion": "resource.k8s.io/v1",
+  "kind": "ResourceClaim",
+  "metadata": {
+    "annotations": {
+      "vmweave.io/allocation": "41b6188d24ce46c1e69194d64394c250"
+    },
+    "creationTimestamp": "2026-11-18T13:01:30Z",
+    "finalizers": [
+      "resource.kubernetes.io/delete-protection"
+    ],
+    "labels": {
+      "vmweave.io/channel": "vwx-20261118-shm"
+    },
+    "name": "vwx-20261118-shm-380853e8dfb2-41b6188d-gpu",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vwx-20261118-shm",
+        "uid": "380853e8-dfb2-4bfa-a3f7-383fa16e44d3"
+      }
+    ],
+    "resourceVersion": "34864180",
+    "uid": "b3e8c1e4-88f2-4817-b88c-7e31223f27c4"
+  },
+  "spec": {
+    "devices": {
+      "requests": [
+        {
+          "exactly": {
+            "allocationMode": "ExactCount",
+            "capacity": {
+              "requests": {
+                "cores": "100",
+                "memory": "97887Mi"
+              }
+            },
+            "count": 1,
+            "deviceClassName": "vmweave-hami-dra",
+            "selectors": [
+              {
+                "cel": {
+                  "expression": "device.driver == \"hami-core-gpu.project-hami.io\" && device.attributes[\"hami-core-gpu.project-hami.io\"].uuid == \"GPU-772181af-05a4-0c24-de59-8487bd37c142\""
+                }
+              }
+            ]
+          },
+          "name": "gpu"
+        }
+      ]
+    }
+  },
+  "status": {
+    "allocation": {
+      "allocationTimestamp": "2026-11-18T13:01:30Z",
+      "devices": {
+        "results": [
+          {
+            "consumedCapacity": {
+              "cores": "100",
+              "memory": "97887Mi"
+            },
+            "device": "hami-gpu-1",
+            "driver": "hami-core-gpu.project-hami.io",
+            "pool": "gpu-4",
+            "request": "gpu",
+            "shareID": "8671b73f-e241-47bb-ad54-21f8d679072b"
+          }
+        ]
+      },
+      "nodeSelector": {
+        "nodeSelectorTerms": [
+          {
+            "matchFields": [
+              {
+                "key": "metadata.name",
+                "operator": "In",
+                "values": [
+                  "gpu-4"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "reservedFor": [
+      {
+        "name": "vwx-20261118-shm-380853e8dfb2-41b6188d-worker",
+        "resource": "pods",
+        "uid": "32ff5d38-d8a2-4d53-b9f5-244cc53111be"
+      }
+    ]
+  }
+}

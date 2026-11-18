@@ -1,157 +1,132 @@
 {
   "passed": true,
-  "intervals": 320,
-  "latency_samples_checked": 135963659,
-  "independent_implementation": "Python standard library array/sort/statistics; no analyzer import",
-  "checks": [
-    "unique 5x4x16 matrix",
-    "raw count, positive time and elapsed >=30s",
-    "completed payload/kernel rate denominator",
-    "p50 and p95 gating/interpolation",
-    "paired log-ratio block t confidence intervals",
-    "session release evidence",
-    "GPU1 process ownership and hardware/thermal slowdown flags"
-  ],
+  "new_intervals": 100,
+  "main_composite_intervals": 320,
+  "new_raw_samples_checked": 1576343,
+  "historical_NFL_intervals_preserved": 240,
+  "historical_NFL_aggregates_identical": true,
+  "original_files_verified": 933,
+  "vm_boots": 5,
+  "unique_cuda_children": 10,
+  "independent_method": "Python standard library array/sort/statistics; no analyzer imports",
+  "cross_campaign_paired_CIs_removed": true,
   "quality": [
     {
-      "session": "b1-F",
+      "session": "b1-OFF",
+      "observer_samples": 152,
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
+    },
+    {
+      "session": "b1-ON",
+      "observer_samples": 596,
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
+    },
+    {
+      "session": "b2-ON",
+      "observer_samples": 596,
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
+    },
+    {
+      "session": "b2-OFF",
+      "observer_samples": 151,
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
+    },
+    {
+      "session": "b3-OFF",
+      "observer_samples": 151,
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
+    },
+    {
+      "session": "b3-ON",
       "observer_samples": 595,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
     },
     {
-      "session": "b1-L",
-      "observer_samples": 594,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b1-N",
-      "observer_samples": 597,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b1-V",
-      "observer_samples": 597,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b2-F",
-      "observer_samples": 596,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b2-L",
-      "observer_samples": 593,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b2-N",
-      "observer_samples": 600,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b2-V",
-      "observer_samples": 597,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b3-F",
-      "observer_samples": 592,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b3-L",
-      "observer_samples": 594,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b3-N",
-      "observer_samples": 600,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b3-V",
+      "session": "b4-ON",
       "observer_samples": 595,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
     },
     {
-      "session": "b4-F",
-      "observer_samples": 597,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "session": "b4-OFF",
+      "observer_samples": 151,
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
     },
     {
-      "session": "b4-L",
+      "session": "b5-OFF",
+      "observer_samples": 151,
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
+    },
+    {
+      "session": "b5-ON",
       "observer_samples": 596,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "foreign_gpu_processes": 0,
+      "hardware_thermal_slowdown_samples": 0,
+      "gpu_query_errors": 0,
+      "process_check_errors": 0
+    }
+  ],
+  "batch_packets": [
+    {
+      "block": 1,
+      "packets": 121310,
+      "submitted": 5275536,
+      "launches_per_packet": 43.48805539526832,
+      "scope": "whole process including warmup/correctness and all K values"
     },
     {
-      "session": "b4-N",
-      "observer_samples": 601,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "block": 2,
+      "packets": 125453,
+      "submitted": 5280119,
+      "launches_per_packet": 42.08842355304377,
+      "scope": "whole process including warmup/correctness and all K values"
     },
     {
-      "session": "b4-V",
-      "observer_samples": 600,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "block": 3,
+      "packets": 125003,
+      "submitted": 5306225,
+      "launches_per_packet": 42.4487812292505,
+      "scope": "whole process including warmup/correctness and all K values"
     },
     {
-      "session": "b5-F",
-      "observer_samples": 597,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "block": 4,
+      "packets": 123258,
+      "submitted": 5288460,
+      "launches_per_packet": 42.905612617436596,
+      "scope": "whole process including warmup/correctness and all K values"
     },
     {
-      "session": "b5-L",
-      "observer_samples": 596,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b5-N",
-      "observer_samples": 601,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
-    },
-    {
-      "session": "b5-V",
-      "observer_samples": 598,
-      "foreign_gpu_processes": [],
-      "hardware_or_thermal_slowdown_samples": 0,
-      "gpu_query_errors": 0
+      "block": 5,
+      "packets": 126578,
+      "submitted": 5324697,
+      "launches_per_packet": 42.06652814865142,
+      "scope": "whole process including warmup/correctness and all K values"
     }
   ]
 }

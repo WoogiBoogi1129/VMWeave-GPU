@@ -1,0 +1,54 @@
+[
+  {
+    "label": "server",
+    "pid": 3581013,
+    "comm": "python3",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+      "NVIDIA_VISIBLE_DEVICES": "void",
+      "VMWEAVE_PINNED_POOL": "1",
+      "VMWEAVE_SESSION_ARENA": "1",
+      "VMWEAVE_SESSION_EVENTFD": "1"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 3581134,
+    "comm": "vmweave-shm-ses",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4",
+      "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+      "NVIDIA_VISIBLE_DEVICES": "void",
+      "VMWEAVE_PINNED_POOL": "1",
+      "VMWEAVE_SESSION_ARENA": "1",
+      "VMWEAVE_SESSION_EVENTFD": "1"
+    }
+  },
+  {
+    "label": "server",
+    "pid": 3584864,
+    "comm": "exe",
+    "cpuset": "Cpus_allowed_list:\t12-15",
+    "libraries": {
+      "/usr/lib/x86_64-linux-gnu/libcuda.so.580.173.02": "266916dac6c5e7e4655526570cf303a6cc017880d2552960abc66017a7c98cf4",
+      "/usr/local/cuda-12.8/targets/x86_64-linux/lib/libcudart.so.12.8.90": "c3a75b33af334a3486d197dbd1584a2985183ba4688d237a2be5f2f679329920",
+      "/usr/local/vgpu/libvgpu.so": "f30f08c8f4bbdada1856231f2ec269d50fc81e08881a4146c9c1bbb3173aebd8"
+    },
+    "environment": {
+      "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+      "NVIDIA_VISIBLE_DEVICES": "void",
+      "VMWEAVE_PINNED_POOL": "1",
+      "VMWEAVE_SESSION_ARENA": "1",
+      "VMWEAVE_SESSION_EVENTFD": "1"
+    }
+  }
+]

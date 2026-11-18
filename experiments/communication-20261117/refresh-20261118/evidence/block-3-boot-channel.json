@@ -1,0 +1,70 @@
+{
+  "apiVersion": "vmweave.io/v1alpha1",
+  "kind": "SharedMemoryChannel",
+  "metadata": {
+    "creationTimestamp": "2026-11-18T12:29:46Z",
+    "finalizers": [
+      "vmweave.io/shm-detach"
+    ],
+    "generation": 1,
+    "name": "vwx-20261118-shm",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "kubevirt.io/v1",
+        "controller": true,
+        "kind": "VirtualMachine",
+        "name": "vwx-20261118-shm",
+        "uid": "946c7c79-d8ad-4f2f-93a2-8c37d5d52870"
+      }
+    ],
+    "resourceVersion": "34864550",
+    "uid": "380853e8-dfb2-4bfa-a3f7-383fa16e44d3"
+  },
+  "spec": {
+    "drain": false,
+    "gid": 107,
+    "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:0b5d884b82d407a271f25884281e4679179477ba40f34c0fff8bee85c7a53168",
+    "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:991a28b2d0d5f9b4834d49c7b76a1a12ba1a5bfced853a3ebed2fb7ac023d0e7",
+    "lifecycle": "VM",
+    "pvcRef": {
+      "name": "vwx-20261118-backing",
+      "uid": "ec4c4d90-c674-488f-ba7c-adad172af8a7"
+    },
+    "requestRef": {
+      "name": "vwx-20261118-shm",
+      "uid": "4f35648c-5671-45b5-beee-260d094f2089"
+    },
+    "sessions": 1,
+    "uid": 107,
+    "vmRef": {
+      "name": "vwx-20261118-shm",
+      "uid": "946c7c79-d8ad-4f2f-93a2-8c37d5d52870"
+    },
+    "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59"
+  },
+  "status": {
+    "allocation": "41b6188d24ce46c1e69194d64394c250",
+    "backend": "hami-dra",
+    "claimName": "vwx-20261118-shm-380853e8dfb2-41b6188d-gpu",
+    "claimUID": "b3e8c1e4-88f2-4817-b88c-7e31223f27c4",
+    "completion": null,
+    "compute": 100,
+    "everBound": true,
+    "generation": "d1131675d6ed4dd64c0e8dafeffedc7b",
+    "gpuUUID": "GPU-772181af-05a4-0c24-de59-8487bd37c142",
+    "memoryMiB": 97887,
+    "nodeName": "gpu-4",
+    "phase": "Ready",
+    "profileGeneration": 1,
+    "reason": "MappingACK",
+    "reclamation": null,
+    "requestGeneration": 1,
+    "resourcePrefix": "vwx-20261118-shm-380853e8dfb2-41b6188d",
+    "sessions": [
+      "db321cc112b593a54a95fd3dacf28df1"
+    ],
+    "vmiUID": "cc71656e-8ac2-4fa4-a73c-5ec6b078829f",
+    "workerPodUID": "32ff5d38-d8a2-4d53-b9f5-244cc53111be"
+  }
+}

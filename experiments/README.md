@@ -29,3 +29,5 @@
 - [2026-11-02~03 VMWeave·Flyt·Passthrough 학습 비교](training-threeway/results/20261102/REPORT.md)
 
 - [2026-11-06 공식 PyTorch 이미지·Device Plugin 기능 검증과 실제 캡처](device-plugin-pytorch/results/20261106-official/REPORT.md)
+
+- [2026-11-18 VMWeave 0.5.12 통신 성능 갱신](communication-20261117/REPORT.md) — VMWeave만 재측정; Native·Flyt·Lupine은 기존 결과 유지. 배치 ON/OFF 비교 및 원자료 포함.

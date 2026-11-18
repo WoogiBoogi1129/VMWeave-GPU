@@ -1,0 +1,17 @@
+VMWEAVE_BULK_COPY=1
+VMWEAVE_BROKER_REUSE=1
+VMWEAVE_BROKER_GATHER=1
+VMWEAVE_BROKER_OWNER=1
+● vmweave-guest-broker.service - VMWeave persistent GPU session broker
+     Loaded: loaded (/etc/systemd/system/vmweave-guest-broker.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-11-18 12:31:59 UTC; 4s ago
+   Main PID: 742 (python3)
+      Tasks: 4 (limit: 19144)
+     Memory: 15.8M (peak: 16.2M)
+        CPU: 190ms
+     CGroup: /system.slice/vmweave-guest-broker.service
+             ├─742 /usr/bin/python3 /opt/vmweave/control/guest_bootstrap.py
+             └─765 /usr/bin/python3 /opt/vmweave/control/guest_broker.py --socket /run/vmweave/gpu.sock --status /run/vmweave-device-plugin/status.json
+
+Nov 18 12:31:59 vwx-20261118-shm systemd[1]: Started vmweave-guest-broker.service - VMWeave persistent GPU session broker.
+Nov 18 12:31:59 vwx-20261118-shm python3[765]: VMWeave broker ready; no active CUDA job

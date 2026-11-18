@@ -1,12 +1,13 @@
 {
-  "files_without_manifest": 954,
-  "bytes_without_manifest": 309558765,
+  "files_without_root_manifest": 1376,
+  "bytes_without_root_manifest": 319979358,
+  "selection": "analysis/selection.json",
   "raw_format": "gzip uint64 little-endian nanoseconds",
-  "integrity": "SHA256SUMS covers all publication files except itself; Python bytecode excluded",
+  "integrity": "SHA256SUMS covers every public file except itself and Python bytecode, including archived manifests",
   "secret_checks": [
     "private-key headers",
     "GitHub/Hugging Face token patterns",
     "AWS access key pattern"
   ],
-  "private_data": "Original operating snapshots remain outside this directory; temporary experiment SSH keys and Mongo credentials were deleted."
+  "private_data": "Operational snapshots stay outside this directory. Temporary experiment SSH keys and cloud image were removed."
 }

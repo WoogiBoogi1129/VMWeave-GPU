@@ -1,0 +1,15 @@
+.version 8.7
+.target sm_120
+.address_size 64
+.visible .entry comm_sequence(.param .u64 p_state, .param .u32 p_sequence)
+{
+ .reg .u64 %rd;
+ .reg .u32 %r<3>;
+ ld.param.u64 %rd, [p_state];
+ ld.param.u32 %r0, [p_sequence];
+ ld.global.u32 %r1, [%rd];
+ add.u32 %r2, %r1, 19;
+ st.global.u32 [%rd], %r2;
+ st.global.u32 [%rd+4], %r0;
+ ret;
+}

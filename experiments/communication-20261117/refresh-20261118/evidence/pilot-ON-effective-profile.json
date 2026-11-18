@@ -1,0 +1,24 @@
+{
+  "profile": "ON",
+  "application": {
+    "VMWEAVE_BULK_COPY": "1",
+    "VMWEAVE_BULK_DIRECT": "1",
+    "VMWEAVE_KERNEL_BATCH": "1",
+    "LD_LIBRARY_PATH": "/opt/comm/artifacts/V"
+  },
+  "broker": [
+    {
+      "pid": 780,
+      "cmd": "/usr/bin/python3 /opt/vmweave/control/guest_broker.py --socket /run/vmweave/gpu.sock --status /run/vmweave-device-plugin/status.json ",
+      "env": {
+        "VMWEAVE_BULK_COPY": "1",
+        "VMWEAVE_BROKER_REUSE": "1",
+        "VMWEAVE_BROKER_GATHER": "1",
+        "VMWEAVE_BROKER_OWNER": "1",
+        "VMWEAVE_LAYOUT": "/run/vmweave/layout.bin",
+        "VMWEAVE_IVSHMEM_BDF": "0000:00:1e.0",
+        "VMWEAVE_SLOT": "0"
+      }
+    }
+  ]
+}

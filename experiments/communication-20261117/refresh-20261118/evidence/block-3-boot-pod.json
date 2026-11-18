@@ -1,0 +1,377 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "annotations": {
+      "vmweave.io/detach-channel-uid": "380853e8-dfb2-4bfa-a3f7-383fa16e44d3"
+    },
+    "creationTimestamp": "2026-11-18T13:01:30Z",
+    "finalizers": [
+      "vmweave.io/detach-observation"
+    ],
+    "generation": 1,
+    "labels": {
+      "vmweave.io/channel": "vwx-20261118-shm"
+    },
+    "name": "vwx-20261118-shm-380853e8dfb2-41b6188d-worker",
+    "namespace": "vmweave-test-a",
+    "ownerReferences": [
+      {
+        "apiVersion": "vmweave.io/v1alpha1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "SharedMemoryChannel",
+        "name": "vwx-20261118-shm",
+        "uid": "380853e8-dfb2-4bfa-a3f7-383fa16e44d3"
+      }
+    ],
+    "resourceVersion": "34864220",
+    "uid": "32ff5d38-d8a2-4d53-b9f5-244cc53111be"
+  },
+  "spec": {
+    "automountServiceAccountToken": true,
+    "containers": [
+      {
+        "command": [
+          "sh",
+          "-ec",
+          "if test -f /opt/vmweave/control/supervisor.py; then exec python3 /opt/vmweave/control/supervisor.py \"$@\"; else exec python3 /opt/flyt/control/supervisor.py \"$@\"; fi",
+          "vmweave-control"
+        ],
+        "env": [
+          {
+            "name": "VMWEAVE_PERSISTENT",
+            "value": "1"
+          },
+          {
+            "name": "VMWEAVE_SESSIONS",
+            "value": "1"
+          },
+          {
+            "name": "FLYT_SESSIONS",
+            "value": "1"
+          },
+          {
+            "name": "VMWEAVE_CHANNEL_NAME",
+            "value": "vwx-20261118-shm"
+          },
+          {
+            "name": "FLYT_CHANNEL_NAME",
+            "value": "vwx-20261118-shm"
+          },
+          {
+            "name": "VMWEAVE_API_GROUP",
+            "value": "vmweave.io"
+          },
+          {
+            "name": "VMWEAVE_ALLOCATION",
+            "value": "41b6188d24ce46c1e69194d64394c250"
+          },
+          {
+            "name": "FLYT_ALLOCATION",
+            "value": "41b6188d24ce46c1e69194d64394c250"
+          },
+          {
+            "name": "VMWEAVE_MEMORY_BYTES",
+            "value": "102641958912"
+          },
+          {
+            "name": "FLYT_MEMORY_BYTES",
+            "value": "102641958912"
+          },
+          {
+            "name": "VMWEAVE_CHANNEL_UID",
+            "value": "380853e8-dfb2-4bfa-a3f7-383fa16e44d3"
+          },
+          {
+            "name": "FLYT_CHANNEL_UID",
+            "value": "380853e8-dfb2-4bfa-a3f7-383fa16e44d3"
+          },
+          {
+            "name": "VMWEAVE_GENERATION",
+            "value": "d1131675d6ed4dd64c0e8dafeffedc7b"
+          },
+          {
+            "name": "FLYT_GENERATION",
+            "value": "d1131675d6ed4dd64c0e8dafeffedc7b"
+          },
+          {
+            "name": "VMWEAVE_NAMESPACE",
+            "value": "vmweave-test-a"
+          },
+          {
+            "name": "FLYT_NAMESPACE",
+            "value": "vmweave-test-a"
+          },
+          {
+            "name": "VMWEAVE_GPU_UUID",
+            "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+          },
+          {
+            "name": "FLYT_GPU_UUID",
+            "value": "GPU-772181af-05a4-0c24-de59-8487bd37c142"
+          },
+          {
+            "name": "VMWEAVE_RESOURCE_BACKEND",
+            "value": "hami"
+          },
+          {
+            "name": "FLYT_RESOURCE_BACKEND",
+            "value": "hami"
+          },
+          {
+            "name": "VMWEAVE_POD_UID",
+            "valueFrom": {
+              "fieldRef": {
+                "apiVersion": "v1",
+                "fieldPath": "metadata.uid"
+              }
+            }
+          },
+          {
+            "name": "FLYT_POD_UID",
+            "valueFrom": {
+              "fieldRef": {
+                "apiVersion": "v1",
+                "fieldPath": "metadata.uid"
+              }
+            }
+          }
+        ],
+        "image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59",
+        "imagePullPolicy": "IfNotPresent",
+        "name": "main",
+        "readinessProbe": {
+          "exec": {
+            "command": [
+              "sh",
+              "-ec",
+              "test -f /tmp/vmweave-worker-ready || test -f /tmp/flyt-worker-ready"
+            ]
+          },
+          "failureThreshold": 3,
+          "periodSeconds": 2,
+          "successThreshold": 1,
+          "timeoutSeconds": 1
+        },
+        "resources": {
+          "claims": [
+            {
+              "name": "gpu"
+            }
+          ]
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/flyt-channel",
+            "name": "channel"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-mm42m",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "enableServiceLinks": true,
+    "nodeName": "gpu-4",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "gpu-4"
+    },
+    "preemptionPolicy": "PreemptLowerPriority",
+    "priority": 0,
+    "resourceClaims": [
+      {
+        "name": "gpu",
+        "resourceClaimName": "vwx-20261118-shm-380853e8dfb2-41b6188d-gpu"
+      }
+    ],
+    "restartPolicy": "Never",
+    "runtimeClassName": "nvidia",
+    "schedulerName": "default-scheduler",
+    "securityContext": {
+      "fsGroup": 107,
+      "runAsGroup": 107,
+      "runAsUser": 107
+    },
+    "serviceAccount": "vwx-20261118-shm-380853e8dfb2-41b6188d-worker",
+    "serviceAccountName": "vwx-20261118-shm-380853e8dfb2-41b6188d-worker",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      },
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "name": "channel",
+        "persistentVolumeClaim": {
+          "claimName": "vwx-20261118-backing"
+        }
+      },
+      {
+        "name": "kube-api-access-mm42m",
+        "projected": {
+          "defaultMode": 420,
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "expirationSeconds": 3607,
+                "path": "token"
+              }
+            },
+            {
+              "configMap": {
+                "items": [
+                  {
+                    "key": "ca.crt",
+                    "path": "ca.crt"
+                  }
+                ],
+                "name": "kube-root-ca.crt"
+              }
+            },
+            {
+              "downwardAPI": {
+                "items": [
+                  {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "metadata.namespace"
+                    },
+                    "path": "namespace"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T13:01:32Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodReadyToStartContainers"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T13:01:31Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T13:01:33Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T13:01:33Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "ContainersReady"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2026-11-18T13:01:30Z",
+        "observedGeneration": 1,
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "allocatedResourcesStatus": [
+          {
+            "name": "claim:gpu",
+            "resources": [
+              {
+                "health": "Unknown",
+                "resourceID": "k8s.hami-core-gpu.project-hami.io/claim=b3e8c1e4-88f2-4817-b88c-7e31223f27c4-hami-gpu-1"
+              }
+            ]
+          }
+        ],
+        "containerID": "cri-o://5d7f71db75de9c89fc2529b3e839d0ecd27a68738bcb7801dbe1e75f5839f860",
+        "image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59",
+        "imageID": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:cd0b71abbc7a72f1501c1447c754d400e0b51fe39c14adc794c706abe9d2fe59",
+        "lastState": {},
+        "name": "main",
+        "ready": true,
+        "resources": {
+          "claims": [
+            {
+              "name": "gpu"
+            }
+          ]
+        },
+        "restartCount": 0,
+        "started": true,
+        "state": {
+          "running": {
+            "startedAt": "2026-11-18T13:01:32Z"
+          }
+        },
+        "user": {
+          "linux": {
+            "gid": 107,
+            "supplementalGroups": [
+              107
+            ],
+            "uid": 107
+          }
+        },
+        "volumeMounts": [
+          {
+            "mountPath": "/flyt-channel",
+            "name": "channel"
+          },
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "kube-api-access-mm42m",
+            "readOnly": true,
+            "recursiveReadOnly": "Disabled"
+          }
+        ]
+      }
+    ],
+    "hostIP": "192.168.24.21",
+    "hostIPs": [
+      {
+        "ip": "192.168.24.21"
+      }
+    ],
+    "observedGeneration": 1,
+    "phase": "Running",
+    "podIP": "10.85.0.31",
+    "podIPs": [
+      {
+        "ip": "10.85.0.31"
+      }
+    ],
+    "qosClass": "BestEffort",
+    "resources": {},
+    "startTime": "2026-11-18T13:01:31Z"
+  }
+}

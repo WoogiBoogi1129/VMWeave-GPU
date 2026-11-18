@@ -1,0 +1,135 @@
+{
+  "mode": "V",
+  "label": "pilot-ON",
+  "namespace": "vmweave-test-a",
+  "name": "vwx-20261118-shm",
+  "ip": "10.85.0.120",
+  "vmi_uid": "ef58b191-0a60-4015-9d99-f96c798adf75",
+  "launcher": "virt-launcher-vwx-20261118-shm-57cnl",
+  "launcher_uid": "b86e36aa-8259-4d97-951f-ec143a04feab",
+  "pinning": [
+    {
+      "pid": 3582390,
+      "comm": "virt-tail",
+      "cpus": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "pid": 3582591,
+      "comm": "virt-launcher-m",
+      "cpus": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "pid": 3582634,
+      "comm": "virt-launcher",
+      "cpus": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "pid": 3582683,
+      "comm": "sidecar-shim",
+      "cpus": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "pid": 3582751,
+      "comm": "virtqemud",
+      "cpus": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "pid": 3582752,
+      "comm": "virtlogd",
+      "cpus": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "pid": 3582985,
+      "comm": "qemu-kvm",
+      "cpus": [
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  ],
+  "server": "vwx-20261118-shm-380853e8dfb2-df270d7f-worker",
+  "server_uid": "2b796497-28ae-4e71-bfa2-11359d3744ba",
+  "server_pinning": [
+    {
+      "pid": 3581013,
+      "comm": "python3",
+      "cpus": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "pid": 3581134,
+      "comm": "vmweave-shm-ses",
+      "cpus": [
+        12,
+        13,
+        14,
+        15
+      ]
+    }
+  ],
+  "profile": "ON",
+  "clocks": [
+    {
+      "host_before_ns": 1795005029867534550,
+      "guest_ns": 1795005029751524247,
+      "host_after_ns": 1795005030258259978
+    },
+    {
+      "host_before_ns": 1795005030258270942,
+      "guest_ns": 1795005030193417309,
+      "host_after_ns": 1795005030699857155
+    },
+    {
+      "host_before_ns": 1795005030699864944,
+      "guest_ns": 1795005030624377686,
+      "host_after_ns": 1795005031128470981
+    },
+    {
+      "host_before_ns": 1795005031128476660,
+      "guest_ns": 1795005031051439353,
+      "host_after_ns": 1795005031557981618
+    },
+    {
+      "host_before_ns": 1795005031557988206,
+      "guest_ns": 1795005031499495713,
+      "host_after_ns": 1795005032006224260
+    }
+  ],
+  "guest_info": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n6.8.0-147-generic\nlo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> \nenp1s0           UP             02:00:ae:cd:0c:50 <BROADCAST,MULTICAST,UP,LOWER_UP> \n00:00.0 Host bridge [0600]: Intel Corporation 82G33/G31/P35/P31 Express DRAM Controller [8086:29c0]\n00:01.0 VGA compatible controller [0300]: Device [1234:1111] (rev 02)\n00:02.0 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:02.1 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:02.2 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:02.3 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:02.4 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:02.5 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:02.6 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:02.7 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.0 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.1 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.2 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.3 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.4 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.5 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.6 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:03.7 PCI bridge [0604]: Red Hat, Inc. QEMU PCIe Root port [1b36:000c]\n00:1e.0 RAM memory [0500]: Red Hat, Inc. Inter-VM shared memory [1af4:1110] (rev 01)\n00:1f.0 ISA bridge [0601]: Intel Corporation 82801IB (ICH9) LPC Interface Controller [8086:2918] (rev 02)\n00:1f.2 SATA controller [0106]: Intel Corporation 82801IR/IO/IH (ICH9R/DO/DH) 6 port SATA Controller [AHCI mode] [8086:2922] (rev 02)\n00:1f.3 SMBus [0c05]: Intel Corporation 82801I (ICH9 Family) SMBus Controller [8086:2930] (rev 02)\n01:00.0 Ethernet controller [0200]: Red Hat, Inc. Virtio 1.0 network device [1af4:1041] (rev 01)\n05:00.0 SCSI storage controller [0100]: Red Hat, Inc. Virtio 1.0 SCSI [1af4:1048] (rev 01)\n06:00.0 Communication controller [0780]: Red Hat, Inc. Virtio 1.0 console [1af4:1043] (rev 01)\n07:00.0 SCSI storage controller [0100]: Red Hat, Inc. Virtio 1.0 block device [1af4:1042] (rev 01)\n08:00.0 SCSI storage controller [0100]: Red Hat, Inc. Virtio 1.0 block device [1af4:1042] (rev 01)\n09:00.0 Unclassified device [00ff]: Red Hat, Inc. Virtio 1.0 memory balloon [1af4:1045] (rev 01)\n"
+}
