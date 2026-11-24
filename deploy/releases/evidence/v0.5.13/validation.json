@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "sourceRevision": "d98e210efde8922364808a47fb2730a9524fd18b",
+  "policy": "default",
+  "liveWorkerProcessPolicyVerified": true,
+  "workerImageDefaultVerified": true,
+  "runtimeSMAdjustmentDeployed": false,
+  "liveComputeModuleAbsent": true,
+  "crdDynamicFieldsAbsent": true,
+  "runtimeBinariesUnchanged": true,
+  "guestLibraryUnchanged": true,
+  "hostHamiLibraryUnchanged": true,
+  "testNamespaceRemoved": true,
+  "sessionsReclaimed": true,
+  "reservedCompute": 25,
+  "memoryMiB": 1024,
+  "slots": 1,
+  "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+  "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:185724ed95388cf4fb874c7737dfade7b1bfbc07121941e197dd1ae0aa7dd556",
+  "cases": [
+    {
+      "name": "ptx-copy",
+      "result": {
+        "status": "PASS",
+        "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+        "seed": 23,
+        "kernel_repeats": 5092,
+        "copy_bytes": 4096,
+        "active_seconds": 8.00101
+      },
+      "podUID": "5bca8a0c-b8b6-44ac-bd6f-abaa29e55208",
+      "exitCode": 0,
+      "brokerIdle": true
+    },
+    {
+      "name": "sgemm",
+      "result": {
+        "status": "PASS",
+        "scope": "SGEMM 2x2 full result validation"
+      },
+      "podUID": "7b4dea95-af84-4db6-be59-203195909b15",
+      "exitCode": 0,
+      "brokerIdle": true
+    }
+  ],
+  "protectedRunningPods": 119,
+  "performanceMeasurement": false,
+  "ciRunsPassed": 12
+}

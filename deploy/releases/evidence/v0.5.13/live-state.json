@@ -1,0 +1,80 @@
+{
+  "node": "gpu-4",
+  "worker": {
+    "name": "dp-dev-20261105-4a8f6577aea6-fd148027-worker",
+    "uid": "b9a25379-3630-4fcb-b428-45f8f7d332a2",
+    "image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:185724ed95388cf4fb874c7737dfade7b1bfbc07121941e197dd1ae0aa7dd556",
+    "imageID": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:185724ed95388cf4fb874c7737dfade7b1bfbc07121941e197dd1ae0aa7dd556",
+    "ready": true,
+    "policy": "default",
+    "resources": {
+      "limits": {
+        "nvidia.com/gpu": "1",
+        "nvidia.com/gpucores": "25",
+        "nvidia.com/gpumem": "1024"
+      },
+      "requests": {
+        "nvidia.com/gpu": "1",
+        "nvidia.com/gpucores": "25",
+        "nvidia.com/gpumem": "1024"
+      }
+    }
+  },
+  "channel": {
+    "name": "dp-dev-20261105",
+    "uid": "4a8f6577-aea6-4421-b962-921b607bdf2a",
+    "spec": {
+      "drain": false,
+      "gid": 107,
+      "hookImage": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:0b5d884b82d407a271f25884281e4679179477ba40f34c0fff8bee85c7a53168",
+      "image": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:991a28b2d0d5f9b4834d49c7b76a1a12ba1a5bfced853a3ebed2fb7ac023d0e7",
+      "lifecycle": "VM",
+      "pvcRef": {
+        "name": "dp-dev-20261105-shm",
+        "uid": "2623b5bf-61c7-42c6-beb5-99c464ef63e7"
+      },
+      "requestRef": {
+        "name": "dp-dev-20261105-v0513",
+        "uid": "98bd9c9e-3326-4902-964b-272c37ee72e2"
+      },
+      "sessions": 1,
+      "uid": 107,
+      "vmRef": {
+        "name": "dp-dev-20261105",
+        "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d"
+      },
+      "workerImage": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:185724ed95388cf4fb874c7737dfade7b1bfbc07121941e197dd1ae0aa7dd556"
+    },
+    "status": {
+      "allocation": "fd1480276d39c638a6ca97fa1e3f19e6",
+      "backend": "hami",
+      "compute": 25,
+      "everBound": true,
+      "generation": "a296b37489872eb3b5387449ad178716",
+      "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3",
+      "memoryMiB": 1024,
+      "nodeName": "gpu-4",
+      "phase": "Ready",
+      "profileGeneration": 1,
+      "reason": "MappingACK",
+      "requestGeneration": 1,
+      "resourcePrefix": "dp-dev-20261105-4a8f6577aea6-fd148027",
+      "sessions": [
+        "399b1be668fc4097258b882b68c447ed"
+      ],
+      "vmiUID": "dcca0d88-dd07-4580-aef2-5f657df0d05f",
+      "workerPodUID": "b9a25379-3630-4fcb-b428-45f8f7d332a2"
+    }
+  },
+  "vm": {
+    "name": "dp-dev-20261105",
+    "uid": "8cb50e87-ceb8-4a35-a92b-fc997bcba16d",
+    "runStrategy": "Always"
+  },
+  "vmi": {
+    "uid": "dcca0d88-dd07-4580-aef2-5f657df0d05f",
+    "phase": "Running",
+    "ready": true
+  },
+  "guestAllocatable": "1"
+}

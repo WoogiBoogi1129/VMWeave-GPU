@@ -1,0 +1,120 @@
+{
+  "tag": "v0.5.13",
+  "sourceRevision": "d98e210efde8922364808a47fb2730a9524fd18b",
+  "publishedDateKST": "2026-11-24",
+  "releaseURL": "https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/v0.5.13",
+  "activeProfile": "vmweave-test-b/dp-dev-20261105-v0513",
+  "activeRequest": "vmweave-test-b/dp-dev-20261105-v0513",
+  "previousProfileAndRequestRetainedForRollback": true,
+  "scope": "Explicit HAMi default policy for new Workers. Central Operator and idle GPU2 Worker deployed; existing Guest, Device Plugin, helper/hook and GPU reservations retained. Runtime SM cap adjustment deferred and excluded.",
+  "chart": {
+    "reference": "oci://ghcr.io/woogiboogi1129/charts/vmweave-operator",
+    "version": "0.5.13",
+    "digest": "sha256:0f3293c3791f58300b14206aad74ddc9cffa461d7341871a79f5826d2e162b52",
+    "packageSHA256": "7a47a78058dbd286214ac6bc82e8d8afabd1f1f1231cff3809c4bdf7d32ebf3d"
+  },
+  "images": {
+    "operator": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:e591c5a781933bf9cc871cfcc9ed3b0cdb85174e0e12732cc922c447a584cada",
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:90d28cabe51f11c929b88a8a14aac4d2aead64e35d4ad1f8b756fade7a5d60df",
+    "worker": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:185724ed95388cf4fb874c7737dfade7b1bfbc07121941e197dd1ae0aa7dd556",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:5323ed36087b8688481653fbe4cd6adaf5a21b9bcc25d1294210ebb02d4c01c0",
+    "guest-artifacts": "ghcr.io/woogiboogi1129/vmweave-guest-artifacts@sha256:ab48940f0115c65a666c8bfe33b2abd4bd6d378df1c082a6f882d37e75b09fc4",
+    "hami": "ghcr.io/woogiboogi1129/vmweave-hami@sha256:f83c6813fe84f8e418599cafb8eaeb158e82e95913ff26b58d4854fc66b02397",
+    "hami-dra": "ghcr.io/woogiboogi1129/vmweave-hami-dra@sha256:22746c86f7bb3f1cf5c02f023b36105c7eec869469251290a6640e6dedc8ac2a"
+  },
+  "helmReleases": [
+    {
+      "name": "vmweave",
+      "namespace": "vmweave-system",
+      "revision": 23,
+      "status": "deployed",
+      "chartVersion": "0.5.13"
+    },
+    {
+      "name": "vmweave-device-plugin",
+      "namespace": "vmweave-device-plugin",
+      "revision": 5,
+      "status": "deployed",
+      "chartVersion": "0.1.4"
+    }
+  ],
+  "deployments": [
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-controller",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:e591c5a781933bf9cc871cfcc9ed3b0cdb85174e0e12732cc922c447a584cada",
+      "podUID": "8f8bcfd8-ed87-44dd-9320-9c714e531883",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:e591c5a781933bf9cc871cfcc9ed3b0cdb85174e0e12732cc922c447a584cada",
+      "ready": true
+    },
+    {
+      "namespace": "vmweave-system",
+      "deployment": "vmweave-webhook",
+      "image": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:e591c5a781933bf9cc871cfcc9ed3b0cdb85174e0e12732cc922c447a584cada",
+      "podUID": "fbb1c5b3-d953-4a67-9d32-5f0edb384ce0",
+      "imageID": "ghcr.io/woogiboogi1129/vmweave-operator@sha256:e591c5a781933bf9cc871cfcc9ed3b0cdb85174e0e12732cc922c447a584cada",
+      "ready": true
+    }
+  ],
+  "devicePluginRecord": "deploy/releases/device-plugin-v0.1.4.json",
+  "devicePluginRebuilt": false,
+  "validation": "deploy/releases/evidence/v0.5.13/validation.json",
+  "evidence": "deploy/releases/evidence/v0.5.13/README.md",
+  "guestLibrarySHA256": "796bdd694f4af59b3b6bfe5d9d9dc8765781e08853d7038d5f193053cefefac1",
+  "gpuCoreUtilizationPolicy": "default",
+  "runtimeSMAdjustmentDeployed": false,
+  "retainedImages": {
+    "helper": "ghcr.io/woogiboogi1129/vmweave-helper@sha256:991a28b2d0d5f9b4834d49c7b76a1a12ba1a5bfced853a3ebed2fb7ac023d0e7",
+    "hook": "ghcr.io/woogiboogi1129/vmweave-hook@sha256:0b5d884b82d407a271f25884281e4679179477ba40f34c0fff8bee85c7a53168"
+  },
+  "runtimeOptions": {
+    "broker": [
+      "VMWEAVE_BULK_COPY=1",
+      "VMWEAVE_BROKER_REUSE=1",
+      "VMWEAVE_BROKER_GATHER=1",
+      "VMWEAVE_BROKER_OWNER=1"
+    ],
+    "applicationOptIn": [
+      "VMWEAVE_BULK_COPY=1",
+      "VMWEAVE_BULK_DIRECT=1",
+      "VMWEAVE_KERNEL_BATCH=1"
+    ],
+    "kernelBatchDefaultEnabled": false
+  },
+  "preExistingUnresolvedChannels": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "phase": "Draining",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "phase": "Draining",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-v2-r1-ab-a",
+      "phase": "Draining",
+      "specUnchanged": true
+    }
+  ],
+  "externalComponentsNotUpgraded": [
+    "Kubernetes",
+    "KubeVirt",
+    "HAMi device plugin",
+    "HAMi DRA driver",
+    "GPU Operator"
+  ],
+  "limits": [
+    "Policy configuration and GPU correctness verified; burst utilization and contention behavior were not benchmarked.",
+    "HAMi default depends on its monitor contention signal; no guarantee of idle-SM bursting or DRA monitor integration.",
+    "Existing Workers require controlled recreation to adopt a changed process environment; the active idle Worker was recreated here.",
+    "No dynamic liveCompute/runtimeCompute API, control thread or live-compute HAMi patch is deployed.",
+    "Guest runtime and Device Plugin v0.1.4 were retained; this release changes policy configuration, not their ABI.",
+    "Three pre-existing Draining channels remain unchanged; unrelated running Pods were preserved.",
+    "Clean-cluster installation and new application performance benchmarks were not run."
+  ]
+}

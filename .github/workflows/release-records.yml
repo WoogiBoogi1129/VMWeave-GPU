@@ -26,13 +26,20 @@ jobs:
           tag=release['tag']; ptag=plugin['tag']; source=release['sourceRevision']
           assert re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+',tag)
           assert re.fullmatch(r'device-plugin-v[0-9]+\.[0-9]+\.[0-9]+',ptag)
-          assert re.fullmatch(r'[a-f0-9]{40}',source) and plugin['sourceRevision']==source
+          plugin_source=plugin['sourceRevision']
+          rebuilt=release.get('devicePluginRebuilt',True)
+          assert re.fullmatch(r'[a-f0-9]{40}',source)
+          assert re.fullmatch(r'[a-f0-9]{40}',plugin_source)
+          assert isinstance(rebuilt,bool)
+          if rebuilt: assert plugin_source==source
           assert json.loads((root/release['validation']).read_text())['status']=='PASS'
           subprocess.run(['python3',f'deploy/releases/evidence/{tag}/validate.py'],check=True)
           repo=os.environ['GITHUB_REPOSITORY']; revision=os.environ['GITHUB_SHA']
-          body=(f"Paired VMWeave Guest/Worker release {tag}, Operator chart {release['chart']['version']}, "
-                f"Device Plugin {plugin['version']}.\n\n"
+          pairing='rebuilt' if rebuilt else 'retained compatible'
+          body=(f"VMWeave release {tag}, Operator chart {release['chart']['version']}, "
+                f"{pairing} Device Plugin {plugin['version']}.\n\n"
                 f"Build source: `{source}`. Guest library SHA256: `{release['guestLibrarySHA256']}`.\n\n"
+                f"Device Plugin build source: `{plugin_source}`.\n\n"
                 f"Verified deployment and limitations: https://github.com/{repo}/blob/{revision}/{release['evidence']}\n\n"
                 f"Installation: https://github.com/{repo}/blob/{revision}/{current['guide']}\n\n"
                 f"Scope: {release['scope']}\n\n"
@@ -43,6 +50,7 @@ jobs:
           pathlib.Path('/tmp/plugin-notes.md').write_text(body+'\n\nThe portable image archive and chart are attached to this release.\n')
           with open(os.environ['GITHUB_ENV'],'a') as env:
               env.write(f'RELEASE_TAG={tag}\nPLUGIN_TAG={ptag}\nBUILD_REVISION={source}\n')
+              env.write(f'PLUGIN_BUILD_REVISION={plugin_source}\nUPDATE_PLUGIN_NOTES={str(rebuilt).lower()}\n')
           PY
       - name: Match existing tags and update notes
         env:
@@ -53,8 +61,10 @@ jobs:
           set -euo pipefail
           git fetch --depth=1 origin "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG" "refs/tags/$PLUGIN_TAG:refs/tags/$PLUGIN_TAG"
           test "$(git rev-parse "$RELEASE_TAG^{}")" = "$BUILD_REVISION"
-          test "$(git rev-parse "$PLUGIN_TAG^{}")" = "$BUILD_REVISION"
+          test "$(git rev-parse "$PLUGIN_TAG^{}")" = "$PLUGIN_BUILD_REVISION"
           gh release view "$RELEASE_TAG" >/dev/null
           gh release view "$PLUGIN_TAG" >/dev/null
           gh release edit "$RELEASE_TAG" --notes-file /tmp/runtime-notes.md --latest
-          gh release edit "$PLUGIN_TAG" --notes-file /tmp/plugin-notes.md --latest=false
+          if [[ "$UPDATE_PLUGIN_NOTES" == true ]]; then
+            gh release edit "$PLUGIN_TAG" --notes-file /tmp/plugin-notes.md --latest=false
+          fi

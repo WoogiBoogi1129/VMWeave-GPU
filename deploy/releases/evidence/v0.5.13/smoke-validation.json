@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "name": "ptx-copy",
+      "result": {
+        "status": "PASS",
+        "scope": "Guest-SHM-HAMi-GPU memory and PTX kernel",
+        "seed": 23,
+        "kernel_repeats": 5092,
+        "copy_bytes": 4096,
+        "active_seconds": 8.00101
+      },
+      "podUID": "5bca8a0c-b8b6-44ac-bd6f-abaa29e55208",
+      "exitCode": 0,
+      "brokerIdle": true
+    },
+    {
+      "name": "sgemm",
+      "result": {
+        "status": "PASS",
+        "scope": "SGEMM 2x2 full result validation"
+      },
+      "podUID": "7b4dea95-af84-4db6-be59-203195909b15",
+      "exitCode": 0,
+      "brokerIdle": true
+    }
+  ],
+  "testNamespaceRemoved": true,
+  "policy": "default",
+  "reservedCompute": 25,
+  "memoryMiB": 1024,
+  "performanceMeasurement": false
+}

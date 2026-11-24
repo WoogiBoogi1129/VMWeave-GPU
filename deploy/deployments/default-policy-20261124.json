@@ -1,0 +1,45 @@
+{
+  "dateKST": "2026-11-24",
+  "runtimeRelease": "v0.5.13",
+  "record": "deploy/releases/v0.5.13.json",
+  "guide": "docs/getting-started/release-v0.5.13.md",
+  "operatorRelease": "vmweave",
+  "operatorNamespace": "vmweave-system",
+  "managedNamespaces": [
+    "vmweave-test-a",
+    "vmweave-test-b",
+    "vmweave-nested-k8s"
+  ],
+  "previousRecord": "deploy/deployments/runtime-upgrade-20261118.json",
+  "validation": "deploy/releases/evidence/v0.5.13/validation.json",
+  "gpuCoreUtilizationPolicy": "default",
+  "runtimeSMAdjustmentDeployed": false,
+  "worker": {
+    "name": "dp-dev-20261105-4a8f6577aea6-fd148027-worker",
+    "uid": "b9a25379-3630-4fcb-b428-45f8f7d332a2",
+    "image": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:185724ed95388cf4fb874c7737dfade7b1bfbc07121941e197dd1ae0aa7dd556",
+    "imageID": "ghcr.io/woogiboogi1129/vmweave-worker@sha256:185724ed95388cf4fb874c7737dfade7b1bfbc07121941e197dd1ae0aa7dd556",
+    "ready": true,
+    "policy": "default",
+    "resources": {
+      "limits": {
+        "nvidia.com/gpu": "1",
+        "nvidia.com/gpucores": "25",
+        "nvidia.com/gpumem": "1024"
+      },
+      "requests": {
+        "nvidia.com/gpu": "1",
+        "nvidia.com/gpucores": "25",
+        "nvidia.com/gpumem": "1024"
+      }
+    }
+  },
+  "gpuReservation": {
+    "compute": 25,
+    "memoryMiB": 1024,
+    "slots": 1,
+    "gpuUUID": "GPU-7d708c42-8d4a-16d5-0746-474567157aa3"
+  },
+  "devicePluginVersion": "0.1.4",
+  "helperAndHookRetained": true
+}

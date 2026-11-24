@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "protectedRunningPods": 119,
+  "unrelatedPodUIDsAndRestartsUnchanged": true,
+  "crdSpecsUnchanged": true,
+  "hamiValuesUnchanged": true,
+  "draValuesUnchanged": true,
+  "vmIdentityAndDevicesPreserved": true,
+  "preExistingUnresolvedChannels": [
+    {
+      "namespace": "vmweave-nested-k8s",
+      "name": "vw-k8s-worker-01",
+      "phase": "Draining",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vmweave-k8s-01",
+      "phase": "Draining",
+      "specUnchanged": true
+    },
+    {
+      "namespace": "vmweave-test-a",
+      "name": "vram-pair-v2-r1-ab-a",
+      "phase": "Draining",
+      "specUnchanged": true
+    }
+  ],
+  "hostHamiLibraryUnchanged": true,
+  "privilegedAdministrationPodsCreated": false
+}

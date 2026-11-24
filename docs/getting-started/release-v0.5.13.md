@@ -30,3 +30,23 @@ Helm upgrade는 중앙 Operator와 향후 Worker 생성 정책을 갱신한다.
 이전 Helm revision과 이미지 digest로 복원할 수 있다. CRD 확장과
 호스트 HAMi 라이브러리 교체는 필요하지 않다. Guest 바이너리 프로토콜을
 변경하지 않아 기존 Device Plugin 패키지를 그대로 사용할 수 있다.
+
+## 현재 노드 적용 결과
+
+2026-11-24 중앙 `vmweave-system/vmweave`를 chart **0.5.13 / revision 23**으로
+갱신했다. GPU 작업이 없는 `vmweave-test-b/dp-dev-20261105`를 정상 종료한 뒤
+새 `dp-dev-20261105-v0513` Profile/Request와 공개 Worker digest로 재생성했다.
+VM과 GPU Worker는 Ready이며 실제 실행 자식 프로세스의 정책은 `default`다.
+
+GPU2 예약 **25%, 1024 MiB, 1슬롯**을 보존했다. Guest 라이브러리,
+Device Plugin 0.1.4, helper/hook과 호스트 HAMi 라이브러리는 유지했다.
+GPU 복사·PTX 커널·SGEMM 정답 검증을 통과했고 테스트 세션을 회수했다.
+무관한 실행 Pod 119개와 기존 Draining Channel 3개를 유지했다.
+[digest·배포 기록](../../deploy/releases/v0.5.13.json)과
+[검증 증거](../../deploy/releases/evidence/v0.5.13/README.md)를 참조한다.
+
+롤백 시 중앙 Helm revision **22**와 이전 Profile/Request
+`dp-dev-20261105-v0512`의 이미지 digest를 사용한다. Worker 변경은 같은 유휴 확인과
+정상 종료·Channel 재생성 절차가 필요하다. Helm rollback만으로 기존 Worker 환경이
+바뀌지는 않는다. 보류한 동적 한도 구현은 별도 SHA256 백업으로 보존했고
+메인 저장소의 활성 빌드 입력에서는 제외했다.
