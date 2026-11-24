@@ -33,6 +33,8 @@ with tarfile.open(fileobj=buf,mode='w') as t:
 layer=buf.getvalue();gz=gzip.compress(layer,mtime=0);ld=digest(gz);cfg['rootfs']['diff_ids'].append(digest(layer));manifest['layers'].append({'mediaType':'application/vnd.oci.image.layer.v1.tar+gzip','size':len(gz),'digest':ld})
 cfg['config'].setdefault('Labels',{}).update({'org.opencontainers.image.title':'VMWeave '+a.kind,'vmweave.io/api-group':'vmweave.io','vmweave.io/helper-contract':'1'})
 if a.kind=='operator':cfg['config'].update(Entrypoint=['/manager'],Cmd=[],User='65532:65532')
+if a.kind=='worker':
+ cfg['config']['Env']=[e for e in cfg['config'].get('Env',[]) if not e.startswith('GPU_CORE_UTILIZATION_POLICY=')]+['GPU_CORE_UTILIZATION_POLICY=default']
 cfg.pop('history',None)  # Overlay layers have no inherited build-history entries.
 cb=pack(cfg);cd=digest(cb);manifest['config']={'mediaType':'application/vnd.oci.image.config.v1+json','size':len(cb),'digest':cd};mb=pack(manifest);md=digest(mb)
 idx={'schemaVersion':2,'manifests':[{'mediaType':'application/vnd.oci.image.manifest.v1+json','size':len(mb),'digest':md,'annotations':{'org.opencontainers.image.ref.name':a.name}}]}

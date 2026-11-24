@@ -45,3 +45,5 @@ HAMi/DRA/KubeVirt 등 공용 인프라를 일괄 업그레이드하지 않았다
 [이미지·chart digest](../../deploy/releases/device-plugin-v0.1.4.json),
 [실제 VM 검증](../../deploy/releases/evidence/v0.5.12/README.md),
 [공개 릴리스](https://github.com/WoogiBoogi1129/VMWeave-GPU/releases/tag/device-plugin-v0.1.4)를 참조한다.
+
+- [v0.5.13 Worker 기본 제한 정책](../getting-started/release-v0.5.13.md): 새 Worker의 `default` 정책을 명시하고 동적 한도 변경 기능은 배포 보류한다.

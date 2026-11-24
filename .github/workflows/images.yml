@@ -62,7 +62,7 @@ jobs:
       - name: Verify Worker package
         if: matrix.name == 'worker'
         run: |
-          docker run --rm --entrypoint sh '${{ steps.image.outputs.name }}' -ec 'test -x /opt/vmweave/bin/vmweave-shm-session-worker; test -x /opt/vmweave/bin/vmweave-shm-worker; test "$VMWEAVE_API_GROUP" = vmweave.io'
+          docker run --rm --entrypoint sh '${{ steps.image.outputs.name }}' -ec 'test -x /opt/vmweave/bin/vmweave-shm-session-worker; test -x /opt/vmweave/bin/vmweave-shm-worker; test "$VMWEAVE_API_GROUP" = vmweave.io; test "$GPU_CORE_UTILIZATION_POLICY" = default'
       - name: Publish verified image
         if: startsWith(github.ref, 'refs/tags/')
         run: docker push '${{ steps.image.outputs.name }}'

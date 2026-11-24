@@ -42,6 +42,18 @@ class ChartTests(unittest.TestCase):
         env = {x["name"]: x["value"] for x in spec["containers"][0]["env"]}
         self.assertEqual(json.loads(env["VMWEAVE_WORKLOAD_IMAGE_PULL_SECRETS"]), [{"name": "tenant-pull"}])
 
+    def test_worker_core_policy_default_and_override(self):
+        for requested in (None, 'force', 'disable'):
+            args = ['--set', 'tls.caBundle=dGVzdA==']
+            if requested:
+                args += ['--set', 'workloads.gpuCoreUtilizationPolicy=' + requested]
+            docs = render(*args)
+            controller = next(x for x in docs if x['kind'] == 'Deployment' and x['metadata']['name'] == 'alternate-controller')
+            env = {x['name']: x['value'] for x in controller['spec']['template']['spec']['containers'][0]['env']}
+            self.assertEqual(env['VMWEAVE_WORKLOAD_GPU_CORE_POLICY'], requested or 'default')
+        self.assertNotEqual(render('--set', 'tls.caBundle=dGVzdA==', '--set',
+                                   'workloads.gpuCoreUtilizationPolicy=invalid', success=False).returncode, 0)
+
     def test_cert_manager_release_dns_and_injection(self):
         docs = render("--set", "tls.mode=certManager", "--set", "tls.certManager.issuerRef.name=test-ca")
         cert = next(x for x in docs if x["kind"] == "Certificate")

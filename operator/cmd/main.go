@@ -35,6 +35,13 @@ func main() {
 	metricsAddr := flag.String("metrics-bind-address", ":8080", "metrics listener")
 	healthAddr := flag.String("health-bind-address", ":8081", "health listener")
 	flag.Parse()
+	corePolicy := os.Getenv("VMWEAVE_WORKLOAD_GPU_CORE_POLICY")
+	if corePolicy == "" {
+		corePolicy = "default"
+	}
+	if corePolicy != "default" && corePolicy != "force" && corePolicy != "disable" {
+		panic("invalid VMWEAVE_WORKLOAD_GPU_CORE_POLICY")
+	}
 	ctrl.SetLogger(zap.New())
 	if *mode != "review" && *mode != "active" {
 		panic("invalid mode")
@@ -77,7 +84,7 @@ func main() {
 				panic(e)
 			}
 		}
-		r := &engine.Reconciler{Client: mgr.GetClient(), Reader: mgr.GetAPIReader(), Namespaces: scopes, Options: engine.Options{Mode: *mode, Tolerations: tol, ImagePullSecrets: pullSecrets}}
+		r := &engine.Reconciler{Client: mgr.GetClient(), Reader: mgr.GetAPIReader(), Namespaces: scopes, Options: engine.Options{Mode: *mode, GPUCorePolicy: corePolicy, Tolerations: tol, ImagePullSecrets: pullSecrets}}
 		if e = r.Setup(mgr); e != nil {
 			panic(e)
 		}

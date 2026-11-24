@@ -141,6 +141,15 @@
         },
         "tolerations": {
           "type": "array"
+        },
+        "gpuCoreUtilizationPolicy": {
+          "type": "string",
+          "enum": [
+            "default",
+            "force",
+            "disable"
+          ],
+          "description": "HAMi-core enforcement policy for newly created Workers; independent of reserved compute."
         }
       }
     }

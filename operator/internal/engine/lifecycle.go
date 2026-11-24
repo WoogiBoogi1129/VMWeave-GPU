@@ -11,6 +11,7 @@ import (
 
 type Options struct {
 	Mode             string
+	GPUCorePolicy    string
 	Tolerations      []interface{}
 	ImagePullSecrets []interface{}
 }

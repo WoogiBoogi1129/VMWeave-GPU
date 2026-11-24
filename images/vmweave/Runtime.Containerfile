@@ -28,6 +28,7 @@ COPY --from=build /opt/vmweave/bin /opt/vmweave/bin
 COPY runtime/shm/control /opt/vmweave/control
 RUN ln -s vmweave /opt/flyt
 ENV VMWEAVE_API_GROUP=vmweave.io VMWEAVE_WORKER_REUSE=1 VMWEAVE_SESSION_ARENA=1 VMWEAVE_SESSION_EVENTFD=1 VMWEAVE_PINNED_POOL=1
+ENV GPU_CORE_UTILIZATION_POLICY=default
 ENTRYPOINT ["/usr/bin/tini","--","python3","/opt/vmweave/control/supervisor.py"]
 
 FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d915c6f AS guest-artifacts

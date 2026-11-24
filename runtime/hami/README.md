@@ -69,3 +69,19 @@ registry/repository/tag를 지정한다. 이 저장소의 배포 파일 반영�
 Worker가 매핑한 파일에 `cp`로 덮어쓰지 않는다. 이전 upstream 이미지의 설치기는
 직접 덮어쓸 수 있으므로 모든 관련 Worker를 정상 종료한 뒤 upstream으로 되돌리거나,
 동일한 atomic 설치기를 포함한 롤백 이미지를 사용한다.
+
+## Worker 연산 제한 정책
+
+v0.5.13부터 새 Worker Pod와 Worker 이미지에
+`GPU_CORE_UTILIZATION_POLICY=default`를 명시한다. Operator Helm 값은
+`workloads.gpuCoreUtilizationPolicy: default`다. `force`와 `disable`은 관리자가
+명시적으로 선택할 수 있으며, 이 설정은 예약된 compute나 메모리를 변경하지 않는다.
+기존 Worker는 생성 당시 설정을 유지한다.
+
+`default`는 경쟁 감지에 따른 제한 완화를 선택한다. vGPUmonitor가 해당 Worker의
+공유 캐시와 활동을 읽고 feedback을 제공해야 하며, 환경변수 설정만으로 실제
+유휴 용량 활용이나 DRA monitor 연동이 검증된 것은 아니다.
+
+2026-11-24에 실험한 실행 중 SM 한도 변경(`liveCompute`/`runtimeCompute`)은
+배포 보류 상태다. 이번 릴리스는 그 CRD 확장, supervisor 제어 스레드,
+HAMi-core의 live-compute 패치를 포함하지 않는다. 기존 SM 제한 패치는 유지한다.

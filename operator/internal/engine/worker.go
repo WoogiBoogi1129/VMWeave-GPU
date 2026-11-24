@@ -3,6 +3,13 @@ package engine
 import "fmt"
 
 func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
+	policy := opts.GPUCorePolicy
+	if policy == "" {
+		policy = "default"
+	}
+	if policy != "default" && policy != "force" && policy != "disable" {
+		return nil, invalid("invalid GPU core utilization policy")
+	}
 	name := ResourceName(c, "worker")
 	if backend(p) == "hami-dra" {
 		if _, err := a.ensureDRAClaim(c, p); err != nil {
@@ -46,7 +53,7 @@ func (a API) Worker(c, p *Obj, opts Options) (*Obj, error) {
 	if r := S(p, "spec", "runtimeClass"); r != "" {
 		Set(w, r, "spec", "runtimeClassName")
 	}
-	env := []interface{}{}
+	env := []interface{}{Map{"name": "GPU_CORE_UTILIZATION_POLICY", "value": policy}}
 	if persistent(c) {
 		env = append(env, Map{"name": "VMWEAVE_PERSISTENT", "value": "1"})
 	}
